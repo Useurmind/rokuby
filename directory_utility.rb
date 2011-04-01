@@ -74,6 +74,10 @@ module RakeBuilder
         return "#{directory}/#{filename}"
       else
         Dir.entries(directory).each { |subdir|
+	  if(subdir == ".." or subdir = ".")
+	    next
+	  end
+	                              
           fileFound = FindFileInDirectory(filename, "#{directory}/#{subdir}")
           if(fileFound != nil)
             return fileFound
@@ -87,13 +91,13 @@ module RakeBuilder
     # Also searches in the subdirectories and returns the first occurence found.
     # Throws exception if no file with the name is found.
     def FindFileInDirectories(filename, directories)
-      directories.each { |dir|
+      directories.each { |dir|                         
         fileFound = FindFileInDirectory(filename, dir)
         if(fileFound != nil)
           return fileFound
         end
-        throw "Could not find file #{filename} in the directories #{directories}"
       }
+      abort "Could not find file #{filename} in the directories #{directories}"
     end
 
     # Returns the paths for the directories extended with the base directory path.
@@ -150,12 +154,12 @@ module RakeBuilder
       for i in 0..paths.length-1
         paths[i] = FormatPath(paths[i])
       end
-      return paths.join("/");
+      return FormatPath(paths.join("/"));
     end
 
     # Format the path so that the slashes are correct.
     def FormatPath(path)
-      path.gsub("\\", "/");
+      return path.gsub("\\", "/").gsub("//", "/");
     end
   end
 

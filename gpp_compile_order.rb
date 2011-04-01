@@ -13,6 +13,7 @@ module RakeBuilder
   # [LibrarySearchPaths] The paths to search for libraries (default: [ "/usr/lib", "usr/local/lib" ])
   # [LibraryIncludeDirectories] The paths were the headers of the different libraries are located (default: [ "/usr/include" , "usr/locale/include" ])
   # [EndTask] This is the task that can be used to create dependencies between the creation of this project and other tasks.
+  # [Dependencies] The tasks that the compilation of this object depends on.
   class GppCompileOrder
     include GeneralUtility
     include DirectoryUtility
@@ -23,12 +24,14 @@ module RakeBuilder
     attr_accessor :LibrarySearchPaths
     attr_accessor :LibraryIncludeDirectories
     attr_accessor :EndTask
+    attr_accessor :Dependencies
 
     def initialize      
       @CompilerOptions = []
       @LinkOptions = []
       @LibrarySearchPaths = [ "/usr/lib", "/usr/local/lib" ]
       @LibraryIncludeDirectories = [ "/usr/include" , "/usr/locale/include" ]
+      @Dependencies = []
       
       @compiles = []
     end
@@ -53,7 +56,7 @@ module RakeBuilder
 
       CreateLinkOptionDirective()
       CreateLinkCompilesDirective()
-      CreateLinkLibrariesDirective()
+      CreateLinkDynamicLibrariesDirective()
 
       CreateLinkTask()
       
@@ -62,7 +65,10 @@ module RakeBuilder
     
     # Add the files to the clean task that were produced during the build process
     def CreateCleanTask      
-        CLEAN.include(@ProjectConfiguration.CompilesDirectory)
+	CLEAN.include(@ProjectConfiguration.CompilesDirectory)
+	CLEAN.include(@ProjectConfiguration.BuildDirectory)
+        CLEAN.include(@ProjectConfiguration.GetFinalCompilesDirectory())
+	CLEAN.include(@ProjectConfiguration.GetFinalBuildDirectory())
         CLEAN.include(@compiles)
 	CLEAN.include(@ProjectConfiguration.BinaryName)
     end
@@ -78,7 +84,7 @@ module RakeBuilder
     end
     
     # Create one compiler command for the compilation of each source in the project.
-    def CreateCompileTasks      
+    def CreateCompileTasks
       extendedHeaders = @ProjectConfiguration.GetExtendedIncludes()
       extendedSources = @ProjectConfiguration.GetExtendedSources()
       extendedSources.each { |source|
@@ -87,7 +93,7 @@ module RakeBuilder
         @compiles.push(binaryPath)
 
 #         puts "task #{binaryPath} => #{(extendedHeaders+[source]).to_s()}"
-        file binaryPath => extendedHeaders + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()] do
+        file binaryPath => extendedHeaders + @Dependencies + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()] do
           SystemWithFail(compileCommand, "Failed to compile #{source}")
         end
       }
@@ -98,17 +104,18 @@ module RakeBuilder
       @binaryFileName = @ProjectConfiguration.GetFinalBuildDirectory()
       if(@ProjectConfiguration.BinaryType == :application)
 	@binaryFileName = JoinPaths([@binaryFileName, @ProjectConfiguration.BinaryName])
-	command = "g++ -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@linkLibrariesDirective}" 
+	command = "g++ -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@linkDynamicLibrariesDirective}" 
       elsif(@ProjectConfiguration.BinaryType == :shared)
 	@binaryFileName = JoinPaths([@binaryFileName, "lib#{@ProjectConfiguration.BinaryName}.so"])
-	command = "g++ -shared -fPIC -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@linkLibrariesDirective}" 
+	command = "g++ -shared -fPIC -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@linkDynamicLibrariesDirective}" 
       else
 	@binaryFileName = JoinPaths([@binaryFileName, "lib#{@ProjectConfiguration.BinaryName}.a"])
 	command = "ar cq #{@binaryFileName} #{@linkCompilesDirective}" 
       end
 #       puts "task #{@ProjectConfiguration.BinaryName} => #{@compiles}"
       file @binaryFileName => @compiles do
-        SystemWithFail(command, "Failed to link #{@ProjectConfiguration.BinaryName}")
+	CreateLinkStaticLibrariesDirective()
+        SystemWithFail("#{command} #{@linkStaticLibrariesDirective}", "Failed to link #{@ProjectConfiguration.BinaryName}")
       end
 
       @EndTask = @binaryFileName
@@ -158,31 +165,34 @@ module RakeBuilder
     end
     
     # Creates a string that can be handed to the compiler containing all the libraries to link in
-    def CreateLinkLibrariesDirective
-      searchPaths = @LibrarySearchPaths
+    def CreateLinkDynamicLibrariesDirective
+      searchPaths = @LibrarySearchPaths.clone()
       for i in 0..searchPaths.length-1 do
 	searchPaths[i] = "-L#{searchPaths[i]}"
       end	
-      searchPathDirective = searchPaths.join(" ")
+      searchPathDirective = searchPaths.join(" ")      
       
-      staticLibs = @ProjectConfiguration.StaticLibraries
-      for i in 0..staticLibs.length-1 do
-	staticLibs[i] = "lib#{staticLibs[i]}.a"
-      end
-      staticLibDirective = staticLibs.join(" ")
-      
-      dynamicLibs = @ProjectConfiguration.DynamicLibraries
+      dynamicLibs = @ProjectConfiguration.DynamicLibraries.clone()
       for i in 0..dynamicLibs.length-1 do
 	dynamicLibs[i] = "-l#{dynamicLibs[i]}"
       end
       dynamicLibDirective = dynamicLibs.join(" ")
       
-      @linkLibrariesDirective = "#{searchPathDirective} #{staticLibDirective} #{dynamicLibDirective}"
+      @linkDynamicLibrariesDirective = "#{searchPathDirective} #{dynamicLibDirective}"
+    end
+    
+    def CreateLinkStaticLibrariesDirective
+      staticLibs = @ProjectConfiguration.StaticLibraries.clone()
+	for i in 0..staticLibs.length-1 do
+	  staticLibs[i] = "lib#{staticLibs[i]}.a"	
+	  staticLibs[i] = FindFileInDirectories(staticLibs[i], @LibrarySearchPaths)
+	end      
+      @linkStaticLibrariesDirective = staticLibs.join(" ")
     end
 
     # Creates a string containing all the defines in the project configuration.
     def CreateDefinesDirective
-      defines = @ProjectConfiguration.Defines
+      defines = @ProjectConfiguration.Defines.clone
       for i in 0..defines.length-1
         defines[i] = "-D#{defines[i]}"
       end
