@@ -14,6 +14,7 @@ module RakeBuilder
   # [LibraryIncludeDirectories] The paths were the headers of the different libraries are located (default: [ "/usr/include" , "usr/locale/include" ])
   # [EndTask] This is the task that can be used to create dependencies between the creation of this project and other tasks.
   # [Dependencies] The tasks that the compilation of this object depends on.
+  # After the project tasks were created with CreateProjectTasks, the EndTask can be used to build the project.
   class GppCompileOrder
     include GeneralUtility
     include DirectoryUtility
@@ -46,6 +47,8 @@ module RakeBuilder
       @compiles = []
     end
   
+    # Create all the necessary tasks to build the project.
+    # After this operation was called the EndTask can be used to build the project.
     def CreateProjectTasks      
       CreateCompilerOptionDirective()
       CreateIncludeDirectoryDirective()
@@ -73,7 +76,7 @@ module RakeBuilder
 	CLEAN.include(@ProjectConfiguration.BinaryName)
     end
 
-    # Create a task to create the directory for the binaries that are compiled
+    # Create the neccesary directories for the build process.
     def CreateBinaryDirectoryTask
       directory @ProjectConfiguration.GetFinalCompilesDirectory()
       directory @ProjectConfiguration.GetFinalBuildDirectory()

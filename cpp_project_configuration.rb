@@ -81,6 +81,7 @@ module RakeBuilder
       @BinaryType = Clone(original.BinaryType)
     end
     
+    # Return the source paths with the prepended project directory.
     def GetExtendedSourcePaths
       if(@ProjectDirectory == nil)
 	raise "ProjectDirectory not set in project configuration"
@@ -89,6 +90,7 @@ module RakeBuilder
       return ExtendDirectoryPaths(@ProjectDirectory, @SourceDirectories)
     end
     
+    # Return the include paths with the prepended project directory.
     def GetExtendedIncludePaths
       if(@ProjectDirectory == nil)
 	raise "ProjectDirectory not set in project configuration"
@@ -97,18 +99,22 @@ module RakeBuilder
       return ExtendDirectoryPaths(@ProjectDirectory, @HeaderDirectories)
     end
     
+    # Get the paths to all source files that are identified by the search patterns.
     def GetExtendedSources
       extendedSourcePaths = GetExtendedSourcePaths()
       extendedSources = FindFilesInDirectories(@SourceIncludePatterns, @SourceExcludePatterns, extendedSourcePaths)
       return extendedSources
     end
     
+    # Get the paths to all include files that are identified by the search patterns.
     def GetExtendedIncludes
       extendedIncludePaths = GetExtendedIncludePaths()
       extendedIncludes = FindFilesInDirectories(@HeaderIncludePatterns, @HeaderExcludePatterns, extendedIncludePaths)
       return extendedIncludes
     end
     
+    # Get the complete directory tree for each include directory.
+    # This gathers all possible include paths for a project.
     def GetIncludeDirectoryTree
       includeDirs = []
       GetExtendedIncludePaths().each {|includeDir|
@@ -117,10 +123,12 @@ module RakeBuilder
       return includeDirs
     end
     
+    # Combines the name of the configuration and the compiles directory to form the directory where the compiles for the given configuration are stored.
     def GetFinalCompilesDirectory
       return JoinPaths([@CompilesDirectory, @Name])
     end
     
+    # Combines the name of the configuration and the build directory to form the directory where the build results for the given configuration are stored.
     def GetFinalBuildDirectory
       return JoinPaths([@BuildDirectory, @Name])
     end
