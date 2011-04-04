@@ -1,6 +1,7 @@
 require "directory_utility"
 require "general_utility"
 require "subproject"
+require 'UUID/uuidtools.rb'
 
 module RakeBuilder
   
@@ -13,7 +14,7 @@ module RakeBuilder
     
     def initialize
       @Subprojects = []
-      @SubprojectTask = "subtask"
+      @SubprojectTask = UUIDTools::UUID.random_create().to_s
     end
     
     def BuildSubprojectTask
@@ -28,6 +29,15 @@ module RakeBuilder
 	  Dir.chdir(projectDir)
 	end
                         
+        cleanSubtask = "#{subproject.Name}_clean"
+                        
+        task cleanSubtask do
+          Dir.chdir(subdir)              
+	  SystemWithFail(subproject.CleanCommand, "Failed to clean subproject #{subproject.Name}")
+          Dir.chdir(projectDir)
+        end                        
+	task :clean => cleanSubtask
+                        
 	task @SubprojectTask => [subproject.Name]
       }
     end
@@ -36,8 +46,8 @@ module RakeBuilder
       AddSubproject(name, folder, "rake #{target}")
     end
     
-    def AddSubproject(name, folder, buildcommand="rake")
-      @Subprojects.push(Subproject.new(name, folder, buildcommand))
+    def AddSubproject(name, folder, buildcommand="rake", cleanCommand="rake clean")
+      @Subprojects.push(Subproject.new(name, folder, buildcommand, cleanCommand))
     end
     
   end

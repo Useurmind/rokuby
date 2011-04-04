@@ -1,3 +1,4 @@
+require "rake/clean"
 require "project_file_creator"
 require "filter_file_creator"
 require "vs_xml_file_utility"
