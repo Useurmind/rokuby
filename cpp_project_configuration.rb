@@ -28,6 +28,8 @@ module RakeBuilder
     include DirectoryUtility
     include GeneralUtility
     
+    attr_accessor :ProjectName
+    attr_accessor :ProjectVersion
     attr_accessor :Name
     attr_accessor :SourceIncludePatterns
     attr_accessor :SourceExcludePatterns
