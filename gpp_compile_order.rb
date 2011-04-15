@@ -125,7 +125,7 @@ module RakeBuilder
     end
 
     def GetCompileCommand(extendedSource, binaryPath)
-      if(@ProjectConfiguration.BinaryType == :shared)
+      if(@ProjectConfiguration.BinaryType == :shared or @ProjectConfiguration.BinaryType == :static)
 	return "g++ -fPIC -c #{@compilerOptionDirective} #{@includeDirectoryDirective} #{@definesDirective} -o #{binaryPath} #{extendedSource}"
       else
 	return "g++ -c #{@compilerOptionDirective} #{@includeDirectoryDirective} #{@definesDirective} -o #{binaryPath} #{extendedSource}"
