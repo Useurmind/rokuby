@@ -1,5 +1,14 @@
 module RakeBuilder
   
+  # This class can be used to create a doxygen class.
+  # It offers the possibility to set values for important doxygen options.
+  # The class takes a doxyfile template, fills in the values for the given options, 
+  # the project name, the source files that are to be documented and creates the doxygen
+  # documentation.
+  # [DoxyfileTemplate] Relative path of the template file for the doxyfile that should be used.
+  # [DoxyfileName] Relative path of the doxyfile that should be created and used.
+  # [ProjectConfiguration] The configuration of the project to document.
+  # [OutputDirectory] The directory where the doxygen docu should be put.
   class DoxygenBuilder
     
     attr_accessor :DoxyfileTemplate
@@ -32,6 +41,7 @@ module RakeBuilder
       @SourceBrowser = true
     end
     
+    # Create the doxyfile and the documentation resulting from it.
     def CreateDoxyfile
       CreateDoxyfileTemplateIfMissing()
       
@@ -66,6 +76,7 @@ module RakeBuilder
       
     end
     
+    # If the line contains the named boolean attribute set its value to "YES" or "NO" and return the new line.
     def SetBoolAttributeIfMatch(name, value, line) 
       if(value)
 	s = "YES"
@@ -76,6 +87,7 @@ module RakeBuilder
       return SetAttributeIfMatch(name, s, line)
     end      
     
+    # If the line contains the named attribute set its value and return the new line.
     def SetAttributeIfMatch(name, value, line)
       if(line.match("^\s*#{name}\s*="))
 	    line = "#{name}    = #{value}"
@@ -83,6 +95,7 @@ module RakeBuilder
       return line
     end
     
+    # Creates a doxyfile template if it is missing.
     def CreateDoxyfileTemplateIfMissing()
       if(!File.exists?(@DoxyfileTemplate))
 	system("doxygen -g #{@DoxyfileTemplate}")

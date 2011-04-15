@@ -17,6 +17,7 @@ module RakeBuilder
       @TaskName = "PacketInstallerTask"
     end
     
+    # Create the task that can be used to install the packets.
     def CreatePacketInstallationTask 
       task @TaskName do
 	@PacketNames.each { |packet|
