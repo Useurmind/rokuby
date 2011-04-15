@@ -161,6 +161,26 @@ module RakeBuilder
     def FormatPath(path)
       return path.gsub("\\", "/").gsub("//", "/");
     end
+    
+#     def IsProjectSubdirectory(directory, projectDirectory) 
+#       puts "#{directory}"
+#       if(!IsAbsolutePath(directory))
+# 	puts "is not absolute"
+# 	return true
+#       end
+# 	
+#       projectDirectoryPattern = ".*#{File.absolute_path(projectDirectory)}.*"
+#       if(directory.match(projectDirectoryPattern))
+# 	puts "is subdir of '#{projectDirectoryPattern}'"
+# 	return true
+#       end
+# 	
+#       return false
+#     end
+#     
+#     def IsAbsolutePath(directory)
+#       return directory.match("^(\/|[A-Za-z]:)")
+#     end
   end
 
 end

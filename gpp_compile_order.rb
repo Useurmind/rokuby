@@ -141,8 +141,15 @@ module RakeBuilder
     def CreateIncludeDirectoryDirective
       includeTree = @ProjectConfiguration.GetIncludeDirectoryTree()
       
+      # Get the complete directory tree recursivly
       @LibraryIncludeDirectories.each do |directory|
-	includeTree.push(directory)
+# 	if(IsProjectSubdirectory(directory, @ProjectConfiguration.ProjectDirectory))
+# 	  puts "Adding subdirectory tree of #{directory}"
+# 	  includeTree = includeTree + GetDirectoryTree(directory)
+# 	elsif
+# 	  puts "Adding directory #{directory}"
+	  includeTree.push(directory)
+# 	end
       end
 
       for i in 0..includeTree.length-1
