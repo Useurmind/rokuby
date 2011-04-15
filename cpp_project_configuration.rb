@@ -113,6 +113,16 @@ module RakeBuilder
       return extendedIncludes
     end
     
+    # Get the complete directory tree for each source directory.
+    # This gathers all possible source paths for a project.
+    def GetSourceDirectoryTree
+      sourceDirs = []
+      GetExtendedSourcePaths().each {|sourceDir|
+                                      sourceDirs = sourceDirs + GetDirectoryTree(sourceDir, @SourceExcludePatterns)
+                                     }
+      return sourceDirs
+    end
+    
     # Get the complete directory tree for each include directory.
     # This gathers all possible include paths for a project.
     def GetIncludeDirectoryTree
