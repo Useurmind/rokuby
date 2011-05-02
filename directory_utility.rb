@@ -137,7 +137,7 @@ module RakeBuilder
         }
 
         if(pathExcluded)
-          puts "Excluding path #{subdirPath}"
+          #puts "Excluding path #{subdirPath}"
           next
         end
 
