@@ -1,0 +1,11 @@
+require 'LibraryManagement/library_base'
+
+module RakeBuilder
+  # Represents a static library under linux.
+  class StaticLibrary < LibraryBase
+    def initialize(name, libraryPath, headerPaths)
+      fileName = "lib#{name}.a"
+      super.initialize(name, fileName, libraryPath, headerPaths)
+    end
+  end
+end

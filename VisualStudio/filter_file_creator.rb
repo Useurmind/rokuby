@@ -1,4 +1,4 @@
-require "vs_xml_file_utility.rb"
+require "VisualStudio/vs_xml_file_utility.rb"
 
 module RakeBuilder
 

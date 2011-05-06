@@ -18,8 +18,7 @@ module RakeBuilder
   # [HeaderDirectories] The directories in the ProjectDirectory for the header files.
   # [CompilesDirectory] The directory in the ProjectDirectory for the compiled sources (defaults to 'bin').
   # [BuildDirectory] The directory in the ProjectDirectory for result of the build (defaults to 'build').
-  # [StaticLibraries] Names of the static libraries to link in (e.g. "x264" for "libx264.a")
-  # [DynamicLibraries] Names of the dynamic libraries to link in (e.g. "x264" for "libx264.so")
+  # [Libraries] The libraries (real objects) for this project.
   # [Defines] Defines that should be set for the project.
   # [PrecompiledHeader] The file that can be used as a precompiled header (visual studio)
   # [BinaryName] The name of the binary that is created.
@@ -42,8 +41,7 @@ module RakeBuilder
     attr_accessor :ProjectDirectory
     attr_accessor :CompilesDirectory
     attr_accessor :BuildDirectory
-    attr_accessor :StaticLibraries
-    attr_accessor :DynamicLibraries
+    attr_accessor :Libraries
     attr_accessor :BinaryName
     attr_accessor :BinaryType
     
@@ -60,8 +58,7 @@ module RakeBuilder
       @ProjectDirectory = nil
       @CompilesDirectory = "bin"
       @BuildDirectory = "build"
-      @StaticLibraries = []
-      @DynamicLibraries = []
+      @Libraries = []
       @BinaryName = nil
       @BinaryType = :application      
     end
@@ -77,8 +74,7 @@ module RakeBuilder
       @PrecompiledHeader = Clone(original.PrecompiledHeader)
       @ProjectDirectory = Clone(original.ProjectDirectory)
       @CompilesDirectory = Clone(original.CompilesDirectory)
-      @StaticLibraries = Clone(original.StaticLibraries)
-      @DynamicLibraries = Clone(original.DynamicLibraries)
+      @Libraries = Clone(original.Libraries)
       @BinaryName = Clone(original.BinaryName)
       @BinaryType = Clone(original.BinaryType)
     end
@@ -86,7 +82,7 @@ module RakeBuilder
     # Return the source paths with the prepended project directory.
     def GetExtendedSourcePaths
       if(@ProjectDirectory == nil)
-	raise "ProjectDirectory not set in project configuration"
+        raise "ProjectDirectory not set in project configuration"
       end
       
       return ExtendDirectoryPaths(@ProjectDirectory, @SourceDirectories)
@@ -95,7 +91,7 @@ module RakeBuilder
     # Return the include paths with the prepended project directory.
     def GetExtendedIncludePaths
       if(@ProjectDirectory == nil)
-	raise "ProjectDirectory not set in project configuration"
+        raise "ProjectDirectory not set in project configuration"
       end
       
       return ExtendDirectoryPaths(@ProjectDirectory, @HeaderDirectories)
@@ -120,8 +116,8 @@ module RakeBuilder
     def GetSourceDirectoryTree
       sourceDirs = []
       GetExtendedSourcePaths().each {|sourceDir|
-                                      sourceDirs = sourceDirs + GetDirectoryTree(sourceDir, @SourceExcludePatterns)
-                                     }
+        sourceDirs = sourceDirs + GetDirectoryTree(sourceDir, @SourceExcludePatterns)
+      }
       return sourceDirs
     end
     
@@ -130,8 +126,8 @@ module RakeBuilder
     def GetIncludeDirectoryTree
       includeDirs = []
       GetExtendedIncludePaths().each {|includeDir|
-                                      includeDirs = includeDirs + GetDirectoryTree(includeDir, @HeaderExcludePatterns)
-                                     }
+        includeDirs = includeDirs + GetDirectoryTree(includeDir, @HeaderExcludePatterns)
+      }
       return includeDirs
     end
     

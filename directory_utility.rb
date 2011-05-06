@@ -74,9 +74,9 @@ module RakeBuilder
         return "#{directory}/#{filename}"
       else
         Dir.entries(directory).each { |subdir|
-	  if(subdir == ".." or subdir = ".")
-	    next
-	  end
+          if(subdir == ".." or subdir == ".")
+            next
+          end
 	                              
           fileFound = FindFileInDirectory(filename, "#{directory}/#{subdir}")
           if(fileFound != nil)
@@ -162,25 +162,25 @@ module RakeBuilder
       return path.gsub("\\", "/").gsub("//", "/");
     end
     
-#     def IsProjectSubdirectory(directory, projectDirectory) 
-#       puts "#{directory}"
-#       if(!IsAbsolutePath(directory))
-# 	puts "is not absolute"
-# 	return true
-#       end
-# 	
-#       projectDirectoryPattern = ".*#{File.absolute_path(projectDirectory)}.*"
-#       if(directory.match(projectDirectoryPattern))
-# 	puts "is subdir of '#{projectDirectoryPattern}'"
-# 	return true
-#       end
-# 	
-#       return false
-#     end
-#     
-#     def IsAbsolutePath(directory)
-#       return directory.match("^(\/|[A-Za-z]:)")
-#     end
+    #     def IsProjectSubdirectory(directory, projectDirectory)
+    #       puts "#{directory}"
+    #       if(!IsAbsolutePath(directory))
+    # 	puts "is not absolute"
+    # 	return true
+    #       end
+    #
+    #       projectDirectoryPattern = ".*#{File.absolute_path(projectDirectory)}.*"
+    #       if(directory.match(projectDirectoryPattern))
+    # 	puts "is subdir of '#{projectDirectoryPattern}'"
+    # 	return true
+    #       end
+    #
+    #       return false
+    #     end
+    #
+    #     def IsAbsolutePath(directory)
+    #       return directory.match("^(\/|[A-Za-z]:)")
+    #     end
   end
 
 end

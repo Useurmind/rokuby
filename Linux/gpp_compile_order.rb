@@ -3,6 +3,7 @@ require "rake/clean"
 require "cpp_project_configuration"
 require "general_utility"
 require "directory_utility"
+require "set"
 
 module RakeBuilder
 
@@ -22,26 +23,20 @@ module RakeBuilder
     attr_accessor :CompilerOptions
     attr_accessor :LinkOptions
     attr_accessor :ProjectConfiguration    
-    attr_accessor :LibrarySearchPaths
-    attr_accessor :LibraryIncludeDirectories
     attr_accessor :EndTask
     attr_accessor :Dependencies
 
     def initialize      
       @CompilerOptions = []
       @LinkOptions = []
-      @LibrarySearchPaths = [ "/usr/lib", "/usr/local/lib" ]
-      @LibraryIncludeDirectories = [ "/usr/include" , "/usr/locale/include" ]
       @Dependencies = []
-      
+
       @compiles = []
     end
     
     def initialize_copy(original)
       @CompilerOptions = Clone(original.CompilerOptions)
       @LinkOptions = Clone(original.LinkOptions)
-      @LibrarySearchPaths = Clone(original.LibrarySearchPaths)
-      @LibraryIncludeDirectories = Clone(original.LibraryIncludeDirectories)
       @ProjectConfiguration = Clone(original.ProjectConfiguration)
       
       @compiles = []
@@ -59,7 +54,7 @@ module RakeBuilder
 
       CreateLinkOptionDirective()
       CreateLinkCompilesDirective()
-      CreateLinkDynamicLibrariesDirective()
+      CreateLinkLibrariesDirective()
 
       CreateLinkTask()
       
@@ -68,22 +63,22 @@ module RakeBuilder
     
     # Add the files to the clean task that were produced during the build process
     def CreateCleanTask      
-	CLEAN.include(@ProjectConfiguration.CompilesDirectory)
-	CLEAN.include(@ProjectConfiguration.BuildDirectory)
-        CLEAN.include(@ProjectConfiguration.GetFinalCompilesDirectory())
-	CLEAN.include(@ProjectConfiguration.GetFinalBuildDirectory())
-        CLEAN.include(@compiles)
-	CLEAN.include(@ProjectConfiguration.BinaryName)
+      CLEAN.include(@ProjectConfiguration.CompilesDirectory)
+      CLEAN.include(@ProjectConfiguration.BuildDirectory)
+      CLEAN.include(@ProjectConfiguration.GetFinalCompilesDirectory())
+      CLEAN.include(@ProjectConfiguration.GetFinalBuildDirectory())
+      CLEAN.include(@compiles)
+      CLEAN.include(@ProjectConfiguration.BinaryName)
     end
 
     # Create the neccesary directories for the build process.
     def CreateBinaryDirectoryTask
       directory @ProjectConfiguration.GetFinalCompilesDirectory()
       directory @ProjectConfiguration.GetFinalBuildDirectory()
-#       file @ProjectConfiguration.CompilesDirectory do
-# 	command = "mkdir #{@ProjectConfiguration.CompilesDirectory}"
-# 	SystemWithFail(command, "Failed to create directory for binary files")
-#       end
+      #       file @ProjectConfiguration.CompilesDirectory do
+      # 	command = "mkdir #{@ProjectConfiguration.CompilesDirectory}"
+      # 	SystemWithFail(command, "Failed to create directory for binary files")
+      #       end
     end
     
     # Create one compiler command for the compilation of each source in the project.
@@ -95,7 +90,7 @@ module RakeBuilder
         compileCommand = GetCompileCommand(source, binaryPath)
         @compiles.push(binaryPath)
 
-#         puts "task #{binaryPath} => #{(extendedHeaders+[source]).to_s()}"
+        #         puts "task #{binaryPath} => #{(extendedHeaders+[source]).to_s()}"
         file binaryPath => extendedHeaders + @Dependencies + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()] do
           SystemWithFail(compileCommand, "Failed to compile #{source}")
         end
@@ -106,19 +101,19 @@ module RakeBuilder
     def CreateLinkTask
       @binaryFileName = @ProjectConfiguration.GetFinalBuildDirectory()
       if(@ProjectConfiguration.BinaryType == :application)
-	@binaryFileName = JoinPaths([@binaryFileName, @ProjectConfiguration.BinaryName])
-	command = "g++ -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@linkDynamicLibrariesDirective}" 
+        @binaryFileName = JoinPaths([@binaryFileName, @ProjectConfiguration.BinaryName])
+        command = "g++ -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@libraryDirective}"
       elsif(@ProjectConfiguration.BinaryType == :shared)
-	@binaryFileName = JoinPaths([@binaryFileName, "lib#{@ProjectConfiguration.BinaryName}.so"])
-	command = "g++ -shared -fPIC -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@linkDynamicLibrariesDirective}" 
+        @binaryFileName = JoinPaths([@binaryFileName, "lib#{@ProjectConfiguration.BinaryName}.so"])
+        command = "g++ -shared -fPIC -o #{@binaryFileName} #{@linkOptionDirective} #{@definesDirective} #{@linkCompilesDirective} #{@libraryDirective}"
       else
-	@binaryFileName = JoinPaths([@binaryFileName, "lib#{@ProjectConfiguration.BinaryName}.a"])
-	command = "ar cq #{@binaryFileName} #{@linkCompilesDirective}" 
+        @binaryFileName = JoinPaths([@binaryFileName, "lib#{@ProjectConfiguration.BinaryName}.a"])
+        command = "ar cq #{@binaryFileName} #{@linkCompilesDirective}"
       end
-#       puts "task #{@ProjectConfiguration.BinaryName} => #{@compiles}"
+      #       puts "task #{@ProjectConfiguration.BinaryName} => #{@compiles}"
       file @binaryFileName => @compiles do
-	CreateLinkStaticLibrariesDirective()
-        SystemWithFail("#{command} #{@linkStaticLibrariesDirective}", "Failed to link #{@ProjectConfiguration.BinaryName}")
+#        CreateLinkStaticLibrariesDirective()
+        SystemWithFail("#{command}", "Failed to link #{@ProjectConfiguration.BinaryName}")
       end
 
       @EndTask = @binaryFileName
@@ -126,9 +121,9 @@ module RakeBuilder
 
     def GetCompileCommand(extendedSource, binaryPath)
       if(@ProjectConfiguration.BinaryType == :shared or @ProjectConfiguration.BinaryType == :static)
-	return "g++ -fPIC -c #{@compilerOptionDirective} #{@includeDirectoryDirective} #{@definesDirective} -o #{binaryPath} #{extendedSource}"
+        return "g++ -fPIC -c #{@compilerOptionDirective} #{@includeDirectoryDirective} #{@definesDirective} -o #{binaryPath} #{extendedSource}"
       else
-	return "g++ -c #{@compilerOptionDirective} #{@includeDirectoryDirective} #{@definesDirective} -o #{binaryPath} #{extendedSource}"
+        return "g++ -c #{@compilerOptionDirective} #{@includeDirectoryDirective} #{@definesDirective} -o #{binaryPath} #{extendedSource}"
       end
     end
 
@@ -142,14 +137,17 @@ module RakeBuilder
       includeTree = @ProjectConfiguration.GetIncludeDirectoryTree()
       
       # Get the complete directory tree recursivly
-      @LibraryIncludeDirectories.each do |directory|
-# 	if(IsProjectSubdirectory(directory, @ProjectConfiguration.ProjectDirectory))
-# 	  puts "Adding subdirectory tree of #{directory}"
-# 	  includeTree = includeTree + GetDirectoryTree(directory)
-# 	elsif
-# 	  puts "Adding directory #{directory}"
-	  includeTree.push(directory)
-# 	end
+      @ProjectConfiguration.Libraries.each do |libContainer|
+        if(!libContainer.UsedInLinux())
+          next
+        end
+        # 	if(IsProjectSubdirectory(directory, @ProjectConfiguration.ProjectDirectory))
+        # 	  puts "Adding subdirectory tree of #{directory}"
+        # 	  includeTree = includeTree + GetDirectoryTree(directory)
+        # 	elsif
+        # 	  puts "Adding directory #{directory}"
+        includeTree.concat(libContainer.GetHeaderPaths(:Linux))
+        # 	end
       end
 
       for i in 0..includeTree.length-1
@@ -173,31 +171,44 @@ module RakeBuilder
     def CreateLinkCompilesDirective
       @linkCompilesDirective = @compiles.join(" ")
     end
-    
-    # Creates a string that can be handed to the compiler containing all the libraries to link in
-    def CreateLinkDynamicLibrariesDirective
-      searchPaths = @LibrarySearchPaths.clone()
-      for i in 0..searchPaths.length-1 do
-	searchPaths[i] = "-L#{searchPaths[i]}"
-      end	
-      searchPathDirective = searchPaths.join(" ")      
-      
-      dynamicLibs = @ProjectConfiguration.DynamicLibraries.clone()
-      for i in 0..dynamicLibs.length-1 do
-	dynamicLibs[i] = "-l#{dynamicLibs[i]}"
+
+    def CreateLinkLibrariesDirective
+      dynamicLibsSearchPaths = Set.new
+      dynamicLibs = []
+      staticLibs = []
+
+      @ProjectConfiguration.Libraries.each do |libContainer|
+        if(libContainer.UsedInLinux())
+          next
+        end
+
+        if(libContainer.IsStatic())
+          dynamicLibs.push(_GetDynamicLibraryDirective(libContainer))
+          dynamicLibsSearchPaths.add(_GetDynamicLibrarySearchPathDirective(libContainer))
+        else
+          staticLibs.push(_GetStaticLibraryDirective(libContainer))
+        end
       end
-      dynamicLibDirective = dynamicLibs.join(" ")
-      
-      @linkDynamicLibrariesDirective = "#{searchPathDirective} #{dynamicLibDirective}"
+
+      dynamicLibsSearchPaths.each do |path|
+        dynamicLibsSearchPathsDirective += " #{path}"
+      end
+      dynamicLibsDirective = dynamicLibs.join(" ")
+      staticLibsDirective = staticLibs.join(" ")
+
+      @libraryDirective = "#{dynamicLibsDirective} #{dynamicLibsDirective} #{staticLibsDirective}"
     end
-    
-    def CreateLinkStaticLibrariesDirective
-      staticLibs = @ProjectConfiguration.StaticLibraries.clone()
-	for i in 0..staticLibs.length-1 do
-	  staticLibs[i] = "lib#{staticLibs[i]}.a"	
-	  staticLibs[i] = FindFileInDirectories(staticLibs[i], @LibrarySearchPaths)
-	end      
-      @linkStaticLibrariesDirective = staticLibs.join(" ")
+
+    def _GetDynamicLibrarySearchPathDirective(libContainer)
+      return "-L#{libContainer.GetLibraryPath(:Linux)}"
+    end
+
+    def _GetDynamicLibraryDirective(libContainer)
+      return "-l#{libContainer.GetName(:Linux)}"
+    end
+
+    def _GetStaticLibraryDirective(libContainer)
+      return libContainer.GetFullPath(:Linux)
     end
 
     # Creates a string containing all the defines in the project configuration.

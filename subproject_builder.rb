@@ -31,24 +31,24 @@ module RakeBuilder
       projectDir = Dir.pwd
       
       @Subprojects.each { |subproject|
-	subdir = JoinPaths([projectDir, subproject.Folder])
+        subdir = JoinPaths([projectDir, subproject.Folder])
                         
-	task subproject.Name do
-	  Dir.chdir(subdir)
-	  SystemWithFail(subproject.BuildCommand, "Failed to build subproject #{subproject.Name}")
-	  Dir.chdir(projectDir)
-	end
+        task subproject.Name do
+          Dir.chdir(subdir)
+          SystemWithFail(subproject.BuildCommand, "Failed to build subproject #{subproject.Name}")
+          Dir.chdir(projectDir)
+        end
                         
         cleanSubtask = "#{subproject.Name}_clean"
                         
         task cleanSubtask do
           Dir.chdir(subdir)              
-	  SystemWithFail(subproject.CleanCommand, "Failed to clean subproject #{subproject.Name}")
+          SystemWithFail(subproject.CleanCommand, "Failed to clean subproject #{subproject.Name}")
           Dir.chdir(projectDir)
         end                        
-	task :clean => cleanSubtask
+        task :clean => cleanSubtask
                         
-	task @SubprojectTask => [subproject.Name]
+        task @SubprojectTask => [subproject.Name]
       }
     end
     

@@ -20,9 +20,9 @@ module RakeBuilder
     # Create the task that can be used to install the packets.
     def CreatePacketInstallationTask 
       task @TaskName do
-	@PacketNames.each { |packet|
-	  SystemWithFail("sudo apt-get install #{packet}", "Could not install packet #{packet}")
-	}
+        @PacketNames.each { |packet|
+          SystemWithFail("sudo apt-get install #{packet}", "Could not install packet #{packet}")
+        }
       end
     end
     
