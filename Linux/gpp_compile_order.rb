@@ -28,7 +28,7 @@ module RakeBuilder
 
     def initialize      
       @CompilerOptions = []
-      @LinkOptions = []
+      @LinkOptions = ["-Wl,-rpath='$ORIGIN/lib'"] # relative linking of libraries
       @Dependencies = []
 
       @compiles = []
@@ -111,12 +111,48 @@ module RakeBuilder
         command = "ar cq #{@binaryFileName} #{@linkCompilesDirective}"
       end
       #       puts "task #{@ProjectConfiguration.BinaryName} => #{@compiles}"
+      
       file @binaryFileName => @compiles do
-#        CreateLinkStaticLibrariesDirective()
         SystemWithFail("#{command}", "Failed to link #{@ProjectConfiguration.BinaryName}")
       end
 
       @EndTask = @binaryFileName
+      
+      CreateLibraryAndHeaderCopyTasks()
+	
+	#Copy headers into binary directory
+	
+    end
+    
+    def CreateLibraryAndHeaderCopyTasks()
+       # Copy libraries and their headers into binary directory
+      @ProjectConfiguration.Libraries.each do |libContainer|
+	  if(!libContainer.UsedInLinux())
+	    next
+	  end
+	  
+	  CreateHeaderCopyTasks(libContainer)
+	  
+	  fullLibraryPath = libContainer.GetFullPath(:Linux)
+	  copyPath = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), libContainer.GetFileName(:Linux) ] )
+	  
+	  puts "#{copyPath} => #{@binaryFileName}"
+	  file copyPath => fullLibraryPath do
+	    SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
+	  end
+	  file @EndTask => copyPath
+	end
+    end
+    
+    # Create tasks that copy the headers of a library into a subdir of the build directory
+    def CreateHeaderCopyTasks(libContainer)
+      fullHeaderNames = libContainer.GetFullHeaderNames(:Linux)
+      
+      baseIncludeDir = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), "include", libContainer.GetName(:Linux) ] )
+      
+      fullHeaderNames.each do |header|
+	
+      end
     end
 
     def GetCompileCommand(extendedSource, binaryPath)

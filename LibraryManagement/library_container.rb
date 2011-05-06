@@ -15,13 +15,13 @@ module RakeBuilder
     def initialize
       @DllLibrary = nil
       @StaticLibrary = nil
-      @DynamicLibary = nil
+      @DynamicLibrary = nil
     end
 
     def initialize_copy(original)
       @DllLibrary = Clone(original.DllLibrary)
       @StaticLibrary = Clone(original.StaticLibrary)
-      @DynamicLibary = Clone(original.DynamicLibrary)
+      @DynamicLibrary = Clone(original.DynamicLibrary)
     end
 
     # Get the name for the library used under this OS.
@@ -67,12 +67,36 @@ module RakeBuilder
     def GetHeaderPaths(os)
       lib = _GetLibraryForOs(os)
       if(lib == nil)
-        puts "Nothing found for lib"
         return nil
       end
 
-      puts "Returning #{lib.HeaderPaths}"
       return lib.HeaderPaths
+    end
+    
+    # Get the names of the header files
+    def GetHeaderNames(os)
+      lib = _GetLibraryForOs(os)
+      if(lib == nil)
+        return nil
+      end
+
+      return lib.HeaderNames
+    end
+    
+    # Get the full names (including path) of the header files
+    def GetFullHeaderNames(os)
+      lib = _GetLibraryForOs(os)
+      if(lib == nil)
+        return nil
+      end
+
+      headerPaths = GetHeaderPaths(os)
+      fullHeaderNames = []
+      lib.HeaderNames.each do |header|
+	fullHeaderNames.push(FindFileInDirectories(header, headerPaths))
+      end     
+      
+      return fullHeaderNames
     end
 
     # Is this library used under windows
@@ -82,18 +106,18 @@ module RakeBuilder
 
     # Is this library used under linux
     def UsedInLinux()
-      return (@DynamicLibary != nil or @StaticLibrary != nil)
+      return (@DynamicLibrary != nil or @StaticLibrary != nil)
     end
 
     # Is this library used as a static library
     def IsStatic()
-      return (@DynamicLibary == nil and @StaticLibrary != nil)
+      return (@DynamicLibrary == nil and @StaticLibrary != nil)
     end
 
     def _GetLibraryForOs(os)
       if(os == :Linux)
         if(@DynamicLibrary != nil)
-          return @DynamicLibary
+          return @DynamicLibrary
         else
           return @StaticLibrary
         end

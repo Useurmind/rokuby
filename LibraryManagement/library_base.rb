@@ -17,12 +17,14 @@ module RakeBuilder
     attr_accessor :FileName
     attr_accessor :LibraryPath
     attr_accessor :HeaderPaths
+    attr_accessor :HeaderNames
 
-    def initialize(name, fileName, libraryPath, headerPaths)
+    def initialize(name, fileName, libraryPath, headerPaths, headerNames)
       @Name = name
       @FileName = fileName
       @LibraryPath = libraryPath
       @HeaderPaths = headerPaths
+      @HeaderNames = headerNames
     end
 
     def initialize_copy(original)
@@ -30,6 +32,7 @@ module RakeBuilder
       @FileName = Clone(original.FileName)
       @LibraryPath = Clone(original.LibraryPath)
       @HeaderPaths = Clone(original.HeaderPaths)
+      @HeaderNames = Clone(original.HeaderNames)
     end
   end
 end

@@ -25,18 +25,19 @@ module RakeBuilder
     #     - header path: basedir/include
     # Parameters are:
     # [name] The name of the libary.
+    # [headerNames] A list with all headers that are relevant for the library.
     # [basedir] The base directory of the library.
     # [static] Should under linux a static library be used.
-    def CreateFullyConventionalLibraryContainer(name, basedir, static=false)
+    def CreateFullyConventionalLibraryContainer(name, headerNames, basedir, static=false)
       libContainer = LibraryContainer.new()
       headerDirs = [JoinPaths([basedir, "include"])]
       
-      libContainer.DllLibrary = WindowsDll.new(name, JoinPaths([basedir, "build", "windows"]), headerDirs)
+      libContainer.DllLibrary = WindowsDll.new(name, JoinPaths([basedir, "build", "windows"]), headerDirs, headerNames)
 
       if(static)
-        libContainer.StaticLibrary = StaticLibrary.new(name, JoinPaths([basedir, "build", "static"]), headerDirs)
+        libContainer.StaticLibrary = StaticLibrary.new(name, JoinPaths([basedir, "build", "static"]), headerDirs, headerNames)
       else
-        libContainer.DynamicLibrary = DynamicLibrary.new(name, JoinPaths([basedir, "build", "dynamic"]), headerDirs)
+        libContainer.DynamicLibrary = DynamicLibrary.new(name, JoinPaths([basedir, "build", "dynamic"]), headerDirs, headerNames)
       end
 
       return libContainer
@@ -45,15 +46,16 @@ module RakeBuilder
     # Creates library that is only used under linux.
     # Parameters are:
     # [name] The name of the libary.
+    # [headerNames] A list with all headers that are relevant for the library.
     # [libraryPath] The directory where the library is located.
     # [headerDirs] The include paths of the library.
     # [static] Should it be a static library.
-    def CreateLinuxOnlyLibraryContainer(name, libraryPath, headerDirs, static=false)
+    def CreateLinuxOnlyLibraryContainer(name, libraryPath, headerNames, headerDirs, static=false)
       libContainer = LibraryContainer.new()
       if(static)
-        libContainer.StaticLibrary = StaticLibrary.new(name, libraryPath, headerDirs)
+        libContainer.StaticLibrary = StaticLibrary.new(name, libraryPath, headerDirs, headerNames)
       else
-        libContainer.DynamicLibrary = DynamicLibrary.new(name, libraryPath, headerDirs)
+        libContainer.DynamicLibrary = DynamicLibrary.new(name, libraryPath, headerDirs, headerNames)
       end
       return libContainer
     end
@@ -61,11 +63,12 @@ module RakeBuilder
     # Creates a library that is only used under windows.
     # Parameters are:
     # [name] The name of the libary.
+    # [headerNames] A list with all headers that are relevant for the library.
     # [libraryPath] The directory where the library is located.
     # [headerDirs] The include paths of the library.
-    def CreateWindowsOnlyLibraryContainer(name, libraryPath, headerDirs)
+    def CreateWindowsOnlyLibraryContainer(name, libraryPath, headerNames, headerDirs)
       libContainer = LibraryContainer.new()
-      libContainer.DllLibrary = WindowsDll.new(name, libraryPath, headerDirs)
+      libContainer.DllLibrary = WindowsDll.new(name, libraryPath, headerDirs, headerNames)
       return libContainer
     end
 
