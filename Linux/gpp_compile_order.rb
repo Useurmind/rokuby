@@ -1,6 +1,6 @@
 require "rake"
 require "rake/clean"
-require "cpp_project_configuration"
+require "ProjectManagement/cpp_project_configuration"
 require "general_utility"
 require "directory_utility"
 require "set"
@@ -228,7 +228,6 @@ module RakeBuilder
 
       dynamicLibsSearchPathsDirective = ""
       dynamicLibsSearchPaths.each do |path|
-	puts "Adding path #{path}"
         dynamicLibsSearchPathsDirective = "#{dynamicLibsSearchPathsDirective} #{path}"
       end
       dynamicLibsDirective = dynamicLibs.join(" ")

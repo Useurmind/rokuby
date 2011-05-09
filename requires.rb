@@ -13,7 +13,9 @@ require "LibraryManagement/library_container"
 require "LibraryManagement/library_container_factory"
 
 # General functionality
-require "cpp_project_configuration"
+require "ProjectManagement/cpp_project_configuration"
+require "ProjectManagement/source_module"
+require "ProjectManagement/project_manager"
 require "subproject"
 require "subproject_builder"
 require "doxygen_builder"
