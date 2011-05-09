@@ -214,11 +214,11 @@ module RakeBuilder
       staticLibs = []
 
       @ProjectConfiguration.Libraries.each do |libContainer|
-        if(libContainer.UsedInLinux())
+        if(!libContainer.UsedInLinux())
           next
         end
 
-        if(libContainer.IsStatic())
+        if(!libContainer.IsStatic())
           dynamicLibs.push(_GetDynamicLibraryDirective(libContainer))
           dynamicLibsSearchPaths.add(_GetDynamicLibrarySearchPathDirective(libContainer))
         else
@@ -226,13 +226,16 @@ module RakeBuilder
         end
       end
 
+      dynamicLibsSearchPathsDirective = ""
       dynamicLibsSearchPaths.each do |path|
-        dynamicLibsSearchPathsDirective += " #{path}"
+	puts "Adding path #{path}"
+        dynamicLibsSearchPathsDirective = "#{dynamicLibsSearchPathsDirective} #{path}"
       end
       dynamicLibsDirective = dynamicLibs.join(" ")
       staticLibsDirective = staticLibs.join(" ")
-
-      @libraryDirective = "#{dynamicLibsDirective} #{dynamicLibsDirective} #{staticLibsDirective}"
+      
+      @libraryDirective = "#{dynamicLibsSearchPathsDirective} #{dynamicLibsDirective} #{staticLibsDirective}"
+      puts "Library Directive is #{@libraryDirective}"
     end
 
     def _GetDynamicLibrarySearchPathDirective(libContainer)
