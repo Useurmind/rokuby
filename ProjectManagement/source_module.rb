@@ -12,18 +12,24 @@ module RakeBuilder
   class SourceModule
     include GeneralUtility
 
+	attr_accessor :Name
     attr_accessor :HeaderPatterns
     attr_accessor :SourcePatterns
+	attr_accessor :AssociatedLibraries
     attr_accessor :Define
 
-    def initialize
+    def initialize(name)
+	@Name = name
       @HeaderPatterns = []
       @SourcePatterns = []
+	  @AssociatedLibraries = []
     end
 
     def initialize_copy(original)
+		@Name = Clone(original.Name)
       @HeaderPatterns = Clone(original.HeaderPatterns)
       @SourcePatterns = Clone(original.SourcePatterns)
+	  @AssociatedLibraries = Clone(original.AssociatedLibraries)
       @Define = Clone(original.Define)
     end
   end

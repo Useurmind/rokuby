@@ -113,6 +113,10 @@ module RakeBuilder
     def IsStatic()
       return (@DynamicLibrary == nil and @StaticLibrary != nil)
     end
+	
+	def Equals(other, os)
+		return (GetName(os) == other.GetName(os))
+	end
 
     def _GetLibraryForOs(os)
       if(os == :Linux)

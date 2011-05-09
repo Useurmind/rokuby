@@ -140,6 +140,34 @@ module RakeBuilder
     def GetFinalBuildDirectory
       return JoinPaths([@BuildDirectory, @Name])
     end
+	
+	# Remove the given library
+	def RemoveLibraries(libContainers, os)
+		libContainers.each do |libContainer|
+			for i in 0..@Libraries.length-1
+				if(libContainer.Equals(@Libraries[i]))
+					@Libraries.delete_at(i)
+					break
+				end
+			end
+		end
+	end
+	
+	# Add the given library
+	def AddLibraries(newLibContainers, os)
+		newLibContainers.each do |newLibContainer|
+			found = false
+			@Libraries.each do |testlibContainer|
+				if(newLibContainer.Equals(testlibContainer, os))
+					found = true
+					break
+				end
+			end
+			if(found == false)
+				@Libraries.push(newLibContainer.clone())
+			end
+		end
+	end
   end
   
 end

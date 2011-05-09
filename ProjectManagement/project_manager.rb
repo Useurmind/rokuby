@@ -3,6 +3,7 @@ require "ProjectManagement/source_module"
 require "ProjectManagement/cpp_project_configuration"
 require "doxygen_builder"
 require "Linux/ubuntu_packet_installer"
+require "rake"
 
 module RakeBuilder
 
@@ -16,6 +17,13 @@ module RakeBuilder
   # and solution creators.
   # By default it creates a doxygen builder and an ubuntu packet installer for
   # which packets can be defined.
+  # [BaseProjectConfiguration] The initial project configuration on which each project configuration is based.
+  # [SourceModules] A hash containing the source modules with their name as key.
+  # [SourceModuleUsage] A hash which can contain a list of modules for each compile order.
+  # [LinuxCompileOrders] A hash with GppCompilerOrders with their name as key.
+  # [CompileOrderDescriptions] A hash containing the description for the final task of each compile order with the name of it as key.
+  # [WindowsSolutionCreators] todo
+  # [DefaultTargetName] The name of the compile order that is used as the default target.
   class ProjectManager
 
     attr_accessor :BaseProjectConfiguration
@@ -39,24 +47,32 @@ module RakeBuilder
 
       @UbuntuPacketInstaller = UbuntuPacketInstaller.new()
     end
-
+	
+	# Add some packets that should be installed with a list of package names.
     def AddUbuntuPacketInstallations(packetNames)
       @UbuntuPacketInstaller.PacketNames.concat(packetNames)
     end
 
-    def AddSourceModule(name, sourceModule)
-      if(@SourceModules[name] != nil)
-        abort "The module #{name} is already present in the ProjectManager"
+	# Add a source module that is contained in the source.
+    def AddSourceModule(sourceModule)
+      if(@SourceModules[sourceModule.Name] != nil)
+        abort "The module #{sourceModule.Name} is already present in the ProjectManager"
       end
-      @SourceModules[name] = sourceModule
+      @SourceModules[sourceModule.Name] = sourceModule
     end
 
-    def AddLinuxCompileOrder(name, compileOrder, description)
-      _CheckCompileOrderNotExists(name)
+	# Add a compile order.
+    def AddLinuxCompileOrder(compileOrder, description)
+      _CheckCompileOrderNotExists(compileOrder.Name)
 
-      compileOrder.ProjectConfiguration = @BaseProjectConfiguration
-      @LinuxCompileOrders[name] = compileOrder
-      @CompileOrderDescriptions[name] = description
+      compileOrder.ProjectConfiguration = @BaseProjectConfiguration.clone()
+	  
+	  compileOrder.ProjectConfiguration.Name = compileOrder.Name
+	  
+      @LinuxCompileOrders[compileOrder.Name] = compileOrder
+      @CompileOrderDescriptions[compileOrder.Name] = description
+	  
+	  return compileOrder
     end
 
     def AddWindowsSolutionCreator(name, solutionCreator)
@@ -66,15 +82,16 @@ module RakeBuilder
       @WindowsSolutionCreators[name] = solutionCreator
     end
 
-    def CopyLinuxCompileOrder(name, copyName, description)
-      _CheckCompileOrderExists(name)
+	# Copy a compile order that is already present giving it a new name and description.
+    def CopyLinuxCompileOrder(compileOrder, copyName, description)
+      _CheckCompileOrderExists(compileOrder.Name)
       _CheckCompileOrderNotExists(copyName)
 
-      copyCompileOrder = @LinuxCompileOrders[name].clone()
+      copyCompileOrder = @LinuxCompileOrders[compileOrder.Name].clone()
       @LinuxCompileOrders[copyName] = copyCompileOrder
       @CompileOrderDescriptions[copyName] = description
+	  copyCompileOrder.Name = copyName
       copyCompileOrder.ProjectConfiguration.Name = copyName
-      copyCompileOrder.ProjectConfiguration.BinaryName = copyName
 
       return copyCompileOrder
     end
@@ -82,7 +99,6 @@ module RakeBuilder
     def CreateTasks()
       _ModifyForSourceModuleUsage()
 
-      @DoxygenBuilder.CreateDoxyfile()
       desc "Build the doxygen documentation of the project"
       task :docu do
         @DoxygenBuilder.CreateDoxyfile()
@@ -92,8 +108,9 @@ module RakeBuilder
       desc "Install required ubuntu packets"
       task :packets => [@UbuntuPacketInstaller.TaskName]
 
-      @LinuxCompileOrders.each do |compileOrder|
+      @LinuxCompileOrders.each do |name, compileOrder|
         compileOrder.CreateProjectTasks()
+		desc @CompileOrderDescriptions[name]
         task compileOrder.ProjectConfiguration.Name => [compileOrder.EndTask]
       end
 
@@ -114,32 +131,31 @@ module RakeBuilder
     end
 
     def _ModifyForSourceModuleUsage
-      @SourceModules.each do |name,sourceModule|
-        usage = @SourceModuleUsage[sourceModule]
-        if(usage == nil)
-          #default is not using the module at all
-          _ExcludeSourceModuleFromCompileOrders(sourceModule, @LinuxCompileOrders.values())
-        else
-          _SetUsageOfModule(usage, sourceModule)
-        end
+      @LinuxCompileOrders.each do |name,compileOrder|
+		if(!@SourceModuleUsage[compileOrder])
+			modulesToUse = []
+		else
+			modulesToUse = @SourceModuleUsage[compileOrder]	
+		end
+	  
+		modulesNotToUse = @SourceModules.values() - modulesToUse
+		
+        modulesToUse.each do |sourceModule|
+			compileOrder.ProjectConfiguration.AddLibraries(sourceModule.AssociatedLibraries, :Linux)
+			if(sourceModule.Define)
+				compileOrder.ProjectConfiguration.Defines.push(sourceModule.Define)
+			end
+		end
+		_ExcludeSourceModulesFromCompileOrder(modulesNotToUse, compileOrder)
       end
     end
 
-    def _ExcludeSourceModuleFromCompileOrders(sourceModule, compileOrders)
-      compileOrders.each do |compileOrder|
+    def _ExcludeSourceModulesFromCompileOrder(sourceModules, compileOrder)
+      sourceModules.each do |sourceModule|
+		puts "Setting exclude patters"
         compileOrder.ProjectConfiguration.SourceExcludePatterns.concat(sourceModule.SourcePatterns)
-        compileOrder.ProjectConfiguration.HeaderExcludePatterns.concat(sourceModule.HeadersPatterns)
+        compileOrder.ProjectConfiguration.HeaderExcludePatterns.concat(sourceModule.HeaderPatterns)
       end
-    end
-
-    def _SetUsageOfModule(usage, sourceModule)
-      compileOrdersToExcludeModuleFrom = []
-      @LinuxCompileOrders.each do |name, compileOrder|
-        if(usage[name] == nil)
-          compileOrdersToExcludeModuleFrom.push(compileOrder)
-        end
-      end
-      _ExcludeSourceModuleFromCompileOrders(sourceModule, compileOrdersToExcludeModuleFrom)
     end
   end
 end
