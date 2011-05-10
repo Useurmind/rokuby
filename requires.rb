@@ -25,6 +25,7 @@ require "VisualStudio/vs_xml_file_utility"
 require "VisualStudio/project_file_creator"
 require "VisualStudio/filter_file_creator"
 require "VisualStudio/solution_file_creator"
+require "VisualStudio/vs_project_creator"
 
 # Linux only functionality
 require "Linux/gpp_compile_order"

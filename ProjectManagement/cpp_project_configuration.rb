@@ -20,7 +20,6 @@ module RakeBuilder
   # [BuildDirectory] The directory in the ProjectDirectory for result of the build (defaults to 'build').
   # [Libraries] The libraries (real objects) for this project.
   # [Defines] Defines that should be set for the project.
-  # [PrecompiledHeader] The file that can be used as a precompiled header (visual studio)
   # [BinaryName] The name of the binary that is created.
   # [BinaryType] The type of the binary to create (:shared, :static, :application, default: :application)
   class CppProjectConfiguration
@@ -37,7 +36,6 @@ module RakeBuilder
     attr_accessor :SourceDirectories
     attr_accessor :HeaderDirectories
     attr_accessor :Defines
-    attr_accessor :PrecompiledHeader
     attr_accessor :ProjectDirectory
     attr_accessor :CompilesDirectory
     attr_accessor :BuildDirectory
@@ -54,7 +52,6 @@ module RakeBuilder
       @HeaderDirectories = []
       @SourceDirectories = []
       @Defines = []
-      @PrecompiledHeader = nil
       @ProjectDirectory = nil
       @CompilesDirectory = "bin"
       @BuildDirectory = "build"
@@ -71,7 +68,6 @@ module RakeBuilder
       @HeaderDirectories = Clone(original.HeaderDirectories)
       @SourceDirectories = Clone(original.SourceDirectories)
       @Defines = Clone(original.Defines)
-      @PrecompiledHeader = Clone(original.PrecompiledHeader)
       @ProjectDirectory = Clone(original.ProjectDirectory)
       @CompilesDirectory = Clone(original.CompilesDirectory)
       @Libraries = Clone(original.Libraries)
@@ -140,34 +136,41 @@ module RakeBuilder
     def GetFinalBuildDirectory
       return JoinPaths([@BuildDirectory, @Name])
     end
+
+    # Get the path relativ to the project directory.
+    # [path] This is the path with the project directory prepended.
+    # Return value is the path without the prepended project directory.
+    def GetProjectRelativePath(path)
+      return path.sub("#{@ProjectDirectory}\/", "")
+    end
 	
-	# Remove the given library
-	def RemoveLibraries(libContainers, os)
-		libContainers.each do |libContainer|
-			for i in 0..@Libraries.length-1
-				if(libContainer.Equals(@Libraries[i]))
-					@Libraries.delete_at(i)
-					break
-				end
-			end
-		end
-	end
+    # Remove the given library
+    def RemoveLibraries(libContainers, os)
+      libContainers.each do |libContainer|
+        for i in 0..@Libraries.length-1
+          if(libContainer.Equals(@Libraries[i]))
+            @Libraries.delete_at(i)
+            break
+          end
+        end
+      end
+    end
 	
-	# Add the given library
-	def AddLibraries(newLibContainers, os)
-		newLibContainers.each do |newLibContainer|
-			found = false
-			@Libraries.each do |testlibContainer|
-				if(newLibContainer.Equals(testlibContainer, os))
-					found = true
-					break
-				end
-			end
-			if(found == false)
-				@Libraries.push(newLibContainer.clone())
-			end
-		end
-	end
+    # Add the given library
+    def AddLibraries(newLibContainers, os)
+      newLibContainers.each do |newLibContainer|
+        found = false
+        @Libraries.each do |testlibContainer|
+          if(newLibContainer.Equals(testlibContainer, os))
+            found = true
+            break
+          end
+        end
+        if(found == false)
+          @Libraries.push(newLibContainer.clone())
+        end
+      end
+    end
   end
   
 end

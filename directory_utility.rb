@@ -161,6 +161,10 @@ module RakeBuilder
     def FormatPath(path)
       return path.gsub("\\", "/").gsub("//", "/");
     end
+
+    def StripFilenameFromPath(path)
+      return path.sub("\/#{File.basename(path)}", "")
+    end
     
     #     def IsProjectSubdirectory(directory, projectDirectory)
     #       puts "#{directory}"

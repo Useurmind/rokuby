@@ -1,23 +1,26 @@
-require "VisualStudio/vs_xml_file_utility.rb"
+require "VisualStudio/vs_file_creator.rb"
+require "VisualStudio/vs_project_configuration.rb"
 
 module RakeBuilder
 
-  class CppProjectFileCreator < VsXmlFileUtility
-    attr_accessor :Configurations
+  class ProjectFileCreator < VsFileCreator
+    attr_accessor :ProjectConfigurations
     attr_accessor :ProjectGuid
     attr_accessor :RootNamespace
-    attr_accessor :ConfigurationType
 
     def initialize()
       super
 
-      @Configurations = ["Release", "Debug"]
-      @ConfigurationType = "Application"
+      @ProjectConfigurations = []
+      @RootNamespace = "root"
+      @ProjectGuid = GetUUID()
     end
 
-    def buildProjectFile()
-      ExtendPaths()
+    def GetFileName()
+      return "#{@ProjectConfiguration.ProjectName}.vcxproj"
+    end
 
+    def BuildFile()
       doc = {
         "DefaultTargets"=>"Build", "ToolsVersion"=>"4.0", "xmlns"=>"http://schemas.microsoft.com/developer/msbuild/2003",
         'ItemGroup' => [],
@@ -33,31 +36,68 @@ module RakeBuilder
       @importGroups = doc["ImportGroup"]
       @itemDefinitionGroups = doc["ItemDefinitionGroup"]
 
-      CreateProjectConfigurations()
-      CreateConfigurations()
+      CreateConfigurationTags()
+
+      CreateGlobals()
+
       CreateHeaderElement()
       CreateSourceElement()
 
-      CreateGlobals()
-      CreateImports()
-      CreateImportGroups()
-      CreateItemDefinitionGroups()
-
-      SaveXmlDocument(doc, "test.vcxproj")
+      SaveXmlDocument(doc, GetFilePath())
     end
 
+    def CreateConfigurationTags
+      projectConfigurationGroupElements = []
+      configurationPropertyGroups = []
+      propertySheetsPropertyGroups = []
+      itemDefinitionGroups = []
+      othersPropertyGroups = []
+      @ProjectConfigurations.each do |configuration|
+        projectConfigurationGroupElements.push(CreateProjectConfigurationGroupElement(configuration))
+        configurationPropertyGroups.push(CreateConfigurationPropertyGroup(configuration))
+        propertySheetsPropertyGroups.push(CreatePropertySheetsPropertyGroup(configuration))
+        itemDefinitionGroups.push(CreateItemDefinitionGroup(configuration))
+      end
+
+      @itemGroups.push GetMultiElementListForList(
+        {"Label" =>  "ProjectConfigurations"},
+        "ProjectConfiguration", projectConfigurationGroupElements
+      )
+
+      @propertyGroups.concat(configurationPropertyGroups)
+      @propertyGroups.concat(propertySheetsPropertyGroups)
+
+      @itemDefinitionGroups.concat(itemDefinitionGroups)
+    end
 
     def CreateGlobals()
       @propertyGroups.push(GetElementForList(
           { "Label" => "Globals"},
-          { "ProjectGuid" => "{#{@ProjectGuid}}",
+          { "ProjectGuid" => "#{@ProjectGuid}",
             "RootNamespace" => "#{@RootNamespace}"})
       )
     end
 
-    def CreateItemDefinitionGroups
-      @itemDefinitionGroups.push GetElementForList({"Condition" => GetConfigurationCondition("Debug", "Win32")}, {})
-      @itemDefinitionGroups.push GetElementForList({"Condition" => GetConfigurationCondition("Release", "Win32")}, {})
+    def CreateItemDefinitionGroup(configuration)
+      clCompileElement = GetSelfContainedElement("ClCompile", {}, {
+          "WarningLevel" => configuration.WarningLevel,
+          "Optimization" => configuration.Optimization,
+          "AdditionalIncludeDirectories" => configuration.AdditionalIncludeDirectories.join(';'),
+          "PreprocessorDefinitions" => configuration.PreprocessorDefinitions.join(';'),
+          "AssemblerOutput" => configuration.AssemblerOutput,
+          "FunctionLevelLinking" => configuration.FunctionLevelLinking.to_s(),
+          "IntrinsicFunctions" => configuration.IntrinsicFunctions.to_s()
+        })
+
+      linkElement = GetSelfContainedElement("Link", {}, {
+          "GenerateDebugInformation" => configuration.GenerateDebugInformation.to_s(),
+          "AdditionalLibraryDirectories" => configuration.AdditionalLibraryDirectories.join(';'),
+          "AdditionalDependencies" => configuration.AdditionalDependencies.join(';'),
+          "EnableCOMDATFolding" => configuration.EnableCOMDATFolding.to_s(),
+          "OptimizeReferences" => configuration.OptimizeReferences.to_s()
+        })
+
+      return GetElementForList({"Condition" => configuration.GetConfigurationCondition()}, clCompileElement.merge(linkElement))
     end
 
     def CreateImports()
@@ -66,58 +106,39 @@ module RakeBuilder
       @imports.push GetElementForList({ "Project" => "$(VCTargetsPath)\\Microsoft.Cpp.props"},{})
     end
 
-    def CreateImportGroups()
-      @importGroups.push GetElementForList({ "Label" => "ExtensionTargets"},{})
-      @importGroups.push GetElementForList({ "Label" => "ExtensionSettings"},{})
-      @importGroups.push GetElementForList(
+    def CreatePropertySheetsPropertyGroup(configuration)
+      return GetElementForList(
         { "Label" => "PropertySheets",
-          "Condition" => GetConfigurationCondition("Debug", "Win32")},
-        {}) #TODO
-      @importGroups.push GetElementForList(
-        { "Label" => "PropertySheets",
-          "Condition" => GetConfigurationCondition("Release", "Win32")},
+          "Condition" => configuration.GetConfigurationCondition()},
         {}) #TODO
     end
 
-    def CreateProjectConfigurations()
-      projectConfigurations = []
-      @Configurations.each { |configuration|
-        projectConfigurations.push GetElementForList(
-          { "Include" => "#{configuration}|Win32"},
-          { "Configuration" => configuration ,
-            "Platform" => "Win32"}
-        )
-      }
-
-      @itemGroups.push GetMultiElementListForList(
-        {"Label" =>  "ProjectConfigurations"},
-        "ProjectConfiguration", projectConfigurations
+    def CreateProjectConfigurationGroupElement(configuration)
+      return GetElementForList(
+        { "Include" => configuration.GetNamePlatformCombi()},
+        { "Configuration" => configuration.Name ,
+          "Platform" => configuration.Platform}
       )
     end
 
-    def CreateConfigurations
-      @propertyGroups.push GetElementForList(
-        { "Condition" => GetConfigurationCondition("Debug", "Win32"), "Label"=>"Configuration"},
-        { "ConfigurationType" => @ConfigurationType ,
-          "UseDebugLibraries" => "true",
-          "CharacterSet" => "MultiByte"
-        }
-      )
-      @propertyGroups.push GetElementForList(
-        { "Condition" => GetConfigurationCondition("Release", "Win32"), "Label"=>"Configuration"},
-        { "ConfigurationType" => @ConfigurationType ,
-          "UseDebugLibraries" => "false",
-          "WholeProgramOptimization" => "true",
-          "CharacterSet" => "MultiByte"
+    def CreateConfigurationPropertyGroup(configuration)
+      return GetElementForList(
+        { "Condition" => configuration.GetConfigurationCondition(), "Label"=>"Configuration"},
+        { "ConfigurationType" => configuration.ConfigurationType ,
+          "UseDebugLibraries" => configuration.UseDebugLibraries.to_s,
+          "CharacterSet" => configuration.CharacterSet.to_s
         }
       )
     end
 
     def CreateHeaderElement()
       itemList = []
-      @HeaderFiles.each {|headerFile|
-        pathToFile = FindFileInDirectories(headerFile, Dir.pwd, @IncludeDirectories)
-        itemList.push GetElementForList({"Include" => pathToFile}, {})
+      extendedIncludePaths = @ProjectConfiguration.GetExtendedIncludes()
+
+      extendedIncludePaths.each { |headerfile|
+        relativeHeader = _GetVsProjectRelativePath(headerfile)
+        
+        itemList.push GetElementForList({"Include" => relativeHeader}, {})
       }
 
       @itemGroups.push GetMultiElementListForList({}, "ClInclude", itemList)
@@ -125,13 +146,16 @@ module RakeBuilder
 
     def CreateSourceElement()
       itemList = []
-      @SourceFiles.each {|sourceFile|
-        pathToFile = FindFileInDirectories(sourceFile, Dir.pwd, @SourceDirectories)
-        itemList.push GetElementForList({"Include" => pathToFile}, {})
+      extendedSourcePaths = @ProjectConfiguration.GetExtendedSources()
+
+      extendedSourcePaths.each { |sourcefile|
+        relativeSource = _GetVsProjectRelativePath(sourcefile)
+     
+        itemList.push GetElementForList({"Include" => relativeSource}, {})
       }
 
-      pathToPrecompiledHeader = FindFileInDirectories(@PrecompiledHeader, Dir.pwd, @SourceDirectories)
-      itemList.push GetPrecompiledHeader(pathToPrecompiledHeader)
+      #pathToPrecompiledHeader = FindFileInDirectories(@PrecompiledHeader, Dir.pwd, @SourceDirectories)
+      #itemList.push GetPrecompiledHeader(pathToPrecompiledHeader)
       @itemGroups.push GetMultiElementListForList({}, "ClCompile", itemList)
     end
 
@@ -142,14 +166,6 @@ module RakeBuilder
       ]
       preHeaderElement = GetMultiElementListForList({"Include" => preHeader}, "PrecompiledHeader", children)
       return preHeaderElement
-    end
-
-    def GetConfigurationCondition(configuration, platform)
-      if(!@Configurations.include? configuration)
-        raise "Configuration #{configuration} not available in this project"
-      end
-
-      return "'$(Configuration)|$(Platform)'=='#{configuration}|#{platform}'"
     end
 
   end
