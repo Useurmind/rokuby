@@ -8,20 +8,12 @@ include REXML
 
 module RakeBuilder
 
-  class VsXmlFileUtility
+  module VsXmlFileUtility
     include DirectoryUtility
 
-    def initialize
-      @options = {
-        "NoEscape" => true,
-        "XmlDeclaration" => "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
-        "RootName" => "Project"
-      }
-    end
-
-    def SaveXmlDocument(doc, path)
+    def SaveXmlDocument(doc, path, options)
       file = File.open(path, 'w')
-      docString = XmlSimple.xml_out(doc, @options)
+      docString = XmlSimple.xml_out(doc, options)
       file.write docString
     end
 

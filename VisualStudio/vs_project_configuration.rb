@@ -1,8 +1,12 @@
+require "ProjectManagement/cpp_project_configuration"
+require "VisualStudio/vs_xml_file_utility"
+require "general_utility"
 
 module RakeBuilder
   # Types of binaries
   VS_CONFIGURATION_TYPE_APPLICATION = "Application"
   VS_CONFIGURATION_TYPE_SHARED = "DynamicLibrary"
+  VS_CONFIGURATION_TYPE_STATIC = "StaticLibrary"
   
   # Binary extensions
   VS_CONFIGURATION_EXTENSION_APPLICATION = ".exe"
@@ -42,12 +46,16 @@ module RakeBuilder
   # [AdditionalDependencies] Array of names of libraries that should be linked in.
   # [EnableCOMDATFolding] Seems to be good for performance, e.g. release builds (true, false).
   # [OptimizeReferences] Seems to be good for performance, e.g. release builds (true, false).
-  class VsProjectConfiguration
-    attr_accessor :Name
-    attr_accessor :Platform
-    attr_accessor :TargetName
+  class VsProjectConfiguration < CppProjectConfiguration
+    include GeneralUtility
+    include VsXmlFileUtility
+    
+    #attr_accessor :Name inherited from CppProjectConfiguration
+    attr_accessor :Platform    
+    attr_accessor :TargetName    
     attr_accessor :TargetExt
     attr_accessor :ConfigurationType
+    
     attr_accessor :UseDebugLibraries
     attr_accessor :WholeProgramOptimization
     attr_accessor :CharacterSet
@@ -68,6 +76,8 @@ module RakeBuilder
     attr_accessor :OptimizeReferences
 
     def initialize
+      super
+      
       @Name = "Release"
       @Platform = "Win32"
 
@@ -81,17 +91,56 @@ module RakeBuilder
 
       @WarningLevel = "Level3"
       @Optimization = "MaxSpeed"
-      @AdditionalIncludeDirectories = []
-      @PreprocessorDefinitions = ["_WINDLL", "%(PreprocessorDefinitions)"]
       @AssemblerOutput = "NoListing"
       @FunctionLevelLinking = true
       @IntrinsicFunctions = true
 
       @GenerateDebugInformation = false
-      @AdditionalLibraryDirectories = []
-      @AdditionalDependencies = ["%(AdditionalDependencies)"]
       @EnableCOMDATFolding = true
       @OptimizeReferences = true
+      
+      InitLists()
+    end
+    
+    def InitLists
+      @AdditionalIncludeDirectories = []
+      @AdditionalLibraryDirectories = []
+      @PreprocessorDefinitions = ["_WINDLL", "%(PreprocessorDefinitions)"]
+      @AdditionalDependencies = ["%(AdditionalDependencies)"]
+    end
+    
+    def InitializeFromParent(parent)
+      InitCopy(parent)
+      SyncWithParent()
+    end
+    
+    def initialize_copy(original)
+      super(original)
+      
+      @Name = Clone(original.Name)
+      @Platform = Clone(original.Platform)
+
+      @TargetName = Clone(original.TargetName)
+      @TargetExt = Clone(original.TargetExt)
+      @ConfigurationType = Clone(original.ConfigurationType)
+      @UseDebugLibraries = Clone(original.UseDebugLibraries)
+      @WholeProgramOptimization = Clone(original.WholeProgramOptimization)
+      @CharacterSet = Clone(original.CharacterSet)
+      @OutputDirectory = Clone(original.OutputDirectory)
+
+      @WarningLevel = Clone(original.WarningLevel)
+      @Optimization = Clone(original.Optimization)
+      @AdditionalIncludeDirectories = Clone(original.AdditionalIncludeDirectories)
+      @PreprocessorDefinitions = Clone(original.PreprocessorDefinitions)
+      @AssemblerOutput = Clone(original.AssemblerOutput)
+      @FunctionLevelLinking = Clone(original.FunctionLevelLinking)
+      @IntrinsicFunctions = Clone(original.IntrinsicFunctions)
+
+      @GenerateDebugInformation = Clone(original.GenerateDebugInformation)
+      @AdditionalLibraryDirectories = Clone(original.AdditionalLibraryDirectories)
+      @AdditionalDependencies = Clone(original.AdditionalDependencies)
+      @EnableCOMDATFolding = Clone(original.EnableCOMDATFolding)
+      @OptimizeReferences = Clone(original.OptimizeReferences)
     end
 
     def GetNamePlatformCombi
@@ -100,6 +149,74 @@ module RakeBuilder
 
     def GetConfigurationCondition
       "'$(Configuration)|$(Platform)'=='#{GetNamePlatformCombi()}'"
+    end
+    
+    def SyncWithParent()
+      InitLists()
+      
+      @TargetName = @BinaryName
+
+      #set binary type
+      if(@BinaryType == :application)
+        @ConfigurationType = VS_CONFIGURATION_TYPE_APPLICATION
+        @TargetExt = VS_CONFIGURATION_EXTENSION_APPLICATION
+      elsif(@BinaryType == :shared)
+        @ConfigurationType = VS_CONFIGURATION_TYPE_SHARED
+        @TargetExt = VS_CONFIGURATION_EXTENSION_SHARED
+      else
+        abort "Binary type #{@BinaryType} not supported"
+      end
+
+      @PreprocessorDefinitions.concat(Clone(@Defines))
+
+      @AdditionalIncludeDirectories.concat(_GetVsIncludeDirectories())
+      _SetVsLibraryAttributes()
+
+      @OutputDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @BuildDirectory, "vs-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
+    end
+    
+    def _GetVsIncludeDirectories()
+      includeTree = GetIncludeDirectoryTree()
+      vsIncludeTree = []
+      includeTree.each do |directory|
+        vsIncludeDirectory = GetVsProjectRelativePath(GetProjectRelativePath(directory)) 
+
+        vsIncludeTree.push(vsIncludeDirectory)
+      end
+      return vsIncludeTree
+    end
+    
+    def _SetVsLibraryAttributes()
+      libraryDirectories = []
+      libraryNames = []
+      libraryIncludePaths = []
+
+      @Libraries.each do |libContainer|
+        if(!libContainer.UsedInWindows())
+          next
+        end
+
+        libraryNames.push(libContainer.GetFileName(:Windows))
+
+        if(libContainer.GetLibraryPath(:Windows) != nil)
+          libraryPath = GetVsProjectRelativePath(libContainer.GetLibraryPath(:Windows)) 
+          if(libraryDirectories.index(libraryPath) == nil)
+            libraryDirectories.push(libraryPath)
+          end
+        end
+
+        libContainer.GetHeaderPaths(:Windows).each do |headerPath|
+          relativePath =  GetVsProjectRelativePath(headerPath) 
+          
+          if(libraryIncludePaths.index(relativePath) == nil)
+            libraryIncludePaths.push( relativePath )
+          end
+        end
+      end
+
+      @AdditionalIncludeDirectories.concat(libraryIncludePaths)
+      @AdditionalDependencies.concat(libraryNames)
+      @AdditionalLibraryDirectories.concat(libraryDirectories)
     end
   end
 end

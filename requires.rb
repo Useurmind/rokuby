@@ -9,6 +9,7 @@ require "LibraryManagement/library_base"
 require "LibraryManagement/dynamic_library"
 require "LibraryManagement/static_library"
 require "LibraryManagement/windows_dll"
+require "LibraryManagement/windows_lib"
 require "LibraryManagement/library_container"
 require "LibraryManagement/library_container_factory"
 
@@ -25,7 +26,7 @@ require "VisualStudio/vs_xml_file_utility"
 require "VisualStudio/project_file_creator"
 require "VisualStudio/filter_file_creator"
 require "VisualStudio/solution_file_creator"
-require "VisualStudio/vs_project_creator"
+require "VisualStudio/vs_solution_creator"
 
 # Linux only functionality
 require "Linux/gpp_compile_order"

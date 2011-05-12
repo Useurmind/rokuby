@@ -2,6 +2,7 @@ require "LibraryManagement/library_container"
 require "LibraryManagement/dynamic_library"
 require "LibraryManagement/static_library"
 require "LibraryManagement/windows_dll"
+require "LibraryManagement/windows_lib"
 
 require "directory_utility"
 require "general_utility"
@@ -17,9 +18,10 @@ module RakeBuilder
 
     # A fully conventional library conforms to the following properties:
     # - Naming is consistent like this, e.g. for a library called foo the library
-    #   binaries are called libfoo.dll, libfoo.so, libfoo.a
+    #   binaries are called libfoo.dll, libfoo.lib, libfoo.so, libfoo.a
     # - Folder structure is consistent like this:
-    #     - dll path: basedir/build/windows
+    #     - dll path: basedir/build/dll
+    #     - lib path: basedir/build/lib
     #     - static path: basedir/build/static
     #     - dynamic path: basedir/build/dynamic
     #     - header path: basedir/include
@@ -31,13 +33,13 @@ module RakeBuilder
     def CreateFullyConventionalLibraryContainer(name, headerNames, basedir, static=false)
       libContainer = LibraryContainer.new()
       headerDirs = [JoinPaths([basedir, "include"])]
-      
-      libContainer.DllLibrary = WindowsDll.new(name, JoinPaths([basedir, "build", "windows"]), headerDirs, headerNames)
 
       if(static)
         libContainer.StaticLibrary = StaticLibrary.new(name, JoinPaths([basedir, "build", "static"]), headerDirs, headerNames)
+        libContainer.LibLibrary = WindowsLib.new(name, JoinPaths([basedir, "build", "lib"]), headerDirs, headerNames)
       else
         libContainer.DynamicLibrary = DynamicLibrary.new(name, JoinPaths([basedir, "build", "dynamic"]), headerDirs, headerNames)
+        libContainer.DllLibrary = WindowsDll.new(name, JoinPaths([basedir, "build", "dll"]), headerDirs, headerNames)
       end
 
       return libContainer
@@ -66,9 +68,14 @@ module RakeBuilder
     # [headerNames] A list with all headers that are relevant for the library.
     # [libraryPath] The directory where the library is located.
     # [headerDirs] The include paths of the library.
-    def CreateWindowsOnlyLibraryContainer(name, libraryPath, headerNames, headerDirs)
+    # [static] Should it be a static library.
+    def CreateWindowsOnlyLibraryContainer(name, libraryPath, headerNames, headerDirs, static=false)
       libContainer = LibraryContainer.new()
-      libContainer.DllLibrary = WindowsDll.new(name, libraryPath, headerDirs, headerNames)
+      if(static)
+        libContainer.LibLibrary = WindowsLib.new(name, libraryPath, headerDirs, headerNames)
+      else
+        libContainer.DllLibrary = WindowsDll.new(name, libraryPath, headerDirs, headerNames)
+      end
       return libContainer
     end
 
@@ -79,6 +86,8 @@ module RakeBuilder
         libraryType = lib.class.name
         if(libraryType.eql? WindowsDll.name)
           libContainer.DllLibrary = lib
+        elsif(libraryType.eql? WindowsLib.name)
+          libContainer.LibLibrary = lib
         elsif(libraryType.eql? DynamicLibrary.name)
           libContainer.DynamicLibrary = lib
         elsif(libraryType.eql? StaticLibrary.name)

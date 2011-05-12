@@ -40,7 +40,7 @@ module RakeBuilder
       @SourceModuleUsage = {}
       @LinuxCompileOrders = {}
       @CompileOrderDescriptions = {}
-      @WindowsSolutionCreators = {}
+      @VsSolutionCreator = VsSolutionCreator.new(baseProjectConfiguration)
 
       @DoxygenBuilder = DoxygenBuilder.new()
       @DoxygenBuilder.ProjectConfiguration = baseProjectConfiguration
@@ -67,19 +67,16 @@ module RakeBuilder
 
       compileOrder.ProjectConfiguration = @BaseProjectConfiguration.clone()
 	  
-	  compileOrder.ProjectConfiguration.Name = compileOrder.Name
+      compileOrder.ProjectConfiguration.Name = compileOrder.Name
 	  
       @LinuxCompileOrders[compileOrder.Name] = compileOrder
       @CompileOrderDescriptions[compileOrder.Name] = description
 	  
-	  return compileOrder
+      return compileOrder
     end
 
-    def AddWindowsSolutionCreator(name, solutionCreator)
-      if(@WindowsSolutionCreators[name] != nil)
-        abort "The solution creator #{name} is already present in the ProjectManager"
-      end
-      @WindowsSolutionCreators[name] = solutionCreator
+    def AddVsProjectConfiguration(name)
+      return @VsSolutionCreator.CreateNewVsProjectConfiguration(name)
     end
 
 	# Copy a compile order that is already present giving it a new name and description.
@@ -97,7 +94,8 @@ module RakeBuilder
     end
 
     def CreateTasks()
-      _ModifyForSourceModuleUsage()
+      _ApplySourceModuleUsageToCompileOrders()
+      _ApplySourceModuleUsageToVsProjectConfigurations()
 
       desc "Build the doxygen documentation of the project"
       task :docu do
@@ -110,9 +108,13 @@ module RakeBuilder
 
       @LinuxCompileOrders.each do |name, compileOrder|
         compileOrder.CreateProjectTasks()
-		desc @CompileOrderDescriptions[name]
+	desc @CompileOrderDescriptions[name]
         task compileOrder.ProjectConfiguration.Name => [compileOrder.EndTask]
       end
+      
+      @VsSolutionCreator.CreateTasks()
+      desc "Create the Visual Studio solution for the project"
+      task "VsSolution" => @VsSolutionCreator.EndTask
 
       _CheckCompileOrderExists(@DefaultTargetName)
       task :default => [@LinuxCompileOrders[@DefaultTargetName].ProjectConfiguration.Name]
@@ -130,31 +132,47 @@ module RakeBuilder
       end
     end
 
-    def _ModifyForSourceModuleUsage
+    def _ApplySourceModuleUsageToCompileOrders
       @LinuxCompileOrders.each do |name,compileOrder|
-		if(!@SourceModuleUsage[compileOrder])
-			modulesToUse = []
-		else
-			modulesToUse = @SourceModuleUsage[compileOrder]	
-		end
-	  
-		modulesNotToUse = @SourceModules.values() - modulesToUse
+	  modulesToUse = _GetSourceModulesToUse(compileOrder)
 		
-        modulesToUse.each do |sourceModule|
-			compileOrder.ProjectConfiguration.AddLibraries(sourceModule.AssociatedLibraries, :Linux)
-			if(sourceModule.Define)
-				compileOrder.ProjectConfiguration.Defines.push(sourceModule.Define)
-			end
-		end
-		_ExcludeSourceModulesFromCompileOrder(modulesNotToUse, compileOrder)
+	  _ApplySourceModuleUsageToProjectConfiguration(compileOrder.ProjectConfiguration, modulesToUse)
       end
     end
+    
+    def _ApplySourceModuleUsageToVsProjectConfigurations
+      @VsSolutionCreator.VsProjectConfigurations.each do |configuration|
+	  modulesToUse = _GetSourceModulesToUse(configuration)
+		
+	  _ApplySourceModuleUsageToProjectConfiguration(configuration, modulesToUse)
+      end
+    end
+    
+    def _GetSourceModulesToUse(component)
+	if(!@SourceModuleUsage[component])
+	    modulesToUse = []
+	else
+	    modulesToUse = @SourceModuleUsage[component]	
+	end
+	return modulesToUse
+    end
+    
+    def _ApplySourceModuleUsageToProjectConfiguration(projectConfiguration, modulesToUse)
+	modulesToUse.each do |sourceModule|
+	    projectConfiguration.AddLibraries(sourceModule.AssociatedLibraries, :Linux)
+	    if(sourceModule.Define)
+		projectConfiguration.Defines.push(sourceModule.Define)
+	    end
+	end  	  
+	modulesNotToUse = @SourceModules.values() - modulesToUse
+	_ExcludeSourceModulesFromProjectConfiguration(modulesNotToUse, projectConfiguration)
+	puts "Source Exclude patterns in configuration #{projectConfiguration.Name}: #{projectConfiguration.SourceExcludePatterns}"
+    end
 
-    def _ExcludeSourceModulesFromCompileOrder(sourceModules, compileOrder)
+    def _ExcludeSourceModulesFromProjectConfiguration(sourceModules, projectConfiguration)
       sourceModules.each do |sourceModule|
-		puts "Setting exclude patters"
-        compileOrder.ProjectConfiguration.SourceExcludePatterns.concat(sourceModule.SourcePatterns)
-        compileOrder.ProjectConfiguration.HeaderExcludePatterns.concat(sourceModule.HeaderPatterns)
+	  projectConfiguration.SourceExcludePatterns.concat(sourceModule.SourcePatterns)
+	  projectConfiguration.HeaderExcludePatterns.concat(sourceModule.HeaderPatterns)
       end
     end
   end

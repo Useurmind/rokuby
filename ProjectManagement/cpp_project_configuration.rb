@@ -61,6 +61,10 @@ module RakeBuilder
     end
     
     def initialize_copy(original)
+      InitCopy(original)
+    end
+    
+    def InitCopy(original)
       @SourceIncludePatterns = Clone(original.SourceIncludePatterns)
       @SourceExcludePatterns = Clone(original.SourceExcludePatterns)
       @HeaderIncludePatterns = Clone(original.HeaderIncludePatterns)
@@ -94,16 +98,16 @@ module RakeBuilder
     end
     
     # Get the paths to all source files that are identified by the search patterns.
-    def GetExtendedSources
+    def GetExtendedSources(additionalExcludePatterns=[])
       extendedSourcePaths = GetExtendedSourcePaths()
-      extendedSources = FindFilesInDirectories(@SourceIncludePatterns, @SourceExcludePatterns, extendedSourcePaths)
+      extendedSources = FindFilesInDirectories(@SourceIncludePatterns, @SourceExcludePatterns + additionalExcludePatterns, extendedSourcePaths)
       return extendedSources
     end
     
     # Get the paths to all include files that are identified by the search patterns.
-    def GetExtendedIncludes
+    def GetExtendedIncludes(additionalExcludePatterns=[])
       extendedIncludePaths = GetExtendedIncludePaths()
-      extendedIncludes = FindFilesInDirectories(@HeaderIncludePatterns, @HeaderExcludePatterns, extendedIncludePaths)
+      extendedIncludes = FindFilesInDirectories(@HeaderIncludePatterns, @HeaderExcludePatterns + additionalExcludePatterns, extendedIncludePaths)
       return extendedIncludes
     end
     

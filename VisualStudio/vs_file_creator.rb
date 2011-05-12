@@ -1,12 +1,18 @@
 require "VisualStudio/vs_xml_file_utility.rb"
 
 module RakeBuilder
-  class VsFileCreator < VsXmlFileUtility
+  class VsFileCreator
+    include VsXmlFileUtility
+    
     attr_accessor :ProjectConfiguration
     attr_accessor :VsProjectDirectory
 
     def initialize
-      super
+      @options = {
+        "NoEscape" => true,
+        "XmlDeclaration" => "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+        "RootName" => "Project"
+      }
     end
 
     def BuildFile

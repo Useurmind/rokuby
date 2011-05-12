@@ -9,17 +9,20 @@ module RakeBuilder
     include GeneralUtility
 
     attr_accessor :DllLibrary
+    attr_accessor :LibLibrary 
     attr_accessor :StaticLibrary
     attr_accessor :DynamicLibrary
 
     def initialize
       @DllLibrary = nil
+      @LibLibrary = nil
       @StaticLibrary = nil
       @DynamicLibrary = nil
     end
 
     def initialize_copy(original)
       @DllLibrary = Clone(original.DllLibrary)
+      @LibLibrary = Clone(original.LibLibrary)
       @StaticLibrary = Clone(original.StaticLibrary)
       @DynamicLibrary = Clone(original.DynamicLibrary)
     end
@@ -101,7 +104,7 @@ module RakeBuilder
 
     # Is this library used under windows
     def UsedInWindows()
-      return (@DllLibrary != nil)
+      return (@DllLibrary != nil or @LibLibrary != nil)
     end
 
     # Is this library used under linux
@@ -114,9 +117,9 @@ module RakeBuilder
       return (@DynamicLibrary == nil and @StaticLibrary != nil)
     end
 	
-	def Equals(other, os)
-		return (GetName(os) == other.GetName(os))
-	end
+    def Equals(other, os)
+      return (GetName(os) == other.GetName(os))
+    end
 
     def _GetLibraryForOs(os)
       if(os == :Linux)
@@ -126,7 +129,11 @@ module RakeBuilder
           return @StaticLibrary
         end
       elsif(os == :Windows)
-        return @DllLibrary
+	if(@DllLibrary != nil)
+	  return @DllLibrary
+	else
+	  return @LibLibrary
+	end
       end
 
       abort "Operating system not supported";

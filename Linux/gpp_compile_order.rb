@@ -20,7 +20,7 @@ module RakeBuilder
     include GeneralUtility
     include DirectoryUtility
 
-	attr_accessor :Name
+    attr_accessor :Name
     attr_accessor :CompilerOptions
     attr_accessor :LinkOptions
     attr_accessor :ProjectConfiguration    
@@ -28,7 +28,7 @@ module RakeBuilder
     attr_accessor :Dependencies
 
     def initialize(name)      
-		@Name = name
+      @Name = name
       @CompilerOptions = []
       @LinkOptions = ["-Wl,-rpath='$ORIGIN/lib'"] # relative linking of libraries
       @Dependencies = []
@@ -37,7 +37,7 @@ module RakeBuilder
     end
     
     def initialize_copy(original)
-		@Name = Clone(original.Name)
+      @Name = Clone(original.Name)
       @CompilerOptions = Clone(original.CompilerOptions)
       @LinkOptions = Clone(original.LinkOptions)
       @ProjectConfiguration = Clone(original.ProjectConfiguration)
