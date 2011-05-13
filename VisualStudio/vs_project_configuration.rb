@@ -15,6 +15,8 @@ module RakeBuilder
 
   # Config file variables
   VS_CONFIGURATION_SOLUTION_DIR = "$(SolutionDir)"
+  VS_CONFIGURATION_INTERMEDIATE_DIR = "$(IntDir)"
+  VS_CONFIGURATION_OUTPUT_DIR = "$(OutDir)"
   VS_CONFIGURATION_CONFIGURATION_NAME = "$(Configuration)"
 
   # Represents a configuration for a project in Visual Studio
@@ -30,6 +32,7 @@ module RakeBuilder
   # [WholeProgramOptimization] Should the program be optimized (true, false).
   # [CharacterSet] bla ('MultiByte')
   # [OutputDirectory] The directory for the build result.
+  # [IntermediateDirectory] The directory for intermediate build results.
   #
   # Compile time attributes:
   # [WarningLevel] The warning level (default: 'Level3')
@@ -39,6 +42,7 @@ module RakeBuilder
   # [AssemblerOutput] Option to enable listings that should be generated about the compilation (e.g. 'NoListing').
   # [FunctionLevelLinking] Seems to be good for performance, e.g. release builds (true, false).
   # [IntrinsicFunctions] Seems to be good for performance, e.g. release builds (true, false).
+  # [ProgramDataBaseFileName] The name of the pdb file that should hold debug information.
   # 
   # Link time attributes:
   # [GenerateDebugInformation] Should debug information be generated (true, false).
@@ -60,6 +64,7 @@ module RakeBuilder
     attr_accessor :WholeProgramOptimization
     attr_accessor :CharacterSet
     attr_accessor :OutputDirectory
+    attr_accessor :IntermediateDirectory
 
     attr_accessor :WarningLevel
     attr_accessor :Optimization
@@ -68,6 +73,7 @@ module RakeBuilder
     attr_accessor :AssemblerOutput
     attr_accessor :FunctionLevelLinking
     attr_accessor :IntrinsicFunctions
+    attr_accessor :ProgramDataBaseFileName
 
     attr_accessor :GenerateDebugInformation
     attr_accessor :AdditionalLibraryDirectories
@@ -87,7 +93,8 @@ module RakeBuilder
       @UseDebugLibraries = false
       @WholeProgramOptimization = true
       @CharacterSet = "MultiByte"
-      @OutputDirectory = "$(SolutionDir)\\build\\$(Configuration)\\"
+      @OutputDirectory = "$(SolutionDir)\\dist\\$(Configuration)\\"
+      @IntermediateDirectory = "$(SolutionDir)\\build\\$(Configuration)\\"
 
       @WarningLevel = "Level3"
       @Optimization = "MaxSpeed"
@@ -167,12 +174,16 @@ module RakeBuilder
         abort "Binary type #{@BinaryType} not supported"
       end
 
+      if(@ProgramDataBaseFileName == nil)
+        @ProgramDataBaseFileName = "#{VS_CONFIGURATION_OUTPUT_DIR}#{@BinaryName}.pdb"
+      end
       @PreprocessorDefinitions.concat(Clone(@Defines))
 
       @AdditionalIncludeDirectories.concat(_GetVsIncludeDirectories())
       _SetVsLibraryAttributes()
 
       @OutputDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @BuildDirectory, "vs-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
+      @IntermediateDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @CompilesDirectory, "vs-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
     end
     
     def _GetVsIncludeDirectories()

@@ -62,6 +62,7 @@ module RakeBuilder
       @projectTag.Children.push(@extensionSettingsImportGroup)
       @projectTag.Children.concat(@propertySheetsImportGroups)
       @projectTag.Children.push(@userMacrosPropertyGroup)
+      @projectTag.Children.concat(@propertyGroups)
       @projectTag.Children.concat(@itemDefinitionGroups)
       @projectTag.Children.push(@headerItemGroup)
       @projectTag.Children.push(@sourceItemGroup)
@@ -84,14 +85,16 @@ module RakeBuilder
 
     def CreateConfigurationTags
       @projectConfigurations = []
-      @configurationPropertyGroups = []
+      @propertyGroups = []
       @propertySheetsImportGroups = []
+      @configurationPropertyGroups = []
       @itemDefinitionGroups = []
       
       @VsProjectConfigurations.each do |configuration|
         @projectConfigurations.push(CreateProjectConfiguration(configuration))
-        @configurationPropertyGroups.push(CreateConfigurationPropertyGroup(configuration))
+        @propertyGroups.push(CreatePropertyGroup(configuration))
         @propertySheetsImportGroups.push(CreatePropertySheetsImportGroup(configuration))
+        @configurationPropertyGroups.push(CreateConfigurationPropertyGroup(configuration))
         @itemDefinitionGroups.push(CreateItemDefinitionGroup(configuration))
       end
     end
@@ -143,6 +146,19 @@ module RakeBuilder
       })
     end
 
+    def CreatePropertyGroup(configuration)
+      return XmlTag.new({
+        name: "PropertyGroup",
+        attributes: {
+          "Condition" => configuration.GetConfigurationCondition()
+        },
+        children: [
+          XmlTag.new( { name: "OutDir", value: configuration.OutputDirectory } ),
+          XmlTag.new( { name: "IntDir", value: configuration.IntermediateDirectory } )
+        ]
+      })
+    end
+
     def CreateItemDefinitionGroup(configuration)
       clCompileElement = XmlTag.new({
         name: "ClCompile",
@@ -153,7 +169,8 @@ module RakeBuilder
           XmlTag.new( { name: "PreprocessorDefinitions", value: configuration.PreprocessorDefinitions.join(';') }),
           XmlTag.new( { name: "AssemblerOutput", value: configuration.AssemblerOutput }),
           XmlTag.new( { name: "FunctionLevelLinking", value: configuration.FunctionLevelLinking.to_s() }),
-          XmlTag.new( { name: "IntrinsicFunctions", value: configuration.IntrinsicFunctions.to_s() })
+          XmlTag.new( { name: "IntrinsicFunctions", value: configuration.IntrinsicFunctions.to_s() }),
+          XmlTag.new( { name: "ProgramDataBaseFileName", value: configuration.ProgramDataBaseFileName })
         ]
       })
 
