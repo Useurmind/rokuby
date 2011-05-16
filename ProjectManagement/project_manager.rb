@@ -24,6 +24,7 @@ module RakeBuilder
   # [CompileOrderDescriptions] A hash containing the description for the final task of each compile order with the name of it as key.
   # [WindowsSolutionCreators] todo
   # [DefaultTargetName] The name of the compile order that is used as the default target.
+  # [DoxygenBuilder] The class object that is responsible for creating the doxygen documentation.
   class ProjectManager
 
     attr_accessor :BaseProjectConfiguration
@@ -33,6 +34,7 @@ module RakeBuilder
     attr_accessor :CompileOrderDescriptions
     attr_accessor :WindowsSolutionCreators
     attr_accessor :DefaultTargetName
+    attr_accessor :DoxygenBuilder
 
     def initialize(baseProjectConfiguration)
       @BaseProjectConfiguration = baseProjectConfiguration
@@ -166,7 +168,6 @@ module RakeBuilder
 	end  	  
 	modulesNotToUse = @SourceModules.values() - modulesToUse
 	_ExcludeSourceModulesFromProjectConfiguration(modulesNotToUse, projectConfiguration)
-	puts "Source Exclude patterns in configuration #{projectConfiguration.Name}: #{projectConfiguration.SourceExcludePatterns}"
     end
 
     def _ExcludeSourceModulesFromProjectConfiguration(sourceModules, projectConfiguration)
