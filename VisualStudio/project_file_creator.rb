@@ -7,20 +7,12 @@ module RakeBuilder
 
 
   class ProjectFileCreator < VsFileCreator
-    attr_accessor :VsProjectConfigurations
-    attr_accessor :ProjectGuid
-    attr_accessor :RootNamespace
-
     def initialize()
       super
-
-      @VsProjectConfigurations = []
-      @RootNamespace = "root"
-      @ProjectGuid = GetUUID()
     end
 
     def GetFileName()
-      return "#{@ProjectConfiguration.ProjectName}.vcxproj"
+      return "#{@VsProject.ProjectName}.vcxproj"
     end
 
     def BuildFile()
@@ -90,7 +82,7 @@ module RakeBuilder
       @configurationPropertyGroups = []
       @itemDefinitionGroups = []
       
-      @VsProjectConfigurations.each do |configuration|
+      @VsProject.VsProjectConfigurations.each do |configuration|
         @projectConfigurations.push(CreateProjectConfiguration(configuration))
         @propertyGroups.push(CreatePropertyGroup(configuration))
         @propertySheetsImportGroups.push(CreatePropertySheetsImportGroup(configuration))
@@ -223,7 +215,7 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      extendedIncludePaths = @ProjectConfiguration.GetExtendedIncludes(@VsProjectConfigurations[0].HeaderExcludePatterns)
+      extendedIncludePaths = @VsProject.GetExtendedIncludes(@VsProject.VsProjectConfigurations[0].HeaderExcludePatterns)
 
       extendedIncludePaths.each do |headerfile|
         relativeHeader = _GetVsProjectRelativePath(headerfile)
@@ -240,7 +232,7 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      extendedSourcePaths = @ProjectConfiguration.GetExtendedSources(@VsProjectConfigurations[0].SourceExcludePatterns)
+      extendedSourcePaths = @VsProject.GetExtendedSources(@VsProject.VsProjectConfigurations[0].SourceExcludePatterns)
 
       extendedSourcePaths.each do |sourcefile|
         relativeSource = _GetVsProjectRelativePath(sourcefile)

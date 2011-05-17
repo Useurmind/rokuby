@@ -37,5 +37,11 @@ module RakeBuilder
       nameParts = object.class.name.split("::")
       return nameParts[nameParts.length-1]
     end
+
+    # Get a UUID with surrounding brackets.
+    # Example: {D9F40C8D-144E-4F80-8C74-1B1AAD84ADFB}
+    def GetUUID
+      return "\{#{UUIDTools::UUID.random_create().to_s}\}"
+    end
   end
 end

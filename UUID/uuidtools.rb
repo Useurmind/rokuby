@@ -64,6 +64,9 @@ module UUIDTools
 
     def initialize(time_low, time_mid, time_hi_and_version,
         clock_seq_hi_and_reserved, clock_seq_low, nodes)
+      
+      @string = nil
+      
       unless time_low >= 0 && time_low < 4294967296
         raise ArgumentError,
           "Expected unsigned 32-bit number for time_low, got #{time_low}."
@@ -396,7 +399,9 @@ module UUIDTools
 
     # Returns a string representation for this UUID.
     def to_s
-      return @string unless @string.nil?
+      unless(@string == nil)
+        return @string
+      end
       if self.frozen?
         return generate_s
       else

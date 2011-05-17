@@ -35,6 +35,14 @@ module RakeBuilder
     attr_accessor :WindowsSolutionCreators
     attr_accessor :DefaultTargetName
     attr_accessor :DoxygenBuilder
+    
+    def ProjectGuid
+      retur @VsSolutionCreator.ProjectGuid
+    end
+    
+    def ProjectGuid=(value)
+      @VsSolutionCreator.ProjectGuid = value
+    end
 
     def initialize(baseProjectConfiguration)
       @BaseProjectConfiguration = baseProjectConfiguration
@@ -50,12 +58,12 @@ module RakeBuilder
       @UbuntuPacketInstaller = UbuntuPacketInstaller.new()
     end
 	
-	# Add some packets that should be installed with a list of package names.
+    # Add some packets that should be installed with a list of package names.
     def AddUbuntuPacketInstallations(packetNames)
       @UbuntuPacketInstaller.PacketNames.concat(packetNames)
     end
 
-	# Add a source module that is contained in the source.
+    # Add a source module that is contained in the source.
     def AddSourceModule(sourceModule)
       if(@SourceModules[sourceModule.Name] != nil)
         abort "The module #{sourceModule.Name} is already present in the ProjectManager"
@@ -63,7 +71,7 @@ module RakeBuilder
       @SourceModules[sourceModule.Name] = sourceModule
     end
 
-	# Add a compile order.
+    # Add a compile order.
     def AddLinuxCompileOrder(compileOrder, description)
       _CheckCompileOrderNotExists(compileOrder.Name)
 
@@ -81,7 +89,7 @@ module RakeBuilder
       return @VsSolutionCreator.CreateNewVsProjectConfiguration(name)
     end
 
-	# Copy a compile order that is already present giving it a new name and description.
+    # Copy a compile order that is already present giving it a new name and description.
     def CopyLinuxCompileOrder(compileOrder, copyName, description)
       _CheckCompileOrderExists(compileOrder.Name)
       _CheckCompileOrderNotExists(copyName)

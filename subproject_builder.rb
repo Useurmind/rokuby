@@ -30,16 +30,16 @@ module RakeBuilder
     def BuildSubprojectTask
       projectDir = Dir.pwd
       
-      @Subprojects.each { |subproject|
+      @Subprojects.each do |subproject|
         subdir = JoinPaths([projectDir, subproject.Folder])
                         
-        task subproject.Name do
+        task GetSubprojectTaskName(subproject.Name) do
           Dir.chdir(subdir)
           SystemWithFail(subproject.BuildCommand, "Failed to build subproject #{subproject.Name}")
           Dir.chdir(projectDir)
         end
                         
-        cleanSubtask = "#{subproject.Name}_clean"
+        cleanSubtask = GetSubprojectCleanTaskName(subproject.Name)
                         
         task cleanSubtask do
           Dir.chdir(subdir)              
@@ -48,8 +48,20 @@ module RakeBuilder
         end                        
         task :clean => cleanSubtask
                         
-        task @SubprojectTask => [subproject.Name]
-      }
+        task @SubprojectTask => [GetSubprojectTaskName(subproject.Name)]
+      end
+    end
+    
+    # Get the name for the task that should build a subproject.
+    # [subprojectName] The name of the subproject.
+    def GetSubprojectTaskName(subprojectName)
+      return subprojectName
+    end
+    
+    # Get the name for the task that should clean a subproject.
+    # [subprojectName] The name of the subproject.
+    def GetSubprojectCleanTaskName(subprojectName)
+      return "#{subprojectName}_clean"
     end
     
     # Add a subproject that uses rake for building.

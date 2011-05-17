@@ -10,7 +10,7 @@ module RakeBuilder
     end
 
     def GetFileName()
-      return "#{@ProjectConfiguration.ProjectName}.vcxproj.filters"
+      return "#{@VsProject.ProjectName}.vcxproj.filters"
     end
 
     def BuildFile
@@ -40,7 +40,7 @@ module RakeBuilder
 
     def CreateSourceFilter
 
-      sourceDirectories = @ProjectConfiguration.GetSourceDirectoryTree()
+      sourceDirectories = @VsProject.GetSourceDirectoryTree()
 
       @filters.push GetElementForList(
         { "Include" => @sourceBasefilter},
@@ -48,7 +48,7 @@ module RakeBuilder
           "Extensions" => "cpp;c;cc"})
 
       sourceDirectories.each { |directory|
-        relativeDir = @ProjectConfiguration.GetProjectRelativePath(directory)
+        relativeDir = @VsProject.GetProjectRelativePath(directory)
 
         filter = JoinXmlPaths([@sourceBasefilter, relativeDir])
 
@@ -60,7 +60,7 @@ module RakeBuilder
 
     def CreateHeaderFilter
 
-      includeDirectories = @ProjectConfiguration.GetIncludeDirectoryTree()
+      includeDirectories = @VsProject.GetIncludeDirectoryTree()
 
       @filters.push GetElementForList(
         { "Include" => @headerBasefilter},
@@ -68,7 +68,7 @@ module RakeBuilder
           "Extensions" => "cpp;c;cc"})
 
       includeDirectories.each { |directory|
-        relativeDir = @ProjectConfiguration.GetProjectRelativePath(directory)
+        relativeDir = @VsProject.GetProjectRelativePath(directory)
 
         filter = JoinXmlPaths([@headerBasefilter, relativeDir])
 
@@ -79,7 +79,7 @@ module RakeBuilder
     end
 
     def CreateIncludes
-      extendedHeaderPaths = @ProjectConfiguration.GetExtendedIncludes()
+      extendedHeaderPaths = @VsProject.GetExtendedIncludes()
 
       extendedHeaderPaths.each { |headerfile|
         filter = JoinXmlPaths([@headerBasefilter, _GetProjectDirectoryRelativeBaseDirectory(headerfile)])
@@ -93,7 +93,7 @@ module RakeBuilder
     end
 
     def CreateCompiles
-      extendedSourcePaths = @ProjectConfiguration.GetExtendedSources()
+      extendedSourcePaths = @VsProject.GetExtendedSources()
 
       extendedSourcePaths.each { |sourcefile|
         filter = JoinXmlPaths([@sourceBasefilter, _GetProjectDirectoryRelativeBaseDirectory(sourcefile)])

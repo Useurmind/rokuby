@@ -3,97 +3,74 @@ require "VisualStudio/filter_file_creator"
 require "VisualStudio/project_file_creator"
 require "VisualStudio/solution_file_creator"
 require "VisualStudio/vs_project_configuration_factory"
+require "VisualStudio/vs_project"
+require "VisualStudio/vs_subproject"
 require 'UUID/uuidtools.rb'
 require "directory_utility"
+require "general_utility"
 
 module RakeBuilder
   # Class that can create a visual studio project for compilation.
+  # [SolutionName] The name for the solution.
+  # [VsSolutionDirectory] The name of the directory under the base directory where to put the solution.
+  #                       All projects will be located in subdirectories of it.
+  # [ProjectCreators] The VsProjectCreators that will create the single project files.
+  # [SubProjects] The VsSubproject instances that represent external projects.
   class VsSolutionCreator
     include DirectoryUtility
+    include GeneralUtility
 
-    attr_accessor :BaseProjectConfiguration
-    attr_accessor :VsProjectConfigurations
-    attr_accessor :VsProjectDirectory
+    attr_accessor :VsSolution
     attr_accessor :EndTask
-
-    def initialize(baseProjectConfiguration)
+    
+    def initialize(vsSolution)
       @EndTask = UUIDTools::UUID.random_create().to_s
       
-      @BaseProjectConfiguration = baseProjectConfiguration
-      @VsProjectConfigurations = []
+      @VsSolution = vsSolution
       
-      @VsProjectDirectory = "VsProjectTest"
-      
-      @filterFileCreator = FilterFileCreator.new()
-      @projectFileCreator = ProjectFileCreator.new()
       @solutionFileCreator = SolutionFileCreator.new()
-      @configurationFactory = VsProjectConfigurationFactory.new() 
-    end
-    
-    def CreateNewVsProjectConfiguration(name)
-        if(VsConfigurationExists(name))
-          abort "The solution creator has already a configuration named #{name}"
-        end
-      
-        newVsProjectConfiguration = VsProjectConfiguration.new()
-        newVsProjectConfiguration.InitializeFromParent(@BaseProjectConfiguration)
-        newVsProjectConfiguration.Name = name
-        
-        @VsProjectConfigurations.push(newVsProjectConfiguration)
-        
-        return newVsProjectConfiguration
+      @solutionFileCreator.VsSolution = @VsSolution
     end
 
     def CreateTasks
-      CreateProjectDirectoryTask()
+      CreateProjectTasks()
+      
+      CreateSolutionDirectoryTask()
+      
+      @solutionFileCreator.SolutionDirectory = @finalVsSolutionDirectory
 
-      CreateFilterFileTask()
-      CreateProjectFileTask()
+      CreateSolutionFileTask()
     end
-
-    def CreateProjectDirectoryTask
-      @finalVsProjectDirectory = JoinPaths([@VsProjectDirectory] )
-      directory @finalVsProjectDirectory
-    end
-
-    def CreateFilterFileTask
-      CreateVsFile(@filterFileCreator)
-    end
-
-    def CreateProjectFileTask
-        @VsProjectConfigurations.each do |vsProjectConfiguration|
-          vsProjectConfiguration.SyncWithParent()
-          @projectFileCreator.VsProjectConfigurations.push(vsProjectConfiguration)
+    
+    def CreateProjectTasks()
+      @projectCreators = []
+      
+      @VsSolution.Projects.each do |project|
+        if(project.class.name.eql? VsProject.name)
+          projectCreator = VsProjectCreator.new(project)
+          projectCreator.VsSolutionDirectory = @VsSolutionDirectory.SolutionDirectory
+          projectCreator.CreateProjectTasks()
+          
+          file @solutionFileCreator.GetFilePath() => [projectCreator.EndTask]
+          
+          @projectCreators.push(projectCreator)
+        elsif(project.class.name.eql? VsSubproject.name)
+          file @solutionFileCreator.GetFilePath() => [VsSubproject.Name]
         end
-        
-      CreateVsFile(@projectFileCreator)
-    end
-
-    def CreateVsFile(fileCreator)
-      fileCreator.ProjectConfiguration = @BaseProjectConfiguration
-      fileCreator.VsProjectDirectory = @finalVsProjectDirectory
-
-      taskName = fileCreator.GetFilePath()
-
-      file taskName => @finalVsProjectDirectory do
-        fileCreator.BuildFile()
       end
+    end
 
-      task @EndTask => taskName
+    def CreateSolutionDirectoryTask()
+      @finalVsSolutionDirectory = JoinPaths([@VsSolutionDirectory] )
+      directory @finalVsSolutionDirectory
     end
     
-    def VsConfigurationExists(name)
-      return GetVsConfiguration(name) != nil
-    end
-    
-    def GetVsConfiguration(name)
-      @VsProjectConfigurations.each do |configuration|
-        if(configuration.Name.eql? name)
-          return configuration
-        end
+    def CreateSolutionFileTask
+      file @solutionFileCreator.GetFilePath() => @finalVsSolutionDirectory do
+        @solutionFileCreator.BuildFile()
       end
       
-      return nil
+      task @EndTask => @solutionFileCreator.GetFilePath()
     end
   end
 end

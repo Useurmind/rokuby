@@ -61,6 +61,7 @@ module RakeBuilder
     end
     
     def initialize_copy(original)
+      @Name = original.Name
       InitCopy(original)
     end
     
