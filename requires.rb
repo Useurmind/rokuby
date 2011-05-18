@@ -23,9 +23,13 @@ require "doxygen_builder"
 
 # Windows only functionality
 require "VisualStudio/vs_xml_file_utility"
+require "VisualStudio/vs_file_creator"
 require "VisualStudio/project_file_creator"
 require "VisualStudio/filter_file_creator"
 require "VisualStudio/solution_file_creator"
+require "VisualStudio/vs_project"
+require "VisualStudio/vs_solution"
+require "VisualStudio/vs_project_creator"
 require "VisualStudio/vs_solution_creator"
 
 # Linux only functionality

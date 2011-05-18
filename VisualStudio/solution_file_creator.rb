@@ -1,10 +1,12 @@
 require "directory_utility"
+require "general_utility"
 
 module RakeBuilder
   # This class can create a solution file for Visual Studio 2010
   # [VsSolution] The solution for which the solution file should be build.
   class SolutionFileCreator
     include DirectoryUtility
+    include GeneralUtility
     
     attr_accessor :VsSolution
     
@@ -90,7 +92,8 @@ module RakeBuilder
     
     # [guid] A guid in the form {35BC...}
     def StartProject(guid, project)
-      WriteLine("Project(\"#{guid}\") = \"#{project.Name}\", \"#{project.ProjectFilePath}\", \"#{project.Guid}\"")
+      relativeProjectFilePath = StripBaseDirectoryFromPath(project.ProjectFilePath, @VsSolution.SolutionDirectory)
+      WriteLine("Project(\"#{guid}\") = \"#{project.Name}\", \"#{relativeProjectFilePath}\", \"#{project.Guid}\"")
       IncreaseIndentation()
     end
     
@@ -144,12 +147,10 @@ module RakeBuilder
     end
     
     def IncreaseIndentation()
-      puts "Incr indent (indent level #{@indentString.length+1})"
       @indentString = @indentString + "\t"
     end
     
     def DecreaseIndentation()
-      puts "Decr indent (indent level #{@indentString.length-1})"
       if(@indentString.length == 1)
         @indentString = ""
       else

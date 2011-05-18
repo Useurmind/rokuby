@@ -166,6 +166,10 @@ module RakeBuilder
       return path.sub("\/#{File.basename(path)}", "")
     end
     
+    def StripBaseDirectoryFromPath(path, baseDir)
+      return path.sub("#{baseDir}\/", "")
+    end
+    
     #     def IsProjectSubdirectory(directory, projectDirectory)
     #       puts "#{directory}"
     #       if(!IsAbsolutePath(directory))

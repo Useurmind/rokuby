@@ -41,9 +41,9 @@ module RakeBuilder
 
     def CreateFinalProjectDirectory
         @finalVsProjectDirectory = JoinPaths([@VsSolutionDirectory, @VsProject.ProjectName] )
-        
-        
-        @VsProject.ProjectFilePath = JoinPaths( [ @finalVsProjectDirectory, @projectFileCreator.GetFilePath() ])
+                
+        @VsProject.ProjectFilePath = JoinPaths( [ @finalVsProjectDirectory, @projectFileCreator.GetFileName() ])
+        @VsProject.FilterFilePath = JoinPaths( [ @finalVsProjectDirectory, @filterFileCreator.GetFileName() ])
     end
 
     def CreateProjectDirectoryTask
@@ -55,16 +55,58 @@ module RakeBuilder
     end
 
     def CreateProjectFileTask
-      @VsProjectConfigurations.each do |vsProjectConfiguration|
+      @VsProject.VsProjectConfigurations.each do |vsProjectConfiguration|
         vsProjectConfiguration.SyncWithParent()
-        @projectFileCreator.VsProjectConfigurations.push(vsProjectConfiguration)
+        
+        CreateCopyLocalTask(vsProjectConfiguration)
       end
+      
+      @projectFileCreator.VsProject = @VsProject
         
       return CreateVsFileTask(@projectFileCreator)
     end
+    
+    def CreateCopyLocalTask(vsProjectConfiguration)
+        vsProjectConfiguration.PostBuildCommand = "rake #{GetCopyLocalTaskName(vsProjectConfiguration)}"
+        
+        task GetCopyLocalTaskName(vsProjectConfiguration)
+        vsProjectConfiguration.Libraries.each do |libContainer|
+            if(!libContainer.UsedInWindows())
+                next
+            end
+            
+            library = libContainer.GetLibraryForOs(:Windows)
+            fullLibraryPath = ""
+            fileName = ""
+            if(library.class.name.eql? WindowsLib.name)
+                fullLibraryPath = library.GetFullDllPath()
+                fileName = library.DllName
+            else
+                fullLibraryPath = libContainer.GetFullPath(:Windows)
+                fileName = libContainer.GetFileName(:Windows)
+            end            
+            
+            if(fullLibraryPath == nil)
+                # library is in global library store, nothing to copy
+                next
+            end
+            
+            copyPath = JoinPaths( [vsProjectConfiguration.GetFinalBuildDirectory(), fileName ] )
+            
+            puts "copying lib #{copyPath} from #{fullLibraryPath}"
+            file copyPath => [fullLibraryPath] do
+              SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
+            end
+            task GetCopyLocalTaskName(vsProjectConfiguration) => [copyPath]
+        end
+    end
+    
+    def GetCopyLocalTaskName(vsProjectConfiguration)
+        return "copyLocal_#{vsProjectConfiguration.GetConfigurationSubdirectoryName()}"
+    end
 
     def CreateVsFileTask(fileCreator)
-      taskName = fileCreator.GetFilePath()
+      taskName = JoinPaths( [ @finalVsProjectDirectory, fileCreator.GetFileName() ])
 
       file taskName => @finalVsProjectDirectory do
         fileCreator.BuildFile()

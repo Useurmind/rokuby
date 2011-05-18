@@ -36,8 +36,6 @@ module RakeBuilder
       CreateProjectTasks()
       
       CreateSolutionDirectoryTask()
-      
-      @solutionFileCreator.SolutionDirectory = @finalVsSolutionDirectory
 
       CreateSolutionFileTask()
     end
@@ -48,8 +46,8 @@ module RakeBuilder
       @VsSolution.Projects.each do |project|
         if(project.class.name.eql? VsProject.name)
           projectCreator = VsProjectCreator.new(project)
-          projectCreator.VsSolutionDirectory = @VsSolutionDirectory.SolutionDirectory
-          projectCreator.CreateProjectTasks()
+          projectCreator.VsSolutionDirectory = @VsSolution.SolutionDirectory
+          projectCreator.CreateTasks()
           
           file @solutionFileCreator.GetFilePath() => [projectCreator.EndTask]
           
@@ -61,7 +59,7 @@ module RakeBuilder
     end
 
     def CreateSolutionDirectoryTask()
-      @finalVsSolutionDirectory = JoinPaths([@VsSolutionDirectory] )
+      @finalVsSolutionDirectory = JoinPaths([@VsSolution.SolutionDirectory] )
       directory @finalVsSolutionDirectory
     end
     

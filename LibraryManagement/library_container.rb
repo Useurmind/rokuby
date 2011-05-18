@@ -29,7 +29,7 @@ module RakeBuilder
 
     # Get the name for the library used under this OS.
     def GetName(os)
-      lib = _GetLibraryForOs(os)
+      lib = GetLibraryForOs(os)
       if(lib == nil)
         return nil
       end
@@ -39,7 +39,7 @@ module RakeBuilder
 
     # Get the file name of the library used under this OS.
     def GetFileName(os)
-      lib = _GetLibraryForOs(os)
+      lib = GetLibraryForOs(os)
       if(lib == nil)
         return nil
       end
@@ -49,7 +49,7 @@ module RakeBuilder
 
     # Get the path where the library can be found under this OS.
     def GetLibraryPath(os)
-      lib = _GetLibraryForOs(os)
+      lib = GetLibraryForOs(os)
       if(lib == nil)
         return nil
       end
@@ -68,7 +68,7 @@ module RakeBuilder
 
     # Get the paths where headers of the library can be found under this OS.
     def GetHeaderPaths(os)
-      lib = _GetLibraryForOs(os)
+      lib = GetLibraryForOs(os)
       if(lib == nil)
         return nil
       end
@@ -78,7 +78,7 @@ module RakeBuilder
     
     # Get the names of the header files
     def GetHeaderNames(os)
-      lib = _GetLibraryForOs(os)
+      lib = GetLibraryForOs(os)
       if(lib == nil)
         return nil
       end
@@ -88,7 +88,7 @@ module RakeBuilder
     
     # Get the full names (including path) of the header files
     def GetFullHeaderNames(os)
-      lib = _GetLibraryForOs(os)
+      lib = GetLibraryForOs(os)
       if(lib == nil)
         return nil
       end
@@ -121,7 +121,7 @@ module RakeBuilder
       return (GetName(os) == other.GetName(os))
     end
 
-    def _GetLibraryForOs(os)
+    def GetLibraryForOs(os)
       if(os == :Linux)
         if(@DynamicLibrary != nil)
           return @DynamicLibrary

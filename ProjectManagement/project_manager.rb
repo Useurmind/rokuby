@@ -32,25 +32,17 @@ module RakeBuilder
     attr_accessor :SourceModuleUsage 
     attr_accessor :LinuxCompileOrders
     attr_accessor :CompileOrderDescriptions
-    attr_accessor :WindowsSolutionCreators
+    attr_accessor :VsSolutionCreator
     attr_accessor :DefaultTargetName
     attr_accessor :DoxygenBuilder
-    
-    def ProjectGuid
-      retur @VsSolutionCreator.ProjectGuid
-    end
-    
-    def ProjectGuid=(value)
-      @VsSolutionCreator.ProjectGuid = value
-    end
 
-    def initialize(baseProjectConfiguration)
+    def initialize(baseProjectConfiguration, vsSolution)
       @BaseProjectConfiguration = baseProjectConfiguration
       @SourceModules = {}
       @SourceModuleUsage = {}
       @LinuxCompileOrders = {}
       @CompileOrderDescriptions = {}
-      @VsSolutionCreator = VsSolutionCreator.new(baseProjectConfiguration)
+      @VsSolutionCreator = VsSolutionCreator.new(vsSolution)
 
       @DoxygenBuilder = DoxygenBuilder.new()
       @DoxygenBuilder.ProjectConfiguration = baseProjectConfiguration
@@ -83,10 +75,6 @@ module RakeBuilder
       @CompileOrderDescriptions[compileOrder.Name] = description
 	  
       return compileOrder
-    end
-
-    def AddVsProjectConfiguration(name)
-      return @VsSolutionCreator.CreateNewVsProjectConfiguration(name)
     end
 
     # Copy a compile order that is already present giving it a new name and description.
@@ -124,7 +112,7 @@ module RakeBuilder
       
       @VsSolutionCreator.CreateTasks()
       desc "Create the Visual Studio solution for the project"
-      task "VsSolution" => @VsSolutionCreator.EndTask
+      task :VisualStudio => @VsSolutionCreator.EndTask
 
       _CheckCompileOrderExists(@DefaultTargetName)
       task :default => [@LinuxCompileOrders[@DefaultTargetName].ProjectConfiguration.Name]
@@ -146,15 +134,17 @@ module RakeBuilder
       @LinuxCompileOrders.each do |name,compileOrder|
 	  modulesToUse = _GetSourceModulesToUse(compileOrder)
 		
-	  _ApplySourceModuleUsageToProjectConfiguration(compileOrder.ProjectConfiguration, modulesToUse)
+	  _ApplySourceModuleUsageToProjectConfiguration(compileOrder.ProjectConfiguration, modulesToUse, :Linux)
       end
     end
     
     def _ApplySourceModuleUsageToVsProjectConfigurations
-      @VsSolutionCreator.VsProjectConfigurations.each do |configuration|
+      @VsSolutionCreator.VsSolution.Projects.each do |project|
+	project.VsProjectConfigurations.each do |configuration|
 	  modulesToUse = _GetSourceModulesToUse(configuration)
 		
-	  _ApplySourceModuleUsageToProjectConfiguration(configuration, modulesToUse)
+	  _ApplySourceModuleUsageToProjectConfiguration(configuration, modulesToUse, :Windows)
+	end
       end
     end
     
@@ -167,9 +157,9 @@ module RakeBuilder
 	return modulesToUse
     end
     
-    def _ApplySourceModuleUsageToProjectConfiguration(projectConfiguration, modulesToUse)
+    def _ApplySourceModuleUsageToProjectConfiguration(projectConfiguration, modulesToUse, os)
 	modulesToUse.each do |sourceModule|
-	    projectConfiguration.AddLibraries(sourceModule.AssociatedLibraries, :Linux)
+	    projectConfiguration.AddLibraries(sourceModule.AssociatedLibraries, os)
 	    if(sourceModule.Define)
 		projectConfiguration.Defines.push(sourceModule.Define)
 	    end

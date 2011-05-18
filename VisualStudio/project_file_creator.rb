@@ -61,7 +61,7 @@ module RakeBuilder
       @projectTag.Children.push(@cppTargetsImport)
       @projectTag.Children.push(@extensionTargetsImportGroup)
       
-      doc.SaveToFile(GetFilePath())
+      doc.SaveToFile(@VsProject.ProjectFilePath)
     end
 
     def CreateGlobalPropertyGroup()
@@ -69,8 +69,8 @@ module RakeBuilder
         name: "PropertyGroup",
         attributes: { "Label" => "Globals" },
         children: [
-          XmlTag.new({name: "ProjectGuid", value: @ProjectGuid}),
-          XmlTag.new({name: "RootNamespace", value: @RootNamespace})
+          XmlTag.new({name: "ProjectGuid", value: @VsProject.Guid}),
+          XmlTag.new({name: "RootNamespace", value: @VsProject.RootNamespace})
         ]
       })
     end
@@ -176,13 +176,20 @@ module RakeBuilder
           XmlTag.new( { name: "OptimizeReferences", value: configuration.OptimizeReferences.to_s() })
         ]
       })
+      
+      postBuildEventElementCommand = XmlTag.new({
+        name: "PostBuildEvent",
+        children: [
+          XmlTag.new( { name: "Command", value: configuration.PostBuildCommand } )
+        ]
+      })
 
       return XmlTag.new({
         name: "ItemDefinitionGroup",
         attributes: {
           "Condition" => configuration.GetConfigurationCondition()
         },
-        children: [ clCompileElement, linkElement ]
+        children: [ clCompileElement, linkElement, postBuildEventElementCommand ]
       })
     end
 

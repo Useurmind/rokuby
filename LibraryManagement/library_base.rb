@@ -1,4 +1,5 @@
 require "general_utility"
+require "directory_utility"
 
 module RakeBuilder
 
@@ -12,6 +13,7 @@ module RakeBuilder
   # [HeaderPaths] All include paths that are needed to find the headers of this library.
   class LibraryBase
     include GeneralUtility
+    include DirectoryUtility
 
     attr_accessor :Name
     attr_accessor :FileName

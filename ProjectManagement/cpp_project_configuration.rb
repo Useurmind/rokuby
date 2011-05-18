@@ -61,11 +61,13 @@ module RakeBuilder
     end
     
     def initialize_copy(original)
-      @Name = original.Name
       InitCopy(original)
     end
     
     def InitCopy(original)
+      @ProjectName = Clone(original.ProjectName)
+      @ProjectVersion = Clone(original.ProjectVersion)
+      @Name = Clone(original.Name)
       @SourceIncludePatterns = Clone(original.SourceIncludePatterns)
       @SourceExcludePatterns = Clone(original.SourceExcludePatterns)
       @HeaderIncludePatterns = Clone(original.HeaderIncludePatterns)
@@ -75,6 +77,7 @@ module RakeBuilder
       @Defines = Clone(original.Defines)
       @ProjectDirectory = Clone(original.ProjectDirectory)
       @CompilesDirectory = Clone(original.CompilesDirectory)
+      @BuildDirectory = Clone(original.BuildDirectory)
       @Libraries = Clone(original.Libraries)
       @BinaryName = Clone(original.BinaryName)
       @BinaryType = Clone(original.BinaryType)

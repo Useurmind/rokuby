@@ -35,7 +35,7 @@ module RakeBuilder
       @itemGroups.push GetMultiElementListForList({}, "CLInclude", @includes)
       @itemGroups.push GetMultiElementListForList({}, "CLCompile", @compiles)
 
-      SaveXmlDocument(doc, GetFilePath(), @options)
+      SaveXmlDocument(doc, @VsProject.FilterFilePath, @options)
     end
 
     def CreateSourceFilter

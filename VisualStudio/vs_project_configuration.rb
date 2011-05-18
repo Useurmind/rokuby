@@ -50,6 +50,8 @@ module RakeBuilder
   # [AdditionalDependencies] Array of names of libraries that should be linked in.
   # [EnableCOMDATFolding] Seems to be good for performance, e.g. release builds (true, false).
   # [OptimizeReferences] Seems to be good for performance, e.g. release builds (true, false).
+  #
+  # [PostBuildCommand] The command line command that is executed after the build.
   class VsProjectConfiguration < CppProjectConfiguration
     include GeneralUtility
     include VsXmlFileUtility
@@ -80,6 +82,8 @@ module RakeBuilder
     attr_accessor :AdditionalDependencies
     attr_accessor :EnableCOMDATFolding
     attr_accessor :OptimizeReferences
+    
+    attr_accessor :PostBuildCommand
 
     def initialize
       super
@@ -101,6 +105,7 @@ module RakeBuilder
       @AssemblerOutput = "NoListing"
       @FunctionLevelLinking = true
       @IntrinsicFunctions = true
+      @ProgramDataBaseFileName = nil
 
       @GenerateDebugInformation = false
       @EnableCOMDATFolding = true
@@ -182,8 +187,16 @@ module RakeBuilder
       @AdditionalIncludeDirectories.concat(_GetVsIncludeDirectories())
       _SetVsLibraryAttributes()
 
-      @OutputDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @BuildDirectory, "vs-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
-      @IntermediateDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @CompilesDirectory, "vs-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
+      @OutputDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @BuildDirectory, "vs-#{@ProjectName}-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
+      @IntermediateDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @CompilesDirectory, "vs-#{@ProjectName}-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
+    end
+    
+    def GetFinalBuildDirectory
+      return JoinPaths([ @BuildDirectory, GetConfigurationSubdirectoryName() ])
+    end
+    
+    def GetConfigurationSubdirectoryName
+      return "vs-#{@ProjectName}-#{@Name}"
     end
     
     def _GetVsIncludeDirectories()
