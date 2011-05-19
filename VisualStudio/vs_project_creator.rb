@@ -86,7 +86,7 @@ module RakeBuilder
             copyPath = JoinPaths( [vsProjectConfiguration.GetFinalBuildDirectory(), fileName ] )
             
             file copyPath => [fullLibraryPath] do
-              SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
+              cp(fullLibraryPath, copyPath)
             end
             task GetPostBuildTaskName(vsProjectConfiguration) => [copyPath]
         end
