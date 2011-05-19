@@ -83,11 +83,10 @@ module RakeBuilder
                 next
             end
             
-            finalBuildDirectory = vsProjectConfiguration.GetFinalBuildDirectory()
-            copyPath = JoinPaths( [finalBuildDirectory, fileName ] )
+            copyPath = JoinPaths( [vsProjectConfiguration.GetFinalBuildDirectory(), fileName ] )
             
             file copyPath => [fullLibraryPath] do
-              cp(fullLibraryPath, finalBuildDirectory)
+              cp(fullLibraryPath, copyPath)
             end
             task GetPostBuildTaskName(vsProjectConfiguration) => [copyPath]
         end

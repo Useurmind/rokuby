@@ -24,9 +24,11 @@ module RakeBuilder
     attr_accessor :VsSolution
     attr_accessor :SubprojectBuilder
     attr_accessor :EndTask
+    attr_accessor :CleanTask
     
     def initialize(vsSolution)
       @EndTask = "SolutionCreationTask_#{vsSolution.SolutionName}_#{UUIDTools::UUID.random_create().to_s}"
+      @CleanTask = "SolutionCleanTask_#{vsSolution.SolutionName}_#{UUIDTools::UUID.random_create().to_s}"
       
       @VsSolution = vsSolution
       @SubprojectBuilder = SubprojectBuilder.new()
@@ -41,6 +43,10 @@ module RakeBuilder
       CreateSolutionDirectoryTask()
 
       CreateSolutionFileTask()
+      
+      task @CleanTask do
+        rm_r @VsSolution.SolutionDirectory rescue nil
+      end
     end
     
     def CreateProjectTasks()
@@ -57,6 +63,7 @@ module RakeBuilder
           @projectCreators.push(projectCreator)
         elsif(project.class.name.eql? VsSubproject.name)
           @SubprojectBuilder.Subprojects.push(project)
+          task @CleanTask => project.CleanVisualStudioTask
         end
       end
       @SubprojectBuilder.BuildSubprojectTasks()

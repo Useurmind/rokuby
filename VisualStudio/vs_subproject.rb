@@ -8,6 +8,8 @@ module RakeBuilder
     class VsSubproject < VsProject
         attr_accessor :Subproject
         attr_accessor :BuildFolder
+        attr_accessor :CleanVisualStudioCommand
+        attr_accessor :CleanVisualStudioTask
         
         def Folder
             return @Subproject.Folder
@@ -34,6 +36,7 @@ module RakeBuilder
         end
         
         # [name] Name of the subproject.
+        # [cleanVisualStudioCommand] Command to execute to remove Visual Studio project.
         #
         # VsProject properties needed:
         # [projectFilePath] Path to the project file relative to the subproject folder.
@@ -56,10 +59,22 @@ module RakeBuilder
             @FilterFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:filterFilePath] or "VsSolution/#{@ProjectName}/#{@Name}.vcxproj.filters") ] )
             @Guid = paramBag[:guid]
             @VsProjectConfigurations = (paramBag[:configurations] or [])
+            @CleanVisualStudioCommand = (paramBag[:cleanVisualStudioCommand] or "rake CleanVisualStudio")
             
             paramBag[:resultFiles] = [@ProjectFilePath, @FilterFilePath]
             
             @Subproject = Subproject.new(paramBag)
+            
+            @CleanVisualStudioTask = "SubprojectCleanVsTask_#{@ProjectName}_#{UUIDTools::UUID.random_create().to_s}"
+            
+            originalDir = Dir.pwd
+            subdir = JoinPaths([ originalDir, Folder() ])
+            
+            task @CleanVisualStudioTask do                
+                Dir.chdir(subdir)
+                SystemWithFail(@CleanVisualStudioCommand, "Could not clean subproject #{@ProjectName}")
+                Dir.chdir(originalDir)
+            end
         end
         
         # Copies all files in the build folder of the given configuration to the specified path.

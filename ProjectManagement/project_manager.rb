@@ -114,6 +114,9 @@ module RakeBuilder
       desc "Create the Visual Studio solution for the project"
       task :VisualStudio => @VsSolutionCreator.EndTask
 
+      desc "Clean the Visual Studio project"
+      task :CleanVisualStudio => @VsSolutionCreator.CleanTask
+
       _CheckCompileOrderExists(@DefaultTargetName)
       task :default => [@LinuxCompileOrders[@DefaultTargetName].ProjectConfiguration.Name]
     end
