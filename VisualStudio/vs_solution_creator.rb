@@ -1,4 +1,5 @@
 require "rake"
+require "Subprojects/subproject_builder"
 require "VisualStudio/filter_file_creator"
 require "VisualStudio/project_file_creator"
 require "VisualStudio/solution_file_creator"
@@ -21,12 +22,14 @@ module RakeBuilder
     include GeneralUtility
 
     attr_accessor :VsSolution
+    attr_accessor :SubprojectBuilder
     attr_accessor :EndTask
     
     def initialize(vsSolution)
-      @EndTask = UUIDTools::UUID.random_create().to_s
+      @EndTask = "SolutionCreationTask_#{vsSolution.SolutionName}_#{UUIDTools::UUID.random_create().to_s}"
       
       @VsSolution = vsSolution
+      @SubprojectBuilder = SubprojectBuilder.new()
       
       @solutionFileCreator = SolutionFileCreator.new()
       @solutionFileCreator.VsSolution = @VsSolution
@@ -53,9 +56,11 @@ module RakeBuilder
           
           @projectCreators.push(projectCreator)
         elsif(project.class.name.eql? VsSubproject.name)
-          file @solutionFileCreator.GetFilePath() => [VsSubproject.Name]
+          @SubprojectBuilder.Subprojects.push(project)
         end
       end
+      @SubprojectBuilder.BuildSubprojectTasks()
+      file @solutionFileCreator.GetFilePath() => [@SubprojectBuilder.SubprojectTask]
     end
 
     def CreateSolutionDirectoryTask()

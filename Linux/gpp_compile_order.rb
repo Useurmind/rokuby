@@ -15,6 +15,8 @@ module RakeBuilder
   # [LibraryIncludeDirectories] The paths were the headers of the different libraries are located (default: [ "/usr/include" , "usr/locale/include" ])
   # [EndTask] This is the task that can be used to create dependencies between the creation of this project and other tasks.
   # [Dependencies] The tasks that the compilation of this object depends on.
+  # [RelativeLibrarySearchPath] If this path is set a define will be set that will link the libraries in a way that at runtime they are searched
+  #                             in the execution directory plus this path (set this only once).
   # After the project tasks were created with CreateProjectTasks, the EndTask can be used to build the project.
   class GppCompileOrder
     include GeneralUtility
@@ -27,10 +29,15 @@ module RakeBuilder
     attr_accessor :EndTask
     attr_accessor :Dependencies
 
+    def RelativeLibrarySearchPath=(value)
+      searchPath = JoinPaths(["$ORIGIN", value])
+      @LinkOptions.push("-Wl,-rpath='#{searchPath}'")
+    end
+
     def initialize(name)      
       @Name = name
       @CompilerOptions = []
-      @LinkOptions = ["-Wl,-rpath='$ORIGIN/lib'"] # relative linking of libraries
+      @LinkOptions = [] 
       @Dependencies = []
 
       @compiles = []
@@ -93,7 +100,6 @@ module RakeBuilder
         compileCommand = GetCompileCommand(source, binaryPath)
         @compiles.push(binaryPath)
 
-        #         puts "task #{binaryPath} => #{(extendedHeaders+[source]).to_s()}"
         file binaryPath => extendedHeaders + @Dependencies + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()] do
           SystemWithFail(compileCommand, "Failed to compile #{source}")
         end
@@ -113,7 +119,7 @@ module RakeBuilder
         @binaryFileName = JoinPaths([@binaryFileName, "lib#{@ProjectConfiguration.BinaryName}.a"])
         command = "ar cq #{@binaryFileName} #{@linkCompilesDirective}"
       end
-      #       puts "task #{@ProjectConfiguration.BinaryName} => #{@compiles}"
+
       
       file @binaryFileName => @compiles do
         SystemWithFail("#{command}", "Failed to link #{@ProjectConfiguration.BinaryName}")
@@ -134,12 +140,12 @@ module RakeBuilder
 	    next
 	  end
 	  
-	  CreateHeaderCopyTasks(libContainer)
+	  #CreateHeaderCopyTasks(libContainer)
 	  
-	  fullLibraryPath = libContainer.GetFullPath(:Linux)
-	  copyPath = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), libContainer.GetFileName(:Linux) ] )
+	  fullLibraryPath = libContainer.GetFullCopyFilePath(:Linux)
+	  copyPath = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), libContainer.GetCopyFileName(:Linux) ] )
 	  
-	  puts "#{copyPath} => #{@binaryFileName}"
+
 	  file copyPath => fullLibraryPath do
 	    SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
 	  end
@@ -248,7 +254,7 @@ module RakeBuilder
     end
 
     def _GetStaticLibraryDirective(libContainer)
-      return libContainer.GetFullPath(:Linux)
+      return libContainer.GetFullLinkFilePath(:Linux)
     end
 
     # Creates a string containing all the defines in the project configuration.

@@ -37,14 +37,28 @@ module RakeBuilder
       return lib.Name
     end
 
-    # Get the file name of the library used under this OS.
-    def GetFileName(os)
+    # Get the name of the file that should be linked under this OS.
+    def GetLinkFileName(os)
       lib = GetLibraryForOs(os)
       if(lib == nil)
         return nil
       end
 
       return lib.FileName
+    end
+    
+    # Get the name of the file that should be copied into the build directory under this OS.
+    def GetCopyFileName(os)
+      lib = GetLibraryForOs(os)
+      if(lib == nil)
+        return nil
+      end
+      
+      if(lib.class.name.eql? WindowsLib.name)
+	return lib.GetFullDllPath()
+      else
+	return lib.FileName
+      end
     end
 
     # Get the path where the library can be found under this OS.
@@ -56,14 +70,23 @@ module RakeBuilder
 
       return lib.LibraryPath
     end
-
-    # Get the full filepath of the library file for this OS
-    def GetFullPath(os)
+    
+    # Get the full filepath of the library file that should be linked for this OS.
+    def GetFullLinkFilePath(os)
       if(GetLibraryPath(os) == nil)
         return nil
       end
       
-      return JoinPaths([GetLibraryPath(os), GetFileName(os)]);
+      return JoinPaths([GetLibraryPath(os), GetLinkFileName(os)]);
+    end
+
+    # Get the full filepath of the library file that should be copied into the build directory for this OS.
+    def GetFullCopyFilePath(os)
+      if(GetLibraryPath(os) == nil)
+        return nil
+      end
+      
+      return JoinPaths([GetLibraryPath(os), GetCopyFileName(os)]);
     end
 
     # Get the paths where headers of the library can be found under this OS.

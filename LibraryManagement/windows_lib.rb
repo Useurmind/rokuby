@@ -14,7 +14,7 @@ module RakeBuilder
       else
         @DllName = "#{dllname}.dll"
       end
-      puts "Set dllname to #{@DllName}"
+      #puts "Set dllname to #{@DllName}"
       
       super(name, fileName, libraryPath, headerPaths, headerNames)
     end

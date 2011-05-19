@@ -1,11 +1,11 @@
-require "directory_utility"
 require "general_utility"
+require "VisualStudio/vs_xml_file_utility"
 
 module RakeBuilder
   # This class can create a solution file for Visual Studio 2010
   # [VsSolution] The solution for which the solution file should be build.
   class SolutionFileCreator
-    include DirectoryUtility
+    include VsXmlFileUtility
     include GeneralUtility
     
     attr_accessor :VsSolution
@@ -81,10 +81,10 @@ module RakeBuilder
     end
     
     def WriteProjectDependencies(project)
-      project.Dependencies.each do |dependeny|
+      project.Dependencies.each do |dependency|
         StartProjectSection("ProjectDependencies")
       
-        WriteLine("#{dependeny.Guid} = #{dependeny.Guid}") 
+        WriteLine("#{dependency.Guid} = #{dependency.Guid}") 
         
         EndProjectSection()
       end
@@ -92,7 +92,7 @@ module RakeBuilder
     
     # [guid] A guid in the form {35BC...}
     def StartProject(guid, project)
-      relativeProjectFilePath = StripBaseDirectoryFromPath(project.ProjectFilePath, @VsSolution.SolutionDirectory)
+      relativeProjectFilePath = GetVsSolutionRelativePath(project.ProjectFilePath)
       WriteLine("Project(\"#{guid}\") = \"#{project.Name}\", \"#{relativeProjectFilePath}\", \"#{project.Guid}\"")
       IncreaseIndentation()
     end

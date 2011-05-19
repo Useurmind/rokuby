@@ -8,7 +8,7 @@ module RakeBuilder
     # [FilterFilePath] The path to the filter file relative to the base directory.
     # [Guid] The UUID of the project in the form '{45CD..}'.
     # [Configurations] The VsProjectConfigurations for the project (only the Name, Platform must be set).
-    # [Dependencies] The VsProjects that this project depends on.
+    # [Dependencies] The VsProjects that this project depends on ( ).
     class VsProject < CppProjectConfiguration
         
         attr_accessor :ProjectFilePath

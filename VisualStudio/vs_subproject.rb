@@ -1,46 +1,80 @@
-require "subproject"
+require "Subprojects/subproject"
+require "directory_utility"
+require "general_utility"
 
 module RakeBuilder
     # Class that gathers Subproject and VsProject attributes.
+    # Set all properties of VsProject to use it.
     class VsSubproject < VsProject
-        attr_accessor :Task
         attr_accessor :Subproject
-        
-        def Name
-            return @Name
-        end
-        
-        def Name=(value)
-            @Name = value
-            @subproject.Name = value
-        end
+        attr_accessor :BuildFolder
         
         def Folder
-            return @subproject.Folder
-        end
-        
-        def Folder=(value)
-            @subproject.Folder = value
+            return @Subproject.Folder
         end
         
         def BuildCommand
-            return @subproject.BuildCommand
-        end
-        
-        def BuildCommand=(value)
-            @subproject.BuildCommand = value
+            return @Subproject.BuildCommand
         end
         
         def CleanCommand
-            return @subproject.CleanCommand
+            return @Subproject.CleanCommand
         end
         
-        def CleanCommand=(value)
-            @subproject.Name = CleanCommand
+        def ResultFiles
+            return @Subproject.ResultFiles
         end
         
-        def initialize
-            @Subproject = Subproject.new()
+        def AfterBuildTask
+            return @Subproject.AfterBuildTask
+        end
+        
+        def GetResultFilePaths
+            return @Subproject.GetResultFilePaths()
+        end
+        
+        # [name] Name of the subproject.
+        #
+        # VsProject properties needed:
+        # [projectFilePath] Path to the project file relative to the subproject folder.
+        # [filterFilePath] Path to the filter file relative to the subproject folder.
+        # [buildDirectory] The subdirectory where the builds of the project are placed.
+        # [guid] The UUID of the project in the form '{45CD..}'.
+        # [configurations] The VsProjectConfigurations for the project (only the Name, Platform must be set).
+        #
+        # Subproject properties needed:
+        # [folder] see Folder in Subproject.
+        # [buildCommand] see BuildCommand in Subproject.
+        # [cleanCommand] see CleanCommand in Subproject.
+        def initialize(paramBag = {})
+            super()
+            
+            @Name = paramBag[:name]
+            @ProjectFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:projectFilePath] or "#{@Name}.vcxproj") ] )
+            @FilterFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:filterFilePath] or "#{@Name}.vcxproj.filters") ] )
+            @Guid = paramBag[:guid]
+            @VsProjectConfigurations = (paramBag[:configurations] or [])
+            @BuildDirectory = paramBag[:buildDirectory]
+            
+            paramBag[:resultFiles] = [@ProjectFilePath, @FilterFilePath]
+            
+            @Subproject = Subproject.new(paramBag)
+        end
+        
+        # Copies all files in the build folder of the given configuration to the specified path.
+        def CopyBuildResultsToPath(configurationName, path)
+            configs = project.VsProjectConfigurations.select do |config|
+                return (configuration.Name.eql? config.Name)
+            end
+            
+            if(configs.length == 0)
+                puts "WARNING: No configuration with the name #{configurationName} was found in subproject #{@Name}. Doing nothing."
+                return
+            end
+            
+            buildFolder = JoinPaths( [ @Subproject.Folder, configs[0].GetFinalBuildDirectory() ])
+            
+            cp_r(buildFolder, path)
         end
     end
 end

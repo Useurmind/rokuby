@@ -52,6 +52,7 @@ module RakeBuilder
   # [OptimizeReferences] Seems to be good for performance, e.g. release builds (true, false).
   #
   # [PostBuildCommand] The command line command that is executed after the build.
+  # [AdditionalPostBuildAction] An function that is executed after the build of the project is complete.
   class VsProjectConfiguration < CppProjectConfiguration
     include GeneralUtility
     include VsXmlFileUtility
@@ -84,6 +85,7 @@ module RakeBuilder
     attr_accessor :OptimizeReferences
     
     attr_accessor :PostBuildCommand
+    attr_accessor :AdditionalPostBuildAction
 
     def initialize
       super
@@ -220,7 +222,7 @@ module RakeBuilder
           next
         end
 
-        libraryNames.push(libContainer.GetFileName(:Windows))
+        libraryNames.push(libContainer.GetLinkFileName(:Windows))
 
         if(libContainer.GetLibraryPath(:Windows) != nil)
           libraryPath = GetVsProjectRelativePath(libContainer.GetLibraryPath(:Windows)) 
@@ -241,6 +243,12 @@ module RakeBuilder
       @AdditionalIncludeDirectories.concat(libraryIncludePaths)
       @AdditionalDependencies.concat(libraryNames)
       @AdditionalLibraryDirectories.concat(libraryDirectories)
+    end
+    
+    def ExecuteAdditionalPostBuildAction
+      if(@AdditionalPostBuildAction)
+        send(@AdditionalPostBuildAction)
+      end
     end
   end
 end

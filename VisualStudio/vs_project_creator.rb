@@ -18,7 +18,7 @@ module RakeBuilder
     attr_accessor :EndTask
 
     def initialize(vsProject)
-        @EndTask = UUIDTools::UUID.random_create().to_s
+        @EndTask = "ProjectCreationTask_#{vsProject.Name}_#{UUIDTools::UUID.random_create().to_s}"
         
         @VsProject = vsProject
         @VsSolutionDirectory = nil
@@ -58,7 +58,7 @@ module RakeBuilder
       @VsProject.VsProjectConfigurations.each do |vsProjectConfiguration|
         vsProjectConfiguration.SyncWithParent()
         
-        CreateCopyLocalTask(vsProjectConfiguration)
+        CreatePostBuildTask(vsProjectConfiguration)
       end
       
       @projectFileCreator.VsProject = @VsProject
@@ -66,25 +66,17 @@ module RakeBuilder
       return CreateVsFileTask(@projectFileCreator)
     end
     
-    def CreateCopyLocalTask(vsProjectConfiguration)
-        vsProjectConfiguration.PostBuildCommand = "rake #{GetCopyLocalTaskName(vsProjectConfiguration)}"
+    def CreatePostBuildTask(vsProjectConfiguration)
+        vsProjectConfiguration.PostBuildCommand = "rake #{GetPostBuildTaskName(vsProjectConfiguration)}"
         
-        task GetCopyLocalTaskName(vsProjectConfiguration)
+        task GetPostBuildTaskName(vsProjectConfiguration)
         vsProjectConfiguration.Libraries.each do |libContainer|
             if(!libContainer.UsedInWindows())
                 next
             end
             
-            library = libContainer.GetLibraryForOs(:Windows)
-            fullLibraryPath = ""
-            fileName = ""
-            if(library.class.name.eql? WindowsLib.name)
-                fullLibraryPath = library.GetFullDllPath()
-                fileName = library.DllName
-            else
-                fullLibraryPath = libContainer.GetFullPath(:Windows)
-                fileName = libContainer.GetFileName(:Windows)
-            end            
+            fullLibraryPath = libContainer.GetFullCopyFilePath(:Windows)
+            fileName = libContainer.GetCopyFileName(:Windows)
             
             if(fullLibraryPath == nil)
                 # library is in global library store, nothing to copy
@@ -93,16 +85,25 @@ module RakeBuilder
             
             copyPath = JoinPaths( [vsProjectConfiguration.GetFinalBuildDirectory(), fileName ] )
             
-            puts "copying lib #{copyPath} from #{fullLibraryPath}"
             file copyPath => [fullLibraryPath] do
               SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
             end
-            task GetCopyLocalTaskName(vsProjectConfiguration) => [copyPath]
+            task GetPostBuildTaskName(vsProjectConfiguration) => [copyPath]
+        end
+        task GetPostBuildTaskName(vsProjectConfiguration) do
+          vsProjectConfiguration.ExecuteAdditionalPostBuildAction()
+        end
+        @VsProject.Dependencies.each do |dependency|
+          if(dependency.class.name.eql? VsSubproject.name)
+            task GetPostBuildTaskName(vsProjectConfiguration) do
+              dependency.CopyBuildResultsToPath(vsProjectConfiguration.Name, vsProjectConfiguration.GetFinalBuildDirectory())
+            end
+          end
         end
     end
     
-    def GetCopyLocalTaskName(vsProjectConfiguration)
-        return "copyLocal_#{vsProjectConfiguration.GetConfigurationSubdirectoryName()}"
+    def GetPostBuildTaskName(vsProjectConfiguration)
+        return "PostBuild_#{vsProjectConfiguration.GetConfigurationSubdirectoryName()}"
     end
 
     def CreateVsFileTask(fileCreator)

@@ -86,7 +86,8 @@ module RakeBuilder
     # Return the source paths with the prepended project directory.
     def GetExtendedSourcePaths
       if(@ProjectDirectory == nil)
-        raise "ProjectDirectory not set in project configuration"
+        puts "WARNING: ProjectDirectory not set in project configuration."
+        return []
       end
       
       return ExtendDirectoryPaths(@ProjectDirectory, @SourceDirectories)
@@ -95,7 +96,8 @@ module RakeBuilder
     # Return the include paths with the prepended project directory.
     def GetExtendedIncludePaths
       if(@ProjectDirectory == nil)
-        raise "ProjectDirectory not set in project configuration"
+        puts "WARNING: ProjectDirectory not set in project configuration."
+        return []
       end
       
       return ExtendDirectoryPaths(@ProjectDirectory, @HeaderDirectories)

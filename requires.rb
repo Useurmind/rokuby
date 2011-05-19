@@ -17,8 +17,8 @@ require "LibraryManagement/library_container_factory"
 require "ProjectManagement/cpp_project_configuration"
 require "ProjectManagement/source_module"
 require "ProjectManagement/project_manager"
-require "subproject"
-require "subproject_builder"
+require "Subprojects/subproject"
+require "Subprojects/subproject_builder"
 require "doxygen_builder"
 
 # Windows only functionality
