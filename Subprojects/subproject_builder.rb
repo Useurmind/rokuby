@@ -51,7 +51,6 @@ module RakeBuilder
         
         task GetSubprojectTaskName(subproject.Name) do
           Dir.chdir(subdir)
-          puts "Executing '#{subproject.BuildCommand}' in subdir '#{subdir}'"
           SystemWithFail(subproject.BuildCommand, "Failed to build subproject #{subproject.Name}")
           Dir.chdir(projectDir)
         end
@@ -71,7 +70,6 @@ module RakeBuilder
           buildTaskName = subproject.AfterBuildTask
         end
         
-        puts "Setting to dep of #{@SubprojectTask} to #{buildTaskName}"
         task @SubprojectTask => [buildTaskName]
       end
     end
