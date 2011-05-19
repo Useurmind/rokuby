@@ -50,11 +50,12 @@ module RakeBuilder
             super()
             
             @Name = paramBag[:name]
-            @ProjectFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:projectFilePath] or "#{@Name}.vcxproj") ] )
-            @FilterFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:filterFilePath] or "#{@Name}.vcxproj.filters") ] )
+            @ProjectName = paramBag[:name]
+            @BuildDirectory = paramBag[:buildDirectory]
+            @ProjectFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:projectFilePath] or "VsSolution/#{@ProjectName}/#{@Name}.vcxproj") ] )
+            @FilterFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:filterFilePath] or "VsSolution/#{@ProjectName}/#{@Name}.vcxproj.filters") ] )
             @Guid = paramBag[:guid]
             @VsProjectConfigurations = (paramBag[:configurations] or [])
-            @BuildDirectory = paramBag[:buildDirectory]
             
             paramBag[:resultFiles] = [@ProjectFilePath, @FilterFilePath]
             

@@ -55,7 +55,7 @@ module RakeBuilder
       end
       
       if(lib.class.name.eql? WindowsLib.name)
-	return lib.GetFullDllPath()
+	return lib.DllName
       else
 	return lib.FileName
       end

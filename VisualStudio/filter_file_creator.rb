@@ -65,7 +65,7 @@ module RakeBuilder
       @filters.push GetElementForList(
         { "Include" => @headerBasefilter},
         { "UniqueIdentifier" => GetUUID(),
-          "Extensions" => "cpp;c;cc"})
+          "Extensions" => "h"})
 
       includeDirectories.each { |directory|
         relativeDir = @VsProject.GetProjectRelativePath(directory)

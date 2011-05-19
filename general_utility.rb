@@ -4,7 +4,7 @@ module RakeBuilder
     # Ob failure print the message if print is set to true.
     def SystemWithFail(command, message="", print=true)
       if(print)
-        puts command
+        puts "'#{Dir.pwd}': #{command}"
       end
 
       if($SimulateTasks)
