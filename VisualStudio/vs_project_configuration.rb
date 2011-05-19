@@ -15,6 +15,7 @@ module RakeBuilder
 
   # Config file variables
   VS_CONFIGURATION_SOLUTION_DIR = "$(SolutionDir)"
+  VS_CONFIGURATION_PROJECT_DIR = "$(ProjectDir)"
   VS_CONFIGURATION_INTERMEDIATE_DIR = "$(IntDir)"
   VS_CONFIGURATION_OUTPUT_DIR = "$(OutDir)"
   VS_CONFIGURATION_CONFIGURATION_NAME = "$(Configuration)"
@@ -189,8 +190,8 @@ module RakeBuilder
       @AdditionalIncludeDirectories.concat(_GetVsIncludeDirectories())
       _SetVsLibraryAttributes()
 
-      @OutputDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @BuildDirectory, "vs-#{@ProjectName}-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
-      @IntermediateDirectory = JoinXmlPaths( [VS_CONFIGURATION_SOLUTION_DIR, "..", @CompilesDirectory, "vs-#{@ProjectName}-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
+      @OutputDirectory = JoinXmlPaths( [VS_CONFIGURATION_PROJECT_DIR, "..", @BuildDirectory, "vs-#{@ProjectName}-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
+      @IntermediateDirectory = JoinXmlPaths( [VS_CONFIGURATION_PROJECT_DIR, "..", @CompilesDirectory, "vs-#{@ProjectName}-#{VS_CONFIGURATION_CONFIGURATION_NAME}"] )
     end
     
     def GetFinalBuildDirectory
