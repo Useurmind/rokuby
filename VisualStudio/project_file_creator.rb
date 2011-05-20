@@ -40,6 +40,7 @@ module RakeBuilder
       CreateImportGroups()
       CreateHeaderItemGroup()
       CreateSourceItemGroup()
+      CreateResourceItemGroup()
       
       @projectTag.Children.push(XmlTag.new({
         name: "ItemGroup",
@@ -58,6 +59,7 @@ module RakeBuilder
       @projectTag.Children.concat(@itemDefinitionGroups)
       @projectTag.Children.push(@headerItemGroup)
       @projectTag.Children.push(@sourceItemGroup)
+      @projectTag.Children.push(@resourceItemGroup)
       @projectTag.Children.push(@cppTargetsImport)
       @projectTag.Children.push(@extensionTargetsImportGroup)
       
@@ -247,6 +249,23 @@ module RakeBuilder
         @sourceItemGroup.Children.push( XmlTag.new({
           name: "ClCompile",
          attributes: {"Include" => relativeSource}
+        }))
+      end
+    end
+    
+    def CreateResourceItemGroup()
+      @resourceItemGroup = XmlTag.new({
+        name: "ItemGroup"
+      })
+      
+      extendedResourcePaths = @VsProject.GetExtendedResources()
+
+      extendedResourcePaths.each do |resourcefile|
+        relativeResource = _GetVsProjectRelativePath(resourcefile)
+     
+        @sourceItemGroup.Children.push( XmlTag.new({
+          name: "ResourceCompile",
+          attributes: {"Include" => relativeResource}
         }))
       end
     end

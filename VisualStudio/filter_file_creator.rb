@@ -7,6 +7,7 @@ module RakeBuilder
       super
       @headerBasefilter = "Headerfiles"
       @sourceBasefilter = "Sourcefiles"
+      @resourceBasefilter = "Resourcefiles"
     end
 
     def GetFileName()
@@ -24,16 +25,20 @@ module RakeBuilder
       @filters = []
       @includes = []
       @compiles = []
+      @resources = []
 
       CreateSourceFilter()
       CreateHeaderFilter()
+      CreateResourceFilter()
 
       CreateIncludes()
       CreateCompiles()
+      CreateResources()
 
       @itemGroups.push GetMultiElementListForList({}, "Filter", @filters)
       @itemGroups.push GetMultiElementListForList({}, "CLInclude", @includes)
       @itemGroups.push GetMultiElementListForList({}, "CLCompile", @compiles)
+      @itemGroups.push GetMultiElementListForList({}, "ResourceCompile", @resources)
 
       SaveXmlDocument(doc, @VsProject.FilterFilePath, @options)
     end
@@ -77,6 +82,25 @@ module RakeBuilder
           { "UniqueIdentifier" => GetUUID()})
       }
     end
+    
+    def CreateResourceFilter
+      resourceDirectories = @VsProject.GetResourceDirectoryTree()
+
+      @filters.push GetElementForList(
+        { "Include" => @resourceBasefilter},
+        { "UniqueIdentifier" => GetUUID(),
+          "Extensions" => "rc"})
+
+      resourceDirectories.each { |directory|
+        relativeDir = @VsProject.GetProjectRelativePath(directory)
+
+        filter = JoinXmlPaths([@resourceBasefilter, relativeDir])
+
+        @filters.push GetElementForList(
+          { "Include" => filter},
+          { "UniqueIdentifier" => GetUUID()})
+      }
+    end
 
     def CreateIncludes
       extendedHeaderPaths = @VsProject.GetExtendedIncludes()
@@ -101,6 +125,20 @@ module RakeBuilder
 
         @compiles.push GetElementForList(
           {"Include" => relativeSource},
+          {"Filter" => filter}
+        )
+      }
+    end
+    
+    def CreateResources
+      extendedResourcePaths = @VsProject.GetExtendedResources()
+
+      extendedResourcePaths.each { |resourcefile|
+        filter = JoinXmlPaths([@resourceBasefilter, _GetProjectDirectoryRelativeBaseDirectory(resourcefile)])
+        relativeResource = _GetVsProjectRelativePath(resourcefile)
+
+        @resources.push GetElementForList(
+          {"Include" => relativeResource},
           {"Filter" => filter}
         )
       }

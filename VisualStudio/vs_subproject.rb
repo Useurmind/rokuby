@@ -79,8 +79,8 @@ module RakeBuilder
         
         # Copies all files in the build folder of the given configuration to the specified path.
         def CopyBuildResultsToPath(configurationName, path)
-            configs = project.VsProjectConfigurations.select do |config|
-                return (configuration.Name.eql? config.Name)
+            configs = @VsProjectConfigurations.select do |config|
+                return (configurationName.eql? config.Name)
             end
             
             if(configs.length == 0)

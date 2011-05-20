@@ -248,8 +248,9 @@ module RakeBuilder
     
     def ExecuteAdditionalPostBuildAction
       if(@AdditionalPostBuildAction)
-        send(@AdditionalPostBuildAction)
+        @AdditionalPostBuildAction.call(self, :Windows)
       end
     end
+    
   end
 end
