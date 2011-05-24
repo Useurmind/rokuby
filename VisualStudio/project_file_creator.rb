@@ -164,7 +164,8 @@ module RakeBuilder
           XmlTag.new( { name: "AssemblerOutput", value: configuration.AssemblerOutput }),
           XmlTag.new( { name: "FunctionLevelLinking", value: configuration.FunctionLevelLinking.to_s() }),
           XmlTag.new( { name: "IntrinsicFunctions", value: configuration.IntrinsicFunctions.to_s() }),
-          XmlTag.new( { name: "ProgramDataBaseFileName", value: configuration.ProgramDataBaseFileName })
+          XmlTag.new( { name: "ProgramDataBaseFileName", value: configuration.ProgramDataBaseFileName }),
+          XmlTag.new( { name: "RuntimeLibrary", value: configuration.RuntimeLibrary })
         ]
       })
 
@@ -178,6 +179,9 @@ module RakeBuilder
           XmlTag.new( { name: "OptimizeReferences", value: configuration.OptimizeReferences.to_s() })
         ]
       })
+      if(configuration.ModuleDefinitionFile != nil)
+        linkElement.Children.push( XmlTag.new( { name: "ModuleDefinitionFile", value: configuration.ModuleDefinitionFile } ) )
+      end
       
       postBuildEventElementCommand = XmlTag.new({
         name: "PostBuildEvent",

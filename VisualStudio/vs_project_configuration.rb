@@ -31,7 +31,7 @@ module RakeBuilder
   # [ConfigurationType] The type of binary that is created (e.g. 'Application' or 'DynamicLibrary')
   # [UseDebugLibraries] Should debug libraries be used (true, false).
   # [WholeProgramOptimization] Should the program be optimized (true, false).
-  # [CharacterSet] bla ('MultiByte')
+  # [CharacterSet] bla ('MultiByte', 'Unicode')
   # [OutputDirectory] The directory for the build result.
   # [IntermediateDirectory] The directory for intermediate build results.
   #
@@ -44,6 +44,7 @@ module RakeBuilder
   # [FunctionLevelLinking] Seems to be good for performance, e.g. release builds (true, false).
   # [IntrinsicFunctions] Seems to be good for performance, e.g. release builds (true, false).
   # [ProgramDataBaseFileName] The name of the pdb file that should hold debug information.
+  # [RuntimeLibrary] The windows libraries to be used with this project ('MultiThreaded', 'MultiThreadedDll', 'MultiThreadedDebug', 'MultiThreadedDebugDll').
   # 
   # Link time attributes:
   # [GenerateDebugInformation] Should debug information be generated (true, false).
@@ -51,6 +52,7 @@ module RakeBuilder
   # [AdditionalDependencies] Array of names of libraries that should be linked in.
   # [EnableCOMDATFolding] Seems to be good for performance, e.g. release builds (true, false).
   # [OptimizeReferences] Seems to be good for performance, e.g. release builds (true, false).
+  # [ModuleDefinitionFile] The file that describes the exports of a library.
   #
   # [PostBuildCommand] The command line command that is executed after the build.
   # [AdditionalPostBuildAction] An function that is executed after the build of the project is complete.
@@ -69,6 +71,7 @@ module RakeBuilder
     attr_accessor :CharacterSet
     attr_accessor :OutputDirectory
     attr_accessor :IntermediateDirectory
+    attr_accessor :RuntimeLibrary
 
     attr_accessor :WarningLevel
     attr_accessor :Optimization
@@ -84,6 +87,7 @@ module RakeBuilder
     attr_accessor :AdditionalDependencies
     attr_accessor :EnableCOMDATFolding
     attr_accessor :OptimizeReferences
+    attr_accessor :ModuleDefinitionFile
     
     attr_accessor :PostBuildCommand
     attr_accessor :AdditionalPostBuildAction
@@ -102,6 +106,7 @@ module RakeBuilder
       @CharacterSet = "MultiByte"
       @OutputDirectory = "$(SolutionDir)\\dist\\$(Configuration)\\"
       @IntermediateDirectory = "$(SolutionDir)\\build\\$(Configuration)\\"
+      @RuntimeLibrary = "MultiThreaded"
 
       @WarningLevel = "Level3"
       @Optimization = "MaxSpeed"
@@ -113,6 +118,7 @@ module RakeBuilder
       @GenerateDebugInformation = false
       @EnableCOMDATFolding = true
       @OptimizeReferences = true
+      @ModuleDefinitionFile = nil
       
       InitLists()
     end
@@ -142,6 +148,7 @@ module RakeBuilder
       @WholeProgramOptimization = Clone(original.WholeProgramOptimization)
       @CharacterSet = Clone(original.CharacterSet)
       @OutputDirectory = Clone(original.OutputDirectory)
+      @RuntimeLibrary = Clone(original.RuntimeLibrary)
 
       @WarningLevel = Clone(original.WarningLevel)
       @Optimization = Clone(original.Optimization)
@@ -156,6 +163,7 @@ module RakeBuilder
       @AdditionalDependencies = Clone(original.AdditionalDependencies)
       @EnableCOMDATFolding = Clone(original.EnableCOMDATFolding)
       @OptimizeReferences = Clone(original.OptimizeReferences)
+      @ModuleDefinitionFile = Clone(original.ModuleDefinitionFile)
     end
 
     def GetNamePlatformCombi
