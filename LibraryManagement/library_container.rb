@@ -55,7 +55,7 @@ module RakeBuilder
       end
       
       if(lib.class.name.eql? WindowsLib.name)
-	return lib.DllName
+	return lib.CopyFileName
       else
 	return lib.FileName
       end
@@ -82,7 +82,7 @@ module RakeBuilder
 
     # Get the full filepath of the library file that should be copied into the build directory for this OS.
     def GetFullCopyFilePath(os)
-      if(GetLibraryPath(os) == nil)
+      if(GetLibraryPath(os) == nil or GetCopyFileName(os) == nil)
         return nil
       end
       

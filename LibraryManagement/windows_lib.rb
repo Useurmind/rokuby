@@ -2,28 +2,35 @@ require 'LibraryManagement/library_base'
 
 module RakeBuilder
   # Represents a windows lib.
-  # [DllName] The name of the dll that is referenced by the lib file.
-  #           Should be located in the same directory as the lib file.
+  # [CopyFileName] The name of the file that should be copied to the release directory.
+  #                Should be located in the same directory as the lib file.
+  #                This exists because libs can reference a dll or themselves.
   class WindowsLib < LibraryBase
-    attr_accessor :DllName
+    attr_accessor :CopyFileName
     
-    def initialize(name, libraryPath, headerPaths, dllname=nil, headerNames=[])
-      fileName = "#{name}.lib"
-      if(dllname == nil)
-        @DllName = "#{name}.dll"
-      else
-        @DllName = "#{dllname}.dll"
-      end
+    # [name] The name of the library.
+    # [libraryPath] The path where the library is located.
+    # [headerPaths] An array with the paths to the header files of the library.
+    # [copyFileName] The name of the file that should be copied to the release directory.
+    def initialize(paramBag)
+      paramBag[:name] = (paramBag[:name] or nil)
+      paramBag[:libraryPath] = (paramBag[:libraryPath] or nil)
+      paramBag[:headerPaths] = (paramBag[:headerPaths] or [])
+      paramBag[:copyFileName] = (paramBag[:copyFileName] or nil)
+      paramBag[:headerNames] = (paramBag[:headerNames] or [])
+      
+      fileName = "#{paramBag[:name]}.lib"
+      @CopyFileName = paramBag[:copyFileName]
       #puts "Set dllname to #{@DllName}"
       
-      super(name, fileName, libraryPath, headerPaths, headerNames)
+      super(paramBag[:name], fileName, paramBag[:libraryPath], paramBag[:headerPaths], paramBag[:headerNames])
     end
     
-    def GetFullDllPath
+    def GetFullCopyFilePath
       if(@LibraryPath == nil)
         return nil
       end
-      return JoinPaths([ @LibraryPath, @DllName ] )
+      return JoinPaths([ @LibraryPath, @CopyFileName ] )
     end
   end
 end

@@ -36,7 +36,12 @@ module RakeBuilder
 
       if(static)
         libContainer.StaticLibrary = StaticLibrary.new(name, JoinPaths([basedir, "build", "static"]), headerDirs, headerNames)
-        libContainer.LibLibrary = WindowsLib.new(name, JoinPaths([basedir, "build", "lib"]), headerDirs, headerNames)
+        libContainer.LibLibrary = WindowsLib.new({
+          name: name,
+          libraryPath: JoinPaths([basedir, "build", "lib"]),
+          headerPaths: headerDirs,
+          headerNames: headerNames
+        })
       else
         libContainer.DynamicLibrary = DynamicLibrary.new(name, JoinPaths([basedir, "build", "dynamic"]), headerDirs, headerNames)
         libContainer.DllLibrary = WindowsDll.new(name, JoinPaths([basedir, "build", "dll"]), headerDirs, headerNames)
@@ -72,7 +77,12 @@ module RakeBuilder
     def CreateWindowsOnlyLibraryContainer(name, libraryPath, headerNames, headerDirs, static=false)
       libContainer = LibraryContainer.new()
       if(static)
-        libContainer.LibLibrary = WindowsLib.new(name, libraryPath, headerDirs, headerNames)
+        libContainer.LibLibrary = WindowsLib.new({
+          name: name,
+          libraryPath: libraryPath,
+          headerPaths: headerDirs,
+          headerNames: headerNames
+        })
       else
         libContainer.DllLibrary = WindowsDll.new(name, libraryPath, headerDirs, headerNames)
       end
