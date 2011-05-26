@@ -1,6 +1,7 @@
 require "rake"
 require "rake/clean"
 require "ProjectManagement/cpp_project_configuration"
+require "Subprojects/subproject_builder.rb"
 require "general_utility"
 require "directory_utility"
 require "set"
@@ -33,7 +34,7 @@ module RakeBuilder
       searchPath = JoinPaths(["$ORIGIN", value])
       @LinkOptions.push("-Wl,-rpath='#{searchPath}'")
     end
-
+    
     def initialize(name)      
       @Name = name
       @CompilerOptions = []
@@ -100,7 +101,7 @@ module RakeBuilder
         compileCommand = GetCompileCommand(source, binaryPath)
         @compiles.push(binaryPath)
 
-        file binaryPath => extendedHeaders + @Dependencies + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()] do
+        file binaryPath => extendedHeaders + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()] do
           SystemWithFail(compileCommand, "Failed to compile #{source}")
         end
       }
@@ -121,7 +122,7 @@ module RakeBuilder
       end
 
       
-      file @binaryFileName => @compiles do
+      file @binaryFileName => @compiles + @Dependencies do
         SystemWithFail("#{command}", "Failed to link #{@ProjectConfiguration.BinaryName}")
       end
 

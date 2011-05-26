@@ -69,8 +69,13 @@ module RakeBuilder
           task subproject.AfterBuildTask => buildTaskName
           buildTaskName = subproject.AfterBuildTask
         end
+	
+	resultFilePaths.each do |filePath|
+	  puts "#{resultFilePaths} => #{GetSubprojectTaskName(subproject.Name)}"
+	  file resultFilePaths => GetSubprojectTaskName(subproject.Name)
+	end
         
-        task @SubprojectTask => [buildTaskName]
+        task @SubprojectTask => [buildTaskName] + resultFilePaths
       end
     end
     
