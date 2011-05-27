@@ -15,6 +15,7 @@ module RakeBuilder
   # [MacroExpansion] Should preprocessor macros be expanded to their defined values.
   # [ExpandOnlyPredef] Should only predefined macros be expanded to their defined values.
   # [Predefined] The macros that should be expanded and their values in form of a hash.
+  # [ImagePath] The path to the folder that contains the images used in the docu.
   class DoxygenBuilder
     include DirectoryUtility
     
@@ -38,6 +39,7 @@ module RakeBuilder
     attr_accessor :MacroExpansion
     attr_accessor :ExpandOnlyPredef
     attr_accessor :Predefined
+    attr_accessor :ImagePath
     
     def initialize
       @DoxyfileTemplate = "Doxyfile.template"
@@ -57,6 +59,7 @@ module RakeBuilder
       @MacroExpansion = true
       @ExpandOnlyPredef = false
       @Predefined = {}
+      @ImagePath = ""
     end
     
     # Create the doxyfile and the documentation resulting from it.
@@ -90,6 +93,7 @@ module RakeBuilder
 	  line = SetBoolAttributeIfMatch("EXTRACT_STATIC", @ExtractStatic, line) 
 	  line = SetBoolAttributeIfMatch("EXTRACT_PRIVATE", @ExtractPrivate, line)  
 	  line = SetBoolAttributeIfMatch("SOURCE_BROWSER", @SourceBrowser, line)
+	  line = SetAttributeIfMatch("IMAGE_PATH", @ImagePath, line)
 	  
 	  line = SetBoolAttributeIfMatch("ENABLE_PREPROCESSING", @EnablePreprocessing, line)
 	  line = SetBoolAttributeIfMatch("MACRO_EXPANSION", @MacroExpansion, line)
