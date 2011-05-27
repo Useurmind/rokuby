@@ -52,16 +52,19 @@ module RakeBuilder
         def initialize(paramBag = {})
             super()
             
+            
             @Name = paramBag[:name]
             @ProjectName = paramBag[:name]
+            projectFile = (paramBag[:projectFilePath] or "VsSolution/#{@ProjectName}/#{@Name}.vcxproj")
+            filterFile = (paramBag[:filterFilePath] or "VsSolution/#{@ProjectName}/#{@Name}.vcxproj.filters")
             @BuildDirectory = paramBag[:buildDirectory]
-            @ProjectFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:projectFilePath] or "VsSolution/#{@ProjectName}/#{@Name}.vcxproj") ] )
-            @FilterFilePath = JoinPaths( [ paramBag[:folder], (paramBag[:filterFilePath] or "VsSolution/#{@ProjectName}/#{@Name}.vcxproj.filters") ] )
+            @ProjectFilePath = JoinPaths( [ paramBag[:folder], projectFile ] )
+            @FilterFilePath = JoinPaths( [ paramBag[:folder], filterFile ] )
             @Guid = paramBag[:guid]
             @VsProjectConfigurations = (paramBag[:configurations] or [])
             @CleanVisualStudioCommand = (paramBag[:cleanVisualStudioCommand] or "rake CleanVisualStudio")
             
-            paramBag[:resultFiles] = [@ProjectFilePath, @FilterFilePath]
+            paramBag[:resultFiles] = [projectFile, filterFile]
             
             @Subproject = Subproject.new(paramBag)
             

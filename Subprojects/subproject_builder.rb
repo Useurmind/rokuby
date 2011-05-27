@@ -37,6 +37,7 @@ module RakeBuilder
         resultFilePaths = subproject.GetResultFilePaths()
         allFilesExist = true
         resultFilePaths.each do |filePath|
+          puts "Checking file #{filePath}"
           if(!File.exists?(filePath))
             allFilesExist = false
             break
@@ -49,7 +50,9 @@ module RakeBuilder
           return
         end
         
-        task GetSubprojectTaskName(subproject.Name) do
+        subprojectBuildTaskName = GetSubprojectTaskName(subproject.Name)
+        
+        task subprojectBuildTaskName do
           Dir.chdir(subdir)
           SystemWithFail(subproject.BuildCommand, "Failed to build subproject #{subproject.Name}")
           Dir.chdir(projectDir)
@@ -64,18 +67,18 @@ module RakeBuilder
         end                        
         task :clean => cleanSubtask
         
-        buildTaskName = GetSubprojectTaskName(subproject.Name)
+        
         if(subproject.AfterBuildTask)
-          task subproject.AfterBuildTask => buildTaskName
-          buildTaskName = subproject.AfterBuildTask
+          task subproject.AfterBuildTask => subprojectBuildTaskName
+          subprojectBuildTaskName = subproject.AfterBuildTask
         end
 	
 	resultFilePaths.each do |filePath|
-	  puts "#{resultFilePaths} => #{GetSubprojectTaskName(subproject.Name)}"
-	  file resultFilePaths => GetSubprojectTaskName(subproject.Name)
+	  puts "#{filePath} => #{subprojectBuildTaskName}"
+	  file filePath => [subprojectBuildTaskName]
 	end
         
-        task @SubprojectTask => [buildTaskName] + resultFilePaths
+        task @SubprojectTask => [subprojectBuildTaskName] + resultFilePaths
       end
     end
     
