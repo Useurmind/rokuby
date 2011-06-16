@@ -19,7 +19,12 @@ module RakeBuilder
       paramBag[:copyFileName] = (paramBag[:copyFileName] or nil)
       paramBag[:headerNames] = (paramBag[:headerNames] or [])
       
-      fileName = "#{paramBag[:name]}.lib"
+      if(paramBag[:name])
+        fileName = "#{paramBag[:name]}.lib"
+      else
+        fileName = nil
+      end
+      
       @CopyFileName = paramBag[:copyFileName]
       #puts "Set dllname to #{@DllName}"
       
