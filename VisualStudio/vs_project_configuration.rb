@@ -231,7 +231,10 @@ module RakeBuilder
           next
         end
 
-        libraryNames.push(libContainer.GetLinkFileName(:Windows))
+        linkFileName = libContainer.GetLinkFileName(:Windows)
+        if(linkFileName)
+          libraryNames.push(linkFileName)
+        end
 
         if(libContainer.GetLibraryPath(:Windows) != nil)
           libraryPath = GetVsProjectRelativePath(libContainer.GetLibraryPath(:Windows)) 
