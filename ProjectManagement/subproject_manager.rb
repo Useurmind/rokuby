@@ -10,35 +10,35 @@ module RakeBuilder
         attr_accessor :Folder
     
         def ProjectName
-          BaseProjectConfiguration().ProjectName
+            BaseProjectConfiguration().ProjectName
         end
         
         def BaseProjectConfiguration
-            ProjectManager.BaseProjectConfiguration
+            @ProjectManager.BaseProjectConfiguration
         end
         def SourceModules
-            ProjectManager.SourceModules
+            @ProjectManager.SourceModules
         end
         def SourceModuleUsage 
-            ProjectManager.SourceModuleUsage
+            @ProjectManager.SourceModuleUsage
         end
         def LinuxCompileOrders
-            ProjectManager.LinuxCompileOrders
+            @ProjectManager.LinuxCompileOrders
         end
         def CompileOrderDescriptions
-            ProjectManager.CompileOrderDescriptions
+            @ProjectManager.CompileOrderDescriptions
         end
         def VsSolutionCreator
-            ProjectManager.VsSolutionCreator
+            @ProjectManager.VsSolutionCreator
         end
         def DefaultTargetName
-            ProjectManager.DefaultTargetName
+            @ProjectManager.DefaultTargetName
         end
         def DoxygenBuilder
-            ProjectManager.DoxygenBuilder
+            @ProjectManager.DoxygenBuilder
         end
         def SubprojectManager
-            ProjectManager.SubprojectManager
+            @ProjectManager.SubprojectManager
         end
         
         attr_accessor :DocuTask
@@ -51,8 +51,13 @@ module RakeBuilder
         # [folder] The folder in which the subproject is located.
         def initialize(paramBag)
             @projectBuilder = paramBag[:projectBuilder]
-            @ProjectManager = @projectBuilder.ProjectManager
             @Folder = paramBag[:folder]
+            
+            ExecuteInFolder(@Folder) do
+                @projectBuilder.CreateProjectDefinition()
+            end
+            
+            @ProjectManager = @projectBuilder.ProjectManager
             
             @DocuTask = GenerateTaskName({
                 projectName: ProjectName(),
@@ -74,10 +79,6 @@ module RakeBuilder
                 projectName: ProjectName(),
                 type: "WrappedGccBuildTask"
             })
-            
-            ExecuteInFolder(@Folder) do
-                @projectBuilder.CreateProjectDefinition()
-            end
 
         end
         
@@ -88,31 +89,31 @@ module RakeBuilder
             
             task @DocuTask do
                 ExecuteInFolder(@Folder) do
-                    Rake::Tasks[ProjectManager.DocuTask].invoke()
+                    Rake::Task[@ProjectManager.DocuTask].invoke()
                 end
             end
             
             task @PacketInstallTask do
                 ExecuteInFolder(@Folder) do
-                    Rake::Tasks[ProjectManager.PacketInstallTask].invoke()
+                    Rake::Task[@ProjectManager.PacketInstallTask].invoke()
                 end
             end
             
             task @CreateVSSolutionTask do
                 ExecuteInFolder(@Folder) do
-                    Rake::Tasks[ProjectManager.CreateVSSolutionTask].invoke()
+                    Rake::Task[@ProjectManager.CreateVSSolutionTask].invoke()
                 end
             end
             
             task @CleanVSSolutionTask do
                 ExecuteInFolder(@Folder) do
-                    Rake::Tasks[ProjectManager.CleanVSSolutionTask].invoke()
+                    Rake::Task[@ProjectManager.CleanVSSolutionTask].invoke()
                 end
             end
             
             task @GccBuildTask do
                 ExecuteInFolder(@Folder) do
-                    Rake::Tasks[ProjectManager.GccBuildTask].invoke()
+                    Rake::Task[@ProjectManager.GccBuildTask].invoke()
                 end
             end
         end

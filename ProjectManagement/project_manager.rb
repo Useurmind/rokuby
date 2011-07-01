@@ -50,6 +50,17 @@ module RakeBuilder
       @BaseProjectConfiguration.ProjectName
     end
 
+    def GetVsProject(name)
+      searchedProject = nil
+      @VsSolutionCreator.VsSolution.Projects.each do |project|
+	if(project.ProjectName == name)
+	  searchedProject = project
+	  break
+	end
+      end
+      return searchedProject
+    end
+
     def initialize(baseProjectConfiguration, vsSolution)
       @BaseProjectConfiguration = baseProjectConfiguration
       @SourceModules = {}
