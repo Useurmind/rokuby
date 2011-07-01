@@ -10,7 +10,7 @@ module RakeBuilder
         attr_accessor :Folder
     
         def ProjectName
-          @BaseProjectConfiguration.ProjectName
+          BaseProjectConfiguration().ProjectName
         end
         
         def BaseProjectConfiguration
