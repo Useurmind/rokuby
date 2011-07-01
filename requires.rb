@@ -34,6 +34,8 @@ require File.join(File.dirname(__FILE__), "LibraryManagement/library_container_f
 require File.join(File.dirname(__FILE__), "ProjectManagement/cpp_project_configuration")
 require File.join(File.dirname(__FILE__), "ProjectManagement/source_module")
 require File.join(File.dirname(__FILE__), "ProjectManagement/project_manager")
+require File.join(File.dirname(__FILE__), "ProjectManagement/subproject_manager")
+require File.join(File.dirname(__FILE__), "ProjectManagement/project_builder")
 require File.join(File.dirname(__FILE__), "Subprojects/subproject")
 require File.join(File.dirname(__FILE__), "Subprojects/subproject_builder")
 

@@ -47,10 +47,11 @@ module RakeBuilder
         attr_accessor :CleanVSSolutionTask
         attr_accessor :GccBuildTask
         
-        # [projectManager] The project manager of the subproject.
+        # [projectBuilder] The project manager of the subproject.
         # [folder] The folder in which the subproject is located.
         def initialize(paramBag)
-            @ProjectManager = paramBag[:projectManager]
+            @projectBuilder = paramBag[:projectBuilder]
+            @ProjectManager = @projectBuilder.ProjectManager
             @Folder = paramBag[:folder]
             
             @DocuTask = GenerateTaskName({
@@ -73,6 +74,11 @@ module RakeBuilder
                 projectName: ProjectName(),
                 type: "WrappedGccBuildTask"
             })
+            
+            ExecuteInFolder(@Folder) do
+                @projectBuilder.CreateProjectDefinition()
+            end
+
         end
         
         def CreateTasks()
