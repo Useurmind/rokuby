@@ -1,6 +1,3 @@
-require "general_utility"
-require "VisualStudio/vs_xml_file_utility"
-
 module RakeBuilder
   # This class can create a solution file for Visual Studio 2010
   # [VsSolution] The solution for which the solution file should be build.

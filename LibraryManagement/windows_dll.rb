@@ -1,5 +1,3 @@
-require 'LibraryManagement/library_base'
-
 module RakeBuilder
   # Represents a windows dll.
   class WindowsDll < LibraryBase

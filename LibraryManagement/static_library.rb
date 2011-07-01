@@ -1,5 +1,3 @@
-require 'LibraryManagement/library_base'
-
 module RakeBuilder
   # Represents a static library under linux.
   class StaticLibrary < LibraryBase

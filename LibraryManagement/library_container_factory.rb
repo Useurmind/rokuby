@@ -1,12 +1,3 @@
-require "LibraryManagement/library_container"
-require "LibraryManagement/dynamic_library"
-require "LibraryManagement/static_library"
-require "LibraryManagement/windows_dll"
-require "LibraryManagement/windows_lib"
-
-require "directory_utility"
-require "general_utility"
-
 module RakeBuilder
   class LibraryContainerFactory
     include DirectoryUtility

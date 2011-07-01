@@ -1,5 +1,3 @@
-require "ProjectManagement/cpp_project_configuration"
-
 module RakeBuilder
     # This class represents the data needed to identify a project.
     # It is used to define projects for a SolutionFileCreator.

@@ -1,5 +1,3 @@
-require "VisualStudio/vs_file_creator.rb"
-
 module RakeBuilder
 
   class FilterFileCreator < VsFileCreator

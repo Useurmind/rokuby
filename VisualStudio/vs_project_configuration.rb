@@ -1,7 +1,3 @@
-require "ProjectManagement/cpp_project_configuration"
-require "VisualStudio/vs_xml_file_utility"
-require "general_utility"
-
 module RakeBuilder
   # Types of binaries
   VS_CONFIGURATION_TYPE_APPLICATION = "Application"

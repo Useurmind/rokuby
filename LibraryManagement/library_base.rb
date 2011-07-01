@@ -1,6 +1,3 @@
-require "general_utility"
-require "directory_utility"
-
 module RakeBuilder
 
   # This is a base class for all types of libraries. Don't use it directly!

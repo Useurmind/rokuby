@@ -1,5 +1,3 @@
-require "directory_utility"
-
 module RakeBuilder
   
   # This class can be used to create a doxygen class.

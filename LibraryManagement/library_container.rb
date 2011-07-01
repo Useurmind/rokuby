@@ -1,6 +1,3 @@
-require "general_utility"
-require "directory_utility"
-
 module RakeBuilder
 
   # This class gathers different types of libraries and eases the access to the attributes of the right type.

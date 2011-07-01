@@ -1,8 +1,3 @@
-require "VisualStudio/vs_file_creator.rb"
-require "VisualStudio/vs_project_configuration.rb"
-require "XML/XmlDocument"
-require "XML/XmlTag"
-
 module RakeBuilder
 
 

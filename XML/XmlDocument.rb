@@ -1,5 +1,3 @@
-require "XML/XmlHelper"
-
 module RakeBuilder
     class XmlDocument
         include XmlHelper

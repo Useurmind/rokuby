@@ -1,5 +1,3 @@
-require "directory_utility"
-
 module RakeBuilder
   
   # This class represents a subproject of the main project.

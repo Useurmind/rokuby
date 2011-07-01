@@ -1,5 +1,3 @@
-require "LibraryManagement/library_base"
-
 module RakeBuilder
   # Represents a dynamic linux library.
   class DynamicLibrary < LibraryBase

@@ -1,9 +1,5 @@
 require "rake"
 require "rake/clean"
-require "ProjectManagement/cpp_project_configuration"
-require "Subprojects/subproject_builder.rb"
-require "general_utility"
-require "directory_utility"
 require "set"
 
 module RakeBuilder

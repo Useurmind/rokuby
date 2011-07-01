@@ -1,5 +1,3 @@
-require 'LibraryManagement/library_base'
-
 module RakeBuilder
   # Represents a windows lib.
   # [CopyFileName] The name of the file that should be copied to the release directory.

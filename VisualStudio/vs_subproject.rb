@@ -1,7 +1,3 @@
-require "Subprojects/subproject"
-require "directory_utility"
-require "general_utility"
-
 module RakeBuilder
     # Class that gathers Subproject and VsProject attributes.
     # Set all properties of VsProject to use it.
@@ -68,7 +64,10 @@ module RakeBuilder
             
             @Subproject = Subproject.new(paramBag)
             
-            @CleanVisualStudioTask = "SubprojectCleanVsTask_#{@ProjectName}_#{UUIDTools::UUID.random_create().to_s}"
+            @CleanVisualStudioTask = GenerateTaskName({
+                projectName: @ProjectName,
+                type: "SubprojectCleanVsTask"
+            })
             
             originalDir = Dir.pwd
             subdir = JoinPaths([ originalDir, Folder() ])

@@ -1,7 +1,3 @@
-require "VisualStudio/vs_project_configuration"
-require "directory_utility"
-require "general_utility"
-
 module RakeBuilder
   class VsProjectConfigurationFactory
     include GeneralUtility

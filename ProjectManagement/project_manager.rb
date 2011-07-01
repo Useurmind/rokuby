@@ -1,8 +1,3 @@
-
-require "ProjectManagement/source_module"
-require "ProjectManagement/cpp_project_configuration"
-require "doxygen_builder"
-require "Linux/ubuntu_packet_installer"
 require "rake"
 
 module RakeBuilder
@@ -25,7 +20,15 @@ module RakeBuilder
   # [WindowsSolutionCreators] todo
   # [DefaultTargetName] The name of the compile order that is used as the default target.
   # [DoxygenBuilder] The class object that is responsible for creating the doxygen documentation.
+  #
+  # Tasks provided by the project manager:
+  # [DocuTask] The task to build the docu of the project.
+  # [PacketInstallTask] The task that will install the packets for ubuntu OS needed for the project.
+  # [CreateVSSolutionTask] The task that will create the VisualStudio solution for this project.
+  # [CleanVSSolutionTask] The task that will delete the VisualStudio solution for this project.
+  # [GccBuildTask] The task that will build this project with the gcc compiler
   class ProjectManager
+    include GeneralUtility
 
     attr_accessor :BaseProjectConfiguration
     attr_accessor :SourceModules
@@ -35,6 +38,17 @@ module RakeBuilder
     attr_accessor :VsSolutionCreator
     attr_accessor :DefaultTargetName
     attr_accessor :DoxygenBuilder
+    attr_accessor :SubprojectManagers
+    
+    attr_accessor :DocuTask
+    attr_accessor :PacketInstallTask
+    attr_accessor :CreateVSSolutionTask
+    attr_accessor :CleanVSSolutionTask
+    attr_accessor :GccBuildTask
+    
+    def ProjectName
+      @BaseProjectConfiguration.ProjectName
+    end
 
     def initialize(baseProjectConfiguration, vsSolution)
       @BaseProjectConfiguration = baseProjectConfiguration
@@ -46,8 +60,31 @@ module RakeBuilder
 
       @DoxygenBuilder = DoxygenBuilder.new()
       @DoxygenBuilder.ProjectConfiguration = baseProjectConfiguration
+      
+      @SubprojectManagers = []
 
       @UbuntuPacketInstaller = UbuntuPacketInstaller.new()
+      
+      @DocuTask = GenerateTaskName({
+	projectName: ProjectName(),
+	type: "DocuTask"
+      })
+      @PacketInstallTask = GenerateTaskName({
+	projectName: ProjectName(),
+	type: "PacketInstallTask"
+      })
+      @CreateVSSolutionTask = GenerateTaskName({
+	projectName: ProjectName(),
+	type: "CreateVSSolutionTask"
+      })
+      @CleanVSSolutionTask = GenerateTaskName({
+	projectName: ProjectName(),
+	type: "CleanVSSolutionTask"
+      })
+      @GccBuildTask = GenerateTaskName({
+	projectName: ProjectName(),
+	type: "GccBuildTask"
+      })
     end
 	
     # Add some packets that should be installed with a list of package names.
@@ -92,33 +129,59 @@ module RakeBuilder
     end
 
     def CreateTasks()
+      @SubprojectManagers.each do |subprojectManager|
+	subprojectManager.CreateTasks()
+	
+	task @DocuTask => [subprojectManager.DocuTask]
+	task @PacketInstallTask => [subprojectManager.PacketInstallTask]
+	task @CreateVSSolutionTask => [subprojectManager.CreateVSSolutionTask]
+	task @CleanVSSolutionTask => [subprojectManager.CleanVSSolutionTask]
+	task @GccBuildTask => [subprojectManager.GccBuildTask]
+      end
+      
       _ApplySourceModuleUsageToCompileOrders()
       _ApplySourceModuleUsageToVsProjectConfigurations()
 
-      desc "Build the doxygen documentation of the project"
-      task :docu do
+      task @DocuTask do
         @DoxygenBuilder.CreateDoxyfile()
       end
 
       @UbuntuPacketInstaller.CreatePacketInstallationTask()
-      desc "Install required ubuntu packets"
-      task :packets => [@UbuntuPacketInstaller.TaskName]
+      task @PacketInstallTask => [@UbuntuPacketInstaller.TaskName]
 
       @LinuxCompileOrders.each do |name, compileOrder|
         compileOrder.CreateProjectTasks()
-	desc @CompileOrderDescriptions[name]
-        task compileOrder.ProjectConfiguration.Name => [compileOrder.EndTask]
+        compilerOrderTaskName = GenerateTaskName({
+	  projectName: ProjectName(),
+	  configuration: compileOrder.ProjectConfiguration.Name,
+	  type: "CompileOrderTask"
+	})
+        task compilerOrderTaskName => [compileOrder.EndTask]
       end
       
       @VsSolutionCreator.CreateTasks()
-      desc "Create the Visual Studio solution for the project"
-      task :VisualStudio => @VsSolutionCreator.EndTask
+      task @CreateVSSolutionTask => @VsSolutionCreator.EndTask
 
-      desc "Clean the Visual Studio project"
-      task :CleanVisualStudio => @VsSolutionCreator.CleanTask
+      task @CleanVSSolutionTask => @VsSolutionCreator.CleanTask
 
       _CheckCompileOrderExists(@DefaultTargetName)
-      task :default => [@LinuxCompileOrders[@DefaultTargetName].ProjectConfiguration.Name]
+      task @GccBuildTask => [@LinuxCompileOrders[@DefaultTargetName].ProjectConfiguration.Name]
+    end
+      
+    def AssignDefaultTasks
+      task :docu => [@DocuTask]
+      task :vssolution => [@CreateVSSolutionTask]
+      task :cleanvssolution => [@CleanVSSolutionTask]
+      task :gccbuild => [@GccBuildTask]
+      task :installpackets => [@PacketInstallTask]
+      
+      DescribeTasks({
+	docuTask: :docu,
+	packetInstallTask: :installpackets,
+	createVSSolutionTask: :vssolution,
+	cleanVSSolutionTask: :cleanvssolution,
+	gccBuildTask: :gccbuild
+      })
     end
 
     def _CheckCompileOrderNotExists(name)

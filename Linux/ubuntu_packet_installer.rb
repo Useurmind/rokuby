@@ -1,5 +1,4 @@
 require "rake"
-require "general_utility"
 
 module RakeBuilder
 
@@ -9,12 +8,17 @@ module RakeBuilder
   class UbuntuPacketInstaller
     include GeneralUtility
     
+    attr_accessor :ProjectName
     attr_accessor :TaskName
     attr_accessor :PacketNames
     
     def initialize
+      @ProjectName = ""
       @PacketNames = []
-      @TaskName = "PacketInstallerTask"
+      @TaskName = GenerateTaskName({
+        projectName: @ProjectName,
+        type: "UbuntuPacketInstallerTask"
+      })
     end
     
     # Create the task that can be used to install the packets.

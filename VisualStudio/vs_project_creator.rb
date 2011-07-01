@@ -1,11 +1,4 @@
 require "rake"
-require "VisualStudio/filter_file_creator"
-require "VisualStudio/project_file_creator"
-require "VisualStudio/vs_project_configuration_factory"
-require "VisualStudio/vs_project"
-require 'UUID/uuidtools.rb'
-require "directory_utility"
-require "general_utility"
 
 module RakeBuilder
   # Class that can create a visual studio project for compilation.
@@ -18,7 +11,10 @@ module RakeBuilder
     attr_accessor :EndTask
 
     def initialize(vsProject)
-        @EndTask = "ProjectCreationTask_#{vsProject.Name}_#{UUIDTools::UUID.random_create().to_s}"
+        @EndTask = GenerateTaskName({
+          projectName: vsProject.Name,
+          type: "ProjectCreationTask"
+        })
         
         @VsProject = vsProject
         @VsSolutionDirectory = nil
@@ -103,7 +99,11 @@ module RakeBuilder
     end
     
     def GetPostBuildTaskName(vsProjectConfiguration)
-        return "PostBuild_#{vsProjectConfiguration.GetConfigurationSubdirectoryName()}"
+        return GenerateTaskName({
+          projectName: @VsProject.ProjectName,
+          configuration: vsProjectConfiguration.GetConfigurationSubdirectoryName(),
+          type: "VsPostBuildTask"
+        })
     end
 
     def CreateVsFileTask(fileCreator)

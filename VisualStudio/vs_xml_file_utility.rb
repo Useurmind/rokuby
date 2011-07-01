@@ -1,8 +1,5 @@
-require 'XML/xmlsimple'
 require 'rexml/document'
 require 'rexml/text'
-require 'UUID/uuidtools.rb'
-require "directory_utility"
 
 include REXML
 

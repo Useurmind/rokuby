@@ -1,14 +1,4 @@
 require "rake"
-require "Subprojects/subproject_builder"
-require "VisualStudio/filter_file_creator"
-require "VisualStudio/project_file_creator"
-require "VisualStudio/solution_file_creator"
-require "VisualStudio/vs_project_configuration_factory"
-require "VisualStudio/vs_project"
-require "VisualStudio/vs_subproject"
-require 'UUID/uuidtools.rb'
-require "directory_utility"
-require "general_utility"
 
 module RakeBuilder
   # Class that can create a visual studio project for compilation.
@@ -27,8 +17,14 @@ module RakeBuilder
     attr_accessor :CleanTask
     
     def initialize(vsSolution)
-      @EndTask = "SolutionCreationTask_#{vsSolution.SolutionName}_#{UUIDTools::UUID.random_create().to_s}"
-      @CleanTask = "SolutionCleanTask_#{vsSolution.SolutionName}_#{UUIDTools::UUID.random_create().to_s}"
+      @EndTask = GenerateTaskName({
+        projectName: vsSolution.SolutionName,
+        type: "SolutionCreationTask"
+      })
+      @CleanTask = GenerateTaskName({
+        projectName: vsSolution.SolutionName,
+        type: "SolutionCleanTask"
+      })
       
       @VsSolution = vsSolution
       @SubprojectBuilder = SubprojectBuilder.new()

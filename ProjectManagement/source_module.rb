@@ -1,5 +1,3 @@
-require "general_utility"
-
 module RakeBuilder
   # This class represents a part of the source code which can be excluded from
   # compilation.

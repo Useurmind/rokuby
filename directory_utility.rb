@@ -189,6 +189,14 @@ module RakeBuilder
     #     def IsAbsolutePath(directory)
     #       return directory.match("^(\/|[A-Za-z]:)")
     #     end
+    
+    # Executes the appended block in the given path.
+    def ExecuteInFolder(path)
+      currentFolder = Dir.pwd
+      Dir.chdir(path)
+      yield if block_given?
+      Dir.chdir(currentFolder)
+    end
   end
 
 end

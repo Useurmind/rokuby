@@ -1,6 +1,3 @@
-require "XML/XmlHelper"
-
-
 module RakeBuilder
 
     class XmlTag

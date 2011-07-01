@@ -1,6 +1,3 @@
-require "VisualStudio/vs_xml_file_utility.rb"
-require "general_utility"
-
 module RakeBuilder
   class VsFileCreator
     include VsXmlFileUtility

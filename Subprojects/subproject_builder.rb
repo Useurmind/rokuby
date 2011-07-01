@@ -1,8 +1,3 @@
-require "directory_utility"
-require "general_utility"
-require "Subprojects/subproject"
-require 'UUID/uuidtools.rb'
-
 module RakeBuilder
   
   # This class can be used to build subprojects.
@@ -16,12 +11,17 @@ module RakeBuilder
     include DirectoryUtility
     include GeneralUtility
     
+    attr_accessor :ProjectName
     attr_accessor :Subprojects
     attr_accessor :SubprojectTask
     
     def initialize
+      @ProjectName = ""
       @Subprojects = []
-      @SubprojectTask = "SubprojectBuilderTask_#{UUIDTools::UUID.random_create().to_s}"
+      @SubprojectTask = GenerateTaskName({
+	projectName: @ProjectName,
+	type: "SubprojectBuilderTask"
+      })
       task @SubprojectTask
     end
     
@@ -85,13 +85,21 @@ module RakeBuilder
     # Get the name for the task that should build a subproject.
     # [subprojectName] The name of the subproject.
     def GetSubprojectTaskName(subprojectName)
-      return "SubprojectTask_#{subprojectName}"
+      return GenerateTaskName({
+	projectName: @ProjectName,
+	configuration: subprojectName,
+	type: "SubprojectTask"
+      })
     end
     
     # Get the name for the task that should clean a subproject.
     # [subprojectName] The name of the subproject.
     def GetSubprojectCleanTaskName(subprojectName)
-      return "#{subprojectName}_clean"
+      GenerateTaskName({
+	projectName: @ProjectName,
+	configuration: subprojectName,
+	type: "SubprojectCleanTask"
+      })
     end
     
     # Add a subproject that uses rake for building.
