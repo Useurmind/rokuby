@@ -149,12 +149,23 @@ module RakeBuilder
     end
 
     def CreateItemDefinitionGroup(configuration)
+      additionalIncludeDirectories = configuration.AdditionalIncludeDirectories
+      
+      @VsProject.Dependencies.each do |dependency|
+        dependency.VsProjectConfigurations.each do |projectConfiguration|
+          if(projectConfiguration.Name == configuration.Name)
+            puts "Found dependency configuration"
+            additionalIncludeDirectories.concat(projectConfiguration.AdditionalIncludeDirectories)
+          end
+        end
+      end
+      
       clCompileElement = XmlTag.new({
         name: "ClCompile",
         children: [
           XmlTag.new( { name: "WarningLevel", value: configuration.WarningLevel }),
           XmlTag.new( { name: "Optimization", value: configuration.Optimization }),
-          XmlTag.new( { name: "AdditionalIncludeDirectories", value: configuration.AdditionalIncludeDirectories.join(';') }),
+          XmlTag.new( { name: "AdditionalIncludeDirectories", value: additionalIncludeDirectories.join(';') }),
           XmlTag.new( { name: "PreprocessorDefinitions", value: configuration.PreprocessorDefinitions.join(';') }),
           XmlTag.new( { name: "AssemblerOutput", value: configuration.AssemblerOutput }),
           XmlTag.new( { name: "FunctionLevelLinking", value: configuration.FunctionLevelLinking.to_s() }),

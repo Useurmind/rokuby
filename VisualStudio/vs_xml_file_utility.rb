@@ -53,6 +53,7 @@ module RakeBuilder
     # [projectRelativePath] Path of the file relative to the project directory.
     # The path will be formatted in visual studio xml path format.
     # Example: 'C:/../projectBase/include/header1.h' -> 'include\header1.h'
+    # Actually it only converts something like './include/header1.h' correctly.
     def GetProjectDirectoryRelativeBaseDirectory(projectRelativePath)
       return FormatXmlPath(StripFilenameFromPath(projectRelativePath))
     end

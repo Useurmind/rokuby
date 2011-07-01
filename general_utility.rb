@@ -20,7 +20,7 @@ module RakeBuilder
     # Clone an arbitrary object
     # Returns nil for nil and the orginal for symbols.
     def Clone(original)
-      if(original.class == Symbol)
+      if(original.class == Symbol or original == false or original == true)
         return original
       end
     
@@ -81,11 +81,18 @@ module RakeBuilder
     # [projectName] The name of the project.
     # [configuration] The name of the configuration.
     # [type] A string describing the type of task.
+    # [noid] Do not append a random uuid (default = false).
     def GenerateTaskName(paramBag)
       projectName = (paramBag[:projectName] or "")
       configuration = (paramBag[:configuration] or "")
       type = (paramBag[:type] or "")
-      uuid = GetUUID()
+      noid = (paramBag[:noid] or false)
+      
+      if(noid)
+        uuid = ""
+      else
+        uuid = GetUUID()        
+      end
       
       return "#{projectName}_#{configuration}_#{type}_#{uuid}"
     end
