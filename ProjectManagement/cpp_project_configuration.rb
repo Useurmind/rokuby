@@ -102,7 +102,11 @@ module RakeBuilder
     # Get the paths to all source files that are identified by the search patterns.
     def GetExtendedSources(additionalExcludePatterns=[])
       extendedSourcePaths = GetExtendedSourcePaths()
+      puts "Searching sources in #{extendedSourcePaths}"
+      puts "Include patterns: #{@SourceIncludePatterns}"
+      puts "Exclude patterns: #{@SourceExcludePatterns}"
       extendedSources = FindFilesInDirectories(@SourceIncludePatterns, @SourceExcludePatterns + additionalExcludePatterns, extendedSourcePaths)
+      puts "Found sources: #{extendedSources}"
       return extendedSources
     end
     

@@ -171,7 +171,11 @@ module RakeBuilder
           XmlTag.new( { name: "FunctionLevelLinking", value: configuration.FunctionLevelLinking.to_s() }),
           XmlTag.new( { name: "IntrinsicFunctions", value: configuration.IntrinsicFunctions.to_s() }),
           XmlTag.new( { name: "ProgramDataBaseFileName", value: configuration.ProgramDataBaseFileName }),
-          XmlTag.new( { name: "RuntimeLibrary", value: configuration.RuntimeLibrary })
+          XmlTag.new( { name: "RuntimeLibrary", value: configuration.RuntimeLibrary }),
+          XmlTag.new( { name: "ExceptionHandling", value: configuration.ExceptionHandling }),
+          XmlTag.new( { name: "BufferSecurityCheck", value: configuration.BufferSecurityCheck }),
+          XmlTag.new( { name: "DebugInformationFormat", value: configuration.DebugInformationFormat }),
+          XmlTag.new( { name: "InlineFunctionExpansion", value: configuration.InlineFunctionExpansion })
         ]
       })
 

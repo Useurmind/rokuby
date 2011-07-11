@@ -61,13 +61,29 @@ module RakeBuilder
     # Get the path of the file relative to the visual studio solution directory.
     # [projectRelativePath] Path of the file relative to the base project directory.
     def GetVsSolutionRelativePath(projectRelativePath)
+      if(VsPathIsAbsolute(projectRelativePath))
+        return projectRelativePath
+      end
+      
       return JoinXmlPaths([ "..", projectRelativePath])
     end
 
     # Get the path of the file relative to the visual studio project directory.
     # [projectRelativePath] Path of the file relative to the base project directory.
     def GetVsProjectRelativePath(projectRelativePath)
+      if(VsPathIsAbsolute(projectRelativePath))
+        return projectRelativePath
+      end
+      
       return JoinXmlPaths([ "..", "..", projectRelativePath])
+    end
+    
+    def VsPathIsAbsolute(path)
+      if(path.start_with?("$(") or path.match(/^[A-Z]:/))
+        return true
+      end
+      
+      return false
     end
 
     def FormatXmlPath(path)
