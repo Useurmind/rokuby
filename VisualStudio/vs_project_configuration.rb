@@ -27,7 +27,7 @@ module RakeBuilder
   # [ConfigurationType] The type of binary that is created (e.g. 'Application' or 'DynamicLibrary')
   # [UseDebugLibraries] Should debug libraries be used (true, false).
   # [WholeProgramOptimization] Should the program be optimized (true, false).
-  # [CharacterSet] bla ('MultiByte', 'Unicode')
+  # [CharacterSet] bla ('MultiByte', 'Unicode', 'NotSet')
   # [OutputDirectory] The directory for the build result.
   # [IntermediateDirectory] The directory for intermediate build results.
   #

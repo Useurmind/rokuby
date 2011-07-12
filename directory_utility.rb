@@ -44,7 +44,7 @@ module RakeBuilder
 
           excludePatterns.each do |pattern|
             if(entryPath.match(pattern) != nil)
-	      puts "Excluding file '#{entryPath}' based on pattern '#{pattern}'"
+	      #puts "Excluding file '#{entryPath}' based on pattern '#{pattern}'"
               entryIsExcluded = true
               break
             end
@@ -56,11 +56,11 @@ module RakeBuilder
 
           entryMatches = false
 
-	  puts "Checking entry #{entry} for inclusion"
+	  #puts "Checking entry #{entry} for inclusion"
           includePatterns.each do |pattern|
-	    puts "Trying pattern #{pattern}"
+	    #puts "Trying pattern #{pattern}"
             if(entryPath.match(pattern) != nil)
-	      puts "Including file '#{entryPath}' based on pattern '#{pattern}'"
+	      #puts "Including file '#{entryPath}' based on pattern '#{pattern}'"
               entryMatches = true
               break
             end
