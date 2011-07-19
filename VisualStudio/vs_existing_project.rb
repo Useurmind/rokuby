@@ -49,6 +49,9 @@ module RakeBuilder
         def SyncLibrariesWithProject
             @Libraries = []
             @Project.Libraries.each do |libContainer|
+	      if(!libContainer.UsedInWindows())
+		return libContainer
+	      end
                 @Libraries.push(ConvertLibContainerPaths(libContainer))
             end
         end
@@ -60,7 +63,7 @@ module RakeBuilder
             end
         end
         
-        def ConvertLibContainerPaths(libContainer)
+        def ConvertLibContainerPaths(libContainer)	  
             libFactory = LibraryContainerFactory.new()
             newHeaderPaths = []
             libContainer.GetHeaderPaths(:Windows).each do |headerPath|
