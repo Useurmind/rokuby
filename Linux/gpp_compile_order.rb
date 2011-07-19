@@ -133,20 +133,22 @@ module RakeBuilder
     def CreateLibraryAndHeaderCopyTasks()
        # Copy libraries and their headers into binary directory
       @ProjectConfiguration.Libraries.each do |libContainer|
-	  if(!libContainer.UsedInLinux())
+	  if(!libContainer.UsedInLinux() or libContainer.IsStatic())
 	    next
 	  end
 	  
 	  #CreateHeaderCopyTasks(libContainer)
 	  
 	  fullLibraryPath = libContainer.GetFullCopyFilePath(:Linux)
-	  copyPath = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), libContainer.GetCopyFileName(:Linux) ] )
-	  
+	  if(fullLibraryPath) 
+	    copyPath = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), libContainer.GetCopyFileName(:Linux) ] )
+	    
 
-	  file copyPath => fullLibraryPath do
-	    SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
+	    file copyPath => fullLibraryPath do
+	      SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
+	    end
+	    file @EndTask => copyPath
 	  end
-	  file @EndTask => copyPath
 	end
     end
     
@@ -187,7 +189,7 @@ module RakeBuilder
         # 	  puts "Adding subdirectory tree of #{directory}"
         # 	  includeTree = includeTree + GetDirectoryTree(directory)
         # 	elsif
-        # 	  puts "Adding directory #{directory}"
+        # 	  puts "Adding include directories #{libContainer.GetHeaderPaths(:Linux)}"
         includeTree.concat(libContainer.GetHeaderPaths(:Linux))
         # 	end
       end
@@ -225,10 +227,20 @@ module RakeBuilder
         end
 
         if(!libContainer.IsStatic())
-          dynamicLibs.push(_GetDynamicLibraryDirective(libContainer))
-          dynamicLibsSearchPaths.add(_GetDynamicLibrarySearchPathDirective(libContainer))
+	  libDirective = _GetDynamicLibraryDirective(libContainer)
+	  if(libDirective)
+	    dynamicLibs.push(libDirective)
+	  end
+	  
+	  libSearchDirective = _GetDynamicLibrarySearchPathDirective(libContainer)
+	  if(libSearchDirective)
+	    dynamicLibsSearchPaths.add(libSearchDirective)
+	  end
         else
-          staticLibs.push(_GetStaticLibraryDirective(libContainer))
+	  libDirective = _GetStaticLibraryDirective(libContainer)
+	  if(libDirective)
+	    staticLibs.push(libDirective)
+	  end
         end
       end
 
@@ -243,10 +255,18 @@ module RakeBuilder
     end
 
     def _GetDynamicLibrarySearchPathDirective(libContainer)
+      if(!libContainer.GetLibraryPath(:Linux))
+	return nil
+      end
+      
       return "-L#{libContainer.GetLibraryPath(:Linux)}"
     end
 
     def _GetDynamicLibraryDirective(libContainer)
+      if(!libContainer.GetName(:Linux))
+	return nil
+      end
+      
       return "-l#{libContainer.GetName(:Linux)}"
     end
 

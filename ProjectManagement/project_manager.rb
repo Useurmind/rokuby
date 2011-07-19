@@ -167,7 +167,8 @@ module RakeBuilder
 	  configuration: compileOrder.ProjectConfiguration.Name,
 	  type: "CompileOrderTask"
 	})
-        task compilerOrderTaskName => [compileOrder.EndTask]
+	desc @CompileOrderDescriptions[name]
+        task name => [compileOrder.EndTask]
       end
       
       @VsSolutionCreator.CreateTasks()
