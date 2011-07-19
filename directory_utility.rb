@@ -9,6 +9,8 @@ module RakeBuilder
     def FindFilesInDirectories(includePatterns, excludePatterns, directories)
       files = []
 
+      puts "Searching files, current directory is #{Dir.pwd}"
+
       directories.each { |dir|
         files = files + FindFilesInDirectory(includePatterns, excludePatterns, dir)
       }
@@ -25,7 +27,10 @@ module RakeBuilder
       files = []
 
       entries = Dir.entries(directory)
-      entries.each { |entry|
+      
+      #puts "Searching files in '#{directory}', found entries: #{entries}"
+      
+      entries.each do |entry|
         entryPath = JoinPaths([directory,entry])
 
         if(entry == "." or entry == "..")
@@ -37,12 +42,13 @@ module RakeBuilder
         else
           entryIsExcluded = false
 
-          excludePatterns.each { |pattern|
+          excludePatterns.each do |pattern|
             if(entryPath.match(pattern) != nil)
+	      #puts "Excluding file '#{entryPath}' based on pattern '#{pattern}'"
               entryIsExcluded = true
               break
             end
-          }
+          end
 
           if(entryIsExcluded)
             next
@@ -50,18 +56,21 @@ module RakeBuilder
 
           entryMatches = false
 
-          includePatterns.each { |pattern|
+	  #puts "Checking entry #{entry} for inclusion"
+          includePatterns.each do |pattern|
+	    #puts "Trying pattern #{pattern}"
             if(entryPath.match(pattern) != nil)
+	      #puts "Including file '#{entryPath}' based on pattern '#{pattern}'"
               entryMatches = true
               break
             end
-          }
+          end
 
           if(entryMatches)
             files = files + [entryPath]
           end
         end
-      }
+      end
 
       return files
     end

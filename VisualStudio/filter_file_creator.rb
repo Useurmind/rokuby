@@ -120,7 +120,7 @@ module RakeBuilder
       extendedSourcePaths.each { |sourcefile|
         filter = JoinXmlPaths([@sourceBasefilter, _GetProjectDirectoryRelativeBaseDirectory(sourcefile)])
         relativeSource = _GetVsProjectRelativePath(sourcefile)
-
+        
         @compiles.push GetElementForList(
           {"Include" => relativeSource},
           {"Filter" => filter}

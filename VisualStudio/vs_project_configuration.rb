@@ -27,7 +27,7 @@ module RakeBuilder
   # [ConfigurationType] The type of binary that is created (e.g. 'Application' or 'DynamicLibrary')
   # [UseDebugLibraries] Should debug libraries be used (true, false).
   # [WholeProgramOptimization] Should the program be optimized (true, false).
-  # [CharacterSet] bla ('MultiByte', 'Unicode')
+  # [CharacterSet] bla ('MultiByte', 'Unicode', 'NotSet')
   # [OutputDirectory] The directory for the build result.
   # [IntermediateDirectory] The directory for intermediate build results.
   #
@@ -41,6 +41,10 @@ module RakeBuilder
   # [IntrinsicFunctions] Seems to be good for performance, e.g. release builds (true, false).
   # [ProgramDataBaseFileName] The name of the pdb file that should hold debug information.
   # [RuntimeLibrary] The windows libraries to be used with this project ('MultiThreaded', 'MultiThreadedDll', 'MultiThreadedDebug', 'MultiThreadedDebugDll').
+  # [ExceptionHandling] Which type of exception handling should be applied (e.g. 'Async', 'false', default: 'Sync' )
+  # [BufferSecurityCheck] 'false' or 'true', default: 'true'
+  # [DebugInformationFormat] Format of the generated debug information (e.g. 'OldStyle', 'ProgramDatabase', default: 'EditAndContinue')
+  # [InlineFunctionExpansion] How should functions be expanded inline (e.g. 'AnySuitable', 'Disabled', default: 'Default')
   # 
   # Link time attributes:
   # [GenerateDebugInformation] Should debug information be generated (true, false).
@@ -77,6 +81,10 @@ module RakeBuilder
     attr_accessor :FunctionLevelLinking
     attr_accessor :IntrinsicFunctions
     attr_accessor :ProgramDataBaseFileName
+    attr_accessor :ExceptionHandling
+    attr_accessor :BufferSecurityCheck
+    attr_accessor :DebugInformationFormat
+    attr_accessor :InlineFunctionExpansion
 
     attr_accessor :GenerateDebugInformation
     attr_accessor :AdditionalLibraryDirectories
@@ -110,6 +118,10 @@ module RakeBuilder
       @FunctionLevelLinking = true
       @IntrinsicFunctions = true
       @ProgramDataBaseFileName = nil
+      @ExceptionHandling = "Sync"
+      @BufferSecurityCheck = true
+      @DebugInformationFormat = "EditAndContinue"
+      @InlineFunctionExpansion = "Default"
 
       @GenerateDebugInformation = false
       @EnableCOMDATFolding = true
@@ -182,6 +194,9 @@ module RakeBuilder
       elsif(@BinaryType == :shared)
         @ConfigurationType = VS_CONFIGURATION_TYPE_SHARED
         @TargetExt = VS_CONFIGURATION_EXTENSION_SHARED
+      elsif(@BinaryType == :static)
+        @ConfigurationType = VS_CONFIGURATION_TYPE_STATIC
+        @TargetExt = VS_CONFIGURATION_EXTENSION_STATIC
       else
         abort "Binary type #{@BinaryType} not supported"
       end
