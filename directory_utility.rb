@@ -9,7 +9,7 @@ module RakeBuilder
     def FindFilesInDirectories(includePatterns, excludePatterns, directories)
       files = []
 
-      puts "Searching files, current directory is #{Dir.pwd}"
+      #puts "Searching files, current directory is #{Dir.pwd}"
 
       directories.each { |dir|
         files = files + FindFilesInDirectory(includePatterns, excludePatterns, dir)

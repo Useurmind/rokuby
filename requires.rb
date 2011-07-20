@@ -4,6 +4,7 @@ end
 
 require "rake"
 require "rake/clean"
+require "pathname"
 
 puts File.dirname(__FILE__)
 puts File.join(File.dirname(__FILE__), "XML/XmlHelper")
@@ -32,6 +33,7 @@ require File.join(File.dirname(__FILE__), "LibraryManagement/library_container_f
 
 # General functionality
 require File.join(File.dirname(__FILE__), "ProjectManagement/cpp_project_configuration")
+require File.join(File.dirname(__FILE__), "ProjectManagement/cpp_existing_project_configuration")
 require File.join(File.dirname(__FILE__), "ProjectManagement/source_module")
 require File.join(File.dirname(__FILE__), "ProjectManagement/project_manager")
 require File.join(File.dirname(__FILE__), "ProjectManagement/subproject_manager")
@@ -56,4 +58,5 @@ require File.join(File.dirname(__FILE__), "VisualStudio/vs_solution_creator")
 
 # Linux only functionality
 require File.join(File.dirname(__FILE__), "Linux/gpp_compile_order")
+require File.join(File.dirname(__FILE__), "Linux/gpp_existing_compile_order")
 require File.join(File.dirname(__FILE__), "Linux/ubuntu_packet_installer")

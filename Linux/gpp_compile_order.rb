@@ -25,6 +25,7 @@ module RakeBuilder
     attr_accessor :ProjectConfiguration    
     attr_accessor :EndTask
     attr_accessor :Dependencies
+    attr_accessor :DependencyCompileOrders
 
     def RelativeLibrarySearchPath=(value)
       searchPath = JoinPaths(["$ORIGIN", value])
@@ -36,22 +37,30 @@ module RakeBuilder
       @CompilerOptions = []
       @LinkOptions = [] 
       @Dependencies = []
+      @DependencyCompileOrders = []
 
       @compiles = []
     end
     
     def initialize_copy(original)
+      InitCopy(original)
+    end
+
+    def InitCopy(original)
       @Name = Clone(original.Name)
       @CompilerOptions = Clone(original.CompilerOptions)
       @LinkOptions = Clone(original.LinkOptions)
       @ProjectConfiguration = Clone(original.ProjectConfiguration)
-      
+
       @compiles = []
     end
   
     # Create all the necessary tasks to build the project.
     # After this operation was called the EndTask can be used to build the project.
-    def CreateProjectTasks      
+    def CreateProjectTasks
+      puts "Creating tasks for compile order with the following configuration:"
+      puts @ProjectConfiguration.to_s()
+      
       CreateCompilerOptionDirective()
       CreateIncludeDirectoryDirective()
       CreateDefinesDirective()
@@ -82,25 +91,24 @@ module RakeBuilder
     def CreateBinaryDirectoryTask
       directory @ProjectConfiguration.GetFinalCompilesDirectory()
       directory @ProjectConfiguration.GetFinalBuildDirectory()
-      #       file @ProjectConfiguration.CompilesDirectory do
-      # 	command = "mkdir #{@ProjectConfiguration.CompilesDirectory}"
-      # 	SystemWithFail(command, "Failed to create directory for binary files")
-      #       end
     end
     
     # Create one compiler command for the compilation of each source in the project.
     def CreateCompileTasks
       extendedHeaders = @ProjectConfiguration.GetExtendedIncludes()
       extendedSources = @ProjectConfiguration.GetExtendedSources()
-      extendedSources.each { |source|
+      extendedSources.each do |source|
         binaryPath = GetBinaryFilePath(source)
         compileCommand = GetCompileCommand(source, binaryPath)
         @compiles.push(binaryPath)
 
-        file binaryPath => extendedHeaders + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()] do
-          SystemWithFail(compileCommand, "Failed to compile #{source}")
-        end
-      }
+        CreateFileTask({
+          filePath: binaryPath,
+          dependencies: extendedHeaders + [source, @ProjectConfiguration.GetFinalCompilesDirectory(), @ProjectConfiguration.GetFinalBuildDirectory()],
+          command: compileCommand,
+          error: "Failed to compile #{source}"
+        })
+      end
     end
 
     # Creates the compiler command that is used to link the compiled sources.
@@ -117,49 +125,42 @@ module RakeBuilder
         command = "ar cq #{@binaryFileName} #{@linkCompilesDirective}"
       end
 
-      
-      file @binaryFileName => @compiles + @Dependencies do
-        SystemWithFail("#{command}", "Failed to link #{@ProjectConfiguration.BinaryName}")
-      end
+      CreateFileTask({
+        filePath: @binaryFileName,
+        dependencies: @compiles + @Dependencies,
+        command: "cp #{fullLibraryPath} #{copyPath}",
+        error: "Failed to link #{@ProjectConfiguration.BinaryName}"
+      })
 
       @EndTask = @binaryFileName
       
-      CreateLibraryAndHeaderCopyTasks()
-	
-	#Copy headers into binary directory
-	
+      CreateLibraryCopyTasks()
     end
     
-    def CreateLibraryAndHeaderCopyTasks()
+    def CreateLibraryCopyTasks()
        # Copy libraries and their headers into binary directory
       @ProjectConfiguration.Libraries.each do |libContainer|
-	  if(!libContainer.UsedInLinux() or libContainer.IsStatic())
-	    next
-	  end
-	  
-	  #CreateHeaderCopyTasks(libContainer)
-	  
-	  fullLibraryPath = libContainer.GetFullCopyFilePath(:Linux)
-	  if(fullLibraryPath) 
-	    copyPath = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), libContainer.GetCopyFileName(:Linux) ] )
-	    
-
-	    file copyPath => fullLibraryPath do
-	      SystemWithFail("cp #{fullLibraryPath} #{copyPath}")
-	    end
-	    file @EndTask => copyPath
-	  end
+	if(!libContainer.UsedInLinux() or libContainer.IsStatic())
+	  next
 	end
-    end
-    
-    # Create tasks that copy the headers of a library into a subdir of the build directory
-    def CreateHeaderCopyTasks(libContainer)
-      fullHeaderNames = libContainer.GetFullHeaderNames(:Linux)
-      
-      baseIncludeDir = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), "include", libContainer.GetName(:Linux) ] )
-      
-      fullHeaderNames.each do |header|
-	
+	  
+        fullLibraryPath = libContainer.GetFullCopyFilePath(:Linux)
+        
+        if(fullLibraryPath)
+          #puts "copy lib #{fullLibraryPath}"
+          copyPath = JoinPaths( [@ProjectConfiguration.GetFinalBuildDirectory(), libContainer.GetCopyFileName(:Linux) ] )
+
+          CreateFileTask({
+            filePath: copyPath,
+            dependencies: fullLibraryPath,
+            command: "cp #{fullLibraryPath} #{copyPath}"
+          })
+
+          CreateFileTask({
+            filePath: @EndTask,
+            dependencies: copyPath
+          })
+        end
       end
     end
 
@@ -178,20 +179,15 @@ module RakeBuilder
 
     # Creates a string containing all include directories for the project.
     def CreateIncludeDirectoryDirective
-      includeTree = @ProjectConfiguration.GetIncludeDirectoryTree()
-      
-      # Get the complete directory tree recursivly
-      @ProjectConfiguration.Libraries.each do |libContainer|
-        if(!libContainer.UsedInLinux())
-          next
+      includeTree = @ProjectConfiguration.GetIncludeDirectoryTree()      
+      includeTree.concat(@ProjectConfiguration.GetLibraryIncludePaths(:Linux))
+
+      @DependencyCompileOrders.each do |compileOrder|
+        if(compileOrder.class.name == GppExistingCompileOrder.name)
+          compileOrder.SyncToOriginal()
         end
-        # 	if(IsProjectSubdirectory(directory, @ProjectConfiguration.ProjectDirectory))
-        # 	  puts "Adding subdirectory tree of #{directory}"
-        # 	  includeTree = includeTree + GetDirectoryTree(directory)
-        # 	elsif
-        # 	  puts "Adding include directories #{libContainer.GetHeaderPaths(:Linux)}"
-        includeTree.concat(libContainer.GetHeaderPaths(:Linux))
-        # 	end
+        includeTree.concat(compileOrder.ProjectConfiguration.GetIncludeDirectoryTree())
+        includeTree.concat(compileOrder.ProjectConfiguration.GetLibraryIncludePaths(:Linux))
       end
 
       for i in 0..includeTree.length-1
@@ -282,6 +278,33 @@ module RakeBuilder
       end
 
       @definesDirective = defines.join(" ")
+    end
+
+    # Create a file task.
+    # [filePath] The path of the file that should be created.
+    # [dependencies] Task on which the task depends.
+    # [command] The command to execute in the task block.
+    # [error] The error message if the command fails.
+    # Additionally, one block is given that is essentially the block for the task.
+    def CreateFileTask(paramBag)
+      filePath = paramBag[:filePath]
+      dependencies = paramBag[:dependencies]
+      command = paramBag[:command]
+      error = paramBag[:error] or ""
+
+      if(!filePath)
+        abort "No file path given for file task creation"
+      end
+      
+      if(dependencies)
+        file filePath => dependencies
+      end
+
+      if(command)
+        file filePath do
+          SystemWithFail(command, error)
+        end
+      end
     end
   end
 

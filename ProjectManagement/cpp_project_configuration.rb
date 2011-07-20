@@ -103,10 +103,11 @@ module RakeBuilder
     def GetExtendedSources(additionalExcludePatterns=[])
       extendedSourcePaths = GetExtendedSourcePaths()
       puts "Searching sources in #{extendedSourcePaths}"
-      puts "Include patterns: #{@SourceIncludePatterns}"
-      puts "Exclude patterns: #{@SourceExcludePatterns}"
+      puts "Current directory: #{Dir.pwd}"
+      #puts "Include patterns: #{@SourceIncludePatterns}"
+      #puts "Exclude patterns: #{@SourceExcludePatterns}"
       extendedSources = FindFilesInDirectories(@SourceIncludePatterns, @SourceExcludePatterns + additionalExcludePatterns, extendedSourcePaths)
-      puts "Found sources: #{extendedSources}"
+      #puts "Found sources: #{extendedSources}"
       return extendedSources
     end
     
@@ -128,7 +129,7 @@ module RakeBuilder
     end
     
     # Get the complete directory tree for each include directory.
-    # This gathers all possible include paths for a project.
+    # This gathers all possible include paths for a project, except library paths.
     def GetIncludeDirectoryTree
       includeDirs = []
       GetExtendedIncludePaths().each {|includeDir|
@@ -136,15 +137,29 @@ module RakeBuilder
       }
       return includeDirs
     end
+
+    def GetLibraryIncludePaths(os)
+      includeDirs = []
+      @Libraries.each do |libContainer|
+        if(!libContainer.UsedInOs(os))
+          next
+        end
+
+        libContainer.GetHeaderPaths(os).each do |headerPath|
+          includeDirs.push(GetExecutingDirectoryRelativePath(headerPath))
+        end
+      end
+      return includeDirs
+    end
     
     # Combines the name of the configuration and the compiles directory to form the directory where the compiles for the given configuration are stored.
     def GetFinalCompilesDirectory
-      return JoinPaths([@CompilesDirectory, @Name])
+      return JoinPaths([@ProjectDirectory, @CompilesDirectory, @Name])
     end
     
     # Combines the name of the configuration and the build directory to form the directory where the build results for the given configuration are stored.
     def GetFinalBuildDirectory
-      return JoinPaths([@BuildDirectory, @Name])
+      return JoinPaths([@ProjectDirectory, @BuildDirectory, @Name])
     end
 
     # Get the path relativ to the project directory.
@@ -152,6 +167,20 @@ module RakeBuilder
     # Return value is the path without the prepended project directory.
     def GetProjectRelativePath(path)
       return path.sub("#{@ProjectDirectory}\/", "")
+    end
+
+    # Return the path relative to the current directory.
+    # If the path is absolute nothing happens.
+    # If not then it is assumed the project directory is prepended.
+    # This assumes that the project directory is the relative path to the current directory where all other paths are valid.
+    def GetExecutingDirectoryRelativePath(path)
+      pathname = Pathname.new(path)
+      if(pathname.absolute?)
+        return path
+      else
+        projectPathName = Pathname.new(@ProjectDirectory)
+        return (projectPathName + pathname).to_s()
+      end
     end
 	
     # Remove the given library
@@ -180,6 +209,33 @@ module RakeBuilder
           @Libraries.push(newLibContainer.clone())
         end
       end
+    end
+
+    def to_s
+      puts "==============================================="
+
+      puts "Printing Project Configuration:"
+      puts "ProjectName:          #{@ProjectName}"
+      puts "ProjectVersion:       #{@ProjectVersion}"
+      puts "Name:                 #{@Name}"
+      puts "SourceDirectories:    #{@SourceDirectories}"
+      puts "HeaderDirectories:    #{@HeaderDirectories}"
+      puts "Defines:              #{@Defines}"
+      puts "ProjectDirectory:     #{@ProjectDirectory}"
+      puts "CompilesDirectory:    #{@CompilesDirectory}"
+      puts "BuildDirectory:       #{@BuildDirectory}"
+      puts "BinaryName:           #{@BinaryName}"
+      puts "BinaryType:           #{@BinaryType}"
+
+      puts "-----------------------------------------------"
+
+      puts "Computed attributes:"
+      puts "Extended Source Paths:    #{GetExtendedSourcePaths()}"
+      puts "Extended Header Paths:    #{GetExtendedIncludePaths()}"
+      puts "Final Compiles Directory: #{GetFinalCompilesDirectory()}"#
+      puts "Final Build Directory:    #{GetFinalBuildDirectory()}"
+
+      puts "==============================================="
     end
   end
   

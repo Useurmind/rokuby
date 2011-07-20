@@ -83,18 +83,33 @@ module RakeBuilder
     # [type] A string describing the type of task.
     # [noid] Do not append a random uuid (default = false).
     def GenerateTaskName(paramBag)
-      projectName = (paramBag[:projectName] or "")
-      configuration = (paramBag[:configuration] or "")
-      type = (paramBag[:type] or "")
+      projectName = (paramBag[:projectName] or nil)
+      configuration = (paramBag[:configuration] or nil)
+      type = (paramBag[:type] or nil)
       noid = (paramBag[:noid] or false)
       
       if(noid)
-        uuid = ""
+        uuid = nil
       else
         uuid = GetUUID()        
       end
       
-      return "#{projectName}_#{configuration}_#{type}_#{uuid}"
+      taskNameParts = []
+      
+      if(projectName)
+	taskNameParts.push( projectName )
+      end
+      if(configuration)
+	taskNameParts.push( configuration )
+      end
+      if(type)
+	taskNameParts.push( type )
+      end
+      if(uuid)
+	taskNameParts.push( uuid )
+      end
+      
+      return taskNameParts.join("_")
     end
   end
 end

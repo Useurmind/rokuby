@@ -132,6 +132,17 @@ module RakeBuilder
       return (@DynamicLibrary != nil or @StaticLibrary != nil)
     end
 
+    # Is this library used in the given OS.
+    def UsedInOs(os)
+      if(os == :Linux)
+        return UsedInLinux()
+      elsif(os == :Windows)
+        return UsedInWindows()
+      end
+
+      return false
+    end
+
     # Is this library used as a static library
     def IsStatic()
       return (@DynamicLibrary == nil and @StaticLibrary != nil)

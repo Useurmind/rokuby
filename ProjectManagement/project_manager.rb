@@ -61,6 +61,10 @@ module RakeBuilder
       return searchedProject
     end
 
+    def GetLinuxCompileOrder(name)
+      return @LinuxCompileOrders[name]
+    end
+
     def initialize(baseProjectConfiguration, vsSolution)
       @BaseProjectConfiguration = baseProjectConfiguration
       @SourceModules = {}
@@ -112,11 +116,13 @@ module RakeBuilder
     end
 
     # Add a compile order.
-    def AddLinuxCompileOrder(compileOrder, description)
+    def AddLinuxCompileOrder(compileOrder, description, cloneFromBase=true)
       _CheckCompileOrderNotExists(compileOrder.Name)
 
-      compileOrder.ProjectConfiguration = @BaseProjectConfiguration.clone()
-	  
+      if(cloneFromBase)
+        compileOrder.ProjectConfiguration = @BaseProjectConfiguration.clone()
+      end
+
       compileOrder.ProjectConfiguration.Name = compileOrder.Name
 	  
       @LinuxCompileOrders[compileOrder.Name] = compileOrder
@@ -165,10 +171,10 @@ module RakeBuilder
         compilerOrderTaskName = GenerateTaskName({
 	  projectName: ProjectName(),
 	  configuration: compileOrder.ProjectConfiguration.Name,
-	  type: "CompileOrderTask"
+	  noid: true
 	})
 	desc @CompileOrderDescriptions[name]
-        task name => [compileOrder.EndTask]
+        task compilerOrderTaskName => [compileOrder.EndTask]
       end
       
       @VsSolutionCreator.CreateTasks()
@@ -210,6 +216,9 @@ module RakeBuilder
 
     def _ApplySourceModuleUsageToCompileOrders
       @LinuxCompileOrders.each do |name,compileOrder|
+          if(compileOrder.ProjectConfiguration.class.name == CppExistingProjectConfiguration.name)
+            next
+          end
 	  modulesToUse = _GetSourceModulesToUse(compileOrder)
 		
 	  _ApplySourceModuleUsageToProjectConfiguration(compileOrder.ProjectConfiguration, modulesToUse, :Linux)

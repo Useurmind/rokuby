@@ -1,4 +1,10 @@
 module RakeBuilder
+    # This class represents an existing VSProject in a subfolder(subproject) of the current project.
+    # With this class it is possible to include subprojects that also use the RakeBuilder into a higher
+    # level project that needs to compile these subprojects.
+    # What it does is essentially to prepend the subfolder where the project is located in front of pathes
+    # where this is necessary.
+    # It offers a similar interface as VSProject.
     class VsExistingProject
         include GeneralUtility
         include VsXmlFileUtility
@@ -36,6 +42,25 @@ module RakeBuilder
         end
         def RootNamespace
             @Project.RootNamespace
+        end
+
+        # TODO: This should be refactored
+        def BuildDirectoryExtra
+          ConvertPath(@Project.BuildDirectory)
+        end
+
+        # TODO: This should be refactored
+        def IncludePathsExtra
+          includeTree = nil
+          ExecuteInFolder(@Folder) do
+            includeTree = @Project.GetIncludeDirectoryTree()
+          end
+          
+          convertedTree = []
+          includeTree.each do |path|
+            convertedTree.push(ConvertPath(path))
+          end
+          return convertedTree
         end
         
         # [project] The existing VsProject instance for this project.
