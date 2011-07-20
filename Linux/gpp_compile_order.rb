@@ -128,7 +128,7 @@ module RakeBuilder
       CreateFileTask({
         filePath: @binaryFileName,
         dependencies: @compiles + @Dependencies,
-        command: "cp #{fullLibraryPath} #{copyPath}",
+        command: command,
         error: "Failed to link #{@ProjectConfiguration.BinaryName}"
       })
 
