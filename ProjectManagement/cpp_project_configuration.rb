@@ -103,6 +103,8 @@ module RakeBuilder
     def GetExtendedSources(additionalExcludePatterns=[])
       extendedSourcePaths = GetExtendedSourcePaths()
       puts "Searching sources in #{extendedSourcePaths}"
+      puts "Exclude patterns: #{@SourceExcludePatterns}"
+      puts "Include patterns: #{@SourceIncludePatterns}"
       puts "Current directory: #{Dir.pwd}"
       #puts "Include patterns: #{@SourceIncludePatterns}"
       #puts "Exclude patterns: #{@SourceExcludePatterns}"
