@@ -13,7 +13,7 @@ module RakeBuilder
       @Subfolder = paramBag[:folder]
 
       InitCopy(@OriginalConfiguration)
-      
+
       @ProjectDirectory = JoinPaths([ @Subfolder, @ProjectDirectory ])
       
       AdaptLibraryPaths()
