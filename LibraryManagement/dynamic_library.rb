@@ -12,10 +12,12 @@ module RakeBuilder
       paramBag[:headerPaths] = (paramBag[:headerPaths] or [])
       paramBag[:headerNames] = (paramBag[:headerNames] or [])
       paramBag[:version] = (paramBag[:version] or nil)
-      
-      fileName = "lib#{paramBag[:name]}.so"
-      if(paramBag[:version])
-        fileName  = fileName + ".#{paramBag[:version]}"
+
+      if(paramBag[:name])             
+        fileName = "lib#{paramBag[:name]}.so"
+        if(paramBag[:version])
+          fileName  = fileName + ".#{paramBag[:version]}"
+        end
       end
 
       super(paramBag[:name], fileName, paramBag[:libraryPath], paramBag[:headerPaths], paramBag[:headerNames])

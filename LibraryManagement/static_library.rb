@@ -9,8 +9,10 @@ module RakeBuilder
       paramBag[:libraryPath] = (paramBag[:libraryPath] or nil)
       paramBag[:headerPaths] = (paramBag[:headerPaths] or [])
       paramBag[:headerNames] = (paramBag[:headerNames] or [])
-      
-      fileName = "lib#{paramBag[:name]}.a"
+
+      if(paramBag[:name])
+        fileName = "lib#{paramBag[:name]}.a"
+      end
       
       super(paramBag[:name], fileName, paramBag[:libraryPath], paramBag[:headerPaths], paramBag[:headerNames])
     end
