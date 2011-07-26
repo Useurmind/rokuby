@@ -45,8 +45,8 @@ module RakeBuilder
         end
 
         # TODO: This should be refactored
-        def BuildDirectoryExtra
-          ConvertPath(@Project.BuildDirectory)
+        def BuildDirectoryExtra(configurationName)
+          ConvertPath(@Project.GetVsConfiguration(configurationName).GetFinalBuildDirectory())
         end
 
         # TODO: This should be refactored
