@@ -179,10 +179,11 @@ module RakeBuilder
 
     # Creates a string containing all include directories for the project.
     def CreateIncludeDirectoryDirective
-      includeTree = @ProjectConfiguration.GetIncludeDirectoryTree()      
+      includeTree = @ProjectConfiguration.GetIncludeDirectoryTree()
       includeTree.concat(@ProjectConfiguration.GetLibraryIncludePaths(:Linux))
 
       @DependencyCompileOrders.each do |compileOrder|
+        
         if(compileOrder.class.name == GppExistingCompileOrder.name)
           compileOrder.SyncToOriginal()
         end

@@ -148,8 +148,9 @@ module RakeBuilder
         end
 
         libContainer.GetHeaderPaths(os).each do |headerPath|
+          #newIncludeDir = GetExecutingDirectoryRelativePath(headerPath)
           if(!includeDirs.include?(headerPath))
-            includeDirs.push(GetExecutingDirectoryRelativePath(headerPath))
+            includeDirs.push(headerPath)
           end
         end
       end
