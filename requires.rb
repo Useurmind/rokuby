@@ -18,6 +18,8 @@ require File.join(File.dirname(__FILE__), "XML/xmlsimple")
 # UUID
 require File.join(File.dirname(__FILE__), "UUID/uuidtools")
 
+require File.join(File.dirname(__FILE__), "path_utility")
+require File.join(File.dirname(__FILE__), "extended_path")
 require File.join(File.dirname(__FILE__), "directory_utility")
 require File.join(File.dirname(__FILE__), "general_utility")
 require File.join(File.dirname(__FILE__), "doxygen_builder")
