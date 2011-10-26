@@ -5,7 +5,7 @@ module RakeBuilder
     # Searches recursively. Patterns are applied on the relative paths.
     # [includePatterns] Some RegExps describing the file names.
     # [excludePatterns] Some RegExps that can be used to exclude file names.
-    # [directories] The extended paths to the directories that should be searched.
+    # [directories] The project paths to the directories that should be searched.
     def FindFilesInDirectories(includePatterns, excludePatterns, directories)
       files = []
 
@@ -22,7 +22,7 @@ module RakeBuilder
     # Searches recursively. Patterns are applied on the relative paths.
     # [includePatterns] Some RegExps describing the file names.
     # [excludePatterns] Some RegExps that can be used to exclude file names.
-    # [directory] The extended path to the directory that should be searched.
+    # [directory] The proeject path to the directory that should be searched.
     def FindFilesInDirectory(includePatterns, excludePatterns, directory)
       files = []      
       #puts "Searching files in '#{directory}', found entries: #{entries}"
@@ -76,7 +76,7 @@ module RakeBuilder
     # Find a file in the given directory.
     # Continues the search in child directories if the file is not found.
     # Returns the first occurence of the file or nil.
-    # filename and directory are extended paths.
+    # filename and directory are project paths.
     def FindFileInDirectory(filename, directory)
       filePath = directory.Join(filename)
       if( filePath.file?())
@@ -105,7 +105,7 @@ module RakeBuilder
       abort "Could not find file #{filename} in the directories #{directories}"
     end
 
-    # Returns the extended pathes to all subdirs of a directory and the directory itself.
+    # Returns the project pathes to all subdirs of a directory and the directory itself.
     # For example:
     # - dir1
     #   - dir2
@@ -136,7 +136,7 @@ module RakeBuilder
       return subdirs
     end
     
-    # Executes the appended block in the given extended path.
+    # Executes the appended block in the given project path.
     def ExecuteInFolder(path)
       currentFolder = Dir.pwd
       Dir.chdir(path.AbsolutePath())

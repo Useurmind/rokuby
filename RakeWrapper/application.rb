@@ -1,6 +1,9 @@
-module RakeBuilder
-  class Application < Rake.Application
+module Rake
+  class Application
     DEFAULT_RAKEFILES = ["ProjectDefinition", "ProjectDefinition.rb"].freeze
+    
+    # Project path to the topmost project file that was evaluated.
+    attr_reader :TopmostProjectFile
     
     def initialize
       super

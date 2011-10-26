@@ -1,11 +1,14 @@
 module RakeBuilder
   
-  # A representation for a path.
+  # A representation for a relative path which also saves the base path.
+  # This allows to choose between absolute and relative paths at any time.
+  # The paths to files should always be relative to the directory of the project
+  # file they are declared in.
   # All functions working on the path return a new copy that represents the manipulated path.
   # File names in the course of this program should always be relative paths only.
   # [BasePath] The base path from where the relative path is used to estimate the absolute path.
   # [RelativePath] The path that is used on top of the base path to estimate the absolute path.
-  class ExtendedPath
+  class ProjectPath
     include PathUtility
     
     attr_accessor :BasePath
@@ -74,20 +77,20 @@ module RakeBuilder
     # [absolute] The absolute path (ignore base and relative path and don't estimate base)(default: nil).
     def initialize(paramBag)
       if(paramBag.kind_of?(String))
-        relative = paramBag
+        relative = FormatPath(paramBag)
         base = nil
         absolute = nil
       else
-        relative = paramBag[:relative] or ""
-        base = paramBag[:base] or nil
-        absolute = paramBag[:absolute] or nil
+        relative = FormatPath(paramBag[:relative]) or ""
+        base = FormatPath(paramBag[:base]) or nil
+        absolute = FormatPath(paramBag[:absolute]) or nil
       end
       
       if(absolute)
         @BasePath = absolute
         @RelativePath = nil
       else
-        @BasePath = base or Dir.pwd
+        @BasePath = base or FormatPath(Dir.pwd)
         @RelativePath = relative
       end
     end
@@ -119,6 +122,7 @@ module RakeBuilder
       return copy
     end
     
+    # Create an array of paths that contain the paths to folders and files under this path.
     def SubPaths()
       entries = Dir.entries(directory.AbsolutePath())
       subPaths = []
@@ -133,6 +137,33 @@ module RakeBuilder
       end
       
       return subPaths
+    end
+    
+    # Compute a path from this path that is relative to the given path.
+    def MakeRelativeTo(path)
+      if(path == nil)
+        return self
+      end
+      
+      originalPathParts = PathParts()
+      pathParts = path.PathParts()
+      
+      newPath = ProjectPath.new({base: path.AbsolutePath()})
+      
+      upCount = 0
+      if(pathParts.length > originalPathParts.length )
+        
+      else
+        
+      end
+      
+      
+      
+      for i in 0..
+      end
+      
+      baseParts = pathParts
+      relativeParts = 
     end
     
     def +(paths)
