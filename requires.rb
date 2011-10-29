@@ -9,6 +9,19 @@ require "pathname"
 puts File.dirname(__FILE__)
 puts File.join(File.dirname(__FILE__), "XML/XmlHelper")
 
+# Utility libs
+require File.join(File.dirname(__FILE__), "Utility/path_utility")
+require File.join(File.dirname(__FILE__), "Utility/project_path")
+require File.join(File.dirname(__FILE__), "Utility/directory_utility")
+require File.join(File.dirname(__FILE__), "Utility/general_utility")
+
+# The rake wrapper that will be executed to gather the project definition files
+require File.join(File.dirname(__FILE__), "RakeWrapper/project_namespace")
+require File.join(File.dirname(__FILE__), "RakeWrapper/project_file")
+require File.join(File.dirname(__FILE__), "RakeWrapper/project_file_loader")
+require File.join(File.dirname(__FILE__), "RakeWrapper/application")
+require File.join(File.dirname(__FILE__), "RakeWrapper/rake_module_redefine")
+
 # Xml
 require File.join(File.dirname(__FILE__), "XML/XmlHelper")
 require File.join(File.dirname(__FILE__), "XML/XmlTag")
@@ -18,10 +31,6 @@ require File.join(File.dirname(__FILE__), "XML/xmlsimple")
 # UUID
 require File.join(File.dirname(__FILE__), "UUID/uuidtools")
 
-require File.join(File.dirname(__FILE__), "path_utility")
-require File.join(File.dirname(__FILE__), "extended_path")
-require File.join(File.dirname(__FILE__), "directory_utility")
-require File.join(File.dirname(__FILE__), "general_utility")
 require File.join(File.dirname(__FILE__), "doxygen_builder")
 
 # Library management functionality

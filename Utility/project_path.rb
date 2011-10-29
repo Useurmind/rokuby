@@ -159,11 +159,11 @@ module RakeBuilder
       
       
       
-      for i in 0..
-      end
+      #for i in 0..
+      #end
       
-      baseParts = pathParts
-      relativeParts = 
+      #baseParts = pathParts
+      #relativeParts = 
     end
     
     def +(paths)

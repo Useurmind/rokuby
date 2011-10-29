@@ -1,6 +1,6 @@
 module RakeBuilder
   class ProjectFile
-    include TaskManager
+    include Rake::TaskManager
     
     # Project path to the project file.
     # The relativ path component of this value must be relative to the topmost project files folder.

@@ -13,5 +13,13 @@ module RakeBuilder
     def FormatPath(path)
       return path.gsub("\\", "/").gsub("//", "/");
     end
+    
+    # Executes the appended block in the given project path.
+    def ExecuteInPath(path)
+      currentFolder = Dir.pwd
+      Dir.chdir(path.AbsolutePath())
+      yield if block_given?
+      Dir.chdir(currentFolder)
+    end
   end
 end

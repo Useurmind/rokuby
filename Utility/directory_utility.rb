@@ -135,14 +135,6 @@ module RakeBuilder
       end
       return subdirs
     end
-    
-    # Executes the appended block in the given project path.
-    def ExecuteInFolder(path)
-      currentFolder = Dir.pwd
-      Dir.chdir(path.AbsolutePath())
-      yield if block_given?
-      Dir.chdir(currentFolder)
-    end
   end
 
 end
