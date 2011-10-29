@@ -3,14 +3,21 @@ module RakeBuilder
     # Joins several parts of a path to one path.
     # Also applies formatting to the paths.
     def JoinPaths(paths)
+      formattedPaths = []
       for i in 0..paths.length-1
-        paths[i] = FormatPath(paths[i])
+        formattedPath = FormatPath(paths[i])
+        if(formattedPath)
+          formattedPaths.push formattedPath
+        end        
       end
       return FormatPath(paths.join("/"));
     end
 
     # Format the path so that the slashes are correct.
     def FormatPath(path)
+      if(!path || path == "")
+        return nil
+      end
       return path.gsub("\\", "/").gsub("//", "/");
     end
     

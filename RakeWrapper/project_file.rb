@@ -4,13 +4,13 @@ module RakeBuilder
     
     # Project path to the project file.
     # The relativ path component of this value must be relative to the topmost project files folder.
-    attr_reader :Path
+    attr_accessor :Path
     
     def Path=(value)
-      @Path = path.MakeRelativeTo(Rake.application.TopmostProjectFile)
+      @Path = value.MakeRelativeTo(Rake.application.TopmostProjectFile)
       
       @Namespace = ProjectNamespace.new()
-      @Namespace.SetProjectPath(@Path.RelativePath)
+      @Namespace.SetProjectPath(@Path)
     end
     
     # Project paths to project files that are included in this one.

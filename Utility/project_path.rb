@@ -145,25 +145,30 @@ module RakeBuilder
         return self
       end
       
+      puts "Making path relative, self: " + self.to_s + ", path: " + path.to_s
+      
+      
       originalPathParts = PathParts()
       pathParts = path.PathParts()
       
       newPath = ProjectPath.new({base: path.AbsolutePath()})
       
-      upCount = 0
-      if(pathParts.length > originalPathParts.length )
-        
-      else
-        
+      minPartsNumber = [originalPathParts.length, pathParts.length].min
+      commonPartsNumber = 0
+      
+      for i in 0..minPartsNumber-1
+        if(originalPathParts[i] != pathParts[i])
+          break
+        end
+        commonPartsNumber += 1
       end
       
+      upSwitches = Array.new(pathParts.length - commonPartsNumber, "..")
       
-      
-      #for i in 0..
-      #end
-      
-      #baseParts = pathParts
-      #relativeParts = 
+      return ProjectPath.new({
+        base: path.AbsolutePath,
+        relative: JoinPaths(upSwitches + originalPathParts[commonPartsNumber..-1])
+      })
     end
     
     def +(paths)
@@ -189,7 +194,14 @@ module RakeBuilder
     end
     
     def ==(path)
+      if(!path)
+        return false
+      end
       return AbsolutePath() == path.AbsolutePath()
+    end
+    
+    def to_s
+      return "Base: '" + (@BasePath || "") + "', Relative: '" + (@RelativePath || "") + "'"
     end
   end
 end

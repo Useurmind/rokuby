@@ -6,6 +6,8 @@ module RakeBuilder
   #
   class Application < Rake::Application
     
+      attr_reader :TopmostProjectFile
+    
       DEFAULT_RAKEFILES = [
         'ProjectDefinition',
         'projectdefinition',
@@ -24,6 +26,7 @@ module RakeBuilder
       end
       
       def LoadProjectFile(path)
+        @TopmostProjectFile = ProjectPath.new(path)
         @ProjectFileLoader.load(path)
       end
     

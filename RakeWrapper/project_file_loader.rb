@@ -20,6 +20,10 @@ module RakeBuilder
     def load(path)
       projectPath = ProjectPath.new(path)
       
+      LoadProjectFile(projectPath)
+    end
+    
+    def LoadProjectFile(projectPath)
       projectFile = ProjectFile.new()
       projectFile.Path = projectPath
       
