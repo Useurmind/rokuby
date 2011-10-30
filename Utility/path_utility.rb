@@ -6,11 +6,11 @@ module RakeBuilder
       formattedPaths = []
       for i in 0..paths.length-1
         formattedPath = FormatPath(paths[i])
-        if(formattedPath)
-          formattedPaths.push formattedPath
+        if(formattedPath != nil)
+          formattedPaths.push(formattedPath)
         end        
       end
-      return FormatPath(paths.join("/"));
+      return FormatPath(formattedPaths.join("/")) || "";
     end
 
     # Format the path so that the slashes are correct.
@@ -27,6 +27,12 @@ module RakeBuilder
       Dir.chdir(path.AbsolutePath())
       yield if block_given?
       Dir.chdir(currentFolder)
+    end
+    
+    # Is this path an absolute path.
+    # Checks for drive letters and beginning slashes.
+    def PathAbsolute?(path)
+      return path.match("^(([A-Za-z]:)|(\/))") != nil
     end
   end
 end

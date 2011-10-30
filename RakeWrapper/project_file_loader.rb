@@ -18,6 +18,7 @@ module RakeBuilder
     # This path is NOT a project path, because this class needs to implement the
     # Rak::Loader interface.
     def load(path)
+      puts "Loading project file #{path}" 
       projectPath = ProjectPath.new(path)
       
       LoadProjectFile(projectPath)
@@ -27,16 +28,32 @@ module RakeBuilder
       projectFile = ProjectFile.new()
       projectFile.Path = projectPath
       
-      ExecuteInPath(projectFile.Path) do
+      ExecuteInPath(projectFile.Path.DirectoryPath().MakeAbsolute()) do
         @CurrentlyLoadedProjectFile = projectFile
-        load(projectFile.Path.AbsolutePath)
+        
+        if(!projectFile.Path.file?())
+          raise "Could not find project file '#{projectFile.Path.AbsolutePath()}'"
+        end
+        
+        Kernel.load(projectFile.Path.AbsolutePath())
         
         @LoadedProjectFiles.push(projectFile)
         
+        puts projectFile.ProjectFileIncludes
         projectFile.ProjectFileIncludes.each do |projectFilePath|
-          LoadProjectFile(projectFile.Path + projectFilePath)
+          puts "Loading child includes of project file"
+          LoadProjectFile(projectFile.Path.DirectoryPath() + projectFilePath)
         end      
       end
+    end
+    
+    def to_s
+      val = "Loaded Project Files:\n"
+      val += "-----------------------------------------------\n"
+      @LoadedProjectFiles.each do |projectFile|
+         val += projectFile.to_s
+      end
+      val += "-----------------------------------------------\n"
     end
   end
 end

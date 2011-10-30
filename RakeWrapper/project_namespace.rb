@@ -7,7 +7,8 @@ module RakeBuilder
     end
     
     def SetProjectPath(path)
-      pathParts = path.RelativePath.split("/")
+      puts "Setting proect path " + path.to_s
+      pathParts = path.RelativePath().split("/")
       @Parts = pathParts[0..-2]
     end
     

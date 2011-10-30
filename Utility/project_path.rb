@@ -1,11 +1,11 @@
 module RakeBuilder
   
-  # A representation for a relative path which also saves the base path.
-  # This allows to choose between absolute and relative paths at any time.
-  # The paths to files should always be relative to the directory of the project
-  # file they are declared in.
+  # A representation for a path.
+  # The path contains a relative part as well as an absolute path.
+  # This allows to save paths that are relative to a given directory and still
+  # use them in directories that are not related to the current directory.
+  # It also allows to choose between absolute and relative paths at any time.
   # All functions working on the path return a new copy that represents the manipulated path.
-  # File names in the course of this program should always be relative paths only.
   # [BasePath] The base path from where the relative path is used to estimate the absolute path.
   # [RelativePath] The path that is used on top of the base path to estimate the absolute path.
   class ProjectPath
@@ -16,7 +16,14 @@ module RakeBuilder
     
     # Is this path an absolute path
     def absolute?
-      return @RelativePath == nil
+      absolute = false
+      if(@BasePath)
+        absolute = PathAbsolute?(@BasePath)
+      elsif(@RelativePath)
+        absolute = PathAbsolute?(@RelativePath)
+      end
+      
+      return @Absolute || absolute
     end
     
     # Does this path represent an existing file.
@@ -27,7 +34,7 @@ module RakeBuilder
     # Does this path represent the path to a file (not necessarily existing).
     def filePath?
       isFilePath = false
-      endingParts = AbsolutePath.split(".")
+      endingParts = AbsolutePath().split(".")
       if(!endingParts[endingParts.length-1].match("/") or file?())
         isFilePath = true
       end
@@ -40,14 +47,30 @@ module RakeBuilder
       return File.directory?(AbsolutePath())
     end
     
-    def AbsolutePath
-      if(!@RelativePath)
-        return @BasePath
-      end
-      
+    # Returns a path that represents the path saved in this project path.
+    def AbsolutePath      
       return JoinPaths([@BasePath, @RelativePath])
     end
     
+    # Return the relative directory path contained in this project path.
+    # Removes file name if present.
+    def RelativeDirectory
+      if(directory?() or !filePath?())
+        return @RelativePath
+      end
+      return JoinPaths(@RelativePath.split("/")[0..-2])      
+    end
+    
+    # Return the absolute directory path contained in this project path.
+    # Removes file name if present.
+    def AbsoluteDirectory
+      if(directory?() or !filePath?())
+        return AbsolutePath()
+      end
+      return JoinPaths(PathParts()[0..-2])      
+    end
+    
+    # Returns the file name contained in this project path or nil.
     def FileName      
       if(filePath?())
         pathParts = PathParts()
@@ -56,14 +79,9 @@ module RakeBuilder
       return nil
     end
     
+    # Return a project path with the directory path contained in this project path.
     def DirectoryPath
-      if(directory?() or !filePath?())
-        return AbsolutePath()
-      else
-        parts = PathParts()
-        parts.delete(parts.length-1)
-        return JoinPaths(parts)
-      end
+      return ProjectPath.new({base: @BasePath, relative: RelativeDirectory()})
     end
     
     def PathParts
@@ -74,29 +92,33 @@ module RakeBuilder
     # If only one string is give this is taken as the relative path and the base path is estimated.
     # [base] The base path of this path (estimated from the current directory if not given).
     # [relative] The relative part of the path.
-    # [absolute] The absolute path (ignore base and relative path and don't estimate base)(default: nil).
+    # [absolute] Is the input path default (normally estimated automatically, for cases where this is not possible).
     def initialize(paramBag)
       if(paramBag.kind_of?(String))
-        relative = FormatPath(paramBag)
         base = nil
-        absolute = nil
+        relative = FormatPath(paramBag)
       else
-        relative = FormatPath(paramBag[:relative]) or ""
-        base = FormatPath(paramBag[:base]) or nil
-        absolute = FormatPath(paramBag[:absolute]) or nil
+        relative = FormatPath(paramBag[:relative]) || ""
+        base = FormatPath(paramBag[:base]) || nil
+        absolute = paramBag[:absolute] || false
       end
       
-      if(absolute)
-        @BasePath = absolute
-        @RelativePath = nil
+      if(base)
+        absolute = PathAbsolute?(base)
       else
-        @BasePath = base or FormatPath(Dir.pwd)
-        @RelativePath = relative
+        absolute = PathAbsolute?(relative)
       end
+      
+      @BasePath = base
+      if(!base && !absolute)
+        @BasePath = FormatPath(Dir.pwd)
+      end
+      @RelativePath = relative
+      @Absolute = absolute
     end
     
     def CreateCopy()
-      copy = ExtendedPath.new({base: @BasePath, path: @RelativePath})
+      copy = ProjectPath.new({base: @BasePath, path: @RelativePath})
       return copy
     end
     
@@ -108,12 +130,12 @@ module RakeBuilder
     # Join the relative parts of this paths with the relative parts of some other paths.
     def Join(paths)
       pathsToJoin = [@RelativePath]
-      if(paths.length)
+      if(paths.respond_to?(:length))
         paths.each do |path|
           pathsToJoin.concat(path.RelativePath)
         end        
       else
-        pathsToJoin.append(paths.RelativePath)
+        pathsToJoin.push(paths.RelativePath)
       end
       
       copy = CreateCopy()
@@ -127,7 +149,7 @@ module RakeBuilder
       entries = Dir.entries(directory.AbsolutePath())
       subPaths = []
       entries.each do |entry|
-        if(entry == ".." or entry == ".")
+        if(entry == ".." || entry == ".")
           next
         end
         
@@ -166,7 +188,7 @@ module RakeBuilder
       upSwitches = Array.new(pathParts.length - commonPartsNumber, "..")
       
       return ProjectPath.new({
-        base: path.AbsolutePath,
+        base: path.AbsolutePath(),
         relative: JoinPaths(upSwitches + originalPathParts[commonPartsNumber..-1])
       })
     end
@@ -198,10 +220,19 @@ module RakeBuilder
         return false
       end
       return AbsolutePath() == path.AbsolutePath()
+    end   
+    
+    def str
+      return to_s()
     end
     
     def to_s
-      return "Base: '" + (@BasePath || "") + "', Relative: '" + (@RelativePath || "") + "'"
+      return (@BasePath || "") + "|" + (@RelativePath || "nil")
+    end
+    
+    # Create a copy of this path where all parts are absolute.
+    def MakeAbsolute()
+      return ProjectPath.new(AbsolutePath())
     end
   end
 end

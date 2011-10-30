@@ -20,6 +20,7 @@ require File.join(File.dirname(__FILE__), "RakeWrapper/project_namespace")
 require File.join(File.dirname(__FILE__), "RakeWrapper/project_file")
 require File.join(File.dirname(__FILE__), "RakeWrapper/project_file_loader")
 require File.join(File.dirname(__FILE__), "RakeWrapper/application")
+require File.join(File.dirname(__FILE__), "RakeWrapper/dsl_language")
 require File.join(File.dirname(__FILE__), "RakeWrapper/rake_module_redefine")
 
 # Xml

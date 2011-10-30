@@ -1,0 +1,4 @@
+desc "Testing basic task functionality in subfolders"
+task :TestInSubfolder do
+    puts "In test task in subfolder"
+end 

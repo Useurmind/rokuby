@@ -4,7 +4,7 @@ module RakeBuilder
   # Rake main application object.  When invoking +rake+ from the
   # command line, a Rake::Application object is created and run.
   #
-  class Application < Rake::Application
+  class Application < Rake::Application    
     
       attr_reader :TopmostProjectFile
     
@@ -19,9 +19,15 @@ module RakeBuilder
         'projectDefinition.rb'
         ].freeze
     
+      # This is implemented to forward the last description to the currently loaded file.
+      def last_description=(value)
+        @ProjectFileLoader.CurrentlyLoadedProjectFile.last_description = value
+      end
+    
       def initialize
         puts "Initializing Rake Builder Application"
         super
+        @rakefiles = DEFAULT_RAKEFILES
         @ProjectFileLoader = RakeBuilder::ProjectFileLoader.new
       end
       
@@ -35,10 +41,18 @@ module RakeBuilder
       # This is what is used when running the RakeBuilder and gathering all the project files
       # and tasks.
       # It also executes the task that was given on the command line
-        
-      def load_imports
-        puts "Loading imports: " + @pending_imports
+      
+      # Display the error message that caused the exception.
+      def display_error_message(ex)
         super
+        $stderr.puts self.to_s()
+      end
+      
+      # This is called when an additional file is inculded by a project file.
+      # It adds the file that should be imported to the currently loaded project file.
+      def AddProjectImport(path)
+        projectPath = ProjectPath.new(path)
+        @ProjectFileLoader.CurrentlyLoadedProjectFile.ProjectFileIncludes.push(projectPath)
       end
     
       ##########################################################################################
@@ -73,6 +87,9 @@ module RakeBuilder
             break
           end
         end
+        if(!task)
+          fail "Don't know how to build task '#{task_name}'"
+        end
         return task
       end
       
@@ -100,8 +117,8 @@ module RakeBuilder
       # Define a task given +args+ and an option block.  If a rule with the
       # given name already exists, the prerequisites and actions are added to
       # the existing task.  Returns the defined task.
-      def define_task(*args, &block)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile.define_task(self, *args, &block)
+      def define_task(task_class, *args, &block)
+        @ProjectFileLoader.CurrentlyLoadedProjectFile.define_task(task_class, *args, &block)
       end
 
       # Define a rule for synthesizing tasks.
@@ -114,6 +131,13 @@ module RakeBuilder
       # part of the name.
       def scope_name(scope, task_name)
         (scope + [task_name]).join(':')
+      end
+      
+      def to_s
+        val = "RakeBuilder Application Status:\n"
+        val += "===============================================\n"
+        val += @ProjectFileLoader.to_s
+        val += "===============================================\n"
       end
   end
 end
