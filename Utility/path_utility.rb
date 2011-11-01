@@ -18,7 +18,7 @@ module RakeBuilder
       if(!path || path == "")
         return nil
       end
-      return path.gsub("\\", "/").gsub("//", "/");
+      return path.gsub("\\", "/").gsub("//", "/").gsub(".\/", "");
     end
     
     # Executes the appended block in the given project path.

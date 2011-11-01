@@ -1,4 +1,17 @@
 desc "Testing basic task functionality in subfolders"
-task :TestInSubfolder do
-    puts "In test task in subfolder"
-end 
+task :TestInSubfolder => ["TestfileSubfolder", "TestfileSubfolder2"] do |task|
+   taskDescriptor task
+end
+
+file "TestfileSubfolder" do |task|
+   File.new("TestfileSubfolder", "w")
+   taskDescriptor task
+end
+
+file_create "TestfileSubfolder2" do |task|
+    File.new("TestfileSubfolder2", "w")
+   taskDescriptor task
+end
+
+clean "TestfileSubfolder"
+clean "TestfileSubfolder2"

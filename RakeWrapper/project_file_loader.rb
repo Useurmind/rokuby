@@ -11,7 +11,7 @@ module RakeBuilder
     attr_reader :CurrentlyLoadedProjectFile
     
     def initialize
-      @LoadedProjectFiles = []
+      @LoadedProjectFiles = {}
     end
     
     # Load a project file from the given path.
@@ -35,9 +35,11 @@ module RakeBuilder
           raise "Could not find project file '#{projectFile.Path.AbsolutePath()}'"
         end
         
+        projectFile.DefineCleanTasks
+        
         Kernel.load(projectFile.Path.AbsolutePath())
         
-        @LoadedProjectFiles.push(projectFile)
+        @LoadedProjectFiles[projectFile.Path().RelativePath] = projectFile
         
         puts projectFile.ProjectFileIncludes
         projectFile.ProjectFileIncludes.each do |projectFilePath|
@@ -52,8 +54,9 @@ module RakeBuilder
       val += "-----------------------------------------------\n"
       @LoadedProjectFiles.each do |projectFile|
          val += projectFile.to_s
+         val += "-----------------------------------------------\n"
       end
-      val += "-----------------------------------------------\n"
+      return val
     end
   end
 end

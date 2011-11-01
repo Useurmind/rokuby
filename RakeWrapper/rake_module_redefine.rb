@@ -3,6 +3,12 @@ module Rake
   # Rake module singleton methods.
   #
   class << self
+    # Remove warnings by removing all overwritten methodes
+    remove_method('application')
+    remove_method('application=')
+    remove_method('original_dir')
+    remove_method('load_rakefile')
+    
     # Current Rake Application
     def application
       @application ||= RakeBuilder::Application.new
