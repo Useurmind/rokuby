@@ -17,3 +17,5 @@ projectInclude "Test/ProjectDefinition"
 
 clean "TestfileBase"
 clean "TestfileBase2"
+
+task :default => :TestTask

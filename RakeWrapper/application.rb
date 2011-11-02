@@ -31,6 +31,10 @@ module RakeBuilder
         @ProjectFileLoader = RakeBuilder::ProjectFileLoader.new
         @name = "RakeBuilder"
       end
+      
+      def init(app_name=@name)
+        super(app_name)
+      end
     
       def LoadProjectFile(path)
         @TopmostProjectFile = ProjectPath.new(path)
@@ -45,8 +49,8 @@ module RakeBuilder
       
       # Display the error message that caused the exception.
       def display_error_message(ex)
-        super
         $stderr.puts self.to_s()
+        super(ex)        
       end
       
       # Display the tasks and comments.
@@ -75,23 +79,36 @@ module RakeBuilder
       # There is now one clean task for each project file that can be executed separately.
       # Calling clean/clobber without extra information will clean all project files.
       def invoke_task(task_string)
-        name, args = parse_task_string(task_string)
+        taskPath, args = parse_task_string(task_string)
         
-        if(name == "clean" or name == "clobber")          
-          if(args.length > 0)
-            # Execute only the clean targets mentioned in the arguments
-            args.each do |arg|
-              path = ProjectPath.new(arg)
-              projectFile = @ProjectFileLoader.LoadedProjectFiles[path.RelativePath]
-              task = projectFile[name]
-              task.invoke(*args)
-            end
-          else
-            # Execute all clean targets
-            @ProjectFileLoader.LoadedProjectFiles.each do |path, projectFile|  
-              task = projectFile[name]
-              task.invoke(*args)
-            end
+        namespace = nil
+        projectPath = nil
+        name = nil
+        match = taskPath.match("^([^:]*):(.*)$")
+        if(match)
+          namespace = ProjectNamespace.new
+          projectPath = ProjectPath.new(match[1])
+          namespace.SetProjectPath(projectPath)
+          name = match[2]
+        else
+          name = taskPath
+        end
+        
+        if(namespace != nil)
+          projectFile = @ProjectFileLoader.LoadedProjectFiles[projectPath.RelativePath]
+          if(!projectFile)
+            fail "Don't know project file '#{projectPath}'"
+          end
+          task = projectFile[name]
+          if(!task)
+            fail "Don't know task '#{name}' in project file '#{projectPath}'"
+          end
+          task.invoke(*args)
+        elsif(name == "clean" or name == "clobber")
+          # Execute all clean targets
+          @ProjectFileLoader.LoadedProjectFiles.each do |path, projFile|  
+            task = projFile[name]
+            task.invoke(*args)
           end
         else
           super(task_string)
@@ -197,10 +214,10 @@ module RakeBuilder
       end
       
       def to_s
-        val = "RakeBuilder Application Status:\n"
+        val = "\nRakeBuilder Application Status:\n"
         val += "===============================================\n"
         val += @ProjectFileLoader.to_s
-        val += "===============================================\n"
+        val += "===============================================\n\n"
       end
   end
 end

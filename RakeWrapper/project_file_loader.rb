@@ -52,7 +52,7 @@ module RakeBuilder
     def to_s
       val = "Loaded Project Files:\n"
       val += "-----------------------------------------------\n"
-      @LoadedProjectFiles.each do |projectFile|
+      @LoadedProjectFiles.each do |path, projectFile|
          val += projectFile.to_s
          val += "-----------------------------------------------\n"
       end

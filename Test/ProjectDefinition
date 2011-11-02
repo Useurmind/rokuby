@@ -3,6 +3,11 @@ task :TestInSubfolder => ["TestfileSubfolder", "TestfileSubfolder2"] do |task|
    taskDescriptor task
 end
 
+desc "Task to test basic task functionality (but in subfolder)"
+task :TestTask do |task|
+   taskDescriptor task
+end
+
 file "TestfileSubfolder" do |task|
    File.new("TestfileSubfolder", "w")
    taskDescriptor task
