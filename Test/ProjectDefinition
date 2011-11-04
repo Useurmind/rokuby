@@ -8,6 +8,10 @@ task :TestTask do |task|
    taskDescriptor task
 end
 
+task :CalledViaFileSpace do |task|
+   taskDescriptor task
+end 
+
 file "TestfileSubfolder" do |task|
    File.new("TestfileSubfolder", "w")
    taskDescriptor task
@@ -18,5 +22,10 @@ file_create "TestfileSubfolder2" do |task|
    taskDescriptor task
 end
 
+directory "SubTestDirectory"
+
 clean "TestfileSubfolder"
 clean "TestfileSubfolder2"
+clean "SubTestDirectory"
+
+import "Test2/projectDefinition"

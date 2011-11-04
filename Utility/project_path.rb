@@ -100,7 +100,7 @@ module RakeBuilder
       else
         relative = FormatPath(paramBag[:relative]) || ""
         base = FormatPath(paramBag[:base]) || nil
-        absolute = paramBag[:absolute] || false
+        @Absolute = paramBag[:absolute] || false
       end
       
       if(base)
@@ -114,7 +114,6 @@ module RakeBuilder
         @BasePath = FormatPath(Dir.pwd)
       end
       @RelativePath = relative
-      @Absolute = absolute
     end
     
     def CreateCopy()
@@ -167,8 +166,7 @@ module RakeBuilder
         return self
       end
       
-      puts "Making path relative, self: " + self.to_s + ", path: " + path.to_s
-      
+      puts "Making path relative, self: " + self.to_s + ", path: " + path.to_s     
       
       originalPathParts = PathParts()
       pathParts = path.PathParts()

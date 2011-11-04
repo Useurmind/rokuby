@@ -4,7 +4,7 @@ module Rake
   module DSL
   
     # Incude a project file from a subfolder
-    def projectInclude(path)
+    def import(path)
       Rake.application.AddProjectImport(path)
     end
     

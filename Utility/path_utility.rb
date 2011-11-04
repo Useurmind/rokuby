@@ -10,7 +10,7 @@ module RakeBuilder
           formattedPaths.push(formattedPath)
         end        
       end
-      return FormatPath(formattedPaths.join("/")) || "";
+      return RemoveParents(FormatPath(formattedPaths.join("/")) || "")
     end
 
     # Format the path so that the slashes are correct.
@@ -18,7 +18,25 @@ module RakeBuilder
       if(!path || path == "")
         return nil
       end
-      return path.gsub("\\", "/").gsub("//", "/").gsub(".\/", "");
+      return path.gsub("\\", "/").gsub("//", "/").gsub("\/.\/", "/").gsub(/^\.\//, "");
+    end
+    
+    def RemoveParents(path)
+      pathParts = path.split("/")
+      i = 0
+      while(pathParts[i] == "..") do
+        i+=1
+      end
+      while (i < pathParts.length) do
+        if(i > 0 and pathParts[i] == ".." and pathParts[i-1] != "..")
+          pathParts.delete_at(i-1)
+          pathParts.delete_at(i-1)
+          i-=1
+        else
+          i+=1
+        end
+      end
+      return (pathParts.join("/") || "")
     end
     
     # Executes the appended block in the given project path.

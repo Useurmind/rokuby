@@ -21,7 +21,7 @@ module RakeBuilder
     
       # This is implemented to forward the last description to the currently loaded file.
       def last_description=(value)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile.last_description = value
+        @ProjectFileLoader.CurrentlyLoadedProjectFile().last_description = value
       end
     
       def initialize
@@ -47,6 +47,27 @@ module RakeBuilder
       # and tasks.
       # It also executes the task that was given on the command line
       
+      # Run the top level tasks of a Rake application.
+      def top_level
+        if(options.show_status == true)
+          puts to_s
+        else
+          super
+        end
+      end
+      
+      # A list of all the standard options used in rake, suitable for
+      # passing to OptionParser.
+      def standard_rake_options
+        super().concat([
+          ['--status', "Print the status of the RakeBuilder.",
+            lambda { |value|
+              options.show_status = true
+            }
+          ]
+        ])
+      end
+      
       # Display the error message that caused the exception.
       def display_error_message(ex)
         $stderr.puts self.to_s()
@@ -66,7 +87,7 @@ module RakeBuilder
           width = all_displayable_tasks.collect { |t| t.name_with_args.length }.max || 10
           max_column = truncate_output? ? terminal_width - name.size - width - 7 : nil
           
-          @ProjectFileLoader.LoadedProjectFiles.each do |path, projectFile|            
+          @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|            
             puts "Task in project file: '#{projectFile.Path().RelativePath}'\n"
             puts projectFile.GetTaskDescriptions(width, max_column)
           end
@@ -81,58 +102,56 @@ module RakeBuilder
       def invoke_task(task_string)
         taskPath, args = parse_task_string(task_string)
         
-        namespace = nil
+        projectPath, name = parse_task_path(taskPath)
+          
+        if(projectPath == nil and (name == "clean" or name == "clobber"))
+          # Execute all clean targets
+          puts "Cleaning all projects..."
+          @ProjectFileLoader.LoadedProjectFiles().each do |projFile|  
+            task = projFile[name]
+            task.invoke(*args)
+          end
+        else
+          task = self[taskPath]
+          task.invoke(*args)
+        end
+      end
+      
+      # Split the task path in a string describing the file where the task is defined
+      # and its name.
+      def parse_task_path(taskPath)
         projectPath = nil
         name = nil
         match = taskPath.match("^([^:]*):(.*)$")
         if(match)
-          namespace = ProjectNamespace.new
           projectPath = ProjectPath.new(match[1])
-          namespace.SetProjectPath(projectPath)
           name = match[2]
         else
           name = taskPath
         end
         
-        if(namespace != nil)
-          projectFile = @ProjectFileLoader.LoadedProjectFiles[projectPath.RelativePath]
-          if(!projectFile)
-            fail "Don't know project file '#{projectPath}'"
-          end
-          task = projectFile[name]
-          if(!task)
-            fail "Don't know task '#{name}' in project file '#{projectPath}'"
-          end
-          task.invoke(*args)
-        elsif(name == "clean" or name == "clobber")
-          # Execute all clean targets
-          @ProjectFileLoader.LoadedProjectFiles.each do |path, projFile|  
-            task = projFile[name]
-            task.invoke(*args)
-          end
-        else
-          super(task_string)
-        end
+        return projectPath, name
       end
       
       ##########################################################################################
       # New dsl interface introduced by the RakeBuilder module
       
       # This is called when an additional file is inculded by a project file.
-      # It adds the file that should be imported to the currently loaded project file.
+      # It will load the project file asap to make its values available in the
+      # loading project file and above.
       def AddProjectImport(path)
         projectPath = ProjectPath.new(path)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile.ProjectFileIncludes.push(projectPath)
+        @ProjectFileLoader.LoadProjectFile(projectPath)
       end
       
       # Include a file expression into the list of clean targets of the current project file.
       def IncludeCleanTargets(*includes)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile.CleanList.include(includes)
+        @ProjectFileLoader.CurrentlyLoadedProjectFile().CleanList.include(includes)
       end
       
       # Include a file expression into the list of clobber targets of the current project file.
       def IncludeClobberTargets(*includes)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile.ClobberList.include(includes)
+        @ProjectFileLoader.CurrentlyLoadedProjectFile().ClobberList.include(includes)
       end
     
       ##########################################################################################
@@ -141,7 +160,7 @@ module RakeBuilder
       # Clear the task list.  This cause rake to immediately forget all the
       # tasks that have been assigned.  (Normally used in the unit tests.)
       def clear
-        @ProjectFileLoader.LoadedProjectFiles.each do |path, projectFile|
+        @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|
           projectFile.clear()
         end
       end
@@ -149,7 +168,7 @@ module RakeBuilder
       # List of all defined tasks.
       def tasks
         tasks = []
-        @ProjectFileLoader.LoadedProjectFiles.each do |path, projectFile|
+        @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|
           tasks.concat(projectFile.tasks)
         end
         return tasks
@@ -159,16 +178,32 @@ module RakeBuilder
       # known, try to synthesize one from the defined rules.  If no rules are
       # found, but an existing file matches the task name, assume it is a file
       # task with no dependencies or actions.
-      def [](task_name, scopes=nil)
+      def [](taskPath, scopes=nil)
         task = nil
-        @ProjectFileLoader.LoadedProjectFiles.each do |path, projectFile|
-          task = projectFile[task_name, scopes]
-          if(task != nil)
-            break
+        
+        projectPath, name = parse_task_path(taskPath)
+        
+        if(projectPath != nil)
+          # return the project file specific task
+          projectFile = @ProjectFileLoader.LoadedProjectFile(projectPath.RelativePath)
+          if(!projectFile)
+            fail "Don't know project file '#{projectPath}'"
           end
-        end
-        if(!task)
-          fail "Don't know how to build task '#{task_name}'"
+          task = projectFile[name]
+          if(!task)
+            fail "Don't know task '#{name}' in project file '#{projectPath}'"
+          end
+        else
+          # return the first task that is found in any project file
+          @ProjectFileLoader.LoadedProjectFiles().each do |projFile|
+            task = projFile[name, scopes]
+            if(task != nil)
+              break
+            end
+          end
+          if(!task)
+            fail "Don't know how to build task '#{name}'"
+          end
         end
         return task
       end
@@ -180,7 +215,7 @@ module RakeBuilder
       # current scope.  Return nil if the task cannot be found.
       def lookup(task_name, initial_scope=nil)
         task = nil
-        @ProjectFileLoader.LoadedProjectFiles.each do |path, projectFile|
+        @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|
           task = projectFile.lookup(task_name, initial_scope)
           if(task != nil)
             break
@@ -198,12 +233,12 @@ module RakeBuilder
       # given name already exists, the prerequisites and actions are added to
       # the existing task.  Returns the defined task.
       def define_task(task_class, *args, &block)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile.define_task(task_class, *args, &block)
+        @ProjectFileLoader.CurrentlyLoadedProjectFile().define_task(task_class, *args, &block)
       end
 
       # Define a rule for synthesizing tasks.
       def create_rule(*args, &block)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile.create_rule(*args, &block)
+        @ProjectFileLoader.CurrentlyLoadedProjectFile().create_rule(*args, &block)
       end
 
       # Apply the scope to the task name according to the rules for

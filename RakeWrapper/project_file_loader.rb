@@ -1,17 +1,28 @@
 module RakeBuilder
-  # This class is used to load files.
+  # This class is used to load project files.
+  # Project file includes are loaded as soon as a project file include is defined.
   # Implements the rake loader interface.
   class ProjectFileLoader
     include PathUtility
     
     # A list of project files that were loaded.
-    attr_accessor :LoadedProjectFiles
+    def LoadedProjectFiles
+      @LoadedProjectFilesList
+    end
+    
+    def LoadedProjectFile(path)
+      @LoadedProjectFilesMap[path]
+    end
     
     #The project file that is currently loaded
-    attr_reader :CurrentlyLoadedProjectFile
+    def CurrentlyLoadedProjectFile
+      @CurrentlyLoadedProjectFileStack[-1]
+    end
     
     def initialize
-      @LoadedProjectFiles = {}
+      @LoadedProjectFilesMap = {}
+      @LoadedProjectFilesList = []
+      @CurrentlyLoadedProjectFileStack = []
     end
     
     # Load a project file from the given path.
@@ -29,7 +40,14 @@ module RakeBuilder
       projectFile.Path = projectPath
       
       ExecuteInPath(projectFile.Path.DirectoryPath().MakeAbsolute()) do
-        @CurrentlyLoadedProjectFile = projectFile
+        if(CurrentlyLoadedProjectFile() != nil)
+          CurrentlyLoadedProjectFile().ProjectFileIncludes.push(projectFile.Path())
+        end
+        
+        @LoadedProjectFilesMap[projectFile.Path().RelativePath] = projectFile
+        @LoadedProjectFilesList.push(projectFile)
+        
+        @CurrentlyLoadedProjectFileStack.push(projectFile)
         
         if(!projectFile.Path.file?())
           raise "Could not find project file '#{projectFile.Path.AbsolutePath()}'"
@@ -39,20 +57,14 @@ module RakeBuilder
         
         Kernel.load(projectFile.Path.AbsolutePath())
         
-        @LoadedProjectFiles[projectFile.Path().RelativePath] = projectFile
-        
-        puts projectFile.ProjectFileIncludes
-        projectFile.ProjectFileIncludes.each do |projectFilePath|
-          puts "Loading child includes of project file"
-          LoadProjectFile(projectFile.Path.DirectoryPath() + projectFilePath)
-        end      
+        @CurrentlyLoadedProjectFileStack.delete_at(-1)
       end
     end
     
     def to_s
       val = "Loaded Project Files:\n"
       val += "-----------------------------------------------\n"
-      @LoadedProjectFiles.each do |path, projectFile|
+      LoadedProjectFiles().each do |projectFile|
          val += projectFile.to_s
          val += "-----------------------------------------------\n"
       end

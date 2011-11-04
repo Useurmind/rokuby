@@ -1,4 +1,12 @@
 module RakeBuilder
+  # Project files can be loaded by other project files.
+  # Each project file spans a namespace in which its tasks are defined.
+  # Additionally the task are guaranteed to be executed in the folder where
+  # the project file is located.
+  # Each project file has an own clean and clobber target that can be used.
+  # Project file specific tasks are called by joining the project file path
+  # which is relative to the topmost project file with the task name by a colon.
+  # (e.g. "Test/ProjectFile.rb:Task1")
   class ProjectFile
     include Rake::TaskManager
     include Rake::DSL
@@ -37,7 +45,8 @@ module RakeBuilder
     def to_s
       val = "Project File '#{@Path}':\n"
       val += "Defined tasks: #{@tasks}\n"
-      val += "Included projects: #{@ProjectFileIncludes}\n"
+      val += "Defined rules: #{@rules}\n"
+      val += "Included projects: #{@ProjectFileIncludes}\n"      
     end
     
     # get a list that describes all tasks in this proect file
