@@ -1,3 +1,6 @@
+require File.join(File.dirname(__FILE__), "Test/task_descriptor")
+require File.join(File.dirname(__FILE__), "Test/unit_tests")
+
 desc "Task to test basic task functionality"
 task :TestTask => [:TestInSubfolder, "TestfileBase", "TestfileBase2", "./Test\\Test2/projectDefinition:TestTask"] do |task|
    taskDescriptor task

@@ -189,7 +189,7 @@ module RakeBuilder
           if(!projectFile)
             fail "Don't know project file '#{projectPath}'"
           end
-          task = projectFile[name]
+          task = projectFile[name, scopes]
           if(!task)
             fail "Don't know task '#{name}' in project file '#{projectPath}'"
           end
@@ -213,12 +213,25 @@ module RakeBuilder
       # synthesize file tasks or rules.  Special scope names (e.g. '^')
       # are recognized.  If no scope argument is supplied, use the
       # current scope.  Return nil if the task cannot be found.
-      def lookup(task_name, initial_scope=nil)
+      def lookup(taskPath, initial_scope=nil)
         task = nil
-        @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|
-          task = projectFile.lookup(task_name, initial_scope)
-          if(task != nil)
-            break
+        
+        projectPath, name = parse_task_path(taskPath)
+        
+        if(projectPath != nil)
+          # return the project file specific task
+          projectFile = @ProjectFileLoader.LoadedProjectFile(projectPath.RelativePath)
+          if(!projectFile)
+            return task
+          end
+          task = projectFile.lookup(name, initial_scope)
+        else
+          # return the first task that is found in any project file
+          @ProjectFileLoader.LoadedProjectFiles().each do |projFile|
+            task = projFile.lookup(name, initial_scope)
+            if(task != nil)
+              break
+            end
           end
         end
         return task

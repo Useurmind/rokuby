@@ -1,9 +1,9 @@
 module RakeBuilder
-  # Information about a set of files
+  # Information about a set of files.
   # Input Values:
   # [IncludePatterns] An array of regex patterns used to define file paths that belong to this file set.
   # [ExcludePatterns] An array of regex patterns used to define file paths that do NOT belong to this file set.
-  # [SearchPaths] An array of extended paths representing the search location for the files (searches recursively).
+  # [SearchPaths] An array of project paths representing the search location for the files (searches recursively).
   # Output Values:
   # [FilePaths] An array of file paths that were found based on the patterns and paths defined above.
   # [FileDirectories] An array of directories that were searched (all recursively searched directories).

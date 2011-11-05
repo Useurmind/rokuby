@@ -24,11 +24,11 @@
 #++
 
 begin
-  require File.join(File.dirname(__FILE__), "requires")
+  require File.join(File.dirname(__FILE__), "lib/requires")
   #require 'requires'
 rescue LoadError
   require 'rubygems'
-  require File.join(File.dirname(__FILE__), "requires")
+  require File.join(File.dirname(__FILE__), "lib/requires")
   #require 'requires'
 end
 Rake.application = RakeBuilder::Application.new

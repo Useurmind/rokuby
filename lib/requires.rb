@@ -15,10 +15,6 @@ require File.join(File.dirname(__FILE__), "Utility/project_path")
 require File.join(File.dirname(__FILE__), "Utility/directory_utility")
 require File.join(File.dirname(__FILE__), "Utility/general_utility")
 
-# Classes that make testing easier
-require File.join(File.dirname(__FILE__), "Test/task_descriptor")
-require File.join(File.dirname(__FILE__), "Test/unit_tests")
-
 # The rake wrapper that will be executed to gather the project definition files
 require File.join(File.dirname(__FILE__), "RakeWrapper/task")
 require File.join(File.dirname(__FILE__), "RakeWrapper/file_task")
