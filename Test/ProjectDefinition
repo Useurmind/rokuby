@@ -3,6 +3,11 @@ task :TestInSubfolder => ["TestfileSubfolder", "TestfileSubfolder2"] do |task|
    taskDescriptor task
 end
 
+desc "Test executing an shadowed task as prerequesite in subproject"
+task :PreTaskInSub => [:TestTask, "Test2\\projectDefinition:TestTask"] do |task|
+    taskDescriptor task
+end
+
 desc "Task to test basic task functionality (but in subfolder)"
 task :TestTask do |task|
    taskDescriptor task

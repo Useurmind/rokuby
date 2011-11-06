@@ -22,5 +22,15 @@ module Rake
         execute_old(args)
       end
     end
+    
+    alias lookup_prerequisite_old lookup_prerequisite
+    def lookup_prerequisite(prerequisite_name)
+      application.CurrentTask = self
+      #puts "Loading prerequisite '#{prerequisite_name}' in task '#{name}'"
+      task = application[prerequisite_name, @scope]
+      application.CurrentTask = nil
+      return task
+    end
+    private :lookup_prerequisite
   end
 end

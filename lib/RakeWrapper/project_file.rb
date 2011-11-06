@@ -79,10 +79,13 @@ module RakeBuilder
     # Find a matching task for +task_name+.
     # Overwritten to not fail.
     def [](task_name, scopes=nil)
+      #puts "Looking for task '#{task_name}' in project file '#{Path().to_s}'"
       task_name = task_name.to_s
-      self.lookup(task_name, scopes) or
-        enhance_with_matching_rule(task_name) or
-        synthesize_file_task(task_name)
+      task = (self.lookup(task_name, scopes) or
+              enhance_with_matching_rule(task_name) or
+              synthesize_file_task(task_name))
+      #puts "Found task '#{task != nil}'"
+      return task
     end
     
     # Lookup a task.  Return an existing task if found, otherwise

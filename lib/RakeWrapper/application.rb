@@ -7,6 +7,9 @@ module RakeBuilder
   class Application < Rake::Application    
     
       attr_reader :TopmostProjectFile
+      
+      # The task that currently asks for a prerequesite.
+      attr_accessor :CurrentTask
     
       DEFAULT_RAKEFILES = [
         'ProjectDefinition',
@@ -133,6 +136,65 @@ module RakeBuilder
         return projectPath, name
       end
       
+      # Get the project file containing the task from the path of the task and
+      # the project file in which the task path is declared.
+      def compute_task_project_file(projectPath, taskName)
+          projectFile = nil
+          if(!@CurrentTask)
+              #Just get the project file with the complete project path
+              if(projectPath)
+                projectFile = @ProjectFileLoader.LoadedProjectFile(projectPath.RelativePath)
+              end
+          else
+              if(projectPath)
+                  # Make the project path relative to the top first as it is now relative to the invoking project file
+                invokingProjectFile = @ProjectFileLoader.CurrentlyLoadedProjectFile || @CurrentTask.ProjectFile
+                projectFile = get_included_project_file(invokingProjectFile, projectPath)
+                if(!projectFile)
+                    fail "Don't know project file '#{projectPath}'"
+                end
+              else
+                  # Tasks without path are searched first in their declaring project file and then in all sub project files
+                  projectFile = @CurrentTask.ProjectFile
+              end
+              
+          end
+          return projectFile
+      end
+      
+      # Get a project file included by the given project file.
+      # The include paths relative component needs to be the include path.
+      def get_included_project_file(projectFile, includePath)
+          topRelativePath = projectFile.Path().DirectoryPath() + includePath
+          return @ProjectFileLoader.LoadedProjectFile(topRelativePath.RelativePath)
+      end
+      
+      # search the task in the project file and all the project files loaded by it
+      # breadth first search
+      def search_task_in_project_file_tree(projectFile, name, scopes)
+          #puts "Looking for task in tree under '#{projectFile.Path().to_s}'"
+          task = projectFile[name, scopes]
+          if(task != nil)
+              #puts "Found task '#{task.name}'"
+              return task
+          end
+          
+          projectFile.ProjectFileIncludes.each do |includePath|
+              includedProjectFile = get_included_project_file(projectFile, includePath)
+              if(!includedProjectFile)
+                  puts "WARNING: Could not find included project file '#{includePath.to_s}' in '#{projectFile.Path().to_s}'"
+              end
+              task = search_task_in_project_file_tree(includedProjectFile, name, scopes)
+              if(task != nil)
+                  #puts "Found task '#{task.name}'"
+                  return task
+              end
+          end
+          
+          #puts "Could not find task in tree under '#{projectFile.Path().to_s}'"
+          return nil
+      end
+      
       ##########################################################################################
       # New dsl interface introduced by the RakeBuilder module
       
@@ -183,15 +245,13 @@ module RakeBuilder
         
         projectPath, name = parse_task_path(taskPath)
         
-        if(projectPath != nil)
-          # return the project file specific task
-          projectFile = @ProjectFileLoader.LoadedProjectFile(projectPath.RelativePath)
-          if(!projectFile)
-            fail "Don't know project file '#{projectPath}'"
-          end
-          task = projectFile[name, scopes]
+        projectFile = compute_task_project_file(projectPath, name)
+        
+        if(projectFile)          
+          # return the task from the declaring project file
+          task = search_task_in_project_file_tree(projectFile, name, scopes)
           if(!task)
-            fail "Don't know task '#{name}' in project file '#{projectPath}'"
+            fail "Don't know how to build task '#{name}'"
           end
         else
           # return the first task that is found in any project file
@@ -205,6 +265,8 @@ module RakeBuilder
             fail "Don't know how to build task '#{name}'"
           end
         end
+        
+        #puts "Application found task '#{task.name}'"
         return task
       end
       
