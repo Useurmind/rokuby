@@ -5,8 +5,8 @@ module RakeBuilder
   # [ExcludePatterns] An array of regex patterns used to define file paths that do NOT belong to this file set.
   # [SearchPaths] An array of project paths representing the search location for the files (searches recursively).
   # Output Values:
-  # [FilePaths] An array of file paths that were found based on the patterns and paths defined above.
-  # [FileDirectories] An array of directories that were searched (all recursively searched directories).
+  # [FilePaths] An array of project paths for files that were found based on the patterns and paths defined above.
+  # [FileDirectories] An array of project paths for the directories that include the files.
   class FileSet < SystemInformationSet
     include DirectoryUtility
     
@@ -47,7 +47,7 @@ module RakeBuilder
       @FileDirectories = []
       
       @FilePaths.each do |path|
-        fileDir = path.Up()
+        fileDir = path.DirectoryPath()
         if(@FileDirectories.include?(fileDir))
           next
         end
@@ -56,6 +56,15 @@ module RakeBuilder
       end
       
       @filled = true
+    end
+    
+    def to_s
+      val = ""
+      val += "Include: #{@IncludePatterns}\n"
+      val += "Exclude: #{@ExcludePatterns}\n"
+      val += "Search Paths: #{@SearchPaths}\n"
+      val += "Files: #{@FilePaths}\n"
+      val += "File Directories: #{@FileDirectories}\n"
     end
   end
 end
