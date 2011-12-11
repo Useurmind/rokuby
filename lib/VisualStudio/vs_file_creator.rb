@@ -3,9 +3,19 @@ module RakeBuilder
     include VsXmlFileUtility
     include GeneralUtility
     
-    attr_accessor :VsProject
+    attr_accessor :ProjectDescription
+    attr_accessor :ProjectInstance
+    attr_accessor :VsProjectInstance
+    attr_accessor :VsProjectDescription
+    attr_accessor :VsConfigurations
 
     def initialize
+      @ProjectDescription = nil
+      @ProjectInstance = nil
+      @VsProjectInstance = nil
+      @VsProjectDescription = nil
+      @VsConfigurations = []
+      
       @options = {
         "NoEscape" => true,
         "XmlDeclaration" => "<?xml version=\"1.0\" encoding=\"utf-8\"?>",

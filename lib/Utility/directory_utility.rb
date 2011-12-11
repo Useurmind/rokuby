@@ -112,7 +112,7 @@ module RakeBuilder
     #   - dir3
     #     -dir4
     # => ['dir1', 'dir1/dir2', 'dir1/dir3', 'dir1/dir3/dir4']
-    def GetDirectoryTree(baseDirectory, excludePatterns=[])
+    def GetDirectoryTree(baseDirectory, excludePatterns=[], excludeEmpty=false)
       subdirs = [baseDirectory]
       baseDirectory.SubPaths().each do |subPath|
 	pathExcluded = false
@@ -130,10 +130,19 @@ module RakeBuilder
         end
 
         if(subPath.directory?())
-          subdirs = subdirs + GetDirectoryTree(subPath, excludePatterns)
+	  subTree = GetDirectoryTree(subPath, excludePatterns)
+	  if(subTree.length > 1 or !excludeEmpty)
+	    subdirs = subdirs + subTree
+	  end          
         end
       end
       return subdirs
+    end
+    
+    # This creates a ProjectPath that can start with VS variable and nontheless will
+    # work properly.
+    def GenerateVSVariablePath(path)
+      ProjectPath.new({base: path, absolute: true})
     end
   end
 

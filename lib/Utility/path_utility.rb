@@ -52,5 +52,10 @@ module RakeBuilder
     def PathAbsolute?(path)
       return path.match("^(([A-Za-z]:)|(\/))") != nil
     end
+    
+    # Replaces all slashes by backslashes.
+    def GetWindowsPath(path)
+      return path.gsub("/", "\\")
+    end
   end
 end

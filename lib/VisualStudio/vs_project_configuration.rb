@@ -18,6 +18,7 @@ module RakeBuilder
 
   # Represents a configuration for a project in Visual Studio
   # The default configuration is a release configuration.
+  # Many values for the below members can be found in vs_constants.rb
   # General attributes:
   # [Name] The display name for the configuration.
   # [Platform] The platform to compile for (only Win32 possible)

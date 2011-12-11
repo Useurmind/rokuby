@@ -9,7 +9,7 @@ module RakeBuilder
     end
 
     def GetFileName()
-      return "#{@VsProject.ProjectName}.vcxproj.filters"
+      return "#{@ProjectDescription.Name}.vcxproj.filters"
     end
 
     def BuildFile
@@ -38,12 +38,12 @@ module RakeBuilder
       @itemGroups.push GetMultiElementListForList({}, "CLCompile", @compiles)
       @itemGroups.push GetMultiElementListForList({}, "ResourceCompile", @resources)
 
-      SaveXmlDocument(doc, @VsProject.FilterFilePath, @options)
+      SaveXmlDocument(doc, @VsProjectDescription.FilterFilePath, @options)
     end
 
     def CreateSourceFilter
 
-      sourceDirectories = @VsProject.GetSourceDirectoryTree()
+      sourceDirectories = @projectInstance.GetSourceDirectoryTree(true)
 
       @filters.push GetElementForList(
         { "Include" => @sourceBasefilter},
