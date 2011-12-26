@@ -3,6 +3,8 @@ module RakeBuilder
   # projects.
   # A project builder takes one project description, one project instance and
   # several configurations and generates a project based on that.
+  # They are merely a base class for building complete project builder classes
+  # for specific types of projects.
   class ProjectBuilder < Processor
     def initialize(name)
       super(name)
@@ -38,6 +40,20 @@ module RakeBuilder
       elsif(input.is_a?(RakeBuilder::ProjectConfiguration))
         @projectConfigurations.push(input)
       end
+    end
+    
+    def _ProcessInputs
+      @inputs.each() do |input|
+        _SortInput(input)
+      end
+      _CheckInputs()
+      # Do stuff to build project...
+      _BuildProject()
+    end
+    
+    # Overwrite this in actual implementation
+    def _BuildProject
+      raise "_BuildProject not implemented in #{self.class.name}"
     end
     
     def _GetProjectConfiguration(platform)

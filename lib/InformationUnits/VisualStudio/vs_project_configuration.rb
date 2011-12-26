@@ -3,7 +3,7 @@ module RakeBuilder
   # configuration.
   # The default configuration is for release builds.
   # Many values will not be set by default. If they are not set by the user they will
-  # be set based in the values in the project information classes.
+  # be set based on the values in the project information classes.
   # General attributes:
   # [Plat] The platform to compile for (based on the platform).
   # [TargetName] The name of the resulting binary (based on the project description name and the platform extension).
@@ -37,9 +37,6 @@ module RakeBuilder
   # [EnableCOMDATFolding] Seems to be good for performance, e.g. release builds (bool) (based on the platform type).
   # [OptimizeReferences] Seems to be good for performance, e.g. release builds (bool) (based on the platform type).
   # [ModuleDefinitionFile] The file that describes the exports of a library.
-  #
-  # [PostBuildCommand] The command line command that is executed after the build.
-  # [AdditionalPostBuildAction] An function that is executed after the build of the project is complete.
   class VSProjectConfiguration < InformationConfiguration
     include DirectoryUtility
     
@@ -50,9 +47,9 @@ module RakeBuilder
     def Plat()
       if(@Plat == nil)
         if(@Platform.Architecture == :x64)
-          return VS:Configuration::Platform::X64
+          return VS::Configuration::Platform::X64
         elsif(@Platform.Architecture == :x86)
-          return VS:Configuration::Platform::WIN32
+          return VS::Configuration::Platform::WIN32
         else
           raise "Unknown platform type in #{self.class.name}"
         end

@@ -32,12 +32,12 @@
 #
 # =Build process
 # The build process of a RakeBuilder project hierarchy is based on a tree structure of information processing units the
-# \+Processor+s. These processors are arbitrary units that can retreive input information and produce output
-# information. The information transportet is a set of ruby objects that conform to the RakeBuilder \+InformationUnit+
-# interface. This interface provides the means to the \+Processor+ to identify the given objects and decide
-# whether it can process this type of information or not.
-# With this system one can build arbitrary systems of processors that take in information specific to the build process
-# and propagate it to the next build step.
+# \+Processor+s. These processors can retreive input information and produce output information.
+# The information transported is a set of ruby objects that derive from the RakeBuilder \+InformationUnit+ interface.
+# This interface provides the means to the \+Processor+ to identify the given objects and decide whether it can process
+# this type of information or not.
+# With this system one can build arbitrary systems of processors that take in information specific to the build process,
+# process and forward the resulting information to the next step in the build process.
 # An example for this is the inclusion of a library into a project. The library specification is defined somewhere in the
 # project file. A so called \#LibraryLocator# processor can then take this information and locate the library. The actual
 # library instance is then given to another processor that for example defines the necessary tasks to build another library.

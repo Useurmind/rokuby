@@ -1,5 +1,5 @@
 module RakeBuilder
-  # This class holds additionals specifications for information needed to create
+  # This class holds additional specifications for information needed to create
   # a visual studio project.
   class VSProjectSpecification < InformationSpecification
     attr_accessor :ResourceFileSpec

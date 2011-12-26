@@ -5,6 +5,7 @@ module RakeBuilder
   # The configurations are associated with the project configurations by means of the
   # platform they are defined for. Make sure that there is at most one visual studio and normal
   # project configuration for each platform.
+  # The builder writes the project files to hdd and returns their paths in the form of some file sets.
   class VSProjectBuilder < ProjectBuilder
     def initialize(name)
       super(name)
@@ -18,13 +19,7 @@ module RakeBuilder
       @knownInputClasses.push(RakeBuilder::VSProjectConfiguration)
     end
     
-    def _ProcessInputs
-      @inputs.each() do |input|
-        _SortInput(input)
-      end
-      
-      _CheckInputs()
-      
+    def _BuildProject
       
     end
     
