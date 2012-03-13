@@ -171,7 +171,7 @@ module RakeBuilder
       originalPathParts = PathParts()
       pathParts = path.PathParts()
       
-      newPath = ProjectPath.new({base: path.AbsolutePath()})
+      #newPath = ProjectPath.new({base: path.AbsolutePath()})
       
       minPartsNumber = [originalPathParts.length, pathParts.length].min
       commonPartsNumber = 0

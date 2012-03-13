@@ -149,19 +149,19 @@ module RakeBuilder
     attr_accessor :PostBuildCommand
     attr_accessor :AdditionalPostBuildAction
     
-    def initialize
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       
       @Plat = nil
 
       @TargetName = nil
       @TargetExt = nil
-      @ConfigurationType = VS::Configuration::ConfigurationType::APPLICATION
+      @ConfigurationType = nil
       @UseDebugLibraries = nil
       @WholeProgramOptimization = nil
       @CharacterSet = VS::Configuration::CharacterSet::NOT_SET
-      @OutputDirectory = GenerateVSVariablePath("$(SolutionDir)/dist/$(Configuration)/")
-      @IntermediateDirectory = GenerateVSVariablePath("$(SolutionDir)/build/$(Configuration)/")
+      @OutputDirectory = nil
+      @IntermediateDirectory = nil
       @RuntimeLibrary = VS::Configuration::RuntimeLibrary::MULTITHREADED
 
       @WarningLevel = VS::Configuration::WarningLevel::LEVEL3
@@ -184,6 +184,8 @@ module RakeBuilder
       @AdditionalLibraryDirectories = []
       @PreprocessorDefinitions = ["%(PreprocessorDefinitions)"]
       @AdditionalDependencies = ["%(AdditionalDependencies)"]
+      
+      Extend(valueMap, false)
     end
     
     def IsPlatformDebug
@@ -192,6 +194,51 @@ module RakeBuilder
     
     def initialize_copy(original)
       super(original)
+      
+      @Plat = Clone(original.Plat)
+
+      @TargetName = Clone(original.TargetName)
+      @TargetExt = Clone(original.TargetExt)
+      @ConfigurationType = Clone(original.ConfigurationType)
+      @UseDebugLibraries = Clone(original.UseDebugLibraries)
+      @WholeProgramOptimization = Clone(original.WholeProgramOptimization)
+      @CharacterSet = Clone(original.CharacterSet)
+      @OutputDirectory = Clone(original.OutputDirectory)
+      @IntermediateDirectory = Clone(original.IntermediateDirectory)
+      @RuntimeLibrary = Clone(original.RuntimeLibrary)
+
+      @WarningLevel = Clone(original.WarningLevel)
+      @Optimization = Clone(original.Optimization)
+      @AssemblerOutput = Clone(original.AssemblerOutput)
+      @FunctionLevelLinking = Clone(original.FunctionLevelLinking)
+      @IntrinsicFunctions = Clone(original.IntrinsicFunctions)
+      @ProgramDataBaseFileName = Clone(original.ProgramDataBaseFileName)
+      @ExceptionHandling = Clone(original.ExceptionHandling)
+      @BufferSecurityCheck = Clone(original.BufferSecurityCheck)
+      @DebugInformationFormat = Clone(original.DebugInformationFormat)
+      @InlineFunctionExpansion = Clone(original.InlineFunctionExpansion)
+
+      @GenerateDebugInformation = Clone(original.GenerateDebugInformation)
+      @EnableCOMDATFolding = Clone(original.EnableCOMDATFolding)
+      @OptimizeReferences = Clone(original.OptimizeReferences)
+      @ModuleDefinitionFile = Clone(original.ModuleDefinitionFile)
+      
+      @AdditionalIncludeDirectories = Clone(original.AdditionalIncludeDirectories)
+      @AdditionalLibraryDirectories = Clone(original.AdditionalLibraryDirectories)
+      @PreprocessorDefinitions = Clone(original.PreprocessorDefinitions)
+      @AdditionalDependencies = Clone(original.AdditionalDependencies)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      raise "Extend not implemented in #{self.class.name}"
       
       @Plat = Clone(original.Plat)
 

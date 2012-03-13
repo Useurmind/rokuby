@@ -6,10 +6,11 @@ module RakeBuilder
     attr_accessor :SourceUnits
     attr_accessor :Libraries
     
-    def initialize
-      super()
+    def initialize(valueMap=nil)
+      super(valueMap)
       @SourceUnits = []
       @Libraries = []
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -22,7 +23,7 @@ module RakeBuilder
       dirs = []
       @SourceUnits.each() do |su|
         su.SourceFileSet.RootDirectories.each() do |dir|
-          dirs.concat(GetDirectoryTree(dir, [], excludeEmpty)  
+          dirs.concat(GetDirectoryTree(dir, [], excludeEmpty))
         end
       end
       return dirs.uniq()
@@ -32,10 +33,30 @@ module RakeBuilder
       dirs = []
       @SourceUnits.each() do |su|
         su.IncludeFileSet.RootDirectories.each() do |dir|
-          dirs.concat(GetDirectoryTree(dir, [], excludeEmpty)  
+          dirs.concat(GetDirectoryTree(dir, [], excludeEmpty))
         end
       end
       return dirs.uniq()
+    end
+      
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      sourceUnits = valueMap[:SourceUnits] || valueMap[:srcUnits]
+      if(sourceUnits)
+        @SourceUnits = sourceUnits
+      end
+      
+      libraries = valueMap[:Libraries] || valueMap[:libs]
+      if(libraries)
+        @Libraries = libraries
+      end
     end
   end
 end

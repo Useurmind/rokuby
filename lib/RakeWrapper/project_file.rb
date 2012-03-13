@@ -10,6 +10,9 @@ module RakeBuilder
   class ProjectFile
     include Rake::TaskManager
     include Rake::DSL
+    include InformationUnitManager
+    include ProcessManager
+    #include DSL
     
     # Project path to the project file.
     # The relativ path component of this value must be relative to the topmost project files folder.

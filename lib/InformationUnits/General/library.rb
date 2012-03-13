@@ -6,16 +6,19 @@ module RakeBuilder
   class Library < InformationUnit
     attr_accessor :Name
     
-    def initialize
+    def initialize(valueMap=nil)
+      super(valueMap)
       @instances = []
+      Extend(valueMap, false)
+    end
+    
+    def initialize_copy(original)
+      super(original)
+      @instances = Clone(original.instances)
     end
     
     def AddInstance(instance)
       @instances.push(instance)
-    end
-    
-    def initialize_copy(original)
-      @instances = Clone(original.instances)
     end
     
     # Get all library that belong to this platform.
@@ -50,6 +53,28 @@ module RakeBuilder
       end
       
       return matchingInstances[0].LinkFileName()
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      name = valueMap[:Name] || valueMap[:name]
+      if(name)
+        @Name = name
+      end
+      
+      instances = valueMap[:Instances] || valueMap[:insts]
+      if(instances)
+        instances.each() do |inst|
+          AddInstance(inst)
+        end
+      end
     end
   end
   

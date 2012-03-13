@@ -9,11 +9,12 @@ module RakeBuilder
     attr_accessor :Platform
     attr_accessor :Location
     
-    def initialize()
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       @Name = ""
       @Location = LibraryLocationSpec.new()
       @Platform = PlatformConfiguration.new()
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -21,6 +22,31 @@ module RakeBuilder
       @Name = Clone(original.Name)
       @Location = Clone(original.Location)
       @Platform = Clone(original.Platform)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      name = valueMap[:Name] || valueMap[:name]
+      if(name)
+        @Name = name
+      end
+      
+      platform = valueMap[:Platform] || valueMap[:plat]
+      if(platform)
+        @Platform = platform
+      end
+      
+      location = valueMap[:Location] || valueMap[:loc]
+      if(location)
+        @Location = location
+      end
     end
   end
 end

@@ -16,16 +16,18 @@ module RakeBuilder
     attr_accessor :CompilesPath
     attr_accessor :BuildPath
     
-    def initialize
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       
       @Name = ""
       @Version = "0.0"
       @BinaryName = ""
       @BinaryType = ""
       @ProjectPath = ProjectPath.new(".")
-      @CompilesPath = ProjectPath.new("bin")
-      @BuildPath = ProjectPath.new("build")
+      @CompilesPath = ProjectPath.new(COMPILE_SUBDIR)
+      @BuildPath = ProjectPath.new(BUILD_SUBDIR)
+      
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -38,6 +40,51 @@ module RakeBuilder
       @ProjectPath = Clone(original.ProjectPath)
       @CompilesPath = Clone(original.CompilesPath)
       @BuildPath = Clone(original.BuildPath)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      name = valueMap[:Name] || valueMap[:name]
+      if(name)
+        @Name = name
+      end
+      
+      version = valueMap[:Version] || valueMap[:ver]
+      if(version)
+        @Version = version
+      end
+      
+      binaryName = valueMap[:BinaryName] || valueMap[:binName]
+      if(binaryName)
+        @BinaryName = binaryName
+      end
+      
+      binaryType = valueMap[:BinaryType] || valueMap[:binType]
+      if(binaryType)
+        @BinaryType = binaryType
+      end
+      
+      projectPath = valueMap[:ProjectPath] || valueMap[:projPath]
+      if(projectPath)
+        @ProjectPath = projectPath
+      end
+      
+      compilesPath = valueMap[:CompilesPath] || valueMap[:compPath]
+      if(compilesPath)
+        @CompilesPath = compilesPath
+      end
+      
+      buildPath = valueMap[:BuildPath] || valueMap[:buildPath]
+      if(buildPath)
+        @BuildPath = buildPath
+      end
     end
   end
 end

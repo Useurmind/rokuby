@@ -10,15 +10,17 @@ module RakeBuilder
     attr_accessor :Guid
     attr_accessor :RootNamespace
     
-    def initialize
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       
-      # filled by the project builde processor if not set
+      # filled by the project builder project preprocessor if not set
       @ProjectFilePath = nil
       @FilterFilePath = nil
       
       @Guid = GetUUID()
       @RootNamespace = ""
+      
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -28,6 +30,36 @@ module RakeBuilder
       @FilterFilePath = Clone(original.FilterFilePath)
       @Guid = Clone(original.Guid)
       @RootNamespace = Clone(original.RootNamespace)
+    end
+     
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      projectFilePath = valueMap[:ProjectFilePath] || valueMap[:projFilePath]
+      if(projectFilePath)
+        @ProjectFilePath = projectFilePath
+      end
+      
+      filterFilePath = valueMap[:FilterFilePath] || valueMap[:filterFilePath]
+      if(filterFilePath)
+        @FilterFilePath = filterFilePath
+      end
+      
+      guid = valueMap[:Guid] || valueMap[:guid]
+      if(guid)
+        @Guid = guid
+      end
+      
+      rootNamespace = valueMap[:RootNamespace] || valueMap[:rootNspc]
+      if(rootNamespace)
+        @RootNamespace = rootNamespace
+      end
     end
   end
 end

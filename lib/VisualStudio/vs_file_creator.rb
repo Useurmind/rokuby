@@ -5,6 +5,7 @@ module RakeBuilder
     
     attr_accessor :ProjectDescription
     attr_accessor :ProjectInstance
+    attr_accessor :ProjectConfigurations
     attr_accessor :VsProjectInstance
     attr_accessor :VsProjectDescription
     attr_accessor :VsConfigurations
@@ -12,6 +13,7 @@ module RakeBuilder
     def initialize
       @ProjectDescription = nil
       @ProjectInstance = nil
+      @ProjectConfigurations = []
       @VsProjectInstance = nil
       @VsProjectDescription = nil
       @VsConfigurations = []

@@ -33,6 +33,7 @@ module RakeBuilder
         @rakefiles = DEFAULT_RAKEFILES
         @ProjectFileLoader = RakeBuilder::ProjectFileLoader.new
         @name = "RakeBuilder"
+        @CurrentTask = nil
       end
       
       def init(app_name=@name)
@@ -214,6 +215,10 @@ module RakeBuilder
       # Include a file expression into the list of clobber targets of the current project file.
       def IncludeClobberTargets(*includes)
         @ProjectFileLoader.CurrentlyLoadedProjectFile().ClobberList.include(includes)
+      end
+      
+      def DefineInformationUnit(iuClass, *args, &block)
+        return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineInformationUnit(iuClass, args, block)
       end
     
       ##########################################################################################

@@ -3,13 +3,18 @@ module RakeBuilder
 # The processor base class upon which all processors are build.
 # It defines basic concepts of the class like inputs and outputs and the interface
 # for the processing step.
+# Processor can use the advantages of tasks. But there is one thing that needs to be
+# considered here. The tasks must be defined during the setup phase, which means in the
+# initialize or extend method (triggered by the user). If the task is defined during the
+# process phase then it could be that the task is not foud because the dependend task
+# has already been tried to invoke.
 # [Name] The name of the processor to uniquely identify it.
 # [ThrowOnUnknownInput] Throw an exception when an unknown input occures.
-class Processor
+# [Task] Each processor does possess a task whose invocation will execute the processor.
+class Processor < Rake::ProcessorTask
   include GeneralUtility
   
   attr_accessor :Name
-  attr_accessor :ProcessChain
   attr_accessor :ThrowOnUnknownInput
   
   def Outputs
@@ -17,23 +22,29 @@ class Processor
   end
   
   def initialize(name)
-    if(!name)
-      name = GetUUID()
-    end
+    super
+    
+    name = (name || GetUUID())
     
     @Name = name
-    @ProcessChain = nil
     @ThrowOnUnknownInput = true
     
     @knownInputClasses = []  # list of classes that can be processed by this processor, define in actual processor
-    
-    @inputProcessors = {}
-    @outputProcessors = {}
     
     @inputs = []
     @outputs = []
     
     @processingDone = false
+  end
+  
+  # This can only be called after invoking the task.
+  def _InputProcessors
+    inputProcs = prerequisites.uniq().select do |pre|
+      t = lookup_prerequisite(pre)
+      return t.is_a?(Processor)
+    end
+    
+    return inputProcs
   end
   
   def _InputKnown(input)
@@ -46,9 +57,8 @@ class Processor
     return false
   end
   
-  def _ExecuteInputProcessorsAndFetchInputs
-    @inputProcessors.each() do |name, inputProcessor|
-      inputProcessor.Process()
+  def _FetchInputs
+    _InputProcessors().each() do |name, inputProcessor|
       inputProcessor.Outputs().each() do |output|
         AddInput(output)
       end
@@ -57,14 +67,24 @@ class Processor
   
   # Execute all input processors, fetch their outputs and process them to create own output.
   # Returns true if processing took place and false else.
-  def Process
+  def Process(*args)
+    if(@processing == true)
+      raise "Circular dependency detected in processor chain"
+    end
+    
     if(@processingDone)
       return false
     end
     
-    _ExecuteInputProcessorsAndFetchInputs()
+    @processing = true
+    
+    InvokeFromProcessor(args)
+    
+    _FetchInputs()
     
     _ProcessInputs()
+    
+    @processing = false
     
     @processingDone = true
     return true
@@ -77,24 +97,10 @@ class Processor
     raise "_ProcessInputs not defined in #{self.class.name}"
   end
   
-  # Add a processor that delivers input to this processor.
-  def AddInputProcessor(processor)
-    if(@inputProcessors[processor.Name] == nil)
-      @inputProcessors[processor.Name] = processor
-    end
-  end
-  
-  # Add a processor to which output is delivered by this processor.
-  def AddOutputProcessors(processor)
-    if(@outputProcessors[processor.Name] == nil)
-      @outputProcessors[processor.Name] = processor
-    end
-  end
-  
   # Add one or several inputs to the input queue of this class.
   # If at least one of the inputs was not successfully added returns false, else true.
   def AddInput(input)
-    if(input.length != nil)
+    if(input.respond_to?("length"))
       inputsDone = true
       input.each() do |inp|
         inputsDone = inputsDone and _AddInput(inp)
@@ -116,6 +122,28 @@ class Processor
     end
     
     return false
+  end
+  
+  # Extend/set the attributes of the processor.
+  def Extend(valueMap, executeParent=true)
+    if(valueMap == nil)
+      return
+    end
+    
+    inputs = valueMap[:Inputs] || valueMap[:ins]
+    if(inputs)
+      AddInput(inputs)
+    end
+    
+    throwOnUnknownInput = valueMap[:ThrowOnUnkownInput] || valueMap[:throwUnknown]
+    if(throwOnUnknownInput)
+      @ThrowOnUnkownInput = throwOnUnknownInput
+    end
+    
+    dependencies = valueMap[:Dependencies] || valueMap[:deps]
+    if(dependencies)
+      prerequisites.push(dependencies)
+    end
   end
 end
 

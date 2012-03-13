@@ -8,11 +8,12 @@ module RakeBuilder
     attr_accessor :ExcludePatterns
     attr_accessor :SearchPaths
     
-    def initialize()
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       @IncludePatterns = []
       @ExcludePatterns = []
       @SearchPaths = []
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -20,6 +21,31 @@ module RakeBuilder
       @IncludePatterns = Clone(original.IncludePatterns)
       @ExcludePatterns = Clone(original.ExcludePatterns)
       @SearchPaths = Clone(original.SearchPaths)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      includePatterns = valueMap[:IncludePatterns] || valueMap[:inPats]
+      if(includePatterns)
+        @IncludePatterns.concat(includePatterns)
+      end
+      
+      excludePatterns = valueMap[:ExcludePatterns] || valueMap[:exPats]
+      if(excludePatterns)
+        @ExcludePatterns.concat(excludePatterns)
+      end
+      
+      searchPaths = valueMap[:SearchPaths] || valueMap[:sPaths]
+      if(searchPaths)
+        @SearchPaths.concat(searchPaths)
+      end
     end
     
     def to_s

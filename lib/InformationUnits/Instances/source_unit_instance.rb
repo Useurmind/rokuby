@@ -6,11 +6,12 @@ module RakeBuilder
     attr_accessor :SourceFileSet
     attr_accessor :IncludeFileSet
     
-    def initialize()
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       @Defines = []
       @SourceFileSet = FileSet.new()
       @IncludeFileSet = FileSet.new()
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -18,6 +19,26 @@ module RakeBuilder
       @Defines = Clone(original.Defines)
       @SourceFileSet = Clone(original.SourceFileSet)
       @IncludeFileSet = Clone(original.IncludeFileSet)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      sourceFileSet = valueMap[:SourceFileSet] || valueMap[:srcFileSet]
+      if(sourceFileSet)
+        @SourceFileSet = sourceFileSet
+      end
+      
+      includeFileSet = valueMap[:IncludeFileSet] || valueMap[:inclFileSet]
+      if(includeFileSet)
+        @IncludeFileSet = includeFileSet
+      end
     end
   end
 end

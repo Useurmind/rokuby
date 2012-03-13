@@ -15,16 +15,58 @@ require File.join(File.dirname(__FILE__), "Utility/project_path")
 require File.join(File.dirname(__FILE__), "Utility/directory_utility")
 require File.join(File.dirname(__FILE__), "Utility/general_utility")
 
+# Information Units (classes needed in the dsl language)
+require File.join(File.dirname(__FILE__), "InformationUnits/Constants/project_constants")
+
+require File.join(File.dirname(__FILE__), "InformationUnits/information_unit")
+require File.join(File.dirname(__FILE__), "InformationUnits/information_specification")
+require File.join(File.dirname(__FILE__), "InformationUnits/information_instance")
+require File.join(File.dirname(__FILE__), "InformationUnits/information_configuration")
+# general IUs
+require File.join(File.dirname(__FILE__), "InformationUnits/General/library")
+require File.join(File.dirname(__FILE__), "InformationUnits/General/platform_configuration")
+require File.join(File.dirname(__FILE__), "InformationUnits/General/project")
+require File.join(File.dirname(__FILE__), "InformationUnits/General/project_configuration")
+require File.join(File.dirname(__FILE__), "InformationUnits/General/project_description")
+# specification IUs
+require File.join(File.dirname(__FILE__), "InformationUnits/Specifications/file_specification")
+require File.join(File.dirname(__FILE__), "InformationUnits/Specifications/library_location_spec")
+require File.join(File.dirname(__FILE__), "InformationUnits/Specifications/library_specification")
+require File.join(File.dirname(__FILE__), "InformationUnits/Specifications/project_specification")
+require File.join(File.dirname(__FILE__), "InformationUnits/Specifications/source_unit_specification")
+# instance IUs
+require File.join(File.dirname(__FILE__), "InformationUnits/Instances/file_set")
+require File.join(File.dirname(__FILE__), "InformationUnits/Instances/library_file_set")
+require File.join(File.dirname(__FILE__), "InformationUnits/Instances/library_instance")
+require File.join(File.dirname(__FILE__), "InformationUnits/Instances/project_instance")
+require File.join(File.dirname(__FILE__), "InformationUnits/Instances/source_unit_instance")
+
+require File.join(File.dirname(__FILE__), "InformationUnits/Constants/configuration_constants")
+
 # The rake wrapper that will be executed to gather the project definition files
+require File.join(File.dirname(__FILE__), "RakeWrapper/dsl_language")
 require File.join(File.dirname(__FILE__), "RakeWrapper/task")
 require File.join(File.dirname(__FILE__), "RakeWrapper/file_task")
 require File.join(File.dirname(__FILE__), "RakeWrapper/file_creation_task")
+require File.join(File.dirname(__FILE__), "RakeWrapper/processor_task")
 require File.join(File.dirname(__FILE__), "RakeWrapper/project_namespace")
+require File.join(File.dirname(__FILE__), "RakeWrapper/process_manager")
+require File.join(File.dirname(__FILE__), "RakeWrapper/information_unit_manager")
 require File.join(File.dirname(__FILE__), "RakeWrapper/project_file")
 require File.join(File.dirname(__FILE__), "RakeWrapper/project_file_loader")
 require File.join(File.dirname(__FILE__), "RakeWrapper/application")
-require File.join(File.dirname(__FILE__), "RakeWrapper/dsl_language")
 require File.join(File.dirname(__FILE__), "RakeWrapper/rake_module_redefine")
+
+# Processing chain
+require File.join(File.dirname(__FILE__), "Processors/processor")
+require File.join(File.dirname(__FILE__), "Processors/process_chain")
+require File.join(File.dirname(__FILE__), "Processors/project_builder")
+# general processors
+require File.join(File.dirname(__FILE__), "Processors/General/find_file")
+require File.join(File.dirname(__FILE__), "Processors/General/file_finder")
+require File.join(File.dirname(__FILE__), "Processors/General/library_finder")
+require File.join(File.dirname(__FILE__), "Processors/General/source_unit_finder")
+require File.join(File.dirname(__FILE__), "Processors/General/project_finder")
 
 # Xml
 require File.join(File.dirname(__FILE__), "XML/XmlHelper")

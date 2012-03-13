@@ -2,18 +2,19 @@ module RakeBuilder
   # A set of files that is present on this system.
   # [FilePaths] An array of project paths for files that were found based on the patterns and paths defined above.
   # [FileDirectories] An array of project paths for the directories that include the files.
-  # [BaseDirectories] An array of project paths for the topmost directories that include the files.
+  # [RootDirectories] An array of project paths for the topmost directories that include the files.
   class FileSet < InformationInstance
     
     attr_accessor :FilePaths
     attr_accessor :FileDirectories
     attr_accessor :RootDirectories
     
-    def initialize
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       @FilePaths = []
       @FileDirectories = []
       @RootDirectories = []
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -21,6 +22,47 @@ module RakeBuilder
       @FilePaths = Clone(original.FilePaths)
       @FileDirectories = Clone(original.FileDirectories)
       @RootDirectories = Clone(original.RootDirectories)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      filePaths = valueMap[:FilePaths] || valueMap[:filePaths]
+      if(filePaths)
+        @FilePaths.concat(filePaths)
+      end
+      
+      fileDirectories = valueMap[:FileDirectories] || valueMap[:fileDirs]
+      if(fileDirectories)
+        @FileDirectories.concat(fileDirectories)
+      end
+      
+      rootDirectories = valueMap[:RootDirectories] || valueMap[:rootDirs]
+      if(rootDirectories)
+        @RootDirectories.concat(rootDirectories)
+      end
+    end
+    
+    # Join two fileset to one new fileset.
+    def +(other)
+      if(other == nil)
+        return Clone(self)
+      end
+      
+      fileSet = FileSet.new()
+      
+      fileSet.FilePaths = (self.FilePaths + other.FilePaths).uniq()
+      fileSet.FileDirectories = (self.FileDirectories + other.FileDirectories).uniq()
+      fileSet.RootDirectories = (self.RootDirectories + other.RootDirectories).uniq()
+      fileSet.Defines = (self.Defines + other.Defines).uniq()
+      
+      return fileSet
     end
     
     def to_s

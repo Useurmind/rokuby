@@ -80,10 +80,6 @@ module RakeBuilder
             return nil
         end
         
-        def GetExtendedResources
-            
-        end
-        
         # Return the resource paths with the prepended project directory.
         def GetExtendedResourcePaths
           if(@ProjectDirectory == nil)

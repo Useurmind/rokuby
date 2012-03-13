@@ -22,23 +22,24 @@ module RakeBuilder
       end
       
       return "#{@Os}_#{@Architecture}_#{@Type}"
-    end
-    
+    end   
     
      # All the attributes stated above.
     # [name] The name for this configuration.
     # [os] The os this library is for.
     # [arch] The cpu architecture this library is for.
     # [type] The configuration this library is for.
-    def initialize(paramBag)
-      paramBag = paramBag || {}
-      @Name = paramBag[:name] || ""
-      @Os = paramBag[:os] || ""
-      @Architecture = paramBag[:arch] || ""
-      @Type = paramBag[:type] || ""
+    def initialize(valueMap=nil)
+      super(valueMap)
+      @Name = nil
+      @Os = nil
+      @Architecture = nil
+      @Type = nil
+      Extend(valueMap, false)
     end   
     
     def initialize_copy(original)
+      super(original)
       @Name = Clone(original.Name)
       @Os = Clone(original.Os)
       @Architecture = Clone(original.Architecture)
@@ -53,6 +54,36 @@ module RakeBuilder
         return true
       end
       return false
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      name = valueMap[:Name] || valueMap[:name]
+      if(name)
+        @Name = name
+      end
+      
+      os = valueMap[:Os] || valueMap[:os]
+      if(os)
+        @Os = os
+      end
+      
+      architecture = valueMap[:Architecture] || valueMap[:arch]
+      if(architecture)
+        @Architecture = architecture
+      end
+      
+      type = valueMap[:Type] || valueMap[:type]
+      if(type)
+        @Type = type
+      end
     end
   end
 end

@@ -1,17 +1,27 @@
 module RakeBuilder
-  # This class creates project and filter file for a given project.
+  # This class creates project and filter file for a given project and produces a
+  # VSProject instance that can be used in other projects.
   # This builder works like a normal builder but additionally accepts a visual studio
-  # project description and one visual studio instance and several configurations.
+  # project description, one visual studio instance and several configurations.
   # The configurations are associated with the project configurations by means of the
   # platform they are defined for. Make sure that there is at most one visual studio and normal
   # project configuration for each platform.
-  # The builder writes the project files to hdd and returns their paths in the form of some file sets.
+  # Output of this processor is a VSProject instance that represents the created project.
   class VSProjectBuilder < ProjectBuilder
     def initialize(name)
       super(name)
       
-      @vsProjectDescription = nil
-      @vsProjectInstance = nil
+      @processChain = ProcessChain.new()
+      
+      @projectPreprocessor = VSProjectPreprocessor.new()
+      @projectCreator = VSProjectCreator.new()
+      @fileWriter = VSProjectFilesWriter.new()
+      
+      @processChain.Connect(@projectPreprocessor, @fileWriter)
+      @processChain.Connect(@projectPreprocessor, @projectCreator)      
+      
+      @vsProjectDescription = VSProjectDescription.new()
+      @vsProjectInstance = VSProjectInstance.new()
       @vsProjectConfigurations = []
       
       @knownInputClasses.push(RakeBuilder::VSProjectDescription)
@@ -20,7 +30,17 @@ module RakeBuilder
     end
     
     def _BuildProject
+      @processChain.AddInput(@projectPreprocessor, @inputs)
       
+      @processChain.AddInput(@fileWriter, @vsProjectInstance)
+      @processChain.AddInput(@fileWriter, @projectInstance)
+      
+      @processChain.AddInput(@projectCreator, @vsProjectInstance)
+      @processChain.AddInput(@projectCreator, @projectInstance)
+      
+      @processChain.Process()
+      
+      @outputs = @projectCreator.Outputs
     end
     
     def _CheckInputs

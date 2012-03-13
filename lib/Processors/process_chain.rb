@@ -1,41 +1,57 @@
 module RakeBuilder
   # A class to manage the processor structure.
-  class ProcessChain
-    def initialize
-      @processors = {}
+  # A process chain is a directed graph structure of processors that are connected and
+  # propagate their outputs to the next processors in the graph.
+  class ProcessChain < Processor
+    attr_accessor :InputProcessor
+    attr_accessor :OutputProcessor
+    
+    def initialize(name)
+      super(name)
+      @processors = []
+      @processorInputs = {}
+      @InputProcessor = "#{@Name}_in"
+      @OutputProcessor = "#{@Name}_out"
+      AddProcessor(@InputProcessor)
+      AddProcessor(@OutputProcessor)
     end
     
-    def GetProcessor(name)
-      return @processors[name]
+    def _InputKnown(input)
+      return true
     end
     
-    def AddProcessor(processor)
-      if(@processors[processor.Name] == nil)
-        if(processor.ProcessChain)
-          processor.ProcessChain.RemoveProcessor(processor)
+    def _ProcessInputs
+      @InputProcessor.AddInput(@inputs)
+      @OutputProcessor.Process()
+      @outputs = @OutputProcessor.Outputs()
+    end
+    
+    # Add a processor to this process chain.
+    def AddProcessor(procName)
+      if(@processors[procName] == nil)
+        prerequisites.push(procName)
+      end
+    end
+    
+    # State that the first processor should be input processor to the second
+    # processor.
+    def Connect(*args)
+      if(args.length == 0)
+        return
+      end
+      
+      procNames = args
+      if(args[0].respond_to?("length"))
+        procNames = args[0]
+      end
+      
+      lastProcName = nil
+      procNames.each() do |procName|
+        if(lastProcName)
+          Rake::DSL::task procName => [lastProcName]
         end
-        
-        @processors[processor.Name} = processor
-        processor.ProcessChain = self
-      end
-    end
-    
-    def RemoveProcessor(processor)
-      if(@processors[processor.Name])
-        @processors[processor.Name] = nil
-        processor.ProcessChain = nil
-      end
-    end
-    
-    def AddInput(processor, input)
-      processor.AddInput(input)
-    end
-    
-    def Connect(processor1, processor2)
-      processor1.AddOutputProcessor(processor2)
-      processor2.AddInputProcessor(processor1)
-      AddProcessor(processor1)
-      AddProcessor(processor2)
+        lastProcName = procName
+      end      
     end
   end
 end

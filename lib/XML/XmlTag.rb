@@ -50,7 +50,7 @@ module RakeBuilder
         
         def GetIndentationString
             indent = ""
-            for i in 0..@IndentDepth-1
+            (0..@IndentDepth-1).each do
                 indent += " "
             end
             return indent

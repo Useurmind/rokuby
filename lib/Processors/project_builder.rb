@@ -5,12 +5,12 @@ module RakeBuilder
   # several configurations and generates a project based on that.
   # They are merely a base class for building complete project builder classes
   # for specific types of projects.
-  class ProjectBuilder < Processor
+  class ProjectBuilder < ProcessChain
     def initialize(name)
       super(name)
       
-      @projectInstance = nil
-      @projectDescription = nil
+      @projectInstance = ProjectInstance.new()
+      @projectDescription = ProjectDescription.new()
       @projectConfigurations = []
       
       @knownInputClasses.push(RakeBuilder::ProjectInstance)     # the input of all project instances is used to find the right sources

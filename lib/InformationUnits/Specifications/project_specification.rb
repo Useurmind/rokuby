@@ -6,11 +6,13 @@ module RakeBuilder
     attr_accessor :LibrarySpecs
     attr_accessor :SourceSpecs
     
-    def initialize()
-      super
+    def initialize(valueMap=nil)
+      super(valueMap)
       
       @LibrarySpecs = []
       @SourceSpecs = []
+      
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
@@ -18,6 +20,26 @@ module RakeBuilder
       
       @LibrarySpecs = Clone(original.LibrarySpecs)
       @SourceSpecs = Clone(original.SourceSpecs)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      librarySpecs = valueMap[:LibrarySpecs] || valueMap[:libSpecs]
+      if(librarySpecs)
+        @LibrarySpecs.concat(librarySpecs)
+      end
+      
+      sourceSpecs = valueMap[:SourceSpecs] || valueMap[:srcSpecs]
+      if(sourceSpecs)
+        @SourceSpecs.concat(sourceSpecs)
+      end
     end
   end
 end

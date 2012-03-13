@@ -3,7 +3,7 @@ module RakeBuilder
   # [LibraryFileSet] A file set containing the libary file.
   # [LinkFileSet] A file set containing the file that should be linked to.
   # [IncludeFileSet] A file set containing the include files for the library.
-  class LibraryFileSet < InformationUnit
+  class LibraryFileSet < InformationInstance
     attr_accessor :LibraryFileSet
     attr_accessor :LinkFileSet
     attr_accessor :IncludeFileSet
@@ -48,16 +48,44 @@ module RakeBuilder
       @IncludeFileSet.FilePaths()
     end
     
-    def initialize()
+    def initialize(valueMap=nil)
+      super(valueMap)
       @LibraryFileSet = FileSet.new()
       @LinkFileSet = FileSet.new()
       @IncludeFileSet = FileSet.new()
+      Extend(valueMap, false)
     end
     
     def initialize_copy(original)
+      super(original)
       @LibraryFileSet = Clone(original.LibraryFileSet)
       @LinkFileSet = Clone(original.LinkFileSet)
       @IncludeFileSet = Clone(original.IncludeFileSet)
+    end
+    
+    def Extend(valueMap, callParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(callParent)
+        super(valueMap)
+      end
+      
+      libraryFileSet = valueMap[:LibraryFileSet] || valueMap[:libFileSet]
+      if(libraryFileSet)
+        @LibraryFileSet = libraryFileSet
+      end
+      
+      linkFileSet = valueMap[:LinkFileSet] || valueMap[:lnkFileSet]
+      if(linkFileSet)
+        @LinkFileSet = linkFileSet
+      end
+      
+      includeFileSet = valueMap[:IncludeFileSet] || valueMap[:inclFileSet]
+      if(includeFileSet)
+        @IncludeFileSet = includeFileSet
+      end
     end
   end
 end
