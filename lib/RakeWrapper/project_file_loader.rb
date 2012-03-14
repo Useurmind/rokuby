@@ -29,7 +29,7 @@ module RakeBuilder
     # This path is NOT a project path, because this class needs to implement the
     # Rak::Loader interface.
     def load(path)
-      puts "Loading project file #{path}" 
+      #puts "Loading project file #{path}" 
       projectPath = ProjectPath.new(path)
       
       LoadProjectFile(projectPath)

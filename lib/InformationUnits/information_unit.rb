@@ -4,6 +4,7 @@ module RakeBuilder
     include GeneralUtility
     
     def initialize(valueMap)
+      super()
       Extend(valueMap, false)
     end
     

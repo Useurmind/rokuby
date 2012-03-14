@@ -5,9 +5,9 @@ module RakeBuilder
     attr_accessor :ResourceFileSpec
     
     def initialize(valueMap=nil)
-      super(valueMap)
-      
       @ResourceFileSpec = FileSpecification.new()
+      
+      super(valueMap)
       
       Extend(valueMap, false)
     end

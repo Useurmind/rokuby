@@ -10,7 +10,7 @@ module RakeBuilder
     
     # Set the project path that refers to the project file this namespace describes.
     def SetProjectPath(path)
-      puts "Setting proect path " + path.to_s
+      #puts "Setting proect path " + path.to_s
       pathParts = path.RelativePath().split("/")
       @Parts = pathParts[0..-2]
     end

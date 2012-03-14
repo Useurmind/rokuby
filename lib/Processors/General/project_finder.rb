@@ -5,8 +5,8 @@ module RakeBuilder
   # LibrarySpecifications.
   # Output is one ProjectInstance that contains all the gathered information.
   class ProjectFinder < Processor
-    def initialize(name)
-      super(name)
+    def initialize(name=nil, app=nil, project_file=nil)
+      super(name, app, project_file)
       
       @knownInputClasses.push(RakeBuilder::ProjectSpecification)
       @knownInputClasses.push(RakeBuilder::SourceUnitSpecification)
@@ -14,14 +14,16 @@ module RakeBuilder
     end
     
     def _ProcessInputs
+      #puts "processing inputs #{@inputs} in ProjectFinder"
+      
       sourceUnitSpecs = []
       librarySpecs = []
       
       projectInstance = ProjectInstance.new()
       @inputs.each() do |input|
         if(input.is_a?(RakeBuilder::ProjectSpecification))
-          sourceUnitSpecs.push(input.SourceSpecs)
-          librarySpecs.push(input.LibrarySpecs)
+          sourceUnitSpecs.concat(input.SourceSpecs)
+          librarySpecs.concat(input.LibrarySpecs)
           projectInstance.AddDefinesFrom(input)
         elsif(input.is_a?(RakeBuilder::SourceUnitSpecification))
           sourceUnitSpecs.push(input)
@@ -37,7 +39,8 @@ module RakeBuilder
     end
     
     def _ProcessSourceUnits(suSpecs)
-      suFinder = SourceUnitFinder.new()
+      #puts "Processing source units #{suSpecs}"
+      suFinder = SourceUnitFinder.new(@ProjectFile)
       
       suFinder.AddInput(suSpecs)
       suFinder.Process()
@@ -46,6 +49,8 @@ module RakeBuilder
     end
     
     def _ProcessLibraries(libSpecs)
+      #puts "Processing libraries units #{libSpecs}"
+      
       libFinder = LibraryFinder.new()
       
       libFinder.AddInput(libSpecs)

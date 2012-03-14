@@ -49,10 +49,10 @@ module RakeBuilder
     end
     
     def initialize(valueMap=nil)
-      super(valueMap)
       @LibraryFileSet = FileSet.new()
       @LinkFileSet = FileSet.new()
       @IncludeFileSet = FileSet.new()
+      super(valueMap)
       Extend(valueMap, false)
     end
     

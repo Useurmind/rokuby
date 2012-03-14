@@ -8,8 +8,8 @@ module RakeBuilder
   class VSProjectFilesWriter < Processor
     include VSProjectProcessorUtility
     
-    def initialize(name)
-      super(name)
+    def initialize(name, app, project_file)
+      super(name, app, project_file)
       
       @projectInstance = nil
       @projectDescription = nil

@@ -7,9 +7,9 @@ module RakeBuilder
     attr_accessor :Platform
     
     def initialize(valueMap=nil)
-      super(valueMap)
-      @FileSet = FileSet.new()
+      @FileSet = LibraryFileSet.new()
       @Platform = PlatformConfiguration.new()
+      super(valueMap)
       Extend(valueMap, false)
     end
     

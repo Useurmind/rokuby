@@ -19,5 +19,10 @@ module Rake
     def InvokeFromProcessor(*args)
       invoke_old(args)
     end
+    
+    # Is this processor task embedded into the task hierarchy or not.
+    def InTaskHierarchy?()
+      return @ProjectFile != nil
+    end
   end
 end

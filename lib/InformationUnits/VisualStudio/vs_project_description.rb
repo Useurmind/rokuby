@@ -11,7 +11,6 @@ module RakeBuilder
     attr_accessor :RootNamespace
     
     def initialize(valueMap=nil)
-      super(valueMap)
       
       # filled by the project builder project preprocessor if not set
       @ProjectFilePath = nil
@@ -20,6 +19,7 @@ module RakeBuilder
       @Guid = GetUUID()
       @RootNamespace = ""
       
+      super(valueMap)
       Extend(valueMap, false)
     end
     

@@ -7,10 +7,10 @@ module RakeBuilder
     attr_accessor :IncludeFileSet
     
     def initialize(valueMap=nil)
-      super(valueMap)
       @Defines = []
       @SourceFileSet = FileSet.new()
       @IncludeFileSet = FileSet.new()
+      super(valueMap)
       Extend(valueMap, false)
     end
     

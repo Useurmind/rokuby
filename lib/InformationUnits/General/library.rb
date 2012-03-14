@@ -9,6 +9,7 @@ module RakeBuilder
     def initialize(valueMap=nil)
       super(valueMap)
       @instances = []
+      @Name = nil
       Extend(valueMap, false)
     end
     

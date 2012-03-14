@@ -11,54 +11,54 @@ ProjDescr "TestProject", {
 
 SrcSpec "TestProjectSource", {
   srcSpec: FileSpec({
-    inPaths: [".*\.cpp$"],
+    inPats: [".*\.cpp$"],
     sPaths: [ProjPath("src")]
   }),
   inclSpec: FileSpec({
-    inPaths: [".*\.hpp$"],
+    inPats: [".*\.hpp$"],
     sPaths: [ProjPath("include")]
   })
 }
 
-lib1Path = ProjPath("libs/lib1")
+lib1Path = [ProjPath("libs/lib1")]
 
 LibSpec "lib1_win32_debug", {
-  name: "lib1_win32_debug",
+  name: "lib1",
   plat: PLATFORM_WIN_X86_DEBUG,
   loc: LibLoc({
-    libSpec: FileSpec({ inPaths: ["lib1_win32_debug.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPaths: ["lib1_win32_debug.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPaths: [".*\.hpp$"], sPaths: lib1Path })
+    libSpec: FileSpec({ inPats: ["lib1_win32_debug.lib"], sPaths: lib1Path  }),
+    linkSpec: FileSpec({ inPats: ["lib1_win32_debug.dll"], sPaths: lib1Path }),
+    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
 LibSpec "lib1_win32_release", {
-  name: "lib1_win32_release",
+  name: "lib1",
   plat: PLATFORM_WIN_X86_RELEASE,
   loc: LibLoc({
-    libSpec: FileSpec({ inPaths: ["lib1_win32_release.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPaths: ["lib1_win32_release.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPaths: [".*\.hpp$"], sPaths: lib1Path })
+    libSpec: FileSpec({ inPats: ["lib1_win32_release.lib"], sPaths: lib1Path  }),
+    linkSpec: FileSpec({ inPats: ["lib1_win32_release.dll"], sPaths: lib1Path }),
+    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
 LibSpec "lib1_x64_debug", {
-  name: "lib1_x64_debug",
+  name: "lib1",
   plat: PLATFORM_WIN_X64_DEBUG,
   loc: LibLoc({
-    libSpec: FileSpec({ inPaths: ["lib1_x64_debug.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPaths: ["lib1_x64_debug.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPaths: [".*\.hpp$"], sPaths: lib1Path })
+    libSpec: FileSpec({ inPats: ["lib1_x64_debug.lib"], sPaths: lib1Path  }),
+    linkSpec: FileSpec({ inPats: ["lib1_x64_debug.dll"], sPaths: lib1Path }),
+    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
 LibSpec "lib1_x64_release", {
-  name: "lib1_x64_release",
+  name: "lib1",
   plat: PLATFORM_WIN_X64_RELEASE,
   loc: LibLoc({
-    libSpec: FileSpec({ inPaths: ["lib1_x64_release.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPaths: ["lib1_x64_release.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPaths: [".*\.hpp$"], sPaths: lib1Path })
+    libSpec: FileSpec({ inPats: ["lib1_x64_release.lib"], sPaths: lib1Path  }),
+    linkSpec: FileSpec({ inPats: ["lib1_x64_release.dll"], sPaths: lib1Path }),
+    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
@@ -70,11 +70,7 @@ ProjSpec "TestProject", {
 
 #define the processing chain for the project
 
-proc = Processor RakeBuilder::ProjectFinder
-proc.AddInput( ProjSpec("TestProject") )
-
-task :default do
-  proc.Process()
-  
-  puts proc.Outputs
+Proc RakeBuilder::ProjectFinder, "ProjectFinderProcessor", :procIns => [ProjSpec("TestProject")] do |proc|
+  puts "In execution of task #{proc.Name}"
+  puts "Outputs are #{proc.Outputs()}"
 end

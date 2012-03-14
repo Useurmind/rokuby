@@ -6,13 +6,12 @@ module RakeBuilder
     attr_accessor :Name
     attr_accessor :SolutionFilePath
     
-    def initialize(valueMap=nil)
-      super(valueMap)
-      
+    def initialize(valueMap=nil)      
       # This is set by the solution preprocessor if not set
       @SolutionFilePath = nil
       @Name = "MySolution"
       
+      super(valueMap)
       Extend(valueMap, false)
     end
     

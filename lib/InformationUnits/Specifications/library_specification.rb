@@ -10,10 +10,10 @@ module RakeBuilder
     attr_accessor :Location
     
     def initialize(valueMap=nil)
-      super(valueMap)
       @Name = ""
       @Location = LibraryLocationSpec.new()
       @Platform = PlatformConfiguration.new()
+      super(valueMap)
       Extend(valueMap, false)
     end
     

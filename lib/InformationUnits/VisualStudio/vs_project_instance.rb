@@ -4,9 +4,9 @@ module RakeBuilder
     attr_accessor :ResourceFileSet
     
     def initialize(valueMap=nil)
-      super(valueMap)
-      
       @ResourceFileSet = FileSet.new()
+      
+      super(valueMap)
       
       Extend(valueMap, false)
     end

@@ -1,6 +1,7 @@
 module RakeBuilder
   # This class is responsible for managing processors and process chains that are
   # needed for a process build.
+  # ATTENTION: Some function calls assume that this module is included into the ProjectFile class.
   module ProcessManager
     attr_accessor :Processors
     attr_accessor :ProcessChains
@@ -12,21 +13,30 @@ module RakeBuilder
     end
     
     # The args for the processor include the following:
-    # - [name]: The name of the processor.
-    # - [valueMap]: A map of value that should be used to configure the processor with extend.
-    # - [taskArgs]: 
-    def DefineProcessor(procClass, *args, &block)
-      name, valueMap, taskArgs = _ParseProcessorArgs(args)
+    # For examples how this can be formatted see the unit tests (-> Test_ProcessManager).
+    # - [name]: The name of the processor (required).
+    # - [procIns]: An array or list of input args (optional)
+    # - [valueMap]: A map of values that should be used to configure the processor with extend (optional).
+    # - [procArgs]: A list of input arguments for the task (optional).
+    # - [procDeps]: An array of dependencies for the task (optional)
+    def DefineProcessor(procClass, *args, &block)      
+      name, args = _GetProcessorName(*args)
       
       if(!name)
         return nil
       end
       
-      processor, newProcessor = _GetProcessor(procClass, name)
+      processor = _GetProcessor(procClass, name)
+      
+      inputs, valueMap, taskArgs, taskDeps = _ParseProcessorArgs(*args)
+      
+      processor.enhance(taskDeps, &block)
+      processor.set_arg_names(taskArgs)
+      
+      inputs.each() do |input|
+        processor.AddInput(input)
+      end      
       processor.Extend(valueMap)
-      if(newProcessor)
-        processor.Task = Processor.define_task(taskArgs, &block)
-      end
       
       return processor
     end
@@ -42,18 +52,47 @@ module RakeBuilder
         processChain.Task = Processor.define_task(taskArgs, &block)
       end
       
-      args.drop(1)  # drop the name
+      args = args.drop(1)  # drop the name
       
       _ParseProcessChainArgs(args)
     end
     
-    def _GetProcessChainName(chainClass, *args)
-      if(args.length < 0 || args[0].class == Hash || args[0].class == Array)
-        return nil
+    # Retrieves the processor name and the rest of the arguments
+    def _GetProcessorName(*args)
+      if(args.length < 1 || (args[0].class != String && args[0].class != Symbol))
+        return nil, args
       end
-      return args[0]
+      
+      return args[0], args.drop(1)
     end
     
+    def _ParseProcessorArgs(*args)
+      inputs = []
+      valueMap = {}
+      taskArgs = []
+      taskDeps = []
+      
+      if(args.length < 1 || args[0].class != Hash)
+        return inputs, valueMap, taskArgs, taskDeps
+      end
+      
+      hash = args[0]
+      
+      hash.keys.each() do |key|
+        if(key == :procIns)
+          inputs = hash[key]
+          elsif(key == :procArgs)
+            taskArgs = hash[key]
+        elsif(key == :procDeps)
+          taskDeps = hash[key]
+        else
+          valueMap[key] = hash[key]
+        end
+      end
+      
+      return inputs, valueMap, taskArgs, taskDeps
+    end
+     
     def _ParseProcessChainArgs(*args)
       procChainArgs = nil
       procArgs = nil
@@ -63,14 +102,6 @@ module RakeBuilder
     
     # Parse an array containing processors and/or processor input maps
     def _ParseProcessorChain(processorChain)
-    end
-    
-    def _ParseProcessorArgs(*args)
-      name = nil
-      valueMap = nil
-      taskArgs = nil
-      
-      return name, valueMap, taskArgs
     end
         
     def _GetProcessChain(procChainClass, name)
@@ -84,11 +115,12 @@ module RakeBuilder
     
     def _GetProcessor(procClass, name)      
       if(@Processors[name])
-        return @Processors[name], false
+        return @Processors[name]
       end
       
-      @Processors[name] = procClass.new(name)
-      return @Processors[name], true
+      @Processors[name] = intern(procClass, name)
+       
+      return @Processors[name]
     end
   end
 end

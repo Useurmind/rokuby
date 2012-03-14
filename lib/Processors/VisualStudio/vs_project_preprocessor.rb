@@ -10,8 +10,8 @@ module RakeBuilder
   # can be overwritten/modified by values in the project configuration. Values that are
   # set by the user in the visual studio project objects should never be modified.
   class VSProjectPreprocessor < Processor
-    def initialize(name)
-      super(name)
+    def initialize(name, app, project_file)
+      super(name, app, project_file)
       
       @projectDescription = nil
       @projectConfigurations = []

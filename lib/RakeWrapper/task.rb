@@ -10,8 +10,10 @@ module Rake
     # +enhance+ to add actions and prerequisites.
     alias initialize_old initialize
     def initialize(task_name, app, projectFile)
-      initialize_old(task_name, app)
       @ProjectFile = projectFile
+      if(@ProjectFile)      
+        initialize_old(task_name, app)
+      end      
     end
     
     # Execute the actions associated with this task.

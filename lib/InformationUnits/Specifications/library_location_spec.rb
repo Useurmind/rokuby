@@ -9,10 +9,10 @@ module RakeBuilder
     attr_accessor :IncludeFileSpec
     
     def initialize(valueMap=nil)
-      super(valueMap)
       @LibraryFileSpec = FileSpecification.new()
       @LinkFileSpec = FileSpecification.new()
       @IncludeFileSpec = FileSpecification.new()
+      super(valueMap)
       Extend(valueMap, false)
     end
     

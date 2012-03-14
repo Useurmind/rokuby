@@ -7,9 +7,9 @@ module RakeBuilder
     attr_accessor :Libraries
     
     def initialize(valueMap=nil)
-      super(valueMap)
       @SourceUnits = []
       @Libraries = []
+      super(valueMap)
       Extend(valueMap, false)
     end
     

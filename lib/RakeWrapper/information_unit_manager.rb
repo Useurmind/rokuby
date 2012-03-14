@@ -40,27 +40,26 @@ module RakeBuilder
     # valueMap : A class object is created with the given valueMap but is NOT
     #            entered into the registered information units.
     def DefineInformationUnit(iuClass, *args, &block)
-      _CheckCurrentInformationUnit()
+      #_CheckCurrentInformationUnit()
       
-      name, valueMap = _ParseArguments(args)
+      name, valueMap = _ParseArguments(*args)
       
       returnIU = nil
       if(name) 
-        @CurrentInformationUnit = GetInformationUnit(iuClass, name)
-        
-        if(valueMap)
-          @CurrentInformationUnit.Extend(valueMap)
-        end
-        
-        if(block_given?)
-          block.call()
-        end
-      
-        returnIU = @CurrentInformationUnit  
-        @CurrentInformationUnit = nil
+        returnIU = GetInformationUnit(iuClass, name)
       else
-        returnIU = iuClass.new(valueMap || {})
+        returnIU = iuClass.new()
       end
+      
+      #puts "value map for information unit is #{valueMap}"
+      if(valueMap)
+        returnIU.Extend(valueMap)
+      end
+      
+      if(block_given?)
+        block.call(returnIU)
+      end
+      
       return returnIU
     end
     
@@ -73,23 +72,21 @@ module RakeBuilder
     def _ParseArguments(*args)      
       name = nil
       valueMap = nil
-      
+
       if(args.length < 1)
         return name, valueMap
       end
       
-      if(args.length >= 1)
-        firstArgClass = args[0].class
-        if(firstArgClass == Hash) # first arg is valueMap
+      if(args.length > 0)
+        if(args[0].class == Hash) # first arg is valueMap
           valueMap = args[0]
         else # first arg is name
           name = args[0]
         end
       end
-            
-      if(args.length >= 2)
-        secArgClass = args[1].class
-        if(valueMap == nil && secArgClass) # second argument is valueMap
+      
+      if(args.length > 1)
+        if(valueMap == nil && args[1].class) # second argument is valueMap
           valueMap = args[1]
         end
       end

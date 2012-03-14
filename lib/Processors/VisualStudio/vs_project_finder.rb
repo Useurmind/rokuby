@@ -1,8 +1,8 @@
 module RakeBuilder
   # This processor processes VSProjectSpecifications to produce corresponding instances.
   class VSProjectFinder < Processor
-     def initialize(name)
-      super(name)
+     def initialize(name, app, project_file)
+      super(name, app, project_file)
       
       @knownInputClasses.push(RakeBuilder::VSProjectSpecification)
     end

@@ -10,10 +10,10 @@ module RakeBuilder
     attr_accessor :RootDirectories
     
     def initialize(valueMap=nil)
-      super(valueMap)
       @FilePaths = []
       @FileDirectories = []
       @RootDirectories = []
+      super(valueMap)
       Extend(valueMap, false)
     end
     
@@ -65,10 +65,10 @@ module RakeBuilder
       return fileSet
     end
     
-    def to_s
-      val = ""
-      val += "Files: #{@FilePaths}\n"
-      val += "File Directories: #{@FileDirectories}\n"
-    end
+    #def to_s
+    #  val = ""
+    #  val += "Files: #{@FilePaths}\n"
+    #  val += "File Directories: #{@FileDirectories}\n"
+    #end
   end
 end

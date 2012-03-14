@@ -2,8 +2,8 @@ module RakeBuilder
   # This class derives automatic values for the solution description if they were
   # not set by the user.
   class VSSolutionPreprocessor < Processor
-    def initialize(name)
-      super(name)
+    def initialize(name, app, project_file)
+      super(name, app, project_file)
       
       @knownInputClasses.push(RakeBuilder::SolutionDescription)
     end

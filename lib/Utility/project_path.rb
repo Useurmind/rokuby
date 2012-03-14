@@ -94,6 +94,8 @@ module RakeBuilder
     # [relative] The relative part of the path.
     # [absolute] Is the input path default (normally estimated automatically, for cases where this is not possible).
     def initialize(paramBag)
+      super()
+      
       if(paramBag.kind_of?(String))
         base = nil
         relative = FormatPath(paramBag)
@@ -117,7 +119,7 @@ module RakeBuilder
     end
     
     def CreateCopy()
-      copy = ProjectPath.new({base: @BasePath, path: @RelativePath})
+      copy = ProjectPath.new({base: @BasePath, relative: @RelativePath})
       return copy
     end
     
@@ -145,16 +147,27 @@ module RakeBuilder
     
     # Create an array of paths that contain the paths to folders and files under this path.
     def SubPaths()
-      entries = Dir.entries(directory.AbsolutePath())
+      #puts "Searching subpaths in #{to_s()}"
+      entries = Dir.entries(AbsolutePath())
       subPaths = []
+      
+      #puts "Found entries #{entries}"
+      
       entries.each do |entry|
         if(entry == ".." || entry == ".")
           next
         end
         
+        
+        
         copy = CreateCopy()
+        
+        #puts "Copy is #{copy}"
+        
         copy.RelativePath = JoinPaths([copy.RelativePath, entry])
         subPaths.push(copy)
+        
+        #puts "Created path #{copy} for entry #{entry}"
       end
       
       return subPaths
@@ -166,7 +179,7 @@ module RakeBuilder
         return self
       end
       
-      puts "Making path relative, self: " + self.to_s + ", path: " + path.to_s     
+      #puts "Making path relative, self: " + self.to_s + ", path: " + path.to_s     
       
       originalPathParts = PathParts()
       pathParts = path.PathParts()
@@ -217,6 +230,7 @@ module RakeBuilder
       if(!path)
         return false
       end
+      
       return AbsolutePath() == path.AbsolutePath()
     end   
     

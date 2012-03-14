@@ -6,8 +6,8 @@ require "rake"
 require "rake/clean"
 require "pathname"
 
-puts File.dirname(__FILE__)
-puts File.join(File.dirname(__FILE__), "XML/XmlHelper")
+#puts File.dirname(__FILE__)
+#puts File.join(File.dirname(__FILE__), "XML/XmlHelper")
 
 # Utility libs
 require File.join(File.dirname(__FILE__), "Utility/path_utility")

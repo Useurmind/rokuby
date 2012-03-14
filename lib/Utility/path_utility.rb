@@ -1,5 +1,5 @@
 module RakeBuilder
-  module PathUtility
+  module PathUtility    
     # Joins several parts of a path to one path.
     # Also applies formatting to the paths.
     def JoinPaths(paths)

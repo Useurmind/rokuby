@@ -29,10 +29,6 @@ module RakeBuilder
       
       directory.SubPaths().each do |subPath|
 
-        if(entry == "." or entry == "..")
-          next
-        end
-
         if(subPath.directory?())
           files = files + FindFilesInDirectory(includePatterns, excludePatterns, subPath)
         else

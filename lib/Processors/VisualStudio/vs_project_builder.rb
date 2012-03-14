@@ -8,8 +8,8 @@ module RakeBuilder
   # project configuration for each platform.
   # Output of this processor is a VSProject instance that represents the created project.
   class VSProjectBuilder < ProjectBuilder
-    def initialize(name)
-      super(name)
+    def initialize(name, app, project_file)
+      super(name, app, project_file)
       
       @processChain = ProcessChain.new()
       

@@ -5,15 +5,13 @@ module RakeBuilder
   class VSProject < Project
     attr_accessor :ProjectFileSet
     attr_accessor :FilterFileSet
-    attr_accessor :ProjectFileTask
-    attr_accessor :FilterFileTask
     
     def initialize(valueMap=nil)
-      super(valueMap)
       
       @ProjectFileSet = FileSet.new()
       @FilterFileSet = FileSet.new()
       
+      super(valueMap)
       Extend(valueMap, false)
     end
     

@@ -5,16 +5,17 @@ module RakeBuilder
   class FileFinder < Processor
     include DirectoryUtility
     
-    def initialize(name)
-      super(name)
+    def initialize(name=nil, app=nil, project_file=nil)
+      super(name, app, project_file)
       
       @knownInputClasses.push(RakeBuilder::FileSpecification)
     end
     
-    def _ProcessInputs      
+    def _ProcessInputs
+      #puts "Processing inputs #{@inputs} in FileFinder"
       @inputs.each() do |fileSpec|
         fileSet = FileSet.new()
-        fileSet.GetDefines(fileSpec)
+        fileSet.AddDefinesFrom(fileSpec)
           
         fileSet.FilePaths = FindFilesInDirectories(fileSpec.IncludePatterns, fileSpec.ExcludePatterns, fileSpec.SearchPaths)
         fileSet.FileDirectories = []
@@ -30,7 +31,11 @@ module RakeBuilder
         end
         
         @outputs.push(fileSet)
-      end
+        #puts "Found fileset #{fileSet}"
+        #puts "FilePaths: #{fileSet.FilePaths}"
+        #puts "FileDirectories: #{fileSet.FileDirectories}"
+        #puts "RootDirectories: #{fileSet.RootDirectories}"
+      end      
     end
   end
 end

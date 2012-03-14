@@ -3,14 +3,15 @@ module RakeBuilder
 # The processor base class upon which all processors are build.
 # It defines basic concepts of the class like inputs and outputs and the interface
 # for the processing step.
+# Each processor is a special sort of task. Therefore it is defined as any other task
+# with the corresponding class.
 # Processor can use the advantages of tasks. But there is one thing that needs to be
 # considered here. The tasks must be defined during the setup phase, which means in the
 # initialize or extend method (triggered by the user). If the task is defined during the
-# process phase then it could be that the task is not foud because the dependend task
+# process phase then it could be that the task is not found because the dependend task
 # has already been tried to invoke.
 # [Name] The name of the processor to uniquely identify it.
 # [ThrowOnUnknownInput] Throw an exception when an unknown input occures.
-# [Task] Each processor does possess a task whose invocation will execute the processor.
 class Processor < Rake::ProcessorTask
   include GeneralUtility
   
@@ -21,10 +22,14 @@ class Processor < Rake::ProcessorTask
     @outputs
   end
   
-  def initialize(name)
-    super
-    
+  def KnownInputClasses
+    @knownInputClasses
+  end
+  
+  def initialize(name=nil, app=nil, project_file=nil)    
     name = (name || GetUUID())
+    
+    super(name, app, project_file)
     
     @Name = name
     @ThrowOnUnknownInput = true
@@ -34,6 +39,7 @@ class Processor < Rake::ProcessorTask
     @inputs = []
     @outputs = []
     
+    @processing = false
     @processingDone = false
   end
   
@@ -68,6 +74,11 @@ class Processor < Rake::ProcessorTask
   # Execute all input processors, fetch their outputs and process them to create own output.
   # Returns true if processing took place and false else.
   def Process(*args)
+    if(!InTaskHierarchy?())
+      _ProcessInputs()
+      return true
+    end
+    
     if(@processing == true)
       raise "Circular dependency detected in processor chain"
     end
@@ -78,11 +89,11 @@ class Processor < Rake::ProcessorTask
     
     @processing = true
     
-    InvokeFromProcessor(args)
-    
     _FetchInputs()
     
     _ProcessInputs()
+    
+    InvokeFromProcessor(args)
     
     @processing = false
     

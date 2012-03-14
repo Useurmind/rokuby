@@ -7,11 +7,11 @@ module RakeBuilder
     attr_accessor :IncludeFileSpec
     
     def initialize(valueMap=nil)
-      super(valueMap)
       
       @SourceFileSpec = FileSpecification.new()
       @IncludeFileSpec = FileSpecification.new()
       
+      super(valueMap)
       Extend(valueMap, false)
     end
     

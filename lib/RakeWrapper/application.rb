@@ -20,7 +20,7 @@ module RakeBuilder
         'projectdefinition.rb',
         'Projectdefinition.rb',
         'projectDefinition.rb'
-        ].freeze
+        ]
     
       # This is implemented to forward the last description to the currently loaded file.
       def last_description=(value)
@@ -28,7 +28,7 @@ module RakeBuilder
       end
     
       def initialize
-        puts "Initializing Rake Builder Application"
+        #puts "Initializing Rake Builder Application"
         super
         @rakefiles = DEFAULT_RAKEFILES
         @ProjectFileLoader = RakeBuilder::ProjectFileLoader.new
@@ -218,7 +218,11 @@ module RakeBuilder
       end
       
       def DefineInformationUnit(iuClass, *args, &block)
-        return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineInformationUnit(iuClass, args, block)
+        return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineInformationUnit(iuClass, *args, &block)
+      end
+      
+      def DefineProcessor(procClass, *args, &block)
+        return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessor(procClass, *args, &block)
       end
     
       ##########################################################################################

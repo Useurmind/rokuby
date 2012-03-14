@@ -40,118 +40,40 @@ module RakeBuilder
   class VSProjectConfiguration < InformationConfiguration
     include DirectoryUtility
     
-    def Plat=(value)
-      @Plat = value
-    end
-    
-    def Plat()
-      if(@Plat == nil)
-        if(@Platform.Architecture == :x64)
-          return VS::Configuration::Platform::X64
-        elsif(@Platform.Architecture == :x86)
-          return VS::Configuration::Platform::WIN32
-        else
-          raise "Unknown platform type in #{self.class.name}"
-        end
-      end
-      
-      return @Plat
-    end
-    
+    attr_accessor :Plat    
     attr_accessor :TargetName    
     attr_accessor :TargetExt
     attr_accessor :ConfigurationType
-    
-    def UseDebugLibraries=(val)
-      @UseDebugLibraries = val
-    end    
-    def UseDebugLibraries
-      if(@UseDebugLibraries == nil)
-        return IsPlatformDebug()
-      end      
-      return @UseDebugLibraries 
-    end
-    
-    def WholeProgramOptimization=(val)
-      @WholeProgramOptimization = val
-    end
-    def WholeProgramOptimization
-      @WholeProgramOptimization == nil ? !IsPlatformDebug() : @WholeProgramOptimization
-    end
-    
+    attr_accessor :UseDebugLibraries
+    attr_accessor :WholeProgramOptimization    
     attr_accessor :CharacterSet
     attr_accessor :OutputDirectory
     attr_accessor :IntermediateDirectory
     attr_accessor :RuntimeLibrary
 
     attr_accessor :WarningLevel
-    
-    def Optimization=(val)
-      @Optimization = val
-    end
-    def Optimization
-      if(@Optimization == nil)
-        IsPlatformDebug() ? VS::ConfigurationType::Optimization::DISABLED : VS::ConfigurationType::Optimization::MAX_SPEED
-      end
-      return @Optimization
-    end
-    
+    attr_accessor :Optimization    
     attr_accessor :AdditionalIncludeDirectories
     attr_accessor :PreprocessorDefinitions
     attr_accessor :AssemblerOutput
-    
-    def FunctionLevelLinking=(value)
-      @FunctionLevelLinking = value
-    end
-    def FunctionLevelLinking
-      @FunctionLevelLinking == nil ? !IsPlatformDebug() : @FunctionLevelLinking
-    end
-    
-    def IntrinsicFunctions=(value)
-      @IntrinsicFunctions = value
-    end
-    def IntrinsicFunctions
-      @IntrinsicFunctions == nil ?  !IsPlatformDebug() : @IntrinsicFunctions
-    end
-    
+    attr_accessor :FunctionLevelLinking
+    attr_accessor :IntrinsicFunctions    
     attr_accessor :ProgramDataBaseFileName
     attr_accessor :ExceptionHandling
     attr_accessor :BufferSecurityCheck
     attr_accessor :DebugInformationFormat
     attr_accessor :InlineFunctionExpansion
 
-    def GenerateDebugInformation=(value)
-      @GenerateDebugInformation = value
-    end
-    def GenerateDebugInformation
-      @GenerateDebugInformation == nil ? IsPlatformDebug() : @GenerateDebugInformation
-    end
-    
+    attr_accessor :GenerateDebugInformation
     attr_accessor :AdditionalLibraryDirectories
     attr_accessor :AdditionalDependencies
-    
-    def EnableCOMDATFolding=(value)
-      @EnableCOMDATFolding = value
-    end
-    def EnableCOMDATFolding
-      @EnableCOMDATFolding == nil ? !IsPlatformDebug() : @EnableCOMDATFolding
-    end
-    
-    def OptimizeReferences=(value)
-      @OptimizeReferences = value
-    end
-    def OptimizeReferences
-      @OptimizeReferences == nil ? !IsPlatformDebug() : @OptimizeReferences
-    end
-    
+    attr_accessor :EnableCOMDATFolding
+    attr_accessor :OptimizeReferences    
     attr_accessor :ModuleDefinitionFile
     
     attr_accessor :PostBuildCommand
-    attr_accessor :AdditionalPostBuildAction
     
-    def initialize(valueMap=nil)
-      super(valueMap)
-      
+    def initialize(valueMap=nil)      
       @Plat = nil
 
       @TargetName = nil
@@ -185,11 +107,10 @@ module RakeBuilder
       @PreprocessorDefinitions = ["%(PreprocessorDefinitions)"]
       @AdditionalDependencies = ["%(AdditionalDependencies)"]
       
+      @PostBuildCommand = nil
+      
+      super(valueMap)
       Extend(valueMap, false)
-    end
-    
-    def IsPlatformDebug
-      return @Platform.Type == :Debug
     end
     
     def initialize_copy(original)
@@ -227,6 +148,8 @@ module RakeBuilder
       @AdditionalLibraryDirectories = Clone(original.AdditionalLibraryDirectories)
       @PreprocessorDefinitions = Clone(original.PreprocessorDefinitions)
       @AdditionalDependencies = Clone(original.AdditionalDependencies)
+      
+      @PostBuildCommand = Clone(original.PostBuildCommand)
     end
     
     def Extend(valueMap, callParent=true)
@@ -238,40 +161,150 @@ module RakeBuilder
         super(valueMap)
       end
       
-      raise "Extend not implemented in #{self.class.name}"
+      plat = valueMap[:Plat] || valueMap[:plat]
+      if(plat)
+        @Plat = plat
+      end
+
+      targetName = valueMap[:TargetName] || valueMap[:targetName]
+      if(targetName)
+          @TargetName = targetName
+      end
+  
+      targetExt = valueMap[:TargetExt] || valueMap[:targetExt]
+      if(targetExt)
+        @TargetExt = targetExt
+      end
       
-      @Plat = Clone(original.Plat)
-
-      @TargetName = Clone(original.TargetName)
-      @TargetExt = Clone(original.TargetExt)
-      @ConfigurationType = Clone(original.ConfigurationType)
-      @UseDebugLibraries = Clone(original.UseDebugLibraries)
-      @WholeProgramOptimization = Clone(original.WholeProgramOptimization)
-      @CharacterSet = Clone(original.CharacterSet)
-      @OutputDirectory = Clone(original.OutputDirectory)
-      @IntermediateDirectory = Clone(original.IntermediateDirectory)
-      @RuntimeLibrary = Clone(original.RuntimeLibrary)
-
-      @WarningLevel = Clone(original.WarningLevel)
-      @Optimization = Clone(original.Optimization)
-      @AssemblerOutput = Clone(original.AssemblerOutput)
-      @FunctionLevelLinking = Clone(original.FunctionLevelLinking)
-      @IntrinsicFunctions = Clone(original.IntrinsicFunctions)
-      @ProgramDataBaseFileName = Clone(original.ProgramDataBaseFileName)
-      @ExceptionHandling = Clone(original.ExceptionHandling)
-      @BufferSecurityCheck = Clone(original.BufferSecurityCheck)
-      @DebugInformationFormat = Clone(original.DebugInformationFormat)
-      @InlineFunctionExpansion = Clone(original.InlineFunctionExpansion)
-
-      @GenerateDebugInformation = Clone(original.GenerateDebugInformation)
-      @EnableCOMDATFolding = Clone(original.EnableCOMDATFolding)
-      @OptimizeReferences = Clone(original.OptimizeReferences)
-      @ModuleDefinitionFile = Clone(original.ModuleDefinitionFile)
+      configurationType = valueMap[:ConfigurationType] || valueMap[:configurationType]
+      if(configurationType)
+        @ConfigurationType = configurationType
+      end
       
-      @AdditionalIncludeDirectories = Clone(original.AdditionalIncludeDirectories)
-      @AdditionalLibraryDirectories = Clone(original.AdditionalLibraryDirectories)
-      @PreprocessorDefinitions = Clone(original.PreprocessorDefinitions)
-      @AdditionalDependencies = Clone(original.AdditionalDependencies)
+      useDebugLibraries = valueMap[:UseDebugLibraries] || valueMap[:useDebugLibraries]
+      if(useDebugLibraries)
+        @UseDebugLibraries = useDebugLibraries
+      end
+      
+      wholeProgramOptimization = valueMap[:WholeProgramOptimization] || valueMap[:wholeProgramOptimization]
+      if(wholeProgramOptimization)
+        @WholeProgramOptimization = wholeProgramOptimization
+      end
+      
+      characterSet = valueMap[:CharacterSet] || valueMap[:characterSet]
+      if(characterSet)
+        @CharacterSet = characterSet
+      end
+      
+      outputDirectory = valueMap[:OutputDirectory] || valueMap[:outputDirectory]
+      if(outputDirectory)
+        @OutputDirectory = outputDirectory
+      end
+      
+      intermediateDirectory = valueMap[:IntermediateDirectory] || valueMap[:intermediateDirectory]
+      if(intermediateDirectory)
+        @IntermediateDirectory = intermediateDirectory
+      end
+      
+      runtimeLibrary = valueMap[:RuntimeLibrary] || valueMap[:runtimeLibrary]
+      if(runtimeLibrary)
+        @RuntimeLibrary = runtimeLibrary
+      end
+
+      warningLevel = valueMap[:WarningLevel] || valueMap[:warningLevel]
+      if(warningLevel)
+        @WarningLevel = warningLevel
+      end
+      
+      optimization = valueMap[:Optimization] || valueMap[:optimization]
+      if(optimization)
+        @Optimization = optimization
+      end
+      
+      assemblerOutput = valueMap[:AssemblerOutput] || valueMap[:assemblerOutput]
+      if(assemblerOutput)
+        @AssemblerOutput = assemblerOutput
+      end
+      
+      functionLevelLinking = valueMap[:FunctionLevelLinking] || valueMap[:functionLevelLinking]
+      if(functionLevelLinking)
+        @FunctionLevelLinking = functionLevelLinking
+      end
+      
+      intrinsicFunctions = valueMap[:IntrinsicFunctions] || valueMap[:intrinsicFunctions]
+      if(intrinsicFunctions)
+        @IntrinsicFunctions = intrinsicFunctions
+      end
+      
+      programDataBaseFileName = valueMap[:ProgramDataBaseFileName] || valueMap[:programDataBaseFileName]
+      if(programDataBaseFileName)
+        @ProgramDataBaseFileName = programDataBaseFileName
+      end
+      
+      exceptionHandling = valueMap[:ExceptionHandling] || valueMap[:exceptionHandling]
+      if(exceptionHandling)
+        @ExceptionHandling = exceptionHandling
+      end
+      
+      bufferSecurityCheck = valueMap[:BufferSecurityCheck] || valueMap[:bufferSecurityCheck]
+      if(bufferSecurityCheck)
+        @BufferSecurityCheck = bufferSecurityCheck
+      end
+      
+      debugInformationFormat = valueMap[:DebugInformationFormat] || valueMap[:debugInformationFormat]
+      if(debugInformationFormat)
+        @DebugInformationFormat = debugInformationFormat
+      end
+      
+      inlineFunctionExpansion = valueMap[:InlineFunctionExpansion] || valueMap[:inlineFunctionExpansion]
+      if(inlineFunctionExpansion)
+        @InlineFunctionExpansion = inlineFunctionExpansion
+      end
+
+      generateDebugInformation = valueMap[:GenerateDebugInformation] || valueMap[:generateDebugInformation]
+      if(generateDebugInformation)
+        @GenerateDebugInformation = generateDebugInformation
+      end
+      
+      enableCOMDATFolding = valueMap[:EnableCOMDATFolding] || valueMap[:enableCOMDATFolding]
+      if(enableCOMDATFolding)
+        @EnableCOMDATFolding = enableCOMDATFolding
+      end
+      
+      optimizeReferences = valueMap[:OptimizeReferences] || valueMap[:optimizeReferences]
+      if(optimizeReferences)
+        @OptimizeReferences = optimizeReferences
+      end
+      
+      moduleDefinitionFile = valueMap[:ModuleDefinitionFile] || valueMap[:moduleDefinitionFile]
+      if(moduleDefinitionFile)
+        @ModuleDefinitionFile = moduleDefinitionFile
+      end
+      
+      additionalIncludeDirectories = valueMap[:AdditionalIncludeDirectories] || valueMap[:additionalIncludeDirectories]
+      if(additionalIncludeDirectories)
+        @AdditionalIncludeDirectories.concat(additionalIncludeDirectories)
+      end
+      
+      additionalLibraryDirectories = valueMap[:AdditionalLibraryDirectories] || valueMap[:additionalLibraryDirectories]
+      if(additionalLibraryDirectories)
+        @AdditionalLibraryDirectories.concat(additionalLibraryDirectories)
+      end
+      
+      preprocessorDefinitions = valueMap[:PreprocessorDefinitions] || valueMap[:preprocessorDefinitions]
+      if(preprocessorDefinitions)
+        @PreprocessorDefinitions.concat(preprocessorDefinitions)
+      end
+      
+      additionalDependencies = valueMap[:AdditionalDependencies] || valueMap[:additionalDependencies]
+      if(additionalDependencies)
+        @AdditionalDependencies.concat(additionalDependencies)
+      end
+      
+      postBuildCommand = valueMap[:PostBuildCommand] || valueMap[:postBuildCommand]
+      if(postBuildCommand)
+        @PostBuildCommand = postBuildCommand
+      end
     end
   end
 end

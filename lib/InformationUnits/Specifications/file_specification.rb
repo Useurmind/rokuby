@@ -9,10 +9,10 @@ module RakeBuilder
     attr_accessor :SearchPaths
     
     def initialize(valueMap=nil)
-      super(valueMap)
       @IncludePatterns = []
       @ExcludePatterns = []
-      @SearchPaths = []
+      @SearchPaths = []      
+      super(valueMap)
       Extend(valueMap, false)
     end
     
@@ -48,11 +48,11 @@ module RakeBuilder
       end
     end
     
-    def to_s
-      val = ""
-      val += "Include: #{@IncludePatterns}\n"
-      val += "Exclude: #{@ExcludePatterns}\n"
-      val += "Search Paths: #{@SearchPaths}\n"
-    end
+    #def to_s
+    #  val = ""
+    #  val += "Include: #{@IncludePatterns}\n"
+    #  val += "Exclude: #{@ExcludePatterns}\n"
+    #  val += "Search Paths: #{@SearchPaths}\n"
+    #end
   end
 end

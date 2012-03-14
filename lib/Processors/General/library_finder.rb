@@ -6,8 +6,8 @@ module RakeBuilder
   class LibraryFinder < Processor
     include FindFile
     
-    def initialize(name)
-      super(name)
+    def initialize(name=nil, app=nil, project_file=nil)
+      super(name, app, project_file)
       
       @knownInputClasses.push(RakeBuilder::LibrarySpecification)
     end
@@ -19,15 +19,17 @@ module RakeBuilder
         library = libraries[libSpec.Name]
         if(!library)
           library = Library.new()
+          library.Name = libSpec.Name
+          libraries[libSpec.Name] = library
         end
         
         libInstance = LibraryInstance.new()
-        libInstance.GetDefines(libSpec)        
+        libInstance.AddDefinesFrom(libSpec)        
         libInstance.Platform = libSpec.Platform
         
-        libInstance.FileSet.LibraryFileSet = FindFile(libSpec.LibraryLocation.LibFileSpec)
-        libInstance.FileSet.LinkFileSet = FindFile(libSpec.LibraryLocation.LinkFileSpec)
-        libInstance.FileSet.IncludeFileSet = FindFile(libSpec.LibraryLocation.IncludeFileSpec)
+        libInstance.FileSet.LibraryFileSet = FindFile(libSpec.Location.LibraryFileSpec)
+        libInstance.FileSet.LinkFileSet = FindFile(libSpec.Location.LinkFileSpec)
+        libInstance.FileSet.IncludeFileSet = FindFile(libSpec.Location.IncludeFileSpec)
         
         library.AddInstance(libInstance)
       end

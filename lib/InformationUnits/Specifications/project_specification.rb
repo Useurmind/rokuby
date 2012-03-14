@@ -7,11 +7,11 @@ module RakeBuilder
     attr_accessor :SourceSpecs
     
     def initialize(valueMap=nil)
-      super(valueMap)
       
       @LibrarySpecs = []
       @SourceSpecs = []
       
+      super(valueMap)
       Extend(valueMap, false)
     end
     
