@@ -5,7 +5,7 @@ module RakeBuilder
   # Many values will not be set by default. If they are not set by the user they will
   # be set based on the values in the project information classes.
   # General attributes:
-  # [Plat] The platform to compile for (based on the platform).
+  # [PlatformName] The platform to compile for (based on the platform).
   # [TargetName] The name of the resulting binary (based on the project description name and the platform extension).
   # [TargetExt] The extension for the resulting binary (based on the project description binary type).
   # [ConfigurationType] The type of binary that is created (based on the project description binary type).
@@ -37,10 +37,10 @@ module RakeBuilder
   # [EnableCOMDATFolding] Seems to be good for performance, e.g. release builds (bool) (based on the platform type).
   # [OptimizeReferences] Seems to be good for performance, e.g. release builds (bool) (based on the platform type).
   # [ModuleDefinitionFile] The file that describes the exports of a library.
-  class VSProjectConfiguration < InformationConfiguration
+  class VsProjectConfiguration < InformationConfiguration
     include DirectoryUtility
     
-    attr_accessor :Plat    
+    attr_accessor :PlatformName    
     attr_accessor :TargetName    
     attr_accessor :TargetExt
     attr_accessor :ConfigurationType
@@ -73,29 +73,41 @@ module RakeBuilder
     
     attr_accessor :PostBuildCommand
     
+    def Name
+       return @Platform.Name
+    end
+    
+    def NamePlatformCombi
+      return "#{Name()}|#{@PlatformName}"
+    end
+
+    def ConfigurationCondition
+      return "'$(Configuration)|$(Platform)'=='#{NamePlatformCombi()}'"
+    end
+    
     def initialize(valueMap=nil)      
-      @Plat = nil
+      @PlatformName = nil
 
       @TargetName = nil
       @TargetExt = nil
       @ConfigurationType = nil
       @UseDebugLibraries = nil
       @WholeProgramOptimization = nil
-      @CharacterSet = VS::Configuration::CharacterSet::NOT_SET
+      @CharacterSet = Vs::Configuration::CharacterSet::NOT_SET
       @OutputDirectory = nil
       @IntermediateDirectory = nil
-      @RuntimeLibrary = VS::Configuration::RuntimeLibrary::MULTITHREADED
+      @RuntimeLibrary = Vs::Configuration::RuntimeLibrary::MULTITHREADED
 
-      @WarningLevel = VS::Configuration::WarningLevel::LEVEL3
+      @WarningLevel = Vs::Configuration::WarningLevel::LEVEL3
       @Optimization = nil
-      @AssemblerOutput = VS::Configuration::AssemblerOutput::NO_LISTING
+      @AssemblerOutput = Vs::Configuration::AssemblerOutput::NO_LISTING
       @FunctionLevelLinking = nil
       @IntrinsicFunctions = nil
       @ProgramDataBaseFileName = nil
-      @ExceptionHandling = VS::Configuration::ExceptionHandling::SYNC
+      @ExceptionHandling = Vs::Configuration::ExceptionHandling::SYNC
       @BufferSecurityCheck = true
-      @DebugInformationFormat = VS::Configuration::DebugInformationFormat::EDIT_AND_CONTINUE
-      @InlineFunctionExpansion = VS::Configuration::InlineFunctionExpansion::DEFAULT
+      @DebugInformationFormat = Vs::Configuration::DebugInformationFormat::EDIT_AND_CONTINUE
+      @InlineFunctionExpansion = Vs::Configuration::InlineFunctionExpansion::DEFAULT
 
       @GenerateDebugInformation = nil
       @EnableCOMDATFolding = nil
@@ -116,7 +128,7 @@ module RakeBuilder
     def initialize_copy(original)
       super(original)
       
-      @Plat = Clone(original.Plat)
+      @PlatformName = Clone(original.PlatformName)
 
       @TargetName = Clone(original.TargetName)
       @TargetExt = Clone(original.TargetExt)
@@ -153,6 +165,7 @@ module RakeBuilder
     end
     
     def Extend(valueMap, callParent=true)
+      puts "in Extend of vsconf: #{valueMap}"
       if(valueMap == nil)
         return
       end
@@ -161,9 +174,9 @@ module RakeBuilder
         super(valueMap)
       end
       
-      plat = valueMap[:Plat] || valueMap[:plat]
+      plat = valueMap[:PlatformName] || valueMap[:platformName]
       if(plat)
-        @Plat = plat
+        @PlatformName = plat
       end
 
       targetName = valueMap[:TargetName] || valueMap[:targetName]

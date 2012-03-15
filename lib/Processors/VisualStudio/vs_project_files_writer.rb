@@ -5,20 +5,11 @@ module RakeBuilder
   # to create the files. There is no output from this processor and it only reads
   # the values that are given in the objects to create the files (there are no changes
   # made to them).
-  class VSProjectFilesWriter < Processor
-    include VSProjectProcessorUtility
+  class VsProjectFilesWriter < Processor
+    include VsProjectProcessorUtility
     
     def initialize(name, app, project_file)
       super(name, app, project_file)
-      
-      @projectInstance = nil
-      @projectDescription = nil
-      @projectConfigurations = []
-      @vsProjectInstance = nil
-      @vsProjectDescription = nil
-      @vsProjectConfigurations = []
-      
-      _DefineFileWritingTasks()
       
       _RegisterInputTypes()
     end
@@ -26,21 +17,8 @@ module RakeBuilder
     def _ProcessInputs
       _SortInputs()
       
-      Rake::DSL
-    end
-    
-    def _DefineFileWritingTasks()
-      @projectFileTask = @vsProjectDescription.ProjectFilePath.RelativePath
-      Rake::DSL::file @projectFileTask do
-        _CreateProjectFile()
-      end
-      Rake::DSL::clobber @projectFileTask
-      
-      @filterFileTask = @vsProjectDescription.FilterFilePath.RelativePath
-      Rake::DSL::file @filterFileTask do
-        _CreateFilterFile()
-      end
-      Rake::DSL::clobber @filterFileTask
+      _CreateFilterFile()
+      _CreateProjectFile()
     end
     
     def _CreateFilterFile
@@ -61,7 +39,7 @@ module RakeBuilder
       fileCreator.ProjectConfigurations = @projectConfigurations
       fileCreator.VsProjectInstance = @vsProjectInstance
       fileCreator.VsProjectDescription = @vsProjectDescription
-      fileCreator.VsConfigurations = @vsProjectConfigurations
+      fileCreator.VsProjectConfigurations = @vsProjectConfigurations
     end
   end
 end

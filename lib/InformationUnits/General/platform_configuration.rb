@@ -35,6 +35,7 @@ module RakeBuilder
       @Os = nil
       @Architecture = nil
       @Type = nil
+      @binaryExtension = nil
       Extend(valueMap, false)
     end   
     

@@ -1,43 +1,28 @@
 module RakeBuilder
-  # This processor processes VSProjectSpecifications to produce corresponding instances.
-  class VSProjectFinder < Processor
-     def initialize(name, app, project_file)
-      super(name, app, project_file)
+   # This processor processes VSProjectSpecifications to produce corresponding instances.
+   class VsProjectFinder < Processor
+      include FindFile
       
-      @knownInputClasses.push(RakeBuilder::VSProjectSpecification)
-    end
-    
-    def _ProcessInputs
-      resourceUnitSpecs = []
-      
-      vsProjectInstance = VSProjectInstance.new()
-      @inputs.each() do |input|
-        if(input.is_a?(RakeBuilder::VSProjectSpecification))
-          resourceUnitSpecs.concat(input.ResourceFileSpec)
-        end
+      alias initialize_processor initialize
+      def initialize(name=nil, app=nil, project_file=nil)
+         initialize_processor(name, app, project_file)
+         
+         @knownInputClasses.push(RakeBuilder::VsProjectSpecification)
       end
-      
-      vsProjectInstance.ResourceFileSet.concat(_ProcessResourceUnits(resourceUnitSpecs))
-      
-      @outputs = [vsProjectInstance]
-    end
     
-    def _ProcessSourceUnits(suSpecs)
-      suFinder = SourceUnitFinder.new()
-      
-      suFinder.AddInput(suSpecs)
-      suFinder.Process()
-      
-      return suFinder.Outputs()
-    end
-    
-    def _ProcessLibraries(libSpecs)
-      libFinder = LibraryFinder.new()
-      
-      libFinder.AddInput(libSpecs)
-      libFinder.Process()
-      
-      return libFinder.Outputs()
-    end
-  end
+      def _ProcessInputs         
+         vsProjectInstance = VsProjectInstance.new()
+         @inputs.each() do |input|
+           if(input.is_a?(RakeBuilder::VsProjectSpecification))
+             resFileSet = FindFile(input.ResourceFileSpec)
+             vsProjectInstance.ResourceFileSet = vsProjectInstance.ResourceFileSet + resFileSet
+           end
+         end
+         
+         puts "searched: #{@inputs}"
+         puts "rsources found: #{[vsProjectInstance.ResourceFileSet]}"
+         
+         @outputs = [vsProjectInstance]
+      end
+   end
 end

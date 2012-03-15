@@ -3,7 +3,7 @@ module RakeBuilder
   # visual studio projects.
   # The processor needs one VSSolutionDescription and one to several VSProject(s).
   # The processor does not produce any output.
-  class VSSolutionBuilder < Processor
+  class VsSolutionBuilder < Processor
     def initialize(name, app, project_file)
       super(name, app, project_file)
       

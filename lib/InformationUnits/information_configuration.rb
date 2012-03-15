@@ -25,6 +25,7 @@ module RakeBuilder
     end
     
     def Extend(valueMap, callParent=true)
+      puts "in Extend of infoconf: #{valueMap}"
       if(valueMap == nil)
         return
       end

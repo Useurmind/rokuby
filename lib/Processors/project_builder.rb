@@ -6,8 +6,8 @@ module RakeBuilder
   # They are merely a base class for building complete project builder classes
   # for specific types of projects.
   class ProjectBuilder < ProcessChain
-    def initialize(name)
-      super(name)
+    def initialize(name=nil, app=nil, projectFile=nil)
+      super(name, app, projectFile)
       
       @projectInstance = ProjectInstance.new()
       @projectDescription = ProjectDescription.new()

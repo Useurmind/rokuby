@@ -3,17 +3,23 @@ module RakeBuilder
   # A process chain is a directed graph structure of processors that are connected and
   # propagate their outputs to the next processors in the graph.
   class ProcessChain < Processor
-    attr_accessor :InputProcessor
-    attr_accessor :OutputProcessor
+    include RakeBuilder::DSL
     
-    def initialize(name)
-      super(name)
-      @processors = []
-      @processorInputs = {}
-      @InputProcessor = "#{@Name}_in"
-      @OutputProcessor = "#{@Name}_out"
-      AddProcessor(@InputProcessor)
-      AddProcessor(@OutputProcessor)
+    attr_reader :InputProcessorName
+    attr_reader :OutputProcessorName
+    attr_reader :InputProcessor
+    attr_reader :OutputProcessor    
+    
+    alias initialize_processor initialize    
+    def initialize(name=nil, app=nil, projectFile=nil)
+      initialize_processor(name, app, projectFile)
+      @InputProcessorName = "#{@Name}_in"
+      @OutputProcessorName = "#{@Name}_out"
+      
+      @InputProcessor = DefineProc PassthroughProcessor, @InputProcessorName
+      @OutputProcessor = DefineProc PassthroughProcessor, @OutputProcessorName
+      
+      AddProcessor(@OutputProcessorName)
     end
     
     def _InputKnown(input)
@@ -21,36 +27,82 @@ module RakeBuilder
     end
     
     def _ProcessInputs
-      @InputProcessor.AddInput(@inputs)
-      @OutputProcessor.Process()
-      @outputs = @OutputProcessor.Outputs()
+      OutputProcessor().Process()
+      @outputs = OutputProcessor().Outputs()
     end
     
     # Add a processor to this process chain.
     def AddProcessor(procName)
-      if(@processors[procName] == nil)
+      if(!prerequisites.include?(procName))
         prerequisites.push(procName)
+      end
+    end
+    
+    alias enhance_old enhance
+    def enhance(deps=nil, &block)
+      #puts "in enhance of #{name}: #{deps}"
+      InputProcessor().enhance(deps)
+      enhance_old(nil, &block)
+    end
+    
+    def AddInput(input)
+      InputProcessor().AddInput(input)
+    end
+    
+    # Extend/set the attributes of the process_chain.
+    # Same as in processor except that the inputs and dependecies are set on the input processor.
+    def Extend(valueMap, executeParent=true)
+      puts "in extend of process chain #{name}: #{valueMap}"
+      if(valueMap == nil)
+        return
+      end
+      
+      inputs = valueMap[:Inputs] || valueMap[:ins]
+      if(inputs)
+        InputProcessor().AddInput(inputs)
+      end
+      
+      throwOnUnknownInput = valueMap[:ThrowOnUnkownInput] || valueMap[:throwUnknown]
+      if(throwOnUnknownInput)
+        @ThrowOnUnkownInput = throwOnUnknownInput
+        InputProcessor().ThrowOnUnkownInput = throwOnUnknownInput
+        OutputProcessor().ThrowOnUnkownInput = throwOnUnknownInput
+      end
+      
+      dependencies = valueMap[:Dependencies] || valueMap[:deps]
+      if(dependencies)
+        InputProcessor().enhance(dependencies)
       end
     end
     
     # State that the first processor should be input processor to the second
     # processor.
+    # The args should be a list of processor name or :in, :out
     def Connect(*args)
+      #puts "Connecting processors in #{name}: #{args}"
       if(args.length == 0)
         return
       end
       
       procNames = args
-      if(args[0].respond_to?("length"))
+      if(args[0].class == Array)
         procNames = args[0]
       end
       
       lastProcName = nil
       procNames.each() do |procName|
-        if(lastProcName)
-          Rake::DSL::task procName => [lastProcName]
+        usedProcName = procName
+        if(procName == :in)
+          usedProcName = @InputProcessorName
+        elsif(procName == :out)
+          usedProcName = @OutputProcessorName
         end
-        lastProcName = procName
+        
+        if(lastProcName)
+          #puts "Adding #{lastProcName} to pres of #{usedProcName}"
+          Proc usedProcName, :procDeps => [lastProcName]
+        end
+        lastProcName = usedProcName
       end      
     end
   end

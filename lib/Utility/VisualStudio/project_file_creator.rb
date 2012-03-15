@@ -6,11 +6,13 @@ module RakeBuilder
       super
     end
 
-    def GetFileName()
-      return "#{@VsProject.ProjectName}.vcxproj"
+    def GetFilePath()
+      return @VsProjectDescription.ProjectFilePath
     end
 
     def BuildFile()
+      _JoinSourceUnits()
+      
       doc = XmlDocument.new()
       
       doc.Attributes = {
@@ -58,7 +60,8 @@ module RakeBuilder
       @projectTag.Children.push(@cppTargetsImport)
       @projectTag.Children.push(@extensionTargetsImportGroup)
       
-      doc.SaveToFile(@VsProject.ProjectFilePath)
+      CreateFileDirectory()
+      doc.SaveToFile(GetFilePath().AbsolutePath())
     end
 
     def CreateGlobalPropertyGroup()
@@ -66,8 +69,8 @@ module RakeBuilder
         name: "PropertyGroup",
         attributes: { "Label" => "Globals" },
         children: [
-          XmlTag.new({name: "ProjectGuid", value: @VsProject.Guid}),
-          XmlTag.new({name: "RootNamespace", value: @VsProject.RootNamespace})
+          XmlTag.new({name: "ProjectGuid", value: @VsProjectDescription.Guid}),
+          XmlTag.new({name: "RootNamespace", value: @VsProjectDescription.RootNamespace})
         ]
       })
     end
@@ -79,7 +82,7 @@ module RakeBuilder
       @configurationPropertyGroups = []
       @itemDefinitionGroups = []
       
-      @VsProject.VsProjectConfigurations.each do |configuration|
+      @VsProjectConfigurations.each do |configuration|
         @projectConfigurations.push(CreateProjectConfiguration(configuration))
         @propertyGroups.push(CreatePropertyGroup(configuration))
         @propertySheetsImportGroups.push(CreatePropertySheetsImportGroup(configuration))
@@ -91,10 +94,10 @@ module RakeBuilder
     def CreateProjectConfiguration(configuration)
       return XmlTag.new({
         name: "ProjectConfiguration",
-        attributes: { "Include" => configuration.GetNamePlatformCombi()},
+        attributes: { "Include" => configuration.NamePlatformCombi()},
         children: [
-          XmlTag.new({name: "Configuration", value: configuration.Name}),
-          XmlTag.new({name: "Platform", value: configuration.Platform})
+          XmlTag.new({name: "Configuration", value: configuration.Name()}),
+          XmlTag.new({name: "Platform", value: configuration.PlatformName})
         ]
       })
     end
@@ -103,7 +106,7 @@ module RakeBuilder
       return XmlTag.new({
         name: "PropertyGroup",
         attributes: {
-          "Condition" => configuration.GetConfigurationCondition(),
+          "Condition" => configuration.ConfigurationCondition(),
           "Label"=>"Configuration"
         },
         children: [
@@ -120,7 +123,7 @@ module RakeBuilder
         name: "ImportGroup",
         attributes: {
           "Label" => "PropertySheets",
-          "Condition" => configuration.GetConfigurationCondition()
+          "Condition" => configuration.ConfigurationCondition()
         },
         children: [
           XmlTag.new({
@@ -136,36 +139,42 @@ module RakeBuilder
     end
 
     def CreatePropertyGroup(configuration)
+      puts "Creating property group for configuration #{[configuration]}"
       return XmlTag.new({
         name: "PropertyGroup",
         attributes: {
-          "Condition" => configuration.GetConfigurationCondition()
+          "Condition" => configuration.ConfigurationCondition()
         },
         children: [
-          XmlTag.new( { name: "OutDir", value: configuration.OutputDirectory } ),
-          XmlTag.new( { name: "IntDir", value: configuration.IntermediateDirectory } )
+          XmlTag.new( { name: "OutDir", value: _GetVsProjectRelativePath(configuration.OutputDirectory).RelativePath } ),
+          XmlTag.new( { name: "IntDir", value: _GetVsProjectRelativePath(configuration.IntermediateDirectory).RelativePath } )
         ]
       })
     end
 
     def CreateItemDefinitionGroup(configuration)
-      additionalIncludeDirectories = configuration.AdditionalIncludeDirectories
+      vsRelativeAdditionalIncludeDirectories = []
       
-      @VsProject.Dependencies.each do |dependency|
-        dependency.VsProjectConfigurations.each do |projectConfiguration|
-          if(projectConfiguration.Name == configuration.Name)
-            puts "Found dependency configuration"
-            additionalIncludeDirectories.concat(projectConfiguration.AdditionalIncludeDirectories)
-          end
-        end
+      configuration.AdditionalIncludeDirectories.each() do |dirPath|
+        vsRelativeAdditionalIncludeDirectories.push(_GetVsProjectRelativePath(dirPath).RelativePath)
       end
+      
+      
+      #@VsProject.Dependencies.each do |dependency|
+      #  dependency.VsProjectConfigurations.each do |projectConfiguration|
+      #    if(projectConfiguration.Name == configuration.Name)
+      #      puts "Found dependency configuration"
+      #      additionalIncludeDirectories.concat(projectConfiguration.AdditionalIncludeDirectories)
+      #    end
+      #  end
+      #end
       
       clCompileElement = XmlTag.new({
         name: "ClCompile",
         children: [
           XmlTag.new( { name: "WarningLevel", value: configuration.WarningLevel }),
           XmlTag.new( { name: "Optimization", value: configuration.Optimization }),
-          XmlTag.new( { name: "AdditionalIncludeDirectories", value: additionalIncludeDirectories.join(';') }),
+          XmlTag.new( { name: "AdditionalIncludeDirectories", value: vsRelativeAdditionalIncludeDirectories.join(';') }),
           XmlTag.new( { name: "PreprocessorDefinitions", value: configuration.PreprocessorDefinitions.join(';') }),
           XmlTag.new( { name: "AssemblerOutput", value: configuration.AssemblerOutput }),
           XmlTag.new( { name: "FunctionLevelLinking", value: configuration.FunctionLevelLinking.to_s() }),
@@ -179,18 +188,23 @@ module RakeBuilder
         ]
       })
 
+      vsRelativeLibraryDirectories = []
+      configuration.AdditionalLibraryDirectories.each() do |libPath|
+        vsRelativeLibraryDirectories.push(_GetVsProjectRelativePath(libPath).RelativePath)
+      end
+
       linkElement = XmlTag.new({
         name: "Link",
         children: [
           XmlTag.new( { name: "GenerateDebugInformation", value: configuration.GenerateDebugInformation.to_s() }),
-          XmlTag.new( { name: "AdditionalLibraryDirectories", value: configuration.AdditionalLibraryDirectories.join(';') }),
+          XmlTag.new( { name: "AdditionalLibraryDirectories", value: vsRelativeLibraryDirectories.join(';') }),
           XmlTag.new( { name: "AdditionalDependencies", value: configuration.AdditionalDependencies.join(';') }),
           XmlTag.new( { name: "EnableCOMDATFolding", value: configuration.EnableCOMDATFolding.to_s() }),
           XmlTag.new( { name: "OptimizeReferences", value: configuration.OptimizeReferences.to_s() })
         ]
       })
       if(configuration.ModuleDefinitionFile != nil)
-        linkElement.Children.push( XmlTag.new( { name: "ModuleDefinitionFile", value: configuration.ModuleDefinitionFile } ) )
+        linkElement.Children.push( XmlTag.new( { name: "ModuleDefinitionFile", value: _GetVsProjectRelativePath(configuration.ModuleDefinitionFile).RelativePath } ) )
       end
       
       postBuildEventElementCommand = XmlTag.new({
@@ -203,7 +217,7 @@ module RakeBuilder
       return XmlTag.new({
         name: "ItemDefinitionGroup",
         attributes: {
-          "Condition" => configuration.GetConfigurationCondition()
+          "Condition" => configuration.ConfigurationCondition()
         },
         children: [ clCompileElement, linkElement, postBuildEventElementCommand ]
       })
@@ -238,16 +252,14 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      extendedIncludePaths = @VsProject.GetExtendedIncludes(@VsProject.VsProjectConfigurations[0].HeaderExcludePatterns)
-
-      extendedIncludePaths.each do |headerfile|
-        relativeHeader = _GetVsProjectRelativePath(headerfile)
+      @SourceUnit.IncludeFileSet.FilePaths.each() do |filePath|
+        headerPath = _GetVsProjectRelativePath(filePath)
         
         @headerItemGroup.Children.push( XmlTag.new({
           name: "ClInclude",
-          attributes: {"Include" => relativeHeader}
+          attributes: {"Include" => headerPath.RelativePath}
         }))
-      end
+      end 
     end
 
     def CreateSourceItemGroup()
@@ -255,16 +267,14 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      extendedSourcePaths = @VsProject.GetExtendedSources(@VsProject.VsProjectConfigurations[0].SourceExcludePatterns)
-
-      extendedSourcePaths.each do |sourcefile|
-        relativeSource = _GetVsProjectRelativePath(sourcefile)
-     
+      @SourceUnit.SourceFileSet.FilePaths.each() do |filePath|
+        sourcePath = _GetVsProjectRelativePath(filePath)
+        
         @sourceItemGroup.Children.push( XmlTag.new({
           name: "ClCompile",
-         attributes: {"Include" => relativeSource}
+         attributes: {"Include" => sourcePath.RelativePath}
         }))
-      end
+      end 
     end
     
     def CreateResourceItemGroup()
@@ -272,14 +282,13 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      extendedResourcePaths = @VsProject.GetExtendedResources()
+      puts "resource file set: #{[@ResourceFileSet]}"
+      @ResourceFileSet.FilePaths.each() do |filePath|
+        resourcePath = _GetVsProjectRelativePath(filePath)
 
-      extendedResourcePaths.each do |resourcefile|
-        relativeResource = _GetVsProjectRelativePath(resourcefile)
-     
-        @sourceItemGroup.Children.push( XmlTag.new({
+        @resourceItemGroup.Children.push( XmlTag.new({
           name: "ResourceCompile",
-          attributes: {"Include" => relativeResource}
+          attributes: {"Include" => resourcePath.RelativePath}
         }))
       end
     end

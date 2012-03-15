@@ -4,7 +4,7 @@ module RakeBuilder
   # [FilterFilePath] The path of the filter file.
   # [Guid] A unique UUID of the project in the form '{45CD...}'.
   # [RootNamespace] The root namespace of the project.
-  class VSProjectDescription < InformationUnit
+  class VsProjectDescription < InformationUnit
     attr_accessor :ProjectFilePath
     attr_accessor :FilterFilePath
     attr_accessor :Guid

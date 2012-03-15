@@ -1,6 +1,6 @@
 module RakeBuilder
   # This class holds the information found through a specification.
-  class VSProjectSpecification < InformationInstance
+  class VsProjectInstance < InformationInstance
     attr_accessor :ResourceFileSet
     
     def initialize(valueMap=nil)

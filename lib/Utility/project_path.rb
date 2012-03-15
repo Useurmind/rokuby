@@ -47,6 +47,11 @@ module RakeBuilder
       return File.directory?(AbsolutePath())
     end
     
+    # Is this an empty directory empty
+    def EmptyDirectory?
+      return directory?() && Dir.entries(AbsolutePath()).length == 2  # only . and .. are entries of the directory
+    end
+    
     # Returns a path that represents the path saved in this project path.
     def AbsolutePath      
       return JoinPaths([@BasePath, @RelativePath])
@@ -234,10 +239,13 @@ module RakeBuilder
       return AbsolutePath() == path.AbsolutePath()
     end   
     
+    # Same as to_s
     def str
       return to_s()
     end
     
+    # This stringifyer is for a human readable string with indication of the relative path.
+    # Don't use as string version for functions. Use AbsolutePath, RelativePath, BasePath, etc. instead.
     def to_s
       return (@BasePath || "") + "|" + (@RelativePath || "nil")
     end

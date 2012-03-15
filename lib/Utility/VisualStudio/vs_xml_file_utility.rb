@@ -6,7 +6,7 @@ include REXML
 module RakeBuilder
 
   module VsXmlFileUtility
-    include DirectoryUtility
+    include PathUtility
 
     def SaveXmlDocument(doc, path, options)
       file = File.open(path, 'w')

@@ -113,36 +113,48 @@ module RakeBuilder
     #    Visual Studio
     
     def VsProj(*args, &block)
-      return Rake.application.DefineInformationUnit(VSProject, *args, &block)
+      return Rake.application.DefineInformationUnit(VsProject, *args, &block)
     end
     
     def VsProjConf(*args, &block)
-      return Rake.application.DefineInformationUnit(VSProjectConfiguration, *args, &block)
+      return Rake.application.DefineInformationUnit(VsProjectConfiguration, *args, &block)
     end
     
     def VsProjDescr(*args, &block)
-      return Rake.application.DefineInformationUnit(VSProjectDescription, *args, &block)
+      return Rake.application.DefineInformationUnit(VsProjectDescription, *args, &block)
     end
     
     def VsProjInst(*args, &block)
-      return Rake.application.DefineInformationUnit(VSProjectInstance, *args, &block)
+      return Rake.application.DefineInformationUnit(VsProjectInstance, *args, &block)
     end
     
     def VsProjSpec(*args, &block)
-      return Rake.application.DefineInformationUnit(VSProjectSpecification, *args, &block)
+      return Rake.application.DefineInformationUnit(VsProjectSpecification, *args, &block)
     end
     
     def VsSlnDescr(*args, &block)
-      return Rake.application.DefineInformationUnit(VSSolutionDescription, *args, &block)
+      return Rake.application.DefineInformationUnit(VsSolutionDescription, *args, &block)
     end
     
     ####################################################
     # Processors
     
-    def Proc(procClass, *args, &block)
+    # general processors
+    def Proc(*args, &block)
+      return Rake.application.DefineProcessor(nil, *args, &block)
+    end
+    
+    def DefineProc(procClass, *args, &block)
       return Rake.application.DefineProcessor(procClass, *args, &block)
     end
     
+    def Chain(*args, &block)
+      return Rake.application.DefineProcessChain(nil, *args, &block)
+    end
+    
+    def DefineChain(chainClass, *args, &block)
+      return Rake.application.DefineProcessChain(chainClass, *args, &block)
+    end    
   end
 end
 

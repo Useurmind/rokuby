@@ -1,7 +1,7 @@
 module RakeBuilder
   # This class holds additional specifications for information needed to create
   # a visual studio project.
-  class VSProjectSpecification < InformationSpecification
+  class VsProjectSpecification < InformationSpecification
     attr_accessor :ResourceFileSpec
     
     def initialize(valueMap=nil)

@@ -14,12 +14,14 @@ module RakeBuilder
     
     # The args for the processor include the following:
     # For examples how this can be formatted see the unit tests (-> Test_ProcessManager).
+    # If procClass is nil only existing processors can be retrieved.
     # - [name]: The name of the processor (required).
     # - [procIns]: An array or list of input args (optional)
     # - [valueMap]: A map of values that should be used to configure the processor with extend (optional).
     # - [procArgs]: A list of input arguments for the task (optional).
     # - [procDeps]: An array of dependencies for the task (optional)
-    def DefineProcessor(procClass, *args, &block)      
+    def DefineProcessor(procClass, *args, &block)
+      #puts "DEfineProcessor: #{args}"
       name, args = _GetProcessorName(*args)
       
       if(!name)
@@ -28,8 +30,13 @@ module RakeBuilder
       
       processor = _GetProcessor(procClass, name)
       
+      if(processor == nil)
+        return nil
+      end
+      
       inputs, valueMap, taskArgs, taskDeps = _ParseProcessorArgs(*args)
       
+      #puts "enhancing processor task #{name}: #{inputs}, #{valueMap}, #{taskArgs}, #{taskDeps}"
       processor.enhance(taskDeps, &block)
       processor.set_arg_names(taskArgs)
       
@@ -41,24 +48,34 @@ module RakeBuilder
       return processor
     end
     
-    def ChangeProcessChain(chainClass, *args, &block)
-      name = _GetProcessChainName(chainClass, *args)
+    # Define or change a new/existing process chain.
+    # The arguments for the process chain are the names of the processors that should be
+    # concated.
+    def DefineProcessChain(chainClass, *args, &block)
+      #puts "in DefineProcessChain: #{chainClass}, #{args}"
+      name, args = _GetProcessorName(*args)
       if(!name)
         return nil
       end
       
-      processChain, newChain = _GetProcessChain(chainClass, name)
-      if(newChain)
-        processChain.Task = Processor.define_task(taskArgs, &block)
+      #puts "Creating process chain #{name}"
+      
+      processChain = _GetProcessChain(chainClass, name)
+      if(processChain == nil)
+        return nil
       end
       
-      args = args.drop(1)  # drop the name
+      procNames, procArgs = _ParseProcessChainArgs(*args)
       
-      _ParseProcessChainArgs(args)
+      #puts "procNames, procArgs for #{name}: #{procNames}, #{procArgs}"
+      
+      processChain.Connect(*procNames)
+      DefineProcessor(nil, name, procArgs, &block)
     end
     
     # Retrieves the processor name and the rest of the arguments
     def _GetProcessorName(*args)
+      #puts "in GetProcessorName: #{args}"
       if(args.length < 1 || (args[0].class != String && args[0].class != Symbol))
         return nil, args
       end
@@ -94,28 +111,43 @@ module RakeBuilder
     end
      
     def _ParseProcessChainArgs(*args)
-      procChainArgs = nil
+      procNames = []
       procArgs = nil
       
-      return name, procArgs, procChainArgs
-    end
-    
-    # Parse an array containing processors and/or processor input maps
-    def _ParseProcessorChain(processorChain)
+      args.each() do |arg|
+        if(arg.class == Hash)
+          procArgs = arg
+        else
+          procNames.push(arg)
+        end
+      end
+      
+      return procNames, procArgs
     end
         
     def _GetProcessChain(procChainClass, name)
       if(@ProcessChains[name])
-        return @ProcessChains[name], false
+        return @ProcessChains[name]
       end
       
-      @ProcessChains[name] = procChainClass.new(name)
-      return @ProcessChains[name], true
+      if(procChainClass == nil)
+        return nil
+      end
+      
+      processChain = intern(procChainClass, name)
+      @ProcessChains[name] = processChain
+      @Processors[name] = processChain
+      
+      return processChain
     end
     
     def _GetProcessor(procClass, name)      
       if(@Processors[name])
         return @Processors[name]
+      end
+      
+      if(procClass == nil)
+        return nil
       end
       
       @Processors[name] = intern(procClass, name)

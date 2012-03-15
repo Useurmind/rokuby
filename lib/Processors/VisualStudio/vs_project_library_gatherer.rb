@@ -1,7 +1,7 @@
 module RakeBuilder
   # This class is responsible for gathering 
-  class VSProjectLibraryGatherer < Processor
-    include VSProjectProcessorUtility
+  class VsProjectLibraryGatherer < Processor
+    include VsProjectProcessorUtility
     
     def initialize(name, app, project_file)
       super(name, app, project_file)

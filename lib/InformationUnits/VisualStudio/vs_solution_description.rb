@@ -2,7 +2,7 @@ module RakeBuilder
   # Contains information that is needed to create a visual studio solution.
   # [Name] The name of the solution
   # [SolutionFilePath] The path of the solution file (normally derived automatically).
-  class VSSolutionDescription < InformationUnit
+  class VsSolutionDescription < InformationUnit
     attr_accessor :Name
     attr_accessor :SolutionFilePath
     

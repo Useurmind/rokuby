@@ -26,13 +26,15 @@ class Processor < Rake::ProcessorTask
     @knownInputClasses
   end
   
+  alias initialize_processortask initialize
   def initialize(name=nil, app=nil, project_file=nil)    
     name = (name || GetUUID())
     
-    super(name, app, project_file)
+    #puts "in init processor #{name}"
+    initialize_processortask(name, app, project_file)
     
     @Name = name
-    @ThrowOnUnknownInput = true
+    @ThrowOnUnknownInput = false
     
     @knownInputClasses = []  # list of classes that can be processed by this processor, define in actual processor
     
@@ -44,12 +46,19 @@ class Processor < Rake::ProcessorTask
   end
   
   # This can only be called after invoking the task.
-  def _InputProcessors
-    inputProcs = prerequisites.uniq().select do |pre|
+  def _InputProcessors    
+    inputProcs = {}
+    
+    puts "pres of #{name}: #{prerequisites}"
+    
+    prerequisites.uniq().each() do |pre|
       t = lookup_prerequisite(pre)
-      return t.is_a?(Processor)
+      if(t.is_a?(Processor))
+        inputProcs[pre] = t
+      end
     end
     
+    #puts "input processors: #{inputProcs}"
     return inputProcs
   end
   
@@ -64,7 +73,9 @@ class Processor < Rake::ProcessorTask
   end
   
   def _FetchInputs
+    #puts "in FetchInputs of processor #{self}"
     _InputProcessors().each() do |name, inputProcessor|
+      puts "collecting outputs in #{@Name} from processor #{name}: #{inputProcessor.Outputs()}"
       inputProcessor.Outputs().each() do |output|
         AddInput(output)
       end
@@ -73,8 +84,8 @@ class Processor < Rake::ProcessorTask
   
   # Execute all input processors, fetch their outputs and process them to create own output.
   # Returns true if processing took place and false else.
-  def Process(*args)
-    if(!InTaskHierarchy?())
+  def Process(task_args=nil, invocation_chain=nil)
+    if(!InTaskHierarchy?())  # Only do checking for processors that are integrated into the task hierarchy
       _ProcessInputs()
       return true
     end
@@ -89,11 +100,17 @@ class Processor < Rake::ProcessorTask
     
     @processing = true
     
+    puts "Invoking pres in #{name}"
+    InvokePrerequisites(task_args, invocation_chain)
+    
+    puts "Fetching inputs in #{name}"
     _FetchInputs()
     
+    puts "Processing inputs in #{name}: #{@inputs}"
     _ProcessInputs()
     
-    InvokeFromProcessor(args)
+    puts "Executing actions in #{name}"
+    Execute(task_args)
     
     @processing = false
     
@@ -111,7 +128,7 @@ class Processor < Rake::ProcessorTask
   # Add one or several inputs to the input queue of this class.
   # If at least one of the inputs was not successfully added returns false, else true.
   def AddInput(input)
-    if(input.respond_to?("length"))
+    if(input.class == Array)
       inputsDone = true
       input.each() do |inp|
         inputsDone = inputsDone and _AddInput(inp)

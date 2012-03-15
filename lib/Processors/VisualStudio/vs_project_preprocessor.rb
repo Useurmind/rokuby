@@ -9,19 +9,19 @@ module RakeBuilder
   # This normally means that values in the visual studio configuration that are not set
   # can be overwritten/modified by values in the project configuration. Values that are
   # set by the user in the visual studio project objects should never be modified.
-  class VSProjectPreprocessor < Processor
+  class VsProjectPreprocessor < Processor
     def initialize(name, app, project_file)
       super(name, app, project_file)
       
       @projectDescription = nil
       @projectConfigurations = []
-      @vsProjectDescription = nil
+      @vsProjectDescription = VsProjectDescription.new()
       @vsProjectConfigurations = []
       
       @knownInputClasses.push(RakeBuilder::ProjectDescription)
       @knownInputClasses.push(RakeBuilder::ProjectConfiguration)
-      @knownInputClasses.push(RakeBuilder::VSProjectDescription)
-      @knownInputClasses.push(RakeBuilder::VSProjectConfiguration)
+      @knownInputClasses.push(RakeBuilder::VsProjectDescription)
+      @knownInputClasses.push(RakeBuilder::VsProjectConfiguration)
     end
     
     def _ProcessInputs
@@ -44,9 +44,9 @@ module RakeBuilder
           @projectDescription = input
         elsif(input.is_a?(RakeBuilder::ProjectConfiguration))
           @projectConfigurations.push(input)
-        elsif(input.is_a?(RakeBuilder::VSProjectDescription))
+        elsif(input.is_a?(RakeBuilder::VsProjectDescription))
           @vsProjectDescription = input
-        elsif(input.is_a?(RakeBuilder::VSProjectConfiguration))
+        elsif(input.is_a?(RakeBuilder::VsProjectConfiguration))
           @vsProjectConfigurations.push(input)
         end
       end
@@ -56,11 +56,17 @@ module RakeBuilder
       projectFilesBasePath = @projectDescription.ProjectPath + ProjectPath.new(PROJECT_SUBDIR)
       projectFileBaseName = @projectDescription.Name
       
-      @vsProjectDescription.ProjectFilePath = projectFilesBasePath + ProjectPath.new("#{projectFileBaseName}.vcxproj")
-      @vsProjectDescription.FilterFilePath = projectFilesBasePath + ProjectPath.new("#{projectFileBaseName}.vcxproj.filters")
+      if(@vsProjectDescription.ProjectFilePath == nil)
+        @vsProjectDescription.ProjectFilePath = projectFilesBasePath + ProjectPath.new("#{projectFileBaseName}.vcxproj")
+      end
+      if(@vsProjectDescription.FilterFilePath == nil)
+        @vsProjectDescription.FilterFilePath = projectFilesBasePath + ProjectPath.new("#{projectFileBaseName}.vcxproj.filters")
+      end
     end
     
     def _ExtendVsProjectConfigurations
+      puts "in _ExtendVsProjectConfigurations: #{@vsProjectConfigurations}"
+      
       @vsProjectConfigurations.each() do |vsConf|
         
         # Set binary name and extension and configuration type
@@ -90,6 +96,7 @@ module RakeBuilder
         
         # Set the intermediate and output directories
         if(vsConf.OutputDirectory == nil)
+          puts "setting output directory on configuration #{@projectDescription.BuildPath + ProjectPath.new(vsConf.Platform.Name)}"
           vsConf.OutputDirectory = @projectDescription.BuildPath + ProjectPath.new(vsConf.Platform.Name)
         end
         if(vsConf.IntermediateDirectory == nil)
@@ -110,7 +117,7 @@ module RakeBuilder
         end
       end
       
-      vsProjectConfigurations = remainingConfigurations
+      @vsProjectConfigurations = remainingConfigurations
     end
     
     def _HaveProjectConfiguration(platform)

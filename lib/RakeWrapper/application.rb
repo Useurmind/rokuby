@@ -224,6 +224,10 @@ module RakeBuilder
       def DefineProcessor(procClass, *args, &block)
         return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessor(procClass, *args, &block)
       end
+      
+      def DefineProcessChain(chainClass, *args, &block)
+        return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessChain(chainClass, *args, &block)
+      end
     
       ##########################################################################################
       # Interface used for the definition and lookup of task/rules etc. , mostly used in the dsl

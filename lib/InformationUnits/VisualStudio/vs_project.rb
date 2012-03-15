@@ -2,7 +2,7 @@ module RakeBuilder
   # This class represents a visual studio project.
   # [ProjectFileSet] A file set representing the project file of the project.
   # [FilterFileSet] A file set representing the filter file of the project.
-  class VSProject < Project
+  class VsProject < Project
     attr_accessor :ProjectFileSet
     attr_accessor :FilterFileSet
     

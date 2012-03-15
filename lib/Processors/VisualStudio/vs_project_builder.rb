@@ -7,48 +7,37 @@ module RakeBuilder
   # platform they are defined for. Make sure that there is at most one visual studio and normal
   # project configuration for each platform.
   # Output of this processor is a VSProject instance that represents the created project.
-  class VSProjectBuilder < ProjectBuilder
-    def initialize(name, app, project_file)
+  class VsProjectBuilder < ProjectBuilder
+    def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
-      @processChain = ProcessChain.new()
+      @projectPreprocessor = DefineProc VsProjectPreprocessor, "#{@Name}_Pre"
+      @projectCreator = DefineProc VsProjectCreator, "#{@Name}_Proj"
+      @fileWriter = DefineProc VsProjectFilesWriter, "#{@Name}_Files"
+      @vsProjectFinder = DefineProc VsProjectFinder, "#{@Name}_ProjFinder"
       
-      @projectPreprocessor = VSProjectPreprocessor.new()
-      @projectCreator = VSProjectCreator.new()
-      @fileWriter = VSProjectFilesWriter.new()
-      
-      @processChain.Connect(@projectPreprocessor, @fileWriter)
-      @processChain.Connect(@projectPreprocessor, @projectCreator)      
-      
-      @vsProjectDescription = VSProjectDescription.new()
-      @vsProjectInstance = VSProjectInstance.new()
+      Connect(:in, @fileWriter.to_s)
+      Connect(:in, @vsProjectFinder.to_s, @fileWriter.to_s)
+      Connect(:in, @projectPreprocessor.to_s)
+      Connect(@projectPreprocessor.to_s, @fileWriter.to_s)
+      Connect(@projectPreprocessor.to_s, @projectCreator.to_s)      
+      Connect(@fileWriter.to_s, @projectCreator.to_s)
+      Connect(@projectCreator.to_s, :out)
+            
+      @vsProjectDescription = VsProjectDescription.new()
+      @vsProjectInstance = VsProjectInstance.new()
       @vsProjectConfigurations = []
       
-      @knownInputClasses.push(RakeBuilder::VSProjectDescription)
-      @knownInputClasses.push(RakeBuilder::VSProjectInstance)
-      @knownInputClasses.push(RakeBuilder::VSProjectConfiguration)
+      @knownInputClasses.push(RakeBuilder::VsProjectDescription)
+      @knownInputClasses.push(RakeBuilder::VsProjectInstance)
+      @knownInputClasses.push(RakeBuilder::VsProjectConfiguration)
     end
     
-    def _BuildProject
-      @processChain.AddInput(@projectPreprocessor, @inputs)
-      
-      @processChain.AddInput(@fileWriter, @vsProjectInstance)
-      @processChain.AddInput(@fileWriter, @projectInstance)
-      
-      @processChain.AddInput(@projectCreator, @vsProjectInstance)
-      @processChain.AddInput(@projectCreator, @projectInstance)
-      
-      @processChain.Process()
-      
-      @outputs = @projectCreator.Outputs
+    def _ProcessInputs
     end
     
     def _CheckInputs
       super()
-      
-      if(@vsProjectDescription == nil)
-        raise "No project description given in #{self.class.name}"
-      end
     end
     
     def _SortInput(input)

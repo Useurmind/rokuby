@@ -101,7 +101,7 @@ module RakeBuilder
       abort "Could not find file #{filename} in the directories #{directories}"
     end
 
-    # Returns the project pathes to all subdirs of a directory and the directory itself.
+    # Returns the project paths to all subdirs of a directory and the directory itself.
     # For example:
     # - dir1
     #   - dir2
@@ -125,11 +125,9 @@ module RakeBuilder
           next
         end
 
-        if(subPath.directory?())
-	  subTree = GetDirectoryTree(subPath, excludePatterns)
-	  if(subTree.length > 1 or !excludeEmpty)
-	    subdirs = subdirs + subTree
-	  end          
+        if(subPath.directory?() && !(excludeEmpty && subPath.EmptyDirectory?()))
+	  subTree = GetDirectoryTree(subPath, excludePatterns, excludeEmpty)	  
+	  subdirs = subdirs + subTree
         end
       end
       return subdirs

@@ -1,8 +1,8 @@
 module RakeBuilder
   # This class is responsible for building a library instance of the project that
   # can be reused in other projects.
-  class VSProjectLibraryCreator < Processor
-    include VSProjectProcessorUtility
+  class VsProjectLibraryCreator < Processor
+    include VsProjectProcessorUtility
     
     def initialize(name, app, project_file)
       super(name, app, project_file)

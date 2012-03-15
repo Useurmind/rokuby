@@ -1,14 +1,16 @@
 module RakeBuilder
+  # A base class for all objects that need to create files used by VisualStudio.
   class VsFileCreator
     include VsXmlFileUtility
     include GeneralUtility
+    include DirectoryUtility
     
     attr_accessor :ProjectDescription
     attr_accessor :ProjectInstance
     attr_accessor :ProjectConfigurations
     attr_accessor :VsProjectInstance
     attr_accessor :VsProjectDescription
-    attr_accessor :VsConfigurations
+    attr_accessor :VsProjectConfigurations
 
     def initialize
       @ProjectDescription = nil
@@ -16,13 +18,18 @@ module RakeBuilder
       @ProjectConfigurations = []
       @VsProjectInstance = nil
       @VsProjectDescription = nil
-      @VsConfigurations = []
+      @VsProjectConfigurations = []
       
       @options = {
         "NoEscape" => true,
         "XmlDeclaration" => "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
         "RootName" => "Project"
       }
+    end
+    
+    def CreateFileDirectory
+      directory = GetFilePath().AbsoluteDirectory()
+      Dir::mkdir(directory) unless File.exists?(directory)
     end
 
     def BuildFile
@@ -33,18 +40,20 @@ module RakeBuilder
     def GetFileName()
       abort "GetFileName not implemented in #{self.class.name}"
     end
-
-    # Return the directory of the given file path relative to the base directory of
-    # the project.
-    # The path will be formatted in visual studio xml path format.
-    # Example: 'C:/../projectBase/include/header1.h' -> 'include\header1.h'
-    def _GetProjectDirectoryRelativeBaseDirectory(file)
-      return GetProjectDirectoryRelativeBaseDirectory(@VsProject.GetProjectRelativePath(file))
+    
+    # Concat all source units contained in the project instance into one source unit named @SourceUnit
+    def _JoinSourceUnits
+      @SourceUnit = @ProjectInstance.SourceUnits[0]
+      for i in 1..@ProjectInstance.SourceUnits.length-1
+        @SourceUnit = @SourceUnit + @ProjectInstance.SourceUnits[i]
+      end
+      
+      @ResourceFileSet = @VsProjectInstance.ResourceFileSet
     end
-
+    
     # Get the path of the file relative to the visual studio project directory.
     def _GetVsProjectRelativePath(path)
-      return GetVsProjectRelativePath(@VsProject.GetProjectRelativePath(path))
+      return path.MakeRelativeTo(@VsProjectDescription.ProjectFilePath.DirectoryPath())
     end
   end
 end

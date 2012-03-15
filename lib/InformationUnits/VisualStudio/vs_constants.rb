@@ -1,5 +1,5 @@
 module RakeBuilder
-  module VS
+  module Vs
     module Configuration
       module Platform
         WIN32 = "Win32"

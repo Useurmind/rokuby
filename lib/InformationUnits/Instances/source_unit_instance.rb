@@ -40,5 +40,20 @@ module RakeBuilder
         @IncludeFileSet = includeFileSet
       end
     end
+    
+    # Join two source units to one new source unit.
+    def +(other)
+      if(other == nil)
+        return Clone(self)
+      end
+      
+      su = SourceUnitInstance.new()
+      
+      su.FilePaths = self.SourceFileSet + other.SourceFileSet
+      su.FileDirectories = self.IncludeFileSet + other.IncludeFileSet
+      su.Defines = (self.Defines + other.Defines).uniq()
+      
+      return su
+    end
   end
 end
