@@ -16,12 +16,23 @@ module RakeBuilder
       @binaryExtension = value
     end
     
-    def BinaryExtension()
+    def BinaryExtension()      
       if(@binaryExtension)
         return @binaryExtension
       end
       
-      return "#{@Os}_#{@Architecture}_#{@Type}"
+      parts = []
+      if(@Os)
+        parts.push @Os
+      end
+      if(@Architecture)
+        parts.push @Architecture
+      end
+      if(@Type)
+        parts.push @Type
+      end
+      
+      return parts.join("_")
     end   
     
      # All the attributes stated above.
@@ -47,7 +58,26 @@ module RakeBuilder
       @Type = Clone(original.Type)
     end
     
+    # All set values in the first spec are equal to the value in the second spec.
+    def <=(other)
+      if(other.class != PlatformConfiguration)
+        return false
+      end
+      
+      if(#(@Name == nil || @Name == other.Name) and # name can be anything
+         (@Os == nil || @Os == other.Os) and
+         (@Architecture ==  nil || @Architecture == other.Architecture) and
+         (@Type == nil || @Type == other.Type))
+        return true
+      end
+      return false
+    end
+    
     def ==(other)
+      if(other.class != PlatformConfiguration)
+        return false
+      end
+      
       if(@Name == other.Name and
          @Os == other.Os and
          @Architecture == other.Architecture and

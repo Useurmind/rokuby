@@ -15,7 +15,7 @@ module RakeBuilder
     
     def initialize_copy(original)
       super(original)
-      @instances = Clone(original.instances)
+      @instances = Clone(original.GetInstances(PLATFORM_ALL))
     end
     
     def AddInstance(instance)
@@ -30,7 +30,7 @@ module RakeBuilder
       return nil
     end
     
-    # Get all library that belong to this platform.
+    # Get all library instances that belong to this platform.
     # [platform] The platform for which we need the library (nil for all instances).
     def GetInstances(platform)      
       matchingInstances = []
@@ -40,8 +40,11 @@ module RakeBuilder
       end
       
       @instances.each do |instance|
-        if(platform.eql?(instance.Platform))
-          matchingInstances.push(instance)
+        instance.Platforms.each() do |instPlat|
+          if(instPlat <= platform)
+            matchingInstances.push(instance)
+            break
+          end          
         end        
       end
       

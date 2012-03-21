@@ -54,7 +54,7 @@ module RakeBuilder
       #This tree should be relative to the normal project directory, e.g. begin with 'src'
       sourceDirectoryTree = []
       @SourceUnit.SourceFileSet.RootDirectories.each() do |rootPath|
-        pathTree = GetDirectoryTree(rootPath, [], true)
+        pathTree = GetDirectoryTreeFromRelativeBase(rootPath, [], true)
         
         pathTree.each() do |path|
           sourceDirectoryTree.push(path.RelativePath)
@@ -79,7 +79,7 @@ module RakeBuilder
       #This tree should be relative to the normal project directory, e.g. begin with 'src'
       includeDirectoryTree = []
       @SourceUnit.IncludeFileSet.RootDirectories.each() do |rootPath|
-        pathTree = GetDirectoryTree(rootPath, [], true)
+        pathTree = GetDirectoryTreeFromRelativeBase(rootPath, [], true)
         
         pathTree.each() do |path|
           includeDirectoryTree.push(path.RelativePath)
@@ -104,7 +104,7 @@ module RakeBuilder
       #This tree should be relative to the normal project directory, e.g. begin with 'src'
       resourceDirectoryTree = []
       @ResourceFileSet.RootDirectories.each() do |rootPath|
-        pathTree = GetDirectoryTree(rootPath, [], true)
+        pathTree = GetDirectoryTreeFromRelativeBase(rootPath, [], true)
         
         pathTree.each() do |path|
           resourceDirectoryTree.push(path.RelativePath)

@@ -3,16 +3,16 @@ module RakeBuilder
   # configuration it belongs and where it can be found.
   # [Name] The name of the library this specification belongs to.
   # [Location] The library file spec that defines where the library can be found.
-  # [Platform] The platform for which this library is meant.
+  # [Platforms] The platforms for which this library is meant.
   class LibrarySpecification < InformationSpecification
     attr_accessor :Name
-    attr_accessor :Platform
+    attr_accessor :Platforms
     attr_accessor :Location
     
     def initialize(valueMap=nil)
       @Name = ""
       @Location = LibraryLocationSpec.new()
-      @Platform = PlatformConfiguration.new()
+      @Platforms = []
       super(valueMap)
       Extend(valueMap, false)
     end
@@ -21,7 +21,14 @@ module RakeBuilder
       super(original)
       @Name = Clone(original.Name)
       @Location = Clone(original.Location)
-      @Platform = Clone(original.Platform)
+      @Platforms = Clone(original.Platform)
+    end
+    
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      defines = @Defines
+      defines.concat(@Location.GatherDefines())
+      return defines
     end
     
     def Extend(valueMap, callParent=true)
@@ -38,9 +45,9 @@ module RakeBuilder
         @Name = name
       end
       
-      platform = valueMap[:Platform] || valueMap[:plat]
-      if(platform)
-        @Platform = platform
+      platforms = valueMap[:Platforms] || valueMap[:plats]
+      if(platforms)
+        @Platforms.concat(platforms)
       end
       
       location = valueMap[:Location] || valueMap[:loc]

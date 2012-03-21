@@ -23,12 +23,26 @@ module RakeBuilder
       if(original.class == Symbol or original == false or original == true)
         return original
       end
+      
+      if(original.class == Array)
+	return CloneArray(original)
+      end
     
       if(original != nil)
         return original.clone()
       end
     
       return nil
+    end
+    
+    def CloneArray(original)
+      copy = []
+      
+      original.each() do |item|
+	copy.push(Clone(item))
+      end
+      
+      return copy
     end
 
     # Get the name of the class of the object.

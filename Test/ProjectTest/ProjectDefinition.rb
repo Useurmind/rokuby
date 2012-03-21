@@ -27,7 +27,7 @@ lib1Path = [ProjPath("libs/lib1")]
 
 LibSpec "lib1_win32_debug", {
   name: "lib1",
-  plat: PLATFORM_WIN_X86_DEBUG,
+  plats: [PLATFORM_WIN_X86_DEBUG],
   loc: LibLoc({
     libSpec: FileSpec({ inPats: ["lib1_win32_debug.lib"], sPaths: lib1Path  }),
     linkSpec: FileSpec({ inPats: ["lib1_win32_debug.dll"], sPaths: lib1Path }),
@@ -37,7 +37,7 @@ LibSpec "lib1_win32_debug", {
 
 LibSpec "lib1_win32_release", {
   name: "lib1",
-  plat: PLATFORM_WIN_X86_RELEASE,
+  plats: [PLATFORM_WIN_X86_RELEASE],
   loc: LibLoc({
     libSpec: FileSpec({ inPats: ["lib1_win32_release.lib"], sPaths: lib1Path  }),
     linkSpec: FileSpec({ inPats: ["lib1_win32_release.dll"], sPaths: lib1Path }),
@@ -47,7 +47,7 @@ LibSpec "lib1_win32_release", {
 
 LibSpec "lib1_x64_debug", {
   name: "lib1",
-  plat: PLATFORM_WIN_X64_DEBUG,
+  plats: [PLATFORM_WIN_X64_DEBUG],
   loc: LibLoc({
     libSpec: FileSpec({ inPats: ["lib1_x64_debug.lib"], sPaths: lib1Path  }),
     linkSpec: FileSpec({ inPats: ["lib1_x64_debug.dll"], sPaths: lib1Path }),
@@ -57,7 +57,7 @@ LibSpec "lib1_x64_debug", {
 
 LibSpec "lib1_x64_release", {
   name: "lib1",
-  plat: PLATFORM_WIN_X64_RELEASE,
+  plats: [PLATFORM_WIN_X64_RELEASE],
   loc: LibLoc({
     libSpec: FileSpec({ inPats: ["lib1_x64_release.lib"], sPaths: lib1Path  }),
     linkSpec: FileSpec({ inPats: ["lib1_x64_release.dll"], sPaths: lib1Path }),
@@ -74,7 +74,7 @@ VsProjSpec "TestProject", :resSpec => FileSpec("TestProjectVsResource")
 
 VsSlnDescr "TestProject", :name => "TestSolution"
 
-generalInputs = [ProjDescr("TestProject"), ProjSpec("TestProject")] + DefaultProjectConfigurations()
+generalInputs = [ProjDescr("TestProject"), ProjSpec("TestProject")] + defaultProjectConfigurations()
 
 vsInputs = DefaultVsProjectConfigurations()
 

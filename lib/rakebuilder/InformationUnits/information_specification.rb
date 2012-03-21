@@ -16,6 +16,11 @@ module RakeBuilder
       @Defines = Clone(original.Defines)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      return @Defines
+    end
+    
     def Extend(valueMap, callParent=true)
       if(valueMap == nil)
         return

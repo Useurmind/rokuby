@@ -49,7 +49,7 @@ class Processor < Rake::ProcessorTask
   def _InputProcessors    
     inputProcs = {}
     
-    puts "pres of #{name}: #{prerequisites}"
+    #puts "pres of #{name}: #{prerequisites}"
     
     prerequisites.uniq().each() do |pre|
       t = lookup_prerequisite(pre)
@@ -75,7 +75,7 @@ class Processor < Rake::ProcessorTask
   def _FetchInputs
     #puts "in FetchInputs of processor #{self}"
     _InputProcessors().each() do |name, inputProcessor|
-      puts "collecting outputs in #{@Name} from processor #{name}: #{inputProcessor.Outputs()}"
+      #puts "collecting outputs in #{@Name} from processor #{name}: #{inputProcessor.Outputs()}"
       inputProcessor.Outputs().each() do |output|
         AddInput(output)
       end
@@ -100,16 +100,24 @@ class Processor < Rake::ProcessorTask
     
     @processing = true
     
-    puts "Invoking pres in #{name}"
+    if(Rake.application.options.trace)
+      $stderr.puts "** Invoking pres in #{@ProjectFile.Path.RelativePath}:#{name}"
+    end    
     InvokePrerequisites(task_args, invocation_chain)
     
-    puts "Fetching inputs in #{name}"
+    if(Rake.application.options.trace)
+      $stderr.puts "** Fetching inputs in #{@ProjectFile.Path.RelativePath}:#{name}"
+    end
     _FetchInputs()
     
-    puts "Processing inputs in #{name}: #{@inputs}"
+    if(Rake.application.options.trace)
+      $stderr.puts "** Processing inputs in #{@ProjectFile.Path.RelativePath}:#{name}"#: #{@inputs}"
+    end
     _ProcessInputs()
     
-    puts "Executing actions in #{name}"
+    if(Rake.application.options.trace)
+      $stderr.puts "** Executing actions in #{@ProjectFile.Path.RelativePath}:#{name}"
+    end
     Execute(task_args)
     
     @processing = false

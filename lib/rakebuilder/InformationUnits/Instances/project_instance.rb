@@ -19,6 +19,21 @@ module RakeBuilder
       @Libraries = Clone(original.Libraries)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines(platform)
+      defines = @Defines
+      @SourceUnits.each() do |su|
+        defines.concat(su.GatherDefines())
+      end
+      @Libraries.each() do |lib|
+        libInstances = lib.GetInstances(platform)
+        libInstances.each() do |libInst|
+          defines.concat(libInst.GatherDefines())  
+        end        
+      end
+      return defines
+    end
+    
     def GetSourceDirectoryTree(excludeEmpty=false)
       dirs = []
       @SourceUnits.each() do |su|

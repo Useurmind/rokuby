@@ -23,6 +23,15 @@ module RakeBuilder
       @IncludeFileSpec = Clone(original.IncludeFileSpec)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      defines = @Defines
+      defines.concat(@LibraryFileSpec.GatherDefines())
+      defines.concat(@LinkFileSpec.GatherDefines())
+      defines.concat(@IncludeFileSpec.GatherDefines())
+      return defines
+    end
+    
     def Extend(valueMap, callParent=true)
       if(valueMap == nil)
         return

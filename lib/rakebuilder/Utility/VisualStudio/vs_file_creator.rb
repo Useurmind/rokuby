@@ -28,8 +28,7 @@ module RakeBuilder
     end
     
     def CreateFileDirectory
-      directory = GetFilePath().AbsoluteDirectory()
-      Dir::mkdir(directory) unless File.exists?(directory)
+      CreatePath(GetFilePath().DirectoryPath())
     end
 
     def BuildFile

@@ -29,13 +29,13 @@ require 'thread'
 require 'digest/sha1'
 require 'digest/md5'
 
-require 'uuidtools/version'
-
-begin
-  require 'securerandom'
-rescue LoadError
-  require File.join(File.dirname(__FILE__), 'compat', 'securerandom')
-end
+#require 'uuidtools/version'
+#
+#begin
+#  require 'securerandom'
+#rescue LoadError
+#  require File.join(File.dirname(__FILE__), 'compat', 'securerandom')
+#end
 
 module UUIDTools
   #= uuidtools.rb

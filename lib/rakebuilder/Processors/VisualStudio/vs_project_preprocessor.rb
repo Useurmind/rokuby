@@ -11,6 +11,7 @@ module RakeBuilder
   # set by the user in the visual studio project objects should never be modified.
   class VsProjectPreprocessor < Processor
     include VsProjectProcessorUtility
+    include DirectoryUtility
     
     def initialize(name, app, project_file)
       super(name, app, project_file)
@@ -19,7 +20,19 @@ module RakeBuilder
     end
     
     def _ProcessInputs
-      _SortInputs()
+      _SortInputs()      
+      
+      if(@projectDescription == nil)
+        raise "No ProjectDescription in #{self.class}:#{@Name}"
+      end
+      
+      if(@projectInstance == nil)
+        raise "No ProjectInstance in #{self.class}:#{@Name}"
+      end
+      
+      if(@vsProjectDescription == nil)
+        raise "No VsProjectDescription in #{self.class}:#{@Name}"
+      end
       
       _ExtendVsProjectDescription()
       
@@ -34,9 +47,9 @@ module RakeBuilder
       @outputs.concat(@vsProjects)
     end
     
-    def _ExtendVsProjectDescription
-      projectFilesBasePath = @projectDescription.ProjectPath + ProjectPath.new(PROJECT_SUBDIR)
+    def _ExtendVsProjectDescription      
       projectFileBaseName = @projectDescription.Name
+      projectFilesBasePath = @projectDescription.ProjectPath + ProjectPath.new(PROJECT_SUBDIR) + ProjectPath.new(projectFileBaseName)
       
       if(@vsProjectDescription.ProjectFilePath == nil)
         @vsProjectDescription.ProjectFilePath = projectFilesBasePath + ProjectPath.new("#{projectFileBaseName}.vcxproj")
@@ -47,42 +60,15 @@ module RakeBuilder
     end
     
     def _ExtendVsProjectConfigurations
-      puts "in _ExtendVsProjectConfigurations: #{@vsProjectConfigurations}"
+      #puts "in _ExtendVsProjectConfigurations: #{@vsProjectConfigurations}"
       
       @vsProjectConfigurations.each() do |vsConf|
         
-        # write the libraries for each configuration to the corresponding fields
-        @projectInstance.Libraries.each() do |library|
-          libInstance = library.GetInstance(vsConf.Platform)
-          if(!libInstance)
-            next
-          end
-          
-          libInstance.FileSet.LibraryFileSet.FilePaths.each() do |filePath|
-            vsConf.AdditionalLibraryDirectories.push(filePath.DirectoryPath())
-            vsConf.AdditionalDependencies.push(filePath.FileName)
-          end
-        end
-        
-        # add the libraries coming from dependent projects
-        @vsProjects.each() do |vsProj|
-          vsProjConfiguration = vsProj.GetConfiguration(vsConf.Platform)
-          
-          outDir = vsProjConfiguration.TargetName
-          targetName = vsProjConfiguration.TargetName
-          targetExt = vsProjConfiguration.TargetExt
-          
-          if(targetExt != Vs::Configuration::TargetExt::APPLICATION)
-            binaryName = targetName.gsub("$(PlatformName)", @projectDescription.Name) + Vs::Configuration::TargetExt::STATIC # add always the lib file
-            
-            vsConf.AdditionalLibraryDirectories.push(outDir)
-            vsConf.AdditionalDependencies.push(binaryName)
-          end
-        end
+        _SetDependencyValues(vsConf)
         
         # Set binary name and extension and configuration type
         if(vsConf.TargetName == nil)
-          vsConf.TargetName = Vs::Configuration::Variables::PROJECT_NAME + "_" + vsConf.Platform.BinaryExtension()
+          vsConf.TargetName = @projectDescription.Name + "_" + vsConf.Platform.BinaryExtension()
         end
         
         if(@projectDescription.BinaryType == :Application)
@@ -108,16 +94,86 @@ module RakeBuilder
           end
         end
         
+        subfolderName = @projectDescription.Name + "_" + vsConf.Platform.BinaryExtension()
+        
         # Set the intermediate and output directories
         if(vsConf.OutputDirectory == nil)
           #puts "setting output directory on configuration #{@projectDescription.BuildPath + ProjectPath.new(vsConf.Platform.Name)}"
-          vsConf.OutputDirectory = @projectDescription.BuildPath + ProjectPath.new(vsConf.Platform.Name)
+          vsConf.OutputDirectory = @projectDescription.BuildPath + ProjectPath.new(subfolderName)
         end
         if(vsConf.IntermediateDirectory == nil)
-          vsConf.IntermediateDirectory = @projectDescription.CompilesPath + ProjectPath.new(vsConf.Platform.Name)
+          vsConf.IntermediateDirectory = @projectDescription.CompilesPath + ProjectPath.new(subfolderName)
         end       
         
+        vsConf.PreprocessorDefinitions |= _GatherDefines(vsConf)
+        vsConf.PreprocessorDefinitions = vsConf.PreprocessorDefinitions.uniq
       end
+    end
+    
+    # For example libs, lib paths, include dirs
+    def _SetDependencyValues(vsConf)
+      # add the include directories for the project itself
+      # this is the complete tree under the include directories
+      includePaths = []
+      @projectInstance.SourceUnits.each() do |su|
+        su.IncludeFileSet.RootDirectories.each() do |rootDir|
+          includePaths |= GetDirectoryTreeFromRelativeBase(rootDir)
+        end        
+      end
+      vsConf.AdditionalIncludeDirectories |= includePaths
+      
+      # write the lib name, path and include directories for all libs in this project
+      @projectInstance.Libraries.each() do |library|
+        libInstance = library.GetInstance(vsConf.Platform)
+        if(!libInstance)
+          next
+        end
+        
+        libInstance.FileSet.IncludeFileSet.RootDirectories.each() do |rootDir|
+          vsConf.AdditionalIncludeDirectories.push(rootDir)          
+        end
+        
+        libInstance.FileSet.LibraryFileSet.FilePaths.each() do |filePath|
+          if(libInstance.FileSet.LibraryFileSet.RootDirectories.length > 0)
+            vsConf.AdditionalLibraryDirectories.push(filePath.DirectoryPath())
+          end          
+          vsConf.AdditionalDependencies.push(filePath.FileName)
+        end
+      end
+      
+      # add the library name, path and include paths coming from each dependent project
+      @vsProjects.each() do |vsProj|
+        vsProjConfiguration = vsProj.GetConfiguration(vsConf.Platform)
+        
+        outDir = vsProjConfiguration.OutputDirectory
+        targetName = vsProjConfiguration.TargetName
+        targetExt = vsProjConfiguration.TargetExt
+        
+        if(targetExt != Vs::Configuration::TargetExt::APPLICATION)
+          binaryName = targetName.gsub("$(PlatformName)", @projectDescription.Name) + Vs::Configuration::TargetExt::STATIC # add always the lib file
+          
+          vsConf.AdditionalIncludeDirectories |= (vsProj.IncludePaths)
+          vsConf.AdditionalLibraryDirectories.push(outDir)
+          vsConf.AdditionalDependencies.push(binaryName)
+        end
+      end
+      
+      vsConf.AdditionalIncludeDirectories = vsConf.AdditionalIncludeDirectories.uniq
+      vsConf.AdditionalLibraryDirectories = vsConf.AdditionalLibraryDirectories.uniq
+      vsConf.AdditionalDependencies = vsConf.AdditionalDependencies.uniq
+    end
+    
+    # Gather the defines that should be applied to a project configuration.
+    def _GatherDefines(vsConf)
+      defines = []
+      defines |= @projectInstance.GatherDefines(vsConf.Platform)
+      if(@vsProjectInstance)        
+        defines |= @vsProjectInstance.GatherDefines()
+      end
+      defines |= @projectDescription.GatherDefines()
+      defines |= @vsProjectDescription.GatherDefines()
+      #puts "found defines for vsconf: #{defines}"
+      return defines
     end
     
     # Filter out unused configurations

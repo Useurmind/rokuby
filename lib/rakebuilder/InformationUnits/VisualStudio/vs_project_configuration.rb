@@ -122,12 +122,6 @@ module RakeBuilder
       @AdditionalDependencies = ["%(AdditionalDependencies)"]
       
       @PostBuildCommand = nil
-      uuid = GetUUID()
-      @PostBuildTaskName = "PostBuildCommandTask_" + uuid
-      @PostBuildWorkTaskName = "PostBuildWorkTask_" + uuid
-      
-      task @PostBuildTaskName
-      task @PostBuildWorkTaskName
       
       super(valueMap)
       Extend(valueMap, false)
@@ -172,8 +166,13 @@ module RakeBuilder
       @PostBuildCommand = Clone(original.PostBuildCommand)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      return @Defines
+    end
+    
     def Extend(valueMap, callParent=true)
-      puts "in Extend of vsconf: #{valueMap}"
+      #puts "in Extend of vsconf: #{valueMap}"
       if(valueMap == nil)
         return
       end
@@ -312,7 +311,7 @@ module RakeBuilder
         @AdditionalLibraryDirectories.concat(additionalLibraryDirectories)
       end
       
-      preprocessorDefinitions = valueMap[:PreprocessorDefinitions] || valueMap[:preprocessorDefinitions]
+      preprocessorDefinitions = valueMap[:PreprocessorDefinitions] || valueMap[:preprocessorDefinitions] || valueMap[:defines] || valueMap[:defs]
       if(preprocessorDefinitions)
         @PreprocessorDefinitions.concat(preprocessorDefinitions)
       end

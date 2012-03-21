@@ -3,7 +3,8 @@ module RakeBuilder
     def Defaults.InitDefaultVsProjectConfigurations
       configs = []
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X64_RELEASE", :plat => PLATFORM_WIN_X64_RELEASE,
-                                                                                                          :defines => ["X64"],
+                                                                                                          :defines => ["WIN32", "X64", "WIN64"],
+                                                                                                          :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                           :PlatformName => Vs::Configuration::Platform::X64,
                                                                                                           :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
                                                                                                           :Optimization =>  Vs::Configuration::Optimization::MAX_SPEED,
@@ -13,7 +14,7 @@ module RakeBuilder
                                                                                                           :ProgramDataBaseFileName => nil,
                                                                                                           :ExceptionHandling => Vs::Configuration::ExceptionHandling::SYNC,
                                                                                                           :BufferSecurityCheck => true,
-                                                                                                          :DebugInformationFormat => Vs::Configuration::DebugInformationFormat::EDIT_AND_CONTINUE,
+                                                                                                          :DebugInformationFormat => Vs::Configuration::DebugInformationFormat::PROGRAM_DATABASE,
                                                                                                           :InlineFunctionExpansion =>  Vs::Configuration::InlineFunctionExpansion::DEFAULT,
                                                                                                           :GenerateDebugInformation => false,
                                                                                                           :EnableCOMDATFolding => true,
@@ -21,7 +22,8 @@ module RakeBuilder
                                                                                                           :UseDebugLibraries => false)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration,  "DEFAULT_X64_RELWITHDEB", :plat => PLATFORM_WIN_X64_RELWITHDEB,
-                                                                                                              :defines => ["X64"],
+                                                                                                              :defines => ["WIN32", "X64", "WIN64"],
+                                                                                                              :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                               :PlatformName => Vs::Configuration::Platform::X64,
                                                                                                               :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
                                                                                                               :Optimization =>  Vs::Configuration::Optimization::DISABLED,
@@ -39,7 +41,8 @@ module RakeBuilder
                                                                                                               :UseDebugLibraries => true)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration,  "DEFAULT_X64_DEBUG", :plat => PLATFORM_WIN_X64_DEBUG,
-                                                                                                        :defines => ["X64"],
+                                                                                                        :defines => ["WIN32", "X64", "WIN64", "DEBUG", "_DEBUG"],
+                                                                                                        :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DEBUG_DLL,
                                                                                                         :PlatformName => Vs::Configuration::Platform::X64,
                                                                                                         :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
                                                                                                         :Optimization =>  Vs::Configuration::Optimization::DISABLED,
@@ -58,6 +61,7 @@ module RakeBuilder
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X86_RELEASE", :plat => PLATFORM_WIN_X86_RELEASE,
                                                                                                          :defines => ["WIN32"],
+                                                                                                         :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                          :PlatformName => Vs::Configuration::Platform::WIN32,
                                                                                                          :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
                                                                                                          :Optimization =>  Vs::Configuration::Optimization::MAX_SPEED,
@@ -67,7 +71,7 @@ module RakeBuilder
                                                                                                          :ProgramDataBaseFileName => nil,
                                                                                                          :ExceptionHandling => Vs::Configuration::ExceptionHandling::SYNC,
                                                                                                          :BufferSecurityCheck => true,
-                                                                                                         :DebugInformationFormat => Vs::Configuration::DebugInformationFormat::EDIT_AND_CONTINUE,
+                                                                                                         :DebugInformationFormat => Vs::Configuration::DebugInformationFormat::PROGRAM_DATABASE,
                                                                                                          :InlineFunctionExpansion =>  Vs::Configuration::InlineFunctionExpansion::DEFAULT,
                                                                                                          :GenerateDebugInformation => false,
                                                                                                          :EnableCOMDATFolding => true,
@@ -76,9 +80,10 @@ module RakeBuilder
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X86_RELWITHDEB", :plat => PLATFORM_WIN_X86_RELWITHDEB,
                                                                                                             :defines => ["WIN32"],
+                                                                                                            :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                             :PlatformName => Vs::Configuration::Platform::WIN32,
                                                                                                             :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
-                                                                                                            :Optimization =>  Vs::Configuration::Optimization::MAX_SPEED,
+                                                                                                            :Optimization =>  Vs::Configuration::Optimization::DISABLED,
                                                                                                             :AssemblerOutput => Vs::Configuration::AssemblerOutput::NO_LISTING,
                                                                                                             :FunctionLevelLinking => true,
                                                                                                             :IntrinsicFunctions => true,
@@ -93,22 +98,23 @@ module RakeBuilder
                                                                                                             :UseDebugLibraries => false)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X86_DEBUG", :plat => PLATFORM_WIN_X86_DEBUG,
-                                                                                                       :defines => ["WIN32"],
+                                                                                                       :defines => ["WIN32", "DEBUG", "_DEBUG"],
+                                                                                                       :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DEBUG_DLL,
                                                                                                        :PlatformName => Vs::Configuration::Platform::WIN32,
                                                                                                        :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
-                                                                                                       :Optimization =>  Vs::Configuration::Optimization::MAX_SPEED,
+                                                                                                       :Optimization =>  Vs::Configuration::Optimization::DISABLED,
                                                                                                        :AssemblerOutput => Vs::Configuration::AssemblerOutput::NO_LISTING,
-                                                                                                       :FunctionLevelLinking => true,
-                                                                                                       :IntrinsicFunctions => true,
+                                                                                                       :FunctionLevelLinking => false,
+                                                                                                       :IntrinsicFunctions => false,
                                                                                                        :ProgramDataBaseFileName => nil,
                                                                                                        :ExceptionHandling => Vs::Configuration::ExceptionHandling::SYNC,
                                                                                                        :BufferSecurityCheck => true,
                                                                                                        :DebugInformationFormat => Vs::Configuration::DebugInformationFormat::EDIT_AND_CONTINUE,
                                                                                                        :InlineFunctionExpansion =>  Vs::Configuration::InlineFunctionExpansion::DEFAULT,
-                                                                                                       :GenerateDebugInformation => false,
-                                                                                                       :EnableCOMDATFolding => true,
-                                                                                                       :OptimizeReferences => true,
-                                                                                                       :UseDebugLibraries => false)
+                                                                                                       :GenerateDebugInformation => true,
+                                                                                                       :EnableCOMDATFolding => false,
+                                                                                                       :OptimizeReferences => false,
+                                                                                                       :UseDebugLibraries => true)
       
       return configs
     end

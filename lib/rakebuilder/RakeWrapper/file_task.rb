@@ -5,21 +5,21 @@ module Rake
     
     # Is this file task needed?  Yes if it doesn't exist, or if its time stamp
     # is out of date.
-    alias needed_old? needed?
+    alias needed_old_filetask? needed?
     def needed?
       val = nil
       ExecuteInPath(@ProjectFile.Path().DirectoryPath()) do
-        val = needed_old?
+        val = needed_old_filetask?
       end
       return val
     end
      
     # Time stamp for file task.
-    alias timestamp_old timestamp
+    alias timestamp_old_filetask timestamp
     def timestamp
       val = nil
       ExecuteInPath(@ProjectFile.Path().DirectoryPath()) do
-        val = timestamp_old
+        val = timestamp_old_filetask
       end
       return val
     end

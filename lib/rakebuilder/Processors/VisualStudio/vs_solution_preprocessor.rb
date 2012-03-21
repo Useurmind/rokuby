@@ -13,15 +13,20 @@ module RakeBuilder
     def _ProcessInputs
       _SortInputs()
     
+      if(@vsSolutionDescription == nil)
+        raise "No VsSolutionDescription in #{self.class}:#{@Name}"
+      end
+    
       if(@vsSolutionDescription.Name == "" || @vsSolutionDescription.Name == nil)
         @vsSolutionDescription.Name = "NoName"
       end
       
       if(@vsSolutionDescription.SolutionFilePath == nil)
-        @vsSolutionDescription.SolutionFilePath = ProjectPath.new("solutions") + ProjectPath.new(@vsSolutionDescription.Name + ".sln") 
+        @vsSolutionDescription.SolutionFilePath = ProjectPath.new(PROJECT_SUBDIR) + ProjectPath.new(@vsSolutionDescription.Name + ".sln") 
       end
       
       @outputs.push(@vsSolutionDescription)
+      @outputs.concat(@vsProjects)
     end
   end
 end

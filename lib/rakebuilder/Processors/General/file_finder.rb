@@ -16,7 +16,7 @@ module RakeBuilder
       @inputs.each() do |fileSpec|
         fileSet = FileSet.new()
         fileSet.AddDefinesFrom(fileSpec)
-          
+        
         fileSet.FilePaths = FindFilesInDirectories(fileSpec.IncludePatterns, fileSpec.ExcludePatterns, fileSpec.SearchPaths)
         fileSet.FileDirectories = []
         fileSet.RootDirectories = Clone(fileSpec.SearchPaths())

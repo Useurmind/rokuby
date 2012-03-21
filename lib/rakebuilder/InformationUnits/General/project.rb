@@ -14,6 +14,7 @@ module RakeBuilder
   class Project < InformationUnit
     attr_accessor :Name
     attr_accessor :OutputBinaryFileSet
+    attr_accessor :IncludePaths
     attr_accessor :Defines
     attr_accessor :Libraries
     attr_accessor :Dependencies
@@ -23,6 +24,7 @@ module RakeBuilder
       
       @Name = ""
       @OutputBinaryFileSet = FileSet.new()
+      @IncludePaths = []
       @Defines = []
       @Libraries = []
       @Dependencies = []
@@ -35,9 +37,28 @@ module RakeBuilder
       
       @Name = Clone(original.Name)
       @OutputBinaryFileSet = Clone(original.OutputBinaryFileSet)
+      @IncludePaths = Clone(original.IncludePaths)
       @Defines = Clone(original.Defines)
       @Libraries = Clone(original.Libraries)
       @Dependencies = Clone(original.Dependencies)
+    end
+    
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines(platform)
+      defines = @Defines
+      
+      @Libraries.each() do |lib|
+        libInstances = lib.GetInstances(platform)
+        libInstances.each() do |libInst|
+          defines.concat(libInst.GatherDefines())
+        end
+      end
+      
+      @Dependencies.each() do |dep|
+        defines.concat(dep.GatherDefines(platform))
+      end
+      
+      return defines
     end
     
     def Extend(valueMap, callParent=true)
@@ -57,6 +78,11 @@ module RakeBuilder
       outputBinaryFileSet = valueMap[:OutputBinaryFileSet] || valueMap[:binSet]
       if(outputBinaryFileSet)
         @OutputBinaryFileSet = outputBinaryFileSet
+      end
+      
+      includePaths = valueMap[:IncludePaths] || valueMap[:incPaths]
+      if(includePaths)
+        @IncludePaths = includePaths
       end
       
       task = valueMap[:Task] || valueMap[:task]

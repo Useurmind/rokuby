@@ -9,11 +9,14 @@ module RakeBuilder
     def FindFilesInDirectories(includePatterns, excludePatterns, directories)
       files = []
 
-      #puts "Searching files, current directory is #{Dir.pwd}"
-
-      directories.each { |dir|
-        files = files + FindFilesInDirectory(includePatterns, excludePatterns, dir)
-      }
+      if(includePatterns.length > 0)      # if there are no include patterns there will be no files
+	puts "Directories searched: #{directories}"
+	directories.each() do |dir|
+	  if(dir.exist?() && dir.directory?())
+	    files = files + FindFilesInDirectory(includePatterns, excludePatterns, dir)
+	  end
+	end
+      end
 
       return files
     end
@@ -101,7 +104,31 @@ module RakeBuilder
       abort "Could not find file #{filename} in the directories #{directories}"
     end
 
-    # Returns the project paths to all subdirs of a directory and the directory itself.
+    # Same as GetDirectoryTree but includes the path from the base directory of the
+    # relative path of the base directory to the base directory.
+    def GetDirectoryTreeFromRelativeBase(baseDirectory, excludePatterns=[], excludeEmpty=false)
+      tree = GetDirectoryPathsFromRelativeBase(baseDirectory)
+      tree.pop() # remove the base directory which is added again in the GetDirectoryTree call
+      
+      tree.concat(GetDirectoryTree(baseDirectory, excludePatterns, excludeEmpty))
+      
+      return tree
+    end
+    
+    # Get all relative directory paths starting from the base of the relative path.
+    # E.g:  "c:/a/b/c|d/e/f"
+    # -> ["c:/a/b/c|d", "c:/a/b/c|d/e", "c:/a/b/c|d/e/f"]
+    def GetDirectoryPathsFromRelativeBase(path)
+      pathParts = path.RelativePathParts
+      paths = []
+      for i in 1..pathParts.length
+	subPath = ProjectPath.new(JoinPaths(pathParts.slice(0, i)))
+	paths.push(subPath)
+      end
+      return paths
+    end
+
+    # Returns the project paths to all subdirs of a directory.
     # For example:
     # - dir1
     #   - dir2
@@ -137,6 +164,20 @@ module RakeBuilder
     # work properly.
     def GenerateVSVariablePath(path)
       ProjectPath.new({base: path, absolute: true})
+    end
+    
+    # Create the given path if it does not exist.
+    # Creates all non existent directories in the path.
+    def CreatePath(path)
+      dirsToCreate = []
+      currentPath = path
+      while(!currentPath.exist?)
+	dirsToCreate.push(currentPath.AbsolutePath())
+	currentPath = currentPath.Up()
+      end
+      dirsToCreate.reverse().each() do |dir|
+	Dir.mkdir(dir)
+      end
     end
   end
 

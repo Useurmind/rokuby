@@ -9,6 +9,7 @@ module RakeBuilder
     attr_accessor :FilterFilePath
     attr_accessor :Guid
     attr_accessor :RootNamespace
+    attr_accessor :Defines
     
     def initialize(valueMap=nil)
       
@@ -18,6 +19,8 @@ module RakeBuilder
       
       @Guid = GetUUID()
       @RootNamespace = ""
+      
+      @Defines = []
       
       super(valueMap)
       Extend(valueMap, false)
@@ -30,6 +33,11 @@ module RakeBuilder
       @FilterFilePath = Clone(original.FilterFilePath)
       @Guid = Clone(original.Guid)
       @RootNamespace = Clone(original.RootNamespace)
+      @Defines = Clone(original.Defines)
+    end
+    
+    def GatherDefines
+      return @Defines
     end
      
     def Extend(valueMap, callParent=true)
@@ -59,6 +67,11 @@ module RakeBuilder
       rootNamespace = valueMap[:RootNamespace] || valueMap[:rootNspc]
       if(rootNamespace)
         @RootNamespace = rootNamespace
+      end
+      
+      defines = valueMap[:Defines] || valueMap[:defs]
+      if(defines)
+        @Defines = defines
       end
     end
   end

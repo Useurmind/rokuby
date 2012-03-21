@@ -18,7 +18,12 @@ module RakeBuilder
     
     # Get the defines from a InformationSpecification.
     def AddDefinesFrom(spec)
-      @Defines.concat(Clone(spec.Defines))
+      @Defines.concat(Clone(spec.GatherDefines()))
+    end
+    
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      return @Defines
     end
     
     def Extend(valueMap, callParent=true)

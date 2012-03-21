@@ -16,6 +16,14 @@ module RakeBuilder
     
     def _ProcessInputs
       _SortInputs()
+       
+      if(@vsSolutionDescription == nil)
+        raise "No VsSolutionDescription in #{self.class}:#{@Name}"
+      end
+      
+      if($EXECUTION_MODE != :Full)
+        return
+      end
       
       _CreateSolutionFile()
     end

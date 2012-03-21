@@ -17,7 +17,27 @@ module RakeBuilder
     def _ProcessInputs
       _SortInputs()
       
+      if(@projectDescription == nil)
+        raise "No ProjectDescription in #{self.class}:#{@Name}"
+      end
+      
+      if(@projectInstance == nil)
+        raise "No ProjectInstance in #{self.class}:#{@Name}"
+      end
+      
+      if(@vsProjectDescription == nil)
+        raise "No VsProjectDescription in #{self.class}:#{@Name}"
+      end
+      
+      if(@vsProjectInstance == nil)
+        raise "No VsProjectInstance in #{self.class}:#{@Name}"
+      end
+      
       #puts "in VsProjectFilesWriter: #{[@projectInstance]}"
+      
+      if($EXECUTION_MODE != :Full)
+        return
+      end
       
       _CreateFilterFile()
       _CreateProjectFile()

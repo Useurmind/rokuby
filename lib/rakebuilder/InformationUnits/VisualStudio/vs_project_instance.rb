@@ -17,6 +17,13 @@ module RakeBuilder
       @ResourceFileSet = Clone(original.ResourceFileSet)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      defines = @Defines
+      defines.concat(@ResourceFileSet.GatherDefines())
+      return defines
+    end
+    
     def Extend(valueMap, callParent=true)
       if(valueMap == nil)
         return

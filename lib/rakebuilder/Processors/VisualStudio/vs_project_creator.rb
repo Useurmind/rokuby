@@ -5,6 +5,7 @@ module RakeBuilder
   # VSProject instance that represents the created project.
   class VsProjectCreator < Processor
     include VsProjectProcessorUtility
+    include DirectoryUtility
     
     def initialize(name, app, project_file)
       super(name, app, project_file)
@@ -17,9 +18,29 @@ module RakeBuilder
     def _ProcessInputs
       _SortInputs()
       
+      if(@projectDescription == nil)
+        raise "No ProjectDescription in #{self.class}:#{@Name}"
+      end
+      
+      if(@vsProjectDescription == nil)
+        raise "No VsProjectDescription in #{self.class}:#{@Name}"
+      end
+      
+      if(@projectInstance == nil)
+        raise "No ProjectInstance in #{self.class}:#{@Name}"
+      end
+      
       @Project = VsProject.new()
       
-      puts "in ProjectCreator: #{[@vsProjectDescription]}"
+      #puts "in ProjectCreator: #{[@vsProjectDescription]}"
+      
+      includePaths = []
+      @projectInstance.SourceUnits.each() do |su|
+        su.IncludeFileSet.RootDirectories.each() do |rootDir|
+          includePaths.concat GetDirectoryTree(rootDir)
+        end        
+      end
+      includePaths = includePaths.uniq
       
       @Project.Extend :Name => Clone(@projectDescription.Name),
                       :Guid => Clone(@vsProjectDescription.Guid),
@@ -28,6 +49,7 @@ module RakeBuilder
                       :Configurations => Clone(@vsProjectConfigurations),
                       :Dependencies => Clone(@vsProjects),
                       :BinaryFileSet => nil, # the binaries are determined through the configuration targetname and outputdirectory
+                      :IncludePaths => includePaths,
                       :Libraries => @projectInstance.Libraries
                       
       

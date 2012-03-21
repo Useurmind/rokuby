@@ -33,11 +33,12 @@ end
 module RakeBuilder
   # This is additional dsl needed for the RakeBuilder projects
   module DSL
+    include GeneralUtility
     
     ####################################################
     # General Generator functions
     
-    def ProjPath(paramBag)
+    def projPath(paramBag)
       return ProjectPath.new(paramBag)
     end
     
@@ -46,93 +47,93 @@ module RakeBuilder
     
     #   General
     
-    def Lib(*args, &block)
+    def lib(*args, &block)
       return Rake.application.DefineInformationUnit(Library, *args, &block)
     end
     
-    def Proj(*args, &block)
+    def proj(*args, &block)
       return Rake.application.DefineInformationUnit(Project, *args, &block)
     end
     
-    def ProjConf(*args, &block)
+    def projConf(*args, &block)
       return Rake.application.DefineInformationUnit(ProjectConfiguration, *args, &block)
     end
     
-    def ProjDescr(*args, &block)
+    def projDescr(*args, &block)
       return Rake.application.DefineInformationUnit(ProjectDescription, *args, &block)
     end
     
-    def Plat(*args, &block)
+    def plat(*args, &block)
       return Rake.application.DefineInformationUnit(PlatformConfiguration, *args, &block)
     end
     
     #   Instances
     
-    def FileSet(*args, &block)
+    def fileSet(*args, &block)
       return Rake.application.DefineInformationUnit(FileSet, *args, &block)
     end
     
-    def LibFileSet(*args, &block)
+    def libFileSet(*args, &block)
       return Rake.application.DefineInformationUnit(LibraryFileSet, *args, &block)
     end
     
-    def LibInst(*args, &block)
+    def libInst(*args, &block)
       return Rake.application.DefineInformationUnit(LibraryInstance, *args, &block)
     end
     
-    def ProjInst(*args, &block)
+    def projInst(*args, &block)
       return Rake.application.DefineInformationUnit(ProjectInstance, *args, &block)
     end
     
-    def SrcInst(*args, &block)
+    def srcInst(*args, &block)
       return Rake.application.DefineInformationUnit(SourceUnitInstance, *args, &block)
     end
     
     #   Specifications    
     
-    def FileSpec(*args, &block)
+    def fileSpec(*args, &block)
       return Rake.application.DefineInformationUnit(FileSpecification, *args, &block)
     end
     
-    def SrcSpec(*args, &block)
+    def srcSpec(*args, &block)
       return Rake.application.DefineInformationUnit(SourceUnitSpecification, *args, &block)
     end
     
-    def LibSpec(*args, &block)
+    def libSpec(*args, &block)
       return Rake.application.DefineInformationUnit(LibrarySpecification, *args, &block)
     end
     
-    def ProjSpec(*args, &block)
+    def projSpec(*args, &block)
       return Rake.application.DefineInformationUnit(ProjectSpecification, *args, &block)
     end
     
-    def LibLoc(*args, &block)
+    def libLoc(*args, &block)
       return Rake.application.DefineInformationUnit(LibraryLocationSpec, *args, &block)
     end
     
     #    Visual Studio
     
-    def VsProj(*args, &block)
+    def vsProj(*args, &block)
       return Rake.application.DefineInformationUnit(VsProject, *args, &block)
     end
     
-    def VsProjConf(*args, &block)
+    def vsProjConf(*args, &block)
       return Rake.application.DefineInformationUnit(VsProjectConfiguration, *args, &block)
     end
     
-    def VsProjDescr(*args, &block)
+    def vsProjDescr(*args, &block)
       return Rake.application.DefineInformationUnit(VsProjectDescription, *args, &block)
     end
     
-    def VsProjInst(*args, &block)
+    def vsProjInst(*args, &block)
       return Rake.application.DefineInformationUnit(VsProjectInstance, *args, &block)
     end
     
-    def VsProjSpec(*args, &block)
+    def vsProjSpec(*args, &block)
       return Rake.application.DefineInformationUnit(VsProjectSpecification, *args, &block)
     end
     
-    def VsSlnDescr(*args, &block)
+    def vsSlnDescr(*args, &block)
       return Rake.application.DefineInformationUnit(VsSolutionDescription, *args, &block)
     end
     
@@ -140,31 +141,40 @@ module RakeBuilder
     # Processors
     
     # general processors
-    def Proc(*args, &block)
+    def proc(*args, &block)
       return Rake.application.DefineProcessor(nil, *args, &block)
     end
     
-    def DefineProc(procClass, *args, &block)
+    def defineProc(procClass, *args, &block)
       return Rake.application.DefineProcessor(procClass, *args, &block)
     end
     
-    def Chain(*args, &block)
-      return Rake.application.DefineProcessChain(nil, *args, &block)
+    def chain(*args, &block)
+      return Rake.application.DefineProcessChain(ProcessChain, *args, &block)
     end
     
-    def DefineChain(chainClass, *args, &block)
+    def defineChain(chainClass, *args, &block)
       return Rake.application.DefineProcessChain(chainClass, *args, &block)
+    end
+    
+    # visual studio
+    def vsProjBuild(*args, &block)
+      Rake.application.DefineProcessor(VsProjectBuilder, *args, &block)
+    end
+    
+    def vsSlnBuild(*args, &block)
+      Rake.application.DefineProcessor(VsSolutionBuilder, *args, &block)
     end
     
     #####################################################
     # Default Configurations
     
-    def DefaultProjectConfigurations()
-      return Rake.application.current_project_file.DefaultProjectConfigurations
+    def defaultProjectConfigurations()
+      return Clone(Rake.application.current_project_file.DefaultProjectConfigurations)
     end
     
-    def DefaultVsProjectConfigurations()
-      return Rake.application.current_project_file.DefaultVsProjectConfigurations
+    def defaultVsProjectConfigurations()
+      return Clone(Rake.application.current_project_file.DefaultVsProjectConfigurations)
     end
   end
 end

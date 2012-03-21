@@ -15,6 +15,7 @@ module RakeBuilder
     attr_accessor :ProjectPath
     attr_accessor :CompilesPath
     attr_accessor :BuildPath
+    attr_accessor :Defines
     
     def initialize(valueMap=nil)
       super(valueMap)
@@ -26,6 +27,7 @@ module RakeBuilder
       @ProjectPath = ProjectPath.new(".")
       @CompilesPath = ProjectPath.new(COMPILE_SUBDIR)
       @BuildPath = ProjectPath.new(BUILD_SUBDIR)
+      @Defines = []
       
       Extend(valueMap, false)
     end
@@ -40,6 +42,11 @@ module RakeBuilder
       @ProjectPath = Clone(original.ProjectPath)
       @CompilesPath = Clone(original.CompilesPath)
       @BuildPath = Clone(original.BuildPath)
+      @Defines = Clone(original.Defines)
+    end
+    
+    def GatherDefines()
+      return @Defines
     end
     
     def Extend(valueMap, callParent=true)
@@ -84,6 +91,11 @@ module RakeBuilder
       buildPath = valueMap[:BuildPath] || valueMap[:buildPath]
       if(buildPath)
         @BuildPath = buildPath
+      end
+      
+      defines = valueMap[:Defines] || valueMap[:defs]
+      if(defines)
+        @Defines = defines 
       end
     end
   end

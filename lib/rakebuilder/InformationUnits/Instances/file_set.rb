@@ -40,6 +40,11 @@ module RakeBuilder
       @RootDirectories = Clone(original.RootDirectories)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      return @Defines
+    end
+    
     def Extend(valueMap, callParent=true)
       if(valueMap == nil)
         return

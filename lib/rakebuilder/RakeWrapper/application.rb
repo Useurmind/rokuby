@@ -128,8 +128,14 @@ module RakeBuilder
       # Split the task path in a string describing the file where the task is defined
       # and its name.
       def parse_task_path(taskPath)
+          
         projectPath = nil
         name = nil
+        if(taskPath.class == Symbol || taskPath.match("^[A-Z]+:\/"))  # the taskPath starts with an absolute path, this is just a filetask OR the taskPath is a symbol which can only be a name
+            name = taskPath
+            return projectPath, name
+        end
+        
         match = taskPath.match("^([^:]*):(.*)$")
         if(match)
           projectPath = ProjectPath.new(match[1])
@@ -260,7 +266,9 @@ module RakeBuilder
       def [](taskPath, scopes=nil)
         task = nil
         
+        #puts "parsing task path #{taskPath}"
         projectPath, name = parse_task_path(taskPath)
+        #puts "result is #{projectPath}, #{name}"
         
         projectFile = compute_task_project_file(projectPath, name)
         

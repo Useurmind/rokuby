@@ -18,13 +18,17 @@ module RakeBuilder
     # Is this path an absolute path
     def absolute?
       absolute = false
-      if(@BasePath)
+      if(@BasePath && !@RelativePath)
         absolute = PathAbsolute?(@BasePath)
       elsif(@RelativePath)
         absolute = PathAbsolute?(@RelativePath)
       end
       
       return @Absolute || absolute
+    end
+    
+    def exist?
+      return File.exist?(AbsolutePath())
     end
     
     # Does this path represent an existing file.
@@ -102,6 +106,9 @@ module RakeBuilder
     def PathParts
       return AbsolutePath().split("/")
     end
+    def RelativePathParts
+      return RelativePath().split("/")
+    end
     
     # Initialize a path.
     # If only one string is give this is taken as the relative path and the base path is estimated.
@@ -114,6 +121,7 @@ module RakeBuilder
       if(paramBag.kind_of?(String))
         base = nil
         relative = FormatPath(paramBag)
+        @Absolute = false
       else
         relative = FormatPath(paramBag[:relative]) || ""
         base = FormatPath(paramBag[:base]) || nil
@@ -229,13 +237,13 @@ module RakeBuilder
       
       if(@RelativePath)
         relativeParts = @RelativePath.split("/")
-        relativeParts.delete[relativeParts.length-1]
+        relativeParts.pop()
         copy = CreateCopy()
         copy.RelativePath = JoinPaths(relativeParts)
         return copy
       else
         parts = PathParts()
-        parts.delete(parts.length-1)
+        parts.pop() 
         copy = ExtendedPath.new({absolute: JoinPaths(parts)})
         return copy
       end

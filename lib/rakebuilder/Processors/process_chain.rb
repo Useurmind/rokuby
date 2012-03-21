@@ -16,8 +16,8 @@ module RakeBuilder
       @InputProcessorName = "#{@Name}_in"
       @OutputProcessorName = "#{@Name}_out"
       
-      @InputProcessor = DefineProc PassthroughProcessor, @InputProcessorName
-      @OutputProcessor = DefineProc PassthroughProcessor, @OutputProcessorName
+      @InputProcessor = defineProc PassthroughProcessor, @InputProcessorName
+      @OutputProcessor = defineProc PassthroughProcessor, @OutputProcessorName
       
       AddProcessor(@OutputProcessorName)
     end
@@ -52,7 +52,7 @@ module RakeBuilder
     # Extend/set the attributes of the process_chain.
     # Same as in processor except that the inputs and dependecies are set on the input processor.
     def Extend(valueMap, executeParent=true)
-      puts "in extend of process chain #{name}: #{valueMap}"
+      #puts "in extend of process chain #{name}: #{valueMap}"
       if(valueMap == nil)
         return
       end
@@ -100,7 +100,7 @@ module RakeBuilder
         
         if(lastProcName)
           #puts "Adding #{lastProcName} to pres of #{usedProcName}"
-          Proc usedProcName, :procDeps => [lastProcName]
+          proc usedProcName, :procDeps => [lastProcName]
         end
         lastProcName = usedProcName
       end      

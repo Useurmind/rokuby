@@ -25,13 +25,14 @@ module RakeBuilder
         
         libInstance = LibraryInstance.new()
         libInstance.AddDefinesFrom(libSpec)        
-        libInstance.Platform = libSpec.Platform
+        libInstance.Platforms = libSpec.Platforms
         
         libInstance.FileSet.LibraryFileSet = FindFile(libSpec.Location.LibraryFileSpec)
         libInstance.FileSet.LinkFileSet = FindFile(libSpec.Location.LinkFileSpec)
         libInstance.FileSet.IncludeFileSet = FindFile(libSpec.Location.IncludeFileSpec)
         
         library.AddInstance(libInstance)
+        #puts "Found library instance: #{[libInstance]}"
       end
       
       libraries.each()do |name, lib|

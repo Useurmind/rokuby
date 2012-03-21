@@ -33,7 +33,13 @@ rescue LoadError
 end
 
 module RakeBuilder
-  RAKE_BUILDER_EXECUTABLE = "RakeBuilder"
+  RAKE_BUILDER_EXECUTABLE = "rakebuilder"
+  # this execution mode can be used to define different modes of operation
+  # - :Full means that all actions are taken
+  # - :Restricted means that only some of the complete actions are taken
+  # This is some sort of ugly bugfix, to tell the processors if e.g. project files
+  # should not be build when the post build command task is executed by visual studio
+  $EXECUTION_MODE = :Full  
 end
 
 Rake.application = RakeBuilder::Application.new

@@ -21,6 +21,14 @@ module RakeBuilder
       @IncludeFileSet = Clone(original.IncludeFileSet)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      defines = @Defines
+      defines.concat(@SourceFileSet.GatherDefines())
+      defines.concat(@IncludeFileSet.GatherDefines())
+      return defines
+    end
+    
     def Extend(valueMap, callParent=true)
       if(valueMap == nil)
         return
@@ -49,8 +57,8 @@ module RakeBuilder
       
       su = SourceUnitInstance.new()
       
-      su.FilePaths = self.SourceFileSet + other.SourceFileSet
-      su.FileDirectories = self.IncludeFileSet + other.IncludeFileSet
+      su.SourceFileSet = self.SourceFileSet + other.SourceFileSet
+      su.IncludeFileSet = self.IncludeFileSet + other.IncludeFileSet
       su.Defines = (self.Defines + other.Defines).uniq()
       
       return su

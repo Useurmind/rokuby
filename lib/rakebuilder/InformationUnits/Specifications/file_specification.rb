@@ -23,6 +23,12 @@ module RakeBuilder
       @SearchPaths = Clone(original.SearchPaths)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      defines = @Defines
+      return defines
+    end
+    
     def Extend(valueMap, callParent=true)
       if(valueMap == nil)
         return

@@ -1,14 +1,14 @@
 module RakeBuilder
   # This class represents an instance of a library used on a certain plaform.
   # [FileSet] The set of files that belong to this specific library.
-  # [Platform] The platform that this library instance is for.
+  # [Platforms] The platforms that this library instance is for.
   class LibraryInstance < InformationInstance
     attr_accessor :FileSet
-    attr_accessor :Platform
+    attr_accessor :Platforms
     
     def initialize(valueMap=nil)
       @FileSet = LibraryFileSet.new()
-      @Platform = PlatformConfiguration.new()
+      @Platforms = []
       super(valueMap)
       Extend(valueMap, false)
     end
@@ -16,7 +16,14 @@ module RakeBuilder
     def initialize_copy(original)
       super(original)
       @FileSet = Clone(original.FileSet)
-      @Platform = Clone(original.Platform)
+      @Platforms = Clone(original.Platforms)
+    end
+    
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      defines = @Defines
+      defines.concat(@FileSet.GatherDefines())
+      return defines
     end
     
     def Extend(valueMap, callParent=true)
@@ -33,9 +40,9 @@ module RakeBuilder
         @FileSet = fileSet
       end
       
-      platform = valueMap[:Platform] || valueMap[:plat]
-      if(platform)
-        @Platform = platform
+      platforms = valueMap[:Platforms] || valueMap[:plats]
+      if(platforms)
+        @Platforms = platforms
       end
     end
   end

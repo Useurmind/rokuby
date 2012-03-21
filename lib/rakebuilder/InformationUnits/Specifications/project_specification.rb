@@ -22,6 +22,20 @@ module RakeBuilder
       @SourceSpecs = Clone(original.SourceSpecs)
     end
     
+    # Gather the defines from this information unit and all subunits.
+    def GatherDefines()
+      defines = @Defines
+      @LibrarySpecs.each() do |libSpec|
+        defines.concat(libSpec.GatherDefines())      
+      end
+
+      @SourceSpecs.each() do |srcSpec|
+        defines.concat(srcSpec.GatherDefines())      
+      end
+
+      return defines
+    end
+    
     def Extend(valueMap, callParent=true)
       if(valueMap == nil)
         return

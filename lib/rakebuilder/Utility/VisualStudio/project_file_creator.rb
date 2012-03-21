@@ -139,7 +139,7 @@ module RakeBuilder
     end
 
     def CreatePropertyGroup(configuration)
-      puts "Creating property group for configuration #{[configuration]}"
+      #puts "Creating property group for configuration #{[configuration]}"
       xmlTag = XmlTag.new({
         name: "PropertyGroup",
         attributes: {
@@ -166,7 +166,12 @@ module RakeBuilder
       vsRelativeAdditionalIncludeDirectories = []
       
       configuration.AdditionalIncludeDirectories.each() do |dirPath|
-        vsRelativeAdditionalIncludeDirectories.push(_GetVsProjectRelativePath(dirPath).RelativePath)
+        if(dirPath.absolute?)
+          vsRelativeAdditionalIncludeDirectories.push dirPath.AbsolutePath()
+        else
+          vsRelativeAdditionalIncludeDirectories.push(_GetVsProjectRelativePath(dirPath).RelativePath)
+        end
+        
       end
       
       
@@ -184,7 +189,7 @@ module RakeBuilder
         children: [
           XmlTag.new( { name: "WarningLevel", value: configuration.WarningLevel }),
           XmlTag.new( { name: "Optimization", value: configuration.Optimization }),
-          XmlTag.new( { name: "AdditionalIncludeDirectories", value: vsRelativeAdditionalIncludeDirectories.join(';') }),
+          XmlTag.new( { name: "AdditionalIncludeDirectories", value: vsRelativeAdditionalIncludeDirectories.uniq().join(';') }),
           XmlTag.new( { name: "PreprocessorDefinitions", value: configuration.PreprocessorDefinitions.join(';') }),
           XmlTag.new( { name: "AssemblerOutput", value: configuration.AssemblerOutput }),
           XmlTag.new( { name: "FunctionLevelLinking", value: configuration.FunctionLevelLinking.to_s() }),
@@ -200,15 +205,20 @@ module RakeBuilder
 
       vsRelativeLibraryDirectories = []
       configuration.AdditionalLibraryDirectories.each() do |libPath|
-        vsRelativeLibraryDirectories.push(_GetVsProjectRelativePath(libPath).RelativePath)
+        if(libPath.absolute?)
+          vsRelativeLibraryDirectories.push(libPath.AbsolutePath())
+        else
+          vsRelativeLibraryDirectories.push(_GetVsProjectRelativePath(libPath).RelativePath)
+        end
+        
       end
 
       linkElement = XmlTag.new({
         name: "Link",
         children: [
           XmlTag.new( { name: "GenerateDebugInformation", value: configuration.GenerateDebugInformation.to_s() }),
-          XmlTag.new( { name: "AdditionalLibraryDirectories", value: vsRelativeLibraryDirectories.join(';') }),
-          XmlTag.new( { name: "AdditionalDependencies", value: configuration.AdditionalDependencies.join(';') }),
+          XmlTag.new( { name: "AdditionalLibraryDirectories", value: vsRelativeLibraryDirectories.uniq().join(';') }),
+          XmlTag.new( { name: "AdditionalDependencies", value: configuration.AdditionalDependencies.uniq().join(';') }),
           XmlTag.new( { name: "EnableCOMDATFolding", value: configuration.EnableCOMDATFolding.to_s() }),
           XmlTag.new( { name: "OptimizeReferences", value: configuration.OptimizeReferences.to_s() })
         ]
@@ -292,7 +302,7 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      puts "resource file set: #{[@ResourceFileSet]}"
+      #puts "resource file set: #{[@ResourceFileSet]}"
       @ResourceFileSet.FilePaths.each() do |filePath|
         resourcePath = _GetVsProjectRelativePath(filePath)
 

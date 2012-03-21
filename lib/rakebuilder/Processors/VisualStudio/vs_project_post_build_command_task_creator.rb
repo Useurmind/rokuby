@@ -4,8 +4,12 @@ module RakeBuilder
   class VsPostBuildCommandTaskCreator < Processor
     include VsProjectProcessorUtility
     
+    attr_accessor :PostBuildTask
+    
     def initialize(name, app, project_file)
       super(name, app, project_file)
+      
+      @PostBuildTask = nil
       
       _RegisterInputTypes()
     end
@@ -13,8 +17,21 @@ module RakeBuilder
     def _ProcessInputs()
       _SortInputs()
       
-      @vsProjectConfigurations.each do |vsConf|
-        #DefineCopyTask(vsConf)
+      if(@projectInstance == nil)
+        raise "No ProjectInstance in #{self.class}:#{@Name}"
+      end
+      
+      if(@PostBuildTask != nil)
+        @vsProjectConfigurations.each do |vsConf|
+          
+          postBuildTaskArgument = vsConf.Platform.BinaryExtension()
+          
+          vsConf.PostBuildCommand = "#{RAKE_BUILDER_EXECUTABLE} -f #{@ProjectFile.Path.AbsolutePath()} #{@PostBuildTask.to_s}[#{postBuildTaskArgument}]"          
+          
+          if(@PostBuildTask.BackTask.Arguments.length > 0 && @PostBuildTask.BackTask.Arguments[0] == postBuildTaskArgument)
+            ExtendPostBuildTask(vsConf)
+          end          
+        end
       end
       
       @outputs = []
@@ -26,10 +43,10 @@ module RakeBuilder
       @outputs.concat(@vsProjects)
     end
     
-    def DefineCopyTask(vsConf)
-      taskName = @Name + "_CopyLibraries_" + vsConf.Platform.BinaryExtension()
-      
-      task taskName
+    def ExtendPostBuildTask(vsConf)
+      # currently a limitation of this is that only tasks in the same project file can be created
+      puts "Extending post build command task for configuration #{vsConf.Platform.BinaryExtension()}"
+      taskName = @PostBuildTask.BackTask.to_s
       
       outputDirectory = vsConf.OutputDirectory
       
@@ -40,15 +57,16 @@ module RakeBuilder
               next
             end
             
-            targetLibPath = outputDirectory + libFilePath.FileName
-            task taskName => [targetLibPath.AbsolutePath()] do
+            targetLibPath = outputDirectory + ProjectPath.new(libFilePath.FileName)
+            
+            ProjectFile().define_task Rake::FileTask, targetLibPath.AbsolutePath() => [libFilePath.AbsolutePath()] do
               cp(libFilePath.AbsolutePath(), targetLibPath.AbsolutePath())
             end
+            
+            ProjectFile().define_task Rake::Task, taskName => [targetLibPath.AbsolutePath()]
           end
         end
       end
-
-      vsConf.PostBuildCommand = "#{RAKE_BUILDER_EXECUTABLE} #{taskName}"
     end
   end
 end

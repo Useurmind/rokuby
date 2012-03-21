@@ -70,6 +70,8 @@ module RakeBuilder
 "RakeWrapper/dsl_language",
 "RakeWrapper/task",
 "RakeWrapper/file_task",
+"RakeWrapper/conditional_task",
+"RakeWrapper/proxy_task",
 "RakeWrapper/file_creation_task",
 "RakeWrapper/processor_task",
 "RakeWrapper/project_namespace",
