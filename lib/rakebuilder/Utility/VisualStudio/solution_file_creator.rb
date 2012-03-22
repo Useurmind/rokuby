@@ -4,6 +4,7 @@ module RakeBuilder
   class SolutionFileCreator
     include VsXmlFileUtility
     include GeneralUtility
+    include DirectoryUtility
     
     attr_accessor :VsSolutionDescription
     attr_accessor :VsProjects    
@@ -55,8 +56,7 @@ module RakeBuilder
       
       EndGlobal()
       
-      directory = GetFilePath().AbsoluteDirectory()
-      Dir::mkdir(directory) unless File.exists?(directory)
+      CreatePath(GetFilePath().DirectoryPath())
       File.open(GetFilePath().AbsolutePath(), 'w') {|f| f.write(@fileContent) }
     end
     

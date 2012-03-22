@@ -14,7 +14,7 @@ module RakeBuilder
       files = []
 
       if(includePatterns.length > 0)      # if there are no include patterns there will be no files
-	#puts "Directories searched: #{directories}"
+	puts "Directories searched: #{directories}"
 	directories.each() do |dir|
 	  if(dir.exist?() && dir.directory?())
 	    files = files + FindFilesInDirectory(includePatterns, excludePatterns, dir)
@@ -33,6 +33,10 @@ module RakeBuilder
     def FindFilesInDirectory(includePatterns, excludePatterns, directory)
       files = []      
       #puts "Searching files in '#{directory}', found entries: #{entries}"
+
+      if(!File.readable?(directory.AbsolutePath()))
+        return files
+      end
       
       directory.SubPaths().each do |subPath|
 

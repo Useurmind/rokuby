@@ -13,7 +13,7 @@ module RakeBuilder
 
       result = system(command)
       if(result != true)
-        abort message
+        raise message
       end
     end
   

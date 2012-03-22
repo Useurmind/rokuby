@@ -3,6 +3,7 @@ module RakeBuilder
   # libraries into the binary folder.
   class VsPostBuildCommandTaskCreator < Processor
     include VsProjectProcessorUtility
+    include ProcessorUtility
     
     attr_accessor :PostBuildTask
     attr_accessor :PostBuildLibCopyTask
@@ -86,15 +87,18 @@ module RakeBuilder
       end
     end
     
-    def _CreateCopyTask(sourceFilePath, outputDirectoryPath)#
+    def _CreateCopyTask(sourceFilePath, outputDirectoryPath)
       taskName = @PostBuildLibCopyTask.to_s
       targetFilePath = outputDirectoryPath + ProjectPath.new(sourceFilePath.FileName)
       
-      ProjectFile().define_task Rake::FileTask, targetFilePath.AbsolutePath() => [sourceFilePath.AbsolutePath()] do
-        FileUtils.cp(sourceFilePath.AbsolutePath(), targetFilePath.AbsolutePath())
-      end
+      CreateFileTask {
+        filePath: targetFilePath.AbsolutePath(),
+        dependencies: [sourceFilePath.AbsolutePath()],
+        command: "cp #{sourceFilePath.AbsolutePath()} #{targetFilePath.AbsolutePath()}",
+        error: "Could not copy #{sourceFilePath.to_s} to #{targetFilePath.to_s}."
+      }
       
-      ProjectFile().define_task Rake::Task, taskName => [targetFilePath.AbsolutePath()]
+      CreateTask taskName => [targetFilePath.AbsolutePath()]
     end
   end
 end
