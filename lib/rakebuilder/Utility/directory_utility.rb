@@ -1,6 +1,10 @@
 module RakeBuilder
 
+  $FindFilesCache = {}
+
   module DirectoryUtility
+    
+    
     # Find all files matching a pattern in some directories.
     # Searches recursively. Patterns are applied on the relative paths.
     # [includePatterns] Some RegExps describing the file names.
@@ -10,7 +14,7 @@ module RakeBuilder
       files = []
 
       if(includePatterns.length > 0)      # if there are no include patterns there will be no files
-	puts "Directories searched: #{directories}"
+	#puts "Directories searched: #{directories}"
 	directories.each() do |dir|
 	  if(dir.exist?() && dir.directory?())
 	    files = files + FindFilesInDirectory(includePatterns, excludePatterns, dir)

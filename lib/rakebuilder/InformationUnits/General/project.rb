@@ -11,6 +11,7 @@ module RakeBuilder
   # [Defines] The defines that are necessary to include this project successfully.
   # [Libraries] The libraries needed to run this project successfully.
   # [Dependencies] Other projects on which this projects depends.
+  # [PassedDefines] A set of passed through defines which should be applied for certain platforms.
   class Project < InformationUnit
     attr_accessor :Name
     attr_accessor :OutputBinaryFileSet
@@ -18,6 +19,7 @@ module RakeBuilder
     attr_accessor :Defines
     attr_accessor :Libraries
     attr_accessor :Dependencies
+    attr_accessor :PassedDefines
     
     def initialize(valueMap=nil)
       super(valueMap)
@@ -28,6 +30,7 @@ module RakeBuilder
       @Defines = []
       @Libraries = []
       @Dependencies = []
+      @PassedDefines = []
       
       Extend(valueMap, false)
     end
@@ -41,6 +44,20 @@ module RakeBuilder
       @Defines = Clone(original.Defines)
       @Libraries = Clone(original.Libraries)
       @Dependencies = Clone(original.Dependencies)
+      @PassedDefines = Clone(original.PassedDefines)
+    end
+    
+    # Get the defines that this project wants other projects to use.
+    def GetPassedDefines(platform)
+      defines = []
+      
+      @PassedDefines.each() do |passedDefines|
+        if(passedDefines.Platform <= platform)
+          defines.concat(passedDefines.GatherDefines())
+        end
+      end
+      
+      return defines
     end
     
     # Gather the defines from this information unit and all subunits.
@@ -82,7 +99,7 @@ module RakeBuilder
       
       includePaths = valueMap[:IncludePaths] || valueMap[:incPaths]
       if(includePaths)
-        @IncludePaths = includePaths
+        @IncludePaths.concat(includePaths)
       end
       
       task = valueMap[:Task] || valueMap[:task]
@@ -103,6 +120,11 @@ module RakeBuilder
       dependencies = valueMap[:Dependencies] || valueMap[:deps]
       if(dependencies)
         @Dependencies.concat(dependencies)
+      end
+      
+      passedDefines = valueMap[:PassedDefines] || valueMap[:passDefs]
+      if(passedDefines)
+        @PassedDefines.concat(passedDefines)
       end
     end
   end

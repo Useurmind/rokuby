@@ -36,6 +36,7 @@ module RakeBuilder
 # general IUs
 "InformationUnits/General/library",
 "InformationUnits/General/platform_configuration",
+"InformationUnits/General/passthrough_defines",
 "InformationUnits/General/project",
 "InformationUnits/General/project_configuration",
 "InformationUnits/General/project_description",
@@ -70,7 +71,6 @@ module RakeBuilder
 "RakeWrapper/dsl_language",
 "RakeWrapper/task",
 "RakeWrapper/file_task",
-"RakeWrapper/conditional_task",
 "RakeWrapper/proxy_task",
 "RakeWrapper/file_creation_task",
 "RakeWrapper/processor_task",

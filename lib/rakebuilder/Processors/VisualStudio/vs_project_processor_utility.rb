@@ -3,6 +3,38 @@ module RakeBuilder
   # a visual studio project builder.
   module VsProjectProcessorUtility
     
+    def ProjectInstance
+      @projectInstance
+    end
+    
+    def ProjectDescription
+      @projectDescription
+    end
+    
+    def ProjectConfigurations
+      @projectConfigurations
+    end
+    
+    def VsProjectInstance
+      @vsProjectInstance
+    end
+    
+    def VsProjectDescription
+      @vsProjectDescription
+    end
+    
+    def VsProjectConfigurations
+      @vsProjectConfigurations
+    end
+    
+    def VsProjects
+      @vsProjects
+    end
+    
+    def PassthroughDefines
+      @passthroughDefines
+    end
+    
     def initialize(*args)
       super(*args)
       @projectInstance = nil
@@ -12,6 +44,7 @@ module RakeBuilder
       @vsProjectDescription = VsProjectDescription.new()
       @vsProjectConfigurations = []
       @vsProjects = []
+      @passthroughDefines = []
     end
     
     # Register the known input types for such a processor.
@@ -23,6 +56,7 @@ module RakeBuilder
       @knownInputClasses.push(RakeBuilder::VsProjectConfiguration)
       @knownInputClasses.push(RakeBuilder::VsProjectInstance)
       @knownInputClasses.push(RakeBuilder::VsProject)
+      @knownInputClasses.push(RakeBuilder::PassthroughDefines)
     end
     
     # Sort the processor inputs by their class type.
@@ -42,6 +76,8 @@ module RakeBuilder
           @vsProjectConfigurations.push(input)
         elsif(input.is_a?(RakeBuilder::VsProject))
           @vsProjects.push(input)
+        elsif(input.is_a?(RakeBuilder::PassthroughDefines))
+          @passthroughDefines.push(input)
         end
       end
     end

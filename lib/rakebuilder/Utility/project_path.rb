@@ -90,10 +90,17 @@ module RakeBuilder
     end
     
     # Returns the file name contained in this project path or nil.
-    def FileName      
+    def FileName(keepExt=true)      
       if(filePath?())
         pathParts = PathParts()
-        return pathParts[pathParts.length-1]
+        
+        fileName = pathParts[pathParts.length-1]
+        
+        if(!keepExt)
+          fileName = fileName.split(".")[0]
+        end
+        
+        return fileName
       end
       return nil
     end

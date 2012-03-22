@@ -166,6 +166,10 @@ module RakeBuilder
       @PostBuildCommand = Clone(original.PostBuildCommand)
     end
     
+    def GetTargetFilePath
+      return @OutputDirectory + ProjectPath.new(@TargetName + @TargetExt)
+    end
+    
     # Gather the defines from this information unit and all subunits.
     def GatherDefines()
       return @Defines

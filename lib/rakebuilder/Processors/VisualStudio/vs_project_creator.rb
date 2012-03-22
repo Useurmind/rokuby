@@ -50,7 +50,8 @@ module RakeBuilder
                       :Dependencies => Clone(@vsProjects),
                       :BinaryFileSet => nil, # the binaries are determined through the configuration targetname and outputdirectory
                       :IncludePaths => includePaths,
-                      :Libraries => @projectInstance.Libraries
+                      :Libraries => @projectInstance.Libraries,
+                      :PassedDefines => @passthroughDefines
                       
       
       @outputs = [@Project]

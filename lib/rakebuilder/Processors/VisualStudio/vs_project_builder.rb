@@ -7,7 +7,7 @@ module RakeBuilder
   # platform they are defined for. Make sure that there is at most one visual studio and normal
   # project configuration for each platform.
   # Output of this processor is a VSProject instance that represents the created project.
-  class VsProjectBuilder < ProcessChain    
+  class VsProjectBuilder < ProcessChain
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
@@ -27,15 +27,54 @@ module RakeBuilder
       Connect(@vsPostBuildTaskCreator.to_s, @fileWriter.to_s)
       
       # The first argument to this task is the configuration name for which the post build should be executed
-      @PostBuildTask = Rake::ProxyTask.define_task "#{@Name}_PostBuildCommandTask"
+      @PostBuildTask = Rake::ProxyTask.define_task "#{@Name}_PostBuildCommandTask", :descr, :inst, :vsDescr, :vsInst, :vsConf
+      @PostBuildLibCopyTask = Rake::Task.define_task "#{@Name}_PostBuildLibCopyTask", :descr, :inst, :vsDescr, :vsInst, :vsConf
       
-      @PostBuildTask.SetPreInvokeAction() do
+      @PostBuildTask.SetArgumentModificationAction() do |args|
+        
+        vsConfBinaryExt = args[0]
+        
         $EXECUTION_MODE = :Restricted
+        @vsPostBuildTaskCreator.CurrentVsConfBinaryExt = vsConfBinaryExt
+        @vsPostBuildTaskCreator.invoke()
+        
+        modifiedArgs = []
+        
+        modifiedArgs.push @vsPostBuildTaskCreator.ProjectDescription
+        modifiedArgs.push @vsPostBuildTaskCreator.ProjectInstance
+        
+        modifiedArgs.push @vsPostBuildTaskCreator.VsProjectDescription
+        modifiedArgs.push @vsPostBuildTaskCreator.VsProjectInstance
+        
+        @vsPostBuildTaskCreator.VsProjectConfigurations.each() do |vsConf|
+          if(vsConf.Platform.BinaryExtension == vsConfBinaryExt)
+            modifiedArgs.push vsConf
+            break
+          end
+        end
+        
+        modifiedArgs
       end
-      
-      @PostBuildTask.enhance [@vsPostBuildTaskCreator.to_s, @PostBuildTask.BackTask.to_s]  # as the pres are executed corresponding to their order this executes the back task last
+      @PostBuildTask.enhance [@PostBuildLibCopyTask.to_s]  # as the pres are executed corresponding to their order this executes the back task last
       
       @vsPostBuildTaskCreator.PostBuildTask = @PostBuildTask
+      @vsPostBuildTaskCreator.PostBuildLibCopyTask = @PostBuildLibCopyTask
+    end
+    
+    # Extend/set the attributes of the processor.
+    def Extend(valueMap, executeParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(executeParent)
+        super(valueMap)
+      end
+      
+      postBuildTasks = valueMap[:PostBuildTasks] || valueMap[:postBuild]
+      if(postBuildTasks)
+        @PostBuildTask.enhance postBuildTasks
+      end
     end
   end
 end

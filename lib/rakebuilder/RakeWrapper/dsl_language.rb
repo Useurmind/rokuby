@@ -67,6 +67,10 @@ module RakeBuilder
       return Rake.application.DefineInformationUnit(PlatformConfiguration, *args, &block)
     end
     
+    def passDefs(*args, &block)
+      return Rake.application.DefineInformationUnit(PassthroughDefines, *args, &block)
+    end
+    
     #   Instances
     
     def fileSet(*args, &block)

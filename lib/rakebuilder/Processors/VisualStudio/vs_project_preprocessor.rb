@@ -45,6 +45,7 @@ module RakeBuilder
       @outputs.push(@vsProjectDescription)
       @outputs.concat(@vsProjectConfigurations)
       @outputs.concat(@vsProjects)
+      @outputs.concat(@passthroughDefines)
     end
     
     def _ExtendVsProjectDescription      
@@ -117,7 +118,7 @@ module RakeBuilder
       includePaths = []
       @projectInstance.SourceUnits.each() do |su|
         su.IncludeFileSet.RootDirectories.each() do |rootDir|
-          includePaths |= GetDirectoryTreeFromRelativeBase(rootDir)
+          includePaths |= GetDirectoryTree(rootDir)
         end        
       end
       vsConf.AdditionalIncludeDirectories |= includePaths
@@ -155,6 +156,17 @@ module RakeBuilder
           vsConf.AdditionalIncludeDirectories |= (vsProj.IncludePaths)
           vsConf.AdditionalLibraryDirectories.push(outDir)
           vsConf.AdditionalDependencies.push(binaryName)
+          
+          vsProj.Libraries.each() do |lib|
+            libInstances = lib.GetInstances(vsConf.Platform)
+            libInstances.each() do |libInstance|
+              vsConf.AdditionalIncludeDirectories |= libInstance.FileSet.IncludeFileSet.RootDirectories
+            end
+          end
+          
+          vsProj.Dependencies.each() do |dep|
+            vsConf.AdditionalIncludeDirectories |= dep.IncludePaths
+          end
         end
       end
       
@@ -173,6 +185,9 @@ module RakeBuilder
       defines |= @projectDescription.GatherDefines()
       defines |= @vsProjectDescription.GatherDefines()
       #puts "found defines for vsconf: #{defines}"
+      @vsProjects.each() do|vsProj|
+        defines |= vsProj.GetPassedDefines(vsConf.Platform)
+      end
       return defines
     end
     

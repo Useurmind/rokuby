@@ -38,7 +38,7 @@ module RakeBuilder
       })
       
       PLATFORM_WIN_X86_RELWITHDEB = PlatformConfiguration.new({
-        name: "Windows Debug (x86)",
+        name: "Windows Release With Debug (x86)",
         os: :Windows,
         arch: :x86,
         type: :RelWithDeb

@@ -30,7 +30,7 @@ module RakeBuilder
     
     def GetConfiguration(platform)
       @Configurations.each() do |configuration|
-        if(configuration.Platform == platform)
+        if(configuration.Platform <= platform)
           return configuration
         end
       end
