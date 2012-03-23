@@ -58,7 +58,7 @@ module RakeBuilder
       # Run the top level tasks of a Rake application.
       def top_level
         if(options.show_status == true)
-          puts to_s
+          puts status_string
         else
           super
         end
@@ -96,7 +96,7 @@ module RakeBuilder
           max_column = truncate_output? ? terminal_width - name.size - width - 7 : nil
           
           @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|            
-            puts "Task in project file: '#{projectFile.Path().RelativePath}'\n"
+            puts "Task in project file: '#{projectFile.Path().AbsolutePath()}'\n"
             puts projectFile.GetTaskDescriptions(width, max_column)
           end
         else
@@ -348,7 +348,7 @@ module RakeBuilder
         (scope + [task_name]).join(':')
       end
       
-      def to_s
+      def status_string
         val = "\nRakeBuilder Application Status:\n"
         val += "===============================================\n"
         val += @ProjectFileLoader.to_s

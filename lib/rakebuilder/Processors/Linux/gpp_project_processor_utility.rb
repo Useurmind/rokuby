@@ -49,6 +49,15 @@ module RakeBuilder
       @BackTask.invoke()
     end
 
+    def _GetGppProjectConf(platform)
+      @gppProjectConfigurations.each() do |gppConf|
+        if(gppConf.Platform <= platform)
+          return gppConf
+        end
+      end
+      return nil
+    end
+    
     def _ForwardOutputs
       @outputs.push(@projectInstance)
       @outputs.push(@projectDescription)

@@ -9,7 +9,7 @@ module RakeBuilder
       return true
     end
     
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs=nil)
       @outputs = @inputs
     end
   end

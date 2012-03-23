@@ -40,9 +40,7 @@ module RakeBuilder
       processor.enhance(taskDeps, &block)
       processor.set_arg_names(taskArgs)
       
-      inputs.each() do |input|
-        processor.AddInput(input)
-      end      
+      processor.AddInput(inputs)
       processor.Extend(valueMap)
       
       return processor
@@ -98,8 +96,8 @@ module RakeBuilder
       hash.keys.each() do |key|
         if(key == :procIns)
           inputs = hash[key]
-          elsif(key == :procArgs)
-            taskArgs = hash[key]
+        elsif(key == :procArgs)
+          taskArgs = hash[key]
         elsif(key == :procDeps)
           taskDeps = hash[key]
         else

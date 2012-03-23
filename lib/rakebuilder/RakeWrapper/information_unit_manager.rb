@@ -9,6 +9,7 @@ module RakeBuilder
     attr_accessor :InformationUnits
     attr_accessor :DefaultProjectConfigurations
     attr_accessor :DefaultVsProjectConfigurations
+    attr_accessor :DefaultGppProjectConfigurations
     
     def initialize
       super

@@ -23,6 +23,17 @@ module RakeBuilder
       @Location = Clone(original.Location)
       @Platforms = Clone(original.Platform)
     end
+
+    def IsForTargetPlatform(targetPlatform)
+      isForPlatform = false
+      @Platforms.each() do |platform|
+        if(platform <= targetPlatform)
+          isForPlatform = true
+          break
+        end
+      end
+      return isForPlatform
+    end
     
     # Gather the defines from this information unit and all subunits.
     def GatherDefines()

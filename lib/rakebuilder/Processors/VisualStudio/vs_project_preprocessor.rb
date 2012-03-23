@@ -19,7 +19,7 @@ module RakeBuilder
       _RegisterInputTypes()
     end
     
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs=nil)
       _SortInputs()      
       
       if(@projectDescription == nil)
@@ -158,8 +158,8 @@ module RakeBuilder
           vsConf.AdditionalDependencies.push(binaryName)
           
           vsProj.Libraries.each() do |lib|
-            libInstances = lib.GetInstances(vsConf.Platform)
-            libInstances.each() do |libInstance|
+            libInstance = lib.GetInstance(vsConf.Platform)
+            if(libInstance)
               vsConf.AdditionalIncludeDirectories |= libInstance.FileSet.IncludeFileSet.RootDirectories
             end
           end

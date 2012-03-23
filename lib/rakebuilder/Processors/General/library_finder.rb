@@ -5,6 +5,7 @@ module RakeBuilder
   # Outputs are the found libraries in form of Library instances.
   class LibraryFinder < Processor
     include FindFile
+    include PlatformTester
     
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
@@ -12,10 +13,14 @@ module RakeBuilder
       @knownInputClasses.push(RakeBuilder::LibrarySpecification)
     end
     
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs=nil)
       libraries = {}
       
       @inputs.each() do |libSpec|
+        if(!TargetedAtPlatforms(libSpec.Platforms))
+          next
+        end
+        
         library = libraries[libSpec.Name]
         if(!library)
           library = Library.new()

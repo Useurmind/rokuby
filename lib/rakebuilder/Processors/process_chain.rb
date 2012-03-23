@@ -59,7 +59,7 @@ module RakeBuilder
       
       inputs = valueMap[:Inputs] || valueMap[:ins]
       if(inputs)
-        InputProcessor().AddInput(inputs)
+        AddInput(inputs)
       end
       
       throwOnUnknownInput = valueMap[:ThrowOnUnkownInput] || valueMap[:throwUnknown]

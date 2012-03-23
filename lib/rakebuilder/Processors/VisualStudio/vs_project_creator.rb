@@ -15,7 +15,7 @@ module RakeBuilder
       _RegisterInputTypes()
     end
     
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs=nil)
       _SortInputs()
       
       if(@projectDescription == nil)

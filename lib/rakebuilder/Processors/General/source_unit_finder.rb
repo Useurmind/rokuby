@@ -12,7 +12,7 @@ module RakeBuilder
       @knownInputClasses.push(RakeBuilder::SourceUnitSpecification)
     end
     
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs=nil)
       #puts "Processing inputs #{@inputs} in SourceUnitFinder"
       @inputs.each() do |suSpec|
         suInstance = SourceUnitInstance.new()

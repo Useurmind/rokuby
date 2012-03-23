@@ -4,7 +4,6 @@ module RakeBuilder
 
   module DirectoryUtility
     
-    
     # Find all files matching a pattern in some directories.
     # Searches recursively. Patterns are applied on the relative paths.
     # [includePatterns] Some RegExps describing the file names.

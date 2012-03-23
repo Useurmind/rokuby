@@ -115,7 +115,7 @@ class Processor < Rake::ProcessorTask
     _FetchInputs()
     
     if(Rake.application.options.trace)
-      $stderr.puts "** Processing inputs in #{@ProjectFile.Path.RelativePath}:#{name}"#: #{@inputs}"
+      $stderr.puts "** Processing inputs in #{@ProjectFile.Path.RelativePath}:#{name}"#": #{@inputs}"
     end
     _ProcessInputs(task_args)
     
@@ -133,7 +133,7 @@ class Processor < Rake::ProcessorTask
   # This function needs to be overloaded by derived classes.
   # It should process the inputs that are already filled in the @inputs member
   # and fill the corresponding @outputs list with the processed output information.
-  def _ProcessInputs(taskArgs)
+  def _ProcessInputs(taskArgs=nil)
     raise "_ProcessInputs not defined in #{self.class.name}"
   end
   

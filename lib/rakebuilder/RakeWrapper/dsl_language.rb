@@ -140,6 +140,20 @@ module RakeBuilder
     def vsSlnDescr(*args, &block)
       return Rake.application.DefineInformationUnit(VsSolutionDescription, *args, &block)
     end
+
+    #    Gpp
+
+    def gppProj(*args, &block)
+      return Rake.application.DefineInformationUnit(GppProject, *args, &block)
+    end
+
+    def gppProjConf(*args, &block)
+      return Rake.application.DefineInformationUnit(GppProjectConfiguration, *args, &block)
+    end
+
+    def gppProjDescr(*args, &block)
+      return Rake.application.DefineInformationUnit(GppProjectDescription, *args, &block)
+    end
     
     ####################################################
     # Processors
@@ -169,6 +183,11 @@ module RakeBuilder
     def vsSlnBuild(*args, &block)
       Rake.application.DefineProcessor(VsSolutionBuilder, *args, &block)
     end
+
+    # Gpp
+    def gppProjBuild(*args, &block)
+      Rake.application.DefineProcessor(GppProjectBuilder, *args, &block)
+    end
     
     #####################################################
     # Default Configurations
@@ -179,6 +198,10 @@ module RakeBuilder
     
     def defaultVsProjectConfigurations()
       return Clone(Rake.application.current_project_file.DefaultVsProjectConfigurations)
+    end
+
+    def defaultGppProjectConfigurations()
+      return Clone(Rake.application.current_project_file.DefaultGppProjectConfigurations)
     end
   end
 end

@@ -55,7 +55,6 @@ module RakeBuilder
     # get a list that describes all tasks in this proect file
     def GetTaskDescriptions(width, maxColumn)
       val = ""
-      puts "task patter: '#{Rake.application.options.show_task_pattern}'"
       puts "tasks in projectfile: #{tasks}"
       displayable_tasks = tasks.select { |t|
         t.comment && t.name =~ Rake.application.options.show_task_pattern

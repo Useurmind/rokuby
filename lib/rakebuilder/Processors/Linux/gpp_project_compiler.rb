@@ -2,30 +2,41 @@ module RakeBuilder
   # Responsible for compiling the sources that belong to the project.
   class GppProjectCompiler < Processor
     include GppProjectProcessorUtility
+    include ProcessorUtility
+    include DirectoryUtility
+
     def initialize(name, app, project_file)
       super(name, app, project_file)
 
       _RegisterInputTypes()
     end
 
-    def _ProcessInputs(taskArgs)
+    def _ProcessInputs(taskArgs=nil)
       _SortInputs()
       
-      if(taskArgs.gppConf.is_a?(GppProjectConfiguration))
-        compileTasks = _CreateCompileTasks(taskArgs.gppConf)
+      if(taskArgs && taskArgs.gppConf.is_a?(GppProjectConfiguration))
+        gppConf = _GetGppProjectConf(taskArgs.gppConf.Platform)
+        puts "Compiling #{[gppConf]}"
+        compileTasks = _CreateCompileTasks(gppConf)
         compileTaskNames = []
         compileTasks.each() do |task|
           compileTaskNames.push task.to_s
         end
         
-        linkTask = _CreateLinkTasks(taskArgs.gppConf, compileTaskNames)
+        linkTask = _CreateLinkTasks(gppConf, compileTaskNames)
         
         @BackTask.enhance [linkTask.to_s]
-  
+
+        _CreateDirectories(gppConf)
         _ExecuteBackTask()      
       end
       
       _ForwardOutputs()
+    end
+
+    def _CreateDirectories(gppConf)
+      CreatePath(gppConf.CompileDirectory)
+      CreatePath(gppConf.OutputDirectory)
     end
 
     def _CreateCompileTasks(gppConf)
@@ -46,7 +57,7 @@ module RakeBuilder
         filePath: targetPath.RelativePath,
         dependencies: [sourcePath.RelativePath],
         command: compileCommand,
-        error: "Could not compile #{sourceFilePath.to_s} to #{targetFilePath.to_s}."
+        error: "Could not compile #{sourcePath.to_s} to #{targetPath.to_s}."
       })
     end
     
@@ -105,11 +116,11 @@ module RakeBuilder
     end
 
     def _GatherIncludePaths(gppConf)
-      return gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@projectDescription.ProjectPath).RelativePath }
+      return (gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@projectDescription.ProjectPath).RelativePath }).uniq
     end
 
     def _GatherDefines(gppConf)
-      return gppConf.Defines.map() {|define| Gpp::CommandLine::Options::DEFINE + define}
+      return (gppConf.Defines.map() {|define| Gpp::CommandLine::Options::DEFINE + define}).uniq
     end
     
     def _GatherLibraryLinkComponents(gppConf)
@@ -120,18 +131,23 @@ module RakeBuilder
       dynamicLibExtension = Gpp::Configuration::TargetExt::SHARED_LIB.gsub("\.", "")
 
       # the libraries that are included in this project
-      @projectInstance.SourceUnits.each() do |su|
-        su.Libraries.each do |lib|
-          libInstance = lib.GetInstance(gppConf.Platform)
+      @projectInstance.Libraries.each() do |lib|
+        libInstance = lib.GetInstance(gppConf.Platform)
+        if(!libInstance)
+          next
+        end
 
-          libPath = libInstance.FileSet.LibraryFileSet.FilePaths[0]
-          libExtension = libPath.FileExt()
-          if(libExtension == dynamicLibExtension)
-            dynamicLibs.push  Gpp::CommandLine::Options::LIB_NAME + libPath.FileName(false)
-            dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + libPath.DirectoryPath().RelativePath
-          else
-            staticLibs.push libPath.RelativePath
-          end
+        libPath = libInstance.FileSet.LibraryFileSet.FilePaths[0]
+        if(!libPath)
+          #puts "No library instance found for library #{lib.Name}"
+          next
+        end
+        libExtension = libPath.FileExt()
+        if(libExtension == dynamicLibExtension)
+          dynamicLibs.push  Gpp::CommandLine::Options::LIB_NAME + libPath.FileName(false)
+          dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + libPath.DirectoryPath().RelativePath
+        else
+          staticLibs.push libPath.RelativePath
         end
       end
       

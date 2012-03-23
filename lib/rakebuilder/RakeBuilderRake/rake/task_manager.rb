@@ -115,6 +115,7 @@ module Rake
         arg_names = key
         deps = value
       end
+      arg_names = [arg_names] unless arg_names.respond_to?(:to_ary)
       deps = [deps] unless deps.respond_to?(:to_ary)
       [task_name, arg_names, deps]
     end

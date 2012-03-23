@@ -60,10 +60,16 @@ module RakeBuilder
 "InformationUnits/VisualStudio/vs_project_configuration",
 "InformationUnits/VisualStudio/vs_project",
 "InformationUnits/VisualStudio/vs_solution_description",
+# linux information instances
+"InformationUnits/Linux/gpp_constants",
+"InformationUnits/Linux/gpp_project",
+"InformationUnits/Linux/gpp_project_description",
+"InformationUnits/Linux/gpp_project_configuration",
 
 # default values for different settings
 "InformationUnits/General/defaults",
 "InformationUnits/VisualStudio/vs_defaults",
+"InformationUnits/Linux/gpp_defaults",
 
 "InformationUnits/Constants/configuration_constants",
 
@@ -84,9 +90,11 @@ module RakeBuilder
 
 # Processing chain
 "Processors/processor",
+"Processors/processor_utility",
 "Processors/passthrough_processor",
 "Processors/process_chain",
 # general processors
+"Processors/General/platform_tester",
 "Processors/General/find_file",
 "Processors/General/file_finder",
 "Processors/General/library_finder",
@@ -104,6 +112,13 @@ module RakeBuilder
 "Processors/VisualStudio/vs_solution_preprocessor",
 "Processors/VisualStudio/vs_solution_file_writer",
 "Processors/VisualStudio/vs_solution_builder",
+# Linux processors
+"Processors/Linux/gpp_project_processor_utility",
+"Processors/Linux/gpp_project_preprocessor",
+"Processors/Linux/gpp_project_compiler",
+"Processors/Linux/gpp_project_library_gatherer",
+"Processors/Linux/gpp_project_creator",
+"Processors/Linux/gpp_project_builder",
 
 "doxygen_builder",
 ]

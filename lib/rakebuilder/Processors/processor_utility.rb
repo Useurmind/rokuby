@@ -1,5 +1,5 @@
 module RakeBuilder
-  module ProcessorUtility
+  module ProcessorUtility    
     def CreateTaskClass(taskClass, *args, &block)
       return ProjectFile().define_task(taskClass, *args, &block)
     end

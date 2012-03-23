@@ -11,7 +11,7 @@ module RakeBuilder
          @knownInputClasses.push(RakeBuilder::VsProjectSpecification)
       end
     
-      def _ProcessInputs         
+      def _ProcessInputs(taskArgs=nil)
          vsProjectInstance = VsProjectInstance.new()
          @inputs.each() do |input|
             if(input.is_a?(RakeBuilder::VsProjectSpecification))

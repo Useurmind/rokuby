@@ -57,6 +57,7 @@ module RakeBuilder
         
         projectFile.DefaultProjectConfigurations = RakeBuilder::Defaults.InitDefaultProjectConfigurations()
         projectFile.DefaultVsProjectConfigurations = RakeBuilder::Defaults.InitDefaultVsProjectConfigurations()
+        projectFile.DefaultGppProjectConfigurations = RakeBuilder::Defaults.InitDefaultGppProjectConfigurations()
         
         Kernel.load(projectFile.Path.AbsolutePath())
         

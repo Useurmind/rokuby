@@ -1,6 +1,7 @@
 module RakeBuilder
   class GppProjectLibraryGatherer < Processor
     include GppProjectProcessorUtility
+    include ProcessorUtility
     
     def initialize(name, app, project_file)
       super(name, app, project_file)
@@ -8,21 +9,24 @@ module RakeBuilder
       _RegisterInputTypes()
     end
     
-    def _ProcessInputs(taskArgs)
+    def _ProcessInputs(taskArgs=nil)
       _SortInputs()
       
-      gppConf = taskArgs.gppConf
-      
-      libraryPaths = _GatherLibraryPaths(gppConf)
-      
-      libraryPaths.each() do |libPath|
-        _CreateLibCopyTask(libPath, gppConf)
+      gppConf = _GetGppProjectConf(taskArgs.gppConf.Platform)
+
+      if(gppConf)
+        libraryPaths = _GatherLibraryPaths(gppConf)
+
+        libraryPaths.each() do |libPath|
+          _CreateLibCopyTask(libPath, gppConf)
+        end
+
+        _ExecuteBackTask()
       end
-      
-      ExecuteBackTask()
     end
     
-    def _GatherLibraryPaths()
+    def _GatherLibraryPaths(gppConf)
+      return []
     end
     
     def _CreateLibCopyTask(libPath, gppConf)

@@ -19,7 +19,7 @@ module RakeBuilder
       _RegisterInputTypes()
     end
     
-    def _ProcessInputs()
+    def _ProcessInputs(taskArgs=nil)
       _SortInputs()
       
       if(@projectInstance == nil)
@@ -75,7 +75,8 @@ module RakeBuilder
       
       # task for copying the library on which this project depends
       librariesToCopy.each() do |lib|
-        lib.GetInstances(vsConf.Platform).each() do |libInstance|
+        libInstance = lib.GetInstance(vsConf.Platform)
+        if(libInstance != nil)
           libInstance.FileSet.LinkFileSet.FilePaths.each() do |libFilePath|
             if(libFilePath.FileExt != "dll") # copy only dlls
               next
@@ -91,12 +92,12 @@ module RakeBuilder
       taskName = @PostBuildLibCopyTask.to_s
       targetFilePath = outputDirectoryPath + ProjectPath.new(sourceFilePath.FileName)
       
-      CreateFileTask {
+      CreateFileTask({
         filePath: targetFilePath.AbsolutePath(),
         dependencies: [sourceFilePath.AbsolutePath()],
         command: "cp #{sourceFilePath.AbsolutePath()} #{targetFilePath.AbsolutePath()}",
         error: "Could not copy #{sourceFilePath.to_s} to #{targetFilePath.to_s}."
-      }
+      })
       
       CreateTask taskName => [targetFilePath.AbsolutePath()]
     end

@@ -5,6 +5,8 @@ module RakeBuilder
   # LibrarySpecifications.
   # Output is one ProjectInstance that contains all the gathered information.
   class ProjectFinder < Processor
+    include PlatformTester
+    
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
@@ -13,7 +15,7 @@ module RakeBuilder
       @knownInputClasses.push(RakeBuilder::LibrarySpecification)
     end
     
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs=nil)
       #puts "processing inputs #{@inputs} in ProjectFinder"
       
       sourceUnitSpecs = []
@@ -52,6 +54,7 @@ module RakeBuilder
       #puts "Processing libraries units #{libSpecs}"
       
       libFinder = LibraryFinder.new()
+      libFinder.TargetPlatforms = TargetPlatforms()
       
       libFinder.AddInput(libSpecs)
       libFinder.Process()

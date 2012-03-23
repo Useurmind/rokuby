@@ -11,7 +11,7 @@ module RakeBuilder
     
     attr_accessor :IncludePaths
     
-     def initialize(valueMap=nil)
+    def initialize(valueMap=nil)
       
       @CompileDirectory = nil
       @OutputDirectory = nil

@@ -62,9 +62,9 @@ module RakeBuilder
       defines = @Defines
       
       @Libraries.each() do |lib|
-        libInstances = lib.GetInstances(platform)
-        libInstances.each() do |libInst|
-          defines.concat(libInst.GatherDefines())
+        libInstance = lib.GetInstance(platform)
+        if(libInstance)
+          defines.concat(libInstance.GatherDefines())
         end
       end
       

@@ -11,7 +11,7 @@ module RakeBuilder
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
-      @projectFinder = defineProc ProjectFinder, "#{@Name}_ProjFinder"      
+      @projectFinder = defineProc ProjectFinder, "#{@Name}_ProjFinder", :TargetPlatforms => [PLATFORM_WIN]
       @projectPreprocessor = defineProc VsProjectPreprocessor, "#{@Name}_Pre"
       @projectCreator = defineProc VsProjectCreator, "#{@Name}_Proj"
       @fileWriter = defineProc VsProjectFilesWriter, "#{@Name}_Files"

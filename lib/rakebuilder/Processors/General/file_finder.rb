@@ -11,7 +11,7 @@ module RakeBuilder
       @knownInputClasses.push(RakeBuilder::FileSpecification)
     end
     
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs=nil)
       #puts "Processing inputs #{@inputs} in FileFinder"
       @inputs.each() do |fileSpec|
         fileSet = FileSet.new()

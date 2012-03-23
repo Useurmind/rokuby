@@ -1,5 +1,5 @@
 module RakeBuilder
-  class GppProjectBuilder < Processor
+  class GppProjectCreator < Processor
     include GppProjectProcessorUtility
     
     def initialize(name, app, project_file)
@@ -8,7 +8,7 @@ module RakeBuilder
       _RegisterInputTypes()
     end
     
-    def _ProcessInputs(taskArgs)
+    def _ProcessInputs(taskArgs=nil)
       _SortInputs()
       
       gppProject = GppProject.new()

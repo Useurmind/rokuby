@@ -11,8 +11,6 @@
 #            The intent of this task is to return a project to its
 #            pristine, just unpacked state.
 
-require 'rake'
-
 # :stopdoc:
 CLEAN = Rake::FileList["**/*~", "**/*.bak", "**/core"]
 CLEAN.clear_exclude.exclude { |fn|

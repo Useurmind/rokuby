@@ -227,8 +227,15 @@ module RakeBuilder
         end
         commonPartsNumber += 1
       end
+
+      upSwitchesNumber = pathParts.length - commonPartsNumber
+      for i in commonPartsNumber-1..pathParts.length-1
+        if(pathParts[i] == '.' or pathParts[i] == '..')
+          upSwitchesNumber -= 1
+        end
+      end
       
-      upSwitches = Array.new(pathParts.length - commonPartsNumber, "..")
+      upSwitches = Array.new(upSwitchesNumber, "..")
       
       return ProjectPath.new({
         base: path.AbsolutePath(),

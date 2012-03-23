@@ -1,6 +1,6 @@
 module RakeBuilder
-  class GppProjectPreprocessor
-    include GppProjectPreprocessorUtility
+  class GppProjectPreprocessor < Processor
+    include GppProjectProcessorUtility
     include DirectoryUtility
     
     def initialize(name, app, project_file)
@@ -9,7 +9,7 @@ module RakeBuilder
       _RegisterInputTypes()
     end
 
-    def _ProcessInputs(taskArgs)
+    def _ProcessInputs(taskArgs=nil)
       _SortInputs()
       
       _ExtendGppProjectConfigurations()
@@ -18,18 +18,20 @@ module RakeBuilder
     end
     
     def _ExtendGppProjectConfigurations()
-      @gppProjectDescriptions.each() do |gppConf|
+      #puts "Extending configurations"
+      @gppProjectConfigurations.each() do |gppConf|
+        #puts "Extending gppConf #{[gppConf]}"
         subfolderName = @projectDescription.Name + gppConf.Platform.BinaryExtension()
         
-        if(!gppConf.CompileDirectory)
+        if(gppConf.CompileDirectory == nil)
           gppConf.CompileDirectory = @projectDescription.BuildPath + ProjectPath.new(subfolderName)
         end
         
-        if(!gppConf.OutputDirectory)
+        if(gppConf.OutputDirectory == nil)
           gppConf.OutputDirectory = @projectDescription.CompilesPath + ProjectPath.new(subfolderName)
         end
         
-        if(!gppConf.TargetName)
+        if(gppConf.TargetName == nil)
           gppConf.TargetName = subfolderName
         end
         
@@ -51,6 +53,8 @@ module RakeBuilder
         
         gppConf.Defines |= _GatherDefines(gppConf)
         gppConf.Defines = gppConf.Defines.uniq
+
+        #puts "extensions done for configuration: #{[gppConf]}"
       end
     end
     
@@ -84,7 +88,11 @@ module RakeBuilder
       # The include paths of libraries this project depends on
       @projectInstance.Libraries.each() do |lib|
         libInstance = lib.GetInstance(gppConf.Platform)
-        includePaths |= libInstance.FileSet.IncludeFileSet.RootDirectories
+        puts "trying to retrieve include paths for lib"
+        if(libInstance)
+          puts "found library instance #{[libInstance]}"
+          includePaths |= libInstance.FileSet.IncludeFileSet.RootDirectories
+        end
       end
       
       return includePaths
