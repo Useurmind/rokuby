@@ -14,7 +14,6 @@ module RakeBuilder
   # [PassedDefines] A set of passed through defines which should be applied for certain platforms.
   class Project < InformationUnit
     attr_accessor :Name
-    attr_accessor :OutputBinaryFileSet
     attr_accessor :IncludePaths
     attr_accessor :Defines
     attr_accessor :Libraries
@@ -25,7 +24,6 @@ module RakeBuilder
       super(valueMap)
       
       @Name = ""
-      @OutputBinaryFileSet = FileSet.new()
       @IncludePaths = []
       @Defines = []
       @Libraries = []
@@ -39,7 +37,6 @@ module RakeBuilder
       super(original)
       
       @Name = Clone(original.Name)
-      @OutputBinaryFileSet = Clone(original.OutputBinaryFileSet)
       @IncludePaths = Clone(original.IncludePaths)
       @Defines = Clone(original.Defines)
       @Libraries = Clone(original.Libraries)
@@ -90,11 +87,6 @@ module RakeBuilder
       name = valueMap[:Name] || valueMap[:name]
       if(name)
         @Name = name
-      end
-      
-      outputBinaryFileSet = valueMap[:OutputBinaryFileSet] || valueMap[:binSet]
-      if(outputBinaryFileSet)
-        @OutputBinaryFileSet = outputBinaryFileSet
       end
       
       includePaths = valueMap[:IncludePaths] || valueMap[:incPaths]

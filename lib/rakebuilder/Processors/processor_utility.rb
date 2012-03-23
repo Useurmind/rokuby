@@ -1,11 +1,11 @@
 module RakeBuilder
   module ProcessorUtility
     def CreateTaskClass(taskClass, *args, &block)
-      ProjectFile().define_task(taskClass, *args, &block)
+      return ProjectFile().define_task(taskClass, *args, &block)
     end
 
     def CreateTask(*args, &block)
-      CreateTaskClass(Rake::Task, *args, &block)
+      return CreateTaskClass(Rake::Task, *args, &block)
     end
 
     # Create a file task.
@@ -24,15 +24,17 @@ module RakeBuilder
         abort "No file path given for file task creation"
       end
 
+      task = nil
       if(dependencies)
-        CreateTaskClass Rake::FileTask, filePath => dependencies
+        task = CreateTaskClass Rake::FileTask, filePath => dependencies
       end
 
       if(command)
-        CreateTaskClass Rake::FileTask, filePath do
+        task = CreateTaskClass Rake::FileTask, filePath do
           SystemWithFail(command, error)
         end
       end
+      return task
     end
   end
 end

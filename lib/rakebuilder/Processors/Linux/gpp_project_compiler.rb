@@ -1,42 +1,86 @@
 module RakeBuilder
   # Responsible for compiling the sources that belong to the project.
-  class GppProjectCompiler < GppProjectProcessorUtility
+  class GppProjectCompiler < Processor
+    include GppProjectProcessorUtility
     def initialize(name, app, project_file)
       super(name, app, project_file)
 
       _RegisterInputTypes()
     end
 
-    def _ProcessInputs
+    def _ProcessInputs(taskArgs)
       _SortInputs()
-
-      _CreateCompileTasks()
-
-      _ExecuteBackTask()
+      
+      if(taskArgs.gppConf.is_a?(GppProjectConfiguration))
+        compileTasks = _CreateCompileTasks(taskArgs.gppConf)
+        compileTaskNames = []
+        compileTasks.each() do |task|
+          compileTaskNames.push task.to_s
+        end
+        
+        linkTask = _CreateLinkTasks(taskArgs.gppConf, compileTaskNames)
+        
+        @BackTask.enhance [linkTask.to_s]
+  
+        _ExecuteBackTask()      
+      end
       
       _ForwardOutputs()
     end
 
     def _CreateCompileTasks(gppConf)
+      compileTasks = []
       @projectInstance.SourceUnits.each() do |su|
         su.SourceFileSet.FilePaths.each() do |sourcePath|
-          _CreateCompileTask(gppConf, sourcePath)          
+          compileTasks.push _CreateCompileTask(gppConf, sourcePath)          
         end
       end
+      return compileTasks
     end
 
     def _CreateCompileTask(gppConf, sourcePath)
       targetPath = _GetTargetPath(gppConf, sourcePath)
       compileCommand = _GetCompileCommand(gppConf, sourcePath, targetPath)
             
-      CreateFileTask {
-        filePath: targetPath.AbsolutePath(),
-        dependencies: [sourcePath.AbsolutePath()],
+      return CreateFileTask({
+        filePath: targetPath.RelativePath,
+        dependencies: [sourcePath.RelativePath],
         command: compileCommand,
         error: "Could not compile #{sourceFilePath.to_s} to #{targetFilePath.to_s}."
-      }
+      })
+    end
+    
+    def _CreateLinkTasks(gppConf, compileTaskNames)
+      binaryPath = gppConf.OutputDirectory + ProjectPath.new(gppConf.TargetName + gppConf.TargetExt)
+      
+      commandParts = []
+      
+      if(@projectDescription.BinaryType = :Application)
+        commandParts.concat(["g++", "-o", binaryPath.RelativePath])
+        commandParts.concat(gppConf.LinkOptions)
+        commandParts.concat(_GatherDefines(gppConf))
+        commandParts.concat(compileTaskNames)
+        commandParts.concat(_GatherLibraryLinkComponents(gppConf))
+        
+      elsif(@projectDescription.BinaryType == :Shared)
+        commandParts.concat(["g++", "-shared", "-fPIC", "-o", binaryPath.RelativePath])
+        commandParts.concat(gppConf.LinkOptions)
+        commandParts.concat(_GatherDefines(gppConf))
+        commandParts.concat(compileTaskNames)
+        commandParts.concat(_GatherLibraryLinkComponents(gppConf))
+        
+      else
+        commandParts.concat(["ar", "cq", binaryPath.RelativePath])
+        commandParts.concat(compileTaskNames)
+      end
+      command = commandParts.join(" ")
 
-      CreateTask @BackTask => [targetPath.AbsolutePath()]
+      return CreateFileTask({
+        filePath: binaryPath.RelativePath,
+        dependencies: compileTaskNames,
+        command: command,
+        error: "Failed to link #{binaryPath}"
+      })
     end
 
     def _GetTargetPath(gppConf, sourcePath)
@@ -54,25 +98,56 @@ module RakeBuilder
       compileCommandParts.push(_GatherDefines(gppConf))
 
       compileCommandParts.push("-o")
-      compileCommandParts.push(targetPath.RelativePath())
-      compileCommandParts.push(sourcePath.RelativePath())
+      compileCommandParts.push(targetPath.RelativePath)
+      compileCommandParts.push(sourcePath.RelativePath)
       
       return compileCommandParts.join(" ")
     end
 
-    def _GatherIncludePaths
+    def _GatherIncludePaths(gppConf)
+      return gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@projectDescription.ProjectPath).RelativePath }
     end
 
     def _GatherDefines(gppConf)
-      defines = []
-      defines |= @projectInstance.GatherDefines(gppConf.Platform)
-      defines |= @projectDescription.GatherDefines()
-      defines |= @gppProjectDescription.GatherDefines()
-      #puts "found defines for vsconf: #{defines}"
-      @gppProjects.each() do|gppProj|
-        defines |= gppProj.GetPassedDefines(gppConf.Platform)
+      return gppConf.Defines.map() {|define| Gpp::CommandLine::Options::DEFINE + define}
+    end
+    
+    def _GatherLibraryLinkComponents(gppConf)
+      dynamicLibsSearchPaths = Set.new
+      dynamicLibs = []
+      staticLibs = []
+
+      dynamicLibExtension = Gpp::Configuration::TargetExt::SHARED_LIB.gsub("\.", "")
+
+      # the libraries that are included in this project
+      @projectInstance.SourceUnits.each() do |su|
+        su.Libraries.each do |lib|
+          libInstance = lib.GetInstance(gppConf.Platform)
+
+          libPath = libInstance.FileSet.LibraryFileSet.FilePaths[0]
+          libExtension = libPath.FileExt()
+          if(libExtension == dynamicLibExtension)
+            dynamicLibs.push  Gpp::CommandLine::Options::LIB_NAME + libPath.FileName(false)
+            dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + libPath.DirectoryPath().RelativePath
+          else
+            staticLibs.push libPath.RelativePath
+          end
+        end
       end
-      return defines
+      
+      # the libraries that are created by other projects
+      @gppProjects.each() do |gppProject|
+        projGppConf = gppProject.GetConfiguration(gppConf.Platform)
+        projectLibFilePath = projGppConf.GetTargetFilePath().MakeRelativeTo(@projectDescription.ProjectPath)
+        if(projGppConf.TargetExt == Gpp::Configuration::TargetExt::SHARED_LIB)
+          dynamicLibs.push Gpp::CommandLine::Options::LIB_NAME + projectLibFilePath.FileName(false)
+          dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + projectLibFilePath.DirectoryPath().RelativePath
+        elsif(projGppConf.TargetExt == Gpp::Configuration::TargetExt::STATIC_LIB)
+          staticLibs.push projectLibFilePath.RelativePath
+        end
+      end
+      
+      return dynamicLibsSearchPaths.to_a() + dynamicLibs + staticLibs
     end
   end
 end

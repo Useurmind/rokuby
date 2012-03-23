@@ -84,7 +84,9 @@ module RakeBuilder
       fileName = FileName()
       if(fileName)
         fileNameParts = fileName.split(".")
-        return fileNameParts[fileNameParts.length - 1]
+        if(fileNameParts.length >= 2)
+          return fileNameParts[fileNameParts.length - 1]
+        end
       end
       return nil
     end

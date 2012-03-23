@@ -48,7 +48,6 @@ module RakeBuilder
                       :FilterFilePath => Clone(@vsProjectDescription.FilterFilePath),
                       :Configurations => Clone(@vsProjectConfigurations),
                       :Dependencies => Clone(@vsProjects),
-                      :BinaryFileSet => nil, # the binaries are determined through the configuration targetname and outputdirectory
                       :IncludePaths => includePaths,
                       :Libraries => @projectInstance.Libraries,
                       :PassedDefines => @passthroughDefines
