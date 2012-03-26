@@ -15,6 +15,9 @@ module RakeBuilder
     end
     
     def Save
+      if(Rake.application.options.trace)
+        $stderr.puts "** Saving cache to #{@CacheFilePath}..."
+      end
       File.open(@CacheFilePath.AbsolutePath(), "w") do |f|
         f.write(YAML::dump(@CacheObject))
       end
@@ -29,7 +32,9 @@ module RakeBuilder
     
     def _LoadCacheObject
       if(exist?())
-        puts "Loading cache..."
+        if(Rake.application.options.trace)
+          $stderr.puts "** Loading cache from #{@CacheFilePath}..."
+        end
         @CacheObject = YAML::load(File.open(@CacheFilePath.AbsolutePath()))
       end
       

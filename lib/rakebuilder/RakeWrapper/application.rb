@@ -112,7 +112,7 @@ module RakeBuilder
           max_column = truncate_output? ? terminal_width - name.size - width - 7 : nil
           
           @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|            
-            puts "Task in project file: '#{projectFile.Path().AbsolutePath()}'\n"
+            puts "Tasks in project file: '#{projectFile.Path().AbsolutePath()}'\n"
             puts projectFile.GetTaskDescriptions(width, max_column)
           end
         else

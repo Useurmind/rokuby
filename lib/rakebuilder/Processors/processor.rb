@@ -98,7 +98,7 @@ class Processor < Rake::ProcessorTask
   def _FetchInputs
     #puts "in FetchInputs of processor #{self}"
     _InputProcessors().each() do |name, inputProcessor|
-      #puts "collecting outputs in #{@Name} from processor #{name}: #{inputProcessor.Outputs()}"
+      puts "collecting outputs in #{@Name} from processor #{name}}"
       inputProcessor.Outputs().each() do |output|
         AddInput(output)
       end
@@ -138,7 +138,7 @@ class Processor < Rake::ProcessorTask
       if(Rake.application.options.trace)
         $stderr.puts "** Loading outputs from cache in #{@ProjectFile.Path.RelativePath}:#{name}"#": #{@inputs}"
       end
-      @outputs = @Cache.GetProcessorCache(self)
+      @outputs = @Cache.GetProcessorCache(self) || []
     else
       if(Rake.application.options.trace)
         $stderr.puts "** Processing outputs from inputs in #{@ProjectFile.Path.RelativePath}:#{name}"#": #{@inputs}"
