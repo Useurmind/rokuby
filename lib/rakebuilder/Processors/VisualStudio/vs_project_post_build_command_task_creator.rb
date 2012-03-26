@@ -19,12 +19,16 @@ module RakeBuilder
       _RegisterInputTypes()
     end
     
-    def _ProcessInputs(taskArgs=nil)
-      _SortInputs()
-      
+    def _CheckInputs
       if(@projectInstance == nil)
         raise "No ProjectInstance in #{self.class}:#{@Name}"
       end
+    end
+    
+    def _ProcessInputs(taskArgs=nil)
+      _SortInputs()
+      
+      _CheckInputs()
       
       #puts "postBuildTask: #{@PostBuildTask}"
       #puts "PostBuildLibCopyTask: #{@PostBuildLibCopyTask}"
@@ -35,14 +39,14 @@ module RakeBuilder
         @vsProjectConfigurations.each do |vsConf|
           vsConfBinaryExt = vsConf.Platform.BinaryExtension()
           vsConf.PostBuildCommand = "#{RAKE_BUILDER_EXECUTABLE} -f #{@ProjectFile.Path.AbsolutePath()} #{@PostBuildTask.to_s}[#{vsConfBinaryExt}]"          
-        
-          if(@CurrentVsConfBinaryExt != nil && @CurrentVsConfBinaryExt == vsConfBinaryExt) # this is the configuration for which the postbuild task was executed
-            _ExtendPostBuildLibCopyTask(vsConf)
-          end
         end
       
       end
       
+      _ForwardOutputs()
+    end
+    
+    def _ForwardOutputs
       @outputs = []
       @outputs.push(@projectInstance)
       @outputs.push(@projectDescription)
@@ -53,17 +57,37 @@ module RakeBuilder
       @outputs.concat(@passthroughDefines)
     end
     
+    #########################################################
+    # Post processing
+    
+    def _ExecutePostProcessing(taskArgs=nil)
+      vsConfigurations = _GetOutputsByClass(VsProjectConfiguration)
+      
+      if(@PostBuildTask != nil && @PostBuildLibCopyTask != nil)
+        vsConfigurations.each do |vsConf|
+          vsConfBinaryExt = vsConf.Platform.BinaryExtension()
+        
+          if(@CurrentVsConfBinaryExt != nil && @CurrentVsConfBinaryExt == vsConfBinaryExt) # this is the configuration for which the postbuild task was executed
+            _ExtendPostBuildLibCopyTask(vsConf)
+          end
+        end
+      end
+    end
+    
     def _ExtendPostBuildLibCopyTask(vsConf)
       # currently a limitation of this is that only tasks in the same project file can be created
       #puts "Extending post build command task for configuration #{vsConf.Platform.BinaryExtension()}"
       
+      projectInstance = _GetOutputByClass(ProjectInstance)
+      vsProjects = _GetOutputsByClass(VsProject)
+      
       outputDirectory = vsConf.OutputDirectory
       
-      librariesToCopy = @projectInstance.Libraries
+      librariesToCopy = projectInstance.Libraries
       
       
       # task for copying the project outputs of projects on which this project depends
-      @vsProjects.each() do |vsProj|
+      vsProjects.each() do |vsProj|
         vsProjConf = vsProj.GetConfiguration(vsConf.Platform)
         
         projOutputPath = vsProjConf.GetTargetFilePath()

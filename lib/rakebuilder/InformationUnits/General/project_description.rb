@@ -12,7 +12,6 @@ module RakeBuilder
     attr_accessor :Version
     attr_accessor :BinaryName
     attr_accessor :BinaryType
-    attr_accessor :ProjectPath
     attr_accessor :CompilesPath
     attr_accessor :BuildPath
     attr_accessor :Defines
@@ -24,7 +23,6 @@ module RakeBuilder
       @Version = "0.0"
       @BinaryName = ""
       @BinaryType = :Application
-      @ProjectPath = ProjectPath.new(".")
       @CompilesPath = ProjectPath.new(COMPILE_SUBDIR)
       @BuildPath = ProjectPath.new(BUILD_SUBDIR)
       @Defines = []
@@ -39,7 +37,6 @@ module RakeBuilder
       @Version = Clone(original.Version)
       @BinaryName = Clone(original.BinaryName)
       @BinaryType = Clone(original.BinaryType)
-      @ProjectPath = Clone(original.ProjectPath)
       @CompilesPath = Clone(original.CompilesPath)
       @BuildPath = Clone(original.BuildPath)
       @Defines = Clone(original.Defines)
@@ -76,11 +73,6 @@ module RakeBuilder
       binaryType = valueMap[:BinaryType] || valueMap[:binType]
       if(binaryType)
         @BinaryType = binaryType
-      end
-      
-      projectPath = valueMap[:ProjectPath] || valueMap[:projPath]
-      if(projectPath)
-        @ProjectPath = projectPath
       end
       
       compilesPath = valueMap[:CompilesPath] || valueMap[:compPath]

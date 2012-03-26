@@ -9,8 +9,6 @@ module RakeBuilder
       @gppProjectConfigurations = []
       @gppProjects = []
       @passthroughDefines = []
-
-      @BackTask = Rake::Task.define_task "#{@Name}_BackTask", :descr, :inst, :gppDescr, :gppConf   # used to create a new task chain
     end
 
     # Register the known input types for such a processor.
@@ -43,10 +41,6 @@ module RakeBuilder
           @passthroughDefines.push(input)
         end
       end
-    end
-
-    def _ExecuteBackTask()
-      @BackTask.invoke()
     end
 
     def _GetGppProjectConf(platform)

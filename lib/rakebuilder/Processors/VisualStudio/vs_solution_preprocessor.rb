@@ -22,7 +22,7 @@ module RakeBuilder
       end
       
       if(@vsSolutionDescription.SolutionFilePath == nil)
-        @vsSolutionDescription.SolutionFilePath = ProjectPath.new(PROJECT_SUBDIR) + ProjectPath.new(@vsSolutionDescription.Name + ".sln") 
+        @vsSolutionDescription.SolutionFilePath = @vsSolutionDescription.SolutionBasePath + ProjectPath.new(@vsSolutionDescription.Name + ".sln") 
       end
       
       @outputs.push(@vsSolutionDescription)

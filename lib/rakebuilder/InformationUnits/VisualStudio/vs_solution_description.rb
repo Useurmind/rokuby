@@ -4,10 +4,12 @@ module RakeBuilder
   # [SolutionFilePath] The path of the solution file (normally derived automatically).
   class VsSolutionDescription < InformationUnit
     attr_accessor :Name
+    attr_accessor :SolutionBasePath
     attr_accessor :SolutionFilePath
     
     def initialize(valueMap=nil)      
-      # This is set by the solution preprocessor if not set
+      #This is set by the solution preprocessor if not set
+      @SolutionBasePath = ProjectPath.new(PROJECT_SUBDIR)
       @SolutionFilePath = nil
       @Name = "MySolution"
       
@@ -18,6 +20,7 @@ module RakeBuilder
     def initialize_copy(original)
       super(original)
       
+      @SolutionBasePath = Clone(original.SolutionBasePath)
       @SolutionFilePath = Clone(original.SolutionFilePath)
       @Name = Clone(original.Name)
     end
@@ -34,6 +37,11 @@ module RakeBuilder
       name = valueMap[:Name] || valueMap[:name]
       if(name)
         @Name = name
+      end
+      
+      solutionBasePath = valueMap[:SolutionBasePath] || valueMap[:slnBasePath]
+      if(solutionBasePath)
+        @SolutionBasePath = solutionBasePath
       end
       
       solutionFilePath = valueMap[:SolutionFilePath] || valueMap[:slnFilePath]

@@ -42,8 +42,8 @@ module RakeBuilder
     
     # Concat all source units contained in the project instance into one source unit named @SourceUnit
     def _JoinSourceUnits
-      @SourceUnit = @ProjectInstance.SourceUnits[0]
-      for i in 1..@ProjectInstance.SourceUnits.length-1
+      @SourceUnit = SourceUnitInstance.new()
+      for i in 0..@ProjectInstance.SourceUnits.length-1
         @SourceUnit = @SourceUnit + @ProjectInstance.SourceUnits[i]
       end
       

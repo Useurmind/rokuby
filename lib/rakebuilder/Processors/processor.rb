@@ -10,13 +10,27 @@ module RakeBuilder
 # initialize or extend method (triggered by the user). If the task is defined during the
 # process phase then it could be that the task is not found because the dependend task
 # has already been tried to invoke.
+# Processor can also use a cache infrastructure. This works as follows:
+# - In at least the one iteration the processor builds up a cache that saves all the outputs
+#   that this processor created in this iteration.
+# - In the next iteration instead of creating outputs from the inputs of the processor, the
+#   outputs will be loaded from cache.
+# - To enable the execution of activities that cannot be cached, the processor has also the 
+#   possibility to execute additional functionality after this processing took place (this
+#   is called post processing).
+# It is important to understand that you should not use inputs of the processor in the post
+# processing because they may not be in the form you need them (they are not processed when cache
+# is used). The same hold for the processing step of the inputs: do not assume that it is executed
+# because it won't if the cache is used.
 # [Name] The name of the processor to uniquely identify it.
 # [ThrowOnUnknownInput] Throw an exception when an unknown input occures.
+# [UseCache] Use the cache for this processor.
 class Processor < Rake::ProcessorTask
   include GeneralUtility
   
   attr_accessor :Name
   attr_accessor :ThrowOnUnknownInput
+  attr_accessor :UseCache
   
   def Outputs
     @outputs
@@ -44,6 +58,11 @@ class Processor < Rake::ProcessorTask
     
     @inputs = []
     @outputs = []
+    
+    @UseCache = false
+    if(project_file != nil)
+      @Cache = project_file.ProcessCache
+    end
     
     @processing = false
     @processingDone = false
@@ -113,12 +132,27 @@ class Processor < Rake::ProcessorTask
       $stderr.puts "** Fetching inputs in #{@ProjectFile.Path.RelativePath}:#{name}"
     end
     _FetchInputs()
+      
+    
+    if(@UseCache && @Cache != nil)
+      if(Rake.application.options.trace)
+        $stderr.puts "** Loading outputs from cache in #{@ProjectFile.Path.RelativePath}:#{name}"#": #{@inputs}"
+      end
+      @outputs = @Cache.GetProcessorCache(self)
+    else
+      if(Rake.application.options.trace)
+        $stderr.puts "** Processing outputs from inputs in #{@ProjectFile.Path.RelativePath}:#{name}"#": #{@inputs}"
+      end
+      #puts "Inputs for #{@ProjectFile.Path.RelativePath}:#{name}:#{@inputs}"
+      _ProcessInputs(task_args)
+      @Cache.UpdateProcessorCache(self)
+    end
     
     if(Rake.application.options.trace)
-      $stderr.puts "** Processing inputs in #{@ProjectFile.Path.RelativePath}:#{name}"#": #{@inputs}"
+      $stderr.puts "** Executing post processing in #{@ProjectFile.Path.RelativePath}:#{name}"
     end
-    _ProcessInputs(task_args)
-    
+    _ExecutePostProcessing(task_args)
+        
     if(Rake.application.options.trace)
       $stderr.puts "** Executing actions in #{@ProjectFile.Path.RelativePath}:#{name}"
     end
@@ -128,6 +162,13 @@ class Processor < Rake::ProcessorTask
     
     @processingDone = true
     return true
+  end
+  
+  # This method can be overloaded to deal with the case that cached values are used.
+  # _ProcessInputs is then not called.
+  # Some processor will still need to execute some actions even in this case.
+  def _ExecutePostProcessing(taskArgs=nil)
+    #raise "_ProcessCacheValues not defined in #{self.class.name}"
   end
   
   # This function needs to be overloaded by derived classes.
@@ -152,9 +193,14 @@ class Processor < Rake::ProcessorTask
   end
   
   def _AddInput(input)
+    #puts "Adding input to #{@Name}: #{input}"
     if(_InputKnown(input))
-      @inputs.push(input)
-      return true
+      if(_OnAddInput(input))
+        @inputs.push(input)      
+        return true
+      else
+        return false
+      end
     end
     
     if(@ThrowOnUnknownInput)
@@ -165,8 +211,28 @@ class Processor < Rake::ProcessorTask
   end
   
   # Overwrite this if you need to take action when input is added
+  # Returns true if the input should really be added (this should be default).
+  # If it should not be added instead return false.
   def _OnAddInput(input)
-    
+    return true
+  end
+  
+  def _GetOutputByClass(cls)
+    outputsWithClass = _GetOutputsByClass(cls)
+    if(outputsWithClass.length == 0)
+      return nil
+    end
+    return outputsWithClass[0]
+  end
+  
+  def _GetOutputsByClass(cls)
+    outputsWithClass = []
+    @outputs.each() do |output|
+      if(output.is_a?(cls))
+        outputsWithClass.push output
+      end
+    end
+    return outputsWithClass
   end
   
   # Extend/set the attributes of the processor.

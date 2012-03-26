@@ -5,6 +5,7 @@ module RakeBuilder
   # [Guid] A unique UUID of the project in the form '{45CD...}'.
   # [RootNamespace] The root namespace of the project.
   class VsProjectDescription < InformationUnit
+    attr_accessor :ProjectBasePath
     attr_accessor :ProjectFilePath
     attr_accessor :FilterFilePath
     attr_accessor :Guid
@@ -12,6 +13,7 @@ module RakeBuilder
     attr_accessor :Defines
     
     def initialize(valueMap=nil)
+      @ProjectBasePath = ProjectPath.new(PROJECT_SUBDIR)
       
       # filled by the project builder project preprocessor if not set
       @ProjectFilePath = nil
@@ -29,6 +31,7 @@ module RakeBuilder
     def initialize_copy(original)
       super(original)
       
+      @ProjectBasePath = Clone(original.ProjectBasePath)
       @ProjectFilePath = Clone(original.ProjectFilePath)
       @FilterFilePath = Clone(original.FilterFilePath)
       @Guid = Clone(original.Guid)
@@ -47,6 +50,11 @@ module RakeBuilder
       
       if(callParent)
         super(valueMap)
+      end
+      
+      projectBasePath = valueMap[:ProjectBasePath] || valueMap[:projPath]
+      if(projectBasePath)
+        @ProjectBasePath = projectBasePath
       end
       
       projectFilePath = valueMap[:ProjectFilePath] || valueMap[:projFilePath]

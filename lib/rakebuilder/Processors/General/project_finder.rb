@@ -4,62 +4,25 @@ module RakeBuilder
   # Allowed inputs are ProjectSpecifications, SourceUnitSpecifications and
   # LibrarySpecifications.
   # Output is one ProjectInstance that contains all the gathered information.
-  class ProjectFinder < Processor
+  class ProjectFinder < ProcessChain
     include PlatformTester
     
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
+      @projSplitter =  defineProc ProjectSplitter, "#{@Name}_Splitter"
+      @suFinder = defineProc SourceUnitFinder, "#{@Name}_SuFinder"
+      @libFinder = defineProc LibraryFinder, "#{@Name}_LibFinder"
+      @projJoiner = defineProc ProjectJoiner, "#{@Name}_Joiner"
+      
+      Connect(:in, @projSplitter.to_s)
+      Connect(@projSplitter.to_s, @libFinder.to_s, @projJoiner.to_s)
+      Connect(@projSplitter.to_s, @suFinder.to_s, @projJoiner.to_s)
+      Connect(@projJoiner.to_s, :out)
+      
       @knownInputClasses.push(RakeBuilder::ProjectSpecification)
       @knownInputClasses.push(RakeBuilder::SourceUnitSpecification)
       @knownInputClasses.push(RakeBuilder::LibrarySpecification)
-    end
-    
-    def _ProcessInputs(taskArgs=nil)
-      #puts "processing inputs #{@inputs} in ProjectFinder"
-      
-      sourceUnitSpecs = []
-      librarySpecs = []
-      
-      projectInstance = ProjectInstance.new()
-      @inputs.each() do |input|
-        if(input.is_a?(RakeBuilder::ProjectSpecification))
-          sourceUnitSpecs.concat(input.SourceSpecs)
-          librarySpecs.concat(input.LibrarySpecs)
-          projectInstance.AddDefinesFrom(input)
-        elsif(input.is_a?(RakeBuilder::SourceUnitSpecification))
-          sourceUnitSpecs.push(input)
-        elsif(input.is_a?(RakeBuilder::LibrarySpecification))
-          librarySpecs.push(input)
-        end
-      end
-      
-      projectInstance.SourceUnits.concat(_ProcessSourceUnits(sourceUnitSpecs))
-      projectInstance.Libraries.concat(_ProcessLibraries(librarySpecs))
-      
-      @outputs = [projectInstance]
-    end
-    
-    def _ProcessSourceUnits(suSpecs)
-      #puts "Processing source units #{suSpecs}"
-      suFinder = SourceUnitFinder.new(@ProjectFile)
-      
-      suFinder.AddInput(suSpecs)
-      suFinder.Process()
-      
-      return suFinder.Outputs()
-    end
-    
-    def _ProcessLibraries(libSpecs)
-      #puts "Processing libraries units #{libSpecs}"
-      
-      libFinder = LibraryFinder.new()
-      libFinder.TargetPlatforms = TargetPlatforms()
-      
-      libFinder.AddInput(libSpecs)
-      libFinder.Process()
-      
-      return libFinder.Outputs()
     end
   end
 end

@@ -9,6 +9,10 @@ module RakeBuilder
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
+      if(!Rake.application.options.no_cache && !Rake.application.options.no_src_cache)
+        @UseCache = true
+      end
+      
       @knownInputClasses.push(RakeBuilder::SourceUnitSpecification)
     end
     

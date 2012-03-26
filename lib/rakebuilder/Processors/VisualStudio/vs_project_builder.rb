@@ -8,6 +8,8 @@ module RakeBuilder
   # project configuration for each platform.
   # Output of this processor is a VSProject instance that represents the created project.
   class VsProjectBuilder < ProcessChain
+    include Rake::DSL
+    
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
@@ -59,6 +61,19 @@ module RakeBuilder
       
       @vsPostBuildTaskCreator.PostBuildTask = @PostBuildTask
       @vsPostBuildTaskCreator.PostBuildLibCopyTask = @PostBuildLibCopyTask
+    end
+    
+    def _OnAddInput(input)
+      if(!super(input))
+        return false
+      end
+      if(input.is_a?(ProjectDescription))
+        clean input.CompilesPath.RelativePath
+        clean input.BuildPath.RelativePath
+      elsif(input.is_a?(VsProjectDescription))
+        clean input.ProjectBasePath.RelativePath
+      end
+      return true
     end
     
     # Extend/set the attributes of the processor.

@@ -8,6 +8,7 @@ Rake::RequiredFiles::FILES.each() do |file|
   require File.join(File.dirname(__FILE__), "RakeBuilderRake/rake/" + file)
 end
 
+require "yaml"
 require "pathname"
 require File.join(File.dirname(__FILE__), "required_files")
 

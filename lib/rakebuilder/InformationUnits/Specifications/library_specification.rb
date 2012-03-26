@@ -21,7 +21,7 @@ module RakeBuilder
       super(original)
       @Name = Clone(original.Name)
       @Location = Clone(original.Location)
-      @Platforms = Clone(original.Platform)
+      @Platforms = Clone(original.Platforms)
     end
 
     def IsForTargetPlatform(targetPlatform)

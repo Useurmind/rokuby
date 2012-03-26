@@ -26,8 +26,8 @@ module RakeBuilder
       return true
     end
     
-    def _ProcessInputs
-      OutputProcessor().Process()
+    def _ProcessInputs(taskArgs=nil)
+      OutputProcessor().Process(taskArgs)
       @outputs = OutputProcessor().Outputs()
     end
     
@@ -45,8 +45,9 @@ module RakeBuilder
       enhance_old(nil, &block)
     end
     
-    def AddInput(input)
+    def _OnAddInput(input)
       InputProcessor().AddInput(input)
+      return true
     end
     
     # Extend/set the attributes of the process_chain.

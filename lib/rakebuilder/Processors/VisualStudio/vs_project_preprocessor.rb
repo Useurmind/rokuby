@@ -50,7 +50,7 @@ module RakeBuilder
     
     def _ExtendVsProjectDescription      
       projectFileBaseName = @projectDescription.Name
-      projectFilesBasePath = @projectDescription.ProjectPath + ProjectPath.new(PROJECT_SUBDIR) + ProjectPath.new(projectFileBaseName)
+      projectFilesBasePath = @vsProjectDescription.ProjectBasePath + ProjectPath.new(projectFileBaseName)
       
       if(@vsProjectDescription.ProjectFilePath == nil)
         @vsProjectDescription.ProjectFilePath = projectFilesBasePath + ProjectPath.new("#{projectFileBaseName}.vcxproj")

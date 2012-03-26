@@ -116,7 +116,7 @@ module RakeBuilder
     end
 
     def _GatherIncludePaths(gppConf)
-      return (gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@projectDescription.ProjectPath).RelativePath }).uniq
+      return (gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@ProjectFile.Path).RelativePath }).uniq
     end
 
     def _GatherDefines(gppConf)
@@ -154,7 +154,7 @@ module RakeBuilder
       # the libraries that are created by other projects
       @gppProjects.each() do |gppProject|
         projGppConf = gppProject.GetConfiguration(gppConf.Platform)
-        projectLibFilePath = projGppConf.GetTargetFilePath().MakeRelativeTo(@projectDescription.ProjectPath)
+        projectLibFilePath = projGppConf.GetTargetFilePath().MakeRelativeTo(@ProjectFile.Path)
         if(projGppConf.TargetExt == Gpp::Configuration::TargetExt::SHARED_LIB)
           dynamicLibs.push Gpp::CommandLine::Options::LIB_NAME + projectLibFilePath.FileName(false)
           dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + projectLibFilePath.DirectoryPath().RelativePath

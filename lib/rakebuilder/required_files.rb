@@ -7,6 +7,7 @@ module RakeBuilder
 "Utility/path_utility",
 "Utility/project_path",
 "Utility/directory_utility",
+"Utility/process_cache",
 
 # Utility for Xml
 "Utility/XML/XmlHelper",
@@ -91,14 +92,16 @@ module RakeBuilder
 # Processing chain
 "Processors/processor",
 "Processors/processor_utility",
-"Processors/passthrough_processor",
 "Processors/process_chain",
 # general processors
+"Processors/General/passthrough_processor",
 "Processors/General/platform_tester",
 "Processors/General/find_file",
 "Processors/General/file_finder",
 "Processors/General/library_finder",
 "Processors/General/source_unit_finder",
+"Processors/General/project_joiner",
+"Processors/General/project_splitter",
 "Processors/General/project_finder",
 # VisualStudio processors
 "Processors/VisualStudio/vs_project_processor_utility",

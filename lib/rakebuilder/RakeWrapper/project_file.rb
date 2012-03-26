@@ -26,6 +26,8 @@ module RakeBuilder
     
     def Path=(value)
       @Path = value.MakeRelativeTo(Rake.application.TopmostProjectFile.DirectoryPath().MakeAbsolute())
+      @ProcessCache = ProcessCache.new(@Path.DirectoryPath + ProjectPath.new(@Path.FileName(false) + ".cache"))
+      
       
       @Namespace = ProjectNamespace.new()
       @Namespace.SetProjectPath(@Path)
@@ -41,7 +43,7 @@ module RakeBuilder
     def initialize
       super
       @ProjectFileIncludes = []
-      @CleanList = Rake::FileList["**/*~", "**/*.bak", "**/core"]
+      @CleanList = Rake::FileList["**/*~", "**/*.bak"]
       @ClobberList = Rake::FileList.new
     end
     
@@ -104,10 +106,10 @@ module RakeBuilder
     # Define the clean and clobber task for this project file.
     def DefineCleanTasks
       task :clean do
-        @CleanList.each { |fn| rm_r fn rescue nil }
+        @CleanList.uniq().each { |fn| rm_r fn rescue nil }
       end
       task :clobber => [:clean] do 
-        @ClobberList.each { |fn| rm_r fn rescue nil }
+        @ClobberList.uniq().each { |fn| rm_r fn rescue nil }
       end
     end
   end

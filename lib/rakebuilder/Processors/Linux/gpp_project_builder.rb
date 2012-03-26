@@ -26,16 +26,12 @@ module RakeBuilder
       
     end
     
-    def AddInput(inputs)
-      #puts "Adding input to GppProjectbuilder #{inputs}"
-      if(inputs.class == Array)
-        inputs.each() do |input|
-          _AddConfigurationTask(input)
-        end
-      else
-        _AddConfigurationTask(inputs)
+    def _OnAddInput(input)
+      if(!super(input))
+        return false
       end
-      super(inputs)
+      _AddConfigurationTask(input)
+      return true
     end
     
     def _AddConfigurationTask(input)

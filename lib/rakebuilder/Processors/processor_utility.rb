@@ -1,5 +1,25 @@
 module RakeBuilder
-  module ProcessorUtility    
+  # This utility is for processors that need to define tasks and execute them during
+  # their execution phase.
+  # Creation of tasks in such cases is restricted to the current project file as
+  # the execution phase is entered after the task to execute has been chosen.
+  # Additionally, the task can only be executed on the fly by program components
+  # that know them.
+  # For tasks that should be executable by the user, you must define them in the
+  # declaration phas, e.g. in _OnAddInput or initialize.
+  # With this task can be created with the appropriate functions, you can build chains
+  # and in the end append them to the backtask to execute them.
+  module ProcessorUtility
+    def initialize(*args)
+      super(*args)
+      
+      @BackTask = Rake::Task.define_task "#{@Name}_BackTask"   # used to create a new task chain
+    end
+    
+    def _ExecuteBackTask()
+      @BackTask.invoke()
+    end
+    
     def CreateTaskClass(taskClass, *args, &block)
       return ProjectFile().define_task(taskClass, *args, &block)
     end

@@ -11,6 +11,7 @@ module RakeBuilder
   
   CONFIGURATION_TYPES = [
     :Debug,
-    :Release
+    :Release,
+    :RelWithDeb
   ]
 end

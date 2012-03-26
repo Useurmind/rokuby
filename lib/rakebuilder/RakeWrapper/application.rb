@@ -62,6 +62,9 @@ module RakeBuilder
         else
           super
         end
+        @ProjectFileLoader.LoadedProjectFiles().each() do |projectFile|
+            projectFile.SaveCache()
+        end
       end
       
       # A list of all the standard options used in rake, suitable for
@@ -72,6 +75,19 @@ module RakeBuilder
             lambda { |value|
               options.show_status = true
             }
+          ],
+          ['--nocache [cache]', "Do not use caching during processing(specify cache as all, lib, src or nothing for all).",
+            lambda { |value|
+                if(!value || value == "all")
+                    options.no_cache = true
+                elsif(value == "lib")
+                    options.no_lib_cache = true
+                elsif(value == "src")
+                    options.no_src_cache = true
+                else
+                    raise "Unknown option value '#{value}' for --nocache."
+                end
+            }            
           ]
         ])
       end

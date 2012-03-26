@@ -2,13 +2,17 @@ module RakeBuilder
   
   # A class that is meant to find the different configurations of libraries on the system.
   # Input values to this processor are LibrarySpecifications.
-  # Outputs are the found libraries in form of Library instances.
+  # Outputs are the found libraries in form of Libraries.
   class LibraryFinder < Processor
     include FindFile
     include PlatformTester
     
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
+      
+      if(!Rake.application.options.no_cache && !Rake.application.options.no_lib_cache)
+        @UseCache = true
+      end
       
       @knownInputClasses.push(RakeBuilder::LibrarySpecification)
     end

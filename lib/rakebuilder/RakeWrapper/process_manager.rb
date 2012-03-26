@@ -5,11 +5,17 @@ module RakeBuilder
   module ProcessManager
     attr_accessor :Processors
     attr_accessor :ProcessChains
+    attr_accessor :ProcessCache
     
     def initialize()
       super
       @Processors = {}
       @ProcessChains = {}
+      @ProcessCache = nil
+    end
+    
+    def SaveCache
+      @ProcessCache.Save()
     end
     
     # The args for the processor include the following:
@@ -42,6 +48,12 @@ module RakeBuilder
       
       processor.AddInput(inputs)
       processor.Extend(valueMap)
+      if(!(Rake.application.options.no_cache ||
+           Rake.application.options.no_lib_cache ||
+           Rake.application.options.no_src_cache) &&
+           @ProcessCache.exist?())
+        processor.UseCache = true
+      end
       
       return processor
     end

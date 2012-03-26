@@ -32,8 +32,8 @@ module RakeBuilder
     def _CreateLibCopyTask(libPath, gppConf)
       targetPath = gppConf.OutputDirectory + ProjectPath.new(libPath.FileName())
       
-      targetPath = targetPath.MakeRelativeTo(@projectDescription.ProjectPath)
-      sourcePath = libPath.MakeRelativeTo(@projectDescription.ProjectPath)
+      targetPath = targetPath.MakeRelativeTo(@ProjectFile.Path)
+      sourcePath = libPath.MakeRelativeTo(@ProjectFile.Path)
       
       copyCommand = "cp #{libPath.AbsolutePath()} #{targetPath.AbsolutePath()}"
       
