@@ -217,15 +217,15 @@ class Processor < Rake::ProcessorTask
     return true
   end
   
-  def _GetOutputByClass(cls)
-    outputsWithClass = _GetOutputsByClass(cls)
+  def GetOutputByClass(cls)
+    outputsWithClass = GetOutputsByClass(cls)
     if(outputsWithClass.length == 0)
       return nil
     end
     return outputsWithClass[0]
   end
   
-  def _GetOutputsByClass(cls)
+  def GetOutputsByClass(cls)
     outputsWithClass = []
     @outputs.each() do |output|
       if(output.is_a?(cls))

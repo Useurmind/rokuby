@@ -61,7 +61,7 @@ module RakeBuilder
     # Post processing
     
     def _ExecutePostProcessing(taskArgs=nil)
-      vsConfigurations = _GetOutputsByClass(VsProjectConfiguration)
+      vsConfigurations = GetOutputsByClass(VsProjectConfiguration)
       
       if(@PostBuildTask != nil && @PostBuildLibCopyTask != nil)
         vsConfigurations.each do |vsConf|
@@ -78,8 +78,8 @@ module RakeBuilder
       # currently a limitation of this is that only tasks in the same project file can be created
       #puts "Extending post build command task for configuration #{vsConf.Platform.BinaryExtension()}"
       
-      projectInstance = _GetOutputByClass(ProjectInstance)
-      vsProjects = _GetOutputsByClass(VsProject)
+      projectInstance = GetOutputByClass(ProjectInstance)
+      vsProjects = GetOutputsByClass(VsProject)
       
       outputDirectory = vsConf.OutputDirectory
       

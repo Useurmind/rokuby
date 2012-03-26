@@ -42,13 +42,13 @@ module RakeBuilder
         
         modifiedArgs = []
         
-        modifiedArgs.push @vsPostBuildTaskCreator.ProjectDescription
-        modifiedArgs.push @vsPostBuildTaskCreator.ProjectInstance
+        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(ProjectDescription)
+        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(ProjectInstance)
         
-        modifiedArgs.push @vsPostBuildTaskCreator.VsProjectDescription
-        modifiedArgs.push @vsPostBuildTaskCreator.VsProjectInstance
+        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(VsProjectDescription)
+        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(VsProjectInstance)
         
-        @vsPostBuildTaskCreator.VsProjectConfigurations.each() do |vsConf|
+        @vsPostBuildTaskCreator.GetOutputsByClass(VsProjectConfiguration).each() do |vsConf|
           if(vsConf.Platform.BinaryExtension == vsConfBinaryExt)
             modifiedArgs.push vsConf
             break

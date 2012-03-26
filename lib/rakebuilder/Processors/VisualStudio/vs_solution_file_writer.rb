@@ -15,6 +15,10 @@ module RakeBuilder
     end
     
     def _ProcessInputs(taskArgs=nil)
+      # nothing to be done
+    end
+    
+    def _ExecutePostProcessing(taskArgs=nil)
       _SortInputs()
        
       if(@vsSolutionDescription == nil)
