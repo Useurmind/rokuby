@@ -3,6 +3,7 @@ module RakeBuilder
   # A process chain is a directed graph structure of processors that are connected and
   # propagate their outputs to the next processors in the graph.
   class ProcessChain < Processor
+    include TaskPathUtility
     include RakeBuilder::DSL
     
     attr_reader :InputProcessorName
@@ -80,7 +81,6 @@ module RakeBuilder
     # processor.
     # The args should be a list of processor name or :in, :out
     def Connect(*args)
-      #puts "Connecting processors in #{name}: #{args}"
       if(args.length == 0)
         return
       end
@@ -100,7 +100,7 @@ module RakeBuilder
         end
         
         if(lastProcName)
-          #puts "Adding #{lastProcName} to pres of #{usedProcName}"
+          puts "Adding #{lastProcName} to pres of #{usedProcName}"
           proc usedProcName, :procDeps => [lastProcName]
         end
         lastProcName = usedProcName

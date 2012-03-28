@@ -4,7 +4,8 @@ module RakeBuilder
   # Rake main application object.  When invoking +rake+ from the
   # command line, a Rake::Application object is created and run.
   #
-  class Application < Rake::Application    
+  class Application < Rake::Application
+      include TaskPathUtility
     
       attr_reader :TopmostProjectFile
       
@@ -126,7 +127,7 @@ module RakeBuilder
       def invoke_task(task_string)
         taskPath, args = parse_task_string(task_string)
         
-        projectPath, name = parse_task_path(taskPath)
+        projectPath, name = GetProjectFilePathName(taskPath)
           
         if(projectPath == nil and (name == "clean" or name == "clobber"))
           # Execute all clean targets
@@ -139,28 +140,6 @@ module RakeBuilder
           task = self[taskPath]
           task.invoke(*args)
         end
-      end
-      
-      # Split the task path in a string describing the file where the task is defined
-      # and its name.
-      def parse_task_path(taskPath)
-          
-        projectPath = nil
-        name = nil
-        if(taskPath.class == Symbol || taskPath.match("^[A-Z]+:\/"))  # the taskPath starts with an absolute path, this is just a filetask OR the taskPath is a symbol which can only be a name
-            name = taskPath
-            return projectPath, name
-        end
-        
-        match = taskPath.match("^([^:]*):(.*)$")
-        if(match)
-          projectPath = ProjectPath.new(match[1])
-          name = match[2]
-        else
-          name = taskPath
-        end
-        
-        return projectPath, name
       end
       
       # Get the project file containing the task from the path of the task and
@@ -176,9 +155,9 @@ module RakeBuilder
               if(projectPath)
                   # Make the project path relative to the top first as it is now relative to the invoking project file
                 invokingProjectFile = @ProjectFileLoader.CurrentlyLoadedProjectFile || @CurrentTask.ProjectFile
-                projectFile = get_included_project_file(invokingProjectFile, projectPath)
+                projectFile = get_invoked_project_file(invokingProjectFile.Path, projectPath)
                 if(!projectFile)
-                    fail "Don't know project file '#{projectPath}'"
+                    fail "Don't know project file '#{projectPath}' for task '#{taskName}'"
                 end
               else
                   # Tasks without path are searched first in their declaring project file and then in all sub project files
@@ -191,8 +170,8 @@ module RakeBuilder
       
       # Get a project file included by the given project file.
       # The include paths relative component needs to be the include path.
-      def get_included_project_file(projectFile, includePath)
-          topRelativePath = projectFile.Path().DirectoryPath() + includePath
+      def get_invoked_project_file(invokingProjectFilePath, invokedProjectFilePath)
+          topRelativePath = (invokingProjectFilePath.DirectoryPath() + invokedProjectFilePath).MakeRelativeTo(@TopmostProjectFile.DirectoryPath())
           return @ProjectFileLoader.LoadedProjectFile(topRelativePath.RelativePath)
       end
       
@@ -200,6 +179,10 @@ module RakeBuilder
       # breadth first search
       def search_task_in_project_file_tree(projectFile, name, scopes)
           #puts "Looking for task in tree under '#{projectFile.Path().to_s}'"
+          if(!projectFile)
+              raise "No valid project file specified to search for task #{name}"
+          end
+          
           task = projectFile[name, scopes]
           if(task != nil)
               #puts "Found task '#{task.name}'"
@@ -207,7 +190,7 @@ module RakeBuilder
           end
           
           projectFile.ProjectFileIncludes.each do |includePath|
-              includedProjectFile = get_included_project_file(projectFile, includePath)
+              includedProjectFile = get_invoked_project_file(projectFile, includePath)
               if(!includedProjectFile)
                   puts "WARNING: Could not find included project file '#{includePath.to_s}' in '#{projectFile.Path().to_s}'"
               end
@@ -247,12 +230,20 @@ module RakeBuilder
         return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineInformationUnit(iuClass, *args, &block)
       end
       
-      def DefineProcessor(procClass, *args, &block)
+      def DefineProcessor(procClass, *args, &block)          
         return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessor(procClass, *args, &block)
       end
       
       def DefineProcessChain(chainClass, *args, &block)
         return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessChain(chainClass, *args, &block)
+      end
+      
+      def FindProcessor(procName)
+            task = self[procName]
+            if(!task.is_a?(Processor))
+                fail "Found task #{procName} is no processor."
+            end
+            return task
       end
     
       ##########################################################################################
@@ -283,7 +274,7 @@ module RakeBuilder
         task = nil
         
         #puts "parsing task path #{taskPath}"
-        projectPath, name = parse_task_path(taskPath)
+        projectPath, name = GetProjectFilePathName(taskPath)
         #puts "result is #{projectPath}, #{name}"
         
         projectFile = compute_task_project_file(projectPath, name)
@@ -319,7 +310,7 @@ module RakeBuilder
       def lookup(taskPath, initial_scope=nil)
         task = nil
         
-        projectPath, name = parse_task_path(taskPath)
+        projectPath, name = GetProjectFilePathName(taskPath)
         
         if(projectPath != nil)
           # return the project file specific task

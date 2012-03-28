@@ -8,6 +8,7 @@ module RakeBuilder
 "Utility/project_path",
 "Utility/directory_utility",
 "Utility/process_cache",
+"Utility/task_path_utility",
 
 # Utility for Xml
 "Utility/XML/XmlHelper",

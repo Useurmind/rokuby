@@ -75,10 +75,10 @@ class Processor < Rake::ProcessorTask
     #puts "pres of #{name}: #{prerequisites}"
     
     prerequisites.uniq().each() do |pre|
-      t = lookup_prerequisite(pre)
-      if(t.is_a?(Processor))
-        inputProcs[pre] = t
-      end
+      p = @ProjectFile.DefineProcessor(nil, pre)
+      if(p)
+        inputProcs[pre] = p
+      end      
     end
     
     #puts "input processors: #{inputProcs}"
@@ -98,7 +98,7 @@ class Processor < Rake::ProcessorTask
   def _FetchInputs
     #puts "in FetchInputs of processor #{self}"
     _InputProcessors().each() do |name, inputProcessor|
-      puts "collecting outputs in #{@Name} from processor #{name}}"
+      #puts "collecting outputs in #{@Name} from processor #{name}}"
       inputProcessor.Outputs().each() do |output|
         AddInput(output)
       end

@@ -1,6 +1,7 @@
 module Rake
   # Overwrite some of the functionality provided by the rake task class
   class Task
+    include RakeBuilder::TaskPathUtility
     include RakeBuilder::PathUtility
     
     # The project file in which the task was defined.
@@ -23,6 +24,18 @@ module Rake
       ExecuteInPath(@ProjectFile.Path().DirectoryPath()) do
         execute_old_task(args)
       end
+    end
+    
+    
+    alias enhance_old_task enhance
+    def enhance(deps=nil, &block)
+      relativeDeps = nil
+      if(deps)
+        relativeDeps = deps.map() do |dep|
+          MakeRelativeTo(dep, @ProjectFile)
+        end
+      end
+      enhance_old_task(relativeDeps, &block)
     end
     
     alias lookup_prerequisite_old_task lookup_prerequisite

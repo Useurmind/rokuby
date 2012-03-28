@@ -3,6 +3,8 @@ module RakeBuilder
   # needed for a process build.
   # ATTENTION: Some function calls assume that this module is included into the ProjectFile class.
   module ProcessManager
+    include TaskPathUtility
+    
     attr_accessor :Processors
     attr_accessor :ProcessChains
     attr_accessor :ProcessCache
@@ -31,13 +33,13 @@ module RakeBuilder
       name, args = _GetProcessorName(*args)
       
       if(!name)
-        return nil
+        raise "No correct arguments for processor definition, missing name."
       end
       
       processor = _GetProcessor(procClass, name)
       
       if(processor == nil)
-        return nil
+        raise "Could not find or allocate processor #{name} in #{@Path}" # Path is from ProjectFile
       end
       
       inputs, valueMap, taskArgs, taskDeps = _ParseProcessorArgs(*args)
@@ -157,7 +159,11 @@ module RakeBuilder
       end
       
       if(procClass == nil)
-        return nil
+        
+        # find processor in appplication
+        taskPath = AbsoluteTaskPath(name, self)
+        
+        return Rake.application.FindProcessor(taskPath)        
       end
       
       @Processors[name] = intern(procClass, name)
