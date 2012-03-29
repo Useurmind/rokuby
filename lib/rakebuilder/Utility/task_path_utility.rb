@@ -1,13 +1,13 @@
 module RakeBuilder
     # Class that provides the means to handle task paths.
     module TaskPathUtility
-        def Absolute?(taskPath)
-            return taskPath.class != Symbol && taskPath =~ /^[A-Z]+:\//
+        def AbsoluteTaskPathOnly?(taskPath)
+            return taskPath.class != Symbol && taskPath =~ /^[A-Z]+:\/[^:]*$/
         end
         
         # Is this task path a name only.
         def NameOnly?(taskPath)
-            return !Absolute?(taskPath) && !(taskPath =~ /.*:.*/)
+            return AbsoluteTaskPathOnly?(taskPath) || taskPath =~ /^[^:]*$/
         end
         
         # Get the name contained in this task path
@@ -32,10 +32,10 @@ module RakeBuilder
                 return projectPath, name
             end
             
-            match = taskPath.match("^([^:]*):(.*)$")
+            match = taskPath.match(/(^([A-Za-z]:\/)*[^:]*):*(.*)/)
             if(match)
               projectPath = ProjectPath.new(match[1])
-              name = match[2]
+              name = match[3]
             else
               name = taskPath
             end
@@ -46,6 +46,9 @@ module RakeBuilder
         # Convert a task path relative to the given project file into an absolute task path.
         def AbsoluteTaskPath(taskPath, projectFile)            
             projectFilePath, name = GetProjectFilePathName(taskPath)
+            
+            puts "projectfile path: #{projectFilePath}"
+            puts "name: #{name}"
             
             absoluteTaskPath = ""
             if(!projectFilePath)
@@ -61,7 +64,7 @@ module RakeBuilder
         
         def MakeRelativeTo(taskPath, projectFile)
             projectFilePath, name = GetProjectFilePathName(taskPath)
-            
+                
             if(projectFilePath)
                 relProjectFilePath = projectFilePath.MakeRelativeTo(projectFile.Path.DirectoryPath())
                 return relProjectFilePath.RelativePath + ":" + name

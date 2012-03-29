@@ -63,14 +63,15 @@ module RakeBuilder
         else
           super
         end
-        @ProjectFileLoader.LoadedProjectFiles().each() do |projectFile|
-            projectFile.SaveCache()
-        end
+        #@ProjectFileLoader.LoadedProjectFiles().each() do |projectFile|
+        #    projectFile.SaveCache()
+        #end
       end
       
       # A list of all the standard options used in rake, suitable for
       # passing to OptionParser.
       def standard_rake_options
+        options.no_cache = true
         super().concat([
           ['--status', "Print the status of the RakeBuilder.",
             lambda { |value|
@@ -190,7 +191,7 @@ module RakeBuilder
           end
           
           projectFile.ProjectFileIncludes.each do |includePath|
-              includedProjectFile = get_invoked_project_file(projectFile, includePath)
+              includedProjectFile = get_invoked_project_file(projectFile.Path, includePath)
               if(!includedProjectFile)
                   puts "WARNING: Could not find included project file '#{includePath.to_s}' in '#{projectFile.Path().to_s}'"
               end

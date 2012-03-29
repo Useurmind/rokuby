@@ -38,7 +38,7 @@ module RakeBuilder
       
         @vsProjectConfigurations.each do |vsConf|
           vsConfBinaryExt = vsConf.Platform.BinaryExtension()
-          vsConf.PostBuildCommand = "#{RAKE_BUILDER_EXECUTABLE} -f #{@ProjectFile.Path.AbsolutePath()} #{@PostBuildTask.to_s}[#{vsConfBinaryExt}]"          
+          #vsConf.PostBuildCommand = "#{RAKE_BUILDER_EXECUTABLE} -f #{@ProjectFile.Path.AbsolutePath()} #{@PostBuildTask.to_s}[#{vsConfBinaryExt}]"          
         end
       
       end
