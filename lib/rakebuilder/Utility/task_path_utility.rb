@@ -47,8 +47,8 @@ module RakeBuilder
         def AbsoluteTaskPath(taskPath, projectFile)            
             projectFilePath, name = GetProjectFilePathName(taskPath)
             
-            puts "projectfile path: #{projectFilePath}"
-            puts "name: #{name}"
+            #puts "projectfile path: #{projectFilePath}"
+            #puts "name: #{name}"
             
             absoluteTaskPath = ""
             if(!projectFilePath)
