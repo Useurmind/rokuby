@@ -51,7 +51,7 @@ module RakeBuilder
         if(NameOnly?(dep))
           usedPath = Path().AbsolutePath() + ":" + dep.to_s  
         end
-        puts "Using dep #{usedPath} instead of #{dep} for task #{name} in #{Path()}"
+        #puts "Using dep #{usedPath} instead of #{dep} for task #{name} in #{Path()}"
         usedPath        
       end
       
@@ -171,7 +171,7 @@ module RakeBuilder
       if(procClass == nil)
         
         # find processor in appplication
-        puts "Trying to find proc #{name} from #{Path()}"
+        #puts "Trying to find proc #{name} from #{Path()}"
         taskPath = AbsoluteTaskPath(name, self)
         
         return Rake.application.FindProcessor(taskPath)        

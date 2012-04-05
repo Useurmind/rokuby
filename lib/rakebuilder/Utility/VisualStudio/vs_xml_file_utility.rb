@@ -89,6 +89,14 @@ module RakeBuilder
     def FormatXmlPath(path)
       return path.gsub("\/", "\\")
     end
+    
+    def FormatXmlDirectory(dir)
+      formattedDir = FormatXmlPath(dir)
+      if(!formattedDir.end_with?("\\"))
+        formattedDir = formattedDir + "\\"
+      end
+      return formattedDir
+    end
 
     def JoinXmlPaths(paths)
       return FormatXmlPath(JoinPaths(paths))

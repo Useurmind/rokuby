@@ -100,7 +100,7 @@ module RakeBuilder
         end
         
         if(lastProcName)
-          puts "Adding #{lastProcName} to pres of #{usedProcName}"
+          #puts "Adding #{lastProcName} to pres of #{usedProcName}"
           p = proc usedProcName
           if(!p)
             raise "Could not find processor '#{p.Name}' when trying to connect processor '#{lastProcName}' to its input."

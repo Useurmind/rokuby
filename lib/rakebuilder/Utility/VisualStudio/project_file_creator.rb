@@ -146,8 +146,8 @@ module RakeBuilder
           "Condition" => configuration.ConfigurationCondition()
         },
         children: [
-          XmlTag.new( { name: "OutDir", value: _GetVsProjectRelativePath(configuration.OutputDirectory).RelativePath } ),
-          XmlTag.new( { name: "IntDir", value: _GetVsProjectRelativePath(configuration.IntermediateDirectory).RelativePath } )
+          XmlTag.new( { name: "OutDir", value: FormatXmlDirectory(_GetVsProjectRelativePath(configuration.OutputDirectory).RelativePath) } ),
+          XmlTag.new( { name: "IntDir", value: FormatXmlDirectory(_GetVsProjectRelativePath(configuration.IntermediateDirectory).RelativePath) } )
         ]
       })
       
