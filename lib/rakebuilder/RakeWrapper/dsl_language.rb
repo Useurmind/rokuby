@@ -175,6 +175,23 @@ module RakeBuilder
       return Rake.application.DefineProcessChain(chainClass, *args, &block)
     end
     
+    # finders
+    def fileFinder(*args, &block)
+      Rake.application.DefineProcessor(FileFinder, *args, &block)
+    end
+    
+    def sourceFinder(*args, &block)
+      Rake.application.DefineProcessor(SourceUnitFinder, *args, &block)
+    end
+    
+    def projFinder(*args, &block)
+      Rake.application.DefineProcessor(ProjectFinder, *args, &block)
+    end
+    
+    def libFinder(*args, &block)
+      Rake.application.DefineProcessor(LibraryFinder, *args, &block)
+    end
+    
     # visual studio
     def vsProjBuild(*args, &block)
       Rake.application.DefineProcessor(VsProjectBuilder, *args, &block)

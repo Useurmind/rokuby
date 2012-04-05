@@ -217,6 +217,7 @@ class Processor < Rake::ProcessorTask
     return true
   end
   
+  # Get the first output of the processor that has the given class.
   def GetOutputByClass(cls)
     outputsWithClass = GetOutputsByClass(cls)
     if(outputsWithClass.length == 0)
