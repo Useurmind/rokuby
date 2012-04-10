@@ -45,6 +45,10 @@ module RakeBuilder
     ####################################################
     # Information Units    
     
+    def infoUnit(cls, *args, &block)
+      return Rake.application.DefineInformationUnit(cls, *args, &block)
+    end
+    
     #   General
     
     def lib(*args, &block)
