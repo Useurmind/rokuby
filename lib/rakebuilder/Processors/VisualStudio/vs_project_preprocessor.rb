@@ -146,17 +146,23 @@ module RakeBuilder
       @vsProjects.each() do |vsProj|
         vsProjConfiguration = vsProj.GetConfiguration(vsConf.Platform)
         
+        # if the user defined a special usage behaviour take it
+        vsProjUsage = _GetProjectUsage(vsProj.Guid)        
+        if(vsProjUsage)
+          #puts "Adopting new project usage for #{vsProj.Name}"
+          vsProj.Usage = Clone(vsProjUsage)
+        #else
+        #  puts "Could not find usage pattern for project #{vsProj.Name} with guid #{vsProj.Guid}"
+        #  puts "Available usages are #{VsProjectUsages()}"
+        end
+        
+        
         outDir = vsProjConfiguration.OutputDirectory
         targetName = vsProjConfiguration.TargetName
         targetExt = vsProjConfiguration.TargetExt
         
         if(targetExt != Vs::Configuration::TargetExt::APPLICATION)
           binaryName = targetName.gsub("$(PlatformName)", @projectDescription.Name) + Vs::Configuration::TargetExt::STATIC # add always the lib file
-          
-          # if the dependency is a static library use its output
-          if(targetExt == Vs::Configuration::TargetExt::STATIC && @projectDescription.BinaryType == :Shared)
-            vsProj.UseLibraryDependencyInputs = true
-          end
           
           vsConf.AdditionalIncludeDirectories |= (vsProj.IncludePaths)
           # use dependencies instead

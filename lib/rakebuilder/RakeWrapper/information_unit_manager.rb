@@ -18,23 +18,43 @@ module RakeBuilder
       @InformationUnits = {}
     end
     
+    def LookupInformationUnit(iuClass, name, copyUnit=nil)
+      if(!NameOnly?(name))
+        #puts "Information unit from different file was requested '#{name}'"
+        absoluteIuPath = AbsoluteTaskPath(name, self)
+        
+        return Rake.application.FindInformationUnit(iuClass, absoluteIuPath)
+      end
+      
+      return GetInformationUnit(iuClass, name, copyUnit)
+    end
+    
+    def GetExistingInformationUnit(iuClass, name)
+      if(@InformationUnits[iuClass] == nil)
+        @InformationUnits[iuClass] = {}
+      end
+      
+      @InformationUnits[iuClass][name.to_s()]
+    end
+    
     # Get the specified information unit (create and insert it if needed).
     def GetInformationUnit(iuClass, name, copyUnit=nil)
       if(@InformationUnits[iuClass] == nil)
         @InformationUnits[iuClass] = {}
       end
       
-      if(copyUnit != nil && @InformationUnits[iuClass][name] != nil)
+      if(copyUnit != nil && @InformationUnits[iuClass][name.to_s()] != nil)
         raise "Cannot copy #{copyUnit} into existing unit #{iuClass}:#{name}"
       end
       
       if(copyUnit != nil)
-        @InformationUnits[iuClass][name] = Clone(copyUnit)
-      elsif(@InformationUnits[iuClass][name] == nil)
-        @InformationUnits[iuClass][name] = iuClass.new({})
+        @InformationUnits[iuClass][name.to_s()] = Clone(copyUnit)
+      elsif(@InformationUnits[iuClass][name.to_s()] == nil)
+        #puts "Creating new information unit #{name} in #{self.Path()} with class #{iuClass}"
+        @InformationUnits[iuClass][name.to_s()] = iuClass.new({})
       end
       
-      return @InformationUnits[iuClass][name]
+      return @InformationUnits[iuClass][name.to_s()]
     end
     
     # You can input several combinations of values as arguments here.
@@ -55,7 +75,7 @@ module RakeBuilder
       
       returnIU = nil
       if(name) 
-        returnIU = GetInformationUnit(iuClass, name, copyUnit)
+        returnIU = LookupInformationUnit(iuClass, name, copyUnit)
       else
         if(copyUnit)
           returnIU = Clone(copyUnit)
@@ -101,7 +121,7 @@ module RakeBuilder
           name = args[i]
         else # last string arg is the information unit to copy
           copyName = args[i]
-          copyUnit = GetInformationUnit(iuClass, copyName)
+          copyUnit = LookupInformationUnit(iuClass, copyName)
         end
       end
     

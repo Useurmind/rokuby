@@ -69,6 +69,7 @@ module RakeBuilder
       
       guid = valueMap[:Guid] || valueMap[:guid]
       if(guid)
+        #puts "Setting guid of project description through extend to #{guid}"
         @Guid = guid
       end
       

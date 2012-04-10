@@ -329,25 +329,26 @@ module RakeBuilder
           attributes: {"Include" => projectFilePath.RelativePath}
         })
         
+        usage = vsProject.Usage
         projectReferenceTag.Children.push(XmlTag.new({ name: "Project", value: vsProject.Guid }))
-        if(vsProject.Private != nil)
-          projectReferenceTag.Children.push(XmlTag.new({ name: "Private", value: vsProject.Private }))
+        if(usage.Private != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "Private", value: usage.Private }))
         end
         
-        if(vsProject.ReferenceOutputAssembly != nil)
-          projectReferenceTag.Children.push(XmlTag.new({ name: "ReferenceOutputAssembly", value: vsProject.ReferenceOutputAssembly }))
+        if(usage.ReferenceOutputAssembly != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "ReferenceOutputAssembly", value: usage.ReferenceOutputAssembly }))
         end
         
-        if(vsProject.CopyLocalSatelliteAssemblies != nil)          
-          projectReferenceTag.Children.push(XmlTag.new({ name: "CopyLocalSatelliteAssemblies", value: vsProject.CopyLocalSatelliteAssemblies }))
+        if(usage.CopyLocalSatelliteAssemblies != nil)          
+          projectReferenceTag.Children.push(XmlTag.new({ name: "CopyLocalSatelliteAssemblies", value: usage.CopyLocalSatelliteAssemblies }))
         end
         
-        if(vsProject.LinkLibraryDependencies != nil)
-          projectReferenceTag.Children.push(XmlTag.new({ name: "LinkLibraryDependencies", value: vsProject.LinkLibraryDependencies }))
+        if(usage.LinkLibraryDependencies != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "LinkLibraryDependencies", value: usage.LinkLibraryDependencies }))
         end
         
-        if(vsProject.UseLibraryDependencyInputs != nil)
-          projectReferenceTag.Children.push(XmlTag.new({ name: "UseLibraryDependencyInputs", value: vsProject.UseLibraryDependencyInputs }))
+        if(usage.UseLibraryDependencyInputs != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "UseLibraryDependencyInputs", value: usage.UseLibraryDependencyInputs }))
         end
 
         @projReferenceItemGroup.Children.push(projectReferenceTag)

@@ -239,12 +239,34 @@ module RakeBuilder
         return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessChain(chainClass, *args, &block)
       end
       
+      def FindInformationUnit(iuClass, absoluteIuPath)
+            projectPath, name = GetProjectFilePathName(absoluteIuPath)
+            #puts "result is #{projectPath}, #{name}"
+            #puts "Looking up information unit in application #{absoluteIuPath} with class #{iuClass}"
+            
+            projectFile = compute_task_project_file(projectPath, name)
+            
+            if(!projectFile)
+                fail "Could not find projectFile for information unit #{absoluteIuPath}"
+            else
+                iu = projectFile.GetExistingInformationUnit(iuClass, name)
+                if(!iu)
+                    #puts "Searched information units: #{[projectFile.InformationUnits]}"
+                    fail "Could not find information unit #{absoluteIuPath} with class #{iuClass}"
+                end
+                return iu
+            end
+      end
+      
       def FindProcessor(procName)
             task = self[procName]
             if(!task.is_a?(Processor))
                 fail "Found task #{procName} is no processor."
             end
             return task
+      end
+      
+      def FindIuInProcessFile()
       end
     
       ##########################################################################################

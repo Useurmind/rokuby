@@ -8,11 +8,7 @@ module RakeBuilder
     attr_accessor :FilterFilePath
     attr_accessor :Configurations
     
-    attr_accessor :Private
-    attr_accessor :ReferenceOutputAssembly
-    attr_accessor :CopyLocalSatelliteAssemblies
-    attr_accessor :LinkLibraryDependencies
-    attr_accessor :UseLibraryDependencyInputs
+    attr_accessor :Usage
     
     def initialize(valueMap=nil)
       
@@ -21,11 +17,7 @@ module RakeBuilder
       @FilterFilePath = nil
       @Configurations = []
       
-      @Private = nil
-      @ReferenceOutputAssembly = nil
-      @CopyLocalSatelliteAssemblies = nil
-      @LinkLibraryDependencies = nil
-      @UseLibraryDependencyInputs = nil
+      @Usage = VsProjectUsage.new()
       
       super(valueMap)
       Extend(valueMap, false)
@@ -38,6 +30,7 @@ module RakeBuilder
       @ProjectFilePath = Clone(original.ProjectFilePath)
       @FilterFilePath = Clone(original.FilterFilePath)
       @Configurations = Clone(original.Configurations)
+      @Usage = Clone(original.Usage)
     end
     
     def GetConfiguration(platform)
@@ -75,6 +68,11 @@ module RakeBuilder
       configurations = valueMap[:Configurations] || valueMap[:configurations]
       if(configurations)
         @Configurations.concat(configurations)
+      end
+      
+      usage = valueMap[:Usage] || valueMap[:usage]
+      if(usage)
+        @Usage = usage
       end
     end
   end

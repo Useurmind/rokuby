@@ -31,6 +31,10 @@ module RakeBuilder
       @vsProjects
     end
     
+    def VsProjectUsages
+      @vsProjectUsages
+    end
+    
     def PassthroughDefines
       @passthroughDefines
     end
@@ -44,6 +48,7 @@ module RakeBuilder
       @vsProjectDescription = VsProjectDescription.new()
       @vsProjectConfigurations = []
       @vsProjects = []
+      @vsProjectUsages = []
       @passthroughDefines = []
     end
     
@@ -56,6 +61,7 @@ module RakeBuilder
       @knownInputClasses.push(RakeBuilder::VsProjectConfiguration)
       @knownInputClasses.push(RakeBuilder::VsProjectInstance)
       @knownInputClasses.push(RakeBuilder::VsProject)
+      @knownInputClasses.push(RakeBuilder::VsProjectUsage)
       @knownInputClasses.push(RakeBuilder::PassthroughDefines)
     end
     
@@ -76,10 +82,23 @@ module RakeBuilder
           @vsProjectConfigurations.push(input)
         elsif(input.is_a?(RakeBuilder::VsProject))
           @vsProjects.push(input)
+        elsif(input.is_a?(RakeBuilder::VsProjectUsage))
+          @vsProjectUsages.push(input)
         elsif(input.is_a?(RakeBuilder::PassthroughDefines))
           @passthroughDefines.push(input)
         end
       end
+    end
+    
+    def _GetProjectUsage(guid)
+      matchingUsage = nil
+      @vsProjectUsages.each() do |projUsage|
+        if(projUsage.Guid == guid)
+          matchingUsage = projUsage
+          break
+        end
+      end
+      return matchingUsage
     end
   end
 end

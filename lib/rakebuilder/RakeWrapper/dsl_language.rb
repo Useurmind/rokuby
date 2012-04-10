@@ -125,6 +125,10 @@ module RakeBuilder
       return Rake.application.DefineInformationUnit(VsProject, *args, &block)
     end
     
+    def vsProjUsage(*args, &block)
+      return Rake.application.DefineInformationUnit(VsProjectUsage, *args, &block)
+    end
+    
     def vsProjConf(*args, &block)
       return Rake.application.DefineInformationUnit(VsProjectConfiguration, *args, &block)
     end

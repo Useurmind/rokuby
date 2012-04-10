@@ -60,6 +60,7 @@ module RakeBuilder
 "InformationUnits/VisualStudio/vs_project_instance",
 "InformationUnits/VisualStudio/vs_project_description",
 "InformationUnits/VisualStudio/vs_project_configuration",
+"InformationUnits/VisualStudio/vs_project_usage",
 "InformationUnits/VisualStudio/vs_project",
 "InformationUnits/VisualStudio/vs_solution_description",
 # linux information instances
