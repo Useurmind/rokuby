@@ -8,12 +8,24 @@ module RakeBuilder
     attr_accessor :FilterFilePath
     attr_accessor :Configurations
     
+    attr_accessor :Private
+    attr_accessor :ReferenceOutputAssembly
+    attr_accessor :CopyLocalSatelliteAssemblies
+    attr_accessor :LinkLibraryDependencies
+    attr_accessor :UseLibraryDependencyInputs
+    
     def initialize(valueMap=nil)
       
       @Guid = nil
       @ProjectFilePath = nil
       @FilterFilePath = nil
       @Configurations = []
+      
+      @Private = nil
+      @ReferenceOutputAssembly = nil
+      @CopyLocalSatelliteAssemblies = nil
+      @LinkLibraryDependencies = nil
+      @UseLibraryDependencyInputs = nil
       
       super(valueMap)
       Extend(valueMap, false)

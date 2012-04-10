@@ -142,7 +142,7 @@ module RakeBuilder
         end
       end
       
-      # add the library name, path and include paths coming from each dependent project
+      # add the library include paths and set defaults for the usage criteria depending on the current project
       @vsProjects.each() do |vsProj|
         vsProjConfiguration = vsProj.GetConfiguration(vsConf.Platform)
         
@@ -153,9 +153,15 @@ module RakeBuilder
         if(targetExt != Vs::Configuration::TargetExt::APPLICATION)
           binaryName = targetName.gsub("$(PlatformName)", @projectDescription.Name) + Vs::Configuration::TargetExt::STATIC # add always the lib file
           
+          # if the dependency is a static library use its output
+          if(targetExt == Vs::Configuration::TargetExt::STATIC && @projectDescription.BinaryType == :Shared)
+            vsProj.UseLibraryDependencyInputs = true
+          end
+          
           vsConf.AdditionalIncludeDirectories |= (vsProj.IncludePaths)
-          vsConf.AdditionalLibraryDirectories.push(outDir)
-          vsConf.AdditionalDependencies.push(binaryName)
+          # use dependencies instead
+          #vsConf.AdditionalLibraryDirectories.push(outDir)
+          #vsConf.AdditionalDependencies.push(binaryName)
           
           vsProj.Libraries.each() do |lib|
             libInstance = lib.GetInstance(vsConf.Platform)

@@ -60,6 +60,7 @@ module RakeBuilder
     end
     
     def _InitVsFileCreator(fileCreator)
+      fileCreator.VsProjects = @vsProjects
       fileCreator.ProjectDescription = @projectDescription
       fileCreator.ProjectInstance = @projectInstance
       fileCreator.ProjectConfigurations = @projectConfigurations

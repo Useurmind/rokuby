@@ -4,13 +4,14 @@ module RakeBuilder
     include VsXmlFileUtility
     include GeneralUtility
     include DirectoryUtility
-    
+  
     attr_accessor :ProjectDescription
     attr_accessor :ProjectInstance
     attr_accessor :ProjectConfigurations
     attr_accessor :VsProjectInstance
     attr_accessor :VsProjectDescription
     attr_accessor :VsProjectConfigurations
+    attr_accessor :VsProjects
 
     def initialize
       @ProjectDescription = nil
@@ -19,6 +20,7 @@ module RakeBuilder
       @VsProjectInstance = nil
       @VsProjectDescription = nil
       @VsProjectConfigurations = []
+      @VsProjects = []
       
       @options = {
         "NoEscape" => true,

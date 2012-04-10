@@ -38,6 +38,7 @@ module RakeBuilder
       CreateHeaderItemGroup()
       CreateSourceItemGroup()
       CreateResourceItemGroup()
+      CreateProjectReferenceItemGroup()
       
       @projectTag.Children.push(XmlTag.new({
         name: "ItemGroup",
@@ -57,6 +58,7 @@ module RakeBuilder
       @projectTag.Children.push(@headerItemGroup)
       @projectTag.Children.push(@sourceItemGroup)
       @projectTag.Children.push(@resourceItemGroup)
+      @projectTag.Children.push(@projReferenceItemGroup)
       @projectTag.Children.push(@cppTargetsImport)
       @projectTag.Children.push(@extensionTargetsImportGroup)
       
@@ -310,6 +312,45 @@ module RakeBuilder
           name: "ResourceCompile",
           attributes: {"Include" => resourcePath.RelativePath}
         }))
+      end
+    end
+    
+    def CreateProjectReferenceItemGroup()
+      @projReferenceItemGroup = XmlTag.new({
+        name: "ItemGroup"
+      })
+      
+      #puts "resource file set: #{[@ResourceFileSet]}"
+      @VsProjects.each() do |vsProject|
+        projectFilePath = _GetVsProjectRelativePath(vsProject.ProjectFilePath)
+
+        projectReferenceTag = XmlTag.new({
+          name: "ProjectReference",
+          attributes: {"Include" => projectFilePath.RelativePath}
+        })
+        
+        projectReferenceTag.Children.push(XmlTag.new({ name: "Project", value: vsProject.Guid }))
+        if(vsProject.Private != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "Private", value: vsProject.Private }))
+        end
+        
+        if(vsProject.ReferenceOutputAssembly != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "ReferenceOutputAssembly", value: vsProject.ReferenceOutputAssembly }))
+        end
+        
+        if(vsProject.CopyLocalSatelliteAssemblies != nil)          
+          projectReferenceTag.Children.push(XmlTag.new({ name: "CopyLocalSatelliteAssemblies", value: vsProject.CopyLocalSatelliteAssemblies }))
+        end
+        
+        if(vsProject.LinkLibraryDependencies != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "LinkLibraryDependencies", value: vsProject.LinkLibraryDependencies }))
+        end
+        
+        if(vsProject.UseLibraryDependencyInputs != nil)
+          projectReferenceTag.Children.push(XmlTag.new({ name: "UseLibraryDependencyInputs", value: vsProject.UseLibraryDependencyInputs }))
+        end
+
+        @projReferenceItemGroup.Children.push(projectReferenceTag)
       end
     end
 
