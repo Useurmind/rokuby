@@ -15,9 +15,9 @@
 #
 #Rokuby works similar to Rake where you can define tasks that can be made dependent
 #on each other.
-#But there are also some important differences between Rake and Rokuby:
-#Also tasks are a great thing they are missing an important feature: It is not possible
-#to easily transport information between tasks that let you easily combine them to create
+#But there are also some important differences between Rake and Rokuby.
+#Although tasks are a great thing they are missing an important feature: It is not possible
+#to easily transport information between tasks that let you combine them to create
 #complex solutions.
 #Therefore, Rokuby implements a new paradigm which is called *Processors*. They are similar
 #to tasks in that they are dependent on each other and execute their dependencies before
@@ -63,7 +63,7 @@
 #We can now create a file specification that targets the given file:
 #
 # fileSpec :SourceFile, {
-#   inPats: ["^main\.cpp$"],
+#   inPats: ["main\.cpp$"],
 #   sPaths: [projPath("src")]
 # }
 #
@@ -77,15 +77,15 @@
 #
 #When you now save this in a project file ProjectDefinition.rb and execute "rokuby FindSourceFile" in the folder
 #where this project definition is located rokuby will try to find the file and print the set of files that
-#was found (even if no files were found, in which case the file set will almost empty).
+#was found (even if no files were found, in which case the file set will almost be empty).
 #
 #=== Building a more complex Project
 #
 #
 #
-#=== Project Files and their Namespaces
+#== Project Files and their Namespaces
 #
-#==== Project Files
+#=== Project Files
 #
 #Learn more under {Project Files}[link:lib/rakebuilder/Doc/project_files_rb.html]
 #
@@ -108,7 +108,7 @@
 #can make the life of a programmer harder because the information in one project file is strictly separated from
 #information in another project file.
 #
-#==== Addressing Tasks in different Project Files
+#=== Addressing Tasks in different Project Files
 #
 #To overcome this problem Rokuby allows to address tasks, information units and processors through the project files
 #path in the directory structure.
@@ -130,27 +130,34 @@
 #This will lead to the execution of +task1+ in the imported project file before the +task1+ in the main project file.
 #(This is by the way one of the only differences between tasks in Rokuby and Rake).
 #
-#=== Project Paths
+#This is also the way to address tasks from the command line. Only giving a name of a task to the command line tool will
+#try to execute the task with that name in the main project file (the first project file that is loaded).
+#If you want to address a task in a specific project file you need to address it with the relative path to this project file
+#a colon and the name of the task:
+#If you for example want to execute a task "subtask" in the project file "./subdir/ProjectDefinition.rb" you would type:
+# rakebuilder ./subdir/ProjectDefinition.rb:subtask"
+#
+#== Project Paths
 #
 #An important thing when building projects is the management of paths and how they are related to the current work directory.
 #Rokubys solution to this problem is that of project paths. These paths do not only hold a simple string that represents a path.
 #Instead they save the absolute path as well as the relative part of the path that is defined. This works as follows:
-#* Each project file is parsed and executed in the directory it is saved in.
+#* Each project file is parsed and executed in the directory it is saved in (which means the working directory is set to this directory).
 #* Project paths always extract information regarding the current directory and combine it with the relative path the user inserts.
 #* The complete information makes it possible to extract a relative path even if you are in the context of another project file.
 #These abilities make it very easy to handle paths because every paths knows where it belongs to.
 #The only drawback for the user is that it is necessary for him to define project paths instead of normal strings.
 #To ease this task Rokuby provides a shortcut for defining a project path:
 # 
-# # Define a project path that is relative to the current directory
+# # Define a project path that is relative to the current directory, which should be the path of the current project file
 # projPath("relative/path/to/my/file.txt")
 # 
 # # Define a project path that is relative to a base directory
 # projPath({base: "base/path", relative: "relative/path/to/my/file.txt"})
 #
-#=== Information Units
+#== Information Units
 #
-#Information units are the elements in Rokuby that carry all information that is used in the process of creating a
+#Information units are the elements in Rokuby that carry all information which is used in the process of creating a
 #project. They are simple and relatively stupid objecs that can only be used to carry and structure information (nothing more!).
 #Defining an information unit is easy as you have already seen in the file set example above. Generally the definition
 #of an information unit has the following format:
@@ -162,8 +169,8 @@
 #Notice that you can define any class of information unit with this syntax. You just need to define a class that can carry data
 #and is derived from a proper information unit base class.
 #There are also a lot of abbreviations for several information unit classes, e.g. +fileSpec+ for file specifications.
-#Notice that information units that are created with a name are saved in the project file and can be addressed later on with their
-#class,name combination. For example:
+#Notice that information units that are created with a name are registered in the project file and can be addressed later on with their
+#class, name combination. For example:
 #
 # # define information unit
 # fileSpec :SourceCode, :inPats => [...], :sPaths => []
@@ -173,15 +180,15 @@
 #                      :inclSpec => fileSpec(:Includes),
 #                      :defs => ["USE_SOURCE_CODE"]
 #
-#Notice that almost every information unit should be able to carry defines that are specific to this information unit and are only
+#Notice that almost every information unit (in the context of a c/c++ project) should be able to carry defines that are specific to this information unit and are only
 #applied when this information unit is involved.
 #The ability to define and reuse information units and the capabilities of project paths make it possible to use information units
 #independently of the project file where they were defined. You can even address information units from outside the project file the
 #same way you would do with tasks and processors.
 #
-#=== Processors and Process Chains
+#== Processors and Process Chains
 #
-#==== The Ins and Outs of Processors
+#=== The Ins and Outs of Processors
 #
 #Processors are entities that are designed to take a set of inputs and produce a set of outputs from the given inputs. The rules of
 #defining and connecting processors are similar to the rules of defining and connecting Rake tasks.
@@ -192,12 +199,12 @@
 #                                  :deps => [...],
 #                                  ...more attributes...
 #
-#The +:ins+ attribute is an array of information unit that can be handed to the processor for processing. Additionally, the processor
+#The +:ins+ attribute is an array of information units that can be handed to the processor for processing. Additionally, the processor
 #can depend on some other processor that are specified over the +:deps+ attribute which is an array of processors. These dependencies
 #will be executed before the processor itself is executed and the output that is generated by them is added to the inputs that this
 #processor will use during its execution.
 #
-#====Process Chains
+#===Process Chains
 #
 #To ease the task of connecting processors (and to generate special purpose chains of processors) there are process chains. One feature
 #that process chains provide is the markup to more simply connect a set of processors into chains.
@@ -213,7 +220,7 @@
 #chain. They gather input in their input processor and produce output that is placed in their output processor.
 #(In fact some of the more complex processors are process chains that simply reuse other processors to implement their functionality)
 #
-#====Processors and Tasks
+#===Processors and Tasks
 #
 #Rokuby adopts the tasking features of Rake so that the user does not loose the possibility to use tasks in their scripts. To tightly integrated
 #processors into the world of tasks it was decided to implement processors as a new sort of tasks. This makes it possible to make processors depend

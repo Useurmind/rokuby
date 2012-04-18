@@ -13,7 +13,11 @@ files = [
 # the documentation files
 doc_files = [
     "introduction.rb",
-    "project_files.rb"
+    "project_files.rb",
+    "projects.rb",
+    "libraries.rb",
+    "gcc.rb",
+    "visual_studio.rb"
 ]
 
 doc_files.each() do |docFile|
