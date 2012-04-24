@@ -15,7 +15,7 @@ module RakeBuilder
     
     def initialize_copy(original)
       super(original)
-      @instances = Clone(original.GetInstances(PLATFORM_ALL))
+      @instances = Clone(original.GetInstances(nil))
     end
     
     def AddInstance(instance)

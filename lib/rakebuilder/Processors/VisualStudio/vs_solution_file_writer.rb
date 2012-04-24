@@ -8,12 +8,6 @@ module RakeBuilder
   class VsSolutionFileWriter < Processor
     include VsSolutionProcessorUtility
     
-    def initialize(name, app, project_file)
-      super(name, app, project_file)
-      
-      _RegisterInputTypes()
-    end
-    
     def _ProcessInputs(taskArgs=nil)
       # nothing to be done
     end

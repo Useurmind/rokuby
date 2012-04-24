@@ -68,8 +68,10 @@ module RakeBuilder
          (@Os == nil || @Os == other.Os) and
          (@Architecture ==  nil || @Architecture == other.Architecture) and
          (@Type == nil || @Type == other.Type))
+        #puts "Testing <= in platform configuration #{[self]} <= #{[other]} ... true"
         return true
       end
+      #puts "Testing <= in platform configuration #{[self]} <= #{[other]} ... false"
       return false
     end
     

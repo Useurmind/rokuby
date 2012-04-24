@@ -6,14 +6,41 @@ module RakeBuilder
   class VsSolutionBuilder < ProcessChain
     include Rake::DSL
     
+    attr_reader :SolutionPreprocessor
+    attr_reader :FileWriter
+    
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
-      @solutionPreprocessor = defineProc VsSolutionPreprocessor, "#{@Name}_Pre"
-      @fileWriter = defineProc VsSolutionFileWriter, "#{@Name}_File"
+      @SolutionPreprocessor = defineProc VsSolutionPreprocessor, _GetProcessorName("Pre")
+      @FileWriter = defineProc VsSolutionFileWriter, _GetProcessorName("File")
       
-      #Connect(:in, @solutionPreprocessor.to_s, :out)
-      Connect(:in, @solutionPreprocessor.to_s, @fileWriter.to_s, :out)
+      _ConnectProcessors()
+    end
+    
+    def intialize_copy(original)
+      super(original)
+      @SolutionPreprocessor = original.SolutionPreprocessor
+      @FileWriter = original.FileWriter
+    end
+    
+    def AdaptName(newName)
+      oldName = name()
+      
+      super(newName)
+      
+      solutionPreprocessorName = _AdaptProcessorName(newName, oldName, @SolutionPreprocessor.to_s)
+      fileWriterName = _AdaptProcessorName(newName, oldName, @FileWriter.to_s)
+      
+      @SolutionPreprocessor = @ChainProcessors[solutionPreprocessorName]
+      @FileWriter = @ChainProcessors[fileWriterName]
+      
+      _ConnectProcessors()
+    end
+    
+    def _ConnectProcessors
+      #puts "Connecting processors in solution builder"
+      Connect(:in, @SolutionPreprocessor.to_s, @FileWriter.to_s, :out)
     end
     
     def _OnAddInput(input)

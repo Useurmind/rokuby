@@ -43,9 +43,28 @@ class Processor < Rake::ProcessorTask
   def KnownInputClasses
     @knownInputClasses
   end
+    
+  def FullName
+    return "#{@ProjectFile.Path.RelativePath}:#{@Name}"
+  end
   
   alias initialize_processortask initialize
   def initialize(name=nil, app=nil, project_file=nil)    
+    init(name, app, project_file)
+  end
+  
+  def initialize_copy(original)
+    init(original.name, original.application, original.ProjectFile)
+    
+    @prerequisites = Clone(original.prerequisites)
+    @actions = Clone(original.actions)
+    @scope = original.scope
+    @arg_names = Clone(original.arg_names)
+    
+    @inputs = original.Inputs()
+  end
+  
+  def init(name=nil, app=nil, project_file=nil)
     name = (name || GetUUID())
     
     #puts "in init processor #{name}"
@@ -66,13 +85,27 @@ class Processor < Rake::ProcessorTask
     
     @processing = false
     @processingDone = false
+    
+    _InitProc()
+  end
+  
+  # Overwrite this in derived processors to
+  # - add the known input classes
+  # - perform any initialization step that is required during both initialization and cloning
+  # Changing anything related to name adaptation when cloning a processor is done in AdaptName.
+  def _InitProc
+    raise "_InitProc not implemented in processor class #{self.class.name}"
+  end
+  
+  def AdaptName(newName)
+    @name = newName
   end
   
   # This can only be called after invoking the task.
   def _InputProcessors    
     inputProcs = {}
     
-    #puts "pres of #{name}: #{prerequisites}"
+    #puts "pres of #{FullName()}: #{prerequisites}"
     
     prerequisites.uniq().each() do |pre|
       p = @ProjectFile.DefineProcessor(nil, pre)
@@ -98,11 +131,13 @@ class Processor < Rake::ProcessorTask
   def _FetchInputs
     #puts "in FetchInputs of processor #{self}"
     _InputProcessors().each() do |name, inputProcessor|
-      #puts "collecting outputs in #{@Name} from processor #{name}}"
+      #puts "collecting outputs in #{@ProjectFile.Path.RelativePath}:#{@Name} from processor #{name}}"
       inputProcessor.Outputs().each() do |output|
         AddInput(output)
       end
     end
+    # Clone all inputs to be save towards overwritting due to the same ius in different process chains
+    @inputs = Clone(@inputs)
   end
   
   # Execute all input processors, fetch their outputs and process them to create own output.
@@ -125,7 +160,8 @@ class Processor < Rake::ProcessorTask
     
     if(Rake.application.options.trace)
       $stderr.puts "** Invoking pres in #{@ProjectFile.Path.RelativePath}:#{name}"
-    end    
+    end
+    #puts "Prerequisites in #{@ProjectFile.Path.RelativePath}:#{name} are #{prerequisites}"
     InvokePrerequisites(task_args, invocation_chain)
     
     if(Rake.application.options.trace)
@@ -254,8 +290,43 @@ class Processor < Rake::ProcessorTask
     
     dependencies = valueMap[:Dependencies] || valueMap[:deps]
     if(dependencies)
-      prerequisites.push(dependencies)
+      AddDependencies(dependencies)
     end
+  end
+  
+  def AddDependencies(taskPaths)
+    if(taskPaths.class == Array)
+      _AddDependencies(taskPaths)
+    else
+      _AddDependencies([taskPaths])
+    end
+  end
+  
+  def _AddDependencies(taskPaths)
+    #if(taskPaths.length > 0)
+    #  puts "Adding prerequisites to processor #{@Name}: #{taskPaths}"
+    #end
+    
+    @prerequisites |= taskPaths
+  end
+  
+  # Remove dependencies from this processor
+  def RemoveDependencies(taskPaths)
+    if(taskPaths.class == Array)
+      _RemoveDependencies(taskPaths)
+    else
+      _RemoveDependencies([taskPaths])
+    end
+  end
+  
+  def _RemoveDependencies(taskPaths)
+    #if(taskPaths.length > 0)
+    #  puts "Removing prerequisites from processor #{@Name}: #{taskPaths}"
+    #end
+    
+    taskPaths.each() do |taskPath|
+      @prerequisites.delete(taskPath)
+    end    
   end
 end
 

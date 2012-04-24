@@ -21,7 +21,7 @@ module RakeBuilder
     def LookupInformationUnit(iuClass, name, copyUnit=nil)
       if(!NameOnly?(name))
         #puts "Information unit from different file was requested '#{name}'"
-        absoluteIuPath = AbsoluteTaskPath(name, self)
+        absoluteIuPath = ApplicationBasedTaskPath(name, self)
         
         return Rake.application.FindInformationUnit(iuClass, absoluteIuPath)
       end

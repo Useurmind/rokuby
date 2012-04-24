@@ -175,6 +175,10 @@ module RakeBuilder
       return Rake.application.DefineProcessor(procClass, *args, &block)
     end
     
+    def cloneProc(newName, oldName)
+      return Rake.application.CloneProcessor(newName, oldName)
+    end
+    
     def chain(*args, &block)
       return Rake.application.DefineProcessChain(ProcessChain, *args, &block)
     end

@@ -8,12 +8,6 @@ module RakeBuilder
   class VsProjectFilesWriter < Processor
     include VsProjectProcessorUtility
     
-    def initialize(name, app, project_file)
-      super(name, app, project_file)
-      
-      _RegisterInputTypes()
-    end
-    
     def _ProcessInputs(taskArgs=nil)
       # nothing to be done
     end
@@ -42,6 +36,8 @@ module RakeBuilder
       if($EXECUTION_MODE != :Full)
         return
       end
+      
+      #puts "VsProjectFileWrite uses vs project instance #{[@vsProjectInstance]}"
       
       _CreateFilterFile()
       _CreateProjectFile()

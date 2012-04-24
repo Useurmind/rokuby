@@ -1,8 +1,8 @@
 module RakeBuilder
   # Simple Processor whose output is his input.
-  class PassthroughProcessor < Processor
-    def initialize(name=nil, app=nil, projectFile=nil)
-      super(name, app, projectFile)
+  class PassthroughProcessor < Processor    
+    def _InitProc
+      # knows everything per implementation of _InputKnown
     end
     
     def _InputKnown(input)

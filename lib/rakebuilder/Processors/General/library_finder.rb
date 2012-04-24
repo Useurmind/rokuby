@@ -7,23 +7,24 @@ module RakeBuilder
     include FindFile
     include PlatformTester
     
-    def initialize(name=nil, app=nil, project_file=nil)
-      super(name, app, project_file)
-      
+    def _InitProc
       if(!Rake.application.options.no_cache && !Rake.application.options.no_lib_cache)
         @UseCache = true
       end
-      
       @knownInputClasses.push(RakeBuilder::LibrarySpecification)
     end
     
     def _ProcessInputs(taskArgs=nil)
       libraries = {}
       
+      #puts "Searching libraries..."
+      
       @inputs.each() do |libSpec|
         if(!TargetedAtPlatforms(libSpec.Platforms))
           next
         end
+        
+        #puts "Library spec is #{[libSpec]}"
         
         library = libraries[libSpec.Name]
         if(!library)
@@ -40,11 +41,15 @@ module RakeBuilder
         libInstance.FileSet.LinkFileSet = FindFile(libSpec.Location.LinkFileSpec)
         libInstance.FileSet.IncludeFileSet = FindFile(libSpec.Location.IncludeFileSpec)
         
+        
+        #puts "Library instance is #{[libInstance]}"
+        
         library.AddInstance(libInstance)
         #puts "Found library instance: #{[libInstance]}"
       end
       
       libraries.each()do |name, lib|
+        #puts "Pushing library #{[lib]} to output of lib finder."
         @outputs.push(lib)
       end
     end

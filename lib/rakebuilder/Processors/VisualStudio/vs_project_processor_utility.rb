@@ -39,8 +39,7 @@ module RakeBuilder
       @passthroughDefines
     end
     
-    def initialize(*args)
-      super(*args)
+    def _InitProc      
       @projectInstance = nil
       @projectDescription = nil
       @projectConfigurations = []
@@ -50,6 +49,8 @@ module RakeBuilder
       @vsProjects = []
       @vsProjectUsages = []
       @passthroughDefines = []
+      
+      _RegisterInputTypes()
     end
     
     # Register the known input types for such a processor.

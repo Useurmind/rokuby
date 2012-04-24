@@ -4,12 +4,6 @@ module RakeBuilder
   class VsSolutionPreprocessor < Processor
     include VsSolutionProcessorUtility
     
-    def initialize(name=nil, app=nil, project_file=nil)
-      super(name, app, project_file)
-      
-      _RegisterInputTypes()
-    end
-    
     def _ProcessInputs(taskArgs=nil)
       _SortInputs()
     

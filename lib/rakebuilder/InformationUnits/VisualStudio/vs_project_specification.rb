@@ -3,9 +3,11 @@ module RakeBuilder
   # a visual studio project.
   class VsProjectSpecification < InformationSpecification
     attr_accessor :ResourceFileSpec
+    attr_accessor :IdlFileSpec
     
     def initialize(valueMap=nil)
       @ResourceFileSpec = FileSpecification.new()
+      @IdlFileSpec = FileSpecification.new()
       
       super(valueMap)
       
@@ -16,6 +18,7 @@ module RakeBuilder
       super(original)
       
       @ResourceFileSpec = Clone(original.ResourceFileSpec)
+      @IdlFileSpec = Clone(original.IdlFileSpec)
     end
     
     # Gather the defines from this information unit and all subunits.
@@ -37,6 +40,11 @@ module RakeBuilder
       resourceFileSpec = valueMap[:ResourceFileSpec] || valueMap[:resSpec]
       if(resourceFileSpec)
         @ResourceFileSpec = resourceFileSpec
+      end
+      
+      idlFileSpec = valueMap[:IdlFileSpec] || valueMap[:idlSpec]
+      if(idlFileSpec)
+        @IdlFileSpec = idlFileSpec
       end
     end
   end

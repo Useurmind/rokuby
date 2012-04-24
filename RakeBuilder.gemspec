@@ -12,7 +12,6 @@ files = [
 
 # the documentation files
 doc_files = [
-    "index.rb",
     "introduction.rb",
     "project_files.rb"
 ]

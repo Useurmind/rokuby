@@ -38,6 +38,7 @@ module RakeBuilder
       CreateHeaderItemGroup()
       CreateSourceItemGroup()
       CreateResourceItemGroup()
+      CreateIdlItemGroup()
       CreateProjectReferenceItemGroup()
       
       @projectTag.Children.push(XmlTag.new({
@@ -58,6 +59,7 @@ module RakeBuilder
       @projectTag.Children.push(@headerItemGroup)
       @projectTag.Children.push(@sourceItemGroup)
       @projectTag.Children.push(@resourceItemGroup)
+      @projectTag.Children.push(@idlItemGroup)
       @projectTag.Children.push(@projReferenceItemGroup)
       @projectTag.Children.push(@cppTargetsImport)
       @projectTag.Children.push(@extensionTargetsImportGroup)
@@ -311,6 +313,22 @@ module RakeBuilder
         @resourceItemGroup.Children.push( XmlTag.new({
           name: "ResourceCompile",
           attributes: {"Include" => resourcePath.RelativePath}
+        }))
+      end
+    end
+    
+    def CreateIdlItemGroup()
+      @idlItemGroup = XmlTag.new({
+        name: "ItemGroup"
+      })
+      
+      #puts "resource file set: #{[@ResourceFileSet]}"
+      @IdlFileSet.FilePaths.each() do |filePath|
+        idlPath = _GetVsProjectRelativePath(filePath)
+
+        @resourceItemGroup.Children.push( XmlTag.new({
+          name: "Midl",
+          attributes: {"Include" => idlPath.RelativePath}
         }))
       end
     end

@@ -235,6 +235,10 @@ module RakeBuilder
         return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessor(procClass, *args, &block)
       end
       
+      def CloneProcessor(newName, oldName)
+        return @ProjectFileLoader.CurrentlyLoadedProjectFile().CloneProcessor(newName, oldName)
+      end
+      
       def DefineProcessChain(chainClass, *args, &block)
         return @ProjectFileLoader.CurrentlyLoadedProjectFile().DefineProcessChain(chainClass, *args, &block)
       end
@@ -247,7 +251,7 @@ module RakeBuilder
             projectFile = compute_task_project_file(projectPath, name)
             
             if(!projectFile)
-                fail "Could not find projectFile for information unit #{absoluteIuPath}"
+                fail "Could not find projectFile #{projectPath} for information unit #{absoluteIuPath}"
             else
                 iu = projectFile.GetExistingInformationUnit(iuClass, name)
                 if(!iu)
@@ -259,11 +263,11 @@ module RakeBuilder
       end
       
       def FindProcessor(procName)
-            task = self[procName]
+            task, projectFile = getTaskAndProjectFile(procName)
             if(!task.is_a?(Processor))
                 fail "Found task #{procName} is no processor."
             end
-            return task
+            return task, projectFile
       end
       
       def FindIuInProcessFile()
@@ -294,7 +298,13 @@ module RakeBuilder
       # found, but an existing file matches the task name, assume it is a file
       # task with no dependencies or actions.
       def [](taskPath, scopes=nil)
+        task, projectFile = getTaskAndProjectFile(taskPath, scopes)
+        return task
+      end
+      
+      def getTaskAndProjectFile(taskPath, scopes=nil)
         task = nil
+        projectFile = nil
         
         #puts "parsing task path #{taskPath}"
         projectPath, name = GetProjectFilePathName(taskPath)
@@ -313,7 +323,8 @@ module RakeBuilder
           @ProjectFileLoader.LoadedProjectFiles().each do |projFile|
             task = projFile[name, scopes]
             if(task != nil)
-              break
+                projectFile = projFile
+                break
             end
           end
           if(!task)
@@ -322,7 +333,7 @@ module RakeBuilder
         end
         
         #puts "Application found task '#{task.name}'"
-        return task
+        return task, projectFile
       end
       
       # Lookup a task, using scope and the scope hints in the task name.

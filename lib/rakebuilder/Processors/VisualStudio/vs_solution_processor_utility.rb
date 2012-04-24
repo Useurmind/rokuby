@@ -1,12 +1,12 @@
 module RakeBuilder
   # A module containing functionality that is needed in many of the processor of
   # a visual studio project builder.
-  module VsSolutionProcessorUtility
-    
-    def initialize(*args)
-      super(*args)
+  module VsSolutionProcessorUtility    
+    def _InitProc
       @vsSolutionDescription = nil
       @vsProjects = []
+      
+      _RegisterInputTypes()
     end
     
     # Register the known input types for such a processor.

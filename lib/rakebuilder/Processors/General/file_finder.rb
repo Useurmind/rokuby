@@ -5,9 +5,7 @@ module RakeBuilder
   class FileFinder < Processor
     include DirectoryUtility
     
-    def initialize(name=nil, app=nil, project_file=nil)
-      super(name, app, project_file)
-      
+    def _InitProc
       @knownInputClasses.push(RakeBuilder::FileSpecification)
     end
     

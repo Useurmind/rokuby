@@ -7,19 +7,56 @@ module RakeBuilder
   class ProjectFinder < ProcessChain
     include PlatformTester
     
+    attr_reader :ProjSplitter
+    attr_reader :SuFinder
+    attr_reader :LibFinder
+    attr_reader :ProjJoiner
+    
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
-      @projSplitter =  defineProc ProjectSplitter, "#{@Name}_Splitter"
-      @suFinder = defineProc SourceUnitFinder, "#{@Name}_SuFinder"
-      @libFinder = defineProc LibraryFinder, "#{@Name}_LibFinder"
-      @projJoiner = defineProc ProjectJoiner, "#{@Name}_Joiner"
+      @ProjSplitter =  defineProc ProjectSplitter, _GetProcessorName("Splitter")
+      @SuFinder = defineProc SourceUnitFinder, _GetProcessorName("SuFinder")
+      @LibFinder = defineProc LibraryFinder, _GetProcessorName("LibFinder")
+      @ProjJoiner = defineProc ProjectJoiner, _GetProcessorName("Joiner")
       
-      Connect(:in, @projSplitter.to_s)
-      Connect(@projSplitter.to_s, @libFinder.to_s, @projJoiner.to_s)
-      Connect(@projSplitter.to_s, @suFinder.to_s, @projJoiner.to_s)
-      Connect(@projJoiner.to_s, :out)
+      _ConnectProcessors()
+    end
+    
+    def intialize_copy(original)
+      super(original)
+      @ProjSplitter = original.ProjSplitter
+      @SuFinder = original.SuFinder
+      @LibFinder = original.LibFinder
+      @ProjJoiner = original.ProjJoiner
+    end
+    
+    def AdaptName(newName)
+      oldName = name()
       
+      super(newName)
+      
+      projSplitterName = _AdaptProcessorName(newName, oldName, @ProjSplitter.to_s)
+      suFinderName = _AdaptProcessorName(newName, oldName, @SuFinder.to_s)
+      libFinderName = _AdaptProcessorName(newName, oldName, @LibFinder.to_s)
+      projJoinerName = _AdaptProcessorName(newName, oldName, @ProjJoiner.to_s)
+      
+      @ProjSplitter = @ChainProcessors[projSplitterName]
+      @SuFinder = @ChainProcessors[suFinderName]
+      @LibFinder = @ChainProcessors[libFinderName]
+      @ProjJoiner = @ChainProcessors[projJoinerName]
+      
+      _ConnectProcessors()
+    end
+    
+    def _ConnectProcessors
+      Connect(:in, @ProjSplitter.to_s)
+      Connect(@ProjSplitter.to_s, @LibFinder.to_s, @ProjJoiner.to_s)
+      Connect(@ProjSplitter.to_s, @SuFinder.to_s, @ProjJoiner.to_s)
+      Connect(@ProjJoiner.to_s, :out)
+    end
+    
+    def _InitProc
       @knownInputClasses.push(RakeBuilder::ProjectSpecification)
       @knownInputClasses.push(RakeBuilder::SourceUnitSpecification)
       @knownInputClasses.push(RakeBuilder::LibrarySpecification)

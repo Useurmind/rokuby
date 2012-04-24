@@ -1,7 +1,7 @@
 module RakeBuilder
   module GppProjectProcessorUtility
-    def initialize(*args)
-      super(*args)
+
+    def _InitProc
       @projectInstance = nil
       @projectDescription = nil
       @projectConfigurations = []
@@ -9,6 +9,8 @@ module RakeBuilder
       @gppProjectConfigurations = []
       @gppProjects = []
       @passthroughDefines = []
+      
+      _RegisterInputTypes()
     end
 
     # Register the known input types for such a processor.

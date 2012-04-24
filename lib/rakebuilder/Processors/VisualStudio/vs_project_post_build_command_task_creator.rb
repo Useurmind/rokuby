@@ -9,14 +9,11 @@ module RakeBuilder
     attr_accessor :PostBuildLibCopyTask
     attr_accessor :CurrentVsConfBinaryExt
     
-    def initialize(name, app, project_file)
-      super(name, app, project_file)
-      
+    def _InitProc
       @PostBuildTask = nil
       @PostBuildLibCopyTask = nil
       @CurrentVsConfBinaryExt = nil
-      
-      _RegisterInputTypes()
+      super
     end
     
     def _CheckInputs

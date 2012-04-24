@@ -2,9 +2,8 @@ module RakeBuilder
   # This class is part of a project finder process chain.
   # It is used to fuse the libraries and source units into a final project instance.
   class ProjectJoiner < Processor
-    def initialize(name=nil, app=nil, project_file=nil)
-      super(name, app, project_file)
-      
+    
+    def _InitProc
       @knownInputClasses.push(RakeBuilder::ProjectSpecification)
       @knownInputClasses.push(RakeBuilder::ProjectInstance)
       @knownInputClasses.push(RakeBuilder::SourceUnitInstance)

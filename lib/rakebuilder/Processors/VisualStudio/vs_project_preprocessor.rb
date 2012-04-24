@@ -13,12 +13,6 @@ module RakeBuilder
     include VsProjectProcessorUtility
     include DirectoryUtility
     
-    def initialize(name, app, project_file)
-      super(name, app, project_file)
-      
-      _RegisterInputTypes()
-    end
-    
     def _ProcessInputs(taskArgs=nil)
       _SortInputs()      
       
@@ -123,6 +117,8 @@ module RakeBuilder
       end
       vsConf.AdditionalIncludeDirectories |= includePaths
       
+      #puts "Libraries in project configuration #{vsConf.PlatformName} of project #{@projectDescription.Name}: #{@projectInstance.Libraries}"
+      
       # write the lib name, path and include directories for all libs in this project
       @projectInstance.Libraries.each() do |library|
         libInstance = library.GetInstance(vsConf.Platform)
@@ -130,6 +126,7 @@ module RakeBuilder
           next
         end
         
+        #puts "Pushing root directories of library #{library.Name} into additional include directories #{[libInstance.FileSet.IncludeFileSet]}"
         libInstance.FileSet.IncludeFileSet.RootDirectories.each() do |rootDir|
           vsConf.AdditionalIncludeDirectories.push(rootDir)          
         end

@@ -5,7 +5,7 @@ module Rake
   # On invocation:
   # - first the task and all it's dependecies are executed (this includes the input processors)
   # - second the processor will process its input values
-  class ProcessorTask < Task   
+  class ProcessorTask < Task    
     # This will execute the processor which in turn invokes the old invoke function
     # of the task.
     def invoke_with_call_chain(task_args, invocation_chain)

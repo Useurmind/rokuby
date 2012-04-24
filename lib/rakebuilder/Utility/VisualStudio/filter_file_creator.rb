@@ -6,6 +6,7 @@ module RakeBuilder
       @headerBasefilter = "Headerfiles"
       @sourceBasefilter = "Sourcefiles"
       @resourceBasefilter = "Resourcefiles"
+      @idlBasefilter = "Idl"
     end
 
     def GetFilePath()
@@ -26,19 +27,23 @@ module RakeBuilder
       @includes = []
       @compiles = []
       @resources = []
+      @idls = []
 
       CreateSourceFilter()
       CreateHeaderFilter()
       CreateResourceFilter()
+      CreateIdlFilter()
 
       CreateIncludes()
       CreateCompiles()
       CreateResources()
+      CreateIdls()
 
       @itemGroups.push GetMultiElementListForList({}, "Filter", @filters)
       @itemGroups.push GetMultiElementListForList({}, "CLInclude", @includes)
       @itemGroups.push GetMultiElementListForList({}, "CLCompile", @compiles)
       @itemGroups.push GetMultiElementListForList({}, "ResourceCompile", @resources)
+      @itemGroups.push GetMultiElementListForList({}, "Midl", @idls)
 
       CreateFileDirectory()
       SaveXmlDocument(doc, GetFilePath().AbsolutePath(), @options)
@@ -49,7 +54,7 @@ module RakeBuilder
       @filters.push GetElementForList(
         { "Include" => @sourceBasefilter},
         { "UniqueIdentifier" => GetUUID(),
-          "Extensions" => "cpp;c;cc"})
+          "Extensions" => "cpp;c;cc;cxx"})
 
       #This tree should be relative to the normal project directory, e.g. begin with 'src'
       sourceDirectoryTree = []
@@ -74,7 +79,7 @@ module RakeBuilder
       @filters.push GetElementForList(
         { "Include" => @headerBasefilter},
         { "UniqueIdentifier" => GetUUID(),
-          "Extensions" => "h"})
+          "Extensions" => "h;hpp;hxx"})
       
       #This tree should be relative to the normal project directory, e.g. begin with 'src'
       includeDirectoryTree = []
@@ -119,6 +124,30 @@ module RakeBuilder
           { "UniqueIdentifier" => GetUUID()})
       end
     end
+    
+    def CreateIdlFilter
+      @filters.push GetElementForList(
+        { "Include" => @idlBasefilter},
+        { "UniqueIdentifier" => GetUUID(),
+          "Extensions" => "idl;h;hpp;hxx;c;cpp;cxx;cc"})
+
+      idlDirectoryTree = []
+      @IdlFileSet.RootDirectories.each() do |rootPath|
+        pathTree = GetDirectoryTreeFromRelativeBase(rootPath, [], true)
+        
+        pathTree.each() do |path|
+          idlDirectoryTree.push(path.RelativePath)
+        end
+      end
+      
+      idlDirectoryTree.uniq().each() do |directory|
+        filter = JoinXmlPaths([@idlBasefilter, directory])
+
+        @filters.push GetElementForList(
+          { "Include" => filter},
+          { "UniqueIdentifier" => GetUUID()})
+      end
+    end
 
     def CreateIncludes
       headerPaths = @SourceUnit.IncludeFileSet.FilePaths
@@ -157,6 +186,31 @@ module RakeBuilder
         
         @resources.push GetElementForList(
           {"Include" => relativeResource},
+          {"Filter" => filter}
+        )
+      end
+    end
+    
+    def CreateIdls
+      idlPaths = @IdlFileSet.FilePaths
+
+      idlPaths.each do |idlPath|
+        filter = JoinXmlPaths([@idlBasefilter, idlPath.RelativeDirectory])
+        relativeIdl = _GetVsProjectRelativePath(idlPath).RelativePath
+        idlFilename = idlPath.FileName(false)
+        
+        @idls.push GetElementForList(
+          {"Include" => relativeIdl},
+          {"Filter" => filter}
+        )
+        
+        @includes.push GetElementForList(
+          {"Include" => idlFilename + "_h.h"},
+          {"Filter" => filter}
+        )
+        
+        @compiles.push GetElementForList(
+          {"Include" => idlFilename + "_i.c"},
           {"Filter" => filter}
         )
       end

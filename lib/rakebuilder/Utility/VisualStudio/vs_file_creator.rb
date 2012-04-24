@@ -50,6 +50,7 @@ module RakeBuilder
       end
       
       @ResourceFileSet = @VsProjectInstance.ResourceFileSet
+      @IdlFileSet = @VsProjectInstance.IdlFileSet
     end
     
     # Get the path of the file relative to the visual studio project directory.

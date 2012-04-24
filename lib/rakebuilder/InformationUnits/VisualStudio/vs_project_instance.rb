@@ -2,9 +2,11 @@ module RakeBuilder
   # This class holds the information found through a specification.
   class VsProjectInstance < InformationInstance
     attr_accessor :ResourceFileSet
+    attr_accessor :IdlFileSet
     
     def initialize(valueMap=nil)
       @ResourceFileSet = FileSet.new()
+      @IdlFileSet = FileSet.new()
       
       super(valueMap)
       
@@ -15,6 +17,7 @@ module RakeBuilder
       super(original)
       
       @ResourceFileSet = Clone(original.ResourceFileSet)
+      @IdlFileSet = Clone(original.IdlFileSet)
     end
     
     # Gather the defines from this information unit and all subunits.
@@ -36,6 +39,11 @@ module RakeBuilder
       resourceFileSet = valueMap[:ResourceFileSet] || valueMap[:resFileSet]
       if(resourceFileSet)
         @ResourceFileSet = resourceFileSet
+      end
+      
+      idlFileSet = valueMap[:IdlFileSet] || valueMap[:idlFileSet]
+      if(idlFileSet)
+        @IdlFileSet = idlFileSet
       end
     end
   end

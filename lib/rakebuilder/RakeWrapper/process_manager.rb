@@ -20,6 +20,25 @@ module RakeBuilder
       @ProcessCache.Save()
     end
     
+    # Create a clone of a given processor
+    # [newName] The name of the new processor.
+    # [oldName] The name of the processor to clone.
+    # A clone of a processor depends on the implementation of the initialize_copy function of the processor.
+    # The basic rules for cloning processors is:
+    # - Only clone processors that were created in the current project file.
+    # - Only the processor is cloned with the state of when it is cloned.
+    # - Cloning process chains will also lead to cloning subprocessors of the chains and adapting their names.
+    def CloneProcessor(newName, oldPath)
+      processor, sourceProjectFile = _GetProcessor(nil, oldPath)     
+      
+      newProcessor = initialize_copy(processor)
+      newProcessor.AdaptName(newName)
+      
+      @Processors[newName] = newProcessor
+      
+      return newProcessor
+    end
+    
     # The args for the processor include the following:
     # For examples how this can be formatted see the unit tests (-> Test_ProcessManager).
     # If procClass is nil only existing processors can be retrieved.
@@ -36,7 +55,7 @@ module RakeBuilder
         raise "No correct arguments for processor definition, missing name."
       end
       
-      processor = _GetProcessor(procClass, name)
+      processor, sourceProjectFile = _GetProcessor(procClass, name)
       
       if(processor == nil)
         raise "Could not find or allocate processor #{name} in #{@Path}" # Path is from ProjectFile
@@ -46,16 +65,22 @@ module RakeBuilder
       
       #puts "enhancing processor task #{name}: #{inputs}, #{valueMap}, #{taskArgs}, #{taskDeps}"
       
-      mappedTaskDeps = taskDeps.map() do |dep|
-        usedPath = dep
-        if(NameOnly?(dep))
-          usedPath = Path().AbsolutePath() + ":" + dep.to_s  
-        end
-        #puts "Using dep #{usedPath} instead of #{dep} for task #{name} in #{Path()}"
-        usedPath        
-      end
+      mappedTaskDeps = taskDeps
+      if(sourceProjectFile != self)
+        mappedTaskDeps = taskDeps.map() do |dep|
+          
+          #puts "Mapping dep #{dep}:"
+          absoluteDep = AbsoluteTaskPath(dep, self)
+          #puts "Absolute dep: #{absoluteDep}"
+          usedDep = MakeRelativeTo(absoluteDep, sourceProjectFile)
+          #puts "Used dep: #{usedDep}"
+          
+          usedDep
+        end  
+      end     
       
-      processor.enhance(mappedTaskDeps, &block)
+      processor.AddDependencies(mappedTaskDeps)
+      processor.enhance(nil, &block)
       processor.set_arg_names(taskArgs)
       
       processor.AddInput(inputs)
@@ -163,23 +188,31 @@ module RakeBuilder
       return processChain
     end
     
-    def _GetProcessor(procClass, name)      
+    def _GetProcessor(procClass, name)
+      proc = nil
+      sourceProjectFile = self
+      
       if(@Processors[name])
-        return @Processors[name]
+        proc = @Processors[name]
+        return proc, sourceProjectFile
       end
       
       if(procClass == nil)
         
         # find processor in appplication
-        #puts "Trying to find proc #{name} from #{Path()}"
-        taskPath = AbsoluteTaskPath(name, self)
+        # puts "Trying to find proc #{name} from #{Path()}"
+        taskPath = ApplicationBasedTaskPath(name, self)
         
-        return Rake.application.FindProcessor(taskPath)        
+        proc, sourceProjectFile = Rake.application.FindProcessor(taskPath)
+        #puts "Found processor #{proc.FullName()}"
+        return proc, sourceProjectFile
       end
       
       @Processors[name] = intern(procClass, name)
        
-      return @Processors[name]
+      proc = @Processors[name]
+      
+      return proc, sourceProjectFile
     end
   end
 end

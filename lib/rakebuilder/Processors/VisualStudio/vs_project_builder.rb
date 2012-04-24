@@ -10,45 +10,88 @@ module RakeBuilder
   class VsProjectBuilder < ProcessChain
     include Rake::DSL
     
+    attr_reader :ProjectFinder
+    attr_reader :ProjectPreprocessor
+    attr_reader :ProjectCreator
+    attr_reader :FileWriter
+    attr_reader :VsProjectFinder
+    attr_reader :VsPostBuildTaskCreator
+    
     def initialize(name=nil, app=nil, project_file=nil)
       super(name, app, project_file)
       
-      @projectFinder = defineProc ProjectFinder, "#{@Name}_ProjFinder", :TargetPlatforms => [PLATFORM_WIN]
-      @projectPreprocessor = defineProc VsProjectPreprocessor, "#{@Name}_Pre"
-      @projectCreator = defineProc VsProjectCreator, "#{@Name}_Proj"
-      @fileWriter = defineProc VsProjectFilesWriter, "#{@Name}_Files"
-      @vsProjectFinder = defineProc VsProjectFinder, "#{@Name}_VsProjFinder"
-      @vsPostBuildTaskCreator = defineProc VsPostBuildCommandTaskCreator, "#{@Name}_PostBuild"
+      @ProjectFinder = defineProc ProjectFinder, _GetProcessorName("ProjFinder"), :TargetPlatforms => [PLATFORM_WIN]
+      @ProjectPreprocessor = defineProc VsProjectPreprocessor, _GetProcessorName("Pre")
+      @ProjectCreator = defineProc VsProjectCreator, _GetProcessorName("Proj")
+      @FileWriter = defineProc VsProjectFilesWriter, _GetProcessorName("Files")
+      @VsProjectFinder = defineProc VsProjectFinder, _GetProcessorName("VsProjFinder")
+      @VsPostBuildTaskCreator = defineProc VsPostBuildCommandTaskCreator, _GetProcessorName("PostBuild")
       
-      Connect(:in, @projectFinder.to_s, @projectPreprocessor.to_s)
-      Connect(:in, @vsProjectFinder.to_s, @fileWriter.to_s)
-      Connect(:in, @projectPreprocessor.to_s, @vsPostBuildTaskCreator.to_s)      
-      Connect(@projectCreator.to_s, :out)
-      Connect(@fileWriter.to_s, @projectCreator.to_s)
-      Connect(@vsPostBuildTaskCreator.to_s, @projectCreator.to_s)
-      Connect(@vsPostBuildTaskCreator.to_s, @fileWriter.to_s)
+      _ConnectProcessors()
+    end
+    
+    def intialize_copy(original)
+      super(original)
+      @ProjectFinder = original.ProjectFinder
+      @ProjectPreprocessor = original.ProjectPreprocessor
+      @ProjectCreator = original.ProjectCreator
+      @FileWriter = original.FileWriter
+      @VsProjectFinder = original.VsProjectFinder
+      @VsPostBuildTaskCreator = original.VsPostBuildTaskCreator
+    end
+    
+    def AdaptName(newName)
+      oldName = name()
+      
+      super(newName)
+      
+      projecFinderName = _AdaptProcessorName(newName, oldName, @ProjectFinder.to_s)
+      projectPreprocessorName = _AdaptProcessorName(newName, oldName, @ProjectPreprocessor.to_s)
+      libFinderName = _AdaptProcessorName(newName, oldName, @ProjectCreator.to_s)
+      fileWriterName = _AdaptProcessorName(newName, oldName, @FileWriter.to_s)
+      vsProjectFinderName = _AdaptProcessorName(newName, oldName, @VsProjectFinder.to_s)
+      vsPostBuildTaskCreatorName = _AdaptProcessorName(newName, oldName, @VsPostBuildTaskCreator.to_s)
+      
+      @ProjectFinder = @ChainProcessors[projecFinderName]
+      @ProjectPreprocessor = @ChainProcessors[projectPreprocessorName]
+      @ProjectCreator = @ChainProcessors[libFinderName]
+      @FileWriter = @ChainProcessors[fileWriterName]
+      @VsProjectFinder = @ChainProcessors[vsProjectFinderName]
+      @VsPostBuildTaskCreator = @ChainProcessors[vsPostBuildTaskCreatorName]
+      
+      _ConnectProcessors()
+    end
+    
+    def _ConnectProcessors
+      Connect(:in, @ProjectFinder.to_s, @ProjectPreprocessor.to_s)
+      Connect(:in, @VsProjectFinder.to_s, @FileWriter.to_s)
+      Connect(:in, @ProjectPreprocessor.to_s, @VsPostBuildTaskCreator.to_s)      
+      Connect(@ProjectCreator.to_s, :out)
+      Connect(@FileWriter.to_s, @ProjectCreator.to_s)
+      Connect(@VsPostBuildTaskCreator.to_s, @ProjectCreator.to_s)
+      Connect(@VsPostBuildTaskCreator.to_s, @FileWriter.to_s)
       
       # The first argument to this task is the configuration name for which the post build should be executed
-      @PostBuildTask = Rake::ProxyTask.define_task "#{@Name}_PostBuildCommandTask", :descr, :inst, :vsDescr, :vsInst, :vsConf
-      @PostBuildLibCopyTask = Rake::Task.define_task "#{@Name}_PostBuildLibCopyTask", :descr, :inst, :vsDescr, :vsInst, :vsConf
+      @PostBuildTask = Rake::ProxyTask.define_task _GetProcessorName("PostBuildCommandTask"), :descr, :inst, :vsDescr, :vsInst, :vsConf
+      @PostBuildLibCopyTask = Rake::Task.define_task _GetProcessorName("PostBuildLibCopyTask"), :descr, :inst, :vsDescr, :vsInst, :vsConf
       
       @PostBuildTask.SetArgumentModificationAction() do |args|
         
         vsConfBinaryExt = args[0]
         
         $EXECUTION_MODE = :Restricted
-        @vsPostBuildTaskCreator.CurrentVsConfBinaryExt = vsConfBinaryExt
-        @vsPostBuildTaskCreator.invoke()
+        @VsPostBuildTaskCreator.CurrentVsConfBinaryExt = vsConfBinaryExt
+        @VsPostBuildTaskCreator.invoke()
         
         modifiedArgs = []
         
-        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(ProjectDescription)
-        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(ProjectInstance)
+        modifiedArgs.push @VsPostBuildTaskCreator.GetOutputByClass(ProjectDescription)
+        modifiedArgs.push @VsPostBuildTaskCreator.GetOutputByClass(ProjectInstance)
         
-        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(VsProjectDescription)
-        modifiedArgs.push @vsPostBuildTaskCreator.GetOutputByClass(VsProjectInstance)
+        modifiedArgs.push @VsPostBuildTaskCreator.GetOutputByClass(VsProjectDescription)
+        modifiedArgs.push @VsPostBuildTaskCreator.GetOutputByClass(VsProjectInstance)
         
-        @vsPostBuildTaskCreator.GetOutputsByClass(VsProjectConfiguration).each() do |vsConf|
+        @VsPostBuildTaskCreator.GetOutputsByClass(VsProjectConfiguration).each() do |vsConf|
           if(vsConf.Platform.BinaryExtension == vsConfBinaryExt)
             modifiedArgs.push vsConf
             break
@@ -59,8 +102,11 @@ module RakeBuilder
       end
       @PostBuildTask.enhance [@PostBuildLibCopyTask.to_s]  # as the pres are executed corresponding to their order this executes the back task last
       
-      @vsPostBuildTaskCreator.PostBuildTask = @PostBuildTask
-      @vsPostBuildTaskCreator.PostBuildLibCopyTask = @PostBuildLibCopyTask
+      @VsPostBuildTaskCreator.PostBuildTask = @PostBuildTask
+      @VsPostBuildTaskCreator.PostBuildLibCopyTask = @PostBuildLibCopyTask
+    end
+    
+    def _InitProc
     end
     
     def _OnAddInput(input)

@@ -1,5 +1,3 @@
-#:include:Doc/index.rb
-
 module RakeBuilder
   $SimulateTasks = false
 end

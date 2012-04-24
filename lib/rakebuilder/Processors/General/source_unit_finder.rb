@@ -6,13 +6,10 @@ module RakeBuilder
   class SourceUnitFinder < Processor
     include FindFile
     
-    def initialize(name=nil, app=nil, project_file=nil)
-      super(name, app, project_file)
-      
+    def _InitProc
       if(!Rake.application.options.no_cache && !Rake.application.options.no_src_cache)
         @UseCache = true
       end
-      
       @knownInputClasses.push(RakeBuilder::SourceUnitSpecification)
     end
     

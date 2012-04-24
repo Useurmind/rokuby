@@ -7,12 +7,9 @@ module RakeBuilder
     include VsProjectProcessorUtility
     include DirectoryUtility
     
-    def initialize(name, app, project_file)
-      super(name, app, project_file)
-      
+    def _InitProc
       @Project = nil
-      
-      _RegisterInputTypes()
+      super
     end
     
     def _ProcessInputs(taskArgs=nil)

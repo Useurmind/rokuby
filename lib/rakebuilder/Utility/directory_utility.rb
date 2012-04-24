@@ -31,7 +31,8 @@ module RakeBuilder
     # [directory] The proeject path to the directory that should be searched.
     def FindFilesInDirectory(includePatterns, excludePatterns, directory)
       files = []      
-      #puts "Searching files in '#{directory}', found entries: #{entries}"
+      #puts "Searching files in '#{directory}'"
+      #puts "Include patterns: #{includePatterns}"
 
       if(!File.readable?(directory.AbsolutePath()))
         return files
@@ -60,7 +61,7 @@ module RakeBuilder
 
           entryMatches = false
 
-	  #puts "Checking entry #{entry} for inclusion"
+	  #puts "Checking entry #{testPath} for inclusion"
           includePatterns.each do |pattern|
 	    #puts "Trying pattern #{pattern}"
             if(testPath.match(pattern) != nil)
