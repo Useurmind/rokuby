@@ -23,7 +23,9 @@
 #- A basis for the name of the binary that will be created (it is extended depending on the configuration)
 #- The type of the binary that should be build (executable, static/dynamic link library)
 #
-#{Source File Documentation}[link:lib/rakebuilder/InformationUnits/General/project_description_rb.html]
+# # specify a project description
+#
+#{Source File Documentation}[link:RakeBuilder/ProjectDescription.html]
 #
 #== Source Unit Specification
 #
@@ -32,7 +34,7 @@
 #- A file specification for the source files that are part of the project itself.
 #- A file specification for the header files that are part of the project itself.
 #
-#{Source File Documentation}[link:lib/rakebuilder/InformationUnits/Specifications/source_unit_specification_rb.html]
+#{Source File Documentation}[link:RakeBuilder/SourceUnitSpecification.html]
 #
 #== Platform Configuration
 #
@@ -44,7 +46,9 @@
 #There are several reasons why a differentiation between different platform setups is practical. One of them is explained
 #in the section about libraries below.
 #
-#{Source File Documentation}[link:lib/rakebuilder/InformationUnits/General/platform_configuration_rb.html]
+#{Common Platforms}[link:RakeBuilder/Defaults/PlatformConfigurations.html]
+#
+#{Source File Documentation}[link:RakeBuilder/PlatformConfiguration.html]
 #
 #== Libraries
 #
@@ -82,7 +86,7 @@
 #- A platform configuration.
 #- Defines that will be applied to the project in case of this configuration (but defines can be added to most information units anyway).
 #
-#{Source File Documentation}[link:lib/rakebuilder/InformationUnits/General/project_configuration_rb.html]
+#{Source File Documentation}[link:RakeBuilder/ProjectConfiguration.html]
 #
 #== Project Sepcification
 #
@@ -90,7 +94,7 @@
 #- The source unit specifications needed by the project.
 #- The library specifications neeeded by the project.
 #
-#{Source File Documentation}[link:lib/rakebuilder/InformationUnits/Specifications/project_specification_rb.html]
+#{Source File Documentation}[link:RakeBuilder/ProjectSpecification.html]
 #
 #== A general project example
 #
@@ -123,4 +127,13 @@
 #		inPats: [".*\.h$", ".*\.hpp$"],
 #		sPaths: [projPath("include")]
 #	})
+# }
+#
+# # Define a library with different instances for different platforms
+# 
+#
+# # Combine library specifications and source specifications into a project specification
+# projSpec :DemoProjectSpec, {
+#       srcSpecs: [srcSpec(:DemoProjectSource)],
+#       libSpecs: []
 # }
