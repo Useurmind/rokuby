@@ -276,12 +276,16 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
+      relativePaths = []
       @SourceUnit.IncludeFileSet.FilePaths.each() do |filePath|
         headerPath = _GetVsProjectRelativePath(filePath)
-        
+        relativePaths.push(headerPath.RelativePath)
+      end
+      
+      relativePaths.uniq().each() do |relativePath|        
         @headerItemGroup.Children.push( XmlTag.new({
           name: "ClInclude",
-          attributes: {"Include" => headerPath.RelativePath}
+          attributes: {"Include" => relativePath}
         }))
       end 
     end
@@ -291,12 +295,16 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
+      relativePaths = []
       @SourceUnit.SourceFileSet.FilePaths.each() do |filePath|
         sourcePath = _GetVsProjectRelativePath(filePath)
-        
+        relativePaths.push(sourcePath.RelativePath)
+      end
+      
+      relativePaths.uniq().each() do |relativePath|        
         @sourceItemGroup.Children.push( XmlTag.new({
           name: "ClCompile",
-         attributes: {"Include" => sourcePath.RelativePath}
+         attributes: {"Include" => relativePath}
         }))
       end 
     end
@@ -306,13 +314,16 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      #puts "resource file set: #{[@ResourceFileSet]}"
+      relativePaths = []
       @ResourceFileSet.FilePaths.each() do |filePath|
         resourcePath = _GetVsProjectRelativePath(filePath)
-
+        relativePaths.push(resourcePath.RelativePath)
+      end
+      
+      relativePaths.uniq().each() do |relativePath|
         @resourceItemGroup.Children.push( XmlTag.new({
           name: "ResourceCompile",
-          attributes: {"Include" => resourcePath.RelativePath}
+          attributes: {"Include" => relativePath}
         }))
       end
     end
@@ -322,13 +333,16 @@ module RakeBuilder
         name: "ItemGroup"
       })
       
-      #puts "resource file set: #{[@ResourceFileSet]}"
+      relativePaths = []
       @IdlFileSet.FilePaths.each() do |filePath|
         idlPath = _GetVsProjectRelativePath(filePath)
-
+        relativePaths.push(idlPath.RelativePath)
+      end
+      
+      relativePaths.uniq().each() do |relativePath|
         @resourceItemGroup.Children.push( XmlTag.new({
           name: "Midl",
-          attributes: {"Include" => idlPath.RelativePath}
+          attributes: {"Include" => relativePath}
         }))
       end
     end

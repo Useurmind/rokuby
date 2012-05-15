@@ -91,6 +91,28 @@ module RakeBuilder
       end
     end
     
+    def _ForwardOutputs
+      _AddOutput(@projectInstance)
+      _AddOutput(@projectDescription)
+      _AddOutput(@projectConfigurations)
+      _AddOutput(@vsProjectInstance)
+      _AddOutput(@vsProjectDescription)
+      _AddOutput(@vsProjectConfigurations)
+      _AddOutput(@vsProjects)
+      _AddOutput(@vsProjectUsages)
+      _AddOutput(@passthroughDefines)
+    end
+    
+    def _AddOutput(output)
+      if(output != nil)
+        if(output.class == Array)
+          @outputs.concat(output)
+        else
+          @outputs.push(output)
+        end        
+      end
+    end
+    
     def _GetProjectUsage(guid)
       matchingUsage = nil
       @vsProjectUsages.each() do |projUsage|

@@ -43,17 +43,6 @@ module RakeBuilder
       _ForwardOutputs()
     end
     
-    def _ForwardOutputs
-      @outputs = []
-      @outputs.push(@projectInstance)
-      @outputs.push(@projectDescription)
-      @outputs.concat(@projectConfigurations)
-      @outputs.push(@vsProjectDescription)
-      @outputs.concat(@vsProjectConfigurations)
-      @outputs.concat(@vsProjects)
-      @outputs.concat(@passthroughDefines)
-    end
-    
     #########################################################
     # Post processing
     

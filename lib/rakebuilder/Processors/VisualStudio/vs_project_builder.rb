@@ -64,7 +64,7 @@ module RakeBuilder
     
     def _ConnectProcessors
       Connect(:in, @ProjectFinder.to_s, @ProjectPreprocessor.to_s)
-      Connect(:in, @VsProjectFinder.to_s, @FileWriter.to_s)
+      Connect(:in, @VsProjectFinder.to_s, @ProjectPreprocessor.to_s)
       Connect(:in, @ProjectPreprocessor.to_s, @VsPostBuildTaskCreator.to_s)      
       Connect(@ProjectCreator.to_s, :out)
       Connect(@FileWriter.to_s, @ProjectCreator.to_s)
@@ -107,6 +107,16 @@ module RakeBuilder
     end
     
     def _InitProc
+    end
+    
+    # Overwrite this in derived processors to print a message before the processor is executed
+    def _LogTextBeforeExecute
+      "Building project #{@Name}..."
+    end
+    
+    # Overwrite this in derived processors to print a message after the processor was executed
+    def _LogTextAfterExecute
+      "Project #{@Name} was build."
     end
     
     def _OnAddInput(input)

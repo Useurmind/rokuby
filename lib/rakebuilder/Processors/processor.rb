@@ -97,6 +97,22 @@ class Processor < Rake::ProcessorTask
     raise "_InitProc not implemented in processor class #{self.class.name}"
   end
   
+  # Overwrite this in derived processors to print a message before the processor is executed
+  def _LogTextBeforeExecute
+    return nil
+  end
+  
+  # Overwrite this in derived processors to print a message after the processor was executed
+  def _LogTextAfterExecute
+    return nil
+  end
+  
+  def _LogProcessorExecution(logText)
+    if(logText)
+      puts logText
+    end   
+  end
+  
   def AdaptName(newName)
     @name = newName
   end
@@ -156,6 +172,8 @@ class Processor < Rake::ProcessorTask
       return false
     end
     
+    _LogProcessorExecution(_LogTextBeforeExecute())
+    
     @processing = true
     
     if(Rake.application.options.trace)
@@ -193,6 +211,8 @@ class Processor < Rake::ProcessorTask
       $stderr.puts "** Executing actions in #{@ProjectFile.Path.RelativePath}:#{name}"
     end
     Execute(task_args)
+    
+    _LogProcessorExecution(_LogTextAfterExecute())
     
     @processing = false
     

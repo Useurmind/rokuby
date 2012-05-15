@@ -33,13 +33,7 @@ module RakeBuilder
       _FilterProjectConfigurations()
       _ExtendVsProjectConfigurations()
       
-      @outputs.push(@projectInstance)
-      @outputs.push(@projectDescription)
-      @outputs.concat(@projectConfigurations)
-      @outputs.push(@vsProjectDescription)
-      @outputs.concat(@vsProjectConfigurations)
-      @outputs.concat(@vsProjects)
-      @outputs.concat(@passthroughDefines)
+      _ForwardOutputs()
     end
     
     def _ExtendVsProjectDescription      
@@ -56,6 +50,25 @@ module RakeBuilder
     
     def _ExtendVsProjectConfigurations
       #puts "in _ExtendVsProjectConfigurations: #{@vsProjectConfigurations}"
+      
+      # add c and h file for each idl file, as a source unit
+      if(@vsProjectInstance)
+        @vsProjectInstance.IdlFileSet.FilePaths.each() do |idlFilePath|
+          sourceUnitInstance = SourceUnitInstance.new()
+          idlFileName = idlFilePath.FileName(false)
+          
+          srcFilePath = ProjectPath.new({relative: idlFileName + "_i.c"})
+          headerFilePath = ProjectPath.new({relative: idlFileName + "_h.h"})
+          
+          sourceUnitInstance.SourceFileSet.FilePaths = [@vsProjectDescription.ProjectFilePath.DirectoryPath() + srcFilePath]
+          sourceUnitInstance.SourceFileSet.RootDirectories = [@vsProjectDescription.ProjectFilePath.DirectoryPath()]
+          
+          sourceUnitInstance.IncludeFileSet.FilePaths = [@vsProjectDescription.ProjectFilePath.DirectoryPath() + headerFilePath]
+          sourceUnitInstance.IncludeFileSet.RootDirectories = [@vsProjectDescription.ProjectFilePath.DirectoryPath()]
+          
+          @projectInstance.SourceUnits.push(sourceUnitInstance)
+        end
+      end
       
       @vsProjectConfigurations.each() do |vsConf|
         
@@ -116,6 +129,14 @@ module RakeBuilder
         end        
       end
       vsConf.AdditionalIncludeDirectories |= includePaths
+      
+      # add the project path to include paths if any idl files were found
+      if(@vsProjectInstance != nil)
+        if(@vsProjectInstance.IdlFileSet.FilePaths.length > 0)
+          puts "Adding #{@vsProjectDescription.ProjectFilePath.DirectoryPath()} to includes"
+          vsConf.AdditionalIncludeDirectories.push(@vsProjectDescription.ProjectFilePath.DirectoryPath())
+        end
+      end
       
       #puts "Libraries in project configuration #{vsConf.PlatformName} of project #{@projectDescription.Name}: #{@projectInstance.Libraries}"
       

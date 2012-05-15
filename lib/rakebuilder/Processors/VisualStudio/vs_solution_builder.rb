@@ -43,6 +43,16 @@ module RakeBuilder
       Connect(:in, @SolutionPreprocessor.to_s, @FileWriter.to_s, :out)
     end
     
+    # Overwrite this in derived processors to print a message before the processor is executed
+    def _LogTextBeforeExecute
+      "Building solution #{@Name}..."
+    end
+    
+    # Overwrite this in derived processors to print a message after the processor was executed
+    def _LogTextAfterExecute
+      "Solution #{@Name} was build."
+    end
+    
     def _OnAddInput(input)
       if(!super(input))
         return false

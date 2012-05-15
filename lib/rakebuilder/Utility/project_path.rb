@@ -227,6 +227,14 @@ module RakeBuilder
         end
         commonPartsNumber += 1
       end
+      
+      # the paths are basically the same, so we return the path "."
+      if(commonPartsNumber == originalPathParts.length && commonPartsNumber == pathParts.length)
+        return ProjectPath.new({
+          base: path.AbsolutePath(),
+          relative: "."
+        })
+      end
 
       upSwitchesNumber = pathParts.length - commonPartsNumber
       for i in commonPartsNumber-1..pathParts.length-1

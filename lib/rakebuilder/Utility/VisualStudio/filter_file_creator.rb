@@ -152,7 +152,7 @@ module RakeBuilder
     def CreateIncludes
       headerPaths = @SourceUnit.IncludeFileSet.FilePaths
 
-      headerPaths.each do |headerPath|
+      headerPaths.uniq().each do |headerPath|
         filter = JoinXmlPaths([@headerBasefilter, headerPath.RelativeDirectory])
         relativeHeader = _GetVsProjectRelativePath(headerPath).RelativePath
         
@@ -166,7 +166,7 @@ module RakeBuilder
     def CreateCompiles
       sourcePaths = @SourceUnit.SourceFileSet.FilePaths
 
-      sourcePaths.each do |sourcePath|
+      sourcePaths.uniq().each do |sourcePath|
         filter = JoinXmlPaths([@sourceBasefilter, sourcePath.RelativeDirectory])
         relativeSource = _GetVsProjectRelativePath(sourcePath).RelativePath
         
@@ -180,7 +180,7 @@ module RakeBuilder
     def CreateResources
       resourcePaths = @ResourceFileSet.FilePaths
 
-      resourcePaths.each do |resourcePath|
+      resourcePaths.uniq().each do |resourcePath|
         filter = JoinXmlPaths([@resourceBasefilter, resourcePath.RelativeDirectory])
         relativeResource = _GetVsProjectRelativePath(resourcePath).RelativePath
         
@@ -194,23 +194,13 @@ module RakeBuilder
     def CreateIdls
       idlPaths = @IdlFileSet.FilePaths
 
-      idlPaths.each do |idlPath|
+      idlPaths.uniq().each do |idlPath|
         filter = JoinXmlPaths([@idlBasefilter, idlPath.RelativeDirectory])
         relativeIdl = _GetVsProjectRelativePath(idlPath).RelativePath
         idlFilename = idlPath.FileName(false)
         
         @idls.push GetElementForList(
           {"Include" => relativeIdl},
-          {"Filter" => filter}
-        )
-        
-        @includes.push GetElementForList(
-          {"Include" => idlFilename + "_h.h"},
-          {"Filter" => filter}
-        )
-        
-        @compiles.push GetElementForList(
-          {"Include" => idlFilename + "_i.c"},
           {"Filter" => filter}
         )
       end
