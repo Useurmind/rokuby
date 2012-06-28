@@ -1,5 +1,7 @@
 module RakeBuilder
   # Responsible for compiling the sources that belong to the project.
+  # This is the class that actually executes the GPP compiler to compile
+  # and link the sources, headers and libraries.
   class GppProjectCompiler < Processor
     include GppProjectProcessorUtility
     include ProcessorUtility
