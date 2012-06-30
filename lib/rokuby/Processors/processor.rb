@@ -28,22 +28,38 @@ module Rokuby
 class Processor < Rake::ProcessorTask
   include GeneralUtility
   
+  # @attribute
+  # @return [String] The name of the processor.
   attr_accessor :Name
+  
+  # @attribute
+  # @return [Bool] Should the processor throw an exception if an unknown input is encountered.
   attr_accessor :ThrowOnUnknownInput
+  
+  # @attribute
+  # @return [Bool] Don't execute processors and retrieve status from cache instead.
   attr_accessor :UseCache
   
+  # @attribute
+  # @return [Array] The output information units (only after execution).
   def Outputs
     @outputs
   end
   
+  # @attribute
+  # @return [Array] The input information units that should be processed.
   def Inputs
     @inputs
   end
   
+  # @attribute
+  # @return [Array] The classes of information untis that this processor knows to handle.
   def KnownInputClasses
     @knownInputClasses
   end
     
+  # @attribute
+  # @return [String] The full name of the processor including the path from the base project file to the processor project file.
   def FullName
     return "#{@ProjectFile.Path.RelativePath}:#{@Name}"
   end

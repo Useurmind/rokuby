@@ -46,10 +46,10 @@ module Rokuby
       #puts "Trying to create configuration task for #{input}"
       if(input.is_a?(GppProjectConfiguration))
         desc "Build the project of #{@Name} with configuration #{input.Platform.BinaryExtension()}"
-        confTask = Rake::ProxyTask.define_task "#{@Name}_#{input.Platform.BinaryExtension()}", :gppConf => [@ProjectCompiler.to_s]
+        confTask = Rake::ProxyTask.define_task "#{@Name}_#{input.Platform.BinaryExtension()}" => [@ProjectCompiler.to_s]
 
         confTask.SetArgumentModificationAction() do |args|
-          input
+	  input
         end
         
         @ConfigurationTasks.push confTask

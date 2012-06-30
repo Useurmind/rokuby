@@ -32,7 +32,20 @@ end
 gemTask = Gem::PackageTask.new($rokubySpec) do |pkg|
     pkg.need_zip = true
 	pkg.need_tar = true
- end
+end
+ 
+desc "Build and install the gem"
+task :install => [:gem] do
+    files = FileList.new("pkg/*.gem")
+    if(files.length == 0)
+      raise "Could not install gem, there does not seem to be an .gem file in the pkg directory."
+    end
+    if(files.length > 1)
+      raise "There are multiple versions of the gem in the pkg directory, install manually."
+    end
+    
+    system("sudo gem install " + files[0])
+end
  
 desc "Create the documentation with Yard"
 task :doc => [:yard, :copyDocImages]

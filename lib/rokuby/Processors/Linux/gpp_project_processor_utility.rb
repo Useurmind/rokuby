@@ -8,7 +8,6 @@ module Rokuby
       @gppProjectDescription = VsProjectDescription.new()
       @gppProjectConfigurations = []
       @gppProjects = []
-      @passthroughDefines = []
       
       _RegisterInputTypes()
     end
@@ -21,7 +20,6 @@ module Rokuby
       @knownInputClasses.push(Rokuby::GppProjectDescription)
       @knownInputClasses.push(Rokuby::GppProjectConfiguration)
       @knownInputClasses.push(Rokuby::GppProject)
-      @knownInputClasses.push(Rokuby::PassthroughDefines)
     end
 
     # Sort the processor inputs by their class type.
@@ -39,8 +37,6 @@ module Rokuby
           @gppProjectConfigurations.push(input)
         elsif(input.is_a?(Rokuby::GppProject))
           @gppProjects.push(input)
-        elsif(input.is_a?(Rokuby::PassthroughDefines))
-          @passthroughDefines.push(input)
         end
       end
     end
@@ -61,7 +57,6 @@ module Rokuby
       @outputs.push(@gppProjectDescription)
       @outputs.concat(@gppProjectConfigurations)
       @outputs.concat(@gppProjects)
-      @outputs.concat(@passthroughDefines)
     end
   end
 end

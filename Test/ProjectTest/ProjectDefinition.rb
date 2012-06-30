@@ -1,95 +1,109 @@
-# define the contents of the project
-ProjDescr "TestProject", {
+#########################################################################################################
+# General Information Units
+
+projDescr "TestProject", {
   name: "TestProject",
   version: "0.1",
   binaryName: "TestProjectBinary",
   binaryType: :Application,
-  projPath: ProjPath("."),
-  compPath: ProjPath("bin"),
-  buildPath: ProjPath("build")
+  projPath: projPath("."),
+  compPath: projPath("bin"),
+  buildPath: projPath("build")
 }
 
-SrcSpec "TestProjectSource", {
-  srcSpec: FileSpec({
+srcSpec "TestProjectSource", {
+  srcSpec: fileSpec({
     inPats: [".*\.cpp$"],
-    sPaths: [ProjPath("src")]
+    sPaths: [projPath("src")]
   }),
-  inclSpec: FileSpec({
+  inclSpec: fileSpec({
     inPats: [".*\.hpp$"],
-    sPaths: [ProjPath("include")]
+    sPaths: [projPath("include")]
   })
 }
 
-FileSpec "TestProjectVsResource", :inPats => [".*\.rc$"],
-                                  :sPaths => [ProjPath("resource")]
+fileSpec "TestProjectVsResource", :inPats => [".*\.rc$"],
+                                  :sPaths => [projPath("resource")]
 
-lib1Path = [ProjPath("libs/lib1")]
+lib1Path = [projPath("libs/lib1")]
 
-LibSpec "lib1_win32_debug", {
+libSpec "lib1_win32_debug", {
   name: "lib1",
   plats: [PLATFORM_WIN_X86_DEBUG],
-  loc: LibLoc({
-    libSpec: FileSpec({ inPats: ["lib1_win32_debug.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPats: ["lib1_win32_debug.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
+  loc: libLoc({
+    libSpec: fileSpec({ inPats: ["lib1_win32_debug.lib"], sPaths: lib1Path  }),
+    linkSpec: fileSpec({ inPats: ["lib1_win32_debug.dll"], sPaths: lib1Path }),
+    inclSpec: fileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
-LibSpec "lib1_win32_release", {
+libSpec "lib1_win32_release", {
   name: "lib1",
   plats: [PLATFORM_WIN_X86_RELEASE],
-  loc: LibLoc({
-    libSpec: FileSpec({ inPats: ["lib1_win32_release.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPats: ["lib1_win32_release.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
+  loc: libLoc({
+    libSpec: fileSpec({ inPats: ["lib1_win32_release.lib"], sPaths: lib1Path  }),
+    linkSpec: fileSpec({ inPats: ["lib1_win32_release.dll"], sPaths: lib1Path }),
+    inclSpec: fileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
-LibSpec "lib1_x64_debug", {
+libSpec "lib1_x64_debug", {
   name: "lib1",
   plats: [PLATFORM_WIN_X64_DEBUG],
-  loc: LibLoc({
-    libSpec: FileSpec({ inPats: ["lib1_x64_debug.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPats: ["lib1_x64_debug.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
+  loc: libLoc({
+    libSpec: fileSpec({ inPats: ["lib1_x64_debug.lib"], sPaths: lib1Path  }),
+    linkSpec: fileSpec({ inPats: ["lib1_x64_debug.dll"], sPaths: lib1Path }),
+    inclSpec: fileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
-LibSpec "lib1_x64_release", {
+libSpec "lib1_x64_release", {
   name: "lib1",
   plats: [PLATFORM_WIN_X64_RELEASE],
-  loc: LibLoc({
-    libSpec: FileSpec({ inPats: ["lib1_x64_release.lib"], sPaths: lib1Path  }),
-    linkSpec: FileSpec({ inPats: ["lib1_x64_release.dll"], sPaths: lib1Path }),
-    inclSpec: FileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
+  loc: libLoc({
+    libSpec: fileSpec({ inPats: ["lib1_x64_release.lib"], sPaths: lib1Path  }),
+    linkSpec: fileSpec({ inPats: ["lib1_x64_release.dll"], sPaths: lib1Path }),
+    inclSpec: fileSpec({ inPats: [".*\.hpp$"], sPaths: lib1Path })
   })
 }
 
-ProjSpec "TestProject", {
-  srcSpecs: [SrcSpec("TestProjectSource")],
-  libSpecs: [LibSpec("lib1_win32_debug"), LibSpec("lib1_win32_release"), LibSpec("lib1_x64_debug"), LibSpec("lib1_x64_release")]
+projSpec "TestProject", {
+  srcSpecs: [srcSpec("TestProjectSource")],
+  libSpecs: [libSpec("lib1_win32_debug"), libSpec("lib1_win32_release"), libSpec("lib1_x64_debug"), libSpec("lib1_x64_release")]
 }
 
-VsProjSpec "TestProject", :resSpec => FileSpec("TestProjectVsResource")
+generalInputs = [projDescr("TestProject"), projSpec("TestProject")] + defaultProjectConfigurations()
 
-VsSlnDescr "TestProject", :name => "TestSolution"
+####################################################################################################
+# Visual Studio Information Units
 
-generalInputs = [ProjDescr("TestProject"), ProjSpec("TestProject")] + defaultProjectConfigurations()
+vsProjSpec "TestProject", :resSpec => fileSpec("TestProjectVsResource")
 
-vsInputs = DefaultVsProjectConfigurations()
+vsSlnDescr "TestProject", :name => "TestSolution"
 
-#define the processing chain for the project
+vsInputs = [vsProjSpec("TestProject"), ] + defaultVsProjectConfigurations()
 
-DefineProc RakeBuilder::ProjectFinder, "ProjectFinderProcessor"
-DefineProc RakeBuilder::VsProjectBuilder, "VisualStudioProjectBuilder"
-DefineProc RakeBuilder::VsSolutionBuilder, "VisualStudioSolutionBuilder", :procIns => [VsSlnDescr("TestProject")]
+####################################################################################################
+# GPP Information Units
 
-DefineChain RakeBuilder::ProcessChain, "SolutionChain"
-Chain "SolutionChain", :in, "VisualStudioProjectBuilder", "VisualStudioSolutionBuilder", :out
-Chain "SolutionChain", :in, "ProjectFinderProcessor", "VisualStudioProjectBuilder", :out
+gppProjDescr "TestProject"
 
-desc "Build the visual studio solution"
-Chain "SolutionChain", :procIns => generalInputs + vsInputs do |task|
-  puts "After executing #{task}"
-  puts "Outputs are: #{task.Outputs}"
-end
+gppInputs = [gppProjDescr("TestProject")] + defaultGppProjectConfigurations()
+
+####################################################################################################
+# Visual Studio Process Chain
+
+vsProjBuild "VisualStudioProjectBuilder", :ins => generalInputs + vsInputs
+vsSlnBuild "VisualStudioSolutionBuilder", :ins => [vsSlnDescr("TestProject")]
+
+chain "SolutionChain"
+chain "SolutionChain", "VisualStudioProjectBuilder", "VisualStudioSolutionBuilder"
+
+desc "Build VS Solution"
+vsSlnBuild "VisualStudioSolutionBuilder"
+
+####################################################################################################
+# GPP Process Chain
+
+desc "Build the proiject with GPP"
+gppProjBuild "GppProjectBuilder", :ins => generalInputs + gppInputs

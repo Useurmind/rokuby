@@ -2,12 +2,19 @@ module Rokuby
   # This class is able to cache the outputs of the different processors to
   # improve the speed of project building.
   class ProcessCache
+    include GeneralUtility
+    
     attr_accessor :CacheFilePath
     
     def initialize(cacheFilePath)
       @CacheFilePath = cacheFilePath
       
       @CacheObject = nil
+    end
+    
+    def initialize_copy(original)
+      @CacheFilePath = original.CacheFilePath
+      @CacheObject = original.CacheObject
     end
     
     def exist?
