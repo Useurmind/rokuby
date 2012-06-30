@@ -1,0 +1,41 @@
+require 'rubygems'
+require 'rubygems/package_task'
+require 'yard'
+require 'yard/rake/yardoc_task.rb'
+
+require_relative "Rokuby.gemspec"
+
+source_files = ['lib/rokuby/**/*.rb']
+target_doc_dir = "doc"
+source_doc_dir = "doc_base"
+target_image_dir = target_doc_dir + "/images"
+
+doc_files = [source_doc_dir + "/**/*.md"]
+doc_images = [source_doc_dir + "/images/**/*.svg"]
+
+YARD::Rake::YardocTask.new do |t|
+  t.files   = source_files + ["-"] + doc_files
+  t.options = []
+end
+
+directory target_image_dir
+
+FileList.new(doc_images).each() do |sourcePath|
+	targetPath = sourcePath.sub(source_doc_dir, target_doc_dir)
+	file targetPath => [sourcePath, target_image_dir] do
+		cp(sourcePath, targetPath)
+	end
+	
+	task :copyDocImages => [targetPath]
+end
+
+gemTask = Gem::PackageTask.new($rokubySpec) do |pkg|
+    pkg.need_zip = true
+	pkg.need_tar = true
+ end
+ 
+desc "Create the documentation with Yard"
+task :doc => [:yard, :copyDocImages]
+
+desc "Create documentation and gem"
+task :default => [:doc, :gem]

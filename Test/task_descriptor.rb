@@ -1,4 +1,4 @@
-module RakeBuilder
+module Rokuby
   # This class prints task information on construction.
   class TaskDescriptor
     def initialize(task)
