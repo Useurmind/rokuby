@@ -1,6 +1,10 @@
 module Rokuby
+  
   class GppProjectDescription < InformationUnit
+    attr_accessor :Defines 
+    
     def initialize(valueMap=nil)
+      @Defines = []
       
       super(valueMap)
       Extend(valueMap, false)
@@ -9,7 +13,11 @@ module Rokuby
     def initialize_copy(original)
       super(original)
       
-      
+      @Defines = Clone(original.Defines)
+    end
+    
+    def GatherDefines
+      return @Defines
     end
     
     def Extend(valueMap, callParent=true)

@@ -15,7 +15,7 @@ module Rokuby
     attr_accessor :BasePath
     attr_accessor :RelativePath
     
-    # Is this path an absolute path
+    # @return [true,false] Is this path an absolute path
     def absolute?
       absolute = false
       if(@BasePath && !@RelativePath)
@@ -27,16 +27,17 @@ module Rokuby
       return @Absolute || absolute
     end
     
+    # @return [true, false] Does the file to which this path points exist.
     def exist?
       return File.exist?(AbsolutePath())
     end
     
-    # Does this path represent an existing file.
+    # @return [true, false] Does this path represent an existing file.
     def file?
       return File.file?(AbsolutePath())
     end
     
-    # Does this path represent the path to a file (not necessarily existing).
+    # @return [true, false] Does this path represent the path to a file (not necessarily existing).
     def filePath?
       isFilePath = false
       endingParts = AbsolutePath().split(".")
@@ -47,32 +48,30 @@ module Rokuby
       return isFilePath
     end
     
-    # Does this path represent an existing directory.
+    # @return [true, false] Does this path represent an existing directory.
     def directory?
       return File.directory?(AbsolutePath())
     end
     
-    # Is this an empty directory empty
+    # @return [true, false] Is this an empty directory empty
     def EmptyDirectory?
       return directory?() && Dir.entries(AbsolutePath()).length == 2  # only . and .. are entries of the directory
     end
     
-    # Returns a path that represents the path saved in this project path.
+    # @return [String] Returns a path that represents the path saved in this project path.
     def AbsolutePath      
       return JoinPaths([@BasePath, @RelativePath])
     end
     
-    # Return the relative directory path contained in this project path.
-    # Removes file name if present.
+    # @return [String] The relative directory path contained in this project path, removes file name if present. 
     def RelativeDirectory
       if(directory?() or !filePath?())
         return @RelativePath
       end
-      return JoinPaths(@RelativePath.split("/")[0..-2])      
+      return JoinPaths(@RelativePath.split("/")[0..-2])      # @todo This does not work if the relative path is an absolute linux path
     end
     
-    # Return the absolute directory path contained in this project path.
-    # Removes file name if present.
+    # @return [String] The absolute directory path contained in this project path, removes file name if present.
     def AbsoluteDirectory
       if(directory?() or !filePath?())
         return AbsolutePath()
@@ -80,6 +79,7 @@ module Rokuby
       return JoinPaths(PathParts()[0..-2])      
     end
     
+    # @return [String, nil] Returns the extension of the file to which this path points or nil.
     def FileExt
       fileName = FileName()
       if(fileName)
@@ -91,7 +91,8 @@ module Rokuby
       return nil
     end
     
-    # Returns the file name contained in this project path or nil.
+    # @param [true, false] keepExt True if the extension should be kept, else the extension is removed.
+    # @return [String] The file name contained in this project path or nil.
     def FileName(keepExt=true)      
       if(filePath?())
         pathParts = PathParts()
@@ -107,23 +108,26 @@ module Rokuby
       return nil
     end
     
-    # Return a project path with the directory path contained in this project path.
+    # @return [ProjectPath] The directory path contained in this project path.
     def DirectoryPath
       return ProjectPath.new({base: @BasePath, relative: RelativeDirectory()})
     end
     
+    # @return [Array<String>] The parts of the complete project path.
     def PathParts
       return AbsolutePath().split("/")
     end
+    
+    # @return [Array<String>] The parts of the relative part of the project path.
     def RelativePathParts
       return RelativePath().split("/")
     end
     
     # Initialize a path.
     # If only one string is give this is taken as the relative path and the base path is estimated.
-    # [base] The base path of this path (estimated from the current directory if not given).
-    # [relative] The relative part of the path.
-    # [absolute] Is the input path default (normally estimated automatically, for cases where this is not possible).
+    # @param [String] base The base path of this path (estimated from the current directory if not given).
+    # @param [String] relative The relative part of the path.
+    # @param [String] absolute Is the input path default (normally estimated automatically, for cases where this is not possible).
     def initialize(paramBag)
       super()
       
@@ -160,7 +164,9 @@ module Rokuby
       @RelativePath = Clone(original.RelativePath)
     end
     
-    # Join the relative parts of this paths with the relative parts of some other paths.
+    # Join the relative parts of this path with the relative parts of some other paths.
+    # @param [Array<ProjectPath>, ProjectPath] paths The paths which should be joined with this path.
+    # @return [ProjectPath] A new path that contains the joined paths.
     def Join(paths)
       pathsToJoin = [@RelativePath]
       if(paths.respond_to?(:length))
@@ -206,6 +212,8 @@ module Rokuby
     end
     
     # Compute a path from this path that is relative to the given path.
+    # @param [ProjectPath] path The path to which this project path should be made relative.
+    # @return [ProjectPath] A new project path which is the same as this but relative to the input path.
     def MakeRelativeTo(path)
       if(path == nil)
         return self
@@ -215,6 +223,9 @@ module Rokuby
       
       originalPathParts = PathParts()
       pathParts = path.PathParts()
+      
+      puts "original parts: #{originalPathParts}"
+      puts "input parts: #{pathParts}"
       
       #newPath = ProjectPath.new({base: path.AbsolutePath()})
       
@@ -227,6 +238,8 @@ module Rokuby
         end
         commonPartsNumber += 1
       end
+      
+      puts "Common parts: #{commonPartsNumber}"
       
       # the paths are basically the same, so we return the path "."
       if(commonPartsNumber == originalPathParts.length && commonPartsNumber == pathParts.length)

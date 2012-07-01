@@ -24,6 +24,7 @@ module Rokuby
       @ProjectLibraryGatherer = defineProc GppProjectLibraryGatherer, "#{@Name}_ProjLibs"
       @ProjectCreator = defineProc GppProjectCreator, "#{@Name}_ProjCreator"      
       
+      _ConnectProcessors()
     end
     
     def _ConnectProcessors
@@ -49,6 +50,7 @@ module Rokuby
         confTask = Rake::ProxyTask.define_task "#{@Name}_#{input.Platform.BinaryExtension()}" => [@ProjectCompiler.to_s]
 
         confTask.SetArgumentModificationAction() do |args|
+	  confTask.set_arg_names([:gppConf])
 	  input
         end
         

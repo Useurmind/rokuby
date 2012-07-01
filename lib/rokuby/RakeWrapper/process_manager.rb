@@ -39,14 +39,22 @@ module Rokuby
       return newProcessor
     end
     
-    # The args for the processor include the following:
-    # For examples how this can be formatted see the unit tests (-> Test_ProcessManager).
-    # If procClass is nil only existing processors can be retrieved.
-    # - [name]: The name of the processor (required).
-    # - [procIns]: An array or list of input args (optional)
-    # - [valueMap]: A map of values that should be used to configure the processor with extend (optional).
-    # - [procArgs]: A list of input arguments for the task (optional).
-    # - [procDeps]: An array of dependencies for the task (optional)
+    # Define or retrieve a new processor.
+    # @example Processor definition
+    #   DefineProcessor ProcessorClass1, :MyProcessor1, :procIns => [InformationUni1, InformationUnit2]
+    #   DefineProcessor ProcessorClass2, :MyProcessor2, :procArgs => [:arg1, :arg2], :procDeps => [:MyProcessor1], :proc2Attribute => proc2AttributeValue do |proc, arg1, arg2|
+    #     # this is done when processor 2 finishes
+    #     # proc is the instance of :MyProcessor2 and arg1, arg2 are the values for the first and second argument, respectively
+    #   end
+    # @param [Class] procClass The class for the processor. If nil only existing processors can be retrieved
+    # @param [Block] block A block of code that will be executed after the processor has run.
+    # @param args A list of parameters (can include everything defined below)
+    # @param [String, Symbol] name The name of the processor (required).
+    # @param [Array<InformationUnit>] procIns A list of information units that should be inputted to the processor(optional)
+    # @param [Array<String, Symbol>] procDeps The task, processor names/paths that should become dependencies for the task (optional)
+    # @param [Array<Symbol, String>] procArgs A list of names that should define input arguments for the task (optional).
+    # @param [Hash{Symbol=>}] valueMap A map of values that should be used to configure the processor with extend (optional).
+    # @return [Processor] The processor that was created.
     def DefineProcessor(procClass, *args, &block)
       #puts "DEfineProcessor: #{args}"
       name, args = _GetProcessorName(*args)
@@ -98,6 +106,12 @@ module Rokuby
     # Define or change a new/existing process chain.
     # The arguments for the process chain are the names of the processors that should be
     # concated.
+    # @example Processor chain example
+    #   # :Processor1 will deliver its output to :Processor2 which gives it output to :Processor3
+    #   DefineProcessChain ProcessChain, :MyProcessChain, :Processor1, :Processor2, :Processor3
+    # @param [Class] chainClass The class for the process chain, if nil only existing chains can be retrieved.
+    # @param [Array<Symbol, String>] args A list of processor names that should be concatenated, see example.
+    # @param [Block] block A block that is executed when the process chain has finished execution.
     def DefineProcessChain(chainClass, *args, &block)
       #puts "in DefineProcessChain: #{chainClass}, #{args}"
       name, args = _GetProcessorName(*args)

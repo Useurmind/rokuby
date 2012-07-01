@@ -1,4 +1,4 @@
-module RakeBuilder
+module Rokuby
   module UnitTests
   
     def TestPred(v1, v2, message)

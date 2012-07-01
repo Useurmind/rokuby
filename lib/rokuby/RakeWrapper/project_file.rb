@@ -14,19 +14,26 @@ module Rokuby
     include ProcessManager
     #include DSL
     
-    # Project path to the project file.
-    # The relativ path component of this value must be relative to the topmost project files folder.
+    # @return [ProjectPath] The path to the project file, relative to the topmost project file folder.
     attr_reader :Path
     
-    # A rake filelist of patterns that should be included in the clean task.
+    # @return [Rake::FileList] A list of patterns that should be included in the clean task.
     attr_reader :CleanList
     
-    # A rake filelist of patterns that should be included in the clobber task.
+    # @return [Rake::FileList] A list of patterns that should be included in the clobber task.
     attr_reader :ClobberList
     
+    # Set the path of this project file.
+    # @param [ProjectPath] value The new value for the project path (not required to have a specific relative part).
     def Path=(value)
+      puts "Setting path of project file to #{[value]}, absolute: #{value.absolute?()}"
+      
+      puts "Making path value relative to topmost project file #{[Rake.application.TopmostProjectFile]}"
+      
       @Path = value.MakeRelativeTo(Rake.application.TopmostProjectFile.DirectoryPath().MakeAbsolute())
       @ProcessCache = ProcessCache.new(@Path.DirectoryPath + ProjectPath.new(@Path.FileName(false) + ".cache"))
+      
+      puts "Result of conversion: #{[@Path]}"
       
       
       @Namespace = ProjectNamespace.new()

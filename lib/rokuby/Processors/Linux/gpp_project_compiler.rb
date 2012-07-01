@@ -16,6 +16,8 @@ module Rokuby
     def _ProcessInputs(taskArgs=nil)
       _SortInputs()
       
+      puts "tast arg in proj compiler #{taskArgs}"
+      
       if(taskArgs && taskArgs.gppConf.is_a?(GppProjectConfiguration))
         gppConf = _GetGppProjectConf(taskArgs.gppConf.Platform)
         puts "Compiling #{[gppConf]}"
@@ -118,6 +120,8 @@ module Rokuby
     end
 
     def _GatherIncludePaths(gppConf)
+      puts "Converting include paths #{gppConf.IncludePaths}"
+      puts "Making the paths relative to #{@ProjectFile.Path}"
       return (gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@ProjectFile.Path).RelativePath }).uniq
     end
 

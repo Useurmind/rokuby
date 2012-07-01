@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "unit_tests")
 require File.join(File.dirname(__FILE__), "task_descriptor")
 
-include RakeBuilder
+include Rokuby
 include UnitTests
 
 class ProcessManagerTest
