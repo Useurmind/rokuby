@@ -64,13 +64,23 @@ Defining instances of both is made available trough a build in DSL which resembl
 DSL. Nevertheless, there are important differences which are necessary to include the new features
 of the build tool.
 
-### The process of finding files
+### From Specification to Instance: The process of finding files
 
 Finding files is one of the most important tasks of a build system because it is made to process
 files into other files. Therefore, this process must be very flexible.
 
-Finding files works by specifying the file location in a file specification and handing it to
-a file finder processor which produces a file instance that represents the files that were found.
+To find anything in Rokuby one has to first setup a *specification* for it. Such a specification
+can be a combination of several things:
+
+- Include patterns: Names of files and or regular expressions for files that should be included into the instance.
+- Exclude patterns: Names of files and or regular expressions for files that should be excluded from the instance (stronger than include patterns).
+- Search paths: The paths in which should be searched (recursively).
+
+Once you have created such a specification it is just a matter of putting it into a proper processor which will
+create an instance with the files that were found (for simple files a [FileFinder](Rokuby/FileFinder.html)).
+
+Remember that there are more complex cases than just finding a file. There are special processors for finding certain
+types of file sets (e.g. libraries or even software project files).
 
 Lets see it in a simple example:
 
@@ -99,8 +109,14 @@ When you now save this in a project file ProjectDefinition.rb and execute `rokub
 where this project definition is located rokuby will try to find the file and print the set of files that
 was found (even if no files were found, in which case the file set will almost be empty).
 
-### Building a more complex Project
+### A Project Reference: The Test Project
 
+In the Rokuby repository you can find the test project which is used to test the features of Rokuby when changes
+are applied to the source code. It is documented and a very good example to get going with Rokuby.
+
+Go and have a look at its [ProjectDefinition](file.ProjectDefinition.html) file.
+
+The project is hopefully not too complex, but complex enough to show the important features of a Rokuby build process.
 
 
 Project Files and their Namespaces
@@ -108,7 +124,7 @@ Project Files and their Namespaces
 
 ### Project Files
 
-Learn more under [Project Files](file.project_files.html Project Files)
+Learn more under [Project Files](file.project_files.html)
 
 Understanding how project files are loaded and processed is important to be able to effectively work with
 Rokuby. Executing "rokuby" in a folder will load and process the first project file that is found in that directory.
@@ -151,7 +167,7 @@ Making a task `task1` in the main project file depending on a task `task1` in th
 
 	task :task1 => [importPath + ":task1"]
 
-This will lead to the execution of +task1+ in the imported project file before the +task1+ in the main project file.
+This will lead to the execution of `task1` in the imported project file before the `task1` in the main project file.
 (This is by the way one of the only differences between tasks in Rokuby and Rake).
 
 This is also the way to address tasks from the command line. Only giving a name of a task to the command line tool will
@@ -160,7 +176,7 @@ If you want to address a task in a specific project file you need to address it 
 a colon and the name of the task:
 If you for example want to execute a task `subtask` in the project file "./subdir/ProjectDefinition.rb" you would type:
 	
-	`rakebuilder ./subdir/ProjectDefinition.rb:subtask`
+	rakebuilder ./subdir/ProjectDefinition.rb:subtask
 
 Project Paths
 -------------

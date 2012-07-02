@@ -10,7 +10,7 @@ target_doc_dir = "doc"
 source_doc_dir = "doc_base"
 target_image_dir = target_doc_dir + "/images"
 
-doc_files = [source_doc_dir + "/**/*.md"]
+doc_files = [source_doc_dir + "/**/*.md", "Test/ProjectTest/ProjectDefinition.rb"]
 doc_images = [source_doc_dir + "/images/**/*.svg"]
 
 YARD::Rake::YardocTask.new do |t|
