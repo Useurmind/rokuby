@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "unit_tests")
 require File.join(File.dirname(__FILE__), "task_descriptor")
 
-include RakeBuilder
+include Rokuby
 include UnitTests
 
 desc "Execute some tests that check the ProjectPath class for errors"
@@ -23,7 +23,11 @@ task :TestProjectPath => [
                           :Test_MakeRelative_WorksForPartOfPath,
                           :Test_MakeRelative_WorksForDifferentRelativePaths,
                           :Test_MakeRelative_WorksForPathsWithLocalPaths,
-                          :Test_MakeRelative_WorksForPathsWithParentPaths
+                          :Test_MakeRelative_WorksForPathsWithParentPaths,
+                          :Test_MakeRelative_WorksForAbsoluteLinuxPath,
+                          
+                          :Test_RelativeDirectory_WorksForAbsoluteWindowsPath,
+                          :Test_RelativeDirectory_WorksForAbsoluteLinuxPath
                           ] do |task|
   taskDescriptor task
 end
@@ -213,4 +217,52 @@ task :Test_MakeRelative_WorksForPathsWithParentPaths do
   TestEqual(relativatedPath.AbsolutePath(), clearPath)
   TestEqual(relativatedPath.BasePath, clearRelativeTarget)
   TestEqual(relativatedPath.RelativePath, "../../some/path/path")
+end
+
+task :Test_MakeRelative_WorksForAbsoluteLinuxPath do
+  puts "Test_MakeRelative_WorksForAbsoluteLinuxPath"
+  
+  relativeTarget = "/home/user/arbitrary/path"
+  clearRelativeTarget = "/home/user/arbitrary/path"
+  path = "/home/user/some/other/arbitrary/path"
+  clearPath = "/home/user/some/other/arbitrary/path"
+  
+  relativeTargetPath = ProjectPath.new(relativeTarget)
+  pathPath = ProjectPath.new(path)
+  
+  relativatedPath = pathPath.MakeRelativeTo(relativeTargetPath)
+  
+  puts "Relativated path: #{relativatedPath.to_s}"
+  
+  TestEqual(relativatedPath.AbsolutePath(), clearPath)
+  TestEqual(relativatedPath.BasePath, clearRelativeTarget)
+  TestEqual(relativatedPath.RelativePath, "../../some/other/arbitrary/path")
+end
+
+task :Test_RelativeDirectory_WorksForAbsoluteWindowsPath do
+  puts "Test_RelativeDirectory_WorksForAbsoluteWindowsPath"
+  
+  path = "C:/arbitrary/path/to/some/place/file.txt"
+  expectedDirectory = "C:/arbitrary/path/to/some/place"
+  
+  pathPath = ProjectPath.new(path)
+  
+  relativeDirectory = pathPath.RelativeDirectory()
+  
+  TestEqual(relativeDirectory, expectedDirectory)
+end
+
+task :Test_RelativeDirectory_WorksForAbsoluteLinuxPath do
+  puts "Test_RelativeDirectory_WorksForAbsoluteLinuxPath"
+  
+  puts "Test_RelativeDirectory_WorksForAbsoluteWindowsPath"
+  
+  path = "/home/user/arbitrary/path/to/some/place/file.txt"
+  expectedDirectory = "/home/user/arbitrary/path/to/some/place"
+  
+  pathPath = ProjectPath.new(path)
+  
+  relativeDirectory = pathPath.RelativeDirectory()
+  
+  TestEqual(relativeDirectory, expectedDirectory)
 end

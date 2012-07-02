@@ -68,7 +68,8 @@ module Rokuby
       if(directory?() or !filePath?())
         return @RelativePath
       end
-      return JoinPaths(@RelativePath.split("/")[0..-2])      # @todo This does not work if the relative path is an absolute linux path
+      
+      return _SplitAndJoinParts(@RelativePath, 2)
     end
     
     # @return [String] The absolute directory path contained in this project path, removes file name if present.
@@ -76,7 +77,8 @@ module Rokuby
       if(directory?() or !filePath?())
         return AbsolutePath()
       end
-      return JoinPaths(PathParts()[0..-2])      
+      
+      return _SplitAndJoinParts(AbsolutePath(), 2)
     end
     
     # @return [String, nil] Returns the extension of the file to which this path points or nil.
@@ -196,8 +198,6 @@ module Rokuby
           next
         end
         
-        
-        
         copy = CreateCopy()
         
         #puts "Copy is #{copy}"
@@ -272,16 +272,13 @@ module Rokuby
     def Up()
       parts = PathParts()
       
-      if(@RelativePath)
-        relativeParts = @RelativePath.split("/")
-        relativeParts.pop()
+      if(@RelativePath)        
         copy = CreateCopy()
-        copy.RelativePath = JoinPaths(relativeParts)
+        copy.RelativePath = _SplitAndJoinParts(@RelativePath, 1)
         return copy
       else
-        parts = PathParts()
-        parts.pop() 
-        copy = ExtendedPath.new({absolute: JoinPaths(parts)})
+        newPath = _SplitAndJoinParts(AbsolutePath(), 1)
+        copy = ProjectPath.new({absolute: newPath})
         return copy
       end
     end
@@ -308,6 +305,23 @@ module Rokuby
     # Create a copy of this path where all parts are absolute.
     def MakeAbsolute()
       return ProjectPath.new(AbsolutePath())
+    end
+    
+    # Split a path and join a range of parts of it again.
+    # @param [String] path The path to split.
+    # @param [Fixnum] pop The number of parts that should be popped from the end of the part list.
+    # @return [String] The cut path.
+    def _SplitAndJoinParts(path, pop)      
+      pathParts = path.split("/")[0..-pop]
+      
+      result = JoinPaths(pathParts)
+      
+      # we face an absolute linux part
+      if(path.start_with?("/"))
+        result = "/" + result
+      end
+      
+      return result
     end
   end
 end

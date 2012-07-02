@@ -122,7 +122,7 @@ module Rokuby
     def _GatherIncludePaths(gppConf)
       puts "Converting include paths #{gppConf.IncludePaths}"
       puts "Making the paths relative to #{@ProjectFile.Path}"
-      return (gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@ProjectFile.Path).RelativePath }).uniq
+      return (gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@ProjectFile.Path.DirectoryPath()).RelativePath }).uniq
     end
 
     def _GatherDefines(gppConf)

@@ -44,7 +44,11 @@ task :install => [:gem] do
       raise "There are multiple versions of the gem in the pkg directory, install manually."
     end
     
-    system("sudo gem install " + files[0])
+	if(RUBY_PLATFORM == "linux")
+		system("sudo gem install " + files[0])
+	else
+		system("gem install " + files[0])
+	end
 end
  
 desc "Create the documentation with Yard"

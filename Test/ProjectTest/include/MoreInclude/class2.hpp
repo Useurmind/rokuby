@@ -5,6 +5,6 @@ class Class2 {
     public:
         Class2();
         ~Class2();
-}
+};
 
 #endif
