@@ -6,13 +6,13 @@ module Rokuby
   # use them in directories that are not related to the current directory.
   # It also allows to choose between absolute and relative paths at any time.
   # All functions working on the path return a new copy that represents the manipulated path.
-  # [BasePath] The base path from where the relative path is used to estimate the absolute path.
-  # [RelativePath] The path that is used on top of the base path to estimate the absolute path.
   class ProjectPath
     include PathUtility
     include GeneralUtility
     
+    # @return [String] The base path from where the relative path is used to estimate the absolute path.
     attr_accessor :BasePath
+    # @return [String] The path that is used on top of the base path to estimate the absolute path.
     attr_accessor :RelativePath
     
     # @return [true,false] Is this path an absolute path
@@ -127,9 +127,15 @@ module Rokuby
     
     # Initialize a path.
     # If only one string is give this is taken as the relative path and the base path is estimated.
-    # @param [String] base The base path of this path (estimated from the current directory if not given).
-    # @param [String] relative The relative part of the path.
-    # @param [String] absolute Is the input path default (normally estimated automatically, for cases where this is not possible).
+    # @example Initialize path with BasePath being the current working directory and RelativePath being `myDirectory`.
+    #   ProjectPath.new("myDirectory")
+    # @example Initialize a path with explicit base and relative part.
+    #   ProjectPath.new({base: "C:/my/base/path", relative: "the/relative/path/part"})
+    # @param [String, Hash] paramBag This can be a simple string for the relative part (automatic base computation),
+    #   or a hash with the different parts of the path, or the absolute path. The keys for the hash are defined below.
+    # @option paramBag [String] :base The base path of this path (estimated from the current directory if not given).
+    # @option paramBag [String] :relative The relative part of the path.
+    # @option paramBag [String] :absolute Is the input path default (normally estimated automatically, for cases where this is not possible).
     def initialize(paramBag)
       super()
       
@@ -156,11 +162,13 @@ module Rokuby
       @RelativePath = relative
     end
     
+    # Create a copy of this path with the same base and relative part.
     def CreateCopy()
       copy = ProjectPath.new({base: @BasePath, relative: @RelativePath})
       return copy
     end
     
+    # Copy constructor which initializes the copy with the same base and relative part.
     def initialize_copy(original)
       @BasePath = Clone(original.BasePath)
       @RelativePath = Clone(original.RelativePath)
@@ -186,6 +194,7 @@ module Rokuby
     end
     
     # Create an array of paths that contain the paths to folders and files under this path.
+    # @return [Array<ProjectPath>] An array containing the subpaths of this path.
     def SubPaths()
       #puts "Searching subpaths in #{to_s()}"
       entries = Dir.entries(AbsolutePath())
@@ -264,11 +273,13 @@ module Rokuby
       })
     end
     
+    # (see #Join)
     def +(paths)
       return Join(paths)
     end
     
     # Move up in the directory hierarchy one step.
+    # @return [ProjectPath] A new path which represents the parent directory of the old path.
     def Up()
       parts = PathParts()
       
@@ -283,6 +294,10 @@ module Rokuby
       end
     end
     
+    # Is this path equal to another path.
+    # Equallity means same class and same absolute path.
+    # @param [ProjectPath] path The other project path which should be tested on equality.
+    # @return [true, false] True if the paths are equal.
     def ==(path)
       if(!path || path.class != ProjectPath)
         return false
@@ -291,21 +306,28 @@ module Rokuby
       return AbsolutePath() == path.AbsolutePath()
     end   
     
-    # Same as to_s
+    # (see #to_s)
     def str
       return to_s()
     end
     
     # This stringifyer is for a human readable string with indication of the relative path.
     # Don't use as string version for functions. Use AbsolutePath, RelativePath, BasePath, etc. instead.
+    # @example Path with base part "/base/part" and relative part "relative/part" will become.
+    #   "/base/part|relative/part"
+    # @return [String] A human readable string representation of the absolute path.
     def to_s
       return (@BasePath || "") + "|" + (@RelativePath || "nil")
     end
     
     # Create a copy of this path where all parts are absolute.
+    # @todo Look into this and check.
+    # @return [ProjectPath] Project path with only 
     def MakeAbsolute()
       return ProjectPath.new(AbsolutePath())
     end
+
+    private
     
     # Split a path and join a range of parts of it again.
     # @param [String] path The path to split.
