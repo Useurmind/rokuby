@@ -35,6 +35,10 @@ module Rokuby
       @vsProjectUsages
     end
     
+    def PassthroughDefines
+      @passthroughDefines
+    end
+    
     def _InitProc      
       @projectInstance = nil
       @projectDescription = nil
@@ -44,6 +48,7 @@ module Rokuby
       @vsProjectConfigurations = []
       @vsProjects = []
       @vsProjectUsages = []
+      @passthroughDefines = []
       
       _RegisterInputTypes()
     end
@@ -58,6 +63,7 @@ module Rokuby
       @knownInputClasses.push(Rokuby::VsProjectInstance)
       @knownInputClasses.push(Rokuby::VsProject)
       @knownInputClasses.push(Rokuby::VsProjectUsage)
+      @knownInputClasses.push(Rokuby::PassthroughDefines)
     end
     
     # Sort the processor inputs by their class type.
@@ -79,6 +85,8 @@ module Rokuby
           @vsProjects.push(input)
         elsif(input.is_a?(Rokuby::VsProjectUsage))
           @vsProjectUsages.push(input)
+        elsif(input.is_a?(Rokuby::PassthroughDefines))
+          @passthroughDefines.push(input)
         end
       end
     end
@@ -92,6 +100,7 @@ module Rokuby
       _AddOutput(@vsProjectConfigurations)
       _AddOutput(@vsProjects)
       _AddOutput(@vsProjectUsages)
+      _AddOutput(@passthroughDefines)
     end
     
     def _AddOutput(output)

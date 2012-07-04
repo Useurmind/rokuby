@@ -41,6 +41,7 @@ module Rokuby
 "InformationUnits/General/project",
 "InformationUnits/General/project_configuration",
 "InformationUnits/General/project_description",
+"InformationUnits/General/passthrough_defines",
 # specification IUs
 "InformationUnits/Specifications/file_specification",
 "InformationUnits/Specifications/library_location_spec",
