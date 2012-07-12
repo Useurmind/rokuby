@@ -36,6 +36,7 @@ module Rokuby
     end
     
     def LoadProjectFile(projectPath)
+      #puts "Loading project file #{projectPath}"
       projectFile = ProjectFile.new()
       projectFile.Path = projectPath
       

@@ -69,7 +69,7 @@ module Rokuby
         return @RelativePath
       end
       
-      return _SplitAndJoinParts(@RelativePath, 2)
+      return _SplitAndJoinParts(@RelativePath, 1)
     end
     
     # @return [String] The absolute directory path contained in this project path, removes file name if present.
@@ -78,7 +78,7 @@ module Rokuby
         return AbsolutePath()
       end
       
-      return _SplitAndJoinParts(AbsolutePath(), 2)
+      return _SplitAndJoinParts(AbsolutePath(), 1)
     end
     
     # @return [String, nil] Returns the extension of the file to which this path points or nil.
@@ -137,6 +137,7 @@ module Rokuby
     # @option paramBag [String] :relative The relative part of the path.
     # @option paramBag [String] :absolute Is the input path default (normally estimated automatically, for cases where this is not possible).
     def initialize(paramBag)
+      #puts "Creating path with #{paramBag}"
       super()
       
       if(paramBag.kind_of?(String))
@@ -157,6 +158,7 @@ module Rokuby
       
       @BasePath = base
       if(!base && !absolute)
+        #puts "Estimating base path from #{Dir.pwd}"
         @BasePath = FormatPath(Dir.pwd)
       end
       @RelativePath = relative
@@ -233,8 +235,8 @@ module Rokuby
       originalPathParts = PathParts()
       pathParts = path.PathParts()
       
-      puts "original parts: #{originalPathParts}"
-      puts "input parts: #{pathParts}"
+      #puts "original parts: #{originalPathParts}"
+      #puts "input parts: #{pathParts}"
       
       #newPath = ProjectPath.new({base: path.AbsolutePath()})
       
@@ -248,7 +250,7 @@ module Rokuby
         commonPartsNumber += 1
       end
       
-      puts "Common parts: #{commonPartsNumber}"
+      #puts "Common parts: #{commonPartsNumber}"
       
       # the paths are basically the same, so we return the path "."
       if(commonPartsNumber == originalPathParts.length && commonPartsNumber == pathParts.length)
@@ -281,17 +283,19 @@ module Rokuby
     # Move up in the directory hierarchy one step.
     # @return [ProjectPath] A new path which represents the parent directory of the old path.
     def Up()
-      parts = PathParts()
+      #puts "Going up in path #{self}"
       
+      copy = nil
       if(@RelativePath)        
         copy = CreateCopy()
         copy.RelativePath = _SplitAndJoinParts(@RelativePath, 1)
-        return copy
       else
         newPath = _SplitAndJoinParts(AbsolutePath(), 1)
         copy = ProjectPath.new({absolute: newPath})
-        return copy
       end
+      
+      #puts "parent path is #{copy}"
+      return copy
     end
     
     # Is this path equal to another path.
@@ -334,7 +338,7 @@ module Rokuby
     # @param [Fixnum] pop The number of parts that should be popped from the end of the part list.
     # @return [String] The cut path.
     def _SplitAndJoinParts(path, pop)      
-      pathParts = path.split("/")[0..-pop]
+      pathParts = path.split("/")[0..-(pop+1)]
       
       result = JoinPaths(pathParts)
       

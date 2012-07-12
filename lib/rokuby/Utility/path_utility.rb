@@ -18,7 +18,11 @@ module Rokuby
       if(!path || path == "")
         return nil
       end
-      return path.gsub("\\", "/").gsub("//", "/").gsub("\/.\/", "/").gsub(/^\.\//, "");
+      #puts "Formatting path #{path}"
+      return path.gsub(/\\/, "/")  # replace accidential double backslashes
+                 .gsub(/\/\//, "/")  # replace accidential double slashes
+                 .gsub(/\/\.\//, "/") # replace local folder overhead, e.g. my/path/./to/my/file
+                 .gsub(/^\.\//, ""); # replace local folder at start of path
     end
     
     def RemoveParents(path)

@@ -308,7 +308,7 @@ class Processor < Rake::ProcessorTask
     return outputsWithClass
   end
   
-  # Extend/set the attributes of the processor.
+  # Extend the attributes of the processor.
   def Extend(valueMap, executeParent=true)
     if(valueMap == nil)
       return
