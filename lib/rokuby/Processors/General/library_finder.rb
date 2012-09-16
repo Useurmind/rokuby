@@ -1,7 +1,7 @@
 module Rokuby
   
   # A class that is meant to find the different configurations of libraries on the system.
-  # Input values to this processor are LibrarySpecifications.
+  # Input values to this processor are LibrarySpecifications or LibrarySpecificationSets.
   # Outputs are the found libraries in form of Libraries.
   class LibraryFinder < Processor
     include FindFile
@@ -12,6 +12,18 @@ module Rokuby
         @UseCache = true
       end
       @knownInputClasses.push(Rokuby::LibrarySpecification)
+      @knownInputClasses.push(Rokuby::LibrarySpecificationSet)
+    end
+    
+    def _SortInputs
+      @libSpecs = []
+      @inputs.each() do |input|
+        if(input.is_a?(Rokuby::LibrarySpecification))
+          @libSpecs.push(input)
+        elsif(input.is_a?(Rokuby::LibrarySpecificationSet))
+          @libSpecs += input.Specifications
+        end
+      end
     end
     
     def _ProcessInputs(taskArgs=nil)
@@ -19,7 +31,9 @@ module Rokuby
       
       #puts "Searching libraries..."
       
-      @inputs.each() do |libSpec|
+      _SortInputs()
+      
+      @libSpecs.each() do |libSpec|
         if(!TargetedAtPlatforms(libSpec.Platforms))
           next
         end

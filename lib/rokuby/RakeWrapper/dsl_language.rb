@@ -111,6 +111,10 @@ module Rokuby
       return Rake.application.DefineInformationUnit(LibrarySpecification, *args, &block)
     end
     
+    def libSpecSet(*args, &block)
+      return Rake.application.DefineInformationUnit(LibrarySpecificationSet, *args, &block)
+    end
+    
     def projSpec(*args, &block)
       return Rake.application.DefineInformationUnit(ProjectSpecification, *args, &block)
     end

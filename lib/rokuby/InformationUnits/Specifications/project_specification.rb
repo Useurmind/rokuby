@@ -1,6 +1,6 @@
 module Rokuby
   # This class defines how the stuff needed for a project can be found.
-  # [LibrarySpecs] The specifications for the libraries that should be used.
+  # [LibrarySpecs] The specifications for the libraries that should be used (can be LibrarySpecifications and LibrarySpecificationSets).
   # [SourceSpecs] The specifications for the source units that belong to this project.
   class ProjectSpecification < InformationSpecification
     attr_accessor :LibrarySpecs

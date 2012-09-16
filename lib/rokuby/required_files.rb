@@ -46,6 +46,7 @@ module Rokuby
 "InformationUnits/Specifications/file_specification",
 "InformationUnits/Specifications/library_location_spec",
 "InformationUnits/Specifications/library_specification",
+"InformationUnits/Specifications/library_specification_set",
 "InformationUnits/Specifications/project_specification",
 "InformationUnits/Specifications/source_unit_specification",
 # instance IUs

@@ -60,6 +60,7 @@ module Rokuby
       @knownInputClasses.push(Rokuby::ProjectSpecification)
       @knownInputClasses.push(Rokuby::SourceUnitSpecification)
       @knownInputClasses.push(Rokuby::LibrarySpecification)
+      @knownInputClasses.push(Rokuby::LibrarySpecificationSet)
     end
   end
 end
