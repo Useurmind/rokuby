@@ -63,6 +63,11 @@ module Rokuby
         raise "No correct arguments for processor definition, missing name."
       end
       
+      description = get_description(name) # processors can define subtasks that could snatch the description away
+      #if(description)
+      #puts "Got description #{description} when defining task #{name}"
+      #end
+      
       processor, sourceProjectFile = _GetProcessor(procClass, name)
       
       if(processor == nil)
@@ -90,6 +95,7 @@ module Rokuby
       processor.AddDependencies(mappedTaskDeps)
       processor.enhance(nil, &block)
       processor.set_arg_names(taskArgs)
+      processor.add_description(description)
       
       processor.AddInput(inputs)
       processor.Extend(valueMap)
@@ -121,6 +127,8 @@ module Rokuby
       
       #puts "Creating process chain #{name}"
       
+      description = get_description(name) # processors can define subtasks that could snatch the description away
+      
       processChain = _GetProcessChain(chainClass, name)
       if(processChain == nil)
         return nil
@@ -132,6 +140,8 @@ module Rokuby
       
       processChain.Connect(*procNames)
       DefineProcessor(nil, name, procArgs, &block)
+      
+      processChain.add_description(description)
     end
     
     # Retrieves the processor name and the rest of the arguments

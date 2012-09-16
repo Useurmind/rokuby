@@ -94,6 +94,22 @@ module Rokuby
         ])
       end
       
+       # Returns [width, height] of terminal when detected, nil if not detected.
+        # Think of this as a simpler version of Highline's Highline::SystemExtensions.terminal_size()
+        def get_terminal_width
+          if (ENV['COLUMNS'] =~ /^\d+$/)
+            ENV['COLUMNS'].to_i
+          elsif (RUBY_PLATFORM =~ /java/ || (!STDIN.tty? && ENV['TERM'])) && command_exists?('tput')
+            `tput cols`.to_i
+          elsif STDIN.tty? && command_exists?('stty')
+            `stty size`.scan(/\d+/).map { |s| s.to_i }.reverse[0]
+          else
+            80
+          end
+        rescue
+          80
+        end
+      
       # Display the error message that caused the exception.
       def display_error_message(ex)
         $stderr.puts self.to_s()
@@ -111,11 +127,15 @@ module Rokuby
           }
           
           width = all_displayable_tasks.collect { |t| t.name_with_args.length }.max || 10
-          max_column = truncate_output? ? terminal_width - name.size - width - 7 : nil
+          max_column = truncate_output? ? terminal_width() - name.size - width - 7 : nil
           
-          @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|            
-            puts "Tasks in project file: '#{projectFile.Path().AbsolutePath()}'\n"
-            puts projectFile.GetTaskDescriptions(width, max_column)
+          @ProjectFileLoader.LoadedProjectFiles().each do |projectFile|
+              if(projectFile.HasTasks())
+                  headline = "Tasks in project file: '#{projectFile.Path().RelativePath()}'\n"
+                  puts headline
+                  puts "-" * headline.length
+                  puts projectFile.GetTaskDescriptions(width, max_column)
+              end            
           end
         else
           super

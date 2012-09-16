@@ -102,6 +102,8 @@ class Processor < Rake::ProcessorTask
     @processing = false
     @processingDone = false
     
+    #puts "Processor name is #{name()}"
+    
     _InitProc()
   end
   
@@ -130,7 +132,9 @@ class Processor < Rake::ProcessorTask
   end
   
   def AdaptName(newName)
+    puts "Adapting name of processor from #{name} to #{newName}"
     @name = newName
+    @Name = newName
   end
   
   # This can only be called after invoking the task.

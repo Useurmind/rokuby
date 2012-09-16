@@ -295,6 +295,9 @@ module Rake
     # Return the current description, clearing it in the process.
     def get_description(task)
       desc = @last_description
+      #if(desc)
+      #  puts "Getting description #{desc} for task #{task}"
+      #end
       @last_description = nil
       desc
     end

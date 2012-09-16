@@ -26,14 +26,14 @@ module Rokuby
     # Set the path of this project file.
     # @param [ProjectPath] value The new value for the project path (not required to have a specific relative part).
     def Path=(value)
-      puts "Setting path of project file to #{[value]}, absolute: #{value.absolute?()}"
+      #puts "Setting path of project file to #{[value]}, absolute: #{value.absolute?()}"
       
-      puts "Making path value relative to topmost project file #{[Rake.application.TopmostProjectFile]}"
+      #puts "Making path value relative to topmost project file #{[Rake.application.TopmostProjectFile]}"
       
       @Path = value.MakeRelativeTo(Rake.application.TopmostProjectFile.DirectoryPath().MakeAbsolute())
       @ProcessCache = ProcessCache.new(@Path.DirectoryPath + ProjectPath.new(@Path.FileName(false) + ".cache"))
       
-      puts "Result of conversion: #{[@Path]}"
+      #puts "Result of conversion: #{[@Path]}"
       
       
       @Namespace = ProjectNamespace.new()
@@ -61,19 +61,52 @@ module Rokuby
       val += "Included projects: #{@ProjectFileIncludes}\n"      
     end
     
-    # get a list that describes all tasks in this proect file
+    def DisplayableTasks
+      return tasks.select { |t|
+        #puts "task: #{t.name} with comment #{t.comment}"
+        t.comment && t.name =~ Rake.application.options.show_task_pattern
+      }
+    end
+    
+    def HasTasks()
+      displayable_tasks = DisplayableTasks()
+      
+      return displayable_tasks.length != 0
+    end
+    
+    # get a list that describes all tasks in this project file.
     def GetTaskDescriptions(width, maxColumn)
       val = ""
       #puts "tasks in projectfile: #{tasks}"
-      displayable_tasks = tasks.select { |t|
-        t.comment && t.name =~ Rake.application.options.show_task_pattern
-      }
+      displayable_tasks = DisplayableTasks()
       
       #puts "displayable tasks in projectfile: #{displayable_tasks}"
       
+      nameSize = Rake.application.name.length + 4 + width
+      sliceSize = maxColumn
+      
       displayable_tasks.each do |t|
-        val += sprintf "  #{Rake.application.name} %-#{width}s  # %s\n",
-          t.name_with_args, maxColumn ? truncate(t.comment, maxColumn) : t.comment
+        
+        i=0
+        slices = []
+        
+        while(i<t.comment.length)
+          sliceEnd = i+sliceSize
+          if(sliceEnd >= t.comment.length)
+            sliceEnd = t.comment.length - 1
+          end
+         #puts "slicing from #{i} to #{sliceEnd}"
+          slices.push(t.comment.slice(i..sliceEnd))
+          i = sliceEnd + 1          
+        end
+        
+        val += sprintf "  #{Rake.application.name} %-#{width}s  # %s\n", t.name_with_args, slices[0]
+          
+        slices.delete_at(0)
+        slices.each() do |slice|
+          val += sprintf "%-#{nameSize}s # %s\n", " ", slice
+        end
+        val += "\n"
       end
       
       val += "\n"
