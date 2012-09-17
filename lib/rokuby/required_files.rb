@@ -96,6 +96,7 @@ module Rokuby
 "Processors/processor",
 "Processors/processor_utility",
 "Processors/process_chain",
+"Processors/processor_array",
 # general processors
 "Processors/General/passthrough_processor",
 "Processors/General/platform_tester",

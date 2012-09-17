@@ -29,7 +29,10 @@ module Rokuby
         super(valueMap)
       end
       
-      
+      defines = valueMap[:Defines] || valueMap[:defs]
+      if(defines)
+        @Defines |= defines
+      end
     end
   end
 end

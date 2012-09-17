@@ -222,6 +222,12 @@ module Rokuby
       Rake.application.DefineProcessor(GppProjectBuilder, *args, &block)
     end
     
+    # Multi process
+    
+    def procArr(*args, &block)
+      Rake.application.DefineProcessor(ProcessorArray, *args, &block)
+    end
+    
     #####################################################
     # Default Configurations
     

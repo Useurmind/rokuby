@@ -146,9 +146,10 @@ module Rokuby
       end
     end
     
-    # State that the first processor should be input processor to the second
-    # processor.
-    # The args should be a list of processor name or :in, :out
+    # State that some processors should be chained. The processors in the list
+    # will deliver their output to the next processor in the list.
+    # The processors should already be defined when calling this function.
+    # The args should be a list of processor names or :in, :out
     def Connect(*args)
       if(args.length == 0)
         return
