@@ -177,11 +177,11 @@ module Rokuby
     # Create the given path if it does not exist.
     # Creates all non existent directories in the path.
     def CreatePath(path)
-      puts "Creating path #{path}"
+      #puts "Creating path #{path}"
       dirsToCreate = []
       currentPath = path
       while(!currentPath.exist?)
-	puts "Need to create path #{currentPath}"
+	#puts "Need to create path #{currentPath}"
 	dirsToCreate.push(currentPath.AbsolutePath())
 	currentPath = currentPath.Up()
       end

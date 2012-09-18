@@ -133,7 +133,7 @@ module Rokuby
       # add the project path to include paths if any idl files were found
       if(@vsProjectInstance != nil)
         if(@vsProjectInstance.IdlFileSet.FilePaths.length > 0)
-          puts "Adding #{@vsProjectDescription.ProjectFilePath.DirectoryPath()} to includes"
+          #puts "Adding #{@vsProjectDescription.ProjectFilePath.DirectoryPath()} to includes"
           vsConf.AdditionalIncludeDirectories.push(@vsProjectDescription.ProjectFilePath.DirectoryPath())
         end
       end

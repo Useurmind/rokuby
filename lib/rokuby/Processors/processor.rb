@@ -141,7 +141,7 @@ class Processor < Rake::ProcessorTask
   def _InputProcessors    
     inputProcs = {}
     
-    puts "pres of #{FullName()}: #{prerequisites}"
+    #puts "pres of #{FullName()}: #{prerequisites}"
     
     prerequisites.uniq().each() do |pre|
       p = @ProjectFile.DefineProcessor(nil, pre)
