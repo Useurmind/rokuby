@@ -192,14 +192,19 @@ module Rokuby
       # Get a project file included by the given project file.
       # The include paths relative component needs to be the include path.
       def get_invoked_project_file(invokingProjectFilePath, invokedProjectFilePath)
-          topRelativePath = (invokingProjectFilePath.DirectoryPath() + invokedProjectFilePath).MakeRelativeTo(@TopmostProjectFile.DirectoryPath())
-          return @ProjectFileLoader.LoadedProjectFile(topRelativePath.RelativePath)
+          #if(invokedProjectFilePath.BasePath == invokedProjectFilePath.BasePath)
+           #   topRelativePath = invokedProjectFilePath
+          #else
+              topRelativePath = (invokingProjectFilePath.DirectoryPath() + invokedProjectFilePath).MakeRelativeTo(@TopmostProjectFile.DirectoryPath())
+          #end
+          #puts "top relative path is #{topRelativePath}"
+          return @ProjectFileLoader.LoadedProjectFile(topRelativePath.RelativePath())
       end
       
       # search the task in the project file and all the project files loaded by it
       # breadth first search
       def search_task_in_project_file_tree(projectFile, name, scopes)
-          #puts "Looking for task in tree under '#{projectFile.Path().to_s}'"
+          #puts "Looking for task '#{name}' in tree under '#{projectFile.Path().to_s}'"
           if(!projectFile)
               raise "No valid project file specified to search for task #{name}"
           end
@@ -210,6 +215,7 @@ module Rokuby
               return task
           end
           
+          #puts "Searching project file includes #{projectFile.ProjectFileIncludes}"
           projectFile.ProjectFileIncludes.each do |includePath|
               includedProjectFile = get_invoked_project_file(projectFile.Path, includePath)
               if(!includedProjectFile)
@@ -264,7 +270,7 @@ module Rokuby
       end
       
       def FindInformationUnit(iuClass, absoluteIuPath)
-            projectPath, name = GetProjectFilePathName(absoluteIuPath)
+            projectPath, name = GetProjectFilePathName(absoluteIuPath)            
             #puts "result is #{projectPath}, #{name}"
             #puts "Looking up information unit in application #{absoluteIuPath} with class #{iuClass}"
             
@@ -326,7 +332,7 @@ module Rokuby
         task = nil
         projectFile = nil
         
-        #puts "parsing task path #{taskPath}"
+        #puts "parsing task path #{taskPath}:#{taskPath.class}"
         projectPath, name = GetProjectFilePathName(taskPath)
         #puts "result is #{projectPath}, #{name}"
         

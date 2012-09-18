@@ -126,6 +126,9 @@ module Rokuby
 "Processors/Linux/gpp_project_library_gatherer",
 "Processors/Linux/gpp_project_creator",
 "Processors/Linux/gpp_project_builder",
+# multi platform
+"Processors/MultiPlatform/multi_project_builder",
+"Processors/MultiPlatform/multi_solution_builder",
 
 "doxygen_builder",
 ]

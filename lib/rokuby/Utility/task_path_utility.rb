@@ -10,8 +10,37 @@ module Rokuby
             return AbsoluteTaskPathOnly?(taskPath) || taskPath =~ /^[^:]*$/
         end
         
+        def JoinTaskPathName(path, name)
+            return "#{path}:#{name}"
+        end
+        
+        # Split a task path in path and name of the task.
+        def SplitTaskPath(taskPath)
+            path = nil
+            name = nil
+            
+            if(!taskPath)
+                return path, name
+            end
+            
+            if(NameOnly?(taskPath))
+                name = taskPath.to_s
+                return path, name
+            end
+            
+            match = taskPath.match(/(^([A-Za-z]:\/)*[^:]*):*(.*)/)
+            if(match)
+              path = match[1]
+              name = match[3]
+            else
+              name = taskPath
+            end
+            
+            return path, name
+        end
+        
         # Get the name contained in this task path
-        def Name(taskPath)
+        def GetTaskName(taskPath)
             projectFilePath, name = GetProjectFilePathName(taskPath)
             return name
         end
@@ -23,21 +52,15 @@ module Rokuby
         end
         
         # Get the path to the project file and the name of the task
+        # The path to the project file
         def GetProjectFilePathName(taskPath)
             projectPath = nil
             name = nil
             
-            if(NameOnly?(taskPath))
-                name = taskPath.to_s
-                return projectPath, name
-            end
+            path, name = SplitTaskPath(taskPath)
             
-            match = taskPath.match(/(^([A-Za-z]:\/)*[^:]*):*(.*)/)
-            if(match)
-              projectPath = ProjectPath.new(match[1])
-              name = match[3]
-            else
-              name = taskPath
+            if(path)
+                projectPath = ProjectPath.new(path)
             end
             
             return projectPath, name
@@ -54,6 +77,7 @@ module Rokuby
             if(!projectFilePath)
                 taskProjectFilePath = projectFile.Path()
             else
+                #puts "Adding #{projectFile.Path().DirectoryPath()} and #{projectFilePath}"
                 taskProjectFilePath = (projectFile.Path().DirectoryPath() + projectFilePath)
             end
             

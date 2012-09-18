@@ -22,6 +22,7 @@ module Rokuby
       if(!NameOnly?(name))
         #puts "Information unit from different file was requested '#{name}'"
         absoluteIuPath = ApplicationBasedTaskPath(name, self)
+        #puts "Information unit from different file was requested '#{name}', absolute path is #{absoluteIuPath}"
         
         return Rake.application.FindInformationUnit(iuClass, absoluteIuPath)
       end

@@ -228,6 +228,14 @@ module Rokuby
       Rake.application.DefineProcessor(ProcessorArray, *args, &block)
     end
     
+    def multiProjBuild(*args, &block)
+      Rake.application.DefineProcessor(MultiProjectBuilder, *args, &block)
+    end
+    
+    def multiSlnBuild(*args, &block)
+      Rake.application.DefineProcessor(MultiSolutionBuilder, *args, &block)
+    end
+    
     #####################################################
     # Default Configurations
     
