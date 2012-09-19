@@ -10,52 +10,52 @@ module Rokuby
     end
 
     def _ProcessInputs(taskArgs=nil)
+      platBinExt = GetPlatformBinaryExtensions(taskArgs)
+      
       _SortInputs()
       
-      _ExtendGppProjectConfigurations()
+      _ExtendGppProjectConfigurations(platBinExt)
       
       _ForwardOutputs()
     end
     
-    def _ExtendGppProjectConfigurations()
+    def _ExtendGppProjectConfigurations(platBinExt)
       #puts "Extending configurations"
-      @gppProjectConfigurations.each() do |gppConf|
-        #puts "Extending gppConf #{[gppConf]}"
-        subfolderName = @projectDescription.Name + gppConf.Platform.BinaryExtension()
+      
+      gppConf = _GetGppProjectConf(platBinExt)
         
-        if(gppConf.CompileDirectory == nil)
-          gppConf.CompileDirectory = @projectDescription.BuildPath + ProjectPath.new(subfolderName)
-        end
-        
-        if(gppConf.OutputDirectory == nil)
-          gppConf.OutputDirectory = @projectDescription.CompilesPath + ProjectPath.new(subfolderName)
-        end
-        
-        if(gppConf.TargetName == nil)
-          gppConf.TargetName = subfolderName
-        end
-        
-        if(@projectDescription.BinaryType == :Application)
-          if(gppConf.TargetExt == nil)
-            gppConf.TargetExt = Gpp::Configuration::TargetExt::APPLICATION
-          end
-        elsif(@projectDescription.BinaryType == :Shared)
-          if(gppConf.TargetExt == nil)
-            gppConf.TargetExt = Gpp::Configuration::TargetExt::SHARED_LIB
-          end
-        elsif(@projectDescription.BinaryType == :Static)
-          if(gppConf.TargetExt == nil)
-            gppConf.TargetExt = Gpp::Configuration::TargetExt::STATIC_LIB
-          end
-        end
-        
-        gppConf.IncludePaths |= _GatherIncludePaths(gppConf)
-        
-        gppConf.Defines |= _GatherDefines(gppConf)
-        gppConf.Defines = gppConf.Defines.uniq
-
-        #puts "extensions done for configuration: #{[gppConf]}"
+      subfolderName = @projectDescription.Name + gppConf.Platform.BinaryExtension()
+      
+      if(gppConf.CompileDirectory == nil)
+        gppConf.CompileDirectory = @projectDescription.BuildPath + ProjectPath.new(subfolderName)
       end
+      
+      if(gppConf.OutputDirectory == nil)
+        gppConf.OutputDirectory = @projectDescription.CompilesPath + ProjectPath.new(subfolderName)
+      end
+      
+      if(gppConf.TargetName == nil)
+        gppConf.TargetName = subfolderName
+      end
+      
+      if(@projectDescription.BinaryType == :Application)
+        if(gppConf.TargetExt == nil)
+          gppConf.TargetExt = Gpp::Configuration::TargetExt::APPLICATION
+        end
+      elsif(@projectDescription.BinaryType == :Shared)
+        if(gppConf.TargetExt == nil)
+          gppConf.TargetExt = Gpp::Configuration::TargetExt::SHARED_LIB
+        end
+      elsif(@projectDescription.BinaryType == :Static)
+        if(gppConf.TargetExt == nil)
+          gppConf.TargetExt = Gpp::Configuration::TargetExt::STATIC_LIB
+        end
+      end
+      
+      gppConf.IncludePaths |= _GatherIncludePaths(gppConf)
+      
+      gppConf.Defines |= _GatherDefines(gppConf)
+      gppConf.Defines = gppConf.Defines.uniq
     end
     
     def _GatherDefines(gppConf)
@@ -70,30 +70,44 @@ module Rokuby
       return defines
     end
     
-    def _GatherIncludePaths(gppConf)
+    def _GatherIncludePaths(gppConf)            
       includePaths = []
       
-      # The include directories of the project itself
+      #puts "Getting include paths by making them relative to #{@ProjectFile.Path.DirectoryPath()}"
+      
       @projectInstance.SourceUnits.each() do |su|
         su.IncludeFileSet.RootDirectories.each() do |rootDir|
           includePaths |= GetDirectoryTree(rootDir)
         end
       end
       
-      # The include paths of project on which this project depends
-      @gppProjects.each() do |gppProj|
-        includePaths |= gppProj.IncludePaths
-      end
-      
-      # The include paths of libraries this project depends on
       @projectInstance.Libraries.each() do |lib|
         libInstance = lib.GetInstance(gppConf.Platform)
-        puts "trying to retrieve include paths for lib"
         if(libInstance)
-          puts "found library instance #{[libInstance]}"
-          includePaths |= libInstance.FileSet.IncludeFileSet.RootDirectories
-        end
+          includePaths |= libInstance.FileSet.IncludeFileSet.RootDirectories.map() {|fileDir| fileDir.MakeRelativeTo(@ProjectFile.Path.DirectoryPath())}
+        end        
       end
+      
+      @gppProjects.each() do |childProject|
+        includePaths |= _GetSubProjectIncludePaths(childProject, gppConf)
+      end
+      
+      return includePaths
+    end
+    
+    def _GetSubProjectIncludePaths(gppProj, gppConf)
+      includePaths = gppProj.IncludePaths.map() {|fileDir| fileDir.MakeRelativeTo(@ProjectFile.Path.DirectoryPath())}
+      
+      gppProj.Libraries.each() do |lib|
+        libInstance = lib.GetInstance(gppConf.Platform)
+        if(libInstance)
+          includePaths |= libInstance.FileSet.IncludeFileSet.RootDirectories.map() {|fileDir| fileDir.MakeRelativeTo(@ProjectFile.Path.DirectoryPath())}
+        end        
+      end
+      
+      gppProj.Dependencies.each() do |depProj|
+        includePaths |= _GetSubProjectIncludePaths(depProj, gppConf)
+      end      
       
       return includePaths
     end

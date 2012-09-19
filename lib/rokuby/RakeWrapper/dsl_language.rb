@@ -26,6 +26,21 @@ module Rake
     def clobber(*includes)
       Rake.application.IncludeClobberTargets(includes)
     end
+    
+    alias desc_old desc
+    # Describe a task with a line of text.
+    # You can add multiple lines of text to an task either by calling this with
+    # multiple additional arguments or by calling it repeatedly for the same argument.
+    def desc(*args)
+      Rake.application.DescribeTask(*args)
+    end
+    
+    # Describe an argument of a task.
+    # You can add multiple lines of text to an argument either by calling this with
+    # multiple additional arguments or by calling it repeatedly for the same argument.
+    def arg(name, *args)
+      Rake.application.DescribeArgument(name, *args)
+    end
   
   end  
 end

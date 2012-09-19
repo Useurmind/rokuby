@@ -23,9 +23,22 @@ module Rokuby
       @knownInputClasses.push(Rokuby::GppProject)
       @knownInputClasses.push(Rokuby::PassthroughDefines)
     end
+    
+    def GetPlatformBinaryExtensions(taskArgs)
+      if(!taskArgs || !taskArgs[:gppConf])
+        errorString = "No PlatformConfiguration binary extension given as task arg in #{self.class}\n"
+        errorString += "Available platforms are:\n"
+        @gppProjectConfigurations.each() do |gppConf|
+          errorString += "- #{gppConf.Platform.BinaryExtension}\n"
+        end
+        raise errorString
+      end
+      
+      return taskArgs[:gppConf]
+    end
 
     # Sort the processor inputs by their class type.
-    def _SortInputs
+    def _SortInputs()
       @inputs.each() do |input|
         if(input.is_a?(Rokuby::ProjectInstance))
           @projectInstance = input
@@ -45,13 +58,19 @@ module Rokuby
       end
     end
 
-    def _GetGppProjectConf(platform)
+    def _GetGppProjectConf(platBinExt)
       @gppProjectConfigurations.each() do |gppConf|
-        if(gppConf.Platform <= platform)
+        if(gppConf.Platform.BinaryExtension == platBinExt)
           return gppConf
         end
       end
-      return nil
+      
+      errorString = "Could not find matching platform configuration for binary extensions #{platBinExt}\n"
+      errorString += "Available platforms are:\n"
+      @gppProjectConfigurations.each() do |gppConf|
+        errorString += "- #{gppConf.Platform.BinaryExtension}\n"
+      end
+      raise errorString
     end
     
     def _ForwardOutputs

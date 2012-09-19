@@ -23,11 +23,6 @@ module Rokuby
         'projectDefinition.rb'
         ]
     
-      # This is implemented to forward the last description to the currently loaded file.
-      def last_description=(value)
-        @ProjectFileLoader.CurrentlyLoadedProjectFile().last_description = value
-      end
-      
       def current_project_file
           return @ProjectFileLoader.CurrentlyLoadedProjectFile()
       end
@@ -35,6 +30,7 @@ module Rokuby
       def initialize
         #puts "Initializing Rake Builder Application"
         super
+        @TaskHelpMessages = []
         @rakefiles = DEFAULT_RAKEFILES
         @ProjectFileLoader = Rokuby::ProjectFileLoader.new
         @name = "Rokuby"
@@ -125,6 +121,8 @@ module Rokuby
           all_displayable_tasks = tasks.select { |t|
             t.comment && t.name =~ options.show_task_pattern
           }
+          
+          puts "Displayable tasks: #{all_displayable_tasks}\n"
           
           width = all_displayable_tasks.collect { |t| t.name_with_args.length }.max || 10
           max_column = truncate_output? ? terminal_width() - name.size - width - 7 : nil
@@ -235,6 +233,27 @@ module Rokuby
       ##########################################################################################
       # New dsl interface introduced by the Rokuby module
       
+      def DescribeTask(*args)
+          descriptionLines = []
+          args.each() do |arg|
+              if(arg.is_a?(String))
+                  descriptionLines.push(arg)
+              end
+          end
+          @ProjectFileLoader.CurrentlyLoadedProjectFile().AddTaskDescriptions(descriptionLines)
+      end    
+    
+      def DescribeArgument(name, *args)
+          descriptionLines = []
+          args.each() do |arg|
+              if(arg.is_a?(String))
+                  descriptionLines.push(arg)
+              end
+          end
+          argMap = {name => descriptionLines}
+          @ProjectFileLoader.CurrentlyLoadedProjectFile().AddTaskArgumentDescriptions(argMap)
+      end
+      
       # This is called when an additional file is inculded by a project file.
       # It will load the project file asap to make its values available in the
       # loading project file and above.
@@ -294,9 +313,6 @@ module Rokuby
                 fail "Found task #{procName} is no processor."
             end
             return task, projectFile
-      end
-      
-      def FindIuInProcessFile()
       end
     
       ##########################################################################################

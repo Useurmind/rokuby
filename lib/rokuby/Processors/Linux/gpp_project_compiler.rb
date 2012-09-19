@@ -10,30 +10,32 @@ module Rokuby
     def initialize(name, app, project_file)
       super(name, app, project_file)
 
+      @includePaths = {}
+      @defines = {}
+
       _RegisterInputTypes()
     end
 
     def _ProcessInputs(taskArgs=nil)
+      platBinExt = GetPlatformBinaryExtensions(taskArgs)
+      
       _SortInputs()
       
-      puts "tast arg in proj compiler #{taskArgs}"
+      gppConf = _GetGppProjectConf(platBinExt)
+      #puts "Compiling #{[gppConf]}"
       
-      if(taskArgs && taskArgs.gppConf.is_a?(GppProjectConfiguration))
-        gppConf = _GetGppProjectConf(taskArgs.gppConf.Platform)
-        puts "Compiling #{[gppConf]}"
-        compileTasks = _CreateCompileTasks(gppConf)
-        compileTaskNames = []
-        compileTasks.each() do |task|
-          compileTaskNames.push task.to_s
-        end
-        
-        linkTask = _CreateLinkTasks(gppConf, compileTaskNames)
-        
-        @BackTask.enhance [linkTask.to_s]
-
-        _CreateDirectories(gppConf)
-        _ExecuteBackTask()      
+      compileTasks = _CreateCompileTasks(gppConf)
+      compileTaskNames = []
+      compileTasks.each() do |task|
+        compileTaskNames.push task.to_s
       end
+      
+      linkTask = _CreateLinkTasks(gppConf, compileTaskNames)
+      
+      @BackTask.enhance [linkTask.to_s]
+
+      _CreateDirectories(gppConf)
+      _ExecuteBackTask()      
       
       _ForwardOutputs()
     end
@@ -57,6 +59,8 @@ module Rokuby
       targetPath = _GetTargetPath(gppConf, sourcePath)
       compileCommand = _GetCompileCommand(gppConf, sourcePath, targetPath)
             
+      #puts "Created compile command for #{sourcePath}: #{compileCommand}"
+            
       return CreateFileTask({
         filePath: targetPath.RelativePath,
         dependencies: [sourcePath.RelativePath],
@@ -70,23 +74,25 @@ module Rokuby
       
       commandParts = []
       
-      if(@projectDescription.BinaryType = :Application)
+      if(@projectDescription.BinaryType == :Application)
         commandParts.concat(["g++", "-o", binaryPath.RelativePath])
         commandParts.concat(gppConf.LinkOptions)
-        commandParts.concat(_GatherDefines(gppConf))
+        commandParts.concat(_MapCompileDefines(gppConf))
         commandParts.concat(compileTaskNames)
         commandParts.concat(_GatherLibraryLinkComponents(gppConf))
         
       elsif(@projectDescription.BinaryType == :Shared)
         commandParts.concat(["g++", "-shared", "-fPIC", "-o", binaryPath.RelativePath])
         commandParts.concat(gppConf.LinkOptions)
-        commandParts.concat(_GatherDefines(gppConf))
+        commandParts.concat(_MapCompileDefines(gppConf))
         commandParts.concat(compileTaskNames)
         commandParts.concat(_GatherLibraryLinkComponents(gppConf))
         
-      else
+      elsif(@projectDescription.BinaryType == :Static)
         commandParts.concat(["ar", "cq", binaryPath.RelativePath])
         commandParts.concat(compileTaskNames)
+      else
+        raise "Unknown BinaryType '#{@projectDescription.BinaryType}' encountered in #{self.class}"
       end
       command = commandParts.join(" ")
 
@@ -109,8 +115,8 @@ module Rokuby
         compileCommandParts.push "-fPIC"
       end
       compileCommandParts.concat(gppConf.CompileOptions)      
-      compileCommandParts.push(_GatherIncludePaths(gppConf))
-      compileCommandParts.push(_GatherDefines(gppConf))
+      compileCommandParts.push(_MapCompileIncludePaths(gppConf))
+      compileCommandParts.push(_MapCompileDefines(gppConf))
 
       compileCommandParts.push("-o")
       compileCommandParts.push(targetPath.RelativePath)
@@ -119,14 +125,24 @@ module Rokuby
       return compileCommandParts.join(" ")
     end
 
-    def _GatherIncludePaths(gppConf)
-      puts "Converting include paths #{gppConf.IncludePaths}"
-      puts "Making the paths relative to #{@ProjectFile.Path}"
-      return (gppConf.IncludePaths.map() { |path| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + path.MakeRelativeTo(@ProjectFile.Path.DirectoryPath()).RelativePath }).uniq
+    def _MapCompileIncludePaths(gppConf)
+      includePaths = @includePaths[gppConf.Platform.Name]
+      if(includePaths)
+        return includePaths
+      end
+      
+      @includePaths[gppConf.Platform.Name] = (gppConf.IncludePaths.map() {|include| Gpp::CommandLine::Options::INCLUDE_DIRECTORY + include.RelativePath()}).uniq
+      return @includePaths[gppConf.Platform.Name]
     end
 
-    def _GatherDefines(gppConf)
-      return (gppConf.Defines.map() {|define| Gpp::CommandLine::Options::DEFINE + define}).uniq
+    def _MapCompileDefines(gppConf)
+      defines = @defines[gppConf.Platform.Name]
+      if(defines)
+        return defines
+      end
+
+      @defines[gppConf.Platform.Name] = (gppConf.Defines.map() {|define| Gpp::CommandLine::Options::DEFINE + define}).uniq
+      return @defines[gppConf.Platform.Name]
     end
     
     def _GatherLibraryLinkComponents(gppConf)

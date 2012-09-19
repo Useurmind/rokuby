@@ -1,6 +1,7 @@
 module Rokuby
   class GppProjectCreator < Processor
     include GppProjectProcessorUtility
+    include DirectoryUtility
     
     def initialize(name, app, project_file)
       super(name, app, project_file)
@@ -9,16 +10,21 @@ module Rokuby
     end
     
     def _ProcessInputs(taskArgs=nil)
+      #platBinExt = GetPlatformBinaryExtensions(taskArgs)
+      
       _SortInputs()
       
       gppProject = GppProject.new()
       
+      # gather include paths
       includePaths = []
+      
       @projectInstance.SourceUnits.each() do |su|
         su.IncludeFileSet.RootDirectories.each() do |rootDir|
           includePaths.concat GetDirectoryTree(rootDir)
-        end        
+        end
       end
+      
       includePaths = includePaths.uniq
       
       gppProject.Extend :Name => Clone(@projectDescription.Name),

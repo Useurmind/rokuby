@@ -25,6 +25,19 @@ module Rokuby
       @ProjectCreator = defineProc GppProjectCreator, "#{@Name}_ProjCreator"      
       
       _ConnectProcessors()
+      
+      confArg = "gppConf"
+      set_arg_names([confArg])
+      
+      @ProjectPreprocessor.set_arg_names([confArg])
+      @ProjectCompiler.set_arg_names([confArg])
+      @ProjectLibraryGatherer.set_arg_names([confArg])
+      @ProjectCreator.set_arg_names([confArg])
+      
+      @InputProcessor.set_arg_names([confArg])
+      @OutputProcessor.set_arg_names([confArg])
+      
+      AddTaskArgumentDescriptions({confArg => ["The configuration of the project that should be build", "Corresponds to the binary extension of the PlatformConfiguration."]})
     end
     
     def _ConnectProcessors
@@ -33,29 +46,6 @@ module Rokuby
             
       task @ProjectCompiler.to_s, :gppConf
       task @ProjectLibraryGatherer.to_s, :gppConf
-    end
-    
-    def _OnAddInput(input)
-      if(!super(input))
-        return false
-      end
-      _AddConfigurationTask(input)
-      return true
-    end
-    
-    def _AddConfigurationTask(input)
-      #puts "Trying to create configuration task for #{input}"
-      if(input.is_a?(GppProjectConfiguration))
-        desc "Build the project of #{@Name} with configuration #{input.Platform.BinaryExtension()}"
-        confTask = Rake::ProxyTask.define_task "#{@Name}_#{input.Platform.BinaryExtension()}" => [@ProjectCompiler.to_s]
-
-        confTask.SetArgumentModificationAction() do |args|
-	  confTask.set_arg_names([:gppConf])
-	  input
-        end
-        
-        @ConfigurationTasks.push confTask
-      end
     end
   end
 end

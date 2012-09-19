@@ -94,7 +94,9 @@ module Rokuby
       
       processor.AddDependencies(mappedTaskDeps)
       processor.enhance(nil, &block)
-      processor.set_arg_names(taskArgs)
+      if(taskArgs.length > 0)
+        processor.set_arg_names(taskArgs)
+      end      
       processor.add_description(description)
       
       processor.AddInput(inputs)

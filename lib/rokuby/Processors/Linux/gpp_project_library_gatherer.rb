@@ -10,6 +10,8 @@ module Rokuby
     end
     
     def _ProcessInputs(taskArgs=nil)
+      return
+      
       _SortInputs()
       
       gppConf = _GetGppProjectConf(taskArgs.gppConf.Platform)

@@ -38,6 +38,14 @@ module Rokuby
         return files
       end
       
+      testPath = directory.RelativePath()
+      excludePatterns.each do |pattern|
+	if(testPath.match(pattern) != nil)
+	  #puts "Excluding file '#{entryPath}' based on pattern '#{pattern}'"
+	  return files
+	end
+      end
+      
       directory.SubPaths().each do |subPath|
 
         if(subPath.directory?())

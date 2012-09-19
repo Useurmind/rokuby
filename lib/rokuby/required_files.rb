@@ -79,6 +79,7 @@ module Rokuby
 
 # The rake wrapper that will be executed to gather the project definition files
 "RakeWrapper/dsl_language",
+"RakeWrapper/task_description",
 "RakeWrapper/task",
 "RakeWrapper/file_task",
 "RakeWrapper/proxy_task",

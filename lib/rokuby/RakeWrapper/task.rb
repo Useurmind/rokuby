@@ -2,6 +2,7 @@ module Rake
   # Overwrite some of the functionality provided by the rake task class
   class Task
     include Rokuby::PathUtility
+    include Rokuby::TaskDescription
     
     # The project file in which the task was defined.
     attr_reader :ProjectFile
@@ -13,7 +14,8 @@ module Rake
       @ProjectFile = projectFile
       if(@ProjectFile)      
         initialize_old_task(task_name, app)
-      end      
+      end
+      ResetTaskDescription(true)
     end
     
     # Execute the actions associated with this task.
@@ -34,5 +36,17 @@ module Rake
       return task
     end
     private :lookup_prerequisite
+    
+    alias add_description_old_task add_description
+    def add_description(descriptions)
+      AddTaskDescriptions(descriptions[0])
+      AddTaskArgumentDescriptions(descriptions[1])
+    end
+    
+    alias set_arg_names_old_task set_arg_names
+    def set_arg_names(args)
+      set_arg_names_old_task(args)
+      @KnownArgNames = @arg_names
+    end
   end
 end

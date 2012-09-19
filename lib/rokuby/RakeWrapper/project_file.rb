@@ -12,6 +12,8 @@ module Rokuby
     include Rake::DSL
     include InformationUnitManager
     include ProcessManager
+    include TaskDescription
+    include PathUtility
     #include DSL
     
     # @return [ProjectPath] The path to the project file, relative to the topmost project file folder.
@@ -52,6 +54,7 @@ module Rokuby
       @ProjectFileIncludes = []
       @CleanList = Rake::FileList["**/*~", "**/*.bak"]
       @ClobberList = Rake::FileList.new
+      ResetTaskDescription(false)
     end
     
     def to_s
@@ -63,8 +66,7 @@ module Rokuby
     
     def DisplayableTasks
       return tasks.select { |t|
-        #puts "task: #{t.name} with comment #{t.comment}"
-        t.comment && t.name =~ Rake.application.options.show_task_pattern
+        !t.IsTaskDescriptionEmpty?() && t.name =~ Rake.application.options.show_task_pattern
       }
     end
     
@@ -82,35 +84,95 @@ module Rokuby
       
       #puts "displayable tasks in projectfile: #{displayable_tasks}"
       
-      nameSize = Rake.application.name.length + 4 + width
-      sliceSize = maxColumn
-      
       displayable_tasks.each do |t|
-        
-        i=0
-        slices = []
-        
-        while(i<t.comment.length)
-          sliceEnd = i+sliceSize
-          if(sliceEnd >= t.comment.length)
-            sliceEnd = t.comment.length - 1
-          end
-         #puts "slicing from #{i} to #{sliceEnd}"
-          slices.push(t.comment.slice(i..sliceEnd))
-          i = sliceEnd + 1          
-        end
-        
-        val += sprintf "  #{Rake.application.name} %-#{width}s  # %s\n", t.name_with_args, slices[0]
-          
-        slices.delete_at(0)
-        slices.each() do |slice|
-          val += sprintf "%-#{nameSize}s # %s\n", " ", slice
-        end
-        val += "\n"
+        val += CreateTaskDescription(t, width, maxColumn)        
       end
       
       val += "\n"
       return val
+    end
+    
+    def CreateTaskDescription(task, width, maxColumn)
+      val = ""
+      firstLine = true
+      preCommentSize = Rake.application.name.length + 3 + task.name_with_args.length + 2
+      preTaskNameSize = Rake.application.name.length + 3
+      preTaskArgsSize = Rake.application.name.length + 4 + task.name.length
+      
+        
+      #puts "Creating task description for task #{task}"
+      
+      #puts "Task description lines #{task.TaskDescriptions}"
+      #puts "Arg description lines #{task.ArgDescriptions}"
+        
+      task.TaskDescriptions.each() do |taskDescr|
+        lines = SplitStringToMultipleLines(taskDescr, maxColumn)
+        
+        #puts "adding lines to output: #{lines}"
+        
+        lines.each() do |line|
+          if(firstLine)
+            val += sprintf "  #{Rake.application.name} %s%-#{preCommentSize - preTaskNameSize - task.name_with_args.length}s# %s\n", task.name_with_args, " ", line
+            firstLine = false
+          else
+            val += sprintf "%-#{preCommentSize}s# %s\n", " ", line
+          end
+        end        
+      end
+      
+      task.ArgDescriptions.each() do |argName, argDescriptions|        
+        firstLine = true
+        argDescriptions.each() do |argDescr|
+          lines = SplitStringToMultipleLines(argDescr, maxColumn)
+        
+          lines.each() do |line|
+            if(firstLine)
+              val += sprintf "%-#{preTaskArgsSize}s%s%-#{preCommentSize - preTaskArgsSize - argName.length}s# %s\n", " ", argName, " ", line
+              firstLine = false
+            else
+              val += sprintf "%-#{preCommentSize}s# %s\n", " ", line
+            end
+          end
+        end
+      end
+      val += "\n"
+      
+      #puts "task description for task #{task.name} is: #{val}"
+      
+      return val
+    end
+      
+    def SplitStringToMultipleLines(s, maxColumn)
+      words = s.split(" ")      
+      lines = []
+      
+      #puts "words in split: #{words}"
+      
+      currentLine = ""
+      words.each() do |word|
+        #puts "currentLine: #{currentLine}"
+        #puts "word: #{word}"
+        #puts "lines: #{lines}"
+        
+        if(currentLine.length + word.length + 1 > maxColumn)
+          if(currentLine != "")
+            lines.push(currentLine)
+          end
+          currentLine = ""
+        end
+        
+        if(currentLine == "")
+          currentLine = word
+        else
+          currentLine = currentLine + " " + word
+        end        
+      end
+      
+      if(currentLine != "")
+        lines.push(currentLine)
+      end
+      
+      return lines
     end
     
     def truncate(string, width)
@@ -151,6 +213,23 @@ module Rokuby
       task :clobber => [:clean] do 
         @ClobberList.uniq().each { |fn| rm_r fn rescue nil }
       end
+    end
+    
+    # Overwritten to return new more sophisticated description structure.
+    def get_description(task)
+      taskDescriptions = @TaskDescriptions
+      argDescriptions = @ArgDescriptions
+      ResetTaskDescription(false)
+      return taskDescriptions, argDescriptions
+    end
+    
+    alias synthesize_file_task_old synthesize_file_task
+    def synthesize_file_task(task_name)
+      val = nil
+      ExecuteInPath(self.Path().DirectoryPath()) do
+        val = synthesize_file_task_old(task_name)
+      end
+      return val
     end
   end
 end
