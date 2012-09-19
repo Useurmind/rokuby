@@ -11,7 +11,7 @@ complex C/C++ projects.
 Currently there are the following integrated build process chains for C/C++ projects:
 
 - [Visual Studio Solution Builder](file.visual_studio.html)
-- [GCC Project Builder](file.gcc.html)
+- [G++ Project Builder](file.gpp.html)
 
 Here we will explain some general rules which both build tools follow. They were intentionally designed
 to use the same core units to reduce the work when defining a project. In the following we will explain
@@ -34,7 +34,7 @@ The project description is the core information concerning each project. It incl
 - A basis for the name of the binary that will be created (it is extended depending on the configuration)
 - The type of the binary that should be build (executable, static/dynamic link library)
 
-[Source File Documentation](Rokuby/ProjectDescription.html)
+[ProjectDescription Source](Rokuby/ProjectDescription.html)
 
 Source Unit Specification
 -------------------------
@@ -45,7 +45,7 @@ The specifications for these units include the following:
 - A file specification for the source files that are part of the project itself.
 - A file specification for the header files that are part of the project itself.
 
-[Source File Documentation](Rokuby/SourceUnitSpecification.html)
+[SourceUnitSpecification Source](Rokuby/SourceUnitSpecification.html)
 
 Platform Configuration
 ----------------------
@@ -61,9 +61,9 @@ These platform configurations contain:
 There are several reasons why a differentiation between different platform setups is practical. One of them is explained
 in the section about libraries below.
 
-[Common Platforms](Rokuby/Defaults/PlatformConfigurations.html)
+[Common PlatformConfigurations](Rokuby/Defaults/PlatformConfigurations.html)
 
-[Source File Documentation] (Rokuby/PlatformConfiguration.html)
+[PlatformConfiguration Source] (Rokuby/PlatformConfiguration.html)
 
 Libraries
 ---------
@@ -109,7 +109,7 @@ These project configurations can be very extensive for specialised tools. In the
 - A platform configuration.
 - Defines that will be applied to the project in case of this configuration (but defines can be added to most information units anyway).
 
-[Source File Documentation](Rokuby/ProjectConfiguration.html)
+[ProjectConfiguration Source](Rokuby/ProjectConfiguration.html)
 
 Project Sepcification
 ---------------------
@@ -119,13 +119,13 @@ The project specification is the place where the information about all required 
 - The source unit specifications needed by the project.
 - The library specifications neeeded by the project.
 
-[Source File Documentation](Rokuby/ProjectSpecification.html)
+[Project Specification Source](Rokuby/ProjectSpecification.html)
 
 A general project example
 -------------------------
 
 This section presents a general example for a project build that is independent of the specific cases of project build with differnt tools
-(e.g. Gcc or Visual Studio). It is not operational! Rather it is meant to illustrate the general process of setting up a build in Rokuby.
+(e.g. G++ or Visual Studio). It is not operational! Rather it is meant to illustrate the general process of setting up a build in Rokuby.
 Some points need to be added for each of the different build tools. But these steps are described in the sections of these tools.
 
 	# Define meta information for the project in its ProjectDescription
@@ -163,3 +163,13 @@ Some points need to be added for each of the different build tools. But these st
 	   srcSpecs: [srcSpec(:DemoProjectSource)],
 	   libSpecs: []
 	}
+        
+Multi Platform Project Building
+-------------------------------
+
+After reading
+
+- [Visual Studio Solution Builder](file.visual_studio.html)
+- [G++ Project Builder](file.gpp.html)
+
+I would recommend to read on with how to create [multi-platform project build processes](file.multi_platform.html).

@@ -112,3 +112,48 @@ by building the main application we automatically check for necessary rebuilds o
 
 We have now build a visual studio solution with several projects that are dependend on each other. By executing the task/processor `MyVsSolutionBuild` we can now
 create a fully functional visual studio solution.
+
+More on Visual Studio Project Dependencies -  The VsProjectUsage class
+----------------------------------------------------------------------
+
+Chaining the process in the manner above is fine and will put the projects into a corresponding dependency in the visual studio project.
+But this is not enough to fully control the possibilities that visual studio provides to handle project dependencies. There are further ways
+in which visual studio allows you to control this behaviour.
+To propagate these possibilities the VsProjectUsage class was created that holds exactly the information necessary to control this behaviour.
+If you want to deviate from the standard behaviour that visual studio provides you can do it like in the following example. Assume the example above
+in which we have now to add some additional elements:
+
+    vsProjDescr "StaticLibrary", guid: "{34aaa03b-5dd7-4228-9845-db359b137cb6}"
+    vsProjUsage "StaticLibrary", {
+        :Guid => Clone(vsProjDescr("StaticLibrary").Guid),
+	:UseLibraryDependencyInputs => true
+    }
+    
+    vsProjBuild "StaticLibraryBuild", :ins => [vsProjDescr("StaticLibrary")]
+    
+    vsProjBuild "MainApplicationBuild", :ins => [vsProjUsage("StaticLibrary")]
+    
+What we did in this code snippet is:
+
+- Create and input a VsProjectDescription that gives the static library project a known guid.
+- Create a VsProjectUsage object that obtains the guid of the project on which our application depends.
+- Input the project usage object into the application builder to inform him how this specific subproject
+  should be handled.
+  
+Reference
+---------
+
+Here are references to the classes presented in this chapter.
+
+Information Units:
+
+- [VsProjectDescription Source](Rokuby/VsProjectDescription.html)
+- [VsProjectSpecification Source](Rokuby/VsProjectSpecification.html)
+- [VsProjectConfiguration Source](Rokuby/VsProjectConfiguration.html)
+- [VsProjectUsage Source](Rokuby/VsProjectUsage.html)
+- [VsProject Source](Rokuby/VsProject.html)
+
+Processors:
+
+- [VsProjectBuilder Source](Rokuby/VsProjectBuilder.html)
+- [VsSolutionBuilder Source](Rokuby/VsSolutionBuilder.html)
