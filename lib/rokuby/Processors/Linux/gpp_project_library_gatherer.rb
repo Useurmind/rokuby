@@ -10,21 +10,20 @@ module Rokuby
     end
     
     def _ProcessInputs(taskArgs=nil)
-      return
       
-      _SortInputs()
-      
-      gppConf = _GetGppProjectConf(taskArgs.gppConf.Platform)
-
-      if(gppConf)
-        libraryPaths = _GatherLibraryPaths(gppConf)
-
-        libraryPaths.each() do |libPath|
-          _CreateLibCopyTask(libPath, gppConf)
-        end
-
-        _ExecuteBackTask()
-      end
+      #_SortInputs()
+      #
+      #gppConf = _GetGppProjectConf(taskArgs.gppConf.Platform)
+      #
+      #if(gppConf)
+      #  libraryPaths = _GatherLibraryPaths(gppConf)
+        #
+        #libraryPaths.each() do |libPath|
+        #  _CreateLibCopyTask(libPath, gppConf)
+        #end
+      #
+      #  _ExecuteBackTask()
+      #end
     end
     
     def _GatherLibraryPaths(gppConf)

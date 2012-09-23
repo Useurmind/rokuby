@@ -62,7 +62,7 @@ module Rokuby
     def _AddDependencies(taskPaths)
       taskPaths.each() do |taskPathAndName|
         depProc = proc taskPathAndName
-        taskPath, taskName = SplitTaskPath(taskPathAndName)
+        taskPath = SplitTaskPath(taskPathAndName)[0]
         
         #puts "taskPath(#{taskPath}), taskName(#{taskName}), taskPathAndName(#{taskPathAndName})\n"
         
@@ -91,7 +91,7 @@ module Rokuby
     def _RemoveDependencies(taskPaths)
       taskPaths.each() do |taskPathAndName|
         depProc = proc taskPathAndName
-        taskPath, taskName = SplitTaskPath(taskPathAndName)
+        taskPath = SplitTaskPath(taskPathAndName)[0]
         
         @ArrayProcessors.each() do |key, ownProc|
           

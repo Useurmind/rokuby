@@ -175,12 +175,12 @@ module Rokuby
         end
         
         
-        outDir = vsProjConfiguration.OutputDirectory
-        targetName = vsProjConfiguration.TargetName
+        #outDir = vsProjConfiguration.OutputDirectory
+        #targetName = vsProjConfiguration.TargetName
         targetExt = vsProjConfiguration.TargetExt
         
         if(targetExt != Vs::Configuration::TargetExt::APPLICATION)
-          binaryName = targetName.gsub("$(PlatformName)", @projectDescription.Name) + Vs::Configuration::TargetExt::STATIC # add always the lib file
+          #binaryName = targetName.gsub("$(PlatformName)", @projectDescription.Name) + Vs::Configuration::TargetExt::STATIC # add always the lib file
           
           vsConf.AdditionalIncludeDirectories |= (vsProj.IncludePaths)
           # use dependencies instead

@@ -10,12 +10,6 @@ module Rake
     def import(path)
       Rake.application.AddProjectImport(path)
     end
-    
-    # For debugging purposes.
-    # Prints useful information concerning the task.
-    def taskDescriptor(task)
-      Rokuby::TaskDescriptor.new(task)
-    end
   
     # Add files to the clean target of this project file.
     def clean(*includes)
@@ -49,6 +43,17 @@ module Rokuby
   # This is additional dsl needed for the Rokuby projects
   module DSL
     include GeneralUtility
+    
+    module Test
+      # Performs some unit tests on the given task.      
+      # @param [Task] task The task that should be checked.
+      # @param [String, Symbol] The exspected name of the task.
+      # @param [ProjectPath] workingDirPath The exspected working directory.
+      # @param [ProjectPath] projectFilePath The exspected project file of the task.
+      def taskTest(task, taskName, workingDirPath, projectFilePath)
+        Rokuby::TaskTest.new(task, taskName, workingDirPath, projectFilePath)
+      end
+    end
     
     ####################################################
     # General Generator functions

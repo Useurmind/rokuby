@@ -1,4 +1,0 @@
-desc "A task in a second level project file"
-task :TestTask do |task|
-    taskDescriptor task
-end

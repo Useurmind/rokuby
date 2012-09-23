@@ -33,10 +33,10 @@ module Rokuby
       
       if(@PostBuildTask != nil && @PostBuildLibCopyTask != nil)
       
-        @vsProjectConfigurations.each do |vsConf|
-          vsConfBinaryExt = vsConf.Platform.BinaryExtension()
+        #@vsProjectConfigurations.each do |vsConf|
+          #vsConfBinaryExt = vsConf.Platform.BinaryExtension()
           #vsConf.PostBuildCommand = "#{ROKUBY_EXECUTABLE} -f #{@ProjectFile.Path.AbsolutePath()} #{@PostBuildTask.to_s}[#{vsConfBinaryExt}]"          
-        end
+        #end
       
       end
       

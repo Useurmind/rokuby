@@ -1,8 +1,11 @@
-require File.join(File.dirname(__FILE__), "unit_tests")
-require File.join(File.dirname(__FILE__), "task_descriptor")
-
 include Rokuby
-include UnitTests
+include Rokuby::UnitTests
+include Rokuby::DSL::Test
+
+expectedWorkingDir = projPath(".")
+expectedProjectFile = projPath("Test_ProcessManager.rb")
+
+task :default => [:TestProcessorArgumentParsing]
 
 class ProcessManagerTest
   include ProcessManager
@@ -36,8 +39,8 @@ end
 processManagerTest = ProcessManagerTest.new()
 
 
-desc "Execute some tests that check the process manager parsing for errors"
-task :TestProcessorArguementParsing => [
+desc "Execute some tests that check the process manager processor argument parsing for errors"
+task :TestProcessorArgumentParsing => [
                           :Test_StringNameOnly,
                           :Test_SymbolNameOnly,
                           :Test_NameAndDeps,
@@ -46,7 +49,7 @@ task :TestProcessorArguementParsing => [
                           :Test_NameInputsTaskArgs,
                           :Test_NameInputsTaskArgsAndDeps
                           ] do |task|
-  taskDescriptor task
+  taskTest task, :TestProcessorArgumentParsing, expectedWorkingDir, expectedProjectFile
 end
 
 task :Test_StringNameOnly do

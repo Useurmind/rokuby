@@ -66,4 +66,5 @@ clean "BaseTestDirectory"
 
 task :default => [:TestTask]
 
-import "Test/Test_ProjectPath.rb"
+import "Test_ProjectPath.rb"
+import "Test_ProcessManager.rb"

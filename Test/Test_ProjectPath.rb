@@ -1,15 +1,20 @@
-require File.join(File.dirname(__FILE__), "unit_tests")
-require File.join(File.dirname(__FILE__), "task_descriptor")
-
 include Rokuby
-include UnitTests
+include Rokuby::UnitTests
+include Rokuby::DSL::Test
+
+expectedWorkingDir = projPath(".")
+expectedProjectFile = projPath("Test_ProjectPath.rb")
+
+task :default => [:TestProjectPath]
 
 desc "Execute some tests that check the ProjectPath class for errors"
 task :TestProjectPath => [
-                          :Test_AbsolutePath_EqualsWorkDirPlusArgument,
-                          :Test_RelativePath_EqualsArgument,
-                          :Test_BasePath_EqualsWorkDir,
-                          :Test_ObjectInputBaseRelative_EqualsInput,
+                          :Test_InitAbsolutePath_EqualsWorkDirPlusArgument,
+                          :Test_InitRelativePath_EqualsArgument,
+                          :Test_InitBasePath_EqualsWorkDir,
+                          :Test_InitObjectInputBaseRelative_EqualsInput,
+                          :Test_InitEmptyLocalPath_EqualWorkingDir,
+                          :Test_InitPointLocalPath_EqualWorkingDir,
                           
                           :Test_MixedSlashesPath_IsCorrected,
                           :Test_LocalPath_IsOmmitted,
@@ -27,28 +32,32 @@ task :TestProjectPath => [
                           :Test_MakeRelative_WorksForAbsoluteLinuxPath,
                           
                           :Test_RelativeDirectory_WorksForAbsoluteWindowsPath,
-                          :Test_RelativeDirectory_WorksForAbsoluteLinuxPath
+                          :Test_RelativeDirectory_WorksForAbsoluteLinuxPath,
+                          
+                          :Test_Join_AddsToPathes,
+                          :Test_Join_OmmitsFileIfDetected
                           ] do |task|
-  taskDescriptor task
+                          
+  taskTest task, :TestProjectPath, expectedWorkingDir, expectedProjectFile
 end
 
-task :Test_AbsolutePath_EqualsWorkDirPlusArgument do
-  puts "Test_AbsolutePath_EqualsWorkDirPlusArgument"
+task :Test_InitAbsolutePath_EqualsWorkDirPlusArgument do
+  puts "Test_InitAbsolutePath_EqualsWorkDirPlusArgument"
   
   pp = ProjectPath.new("any_path")
   expected = Dir.pwd + "/any_path"
   TestEqual(pp.AbsolutePath(), expected)
 end
 
-task :Test_RelativePath_EqualsArgument do
-  puts "Test_RelativePath_EqualsArgument"
+task :Test_InitRelativePath_EqualsArgument do
+  puts "Test_InitRelativePath_EqualsArgument"
   
   pp = ProjectPath.new("any_path")
   expected = "any_path"
   TestEqual(pp.RelativePath, expected)
 end
 
-task :Test_BasePath_EqualsWorkDir do
+task :Test_InitBasePath_EqualsWorkDir do
   puts "Test_BasePath_EqualsWorkDir"
   
   pp = ProjectPath.new("any_path")
@@ -56,8 +65,8 @@ task :Test_BasePath_EqualsWorkDir do
   TestEqual(pp.BasePath, expected)
 end
 
-task :Test_ObjectInputBaseRelative_EqualsInput do
-  puts "Test_ObjectInputBaseRelative_EqualsInput"
+task :Test_InitObjectInputBaseRelative_EqualsInput do
+  puts "Test_InitObjectInputBaseRelative_EqualsInput"
   
   basePath = "C:/some/arbitraty/path"
   relativePath = "some/more/arbitrary/path"
@@ -67,6 +76,34 @@ task :Test_ObjectInputBaseRelative_EqualsInput do
   TestEqual(pp.AbsolutePath(), expected)
   TestEqual(pp.BasePath, basePath)
   TestEqual(pp.RelativePath, relativePath)
+end
+
+task :Test_InitEmptyLocalPath_EqualWorkingDir do
+  puts "Test_InitEmptyLocalPath_EqualWorkingDir"
+  
+  expectedBase = Dir.pwd
+  expectedRelative = ""
+  expectedAbsolute = Dir.pwd
+  
+  pp = ProjectPath.new()  
+  
+  TestEqual(pp.AbsolutePath(), expectedAbsolute)
+  TestEqual(pp.BasePath, expectedBase)
+  TestEqual(pp.RelativePath, expectedRelative)                        
+end
+
+task :Test_InitPointLocalPath_EqualWorkingDir do
+  puts "Test_InitPointLocalPath_EqualWorkingDir"
+  
+  expectedBase = Dir.pwd
+  expectedRelative = ""
+  expectedAbsolute = Dir.pwd
+  
+  pp = ProjectPath.new(".")  
+  
+  TestEqual(pp.AbsolutePath(), expectedAbsolute)
+  TestEqual(pp.BasePath, expectedBase)
+  TestEqual(pp.RelativePath, expectedRelative)                        
 end
 
 task :Test_MixedSlashesPath_IsCorrected do
@@ -255,8 +292,6 @@ end
 task :Test_RelativeDirectory_WorksForAbsoluteLinuxPath do
   puts "Test_RelativeDirectory_WorksForAbsoluteLinuxPath"
   
-  puts "Test_RelativeDirectory_WorksForAbsoluteWindowsPath"
-  
   path = "/home/user/arbitrary/path/to/some/place/file.txt"
   expectedDirectory = "/home/user/arbitrary/path/to/some/place"
   
@@ -265,4 +300,38 @@ task :Test_RelativeDirectory_WorksForAbsoluteLinuxPath do
   relativeDirectory = pathPath.RelativeDirectory()
   
   TestEqual(relativeDirectory, expectedDirectory)
+end
+
+task :Test_Join_AddsToPathes do  
+  puts "Test_Join_AddsToPathes"
+  
+  base1 = "some/arbitrary/path1"
+  base2 = "some/other/arbitrary/path2"
+  relative1 = "relative/path1"
+  relative2 = "relative/path2"
+  
+  path1 = ProjectPath.new({base: base1, relative: relative1})
+  path2 = ProjectPath.new({base: base2, relative: relative2})
+  joinedPath = path1 + path2
+  
+  TestEqual(joinedPath.BasePath, base1)
+  TestEqual(joinedPath.RelativePath, relative1 + "/" + relative2)
+end
+
+task :Test_Join_OmmitsFileIfDetected do                          
+  puts "Test_Join_OmmitsFileIfDetected"
+  puts "Would be unexpected behaviour"
+  
+  #base1 = "some/arbitrary/path1"
+  #base2 = "some/other/arbitrary/path2"
+  #relative1 = "relative/path1/file_should_not_be_used_in_join.txt"
+  #relative1_no_file = "relative/path1"
+  #relative2 = "relative/path2"
+  
+ # path1 = ProjectPath.new({base: base1, relative: relative1})
+ # path2 = ProjectPath.new({base: base2, relative: relative2})
+ # joinedPath = path1 + path2
+  
+ # TestEqual(joinedPath.BasePath, base1)
+ # TestEqual(joinedPath.RelativePath, relative1_no_file + "/" + relative2)
 end

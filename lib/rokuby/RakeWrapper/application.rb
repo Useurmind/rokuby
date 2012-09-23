@@ -340,7 +340,7 @@ module Rokuby
       # found, but an existing file matches the task name, assume it is a file
       # task with no dependencies or actions.
       def [](taskPath, scopes=nil)
-        task, projectFile = getTaskAndProjectFile(taskPath, scopes)
+        task = getTaskAndProjectFile(taskPath, scopes)[0]
         return task
       end
       

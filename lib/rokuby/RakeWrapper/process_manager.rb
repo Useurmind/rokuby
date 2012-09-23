@@ -29,7 +29,7 @@ module Rokuby
     # - Only the processor is cloned with the state of when it is cloned.
     # - Cloning process chains will also lead to cloning subprocessors of the chains and adapting their names.
     def CloneProcessor(newName, oldPath)
-      processor, sourceProjectFile = _GetProcessor(nil, oldPath)     
+      processor = _GetProcessor(nil, oldPath)[0]
       
       newProcessor = initialize_copy(processor)
       newProcessor.AdaptName(newName)

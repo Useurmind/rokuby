@@ -127,6 +127,8 @@ module Rokuby
     
     # Initialize a path.
     # If only one string is give this is taken as the relative path and the base path is estimated.
+    # @example Initialize path to working dir.
+    #   ProjectPath.new()
     # @example Initialize path with BasePath being the current working directory and RelativePath being `myDirectory`.
     #   ProjectPath.new("myDirectory")
     # @example Initialize a path with explicit base and relative part.
@@ -136,13 +138,17 @@ module Rokuby
     # @option paramBag [String] :base The base path of this path (estimated from the current directory if not given).
     # @option paramBag [String] :relative The relative part of the path.
     # @option paramBag [String] :absolute Is the input path default (normally estimated automatically, for cases where this is not possible).
-    def initialize(paramBag)
+    def initialize(paramBag=nil)
       #puts "Creating path with #{paramBag}"
       super()
       
+      if(!paramBag)
+        paramBag = "."
+      end
+      
       if(paramBag.kind_of?(String))
         base = nil
-        relative = FormatPath(paramBag)
+        relative = FormatPath(paramBag) || ""
         @Absolute = false
       else
         relative = FormatPath(paramBag[:relative]) || ""

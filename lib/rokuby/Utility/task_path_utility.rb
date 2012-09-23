@@ -41,13 +41,13 @@ module Rokuby
         
         # Get the name contained in this task path
         def GetTaskName(taskPath)
-            projectFilePath, name = GetProjectFilePathName(taskPath)
+            name = GetProjectFilePathName(taskPath)[1]
             return name
         end
         
         # Get the name contained in this task path
         def GetProjectFilePath(taskPath)
-            projectFilePath, name = GetProjectFilePathName(taskPath)
+            projectFilePath = GetProjectFilePathName(taskPath)[0]
             return projectFilePath
         end
         

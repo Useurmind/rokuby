@@ -28,6 +28,10 @@ module Rokuby
 "Utility/VisualStudio/project_file_creator",
 "Utility/VisualStudio/solution_file_creator",
 
+# Utility for internal testing purposes
+"Utility/Test/unit_tests",
+"Utility/Test/task_test",
+
 # Information Units (classes needed in the dsl language,
 "InformationUnits/Constants/project_constants",
 

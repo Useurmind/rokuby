@@ -15,7 +15,7 @@ module Rokuby
 
     # Format the path so that the slashes are correct.
     def FormatPath(path)
-      if(!path || path == "")
+      if(!path || path == "" || path == ".")
         return nil
       end
       #puts "Formatting path #{path}"
@@ -54,6 +54,10 @@ module Rokuby
     # Is this path an absolute path.
     # Checks for drive letters and beginning slashes.
     def PathAbsolute?(path)
+      if(!path)
+        return false
+      end
+      
       return path.match("^(([A-Za-z]:)|(\/))") != nil
     end
     

@@ -197,7 +197,6 @@ module Rokuby
       idlPaths.uniq().each do |idlPath|
         filter = JoinXmlPaths([@idlBasefilter, idlPath.RelativeDirectory])
         relativeIdl = _GetVsProjectRelativePath(idlPath).RelativePath
-        idlFilename = idlPath.FileName(false)
         
         @idls.push GetElementForList(
           {"Include" => relativeIdl},
