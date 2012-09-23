@@ -27,10 +27,15 @@ module Rokuby
     
     # Load a project file from the given path.
     # This path is NOT a project path, because this class needs to implement the
-    # Rak::Loader interface.
-    def load(path)
+    # Rake::Loader interface.
+    def load(path)      
       #puts "Loading project file #{path}" 
       projectPath = ProjectPath.new(path)
+      
+      if(!projectPath.exist?() || !projectPath.file?())
+        currentlyLoadedProjectFileString = (CurrentlyLoadedProjectFile() == nil) ? "nil" : CurrentlyLoadedProjectFile().Path.to_s
+        raise "Could not find project file '#{path}' to load. Currently loaded project files is #{currentlyLoadedProjectFileString}"
+      end
       
       LoadProjectFile(projectPath)
     end

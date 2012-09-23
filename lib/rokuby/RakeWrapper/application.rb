@@ -258,8 +258,7 @@ module Rokuby
       # It will load the project file asap to make its values available in the
       # loading project file and above.
       def AddProjectImport(path)
-        projectPath = ProjectPath.new(path)
-        @ProjectFileLoader.LoadProjectFile(projectPath)
+        @ProjectFileLoader.load(path)
       end
       
       # Include a file expression into the list of clean targets of the current project file.

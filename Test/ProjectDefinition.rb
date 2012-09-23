@@ -58,7 +58,7 @@ end
 
 directory "BaseTestDirectory"
 
-import "Test/ProjectDefinition"
+import "TestTasks/ProjectDefinition"
 
 clean "TestfileBase"
 clean "TestfileBase2"
