@@ -1,0 +1,41 @@
+expectedWorkingDir = projPath(".")
+expectedProjectFile = projPath("ProjectDefinition")
+
+include Rokuby::DSL::Test
+
+desc "Testing basic task functionality in subfolders"
+task :TestInSubfolder => ["TestfileSubfolder", "TestfileSubfolder2"] do |task|
+   taskTest task, :TestInSubfolder, expectedWorkingDir, expectedProjectFile
+end
+
+desc "Test executing an shadowed task as prerequesite in subproject"
+task :PreTaskInSub => [:TestTask, "Test2\\projectDefinition:TestTask"] do |task|
+    taskTest task, :PreTaskInSub, expectedWorkingDir, expectedProjectFile
+end
+
+desc "Task to test basic task functionality (but in subfolder)"
+task :TestTask do |task|
+   taskTest task, :TestTask, expectedWorkingDir, expectedProjectFile
+end
+
+task :CalledViaFileSpace do |task|
+   taskTest task, :CalledViaFileSpace, expectedWorkingDir, expectedProjectFile
+end 
+
+file "TestfileSubfolder" do |task|
+   File.new("TestfileSubfolder", "w")
+   taskTest task, :TestfileSubfolder, expectedWorkingDir, expectedProjectFile
+end
+
+file_create "TestfileSubfolder2" do |task|
+    File.new("TestfileSubfolder2", "w")
+   taskTest task, :TestfileSubfolder2, expectedWorkingDir, expectedProjectFile
+end
+
+directory "SubTestDirectory"
+
+clean "TestfileSubfolder"
+clean "TestfileSubfolder2"
+clean "SubTestDirectory"
+
+import "Test2/projectDefinition"

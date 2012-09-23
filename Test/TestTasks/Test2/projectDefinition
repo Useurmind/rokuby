@@ -1,0 +1,7 @@
+expectedWorkingDir = projPath(".")
+expectedProjectFile = projPath("projectDefinition")
+
+desc "A task in a second level project file"
+task :TestTask do |task|
+    taskTest task, :TestTask, expectedWorkingDir, expectedProjectFile
+end
