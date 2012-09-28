@@ -44,6 +44,13 @@ module Rokuby
   module DSL
     include GeneralUtility
     
+    module Os
+      # Is the current operating system windows.
+      def self.isWindows?
+        return RbConfig::CONFIG['host_os'] =~ /mswin|mingw/
+      end
+    end
+    
     module Test
       # Performs some unit tests on the given task.      
       # @param [Task] task The task that should be checked.

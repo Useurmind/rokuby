@@ -124,6 +124,6 @@ module Rokuby
       end
       
       return taskNameParts.join("_")
-    end
+    end    
   end
 end
