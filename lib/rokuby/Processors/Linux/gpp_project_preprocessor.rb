@@ -24,7 +24,7 @@ module Rokuby
       
       gppConf = _GetGppProjectConf(platBinExt)
         
-      subfolderName = @projectDescription.Name + gppConf.Platform.BinaryExtension()
+      subfolderName = @projectDescription.BinaryName + gppConf.Platform.BinaryExtension()
       
       if(gppConf.CompileDirectory == nil)
         gppConf.CompileDirectory = @projectDescription.BuildPath + ProjectPath.new(subfolderName)
@@ -35,7 +35,11 @@ module Rokuby
       end
       
       if(gppConf.TargetName == nil)
-        gppConf.TargetName = subfolderName
+        if(@projectDescription.BinaryName)
+            gppConf.TargetName = @projectDescription.BinaryName
+        else
+            gppConf.TargetName = @projectDescription.Name + "_" + gppConf.Platform.BinaryExtension()
+        end  
       end
       
       if(@projectDescription.BinaryType == :Application)

@@ -140,6 +140,7 @@ module Rake
 
     # Invoke the task if it is needed.  Prerequisites are invoked first.
     def invoke(*args)
+      #puts "invoking task #{@name} with arguments #{args}"
       task_args = TaskArguments.new(arg_names, args)
       invoke_with_call_chain(task_args, InvocationChain::EMPTY)
     end

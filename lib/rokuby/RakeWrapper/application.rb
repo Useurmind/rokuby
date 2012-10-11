@@ -144,6 +144,7 @@ module Rokuby
       # There is now one clean task for each project file that can be executed separately.
       # Calling clean/clobber without extra information will clean all project files.
       def invoke_task(task_string)
+          #puts "invoking task: '#{task_string}'"
         taskPath, args = parse_task_string(task_string)
         
         projectPath, name = GetProjectFilePathName(taskPath)

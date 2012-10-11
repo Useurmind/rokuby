@@ -76,7 +76,11 @@ module Rokuby
         
         # Set binary name and extension and configuration type
         if(vsConf.TargetName == nil)
-          vsConf.TargetName = @projectDescription.Name + "_" + vsConf.Platform.BinaryExtension()
+          if(@projectDescription.BinaryName)
+            vsConf.TargetName = @projectDescription.BinaryName
+          else
+            vsConf.TargetName = @projectDescription.Name + "_" + vsConf.Platform.BinaryExtension()
+          end          
         end
         
         if(@projectDescription.BinaryType == :Application)

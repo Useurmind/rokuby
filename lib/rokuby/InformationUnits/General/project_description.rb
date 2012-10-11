@@ -19,9 +19,9 @@ module Rokuby
     def initialize(valueMap=nil)
       super(valueMap)
       
-      @Name = ""
-      @Version = "0.0"
-      @BinaryName = ""
+      @Name = nil
+      @Version = nil
+      @BinaryName = nil
       @BinaryType = :Application
       @CompilesPath = ProjectPath.new(COMPILE_SUBDIR)
       @BuildPath = ProjectPath.new(BUILD_SUBDIR)

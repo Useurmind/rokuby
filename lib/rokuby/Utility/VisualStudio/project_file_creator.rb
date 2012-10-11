@@ -170,12 +170,18 @@ module Rokuby
       vsRelativeAdditionalIncludeDirectories = []
       
       configuration.AdditionalIncludeDirectories.each() do |dirPath|
+        pathToAdd = nil
         if(dirPath.absolute?)
-          vsRelativeAdditionalIncludeDirectories.push dirPath.AbsolutePath()
+          pathToAdd = dirPath.AbsolutePath()
         else
-          vsRelativeAdditionalIncludeDirectories.push(_GetVsProjectRelativePath(dirPath).RelativePath)
+          pathToAdd = _GetVsProjectRelativePath(dirPath).RelativePath
         end
         
+        if(pathToAdd == "" or pathToAdd == nil)
+          pathToAdd = "."
+        end
+        
+        vsRelativeAdditionalIncludeDirectories.push(pathToAdd)
       end
       
       

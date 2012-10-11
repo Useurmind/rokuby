@@ -23,13 +23,13 @@ module Rokuby
       
       parts = []
       if(@Os)
-        parts.push @Os
+        parts.push @Os.to_s().downcase()
       end
       if(@Architecture)
-        parts.push @Architecture
+        parts.push @Architecture.to_s().downcase()
       end
       if(@Type)
-        parts.push @Type
+        parts.push @Type.to_s().downcase()
       end
       
       return parts.join("_")
