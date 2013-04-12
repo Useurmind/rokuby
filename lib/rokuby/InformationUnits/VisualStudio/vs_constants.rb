@@ -18,6 +18,14 @@ module Rokuby
         STATIC = ".lib"
       end
       
+      module ClrSupport
+        FALSE = 'false'
+        TRUE = 'true'
+        OLD_SYNTAX = 'OldSyntax'
+        PURE = 'Pure'
+        SAFE = 'Safe'
+      end
+      
       module CharacterSet
         MULTI_BYTE = 'MultiByte'
         UNICODE = 'Unicode'
@@ -48,6 +56,7 @@ module Rokuby
       module ExceptionHandling
         SYNC = "Sync"
         ASYNC = "Async"
+        SYNCCTHROW = "SyncCThrow"
         FALSE = "false"
       end
       

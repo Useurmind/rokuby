@@ -10,6 +10,7 @@ module Rokuby
   # [TargetExt] The extension for the resulting binary (based on the project description binary type).
   # [ConfigurationType] The type of binary that is created (based on the project description binary type).
   # [UseDebugLibraries] Should debug libraries be used (bool) (based on the platform type).
+  # [ClrSupport] Should the project be compiled with support for the Common Language Runtime (e.g. 'false', 'true', 'OldSyntax', 'Pure', 'Safe', default: 'false').
   # [WholeProgramOptimization] Should the program be optimized (bool) (based on the platform type).
   # [CharacterSet] bla ('MultiByte', 'Unicode', 'NotSet').
   # [OutputDirectory] The directory for the build result (based on the project description build path).
@@ -25,7 +26,7 @@ module Rokuby
   # [IntrinsicFunctions] Seems to be good for performance, e.g. release builds (bool) (based on the platform type).
   # [ProgramDataBaseFileName] The name of the pdb file that should hold debug information.
   # [RuntimeLibrary] The windows libraries to be used with this project ('MultiThreaded', 'MultiThreadedDll', 'MultiThreadedDebug', 'MultiThreadedDebugDll').
-  # [ExceptionHandling] Which type of exception handling should be applied (e.g. 'Async', 'false', default: 'Sync' )
+  # [ExceptionHandling] Which type of exception handling should be applied (e.g. 'Async', 'false', 'SyncCThrow', default: 'Sync' )
   # [BufferSecurityCheck] bool, default: true.
   # [DebugInformationFormat] Format of the generated debug information (e.g. 'OldStyle', 'ProgramDatabase', default: 'EditAndContinue')
   # [InlineFunctionExpansion] How should functions be expanded inline (e.g. 'AnySuitable', 'Disabled', default: 'Default')
@@ -47,6 +48,7 @@ module Rokuby
     attr_accessor :TargetExt
     attr_accessor :ConfigurationType
     attr_accessor :UseDebugLibraries
+    attr_accessor :ClrSupport
     attr_accessor :WholeProgramOptimization    
     attr_accessor :CharacterSet
     attr_accessor :OutputDirectory
@@ -94,6 +96,7 @@ module Rokuby
       @TargetExt = nil
       @ConfigurationType = nil
       @UseDebugLibraries = nil
+      @ClrSupport = Vs::Configuration::ClrSupport::FALSE
       @WholeProgramOptimization = nil
       @CharacterSet = Vs::Configuration::CharacterSet::NOT_SET
       @OutputDirectory = nil

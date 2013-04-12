@@ -117,7 +117,8 @@ module Rokuby
           XmlTag.new({name: "ConfigurationType", value: configuration.ConfigurationType}),
           XmlTag.new({name: "UseDebugLibraries", value: configuration.UseDebugLibraries.to_s}),
           XmlTag.new({name: "WholeProgramOptimization", value: configuration.WholeProgramOptimization.to_s}),
-          XmlTag.new({name: "CharacterSet", value: configuration.CharacterSet.to_s})
+          XmlTag.new({name: "CharacterSet", value: configuration.CharacterSet.to_s}),
+          XmlTag.new({name: "CLRSupport", value: configuration.ClrSupport.to_s})
         ]
       })
     end
