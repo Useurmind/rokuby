@@ -8,4 +8,6 @@ module Rokuby
   PROJECT_SUBDIR = "projects"
   COMPILE_SUBDIR = "bin"
   BUILD_SUBDIR = "build"
+  DOXYGEN_SUBDIR = "doxygen"
+  ADDITIONAL_DOXY_FILES_SUBDIR = "doc_files"
 end

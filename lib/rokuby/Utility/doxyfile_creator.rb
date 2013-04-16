@@ -1,5 +1,4 @@
 module Rokuby
-  
   # This class can be used to create a doxygen class.
   # It offers the possibility to set values for important doxygen options.
   # The class takes a doxyfile template, fills in the values for the given options, 
@@ -14,8 +13,10 @@ module Rokuby
   # [ExpandOnlyPredef] Should only predefined macros be expanded to their defined values.
   # [Predefined] The macros that should be expanded and their values in form of a hash.
   # [ImagePath] The path to the folder that contains the images used in the docu.
-  class DoxygenBuilder
+  class DoxyfileCreator
     include DirectoryUtility
+    
+    attr_accessor :DoxygenConfiguration
     
     attr_accessor :DoxyfileTemplate
     attr_accessor :DoxyfileName
@@ -136,7 +137,5 @@ module Rokuby
 	system("doxygen -g #{@DoxyfileTemplate}")
       end
     end
-    
   end
-  
 end
