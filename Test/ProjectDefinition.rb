@@ -5,7 +5,7 @@ expectedProjectFile = projPath("ProjectDefinition.rb")
 
 
 desc "Task to test basic task functionality"
-task :TestTask => [:TestInSubfolder, "TestfileBase", "TestfileBase2", "./Test\\Test2/projectDefinition:TestTask"] do |task|
+task :TestTask => [:TestInSubfolder, "TestfileBase", "TestfileBase2", "./TestTasks\\Test2/projectDefinition:TestTask"] do |task|
    taskTest task, :TestTask, expectedWorkingDir, expectedProjectFile
 end
 

@@ -120,7 +120,7 @@ generalInputs = [projDescr("TestProject"), projSpec("TestProject")] + defaultPro
 # This information unit is a specification for the resource file which lies in 'resource' and is required
 # for the windows build.
 fileSpec "TestProjectVsResource", :inPats => [".*\.rc$"],
-                                  :sPaths => [projPath("resource")]
+                                  :sPaths => [projPath("resources")]
 
 # The specification for the part of the project which is only required for Visual Studio.
 # It includes the resource files specification which is only used under windows.
