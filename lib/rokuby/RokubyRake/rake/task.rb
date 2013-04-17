@@ -173,6 +173,7 @@ module Rake
     # Invoke all the prerequisites of a task.
     def invoke_prerequisites(task_args, invocation_chain) # :nodoc:
       prerequisite_tasks.each { |prereq|
+        #puts "invoking prerequesite task of #{self}: #{prereq}"
         prereq_args = task_args.new_scope(prereq.arg_names)
         prereq.invoke_with_call_chain(prereq_args, invocation_chain)
       }

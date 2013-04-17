@@ -28,6 +28,9 @@ module Rokuby
 "Utility/VisualStudio/project_file_creator",
 "Utility/VisualStudio/solution_file_creator",
 
+# Utility for doxygen tasks
+"Utility/Doxygen/doxyfile_creator",
+
 # Utility for internal testing purposes
 "Utility/Test/unit_tests",
 "Utility/Test/task_test",
@@ -73,6 +76,8 @@ module Rokuby
 "InformationUnits/Linux/gpp_project",
 "InformationUnits/Linux/gpp_project_description",
 "InformationUnits/Linux/gpp_project_configuration",
+# Doxygen information units
+"InformationUnits/Doxygen/doxygen_configuration",
 
 # default values for different settings
 "InformationUnits/General/defaults",
@@ -134,8 +139,11 @@ module Rokuby
 # multi platform
 "Processors/MultiPlatform/multi_project_builder",
 "Processors/MultiPlatform/multi_solution_builder",
+# Doxygen processors
+"Processors/Doxygen/doxygen_doc_writer",
+"Processors/Doxygen/doxygen_builder",
+"Processors/Doxygen/multi_doxygen_builder"
 
-"doxygen_builder",
 ]
 
   end

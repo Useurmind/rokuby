@@ -9,5 +9,5 @@ module Rokuby
   COMPILE_SUBDIR = "bin"
   BUILD_SUBDIR = "build"
   DOXYGEN_SUBDIR = "doxygen"
-  ADDITIONAL_DOXY_FILES_SUBDIR = "doc_files"
+  ADDITIONAL_DOXY_FILES_SUBDIR = "src_doc"
 end

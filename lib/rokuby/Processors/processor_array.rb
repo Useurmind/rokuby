@@ -10,7 +10,7 @@ module Rokuby
   class ProcessorArray < ProcessChain
         
     attr_reader :ArrayProcessors
-        
+    
     def _InitProc
       # knows everything per implementation of _InputKnown
       
@@ -56,10 +56,10 @@ module Rokuby
     
     alias AddDependencies_ProcessChain AddDependencies
     def AddDependencies(deps)
-      AddDependencies_Processor(deps)
+      _AddDependencies_ProcessorArray(deps)
     end
     
-    def _AddDependencies(taskPaths)
+    def _AddDependencies_ProcessorArray(taskPaths)
       taskPaths.each() do |taskPathAndName|
         depProc = proc taskPathAndName
         taskPath = SplitTaskPath(taskPathAndName)[0]

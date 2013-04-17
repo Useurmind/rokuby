@@ -122,7 +122,7 @@ module Rokuby
             t.comment && t.name =~ options.show_task_pattern
           }
           
-          puts "Displayable tasks: #{all_displayable_tasks}\n"
+          #puts "Displayable tasks: #{all_displayable_tasks}\n"
           
           width = all_displayable_tasks.collect { |t| t.name_with_args.length }.max || 10
           max_column = truncate_output? ? terminal_width() - name.size - width - 7 : nil

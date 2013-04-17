@@ -123,12 +123,12 @@ module Rokuby
       if(!super(input))
         return false
       end
-      if(input.is_a?(ProjectDescription))
-        clean input.CompilesPath.RelativePath
-        clean input.BuildPath.RelativePath
-      elsif(input.is_a?(VsProjectDescription))
-        clean input.ProjectBasePath.RelativePath
-      end
+      #if(input.is_a?(ProjectDescription))
+      #  clean input.CompilesPath.RelativePath
+      #  clean input.BuildPath.RelativePath
+      #elsif(input.is_a?(VsProjectDescription))
+      #  clean input.ProjectBasePath.RelativePath
+      #end
       return true
     end
     

@@ -194,6 +194,12 @@ module Rokuby
       return Rake.application.DefineInformationUnit(GppProjectDescription, *args, &block)
     end
     
+    # Doxygen
+    
+    def doxyConf(*args, &block)
+      return Rake.application.DefineInformationUnit(DoxygenConfiguration, *args, &block)
+    end
+    
     ####################################################
     # Processors
     
@@ -261,6 +267,16 @@ module Rokuby
     
     def multiSlnBuild(*args, &block)
       Rake.application.DefineProcessor(MultiSolutionBuilder, *args, &block)
+    end
+    
+    # Doxygen
+    
+    def doxyBuild(*args, &block)
+      Rake.application.DefineProcessor(DoxygenBuilder, *args, &block)
+    end
+    
+    def multiDoxyBuild(*args, &block)
+      Rake.application.DefineProcessor(MultiDoxygenBuilder, *args, &block)
     end
     
     #####################################################

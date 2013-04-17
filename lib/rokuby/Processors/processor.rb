@@ -167,8 +167,9 @@ class Processor < Rake::ProcessorTask
   def _FetchInputs
     #puts "in FetchInputs of processor #{self}"
     _InputProcessors().each() do |name, inputProcessor|
-      #puts "collecting outputs in #{@ProjectFile.Path.RelativePath}:#{@Name} from processor #{name}}"
+      #puts "collecting outputs in #{@ProjectFile.Path.RelativePath}:#{@Name} from processor #{name}"
       inputProcessor.Outputs().each() do |output|
+        #puts "Found input #{output}"
         AddInput(output)
       end
     end

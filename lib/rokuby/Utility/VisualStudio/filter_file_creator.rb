@@ -14,6 +14,8 @@ module Rokuby
     end
 
     def BuildFile
+      #startTime = Time.now
+      
       _JoinSourceUnits()
       
       doc = {
@@ -47,6 +49,8 @@ module Rokuby
 
       CreateFileDirectory()
       SaveXmlDocument(doc, GetFilePath().AbsolutePath(), @options)
+      
+      #puts "Building the filter file took #{Time.now - startTime} seconds."
     end
 
     def CreateSourceFilter

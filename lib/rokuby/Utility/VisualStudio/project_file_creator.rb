@@ -11,7 +11,12 @@ module Rokuby
     end
 
     def BuildFile()
+      #startTime = Time.now
+      
       _JoinSourceUnits()
+      
+      #t1 = Time.now
+      #puts "Joining the source units took #{t1 - startTime}"
       
       doc = XmlDocument.new()
       
@@ -31,15 +36,34 @@ module Rokuby
       
       doc.RootChild = @projectTag
 
+      #t2 = Time.now
       CreateGlobalPropertyGroup()
+      #t3 = Time.now
+      #puts "CreateGlobalPropertyGroup took #{t3 - t2}"
       CreateConfigurationTags()
+      #t4 = Time.now
+      #puts "CreateConfigurationTags took #{t4 - t3}"
       CreateImports()
+      #t5 = Time.now
+      #puts "CreateImports took #{t5 - t4}"
       CreateImportGroups()
+      #t6 = Time.now
+      #puts "CreateImportGroups took #{t6 - t5}"
       CreateHeaderItemGroup()
+      #t7 = Time.now
+      #puts "CreateHeaderItemGroup took #{t7 - t6}"
       CreateSourceItemGroup()
+      #t8 = Time.now
+      #puts "CreateSourceItemGroup took #{t8 - t7}"
       CreateResourceItemGroup()
+      #t9 = Time.now
+      #puts "CreateResourceItemGroup took #{t9 - t8}"
       CreateIdlItemGroup()
+      #t10 = Time.now
+      #puts "CreateIdlItemGroup took #{t10 - t9}"
       CreateProjectReferenceItemGroup()
+      #t11 = Time.now
+      #puts "CreateProjectReferenceItemGroup took #{t11 - t10}"
       
       @projectTag.Children.push(XmlTag.new({
         name: "ItemGroup",
@@ -66,6 +90,8 @@ module Rokuby
       
       CreateFileDirectory()
       doc.SaveToFile(GetFilePath().AbsolutePath())
+      
+      #puts "Building the project file took #{Time.now - startTime} seconds."
     end
 
     def CreateGlobalPropertyGroup()
@@ -86,12 +112,25 @@ module Rokuby
       @configurationPropertyGroups = []
       @itemDefinitionGroups = []
       
+      #puts "#{@VsProjectConfigurations.count()} configurations to build configuration tags for."
       @VsProjectConfigurations.each do |configuration|
+        #puts "Creating configuration tags for configuration #{configuration.Name}"
+        #t1 = Time.now
         @projectConfigurations.push(CreateProjectConfiguration(configuration))
+        #t2 = Time.now
+        #puts "CreateProjectConfiguration took #{t2 - t1}"
         @propertyGroups.push(CreatePropertyGroup(configuration))
+        #t3 = Time.now
+        #puts "CreatePropertyGroup took #{t3 - t2}"
         @propertySheetsImportGroups.push(CreatePropertySheetsImportGroup(configuration))
+        #t4 = Time.now
+        #puts "CreatePropertySheetsImportGroup took #{t4 - t3}"
         @configurationPropertyGroups.push(CreateConfigurationPropertyGroup(configuration))
+        #t5 = Time.now
+        #puts "CreateConfigurationPropertyGroup took #{t5 - t4}"
         @itemDefinitionGroups.push(CreateItemDefinitionGroup(configuration))
+        #t6 = Time.now
+        #puts "CreateItemDefinitionGroup took #{t6 - t5}"
       end
     end
 

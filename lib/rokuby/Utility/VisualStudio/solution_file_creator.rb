@@ -25,7 +25,9 @@ module Rokuby
       return @VsSolutionDescription.SolutionFilePath.DirectoryPath()
     end
     
-    def BuildFile      
+    def BuildFile
+      #startTime = Time.now
+      
       if(@VsProjects.length == 0)
         abort "No project specified for solution file creation"
       end
@@ -58,6 +60,8 @@ module Rokuby
       
       CreatePath(GetFilePath().DirectoryPath())
       File.open(GetFilePath().AbsolutePath(), 'w') {|f| f.write(@fileContent) }
+      
+      #puts "Building the solution file took #{Time.now - startTime} seconds."
     end
     
     def WriteProjectConfigurationPlatforms()

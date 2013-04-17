@@ -28,7 +28,7 @@ module Rokuby
     # Searches recursively. Patterns are applied on the relative paths.
     # [includePatterns] Some RegExps describing the file names.
     # [excludePatterns] Some RegExps that can be used to exclude file names.
-    # [directory] The proeject path to the directory that should be searched.
+    # [directory] The project path to the directory that should be searched.
     def FindFilesInDirectory(includePatterns, excludePatterns, directory)
       files = []      
       #puts "Searching files in '#{directory}'"
