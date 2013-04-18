@@ -76,7 +76,7 @@ module Rokuby
     end
     
     def CreateAdditionalDocumentationFilesString()
-      additionalDocFiles = FindFilesInDirectory([".*\.h$", ".*\.hpp$", ".*\.hxx$"], [], @DoxygenConfiguration.AdditionalDocumentationFileDirectory)
+      additionalDocFiles = FindFilesInDirectory([".*\.h$", ".*\.hpp$", ".*\.hxx$", ".*\.md$", ".*\.markdown$"], [], @DoxygenConfiguration.AdditionalDocumentationFileDirectory)
       @additionalDocumentationFilesString = ""
       additionalDocFiles.each() do |docFilePath|
         @additionalDocumentationFilesString = @additionalDocumentationFilesString + " #{GetDoxygenFilePath(docFilePath)}"

@@ -34,6 +34,7 @@ module Rokuby
     
     def _ConnectProcessors
       Connect(:in, @ProjectFinder.to_s, @DoxygenDocWriter.to_s, :out)
+      Connect(:in, @DoxygenDocWriter.to_s)
     end
   end
   
