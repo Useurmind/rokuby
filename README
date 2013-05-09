@@ -1,7 +1,7 @@
 Rokuby - A Ruby based build tool
 ================================
 
-Rokuby is a build tool written in Ruby that mainly targets building C++ projects. It is based on the task feature of Rake and extends it to allow more flexible transport and and processing
+Rokuby is a build tool written in Ruby that mainly targets building C++ projects. It is based on the task feature of Rake and extends it to allow more flexible transport and processing
 of information via so called processors.
 
 See the full documentation on http://useurmind.github.io/rokuby for more details.

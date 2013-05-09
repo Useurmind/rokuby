@@ -6,7 +6,7 @@ There are two very important classes in Rokuby:
 - Information Units: They represent the basic unit of information in Rokuby that can be passed around between different processors.
 - Processors: They process information units to achieve certain goals.
 
-As mentioned in the [Introduction](file.introduction.html) processors are Rake tasks that share all the functionality that of these tasks.
+As mentioned in the [Introduction](file.introduction.html) processors are Rake tasks that share all the functionality of these tasks.
 They can depend on tasks or be a dependency for other tasks. And they can also be executed.
 
 But they are also much more than tasks. In addition to their task behaviour they can pass information to processors that are further up
@@ -60,7 +60,7 @@ Normally, there are functions that are specific for the creation of certain info
         version: "1.0"
     }
     
-The functions that are available to create certain information untis (and also processors) are members of the `Rokuby::DSL` namespace.
+The functions that are available to create certain information untis (and also processors) are members of the ['Rokuby::DSL` namespace](Rokuby/DSL.html).
 
 The nice thing is that once the information units are defined you can easily obtain them via their name. For example
 
@@ -78,7 +78,40 @@ First processors can also have attributes and they can be set in a similar fashi
 contains the names and values of the attributes. The extend method of processor bears the same logical behaviour as the information unit
 extend method.
 
+	defineProc ProcessorClass, "ProcessorName", :attribute1 => value 1,
+												:attribute2 => value 2,
+
 But what is even more important when defining a processor is to input the correct information untis that should be processed by the processor.
 This can simply be done by inputting an array of the information units you deem necessary for the processor.
 
-    defineProc ProcessorClass, "ProcessorName", :procIns, :procArgs, :procDeps
+    defineProc ProcessorClass, "ProcessorName", :ins => [inputinformationunits]
+	
+	
+Process Chains
+--------------
+There are cases where you have to give input information units to the processor and cases where you don't. Remember that processors are introduced
+to be able to hand information between them. This means that the transport of information between processors is one of the most important features
+that they offer. Therefore, the information units that a processor uses during processing does not necessarily come from you but from a different
+processor that creates them during processing.
+
+To achieve this Rokuby provides processor chains which make it easy to connect several processors into chains or even trees of processors. You create
+such a chain by writing:
+
+	chain :MyProcessChain
+	
+To connect three processors in a row in this chain you simply use their names as follows:
+
+	chain :MyProcessChain, :Processor1, :Processor2, :Processor3
+	
+There are two special types of processors in such a chain which are named `:in` and `:out`. As process chains are also processors they take input
+and generate output. `:in` and `:out` are simple processors that only forward input information units. All input information units are given to the 
+`:in` processor of the chain. Similarly, all information units given to `:out` are forwarded to be the output of the chain. You can connect these 
+two processors as any other processors in the chain.
+
+	chain :MyProcessChain, :in, :Processor1, :out
+	
+The code above would produce a chain in which the input is routed to `:Processor1`. All the output of `:Processor1` is assigned as the output of the chain.
+
+By putting processors into chains they are automatically dependend on the previous processor in the chain. This means that executing `:Processor3` in the above
+example would execute `:Processor2` which in turn leads to the execution of `:Processor1`. The produced information unit from `:Processor1` will be given to 
+`:Processor2` for processing. Afterwards, the information units produced by `:Processor2` would enter `:Processor3`.

@@ -176,7 +176,7 @@ If you want to address a task in a specific project file you need to address it 
 a colon and the name of the task:
 If you for example want to execute a task `subtask` in the project file "./subdir/ProjectDefinition.rb" you would type:
 	
-	rakebuilder ./subdir/ProjectDefinition.rb:subtask
+	rokuby ./subdir/ProjectDefinition.rb:subtask
 
 Project Paths
 -------------
@@ -265,7 +265,7 @@ For example:
 	#define a general purpose process chain of some known processors
 	chain :ChainName, :in, :Proc1Name, :Proc2Name, :Proc3Name, :out
 
-This code defines a process chain that connects two processors with the names Proc1Name, Proc2Name and Proc3Name. The `:in` and `:out`
+This code defines a process chain that connects two processors with the names `Proc1Name`, `Proc2Name` and `Proc3Name`. The `:in` and `:out`
 symbols represent two processors that each process chain posseses, namely the input processor and the output processor. These processors
 are simple processors that just forward their input values as their output values. They are needed to implement a feature of a process chain
 that makes them very versatile: process chains are processors. This means that process chains can be used like processors in another process

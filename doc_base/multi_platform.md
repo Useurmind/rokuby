@@ -77,4 +77,5 @@ Finally, there is only one thing left, namely starting up such multi-platform ch
 corresponding single platform chain.
 
     desc "Start G++ build chain"
+	gppProjBuild multiProjBuild(:MultiPlatformApp).ArrayProcessors[:Gpp].Name()
     
