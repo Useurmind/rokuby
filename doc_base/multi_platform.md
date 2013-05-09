@@ -25,7 +25,7 @@ process chains for multiple platforms.
 
 Let us see this in a graphic:
 
-![Processor array chain with visual studio and g++ build chain](images/processor_array_multi_platform_chain.svg)
+![Example of a processor array chain with 3 consecutive processors in each process](images/basic_processor_arrays.svg)
 
 As you can see the processors in the array are connected to each other. When executing the last processor of one of these two chains
 all the previous processors in this single chain will be executed.
