@@ -249,7 +249,7 @@ If you want to address a task in a specific project file you need to address it 
 a colon and the name of the task:
 If you for example want to execute a task <code>subtask</code> in the project file &quot;./subdir/ProjectDefinition.rb&quot; you would type:</p>
 
-<pre class="code ruby"><code>rakebuilder ./subdir/ProjectDefinition.rb:subtask
+<pre class="code ruby"><code>rokuby ./subdir/ProjectDefinition.rb:subtask
 </code></pre>
 
 <h2>Project Paths</h2>
@@ -343,7 +343,7 @@ For example:</p>
 </span><span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:ChainName</span><span class='comma'>,</span> <span class='symbol'>:in</span><span class='comma'>,</span> <span class='symbol'>:Proc1Name</span><span class='comma'>,</span> <span class='symbol'>:Proc2Name</span><span class='comma'>,</span> <span class='symbol'>:Proc3Name</span><span class='comma'>,</span> <span class='symbol'>:out</span>
 </code></pre>
 
-<p>This code defines a process chain that connects two processors with the names Proc1Name, Proc2Name and Proc3Name. The <code>:in</code> and <code>:out</code>
+<p>This code defines a process chain that connects two processors with the names <code>Proc1Name</code>, <code>Proc2Name</code> and <code>Proc3Name</code>. The <code>:in</code> and <code>:out</code>
 symbols represent two processors that each process chain posseses, namely the input processor and the output processor. These processors
 are simple processors that just forward their input values as their output values. They are needed to implement a feature of a process chain
 that makes them very versatile: process chains are processors. This means that process chains can be used like processors in another process
@@ -377,7 +377,7 @@ task :MyTask =&gt; [:MyProc]
 </div></div>
 
     <div id="footer">
-  Generated on Wed Sep 19 23:09:42 2012 by
+  Generated on Thu May  9 18:20:51 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.2.1 (ruby-1.9.3).
 </div>

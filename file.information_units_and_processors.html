@@ -70,7 +70,7 @@
 <li>Processors: They process information units to achieve certain goals.</li>
 </ul>
 
-<p>As mentioned in the <a href="file.introduction.html">Introduction</a> processors are Rake tasks that share all the functionality that of these tasks.
+<p>As mentioned in the <a href="file.introduction.html">Introduction</a> processors are Rake tasks that share all the functionality of these tasks.
 They can depend on tasks or be a dependency for other tasks. And they can also be executed.</p>
 
 <p>But they are also much more than tasks. In addition to their task behaviour they can pass information to processors that are further up
@@ -127,7 +127,7 @@ that already contains values <code>[1, 2]</code> in this attribute results in an
 <span class='rbrace'>}</span>
 </code></pre>
 
-<p>The functions that are available to create certain information untis (and also processors) are members of the <code>Rokuby::DSL</code> namespace.</p>
+<p>The functions that are available to create certain information untis (and also processors) are members of the <a href="Rokuby/DSL.html">&#39;Rokuby::DSL` namespace</a>.</p>
 
 <p>The nice thing is that once the information units are defined you can easily obtain them via their name. For example</p>
 
@@ -145,15 +145,51 @@ To undertand their creation, we should look at their similarity and differences 
 contains the names and values of the attributes. The extend method of processor bears the same logical behaviour as the information unit
 extend method.</p>
 
+<pre class="code ruby"><code>defineProc ProcessorClass, &quot;ProcessorName&quot;, :attribute1 =&gt; value 1,
+                                            :attribute2 =&gt; value 2,
+</code></pre>
+
 <p>But what is even more important when defining a processor is to input the correct information untis that should be processed by the processor.
 This can simply be done by inputting an array of the information units you deem necessary for the processor.</p>
 
-<pre class="code ruby"><code><span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>ProcessorClass</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProcessorName</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:procIns</span><span class='comma'>,</span> <span class='symbol'>:procArgs</span><span class='comma'>,</span> <span class='symbol'>:procDeps</span>
+<pre class="code ruby"><code><span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>ProcessorClass</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProcessorName</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_inputinformationunits'>inputinformationunits</span><span class='rbracket'>]</span>
 </code></pre>
+
+<h2>Process Chains</h2>
+
+<p>There are cases where you have to give input information units to the processor and cases where you don&#39;t. Remember that processors are introduced
+to be able to hand information between them. This means that the transport of information between processors is one of the most important features
+that they offer. Therefore, the information units that a processor uses during processing does not necessarily come from you but from a different
+processor that creates them during processing.</p>
+
+<p>To achieve this Rokuby provides processor chains which make it easy to connect several processors into chains or even trees of processors. You create
+such a chain by writing:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:MyProcessChain</span>
+</code></pre>
+
+<p>To connect three processors in a row in this chain you simply use their names as follows:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:MyProcessChain</span><span class='comma'>,</span> <span class='symbol'>:Processor1</span><span class='comma'>,</span> <span class='symbol'>:Processor2</span><span class='comma'>,</span> <span class='symbol'>:Processor3</span>
+</code></pre>
+
+<p>There are two special types of processors in such a chain which are named <code>:in</code> and <code>:out</code>. As process chains are also processors they take input
+and generate output. <code>:in</code> and <code>:out</code> are simple processors that only forward input information units. All input information units are given to the 
+<code>:in</code> processor of the chain. Similarly, all information units given to <code>:out</code> are forwarded to be the output of the chain. You can connect these 
+two processors as any other processors in the chain.</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:MyProcessChain</span><span class='comma'>,</span> <span class='symbol'>:in</span><span class='comma'>,</span> <span class='symbol'>:Processor1</span><span class='comma'>,</span> <span class='symbol'>:out</span>
+</code></pre>
+
+<p>The code above would produce a chain in which the input is routed to <code>:Processor1</code>. All the output of <code>:Processor1</code> is assigned as the output of the chain.</p>
+
+<p>By putting processors into chains they are automatically dependend on the previous processor in the chain. This means that executing <code>:Processor3</code> in the above
+example would execute <code>:Processor2</code> which in turn leads to the execution of <code>:Processor1</code>. The produced information unit from <code>:Processor1</code> will be given to 
+<code>:Processor2</code> for processing. Afterwards, the information units produced by <code>:Processor2</code> would enter <code>:Processor3</code>.</p>
 </div></div>
 
     <div id="footer">
-  Generated on Wed Sep 19 23:09:42 2012 by
+  Generated on Thu May  9 18:20:51 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.2.1 (ruby-1.9.3).
 </div>
