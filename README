@@ -1,0 +1,18 @@
+Rokuby - A Ruby based build tool
+================================
+
+Rokuby is a build tool written in Ruby that mainly targets building C++ projects. It is based on the task feature of Rake and extends it to allow more flexible transport and and processing
+of information via so called processors.
+
+See the full documentation for more details.
+
+Installing
+----------
+Make sure you have installed at least Ruby 1.9.3 if you want to use Rokuby.
+- Clone the git repository:
+
+	git clone https://github.com/Useurmind/rokuby.git
+	
+- Install the Rokuby gem:
+
+	rake install
