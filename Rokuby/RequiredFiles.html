@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::RequiredFiles
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">RequiredFiles</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::RequiredFiles
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/required_files.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="FILES-constant" class="">FILES =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+<span class='comment'># Utility libs
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/general_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/superclass_proxy</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/path_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/project_path</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/directory_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/process_cache</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/task_path_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='comment'># Utility for Xml
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/XML/XmlHelper</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/XML/XmlTag</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/XML/XmlDocument</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/XML/xmlsimple</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='comment'># Utility for UUIDs
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/UUID/compat/securerandom</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/UUID/uuidtools/version</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/UUID/uuidtools</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='comment'># Utility for Visual Studio tasks
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/VisualStudio/vs_xml_file_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/VisualStudio/vs_file_creator</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/VisualStudio/filter_file_creator</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/VisualStudio/project_file_creator</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Utility/VisualStudio/solution_file_creator</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='comment'># Information Units (classes needed in the dsl language,
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Constants/project_constants</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/information_unit</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/information_specification</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/information_instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/information_configuration</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># general IUs
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/General/library</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/General/platform_configuration</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/General/project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/General/project_configuration</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/General/project_description</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/General/passthrough_defines</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># specification IUs
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Specifications/file_specification</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Specifications/library_location_spec</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Specifications/library_specification</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Specifications/library_specification_set</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Specifications/project_specification</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Specifications/source_unit_specification</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># instance IUs
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Instances/file_set</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Instances/library_file_set</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Instances/library_instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Instances/project_instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Instances/source_unit_instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># visual studio information instances
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_constants</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_project_specification</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_project_instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_project_description</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_project_configuration</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_project_usage</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_solution_description</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># linux information instances
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Linux/gpp_constants</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Linux/gpp_project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Linux/gpp_project_description</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Linux/gpp_project_configuration</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='comment'># default values for different settings
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/General/defaults</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/VisualStudio/vs_defaults</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Linux/gpp_defaults</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InformationUnits/Constants/configuration_constants</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='comment'># The rake wrapper that will be executed to gather the project definition files
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/dsl_language</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/task_description</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/file_task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/proxy_task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/file_creation_task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/processor_task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/project_namespace</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/process_manager</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/information_unit_manager</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/project_file</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/project_file_loader</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/application</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RakeWrapper/rake_module_redefine</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='comment'># Processing chain
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/processor</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/processor_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/process_chain</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/processor_array</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># general processors
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/passthrough_processor</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/platform_tester</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/find_file</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/file_finder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/library_finder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/source_unit_finder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/project_joiner</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/project_splitter</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/General/project_finder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># VisualStudio processors
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_project_processor_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_project_finder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_project_preprocessor</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_project_post_build_command_task_creator</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_project_files_writer</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_project_creator</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_project_builder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_solution_processor_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_solution_preprocessor</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_solution_file_writer</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/VisualStudio/vs_solution_builder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># Linux processors
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/Linux/gpp_project_processor_utility</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/Linux/gpp_project_preprocessor</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/Linux/gpp_project_compiler</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/Linux/gpp_project_library_gatherer</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/Linux/gpp_project_creator</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/Linux/gpp_project_builder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='comment'># multi platform
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/MultiPlatform/multi_project_builder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processors/MultiPlatform/multi_solution_builder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>doxygen_builder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='rbracket'>]</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

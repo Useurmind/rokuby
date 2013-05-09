@@ -1,0 +1,3052 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::ProjectPath
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">ProjectPath</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::ProjectPath
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rokuby::ProjectPath</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span>, <span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Utility/project_path.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A representation for a path. The path contains a relative part as well as
+an absolute path. This allows to save paths that are relative to a given
+directory and still use them in directories that are not related to the
+current directory. It also allows to choose between absolute and relative
+paths at any time. All functions working on the path return a new copy that
+represents the manipulated path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#BasePath-instance_method" title="#BasePath (instance method)">- (String) <strong>BasePath</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The base path from where the relative path is used to estimate the absolute
+path.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#RelativePath-instance_method" title="#RelativePath (instance method)">- (String) <strong>RelativePath</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The path that is used on top of the base path to estimate the absolute
+path.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%2B-instance_method" title="#+ (instance method)">- (ProjectPath) <strong>+</strong>(paths) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Join the relative parts of this path with the relative parts of some other
+paths.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3D%3D-instance_method" title="#== (instance method)">- (true, false) <strong>==</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Is this path equal to another path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#absolute%3F-instance_method" title="#absolute? (instance method)">- (true, false) <strong>absolute?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Is this path an absolute path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AbsoluteDirectory-instance_method" title="#AbsoluteDirectory (instance method)">- (String) <strong>AbsoluteDirectory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The absolute directory path contained in this project path, removes file
+name if present.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AbsolutePath-instance_method" title="#AbsolutePath (instance method)">- (String) <strong>AbsolutePath</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a path that represents the path saved in this project path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateCopy-instance_method" title="#CreateCopy (instance method)">- (Object) <strong>CreateCopy</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a copy of this path with the same base and relative part.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#directory%3F-instance_method" title="#directory? (instance method)">- (true, false) <strong>directory?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does this path represent an existing directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DirectoryPath-instance_method" title="#DirectoryPath (instance method)">- (ProjectPath) <strong>DirectoryPath</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The directory path contained in this project path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#EmptyDirectory%3F-instance_method" title="#EmptyDirectory? (instance method)">- (true, false) <strong>EmptyDirectory?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Is this an empty directory empty.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exist%3F-instance_method" title="#exist? (instance method)">- (true, false) <strong>exist?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does the file to which this path points exist.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file%3F-instance_method" title="#file? (instance method)">- (true, false) <strong>file?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does this path represent an existing file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FileExt-instance_method" title="#FileExt (instance method)">- (String<sup>?</sup>) <strong>FileExt</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the extension of the file to which this path points or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FileName-instance_method" title="#FileName (instance method)">- (String) <strong>FileName</strong>(keepExt = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The file name contained in this project path or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filePath%3F-instance_method" title="#filePath? (instance method)">- (true, false) <strong>filePath?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does this path represent the path to a file (not necessarily existing).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ProjectPath) <strong>initialize</strong>(paramBag) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initialize a path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_copy-instance_method" title="#initialize_copy (instance method)">- (Object) <strong>initialize_copy</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copy constructor which initializes the copy with the same base and relative
+part.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Join-instance_method" title="#Join (instance method)">- (ProjectPath) <strong>Join</strong>(paths) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Join the relative parts of this path with the relative parts of some other
+paths.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#MakeAbsolute-instance_method" title="#MakeAbsolute (instance method)">- (ProjectPath) <strong>MakeAbsolute</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a copy of this path where all parts are absolute.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#MakeRelativeTo-instance_method" title="#MakeRelativeTo (instance method)">- (ProjectPath) <strong>MakeRelativeTo</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Compute a path from this path that is relative to the given path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#PathParts-instance_method" title="#PathParts (instance method)">- (Array&lt;String&gt;) <strong>PathParts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The parts of the complete project path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#RelativeDirectory-instance_method" title="#RelativeDirectory (instance method)">- (String) <strong>RelativeDirectory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The relative directory path contained in this project path, removes file
+name if present.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#RelativePathParts-instance_method" title="#RelativePathParts (instance method)">- (Array&lt;String&gt;) <strong>RelativePathParts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The parts of the relative part of the project path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#str-instance_method" title="#str (instance method)">- (String) <strong>str</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This stringifyer is for a human readable string with indication of the
+relative path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SubPaths-instance_method" title="#SubPaths (instance method)">- (Array&lt;ProjectPath&gt;) <strong>SubPaths</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create an array of paths that contain the paths to folders and files under
+this path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">- (String) <strong>to_s</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This stringifyer is for a human readable string with indication of the
+relative path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Up-instance_method" title="#Up (instance method)">- (ProjectPath) <strong>Up</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Move up in the directory hierarchy one step.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GeneralUtility.html#Clone-instance_method" title="Rokuby::GeneralUtility#Clone (method)">#Clone</a></span>, <span class='object_link'><a href="GeneralUtility.html#CloneArray-instance_method" title="Rokuby::GeneralUtility#CloneArray (method)">#CloneArray</a></span>, <span class='object_link'><a href="GeneralUtility.html#DescribeTasks-instance_method" title="Rokuby::GeneralUtility#DescribeTasks (method)">#DescribeTasks</a></span>, <span class='object_link'><a href="GeneralUtility.html#GenerateTaskName-instance_method" title="Rokuby::GeneralUtility#GenerateTaskName (method)">#GenerateTaskName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetClassName-instance_method" title="Rokuby::GeneralUtility#GetClassName (method)">#GetClassName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetUUID-instance_method" title="Rokuby::GeneralUtility#GetUUID (method)">#GetUUID</a></span>, <span class='object_link'><a href="GeneralUtility.html#SystemWithFail-instance_method" title="Rokuby::GeneralUtility#SystemWithFail (method)">#SystemWithFail</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="PathUtility.html#ExecuteInPath-instance_method" title="Rokuby::PathUtility#ExecuteInPath (method)">#ExecuteInPath</a></span>, <span class='object_link'><a href="PathUtility.html#FormatPath-instance_method" title="Rokuby::PathUtility#FormatPath (method)">#FormatPath</a></span>, <span class='object_link'><a href="PathUtility.html#GetWindowsPath-instance_method" title="Rokuby::PathUtility#GetWindowsPath (method)">#GetWindowsPath</a></span>, <span class='object_link'><a href="PathUtility.html#JoinPaths-instance_method" title="Rokuby::PathUtility#JoinPaths (method)">#JoinPaths</a></span>, <span class='object_link'><a href="PathUtility.html#PathAbsolute%3F-instance_method" title="Rokuby::PathUtility#PathAbsolute? (method)">#PathAbsolute?</a></span>, <span class='object_link'><a href="PathUtility.html#RemoveParents-instance_method" title="Rokuby::PathUtility#RemoveParents (method)">#RemoveParents</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>) <strong>initialize</strong>(paramBag) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initialize a path. If only one string is give this is taken as the relative
+path and the base path is estimated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Initialize path with BasePath being the current working directory and
+RelativePath being `myDirectory`.</p>
+</div></p>
+      
+      <pre class="example code"><span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>myDirectory</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Initialize a path with explicit base and relative part.</p>
+</div></p>
+      
+      <pre class="example code"><span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>base:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>C:/my/base/path</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>relative:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>the/relative/path/part</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>paramBag</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>This can be a simple string for the relative part (automatic base
+computation), or a hash with the different parts of the path, or the
+absolute path. The keys for the hash are defined below.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <p class="tag_title">Options Hash (<tt>paramBag</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:base</span>
+          <span class="type">(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>The base path of this path (estimated from the current directory if not
+given).</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:relative</span>
+          <span class="type">(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>The relative part of the path.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:absolute</span>
+          <span class="type">(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Is the input path default (normally estimated automatically, for cases
+where this is not possible).</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 139</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;Creating path with #{paramBag}&quot;
+</span>  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_base'>base</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_relative'>relative</span> <span class='op'>=</span> <span class='const'>FormatPath</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='rparen'>)</span>
+    <span class='ivar'>@Absolute</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_relative'>relative</span> <span class='op'>=</span> <span class='const'>FormatPath</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:relative</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_base'>base</span> <span class='op'>=</span> <span class='const'>FormatPath</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:base</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='kw'>nil</span>
+    <span class='ivar'>@Absolute</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:absolute</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_absolute'>absolute</span> <span class='op'>=</span> <span class='id identifier rubyid_PathAbsolute?'>PathAbsolute?</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_absolute'>absolute</span> <span class='op'>=</span> <span class='id identifier rubyid_PathAbsolute?'>PathAbsolute?</span><span class='lparen'>(</span><span class='id identifier rubyid_relative'>relative</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='ivar'>@BasePath</span> <span class='op'>=</span> <span class='id identifier rubyid_base'>base</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_base'>base</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_absolute'>absolute</span><span class='rparen'>)</span>
+    <span class='comment'>#puts &quot;Estimating base path from #{Dir.pwd}&quot;
+</span>    <span class='ivar'>@BasePath</span> <span class='op'>=</span> <span class='const'>FormatPath</span><span class='lparen'>(</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_pwd'>pwd</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@RelativePath</span> <span class='op'>=</span> <span class='id identifier rubyid_relative'>relative</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="BasePath=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="BasePath-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>BasePath</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The base path from where the relative path is used to estimate the absolute
+path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The base path from where the relative path is used to estimate the absolute
+path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='const'>BasePath</span>
+  <span class='ivar'>@BasePath</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="RelativePath=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="RelativePath-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>RelativePath</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The path that is used on top of the base path to estimate the absolute
+path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The path that is used on top of the base path to estimate the absolute
+path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='const'>RelativePath</span>
+  <span class='ivar'>@RelativePath</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="+-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>) <strong>+</strong>(paths) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Join the relative parts of this path with the relative parts of some other
+paths.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>paths</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span>&gt;</tt>, <tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The paths which should be joined with this path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new path that contains the joined paths.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+279
+280
+281</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 279</span>
+
+<span class='kw'>def</span> <span class='op'>+</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'>Join</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="==-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>==</strong>(path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Is this path equal to another path. Equallity means same class and same
+absolute path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The other project path which should be tested on equality.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>True if the paths are equal.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+305
+306
+307
+308
+309
+310
+311</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 305</span>
+
+<span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_path'>path</span> <span class='op'>||</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='const'>ProjectPath</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="absolute?-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>absolute?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Is this path an absolute path</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Is this path an absolute path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_absolute?'>absolute?</span>
+  <span class='id identifier rubyid_absolute'>absolute</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@BasePath</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@RelativePath</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_absolute'>absolute</span> <span class='op'>=</span> <span class='id identifier rubyid_PathAbsolute?'>PathAbsolute?</span><span class='lparen'>(</span><span class='ivar'>@BasePath</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span><span class='lparen'>(</span><span class='ivar'>@RelativePath</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_absolute'>absolute</span> <span class='op'>=</span> <span class='id identifier rubyid_PathAbsolute?'>PathAbsolute?</span><span class='lparen'>(</span><span class='ivar'>@RelativePath</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='ivar'>@Absolute</span> <span class='op'>||</span> <span class='id identifier rubyid_absolute'>absolute</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AbsoluteDirectory-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>AbsoluteDirectory</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The absolute directory path contained in this project path, removes file
+name if present.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The absolute directory path contained in this project path, removes file
+name if present.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='const'>AbsoluteDirectory</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_directory?'>directory?</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>or</span> <span class='op'>!</span><span class='id identifier rubyid_filePath?'>filePath?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid__SplitAndJoinParts'>_SplitAndJoinParts</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AbsolutePath-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>AbsolutePath</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a path that represents the path saved in this project path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Returns a path that represents the path saved in this project path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='const'>AbsolutePath</span>      
+  <span class='kw'>return</span> <span class='const'>JoinPaths</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='ivar'>@BasePath</span><span class='comma'>,</span> <span class='ivar'>@RelativePath</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CreateCopy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateCopy</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a copy of this path with the same base and relative part.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+168
+169
+170
+171</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 168</span>
+
+<span class='kw'>def</span> <span class='const'>CreateCopy</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>base:</span> <span class='ivar'>@BasePath</span><span class='comma'>,</span> <span class='label'>relative:</span> <span class='ivar'>@RelativePath</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_copy'>copy</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="directory?-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>directory?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Does this path represent an existing directory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Does this path represent an existing directory.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_directory?'>directory?</span>
+  <span class='kw'>return</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_directory?'>directory?</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DirectoryPath-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>) <strong>DirectoryPath</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The directory path contained in this project path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The directory path contained in this project path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='const'>DirectoryPath</span>
+  <span class='kw'>return</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>base:</span> <span class='ivar'>@BasePath</span><span class='comma'>,</span> <span class='label'>relative:</span> <span class='const'>RelativeDirectory</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="EmptyDirectory?-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>EmptyDirectory?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Is this an empty directory empty</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Is this an empty directory empty</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_EmptyDirectory?'>EmptyDirectory?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_directory?'>directory?</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>2</span>  <span class='comment'># only . and .. are entries of the directory
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exist?-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>exist?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Does the file to which this path points exist.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Does the file to which this path points exist.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_exist?'>exist?</span>
+  <span class='kw'>return</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="file?-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>file?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Does this path represent an existing file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Does this path represent an existing file.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_file?'>file?</span>
+  <span class='kw'>return</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_file?'>file?</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FileExt-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt><sup>?</sup>) <strong>FileExt</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the extension of the file to which this path points or nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Returns the extension of the file to which this path points or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='const'>FileExt</span>
+  <span class='id identifier rubyid_fileName'>fileName</span> <span class='op'>=</span> <span class='const'>FileName</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_fileName'>fileName</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_fileNameParts'>fileNameParts</span> <span class='op'>=</span> <span class='id identifier rubyid_fileName'>fileName</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_fileNameParts'>fileNameParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;=</span> <span class='int'>2</span><span class='rparen'>)</span>
+      <span class='kw'>return</span> <span class='id identifier rubyid_fileNameParts'>fileNameParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_fileNameParts'>fileNameParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FileName-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>FileName</strong>(keepExt = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The file name contained in this project path or nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>keepExt</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>True if the extension should be kept, else the extension is removed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The file name contained in this project path or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='const'>FileName</span><span class='lparen'>(</span><span class='id identifier rubyid_keepExt'>keepExt</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>      
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_filePath?'>filePath?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_pathParts'>pathParts</span> <span class='op'>=</span> <span class='const'>PathParts</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    
+    <span class='id identifier rubyid_fileName'>fileName</span> <span class='op'>=</span> <span class='id identifier rubyid_pathParts'>pathParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_pathParts'>pathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span>
+    
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_keepExt'>keepExt</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_fileName'>fileName</span> <span class='op'>=</span> <span class='id identifier rubyid_fileName'>fileName</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+    
+    <span class='kw'>return</span> <span class='id identifier rubyid_fileName'>fileName</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filePath?-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>filePath?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Does this path represent the path to a file (not necessarily existing).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Does this path represent the path to a file (not necessarily existing).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_filePath?'>filePath?</span>
+  <span class='id identifier rubyid_isFilePath'>isFilePath</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_endingParts'>endingParts</span> <span class='op'>=</span> <span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_endingParts'>endingParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_endingParts'>endingParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>or</span> <span class='id identifier rubyid_file?'>file?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_isFilePath'>isFilePath</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_isFilePath'>isFilePath</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize_copy</strong>(original) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Copy constructor which initializes the copy with the same base and relative
+part.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 174</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize_copy'>initialize_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='ivar'>@BasePath</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>BasePath</span><span class='rparen'>)</span>
+  <span class='ivar'>@RelativePath</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Join-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>) <strong>Join</strong>(paths) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Join the relative parts of this path with the relative parts of some other
+paths.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>paths</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span>&gt;</tt>, <tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The paths which should be joined with this path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new path that contains the joined paths.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 182</span>
+
+<span class='kw'>def</span> <span class='const'>Join</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_pathsToJoin'>pathsToJoin</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='ivar'>@RelativePath</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:length</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_paths'>paths</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_path'>path</span><span class='op'>|</span>
+      <span class='id identifier rubyid_pathsToJoin'>pathsToJoin</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>        
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_pathsToJoin'>pathsToJoin</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='const'>CreateCopy</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='const'>RelativePath</span> <span class='op'>=</span> <span class='const'>JoinPaths</span><span class='lparen'>(</span><span class='id identifier rubyid_pathsToJoin'>pathsToJoin</span><span class='rparen'>)</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_copy'>copy</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="MakeAbsolute-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>) <strong>MakeAbsolute</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Look into this and check.</p>
+</div>
+  </div>
+
+
+<p>Create a copy of this path where all parts are absolute.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Project path with only</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+330
+331
+332</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 330</span>
+
+<span class='kw'>def</span> <span class='const'>MakeAbsolute</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="MakeRelativeTo-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>) <strong>MakeRelativeTo</strong>(path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Compute a path from this path that is relative to the given path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The path to which this project path should be made relative.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new project path which is the same as this but relative to the input
+path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 228</span>
+
+<span class='kw'>def</span> <span class='const'>MakeRelativeTo</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>self</span>
+  <span class='kw'>end</span>
+  
+  <span class='comment'>#puts &quot;Making path relative, self: &quot; + self.to_s + &quot;, path: &quot; + path.to_s     
+</span>  
+  <span class='id identifier rubyid_originalPathParts'>originalPathParts</span> <span class='op'>=</span> <span class='const'>PathParts</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_pathParts'>pathParts</span> <span class='op'>=</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='const'>PathParts</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='comment'>#puts &quot;original parts: #{originalPathParts}&quot;
+</span>  <span class='comment'>#puts &quot;input parts: #{pathParts}&quot;
+</span>  
+  <span class='comment'>#newPath = ProjectPath.new({base: path.AbsolutePath()})
+</span>  
+  <span class='id identifier rubyid_minPartsNumber'>minPartsNumber</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_originalPathParts'>originalPathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='comma'>,</span> <span class='id identifier rubyid_pathParts'>pathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+  <span class='id identifier rubyid_commonPartsNumber'>commonPartsNumber</span> <span class='op'>=</span> <span class='int'>0</span>
+  
+  <span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='int'>0</span><span class='op'>..</span><span class='id identifier rubyid_minPartsNumber'>minPartsNumber</span><span class='op'>-</span><span class='int'>1</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_originalPathParts'>originalPathParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='id identifier rubyid_pathParts'>pathParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='kw'>break</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_commonPartsNumber'>commonPartsNumber</span> <span class='op'>+=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+  
+  <span class='comment'>#puts &quot;Common parts: #{commonPartsNumber}&quot;
+</span>  
+  <span class='comment'># the paths are basically the same, so we return the path &quot;.&quot;
+</span>  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_commonPartsNumber'>commonPartsNumber</span> <span class='op'>==</span> <span class='id identifier rubyid_originalPathParts'>originalPathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_commonPartsNumber'>commonPartsNumber</span> <span class='op'>==</span> <span class='id identifier rubyid_pathParts'>pathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>base:</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='label'>relative:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_upSwitchesNumber'>upSwitchesNumber</span> <span class='op'>=</span> <span class='id identifier rubyid_pathParts'>pathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='id identifier rubyid_commonPartsNumber'>commonPartsNumber</span>
+  <span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='id identifier rubyid_commonPartsNumber'>commonPartsNumber</span><span class='op'>-</span><span class='int'>1</span><span class='op'>..</span><span class='id identifier rubyid_pathParts'>pathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>1</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_pathParts'>pathParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.</span><span class='tstring_end'>'</span></span> <span class='kw'>or</span> <span class='id identifier rubyid_pathParts'>pathParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>..</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_upSwitchesNumber'>upSwitchesNumber</span> <span class='op'>-=</span> <span class='int'>1</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_upSwitches'>upSwitches</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_upSwitchesNumber'>upSwitchesNumber</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+  <span class='kw'>return</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>base:</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>relative:</span> <span class='const'>JoinPaths</span><span class='lparen'>(</span><span class='id identifier rubyid_upSwitches'>upSwitches</span> <span class='op'>+</span> <span class='id identifier rubyid_originalPathParts'>originalPathParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_commonPartsNumber'>commonPartsNumber</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="PathParts-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>PathParts</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The parts of the complete project path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The parts of the complete project path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 119</span>
+
+<span class='kw'>def</span> <span class='const'>PathParts</span>
+  <span class='kw'>return</span> <span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="RelativeDirectory-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>RelativeDirectory</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The relative directory path contained in this project path, removes file
+name if present.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The relative directory path contained in this project path, removes file
+name if present.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67
+68
+69
+70
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='const'>RelativeDirectory</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_directory?'>directory?</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>or</span> <span class='op'>!</span><span class='id identifier rubyid_filePath?'>filePath?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='ivar'>@RelativePath</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid__SplitAndJoinParts'>_SplitAndJoinParts</span><span class='lparen'>(</span><span class='ivar'>@RelativePath</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="RelativePathParts-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>RelativePathParts</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The parts of the relative part of the project path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The parts of the relative part of the project path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 124</span>
+
+<span class='kw'>def</span> <span class='const'>RelativePathParts</span>
+  <span class='kw'>return</span> <span class='const'>RelativePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="str-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>str</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This stringifyer is for a human readable string with indication of the
+relative path. Don't use as string version for functions. Use AbsolutePath,
+RelativePath, BasePath, etc. instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Path with base part "/base/part" and relative part "relative/part" will
+become.</p>
+</div></p>
+      
+      <pre class="example code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/base/part|relative/part</span><span class='tstring_end'>&quot;</span></span></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A human readable string representation of the absolute path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+314
+315
+316</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 314</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_str'>str</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_to_s'>to_s</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="SubPaths-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span>&gt;</tt>) <strong>SubPaths</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create an array of paths that contain the paths to folders and files under
+this path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array containing the subpaths of this path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 200</span>
+
+<span class='kw'>def</span> <span class='const'>SubPaths</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;Searching subpaths in #{to_s()}&quot;
+</span>  <span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_subPaths'>subPaths</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='comment'>#puts &quot;Found entries #{entries}&quot;
+</span>  
+  <span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span> <span class='op'>||</span> <span class='id identifier rubyid_entry'>entry</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='kw'>next</span>
+    <span class='kw'>end</span>
+    
+    <span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='const'>CreateCopy</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    
+    <span class='comment'>#puts &quot;Copy is #{copy}&quot;
+</span>    
+    <span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='const'>RelativePath</span> <span class='op'>=</span> <span class='const'>JoinPaths</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='comma'>,</span> <span class='id identifier rubyid_entry'>entry</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_subPaths'>subPaths</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_copy'>copy</span><span class='rparen'>)</span>
+    
+    <span class='comment'>#puts &quot;Created path #{copy} for entry #{entry}&quot;
+</span>  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_subPaths'>subPaths</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>to_s</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This stringifyer is for a human readable string with indication of the
+relative path. Don't use as string version for functions. Use AbsolutePath,
+RelativePath, BasePath, etc. instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Path with base part "/base/part" and relative part "relative/part" will
+become.</p>
+</div></p>
+      
+      <pre class="example code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/base/part|relative/part</span><span class='tstring_end'>&quot;</span></span></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A human readable string representation of the absolute path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+323
+324
+325</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 323</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='kw'>return</span> <span class='lparen'>(</span><span class='ivar'>@BasePath</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='lparen'>(</span><span class='ivar'>@RelativePath</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>nil</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Up-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>) <strong>Up</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Move up in the directory hierarchy one step.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rokuby::ProjectPath (class)">ProjectPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new path which represents the parent directory of the old path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/project_path.rb', line 285</span>
+
+<span class='kw'>def</span> <span class='const'>Up</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;Going up in path #{self}&quot;
+</span>  
+  <span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@RelativePath</span><span class='rparen'>)</span>        
+    <span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='const'>CreateCopy</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='const'>RelativePath</span> <span class='op'>=</span> <span class='id identifier rubyid__SplitAndJoinParts'>_SplitAndJoinParts</span><span class='lparen'>(</span><span class='ivar'>@RelativePath</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_newPath'>newPath</span> <span class='op'>=</span> <span class='id identifier rubyid__SplitAndJoinParts'>_SplitAndJoinParts</span><span class='lparen'>(</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>absolute:</span> <span class='id identifier rubyid_newPath'>newPath</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='comment'>#puts &quot;parent path is #{copy}&quot;
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_copy'>copy</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:46 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rake::RequiredFiles
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rake.html" title="Rake (module)">Rake</a></span></span>
+     &raquo; 
+    <span class="title">RequiredFiles</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rake::RequiredFiles
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/RokubyRake/rake_required_files.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="FILES-constant" class="">FILES =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+ <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ext/core</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ext/module</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ext/string</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ext/time</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+
+ <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>alt_system</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>win32</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+ <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cloneable</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+ <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pathmap</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>file_utils_ext</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>file_list</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>task_argument_error</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>rule_recursion_overflow_error</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+ <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>invocation_exception_mixin</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>rake_module</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pseudo_status</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>task_arguments</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>invocation_chain</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>task</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>file_task</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>file_creation_task</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>multi_task</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dsl_definition</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>default_loader</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>early_time</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>name_space</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>task_manager</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>application</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+   <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>clean</span><span class='tstring_end'>'</span></span>
+<span class='rbracket'>]</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:44 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,1062 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::VsProjectProcessorUtility
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">VsProjectProcessorUtility</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::VsProjectProcessorUtility
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="VsPostBuildCommandTaskCreator.html" title="Rokuby::VsPostBuildCommandTaskCreator (class)">VsPostBuildCommandTaskCreator</a></span>, <span class='object_link'><a href="VsProjectCreator.html" title="Rokuby::VsProjectCreator (class)">VsProjectCreator</a></span>, <span class='object_link'><a href="VsProjectFilesWriter.html" title="Rokuby::VsProjectFilesWriter (class)">VsProjectFilesWriter</a></span>, <span class='object_link'><a href="VsProjectPreprocessor.html" title="Rokuby::VsProjectPreprocessor (class)">VsProjectPreprocessor</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A module containing functionality that is needed in many of the processor
+of a visual studio project builder.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_AddOutput-instance_method" title="#_AddOutput (instance method)">- (Object) <strong>_AddOutput</strong>(output) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ForwardOutputs-instance_method" title="#_ForwardOutputs (instance method)">- (Object) <strong>_ForwardOutputs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_GetProjectUsage-instance_method" title="#_GetProjectUsage (instance method)">- (Object) <strong>_GetProjectUsage</strong>(guid) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_InitProc-instance_method" title="#_InitProc (instance method)">- (Object) <strong>_InitProc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_RegisterInputTypes-instance_method" title="#_RegisterInputTypes (instance method)">- (Object) <strong>_RegisterInputTypes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register the known input types for such a processor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_SortInputs-instance_method" title="#_SortInputs (instance method)">- (Object) <strong>_SortInputs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sort the processor inputs by their class type.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#PassthroughDefines-instance_method" title="#PassthroughDefines (instance method)">- (Object) <strong>PassthroughDefines</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProjectConfigurations-instance_method" title="#ProjectConfigurations (instance method)">- (Object) <strong>ProjectConfigurations</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProjectDescription-instance_method" title="#ProjectDescription (instance method)">- (Object) <strong>ProjectDescription</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProjectInstance-instance_method" title="#ProjectInstance (instance method)">- (Object) <strong>ProjectInstance</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsProjectConfigurations-instance_method" title="#VsProjectConfigurations (instance method)">- (Object) <strong>VsProjectConfigurations</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsProjectDescription-instance_method" title="#VsProjectDescription (instance method)">- (Object) <strong>VsProjectDescription</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsProjectInstance-instance_method" title="#VsProjectInstance (instance method)">- (Object) <strong>VsProjectInstance</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsProjects-instance_method" title="#VsProjects (instance method)">- (Object) <strong>VsProjects</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsProjectUsages-instance_method" title="#VsProjectUsages (instance method)">- (Object) <strong>VsProjectUsages</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_AddOutput-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_AddOutput</strong>(output) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108
+109
+110
+111
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='id identifier rubyid_output'>output</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_output'>output</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_output'>output</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Array</span><span class='rparen'>)</span>
+      <span class='ivar'>@outputs</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_output'>output</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='ivar'>@outputs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_output'>output</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>        
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_ForwardOutputs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ForwardOutputs</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ForwardOutputs'>_ForwardOutputs</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@projectInstance</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@projectDescription</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@projectConfigurations</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@vsProjectInstance</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@vsProjectDescription</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@vsProjectConfigurations</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@vsProjects</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@vsProjectUsages</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__AddOutput'>_AddOutput</span><span class='lparen'>(</span><span class='ivar'>@passthroughDefines</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_GetProjectUsage-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_GetProjectUsage</strong>(guid) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__GetProjectUsage'>_GetProjectUsage</span><span class='lparen'>(</span><span class='id identifier rubyid_guid'>guid</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_matchingUsage'>matchingUsage</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@vsProjectUsages</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_projUsage'>projUsage</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projUsage'>projUsage</span><span class='period'>.</span><span class='const'>Guid</span> <span class='op'>==</span> <span class='id identifier rubyid_guid'>guid</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_matchingUsage'>matchingUsage</span> <span class='op'>=</span> <span class='id identifier rubyid_projUsage'>projUsage</span>
+      <span class='kw'>break</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_matchingUsage'>matchingUsage</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_InitProc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_InitProc</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__InitProc'>_InitProc</span>      
+  <span class='ivar'>@projectInstance</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@projectDescription</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@projectConfigurations</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@vsProjectInstance</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@vsProjectDescription</span> <span class='op'>=</span> <span class='const'>VsProjectDescription</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@vsProjectConfigurations</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@vsProjects</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@vsProjectUsages</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@passthroughDefines</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='id identifier rubyid__RegisterInputTypes'>_RegisterInputTypes</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_RegisterInputTypes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_RegisterInputTypes</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register the known input types for such a processor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__RegisterInputTypes'>_RegisterInputTypes</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>ProjectDescription</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>ProjectConfiguration</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>ProjectInstance</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectDescription</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectConfiguration</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectInstance</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProject</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectUsage</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>PassthroughDefines</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_SortInputs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_SortInputs</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sort the processor inputs by their class type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__SortInputs'>_SortInputs</span>
+  <span class='ivar'>@inputs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_input'>input</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>ProjectInstance</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@projectInstance</span> <span class='op'>=</span> <span class='id identifier rubyid_input'>input</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>ProjectDescription</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@projectDescription</span> <span class='op'>=</span> <span class='id identifier rubyid_input'>input</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>ProjectConfiguration</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@projectConfigurations</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectInstance</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@vsProjectInstance</span> <span class='op'>=</span> <span class='id identifier rubyid_input'>input</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectDescription</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@vsProjectDescription</span> <span class='op'>=</span> <span class='id identifier rubyid_input'>input</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectConfiguration</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@vsProjectConfigurations</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProject</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@vsProjects</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>VsProjectUsage</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@vsProjectUsages</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>PassthroughDefines</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@passthroughDefines</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="PassthroughDefines-instance_method">
+  
+    - (<tt>Object</tt>) <strong>PassthroughDefines</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='const'>PassthroughDefines</span>
+  <span class='ivar'>@passthroughDefines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ProjectConfigurations-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProjectConfigurations</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='const'>ProjectConfigurations</span>
+  <span class='ivar'>@projectConfigurations</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ProjectDescription-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProjectDescription</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='const'>ProjectDescription</span>
+  <span class='ivar'>@projectDescription</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ProjectInstance-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProjectInstance</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='const'>ProjectInstance</span>
+  <span class='ivar'>@projectInstance</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="VsProjectConfigurations-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsProjectConfigurations</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='const'>VsProjectConfigurations</span>
+  <span class='ivar'>@vsProjectConfigurations</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="VsProjectDescription-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsProjectDescription</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='const'>VsProjectDescription</span>
+  <span class='ivar'>@vsProjectDescription</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="VsProjectInstance-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsProjectInstance</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='const'>VsProjectInstance</span>
+  <span class='ivar'>@vsProjectInstance</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="VsProjects-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsProjects</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='const'>VsProjects</span>
+  <span class='ivar'>@vsProjects</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="VsProjectUsages-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsProjectUsages</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='const'>VsProjectUsages</span>
+  <span class='ivar'>@vsProjectUsages</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:45 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

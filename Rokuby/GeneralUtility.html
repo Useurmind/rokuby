@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::GeneralUtility
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">GeneralUtility</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::GeneralUtility
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="DSL.html" title="Rokuby::DSL (module)">DSL</a></span>, <span class='object_link'><a href="InformationUnit.html" title="Rokuby::InformationUnit (class)">InformationUnit</a></span>, <span class='object_link'><a href="ProcessCache.html" title="Rokuby::ProcessCache (class)">ProcessCache</a></span>, <span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span>, <span class='object_link'><a href="ProjectPath.html" title="Rokuby::ProjectPath (class)">ProjectPath</a></span>, <span class='object_link'><a href="SolutionFileCreator.html" title="Rokuby::SolutionFileCreator (class)">SolutionFileCreator</a></span>, <span class='object_link'><a href="VsFileCreator.html" title="Rokuby::VsFileCreator (class)">VsFileCreator</a></span>, <span class='object_link'><a href="VsProjectConfiguration.html" title="Rokuby::VsProjectConfiguration (class)">VsProjectConfiguration</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/Utility/general_utility.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Clone-instance_method" title="#Clone (instance method)">- (Object) <strong>Clone</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Clone an arbitrary object Returns nil for nil and the orginal for symbols.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CloneArray-instance_method" title="#CloneArray (instance method)">- (Object) <strong>CloneArray</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DescribeTasks-instance_method" title="#DescribeTasks (instance method)">- (Object) <strong>DescribeTasks</strong>(paramBag) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a description to the tasks.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GenerateTaskName-instance_method" title="#GenerateTaskName (instance method)">- (Object) <strong>GenerateTaskName</strong>(paramBag) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Generate a name for a task based on different criteria.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetClassName-instance_method" title="#GetClassName (instance method)">- (Object) <strong>GetClassName</strong>(object) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the name of the class of the object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetUUID-instance_method" title="#GetUUID (instance method)">- (Object) <strong>GetUUID</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get a UUID with surrounding brackets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SystemWithFail-instance_method" title="#SystemWithFail (instance method)">- (Object) <strong>SystemWithFail</strong>(command, message = &quot;&quot;, print = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute a system call with the given command.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="Clone-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Clone</strong>(original) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Clone an arbitrary object Returns nil for nil and the orginal for symbols.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/general_utility.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Symbol</span> <span class='kw'>or</span> <span class='id identifier rubyid_original'>original</span> <span class='op'>==</span> <span class='kw'>false</span> <span class='kw'>or</span> <span class='id identifier rubyid_original'>original</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_original'>original</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Array</span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='const'>CloneArray</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CloneArray-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CloneArray</strong>(original) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/general_utility.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='const'>CloneArray</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+	<span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_copy'>copy</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DescribeTasks-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DescribeTasks</strong>(paramBag) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a description to the tasks.</p>
+<dl class="rdoc-list"><dt>docuTask</dt>
+<dd>
+<p>The task to build the docu of the project.</p>
+</dd><dt>packetInstallTask</dt>
+<dd>
+<p>The task that will install the packets for ubuntu OS needed for the
+project.</p>
+</dd><dt>createVSSolutionTask</dt>
+<dd>
+<p>The task that will create the VisualStudio solution for this project.</p>
+</dd><dt>cleanVSSolutionTask</dt>
+<dd>
+<p>The task that will delete the VisualStudio solution for this project.</p>
+</dd><dt>gccBuildTask</dt>
+<dd>
+<p>The task that will build this project with the gcc compiler</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/general_utility.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='const'>DescribeTasks</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_docuTask'>docuTask</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:docuTask</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_docuTask'>docuTask</span><span class='rparen'>)</span>
+    <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='lbracket'>[</span><span class='id identifier rubyid_docuTask'>docuTask</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_comment'>comment</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Build the documentation for the project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_packetInstallTask'>packetInstallTask</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:packetInstallTask</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_packetInstallTask'>packetInstallTask</span><span class='rparen'>)</span>
+    <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='lbracket'>[</span><span class='id identifier rubyid_packetInstallTask'>packetInstallTask</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_comment'>comment</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Install the ubuntu packets needed for this project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_createVSSolutionTask'>createVSSolutionTask</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:createVSSolutionTask</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_createVSSolutionTask'>createVSSolutionTask</span><span class='rparen'>)</span>
+    <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='lbracket'>[</span><span class='id identifier rubyid_createVSSolutionTask'>createVSSolutionTask</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_comment'>comment</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Build the Visual Studio solution for this project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_cleanVSSolutionTask'>cleanVSSolutionTask</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:cleanVSSolutionTask</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_cleanVSSolutionTask'>cleanVSSolutionTask</span><span class='rparen'>)</span>
+    <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='lbracket'>[</span><span class='id identifier rubyid_cleanVSSolutionTask'>cleanVSSolutionTask</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_comment'>comment</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Delete the Visual Studio solution for this project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_gccBuildTask'>gccBuildTask</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:gccBuildTask</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_gccBuildTask'>gccBuildTask</span><span class='rparen'>)</span>
+    <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='lbracket'>[</span><span class='id identifier rubyid_gccBuildTask'>gccBuildTask</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_comment'>comment</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Build the project with the gcc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>      
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GenerateTaskName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GenerateTaskName</strong>(paramBag) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Generate a name for a task based on different criteria.</p>
+<dl class="rdoc-list"><dt>projectName</dt>
+<dd>
+<p>The name of the project.</p>
+</dd><dt>configuration</dt>
+<dd>
+<p>The name of the configuration.</p>
+</dd><dt>type</dt>
+<dd>
+<p>A string describing the type of task.</p>
+</dd><dt>noid</dt>
+<dd>
+<p>Do not append a random uuid (default = false).</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/general_utility.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='const'>GenerateTaskName</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_projectName'>projectName</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:projectName</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_configuration'>configuration</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:configuration</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:type</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_noid'>noid</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:noid</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_noid'>noid</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_uuid'>uuid</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_uuid'>uuid</span> <span class='op'>=</span> <span class='const'>GetUUID</span><span class='lparen'>(</span><span class='rparen'>)</span>        
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_taskNameParts'>taskNameParts</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projectName'>projectName</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_taskNameParts'>taskNameParts</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='id identifier rubyid_projectName'>projectName</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_configuration'>configuration</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_taskNameParts'>taskNameParts</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='id identifier rubyid_configuration'>configuration</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_taskNameParts'>taskNameParts</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_uuid'>uuid</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_taskNameParts'>taskNameParts</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='id identifier rubyid_uuid'>uuid</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_taskNameParts'>taskNameParts</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetClassName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetClassName</strong>(object) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the name of the class of the object. Return the pure class name without
+any module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/general_utility.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='const'>GetClassName</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_nameParts'>nameParts</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>::</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_nameParts'>nameParts</span><span class='lbracket'>[</span><span class='id identifier rubyid_nameParts'>nameParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetUUID-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetUUID</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get a UUID with surrounding brackets. Example:
+D9F40C8D-144E-4F80-8C74-1B1AAD84ADFB</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/general_utility.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='const'>GetUUID</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\{</span><span class='embexpr_beg'>#{</span><span class='const'>UUIDTools</span><span class='op'>::</span><span class='const'>UUID</span><span class='period'>.</span><span class='id identifier rubyid_random_create'>random_create</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_content'>\}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="SystemWithFail-instance_method">
+  
+    - (<tt>Object</tt>) <strong>SystemWithFail</strong>(command, message = &quot;&quot;, print = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute a system call with the given command. Ob failure print the message
+if print is set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/general_utility.rb', line 5</span>
+
+<span class='kw'>def</span> <span class='const'>SystemWithFail</span><span class='lparen'>(</span><span class='id identifier rubyid_command'>command</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_print'>print</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>      
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_print'>print</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>'</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_pwd'>pwd</span><span class='rbrace'>}</span><span class='tstring_content'>': </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_command'>command</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='gvar'>$SimulateTasks</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_system'>system</span><span class='lparen'>(</span><span class='id identifier rubyid_command'>command</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span> <span class='op'>!=</span> <span class='kw'>true</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:43 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

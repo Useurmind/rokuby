@@ -1,0 +1,1534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::ProcessManager
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">ProcessManager</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::ProcessManager
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1"><span class='object_link'><a href="TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span></dd>
+      
+    
+  
+  
+    <dt class="r2">Included in:</dt>
+    <dd class="r2"><span class='object_link'><a href="ProjectFile.html" title="Rokuby::ProjectFile (class)">ProjectFile</a></span></dd>
+    
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/RakeWrapper/process_manager.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class is responsible for managing processors and process chains that
+are needed for a process build. ATTENTION: Some function calls assume that
+this module is included into the ProjectFile class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProcessCache-instance_method" title="#ProcessCache (instance method)">- (Object) <strong>ProcessCache</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ProcessCache.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProcessChains-instance_method" title="#ProcessChains (instance method)">- (Object) <strong>ProcessChains</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ProcessChains.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Processors-instance_method" title="#Processors (instance method)">- (Object) <strong>Processors</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Processors.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_GetProcessChain-instance_method" title="#_GetProcessChain (instance method)">- (Object) <strong>_GetProcessChain</strong>(procChainClass, name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_GetProcessor-instance_method" title="#_GetProcessor (instance method)">- (Object) <strong>_GetProcessor</strong>(procClass, name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_GetProcessorName-instance_method" title="#_GetProcessorName (instance method)">- (Object) <strong>_GetProcessorName</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the processor name and the rest of the arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ParseProcessChainArgs-instance_method" title="#_ParseProcessChainArgs (instance method)">- (Object) <strong>_ParseProcessChainArgs</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ParseProcessorArgs-instance_method" title="#_ParseProcessorArgs (instance method)">- (Object) <strong>_ParseProcessorArgs</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CloneProcessor-instance_method" title="#CloneProcessor (instance method)">- (Object) <strong>CloneProcessor</strong>(newName, oldPath) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a clone of a given processor</p>
+<dl class="rdoc-list"><dt>newName</dt>
+<dd>
+<p>The name of the new processor.</p>
+</dd></dl>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DefineProcessChain-instance_method" title="#DefineProcessChain (instance method)">- (Object) <strong>DefineProcessChain</strong>(chainClass, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Define or change a new/existing process chain.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DefineProcessor-instance_method" title="#DefineProcessor (instance method)">- (Processor) <strong>DefineProcessor</strong>(procClass, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Define or retrieve a new processor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ProcessManager) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of ProcessManager.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SaveCache-instance_method" title="#SaveCache (instance method)">- (Object) <strong>SaveCache</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPath-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPath (method)">#AbsoluteTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPathOnly%3F-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPathOnly? (method)">#AbsoluteTaskPathOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#ApplicationBasedTaskPath-instance_method" title="Rokuby::TaskPathUtility#ApplicationBasedTaskPath (method)">#ApplicationBasedTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePath-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePath (method)">#GetProjectFilePath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePathName (method)">#GetProjectFilePathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetTaskName-instance_method" title="Rokuby::TaskPathUtility#GetTaskName (method)">#GetTaskName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#JoinTaskPathName-instance_method" title="Rokuby::TaskPathUtility#JoinTaskPathName (method)">#JoinTaskPathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#MakeRelativeTo-instance_method" title="Rokuby::TaskPathUtility#MakeRelativeTo (method)">#MakeRelativeTo</a></span>, <span class='object_link'><a href="TaskPathUtility.html#NameOnly%3F-instance_method" title="Rokuby::TaskPathUtility#NameOnly? (method)">#NameOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#SplitTaskPath-instance_method" title="Rokuby::TaskPathUtility#SplitTaskPath (method)">#SplitTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#_GetTaskProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#_GetTaskProjectFilePathName (method)">#_GetTaskProjectFilePathName</a></span></p>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="ProcessCache=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="ProcessCache-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProcessCache</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ProcessCache</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='const'>ProcessCache</span>
+  <span class='ivar'>@ProcessCache</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ProcessChains=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ProcessChains-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProcessChains</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ProcessChains</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='const'>ProcessChains</span>
+  <span class='ivar'>@ProcessChains</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Processors=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Processors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Processors</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Processors</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='const'>Processors</span>
+  <span class='ivar'>@Processors</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_GetProcessChain-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_GetProcessChain</strong>(procChainClass, name) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 201</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__GetProcessChain'>_GetProcessChain</span><span class='lparen'>(</span><span class='id identifier rubyid_procChainClass'>procChainClass</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@ProcessChains</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='ivar'>@ProcessChains</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_procChainClass'>procChainClass</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_processChain'>processChain</span> <span class='op'>=</span> <span class='id identifier rubyid_intern'>intern</span><span class='lparen'>(</span><span class='id identifier rubyid_procChainClass'>procChainClass</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProcessChains</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_processChain'>processChain</span>
+  <span class='ivar'>@Processors</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_processChain'>processChain</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_processChain'>processChain</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_GetProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_GetProcessor</strong>(procClass, name) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 217</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__GetProcessor'>_GetProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_procClass'>procClass</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_proc'>proc</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span> <span class='op'>=</span> <span class='kw'>self</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@Processors</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_proc'>proc</span> <span class='op'>=</span> <span class='ivar'>@Processors</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_proc'>proc</span><span class='comma'>,</span> <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_procClass'>procClass</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    
+    <span class='comment'># find processor in appplication
+</span>    <span class='comment'># puts &quot;Trying to find proc #{name} from #{Path()}&quot;
+</span>    <span class='id identifier rubyid_taskPath'>taskPath</span> <span class='op'>=</span> <span class='const'>ApplicationBasedTaskPath</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
+    
+    <span class='id identifier rubyid_proc'>proc</span><span class='comma'>,</span> <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>FindProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='rparen'>)</span>
+    <span class='comment'>#puts &quot;Found processor #{proc.FullName()}&quot;
+</span>    <span class='kw'>return</span> <span class='id identifier rubyid_proc'>proc</span><span class='comma'>,</span> <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span>
+  <span class='kw'>end</span>
+  
+  <span class='ivar'>@Processors</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_intern'>intern</span><span class='lparen'>(</span><span class='id identifier rubyid_procClass'>procClass</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+   
+  <span class='id identifier rubyid_proc'>proc</span> <span class='op'>=</span> <span class='ivar'>@Processors</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_proc'>proc</span><span class='comma'>,</span> <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_GetProcessorName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_GetProcessorName</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the processor name and the rest of the arguments</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+150
+151
+152
+153
+154
+155
+156
+157</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 150</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;in GetProcessorName: #{args}&quot;
+</span>  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='const'>String</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='const'>Symbol</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_drop'>drop</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_ParseProcessChainArgs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ParseProcessChainArgs</strong>(*args) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 186</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ParseProcessChainArgs'>_ParseProcessChainArgs</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_procNames'>procNames</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_procArgs'>procArgs</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  
+  <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Hash</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_procArgs'>procArgs</span> <span class='op'>=</span> <span class='id identifier rubyid_arg'>arg</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_procNames'>procNames</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_procNames'>procNames</span><span class='comma'>,</span> <span class='id identifier rubyid_procArgs'>procArgs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_ParseProcessorArgs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ParseProcessorArgs</strong>(*args) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 159</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ParseProcessorArgs'>_ParseProcessorArgs</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_inputs'>inputs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_valueMap'>valueMap</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_taskArgs'>taskArgs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_taskDeps'>taskDeps</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>||</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='const'>Hash</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_inputs'>inputs</span><span class='comma'>,</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='comma'>,</span> <span class='id identifier rubyid_taskDeps'>taskDeps</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  
+  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span> <span class='op'>==</span> <span class='symbol'>:procIns</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_inputs'>inputs</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span> <span class='op'>==</span> <span class='symbol'>:procArgs</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_taskArgs'>taskArgs</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span> <span class='op'>==</span> <span class='symbol'>:procDeps</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_taskDeps'>taskDeps</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_inputs'>inputs</span><span class='comma'>,</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='comma'>,</span> <span class='id identifier rubyid_taskDeps'>taskDeps</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CloneProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CloneProcessor</strong>(newName, oldPath) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a clone of a given processor</p>
+<dl class="rdoc-list"><dt>newName</dt>
+<dd>
+<p>The name of the new processor.</p>
+</dd><dt>oldName</dt>
+<dd>
+<p>The name of the processor to clone.</p>
+</dd></dl>
+
+<p>A clone of a processor depends on the implementation of the initialize_copy
+function of the processor. The basic rules for cloning processors is:</p>
+<ul><li>
+<p>Only clone processors that were created in the current project file.</p>
+</li><li>
+<p>Only the processor is cloned with the state of when it is cloned.</p>
+</li><li>
+<p>Cloning process chains will also lead to cloning subprocessors of the
+chains and adapting their names.</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='const'>CloneProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldPath'>oldPath</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_processor'>processor</span><span class='comma'>,</span> <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span> <span class='op'>=</span> <span class='id identifier rubyid__GetProcessor'>_GetProcessor</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_oldPath'>oldPath</span><span class='rparen'>)</span>     
+  
+  <span class='id identifier rubyid_newProcessor'>newProcessor</span> <span class='op'>=</span> <span class='id identifier rubyid_initialize_copy'>initialize_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_processor'>processor</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_newProcessor'>newProcessor</span><span class='period'>.</span><span class='const'>AdaptName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@Processors</span><span class='lbracket'>[</span><span class='id identifier rubyid_newName'>newName</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_newProcessor'>newProcessor</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_newProcessor'>newProcessor</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DefineProcessChain-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DefineProcessChain</strong>(chainClass, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Define or change a new/existing process chain. The arguments for the
+process chain are the names of the processors that should be concated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Processor chain example</p>
+</div></p>
+      
+      <pre class="example code"><span class='comment'># :Processor1 will deliver its output to :Processor2 which gives it output to :Processor3
+</span><span class='const'>DefineProcessChain</span> <span class='const'>ProcessChain</span><span class='comma'>,</span> <span class='symbol'>:MyProcessChain</span><span class='comma'>,</span> <span class='symbol'>:Processor1</span><span class='comma'>,</span> <span class='symbol'>:Processor2</span><span class='comma'>,</span> <span class='symbol'>:Processor3</span></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>chainClass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The class for the process chain, if nil only existing chains can be
+retrieved.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A list of processor names that should be concatenated, see example.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Block</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A block that is executed when the process chain has finished execution.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='const'>DefineProcessChain</span><span class='lparen'>(</span><span class='id identifier rubyid_chainClass'>chainClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;in DefineProcessChain: #{chainClass}, #{args}&quot;
+</span>  <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+  
+  <span class='comment'>#puts &quot;Creating process chain #{name}&quot;
+</span>  
+  <span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_get_description'>get_description</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='comment'># processors can define subtasks that could snatch the description away
+</span>  
+  <span class='id identifier rubyid_processChain'>processChain</span> <span class='op'>=</span> <span class='id identifier rubyid__GetProcessChain'>_GetProcessChain</span><span class='lparen'>(</span><span class='id identifier rubyid_chainClass'>chainClass</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_processChain'>processChain</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_procNames'>procNames</span><span class='comma'>,</span> <span class='id identifier rubyid_procArgs'>procArgs</span> <span class='op'>=</span> <span class='id identifier rubyid__ParseProcessChainArgs'>_ParseProcessChainArgs</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  
+  <span class='comment'>#puts &quot;procNames, procArgs for #{name}: #{procNames}, #{procArgs}&quot;
+</span>  
+  <span class='id identifier rubyid_processChain'>processChain</span><span class='period'>.</span><span class='const'>Connect</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_procNames'>procNames</span><span class='rparen'>)</span>
+  <span class='const'>DefineProcessor</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_procArgs'>procArgs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_processChain'>processChain</span><span class='period'>.</span><span class='id identifier rubyid_add_description'>add_description</span><span class='lparen'>(</span><span class='id identifier rubyid_description'>description</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DefineProcessor-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></tt>) <strong>DefineProcessor</strong>(procClass, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Define or retrieve a new processor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Processor definition</p>
+</div></p>
+      
+      <pre class="example code"><span class='const'>DefineProcessor</span> <span class='const'>ProcessorClass1</span><span class='comma'>,</span> <span class='symbol'>:MyProcessor1</span><span class='comma'>,</span> <span class='symbol'>:procIns</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='const'>InformationUni1</span><span class='comma'>,</span> <span class='const'>InformationUnit2</span><span class='rbracket'>]</span>
+<span class='const'>DefineProcessor</span> <span class='const'>ProcessorClass2</span><span class='comma'>,</span> <span class='symbol'>:MyProcessor2</span><span class='comma'>,</span> <span class='symbol'>:procArgs</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='symbol'>:arg1</span><span class='comma'>,</span> <span class='symbol'>:arg2</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:procDeps</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='symbol'>:MyProcessor1</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:proc2Attribute</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_proc2AttributeValue'>proc2AttributeValue</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_proc'>proc</span><span class='comma'>,</span> <span class='id identifier rubyid_arg1'>arg1</span><span class='comma'>,</span> <span class='id identifier rubyid_arg2'>arg2</span><span class='op'>|</span>
+  <span class='comment'># this is done when processor 2 finishes
+</span>  <span class='comment'># proc is the instance of :MyProcessor2 and arg1, arg2 are the values for the first and second argument, respectively
+</span><span class='kw'>end</span></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>procClass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The class for the processor. If nil only existing processors can be
+retrieved</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Block</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A block of code that will be executed after the processor has run.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A list of parameters (can include everything defined below)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the processor (required).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>procIns</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="InformationUnit.html" title="Rokuby::InformationUnit (class)">InformationUnit</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A list of information units that should be inputted to the
+processor(optional)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>procDeps</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>, Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The task, processor names/paths that should become dependencies for the
+task (optional)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>procArgs</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A list of names that should define input arguments for the task (optional).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>valueMap</span>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A map of values that should be used to configure the processor with extend
+(optional).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The processor that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='const'>DefineProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_procClass'>procClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;DEfineProcessor: #{args}&quot;
+</span>  <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No correct arguments for processor definition, missing name.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_get_description'>get_description</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='comment'># processors can define subtasks that could snatch the description away
+</span>  <span class='comment'>#if(description)
+</span>  <span class='comment'>#puts &quot;Got description #{description} when defining task #{name}&quot;
+</span>  <span class='comment'>#end
+</span>  
+  <span class='id identifier rubyid_processor'>processor</span><span class='comma'>,</span> <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span> <span class='op'>=</span> <span class='id identifier rubyid__GetProcessor'>_GetProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_procClass'>procClass</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_processor'>processor</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not find or allocate processor </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@Path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># Path is from ProjectFile
+</span>  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_inputs'>inputs</span><span class='comma'>,</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='comma'>,</span> <span class='id identifier rubyid_taskDeps'>taskDeps</span> <span class='op'>=</span> <span class='id identifier rubyid__ParseProcessorArgs'>_ParseProcessorArgs</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  
+  <span class='comment'>#puts &quot;enhancing processor task #{name}: #{inputs}, #{valueMap}, #{taskArgs}, #{taskDeps}&quot;
+</span>  
+  <span class='id identifier rubyid_mappedTaskDeps'>mappedTaskDeps</span> <span class='op'>=</span> <span class='id identifier rubyid_taskDeps'>taskDeps</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span> <span class='op'>!=</span> <span class='kw'>self</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_mappedTaskDeps'>mappedTaskDeps</span> <span class='op'>=</span> <span class='id identifier rubyid_taskDeps'>taskDeps</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dep'>dep</span><span class='op'>|</span>
+      
+      <span class='comment'>#puts &quot;Mapping dep #{dep}:&quot;
+</span>      <span class='id identifier rubyid_absoluteDep'>absoluteDep</span> <span class='op'>=</span> <span class='const'>AbsoluteTaskPath</span><span class='lparen'>(</span><span class='id identifier rubyid_dep'>dep</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
+      <span class='comment'>#puts &quot;Absolute dep: #{absoluteDep}&quot;
+</span>      <span class='id identifier rubyid_usedDep'>usedDep</span> <span class='op'>=</span> <span class='const'>MakeRelativeTo</span><span class='lparen'>(</span><span class='id identifier rubyid_absoluteDep'>absoluteDep</span><span class='comma'>,</span> <span class='id identifier rubyid_sourceProjectFile'>sourceProjectFile</span><span class='rparen'>)</span>
+      <span class='comment'>#puts &quot;Used dep: #{usedDep}&quot;
+</span>      
+      <span class='id identifier rubyid_usedDep'>usedDep</span>
+    <span class='kw'>end</span>  
+  <span class='kw'>end</span>     
+  
+  <span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='const'>AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_mappedTaskDeps'>mappedTaskDeps</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='id identifier rubyid_enhance'>enhance</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='id identifier rubyid_set_arg_names'>set_arg_names</span><span class='lparen'>(</span><span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>      
+  <span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='id identifier rubyid_add_description'>add_description</span><span class='lparen'>(</span><span class='id identifier rubyid_description'>description</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='const'>AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_inputs'>inputs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_no_cache'>no_cache</span> <span class='op'>||</span>
+       <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_no_lib_cache'>no_lib_cache</span> <span class='op'>||</span>
+       <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_no_src_cache'>no_src_cache</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>
+       <span class='ivar'>@ProcessCache</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='const'>UseCache</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_processor'>processor</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProcessManager (module)">ProcessManager</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of ProcessManager</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 12</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>super</span>
+  <span class='ivar'>@Processors</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@ProcessChains</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@ProcessCache</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="SaveCache-instance_method">
+  
+    - (<tt>Object</tt>) <strong>SaveCache</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/process_manager.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='const'>SaveCache</span>
+  <span class='ivar'>@ProcessCache</span><span class='period'>.</span><span class='const'>Save</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:44 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

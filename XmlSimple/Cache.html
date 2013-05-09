@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: XmlSimple::Cache
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../XmlSimple.html" title="XmlSimple (class)">XmlSimple</a></span></span>
+     &raquo; 
+    <span class="title">Cache</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: XmlSimple::Cache
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">XmlSimple::Cache</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/Utility/XML/xmlsimple.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A simple cache for XML documents that were already transformed by xml_in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Cache) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates and initializes a new Cache object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restore_mem_copy-instance_method" title="#restore_mem_copy (instance method)">- (Object) <strong>restore_mem_copy</strong>(filename) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Restores a data structure from a memory cache.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restore_mem_share-instance_method" title="#restore_mem_share (instance method)">- (Object) <strong>restore_mem_share</strong>(filename) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Restores a data structure from a shared memory cache.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restore_storable-instance_method" title="#restore_storable (instance method)">- (Object) <strong>restore_storable</strong>(filename) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Restores a data structure from a file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_mem_copy-instance_method" title="#save_mem_copy (instance method)">- (Object) <strong>save_mem_copy</strong>(data, filename) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copies a data structure to a memory cache.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_mem_share-instance_method" title="#save_mem_share (instance method)">- (Object) <strong>save_mem_share</strong>(data, filename) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Saves a data structure in a shared memory cache.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_storable-instance_method" title="#save_storable (instance method)">- (Object) <strong>save_storable</strong>(data, filename) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Saves a data structure into a file.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="XmlSimple::Cache (class)">Cache</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates and initializes a new Cache object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='ivar'>@mem_share_cache</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@mem_copy_cache</span>  <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="restore_mem_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>restore_mem_copy</strong>(filename) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Restores a data structure from a memory cache. If restoring the data
+structure failed for any reason, nil will be returned.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>filename</p></td>
+<td>
+<p>Name of the file belonging to the data structure.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_restore_mem_copy'>restore_mem_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_get_from_memory_cache'>get_from_memory_cache</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='ivar'>@mem_share_cache</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_data'>data</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="restore_mem_share-instance_method">
+  
+    - (<tt>Object</tt>) <strong>restore_mem_share</strong>(filename) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Restores a data structure from a shared memory cache. You should consider
+these elements as "read only". If restoring the data structure failed for
+any reason, nil will be returned.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>filename</p></td>
+<td>
+<p>Name of the file belonging to the data structure.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_restore_mem_share'>restore_mem_share</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_get_from_memory_cache'>get_from_memory_cache</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='ivar'>@mem_share_cache</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="restore_storable-instance_method">
+  
+    - (<tt>Object</tt>) <strong>restore_storable</strong>(filename) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Restores a data structure from a file. If restoring the data structure
+failed for any reason, nil will be returned.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>filename</p></td>
+<td>
+<p>Name of the file belonging to the data structure.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_restore_storable'>restore_storable</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_cache_file'>cache_file</span> <span class='op'>=</span> <span class='id identifier rubyid_get_cache_filename'>get_cache_filename</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='const'>File</span><span class='op'>::</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_cache_file'>cache_file</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='const'>File</span><span class='op'>::</span><span class='id identifier rubyid_mtime'>mtime</span><span class='lparen'>(</span><span class='id identifier rubyid_cache_file'>cache_file</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='const'>File</span><span class='op'>::</span><span class='id identifier rubyid_mtime'>mtime</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_cache_file'>cache_file</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span> <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_data'>data</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_mem_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>save_mem_copy</strong>(data, filename) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Copies a data structure to a memory cache.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>data</p></td>
+<td>
+<p>Data structure to be copied.</p>
+</td></tr><tr><td class="rdoc-term"><p>filename</p></td>
+<td>
+<p>Name of the file belonging to the data structure.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_save_mem_copy'>save_mem_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='ivar'>@mem_share_cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_filename'>filename</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='const'>Time</span><span class='op'>::</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_mem_share-instance_method">
+  
+    - (<tt>Object</tt>) <strong>save_mem_share</strong>(data, filename) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Saves a data structure in a shared memory cache.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>data</p></td>
+<td>
+<p>Data structure to be saved.</p>
+</td></tr><tr><td class="rdoc-term"><p>filename</p></td>
+<td>
+<p>Name of the file belonging to the data structure.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_save_mem_share'>save_mem_share</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='ivar'>@mem_share_cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_filename'>filename</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='const'>Time</span><span class='op'>::</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_storable-instance_method">
+  
+    - (<tt>Object</tt>) <strong>save_storable</strong>(data, filename) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Saves a data structure into a file.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>data</p></td>
+<td>
+<p>Data structure to be saved.</p>
+</td></tr><tr><td class="rdoc-term"><p>filename</p></td>
+<td>
+<p>Name of the file belonging to the data structure.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_save_storable'>save_storable</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_cache_file'>cache_file</span> <span class='op'>=</span> <span class='id identifier rubyid_get_cache_filename'>get_cache_filename</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_cache_file'>cache_file</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>w+</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span> <span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:46 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

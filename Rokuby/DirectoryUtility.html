@@ -1,0 +1,1005 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::DirectoryUtility
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">DirectoryUtility</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::DirectoryUtility
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="DoxygenBuilder.html" title="Rokuby::DoxygenBuilder (class)">DoxygenBuilder</a></span>, <span class='object_link'><a href="FileFinder.html" title="Rokuby::FileFinder (class)">FileFinder</a></span>, <span class='object_link'><a href="GppProjectCompiler.html" title="Rokuby::GppProjectCompiler (class)">GppProjectCompiler</a></span>, <span class='object_link'><a href="GppProjectCreator.html" title="Rokuby::GppProjectCreator (class)">GppProjectCreator</a></span>, <span class='object_link'><a href="GppProjectPreprocessor.html" title="Rokuby::GppProjectPreprocessor (class)">GppProjectPreprocessor</a></span>, <span class='object_link'><a href="SolutionFileCreator.html" title="Rokuby::SolutionFileCreator (class)">SolutionFileCreator</a></span>, <span class='object_link'><a href="VsFileCreator.html" title="Rokuby::VsFileCreator (class)">VsFileCreator</a></span>, <span class='object_link'><a href="VsProjectConfiguration.html" title="Rokuby::VsProjectConfiguration (class)">VsProjectConfiguration</a></span>, <span class='object_link'><a href="VsProjectCreator.html" title="Rokuby::VsProjectCreator (class)">VsProjectCreator</a></span>, <span class='object_link'><a href="VsProjectPreprocessor.html" title="Rokuby::VsProjectPreprocessor (class)">VsProjectPreprocessor</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/Utility/directory_utility.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreatePath-instance_method" title="#CreatePath (instance method)">- (Object) <strong>CreatePath</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create the given path if it does not exist.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FindFileInDirectories-instance_method" title="#FindFileInDirectories (instance method)">- (Object) <strong>FindFileInDirectories</strong>(filename, directories) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Find a file in several directories.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FindFileInDirectory-instance_method" title="#FindFileInDirectory (instance method)">- (Object) <strong>FindFileInDirectory</strong>(filename, directory) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Find a file in the given directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FindFilesInDirectories-instance_method" title="#FindFilesInDirectories (instance method)">- (Object) <strong>FindFilesInDirectories</strong>(includePatterns, excludePatterns, directories) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Find all files matching a pattern in some directories.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FindFilesInDirectory-instance_method" title="#FindFilesInDirectory (instance method)">- (Object) <strong>FindFilesInDirectory</strong>(includePatterns, excludePatterns, directory) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Find all files matching a pattern in some directories.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GenerateVSVariablePath-instance_method" title="#GenerateVSVariablePath (instance method)">- (Object) <strong>GenerateVSVariablePath</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This creates a ProjectPath that can start with VS variable and nontheless
+will work properly.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetDirectoryPathsFromRelativeBase-instance_method" title="#GetDirectoryPathsFromRelativeBase (instance method)">- (Object) <strong>GetDirectoryPathsFromRelativeBase</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get all relative directory paths starting from the base of the relative
+path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetDirectoryTree-instance_method" title="#GetDirectoryTree (instance method)">- (Object) <strong>GetDirectoryTree</strong>(baseDirectory, excludePatterns = [], excludeEmpty = false) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the project paths to all subdirs of a directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetDirectoryTreeFromRelativeBase-instance_method" title="#GetDirectoryTreeFromRelativeBase (instance method)">- (Object) <strong>GetDirectoryTreeFromRelativeBase</strong>(baseDirectory, excludePatterns = [], excludeEmpty = false) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Same as GetDirectoryTree but includes the path from the base directory of
+the relative path of the base directory to the base directory.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="CreatePath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreatePath</strong>(path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create the given path if it does not exist. Creates all non existent
+directories in the path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 187</span>
+
+<span class='kw'>def</span> <span class='const'>CreatePath</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;Creating path #{path}&quot;
+</span>  <span class='id identifier rubyid_dirsToCreate'>dirsToCreate</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_currentPath'>currentPath</span> <span class='op'>=</span> <span class='id identifier rubyid_path'>path</span>
+  <span class='kw'>while</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_currentPath'>currentPath</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='rparen'>)</span>
+	<span class='comment'>#puts &quot;Need to create path #{currentPath}&quot;
+</span>	<span class='id identifier rubyid_dirsToCreate'>dirsToCreate</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_currentPath'>currentPath</span><span class='period'>.</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_currentPath'>currentPath</span> <span class='op'>=</span> <span class='id identifier rubyid_currentPath'>currentPath</span><span class='period'>.</span><span class='const'>Up</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_dirsToCreate'>dirsToCreate</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dir'>dir</span><span class='op'>|</span>
+	<span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_mkdir'>mkdir</span><span class='lparen'>(</span><span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FindFileInDirectories-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FindFileInDirectories</strong>(filename, directories) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Find a file in several directories. Also searches in the subdirectories and
+returns the first occurence found. Throws exception if no file with the
+name is found.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+113
+114
+115
+116
+117
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 113</span>
+
+<span class='kw'>def</span> <span class='const'>FindFileInDirectories</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_directories'>directories</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_directories'>directories</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dir'>dir</span><span class='op'>|</span>                         
+    <span class='id identifier rubyid_fileFound'>fileFound</span> <span class='op'>=</span> <span class='const'>FindFileInDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_fileFound'>fileFound</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+      <span class='kw'>return</span> <span class='id identifier rubyid_fileFound'>fileFound</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_abort'>abort</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not find file </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_filename'>filename</span><span class='rbrace'>}</span><span class='tstring_content'> in the directories </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_directories'>directories</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FindFileInDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FindFileInDirectory</strong>(filename, directory) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Find a file in the given directory. Continues the search in child
+directories if the file is not found. Returns the first occurence of the
+file or nil. filename and directory are project paths.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='const'>FindFileInDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_directory'>directory</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_filePath'>filePath</span> <span class='op'>=</span> <span class='id identifier rubyid_directory'>directory</span><span class='period'>.</span><span class='const'>Join</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span> <span class='id identifier rubyid_filePath'>filePath</span><span class='period'>.</span><span class='id identifier rubyid_file?'>file?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_filePath'>filePath</span>
+  <span class='kw'>else</span>
+	<span class='id identifier rubyid_directory'>directory</span><span class='period'>.</span><span class='const'>SubPaths</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_subPath'>subPath</span><span class='op'>|</span>
+	  <span class='id identifier rubyid_fileFound'>fileFound</span> <span class='op'>=</span> <span class='const'>FindFileInDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_subPath'>subPath</span><span class='rparen'>)</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_fileFound'>fileFound</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+        <span class='kw'>return</span> <span class='id identifier rubyid_fileFound'>fileFound</span>
+      <span class='kw'>end</span>
+	<span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span><span class='semicolon'>;</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FindFilesInDirectories-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FindFilesInDirectories</strong>(includePatterns, excludePatterns, directories) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Find all files matching a pattern in some directories. Searches
+recursively. Patterns are applied on the relative paths.</p>
+<dl class="rdoc-list"><dt>includePatterns</dt>
+<dd>
+<p>Some RegExps describing the file names.</p>
+</dd><dt>excludePatterns</dt>
+<dd>
+<p>Some RegExps that can be used to exclude file names.</p>
+</dd><dt>directories</dt>
+<dd>
+<p>The project paths to the directories that should be searched.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 12</span>
+
+<span class='kw'>def</span> <span class='const'>FindFilesInDirectories</span><span class='lparen'>(</span><span class='id identifier rubyid_includePatterns'>includePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_directories'>directories</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_files'>files</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_includePatterns'>includePatterns</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>      <span class='comment'># if there are no include patterns there will be no files
+</span>	<span class='comment'>#puts &quot;Directories searched: #{directories}&quot;
+</span>	<span class='id identifier rubyid_directories'>directories</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dir'>dir</span><span class='op'>|</span>
+	  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_dir'>dir</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_dir'>dir</span><span class='period'>.</span><span class='id identifier rubyid_directory?'>directory?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+ <span class='id identifier rubyid_files'>files</span> <span class='op'>=</span> <span class='id identifier rubyid_files'>files</span> <span class='op'>+</span> <span class='const'>FindFilesInDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_includePatterns'>includePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>
+	  <span class='kw'>end</span>
+	<span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_files'>files</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FindFilesInDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FindFilesInDirectory</strong>(includePatterns, excludePatterns, directory) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Find all files matching a pattern in some directories. Searches
+recursively. Patterns are applied on the relative paths.</p>
+<dl class="rdoc-list"><dt>includePatterns</dt>
+<dd>
+<p>Some RegExps describing the file names.</p>
+</dd><dt>excludePatterns</dt>
+<dd>
+<p>Some RegExps that can be used to exclude file names.</p>
+</dd><dt>directory</dt>
+<dd>
+<p>The proeject path to the directory that should be searched.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='const'>FindFilesInDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_includePatterns'>includePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_directory'>directory</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_files'>files</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>      
+  <span class='comment'>#puts &quot;Searching files in '#{directory}'&quot;
+</span>  <span class='comment'>#puts &quot;Include patterns: #{includePatterns}&quot;
+</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_readable?'>readable?</span><span class='lparen'>(</span><span class='id identifier rubyid_directory'>directory</span><span class='period'>.</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_files'>files</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_testPath'>testPath</span> <span class='op'>=</span> <span class='id identifier rubyid_directory'>directory</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_pattern'>pattern</span><span class='op'>|</span>
+	<span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_testPath'>testPath</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='id identifier rubyid_pattern'>pattern</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+	  <span class='comment'>#puts &quot;Excluding file '#{entryPath}' based on pattern '#{pattern}'&quot;
+</span>	  <span class='kw'>return</span> <span class='id identifier rubyid_files'>files</span>
+	<span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_directory'>directory</span><span class='period'>.</span><span class='const'>SubPaths</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_subPath'>subPath</span><span class='op'>|</span>
+
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_subPath'>subPath</span><span class='period'>.</span><span class='id identifier rubyid_directory?'>directory?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_files'>files</span> <span class='op'>=</span> <span class='id identifier rubyid_files'>files</span> <span class='op'>+</span> <span class='const'>FindFilesInDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_includePatterns'>includePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_subPath'>subPath</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_entryIsExcluded'>entryIsExcluded</span> <span class='op'>=</span> <span class='kw'>false</span>
+
+	  <span class='id identifier rubyid_testPath'>testPath</span> <span class='op'>=</span> <span class='id identifier rubyid_subPath'>subPath</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+      <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_pattern'>pattern</span><span class='op'>|</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_testPath'>testPath</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='id identifier rubyid_pattern'>pattern</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+   <span class='comment'>#puts &quot;Excluding file '#{entryPath}' based on pattern '#{pattern}'&quot;
+</span>          <span class='id identifier rubyid_entryIsExcluded'>entryIsExcluded</span> <span class='op'>=</span> <span class='kw'>true</span>
+          <span class='kw'>break</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_entryIsExcluded'>entryIsExcluded</span><span class='rparen'>)</span>
+        <span class='kw'>next</span>
+      <span class='kw'>end</span>
+
+      <span class='id identifier rubyid_entryMatches'>entryMatches</span> <span class='op'>=</span> <span class='kw'>false</span>
+
+	  <span class='comment'>#puts &quot;Checking entry #{testPath} for inclusion&quot;
+</span>      <span class='id identifier rubyid_includePatterns'>includePatterns</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_pattern'>pattern</span><span class='op'>|</span>
+ <span class='comment'>#puts &quot;Trying pattern #{pattern}&quot;
+</span>        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_testPath'>testPath</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='id identifier rubyid_pattern'>pattern</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+   <span class='comment'>#puts &quot;Including file '#{entryPath}' based on pattern '#{pattern}'&quot;
+</span>          <span class='id identifier rubyid_entryMatches'>entryMatches</span> <span class='op'>=</span> <span class='kw'>true</span>
+          <span class='kw'>break</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_entryMatches'>entryMatches</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_files'>files</span> <span class='op'>=</span> <span class='id identifier rubyid_files'>files</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='id identifier rubyid_subPath'>subPath</span><span class='rbracket'>]</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_files'>files</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GenerateVSVariablePath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GenerateVSVariablePath</strong>(path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This creates a ProjectPath that can start with VS variable and nontheless
+will work properly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 181</span>
+
+<span class='kw'>def</span> <span class='const'>GenerateVSVariablePath</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>base:</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='label'>absolute:</span> <span class='kw'>true</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetDirectoryPathsFromRelativeBase-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetDirectoryPathsFromRelativeBase</strong>(path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get all relative directory paths starting from the base of the relative
+path. E.g:  "c:/a/b/c|d/e/f" -&gt; ["c:/a/b/c|d", "c:/a/b/c|d/e",
+"c:/a/b/c|d/e/f"]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140
+141
+142
+143
+144
+145</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='const'>GetDirectoryPathsFromRelativeBase</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_pathParts'>pathParts</span> <span class='op'>=</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='const'>RelativePathParts</span>
+  <span class='id identifier rubyid_paths'>paths</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='int'>1</span><span class='op'>..</span><span class='id identifier rubyid_pathParts'>pathParts</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+	<span class='id identifier rubyid_subPath'>subPath</span> <span class='op'>=</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>JoinPaths</span><span class='lparen'>(</span><span class='id identifier rubyid_pathParts'>pathParts</span><span class='period'>.</span><span class='id identifier rubyid_slice'>slice</span><span class='lparen'>(</span><span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_i'>i</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_paths'>paths</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_subPath'>subPath</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_paths'>paths</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetDirectoryTree-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetDirectoryTree</strong>(baseDirectory, excludePatterns = [], excludeEmpty = false) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the project paths to all subdirs of a directory. For example:</p>
+<ul><li>
+<p>dir1</p>
+<ul><li>
+<p>dir2</p>
+</li><li>
+<p>dir3 -dir4</p>
+</li></ul>
+</li></ul>
+
+<h1>&gt; ['dir1', 'dir1/dir2', 'dir1/dir3', 'dir1/dir3/dir4']</h1>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 154</span>
+
+<span class='kw'>def</span> <span class='const'>GetDirectoryTree</span><span class='lparen'>(</span><span class='id identifier rubyid_baseDirectory'>baseDirectory</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_excludeEmpty'>excludeEmpty</span><span class='op'>=</span><span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_subdirs'>subdirs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_baseDirectory'>baseDirectory</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_baseDirectory'>baseDirectory</span><span class='period'>.</span><span class='const'>SubPaths</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_subPath'>subPath</span><span class='op'>|</span>
+	<span class='id identifier rubyid_pathExcluded'>pathExcluded</span> <span class='op'>=</span> <span class='kw'>false</span>
+
+    <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_pattern'>pattern</span><span class='op'>|</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_subPath'>subPath</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='id identifier rubyid_pattern'>pattern</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_pathExcluded'>pathExcluded</span> <span class='op'>=</span> <span class='kw'>true</span>
+        <span class='kw'>break</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_pathExcluded'>pathExcluded</span><span class='rparen'>)</span>
+      <span class='comment'>#puts &quot;Excluding path #{subdirPath}&quot;
+</span>      <span class='kw'>next</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_subPath'>subPath</span><span class='period'>.</span><span class='id identifier rubyid_directory?'>directory?</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='lparen'>(</span><span class='id identifier rubyid_excludeEmpty'>excludeEmpty</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_subPath'>subPath</span><span class='period'>.</span><span class='id identifier rubyid_EmptyDirectory?'>EmptyDirectory?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_subTree'>subTree</span> <span class='op'>=</span> <span class='const'>GetDirectoryTree</span><span class='lparen'>(</span><span class='id identifier rubyid_subPath'>subPath</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_excludeEmpty'>excludeEmpty</span><span class='rparen'>)</span>	  
+	  <span class='id identifier rubyid_subdirs'>subdirs</span> <span class='op'>=</span> <span class='id identifier rubyid_subdirs'>subdirs</span> <span class='op'>+</span> <span class='id identifier rubyid_subTree'>subTree</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_subdirs'>subdirs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetDirectoryTreeFromRelativeBase-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetDirectoryTreeFromRelativeBase</strong>(baseDirectory, excludePatterns = [], excludeEmpty = false) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Same as GetDirectoryTree but includes the path from the base directory of
+the relative path of the base directory to the base directory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/directory_utility.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='const'>GetDirectoryTreeFromRelativeBase</span><span class='lparen'>(</span><span class='id identifier rubyid_baseDirectory'>baseDirectory</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_excludeEmpty'>excludeEmpty</span><span class='op'>=</span><span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_tree'>tree</span> <span class='op'>=</span> <span class='const'>GetDirectoryPathsFromRelativeBase</span><span class='lparen'>(</span><span class='id identifier rubyid_baseDirectory'>baseDirectory</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_tree'>tree</span><span class='period'>.</span><span class='id identifier rubyid_pop'>pop</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='comment'># remove the base directory which is added again in the GetDirectoryTree call
+</span>  
+  <span class='id identifier rubyid_tree'>tree</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='const'>GetDirectoryTree</span><span class='lparen'>(</span><span class='id identifier rubyid_baseDirectory'>baseDirectory</span><span class='comma'>,</span> <span class='id identifier rubyid_excludePatterns'>excludePatterns</span><span class='comma'>,</span> <span class='id identifier rubyid_excludeEmpty'>excludeEmpty</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_tree'>tree</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:43 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

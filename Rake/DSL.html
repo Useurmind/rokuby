@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rake::DSL
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rake.html" title="Rake (module)">Rake</a></span></span>
+     &raquo; 
+    <span class="title">DSL</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rake::DSL
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1"><span class='object_link'><a href="FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></dd>
+      
+    
+  
+  
+    <dt class="r2">Included in:</dt>
+    <dd class="r2"><span class='object_link'><a href="MakefileLoader.html" title="Rake::MakefileLoader (class)">MakefileLoader</a></span>, <span class='object_link'><a href="SshDirPublisher.html" title="Rake::SshDirPublisher (class)">SshDirPublisher</a></span>, <span class='object_link'><a href="SshFilePublisher.html" title="Rake::SshFilePublisher (class)">SshFilePublisher</a></span>, <span class='object_link'><a href="TaskLib.html" title="Rake::TaskLib (class)">TaskLib</a></span>, <span class='object_link'><a href="../Rokuby/GppProjectBuilder.html" title="Rokuby::GppProjectBuilder (class)">Rokuby::GppProjectBuilder</a></span>, <span class='object_link'><a href="../Rokuby/ProjectFile.html" title="Rokuby::ProjectFile (class)">Rokuby::ProjectFile</a></span>, <span class='object_link'><a href="../Rokuby/VsProjectBuilder.html" title="Rokuby::VsProjectBuilder (class)">Rokuby::VsProjectBuilder</a></span>, <span class='object_link'><a href="../Rokuby/VsProjectConfiguration.html" title="Rokuby::VsProjectConfiguration (class)">Rokuby::VsProjectConfiguration</a></span>, <span class='object_link'><a href="../Rokuby/VsSolutionBuilder.html" title="Rokuby::VsSolutionBuilder (class)">Rokuby::VsSolutionBuilder</a></span></dd>
+    
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/RakeWrapper/dsl_language.rb<span class="defines">,<br />
+  lib/rokuby/RokubyRake/rake/dsl_definition.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>DSL is a module that provides #task, #desc, #namespace, etc.  Use this when
+you'd like to use rake outside the top level scope.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+
+
+
+  <h2>Constant Summary</h2>
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="FileUtilsExt.html#DEFAULT-constant" title="Rake::FileUtilsExt::DEFAULT (constant)">FileUtilsExt::DEFAULT</a></span></p>
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#LN_SUPPORTED-constant" title="FileUtils::LN_SUPPORTED (constant)">FileUtils::LN_SUPPORTED</a></span>, <span class='object_link'><a href="../FileUtils.html#RUBY-constant" title="FileUtils::RUBY (constant)">FileUtils::RUBY</a></span></p>
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#arg-instance_method" title="#arg (instance method)">- (Object) <strong>arg</strong>(name, *args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Describe an argument of a task.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clean-instance_method" title="#clean (instance method)">- (Object) <strong>clean</strong>(*includes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add files to the clean target of this project file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clobber-instance_method" title="#clobber (instance method)">- (Object) <strong>clobber</strong>(*includes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add files to the clobber target of this project file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#desc_old-instance_method" title="#desc_old (instance method)">- (Object) <strong>desc_old</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#import_old-instance_method" title="#import_old (instance method)">- (Object) <strong>import_old</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Incude a project file from a subfolder.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#taskDescriptor-instance_method" title="#taskDescriptor (instance method)">- (Object) <strong>taskDescriptor</strong>(task) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>For debugging purposes.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="FileUtilsExt.html#nowrite-instance_method" title="Rake::FileUtilsExt#nowrite (method)">#nowrite</a></span>, <span class='object_link'><a href="FileUtilsExt.html#rake_check_options-instance_method" title="Rake::FileUtilsExt#rake_check_options (method)">#rake_check_options</a></span>, <span class='object_link'><a href="FileUtilsExt.html#rake_merge_option-instance_method" title="Rake::FileUtilsExt#rake_merge_option (method)">#rake_merge_option</a></span>, <span class='object_link'><a href="FileUtilsExt.html#rake_output_message-instance_method" title="Rake::FileUtilsExt#rake_output_message (method)">#rake_output_message</a></span>, <span class='object_link'><a href="FileUtilsExt.html#verbose-instance_method" title="Rake::FileUtilsExt#verbose (method)">#verbose</a></span>, <span class='object_link'><a href="FileUtilsExt.html#when_writing-instance_method" title="Rake::FileUtilsExt#when_writing (method)">#when_writing</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#ruby-instance_method" title="FileUtils#ruby (method)">#ruby</a></span>, <span class='object_link'><a href="../FileUtils.html#safe_ln-instance_method" title="FileUtils#safe_ln (method)">#safe_ln</a></span>, <span class='object_link'><a href="../FileUtils.html#sh-instance_method" title="FileUtils#sh (method)">#sh</a></span>, <span class='object_link'><a href="../FileUtils.html#split_all-instance_method" title="FileUtils#split_all (method)">#split_all</a></span></p>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="arg-instance_method">
+  
+    - (<tt>Object</tt>) <strong>arg</strong>(name, *args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Describe an argument of a task. You can add multiple lines of text to an
+argument either by calling this with multiple additional arguments or by
+calling it repeatedly for the same argument.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/dsl_language.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_arg'>arg</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DescribeArgument</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clean-instance_method">
+  
+    - (<tt>Object</tt>) <strong>clean</strong>(*includes) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add files to the clean target of this project file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/dsl_language.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clean'>clean</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+  <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>IncludeCleanTargets</span><span class='lparen'>(</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clobber-instance_method">
+  
+    - (<tt>Object</tt>) <strong>clobber</strong>(*includes) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add files to the clobber target of this project file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/dsl_language.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clobber'>clobber</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+  <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>IncludeClobberTargets</span><span class='lparen'>(</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="desc_old-instance_method">
+  
+    - (<tt>Object</tt>) <strong>desc_old</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/dsl_language.rb', line 30</span>
+
+<span class='kw'>alias</span> <span class='id identifier rubyid_desc_old'>desc_old</span> <span class='id identifier rubyid_desc'>desc</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="import_old-instance_method">
+  
+    - (<tt>Object</tt>) <strong>import_old</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Incude a project file from a subfolder. The path is given in the form
+"subfolder/projectfile_name". Project file are separated in their
+namespace.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/dsl_language.rb', line 9</span>
+
+<span class='kw'>alias</span> <span class='id identifier rubyid_import_old'>import_old</span> <span class='id identifier rubyid_import'>import</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="taskDescriptor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>taskDescriptor</strong>(task) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>For debugging purposes. Prints useful information concerning the task.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/dsl_language.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_taskDescriptor'>taskDescriptor</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
+  <span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>TaskDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:43 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: gpp
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: gpp</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>G++ Project Compilation</h1>
+
+<p>Creating your software project with the g++ means to setup a build process that handles the coordination of compiling single source files
+and linking the create object files together with perhaps other premade libraries or binary code from other projects.</p>
+
+<p>Rokuby provides a way to do this in a similar fashion to <a href="file.visual_studio.html">creating visual studio projects</a> (here visual studio handles the coordination for
+the compilation and linking process). Because we want to make this build process similar to the visual studio process we have similar and even some shared
+logical constructs.</p>
+
+<h2>G++ Project Creation</h2>
+
+<p>First let us see the project creation workflow.</p>
+
+<p><img src="images/gpp_project_workflow.svg" alt="g++ project creation"></p>
+
+<p>Remember the simple project workflow, which is described on <a href="file.projects.html">Projects</a> :</p>
+
+<p><img src="images/basic_project_build_process.svg" alt="Project build process"></p>
+
+<p>You can see that the g++ workflow is almost the same as the visual studio workflow with almost the same additional information units and the same output
+information unit, namely a GppProject. In what they differ is that the GppProjectBuilder directly creates the binary output that results from the
+compilation and link steps in a project.</p>
+
+<h2>Reference</h2>
+
+<p>As the build process here is pretty self explanatore once you have read <a href="file.projects.html">Basic Project Creation</a> and
+<a href="file.visual_studio.html">Visual Studio Solution Creation</a>, I will only state the source files that are used in this process.</p>
+
+<p>Information Units:</p>
+
+<ul>
+<li><a href="Rokuby/GppProjectDescription.html">GppProjectDescription Source</a></li>
+<li><a href="Rokuby/GppProjectConfiguration.html">GppProjectConfiguration Source</a></li>
+<li><a href="Rokuby/GppProject.html">GppProject Source</a></li>
+</ul>
+
+<p>Processors:</p>
+
+<ul>
+<li><a href="Rokuby/GppProjectBuilder.html">GppProjectBuilder Source</a></li>
+</ul>
+</div></div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

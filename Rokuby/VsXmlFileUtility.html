@@ -1,0 +1,850 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::VsXmlFileUtility
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">VsXmlFileUtility</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::VsXmlFileUtility
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1"><span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></dd>
+      
+    
+  
+  
+    <dt class="r2">Included in:</dt>
+    <dd class="r2"><span class='object_link'><a href="SolutionFileCreator.html" title="Rokuby::SolutionFileCreator (class)">SolutionFileCreator</a></span>, <span class='object_link'><a href="VsFileCreator.html" title="Rokuby::VsFileCreator (class)">VsFileCreator</a></span></dd>
+    
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FormatXmlDirectory-instance_method" title="#FormatXmlDirectory (instance method)">- (Object) <strong>FormatXmlDirectory</strong>(dir) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FormatXmlPath-instance_method" title="#FormatXmlPath (instance method)">- (Object) <strong>FormatXmlPath</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetElementForList-instance_method" title="#GetElementForList (instance method)">- (Object) <strong>GetElementForList</strong>(attributes, children) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetMultiElementListForList-instance_method" title="#GetMultiElementListForList (instance method)">- (Object) <strong>GetMultiElementListForList</strong>(attributes, childElementName, childElements) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetProjectDirectoryRelativeBaseDirectory-instance_method" title="#GetProjectDirectoryRelativeBaseDirectory (instance method)">- (Object) <strong>GetProjectDirectoryRelativeBaseDirectory</strong>(projectRelativePath) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return the directory of the given file path relative to the base directory
+of the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetSelfContainedElement-instance_method" title="#GetSelfContainedElement (instance method)">- (Object) <strong>GetSelfContainedElement</strong>(name, attributes, children) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetVsProjectRelativePath-instance_method" title="#GetVsProjectRelativePath (instance method)">- (Object) <strong>GetVsProjectRelativePath</strong>(projectRelativePath) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the path of the file relative to the visual studio project directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetVsSolutionRelativePath-instance_method" title="#GetVsSolutionRelativePath (instance method)">- (Object) <strong>GetVsSolutionRelativePath</strong>(projectRelativePath) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the path of the file relative to the visual studio solution directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#JoinXmlPaths-instance_method" title="#JoinXmlPaths (instance method)">- (Object) <strong>JoinXmlPaths</strong>(paths) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SaveXmlDocument-instance_method" title="#SaveXmlDocument (instance method)">- (Object) <strong>SaveXmlDocument</strong>(doc, path, options) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsPathIsAbsolute-instance_method" title="#VsPathIsAbsolute (instance method)">- (Object) <strong>VsPathIsAbsolute</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="PathUtility.html#ExecuteInPath-instance_method" title="Rokuby::PathUtility#ExecuteInPath (method)">#ExecuteInPath</a></span>, <span class='object_link'><a href="PathUtility.html#FormatPath-instance_method" title="Rokuby::PathUtility#FormatPath (method)">#FormatPath</a></span>, <span class='object_link'><a href="PathUtility.html#GetWindowsPath-instance_method" title="Rokuby::PathUtility#GetWindowsPath (method)">#GetWindowsPath</a></span>, <span class='object_link'><a href="PathUtility.html#JoinPaths-instance_method" title="Rokuby::PathUtility#JoinPaths (method)">#JoinPaths</a></span>, <span class='object_link'><a href="PathUtility.html#PathAbsolute%3F-instance_method" title="Rokuby::PathUtility#PathAbsolute? (method)">#PathAbsolute?</a></span>, <span class='object_link'><a href="PathUtility.html#RemoveParents-instance_method" title="Rokuby::PathUtility#RemoveParents (method)">#RemoveParents</a></span></p>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="FormatXmlDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FormatXmlDirectory</strong>(dir) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 93</span>
+
+<span class='kw'>def</span> <span class='const'>FormatXmlDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_formattedDir'>formattedDir</span> <span class='op'>=</span> <span class='const'>FormatXmlPath</span><span class='lparen'>(</span><span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_formattedDir'>formattedDir</span><span class='period'>.</span><span class='id identifier rubyid_end_with?'>end_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\\</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_formattedDir'>formattedDir</span> <span class='op'>=</span> <span class='id identifier rubyid_formattedDir'>formattedDir</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\\</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_formattedDir'>formattedDir</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FormatXmlPath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FormatXmlPath</strong>(path) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='const'>FormatXmlPath</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\/</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\\</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetElementForList-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetElementForList</strong>(attributes, children) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='const'>GetElementForList</span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='id identifier rubyid_children'>children</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_element'>element</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_attrName'>attrName</span><span class='comma'>,</span> <span class='id identifier rubyid_attrValue'>attrValue</span><span class='op'>|</span>
+    <span class='id identifier rubyid_element'>element</span><span class='lbracket'>[</span><span class='id identifier rubyid_attrName'>attrName</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_attrValue'>attrValue</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_childName'>childName</span><span class='comma'>,</span> <span class='id identifier rubyid_childValue'>childValue</span><span class='op'>|</span>
+    <span class='id identifier rubyid_element'>element</span><span class='lbracket'>[</span><span class='id identifier rubyid_childName'>childName</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_childValue'>childValue</span><span class='rbracket'>]</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_element'>element</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetMultiElementListForList-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetMultiElementListForList</strong>(attributes, childElementName, childElements) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='const'>GetMultiElementListForList</span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='id identifier rubyid_childElementName'>childElementName</span><span class='comma'>,</span> <span class='id identifier rubyid_childElements'>childElements</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_elementList'>elementList</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_attrName'>attrName</span><span class='comma'>,</span> <span class='id identifier rubyid_attrValue'>attrValue</span><span class='op'>|</span>
+    <span class='id identifier rubyid_elementList'>elementList</span><span class='lbracket'>[</span><span class='id identifier rubyid_attrName'>attrName</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_attrValue'>attrValue</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_elementList'>elementList</span><span class='lbracket'>[</span><span class='id identifier rubyid_childElementName'>childElementName</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_childElements'>childElements</span><span class='semicolon'>;</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_elementList'>elementList</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetProjectDirectoryRelativeBaseDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetProjectDirectoryRelativeBaseDirectory</strong>(projectRelativePath) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Return the directory of the given file path relative to the base directory
+of the project.</p>
+<dl class="rdoc-list"><dt>projectRelativePath</dt>
+<dd>
+<p>Path of the file relative to the project directory.</p>
+</dd></dl>
+
+<p>The path will be formatted in visual studio xml path format. Example:
+'C:/../projectBase/include/header1.h' -&gt; 'includeheader1.h' Actually it
+only converts something like './include/header1.h' correctly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='const'>GetProjectDirectoryRelativeBaseDirectory</span><span class='lparen'>(</span><span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'>FormatXmlPath</span><span class='lparen'>(</span><span class='const'>StripFilenameFromPath</span><span class='lparen'>(</span><span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetSelfContainedElement-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetSelfContainedElement</strong>(name, attributes, children) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31
+32
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='const'>GetSelfContainedElement</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='id identifier rubyid_children'>children</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_element'>element</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='id identifier rubyid_name'>name</span> <span class='op'>=&gt;</span> <span class='const'>GetElementForList</span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='id identifier rubyid_children'>children</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_element'>element</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetVsProjectRelativePath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetVsProjectRelativePath</strong>(projectRelativePath) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the path of the file relative to the visual studio project directory.</p>
+<dl class="rdoc-list"><dt>projectRelativePath</dt>
+<dd>
+<p>Path of the file relative to the base project directory.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='const'>GetVsProjectRelativePath</span><span class='lparen'>(</span><span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>VsPathIsAbsolute</span><span class='lparen'>(</span><span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='const'>JoinXmlPaths</span><span class='lparen'>(</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetVsSolutionRelativePath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetVsSolutionRelativePath</strong>(projectRelativePath) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the path of the file relative to the visual studio solution directory.</p>
+<dl class="rdoc-list"><dt>projectRelativePath</dt>
+<dd>
+<p>Path of the file relative to the base project directory.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='const'>GetVsSolutionRelativePath</span><span class='lparen'>(</span><span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>VsPathIsAbsolute</span><span class='lparen'>(</span><span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='const'>JoinXmlPaths</span><span class='lparen'>(</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_projectRelativePath'>projectRelativePath</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="JoinXmlPaths-instance_method">
+  
+    - (<tt>Object</tt>) <strong>JoinXmlPaths</strong>(paths) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 101</span>
+
+<span class='kw'>def</span> <span class='const'>JoinXmlPaths</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'>FormatXmlPath</span><span class='lparen'>(</span><span class='const'>JoinPaths</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="SaveXmlDocument-instance_method">
+  
+    - (<tt>Object</tt>) <strong>SaveXmlDocument</strong>(doc, path, options) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='const'>SaveXmlDocument</span><span class='lparen'>(</span><span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>w</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_docString'>docString</span> <span class='op'>=</span> <span class='const'>XmlSimple</span><span class='period'>.</span><span class='id identifier rubyid_xml_out'>xml_out</span><span class='lparen'>(</span><span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span> <span class='id identifier rubyid_docString'>docString</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="VsPathIsAbsolute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsPathIsAbsolute</strong>(path) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='const'>VsPathIsAbsolute</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>$(</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>or</span> <span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^[A-Z]:</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>true</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:44 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

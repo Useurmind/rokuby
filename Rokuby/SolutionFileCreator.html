@@ -1,0 +1,1528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::SolutionFileCreator
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">SolutionFileCreator</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::SolutionFileCreator
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rokuby::SolutionFileCreator</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="DirectoryUtility.html" title="Rokuby::DirectoryUtility (module)">DirectoryUtility</a></span>, <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html" title="Rokuby::VsXmlFileUtility (module)">VsXmlFileUtility</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Utility/VisualStudio/solution_file_creator.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class can create a solution file for Visual Studio 2010</p>
+<dl class="rdoc-list"><dt>VsSolution</dt>
+<dd>
+<p>The solution for which the solution file should be build.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsProjects-instance_method" title="#VsProjects (instance method)">- (Object) <strong>VsProjects</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute VsProjects.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsSolutionDescription-instance_method" title="#VsSolutionDescription (instance method)">- (Object) <strong>VsSolutionDescription</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute VsSolutionDescription.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#BuildFile-instance_method" title="#BuildFile (instance method)">- (Object) <strong>BuildFile</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateProjectWithDependencies-instance_method" title="#CreateProjectWithDependencies (instance method)">- (Object) <strong>CreateProjectWithDependencies</strong>(project) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DecreaseIndentation-instance_method" title="#DecreaseIndentation (instance method)">- (Object) <strong>DecreaseIndentation</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#EndGlobal-instance_method" title="#EndGlobal (instance method)">- (Object) <strong>EndGlobal</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#EndGlobalSection-instance_method" title="#EndGlobalSection (instance method)">- (Object) <strong>EndGlobalSection</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#EndProject-instance_method" title="#EndProject (instance method)">- (Object) <strong>EndProject</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#EndProjectSection-instance_method" title="#EndProjectSection (instance method)">- (Object) <strong>EndProjectSection</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetFilePath-instance_method" title="#GetFilePath (instance method)">- (Object) <strong>GetFilePath</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetSolutionDirectory-instance_method" title="#GetSolutionDirectory (instance method)">- (Object) <strong>GetSolutionDirectory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetSolutionString-instance_method" title="#GetSolutionString (instance method)">- (Object) <strong>GetSolutionString</strong>(postSolution = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#IncreaseIndentation-instance_method" title="#IncreaseIndentation (instance method)">- (Object) <strong>IncreaseIndentation</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (SolutionFileCreator) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of SolutionFileCreator.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#StartGlobal-instance_method" title="#StartGlobal (instance method)">- (Object) <strong>StartGlobal</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#StartGlobalSection-instance_method" title="#StartGlobalSection (instance method)">- (Object) <strong>StartGlobalSection</strong>(name, postSolution = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#StartProject-instance_method" title="#StartProject (instance method)">- (Object) <strong>StartProject</strong>(guid, project) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><dl class="rdoc-list"><dt>guid</dt>
+<dd>
+<p>A guid in the form 35BC....</p>
+</dd></dl>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#StartProjectSection-instance_method" title="#StartProjectSection (instance method)">- (Object) <strong>StartProjectSection</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#WriteLine-instance_method" title="#WriteLine (instance method)">- (Object) <strong>WriteLine</strong>(content) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#WriteProjectConfigurationPlatforms-instance_method" title="#WriteProjectConfigurationPlatforms (instance method)">- (Object) <strong>WriteProjectConfigurationPlatforms</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#WriteProjectDependencies-instance_method" title="#WriteProjectDependencies (instance method)">- (Object) <strong>WriteProjectDependencies</strong>(project) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="DirectoryUtility.html" title="Rokuby::DirectoryUtility (module)">DirectoryUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="DirectoryUtility.html#CreatePath-instance_method" title="Rokuby::DirectoryUtility#CreatePath (method)">#CreatePath</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFileInDirectories-instance_method" title="Rokuby::DirectoryUtility#FindFileInDirectories (method)">#FindFileInDirectories</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFileInDirectory-instance_method" title="Rokuby::DirectoryUtility#FindFileInDirectory (method)">#FindFileInDirectory</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFilesInDirectories-instance_method" title="Rokuby::DirectoryUtility#FindFilesInDirectories (method)">#FindFilesInDirectories</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFilesInDirectory-instance_method" title="Rokuby::DirectoryUtility#FindFilesInDirectory (method)">#FindFilesInDirectory</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GenerateVSVariablePath-instance_method" title="Rokuby::DirectoryUtility#GenerateVSVariablePath (method)">#GenerateVSVariablePath</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryPathsFromRelativeBase-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryPathsFromRelativeBase (method)">#GetDirectoryPathsFromRelativeBase</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryTree-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryTree (method)">#GetDirectoryTree</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryTreeFromRelativeBase-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryTreeFromRelativeBase (method)">#GetDirectoryTreeFromRelativeBase</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GeneralUtility.html#Clone-instance_method" title="Rokuby::GeneralUtility#Clone (method)">#Clone</a></span>, <span class='object_link'><a href="GeneralUtility.html#CloneArray-instance_method" title="Rokuby::GeneralUtility#CloneArray (method)">#CloneArray</a></span>, <span class='object_link'><a href="GeneralUtility.html#DescribeTasks-instance_method" title="Rokuby::GeneralUtility#DescribeTasks (method)">#DescribeTasks</a></span>, <span class='object_link'><a href="GeneralUtility.html#GenerateTaskName-instance_method" title="Rokuby::GeneralUtility#GenerateTaskName (method)">#GenerateTaskName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetClassName-instance_method" title="Rokuby::GeneralUtility#GetClassName (method)">#GetClassName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetUUID-instance_method" title="Rokuby::GeneralUtility#GetUUID (method)">#GetUUID</a></span>, <span class='object_link'><a href="GeneralUtility.html#SystemWithFail-instance_method" title="Rokuby::GeneralUtility#SystemWithFail (method)">#SystemWithFail</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="VsXmlFileUtility.html" title="Rokuby::VsXmlFileUtility (module)">VsXmlFileUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="VsXmlFileUtility.html#FormatXmlDirectory-instance_method" title="Rokuby::VsXmlFileUtility#FormatXmlDirectory (method)">#FormatXmlDirectory</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#FormatXmlPath-instance_method" title="Rokuby::VsXmlFileUtility#FormatXmlPath (method)">#FormatXmlPath</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#GetElementForList-instance_method" title="Rokuby::VsXmlFileUtility#GetElementForList (method)">#GetElementForList</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#GetMultiElementListForList-instance_method" title="Rokuby::VsXmlFileUtility#GetMultiElementListForList (method)">#GetMultiElementListForList</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#GetProjectDirectoryRelativeBaseDirectory-instance_method" title="Rokuby::VsXmlFileUtility#GetProjectDirectoryRelativeBaseDirectory (method)">#GetProjectDirectoryRelativeBaseDirectory</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#GetSelfContainedElement-instance_method" title="Rokuby::VsXmlFileUtility#GetSelfContainedElement (method)">#GetSelfContainedElement</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#GetVsProjectRelativePath-instance_method" title="Rokuby::VsXmlFileUtility#GetVsProjectRelativePath (method)">#GetVsProjectRelativePath</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#GetVsSolutionRelativePath-instance_method" title="Rokuby::VsXmlFileUtility#GetVsSolutionRelativePath (method)">#GetVsSolutionRelativePath</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#JoinXmlPaths-instance_method" title="Rokuby::VsXmlFileUtility#JoinXmlPaths (method)">#JoinXmlPaths</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#SaveXmlDocument-instance_method" title="Rokuby::VsXmlFileUtility#SaveXmlDocument (method)">#SaveXmlDocument</a></span>, <span class='object_link'><a href="VsXmlFileUtility.html#VsPathIsAbsolute-instance_method" title="Rokuby::VsXmlFileUtility#VsPathIsAbsolute (method)">#VsPathIsAbsolute</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="PathUtility.html#ExecuteInPath-instance_method" title="Rokuby::PathUtility#ExecuteInPath (method)">#ExecuteInPath</a></span>, <span class='object_link'><a href="PathUtility.html#FormatPath-instance_method" title="Rokuby::PathUtility#FormatPath (method)">#FormatPath</a></span>, <span class='object_link'><a href="PathUtility.html#GetWindowsPath-instance_method" title="Rokuby::PathUtility#GetWindowsPath (method)">#GetWindowsPath</a></span>, <span class='object_link'><a href="PathUtility.html#JoinPaths-instance_method" title="Rokuby::PathUtility#JoinPaths (method)">#JoinPaths</a></span>, <span class='object_link'><a href="PathUtility.html#PathAbsolute%3F-instance_method" title="Rokuby::PathUtility#PathAbsolute? (method)">#PathAbsolute?</a></span>, <span class='object_link'><a href="PathUtility.html#RemoveParents-instance_method" title="Rokuby::PathUtility#RemoveParents (method)">#RemoveParents</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::SolutionFileCreator (class)">SolutionFileCreator</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of SolutionFileCreator</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14
+15
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 12</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='ivar'>@VsSolutionDescription</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@VsProjects</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='ivar'>@Guid</span> <span class='op'>=</span> <span class='const'>GetUUID</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@indentString</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="VsProjects=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="VsProjects-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsProjects</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute VsProjects</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='const'>VsProjects</span>
+  <span class='ivar'>@VsProjects</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="VsSolutionDescription=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="VsSolutionDescription-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsSolutionDescription</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute VsSolutionDescription</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='const'>VsSolutionDescription</span>
+  <span class='ivar'>@VsSolutionDescription</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="BuildFile-instance_method">
+  
+    - (<tt>Object</tt>) <strong>BuildFile</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='const'>BuildFile</span>      
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@VsProjects</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_abort'>abort</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No project specified for solution file creation</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='ivar'>@fileContent</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Microsoft Visual Studio Solution File, Format Version 11.00</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\# Visual Studio 2010</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@VsProjects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
+    <span class='const'>CreateProjectWithDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='const'>StartGlobal</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='const'>StartGlobalSection</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SolutionConfigurationPlatforms</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='ivar'>@VsProjects</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='const'>Configurations</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_configuration'>configuration</span><span class='op'>|</span>
+      <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='const'>NamePlatformCombi</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'> = </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='const'>NamePlatformCombi</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='const'>EndGlobalSection</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='const'>StartGlobalSection</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProjectConfigurationPlatforms</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>WriteProjectConfigurationPlatforms</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='const'>EndGlobalSection</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='const'>StartGlobalSection</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SolutionProperties</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>HideSolutionNode = FALSE</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>EndGlobalSection</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='const'>EndGlobal</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='const'>CreatePath</span><span class='lparen'>(</span><span class='const'>GetFilePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>DirectoryPath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='const'>GetFilePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>AbsolutePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>w</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='ivar'>@fileContent</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CreateProjectWithDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateProjectWithDependencies</strong>(project) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78
+79
+80
+81
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='const'>CreateProjectWithDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
+  <span class='const'>StartProject</span><span class='lparen'>(</span><span class='ivar'>@Guid</span><span class='comma'>,</span> <span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>Dependencies</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
+    <span class='const'>WriteProjectDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>        
+  <span class='kw'>end</span>
+  
+  <span class='const'>EndProject</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DecreaseIndentation-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DecreaseIndentation</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+158
+159
+160
+161
+162
+163
+164</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 158</span>
+
+<span class='kw'>def</span> <span class='const'>DecreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@indentString</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>1</span><span class='rparen'>)</span>
+    <span class='ivar'>@indentString</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@indentString</span> <span class='op'>=</span> <span class='ivar'>@indentString</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='ivar'>@indentString</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="EndGlobal-instance_method">
+  
+    - (<tt>Object</tt>) <strong>EndGlobal</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='const'>EndGlobal</span>
+  <span class='const'>DecreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EndGlobal</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="EndGlobalSection-instance_method">
+  
+    - (<tt>Object</tt>) <strong>EndGlobalSection</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='const'>EndGlobalSection</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='const'>DecreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EndGlobalSection</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="EndProject-instance_method">
+  
+    - (<tt>Object</tt>) <strong>EndProject</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 105</span>
+
+<span class='kw'>def</span> <span class='const'>EndProject</span>
+  <span class='const'>DecreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EndProject</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="EndProjectSection-instance_method">
+  
+    - (<tt>Object</tt>) <strong>EndProjectSection</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='const'>EndProjectSection</span>
+  <span class='const'>DecreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EndProjectSection</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetFilePath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetFilePath</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='const'>GetFilePath</span>
+  <span class='kw'>return</span> <span class='ivar'>@VsSolutionDescription</span><span class='period'>.</span><span class='const'>SolutionFilePath</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetSolutionDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetSolutionDirectory</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='const'>GetSolutionDirectory</span>
+  <span class='kw'>return</span> <span class='ivar'>@VsSolutionDescription</span><span class='period'>.</span><span class='const'>SolutionFilePath</span><span class='period'>.</span><span class='const'>DirectoryPath</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetSolutionString-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetSolutionString</strong>(postSolution = true) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+142
+143
+144
+145
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 142</span>
+
+<span class='kw'>def</span> <span class='const'>GetSolutionString</span><span class='lparen'>(</span><span class='id identifier rubyid_postSolution'>postSolution</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_solutionString'>solutionString</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>postSolution</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_postSolution'>postSolution</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_solutionString'>solutionString</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>preSolution</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_solutionString'>solutionString</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="IncreaseIndentation-instance_method">
+  
+    - (<tt>Object</tt>) <strong>IncreaseIndentation</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 154</span>
+
+<span class='kw'>def</span> <span class='const'>IncreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@indentString</span> <span class='op'>=</span> <span class='ivar'>@indentString</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\t</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="StartGlobal-instance_method">
+  
+    - (<tt>Object</tt>) <strong>StartGlobal</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 120</span>
+
+<span class='kw'>def</span> <span class='const'>StartGlobal</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Global</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>IncreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="StartGlobalSection-instance_method">
+  
+    - (<tt>Object</tt>) <strong>StartGlobalSection</strong>(name, postSolution = true) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='const'>StartGlobalSection</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_postSolution'>postSolution</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_solutionString'>solutionString</span> <span class='op'>=</span> <span class='const'>GetSolutionString</span><span class='lparen'>(</span><span class='id identifier rubyid_postSolution'>postSolution</span><span class='rparen'>)</span>
+  
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GlobalSection(</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>) = </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_solutionString'>solutionString</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>IncreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="StartProject-instance_method">
+  
+    - (<tt>Object</tt>) <strong>StartProject</strong>(guid, project) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <dl class="rdoc-list"><dt>guid</dt>
+<dd>
+<p>A guid in the form 35BC...</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='const'>StartProject</span><span class='lparen'>(</span><span class='id identifier rubyid_guid'>guid</span><span class='comma'>,</span> <span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_solutionDirectory'>solutionDirectory</span> <span class='op'>=</span> <span class='const'>GetSolutionDirectory</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_relativeProjectFilePath'>relativeProjectFilePath</span> <span class='op'>=</span> <span class='const'>FormatXmlPath</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>ProjectFilePath</span><span class='period'>.</span><span class='const'>MakeRelativeTo</span><span class='lparen'>(</span><span class='id identifier rubyid_solutionDirectory'>solutionDirectory</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rparen'>)</span>
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Project(\&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guid'>guid</span><span class='rbrace'>}</span><span class='tstring_content'>\&quot;) = \&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>Name</span><span class='rbrace'>}</span><span class='tstring_content'>\&quot;, \&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_relativeProjectFilePath'>relativeProjectFilePath</span><span class='rbrace'>}</span><span class='tstring_content'>\&quot;, \&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>Guid</span><span class='rbrace'>}</span><span class='tstring_content'>\&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>IncreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="StartProjectSection-instance_method">
+  
+    - (<tt>Object</tt>) <strong>StartProjectSection</strong>(name) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='const'>StartProjectSection</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>      
+  <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProjectSection(</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>) = postProject</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>IncreaseIndentation</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="WriteLine-instance_method">
+  
+    - (<tt>Object</tt>) <strong>WriteLine</strong>(content) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+150
+151
+152</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 150</span>
+
+<span class='kw'>def</span> <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span>
+  <span class='ivar'>@fileContent</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@indentString</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_content'>content</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="WriteProjectConfigurationPlatforms-instance_method">
+  
+    - (<tt>Object</tt>) <strong>WriteProjectConfigurationPlatforms</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='const'>WriteProjectConfigurationPlatforms</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@VsProjects</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='const'>Configurations</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_configuration'>configuration</span><span class='op'>|</span>
+    <span class='ivar'>@VsProjects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
+      <span class='id identifier rubyid_configs'>configs</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>Configurations</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+        <span class='kw'>return</span> <span class='lparen'>(</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='const'>Name</span><span class='period'>.</span><span class='id identifier rubyid_eql?'>eql?</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='const'>Name</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      
+      <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>Guid</span><span class='rbrace'>}</span><span class='tstring_content'>.</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='const'>NamePlatformCombi</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>.ActiveCfg = </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_configs'>configs</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='const'>NamePlatformCombi</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>Guid</span><span class='rbrace'>}</span><span class='tstring_content'>.</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='const'>NamePlatformCombi</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>.Build.0 = </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_configs'>configs</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='const'>NamePlatformCombi</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="WriteProjectDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>WriteProjectDependencies</strong>(project) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/VisualStudio/solution_file_creator.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='const'>WriteProjectDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='const'>Dependencies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dependency'>dependency</span><span class='op'>|</span>
+    <span class='const'>StartProjectSection</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProjectDependencies</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+    <span class='const'>WriteLine</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_dependency'>dependency</span><span class='period'>.</span><span class='const'>Guid</span><span class='rbrace'>}</span><span class='tstring_content'> = </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_dependency'>dependency</span><span class='period'>.</span><span class='const'>Guid</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> 
+    
+    <span class='const'>EndProjectSection</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:55 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

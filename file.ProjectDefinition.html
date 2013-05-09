@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: ProjectDefinition
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: ProjectDefinition</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><pre class="code ruby"><span class='comment'>#########################################################################################################
+</span><span class='comment'># General Information Units
+</span><span class='comment'>#########################################################################################################
+</span>
+<span class='comment'># This is a ProjectDescription stating meta information about the project.
+</span><span class='id identifier rubyid_projDescr'>projDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+  <span class='comment'># The human readable name of the project.
+</span>  <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='comment'># A human readable version of the project.
+</span>  <span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='comment'># The name which will make up a part of the resulting binary.
+</span>  <span class='label'>binaryName:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProjectBinary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='comment'># The type of binary that should be build, either :Application, :Shared, or :Static
+</span>  <span class='label'>binaryType:</span> <span class='symbol'>:Application</span><span class='comma'>,</span>
+  <span class='comment'># This is the path into which the meta files of this project will be put (e.g. IDE files)
+</span>  <span class='label'>projPath:</span> <span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+  <span class='comment'># This is the path where the the intermediate results of the build will be put.
+</span>  <span class='label'>compPath:</span> <span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>intermediate</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+  <span class='comment'># This is the path where the final results of the build will be put.
+</span>  <span class='label'>buildPath:</span> <span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># Source Code Specification
+</span><span class='comment'>###########################
+</span>
+<span class='comment'># Here we state the specification for the source code that should go into the project.
+</span><span class='comment'># Currently, the source is made up of three source '.cpp' files under 'src' and two header '.hpp' files
+</span><span class='comment'># under 'include'. One of them is in a subpath to see that recursive inclusion works.
+</span><span class='id identifier rubyid_srcSpec'>srcSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProjectSource</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+  <span class='comment'># A file specification for the set of source files.
+</span>  <span class='label'>srcSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.cpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>sPaths:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>src</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+  <span class='comment'># A file specification for the set of header files.
+</span>  <span class='label'>inclSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.hpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>sPaths:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>include</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># Windows Library Specification
+</span><span class='comment'>##############################
+</span>
+<span class='comment'># This is the path where the binaries of lib1 are located.
+</span><span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>libs/lib1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+
+<span class='comment'># In this part we create library specifications for different binaries of the library.
+</span><span class='comment'># Each binary can be assigned to a certain platform environment.
+</span>
+<span class='comment'># This is the binary that is used on 32 bit windows platforms for debug builds.
+</span><span class='id identifier rubyid_libSpec'>libSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_debug</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+  <span class='comment'># The name of the lib whose binary is contained in this specification.
+</span>  <span class='comment'># Used to match different specifications to one library.
+</span>  <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='comment'># The platform for which this library should be used.
+</span>  <span class='label'>plats:</span> <span class='lbracket'>[</span><span class='const'>PLATFORM_WIN_X86_DEBUG</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='comment'># The specification for the location of the libary files.
+</span>  <span class='label'>loc:</span> <span class='id identifier rubyid_libLoc'>libLoc</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='comment'># The specification for the file to which should be linked in the build.
+</span>    <span class='label'>libSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_debug.lib</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span>  <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='comment'># The specification for the file that is used during execution.
+</span>    <span class='label'>linkSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_debug.dll</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='comment'># The specification for the header files of the library that are required during compilation.
+</span>    <span class='label'>inclSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.hpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># This is the binary that is used on 32 bit windows platforms for release builds.
+</span><span class='id identifier rubyid_libSpec'>libSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_release</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+  <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>plats:</span> <span class='lbracket'>[</span><span class='const'>PLATFORM_WIN_X86_RELEASE</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>loc:</span> <span class='id identifier rubyid_libLoc'>libLoc</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>libSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_release.lib</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span>  <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>linkSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_release.dll</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>inclSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.hpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># This is the binary that is used on 64 bit windows platforms for debug builds.
+</span><span class='id identifier rubyid_libSpec'>libSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_debug</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+  <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>plats:</span> <span class='lbracket'>[</span><span class='const'>PLATFORM_WIN_X64_DEBUG</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>loc:</span> <span class='id identifier rubyid_libLoc'>libLoc</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>libSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_debug.lib</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span>  <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>linkSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_debug.dll</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>inclSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.hpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># This is the binary that is used on 64 bit windows platforms for release builds.
+</span><span class='id identifier rubyid_libSpec'>libSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_release</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+  <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>plats:</span> <span class='lbracket'>[</span><span class='const'>PLATFORM_WIN_X64_RELEASE</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>loc:</span> <span class='id identifier rubyid_libLoc'>libLoc</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>libSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_release.lib</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span>  <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>linkSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_release.dll</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>inclSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.hpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>sPaths:</span> <span class='id identifier rubyid_lib1Path'>lib1Path</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># Project Specification
+</span><span class='comment'>#######################
+</span>
+<span class='comment'># Here we put together all the file specifications into one project specification.
+</span><span class='id identifier rubyid_projSpec'>projSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+  <span class='comment'># The source code that we specified above.
+</span>  <span class='label'>srcSpecs:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_srcSpec'>srcSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProjectSource</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='comment'># The libraries that we specified above.
+</span>  <span class='label'>libSpecs:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_libSpec'>libSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_debug</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_libSpec'>libSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_win32_release</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_libSpec'>libSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_debug</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_libSpec'>libSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib1_x64_release</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># All information units that are used for all project builds.
+</span><span class='id identifier rubyid_generalInputs'>generalInputs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projDescr'>projDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_projSpec'>projSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_defaultProjectConfigurations'>defaultProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+<span class='comment'>####################################################################################################
+</span><span class='comment'># Visual Studio Information Units
+</span><span class='comment'>####################################################################################################
+</span>
+<span class='comment'># This information unit is a specification for the resource file which lies in 'resource' and is required
+</span><span class='comment'># for the windows build.
+</span><span class='id identifier rubyid_fileSpec'>fileSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProjectVsResource</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:inPats</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.rc$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                  <span class='symbol'>:sPaths</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resource</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+
+<span class='comment'># The specification for the part of the project which is only required for Visual Studio.
+</span><span class='comment'># It includes the resource files specification which is only used under windows.
+</span><span class='id identifier rubyid_vsProjSpec'>vsProjSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:resSpec</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProjectVsResource</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># This is the specification for the solution that should be build.
+</span><span class='comment'># Just stating the name at the moment.
+</span><span class='id identifier rubyid_vsSlnDescr'>vsSlnDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestSolution</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># All the inputs that are required for the build of the Visual Studio project.
+</span><span class='id identifier rubyid_vsInputs'>vsInputs</span> <span class='op'>=</span> <span class='id identifier rubyid_generalInputs'>generalInputs</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='id identifier rubyid_vsProjSpec'>vsProjSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_defaultVsProjectConfigurations'>defaultVsProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+<span class='comment'>####################################################################################################
+</span><span class='comment'># GPP Information Units
+</span><span class='comment'>####################################################################################################
+</span>
+<span class='comment'># A description with meta information for the GPP project build.
+</span><span class='id identifier rubyid_gppProjDescr'>gppProjDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># The inputs for the GPP project build
+</span><span class='id identifier rubyid_gppInputs'>gppInputs</span> <span class='op'>=</span> <span class='id identifier rubyid_generalInputs'>generalInputs</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='id identifier rubyid_gppProjDescr'>gppProjDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_defaultGppProjectConfigurations'>defaultGppProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+<span class='comment'>####################################################################################################
+</span><span class='comment'># Visual Studio Process Chain
+</span><span class='comment'>####################################################################################################
+</span>
+<span class='comment'># Create a VsProjectBuilder which will create the Visual Studio project.
+</span><span class='comment'># It receives the inputs that belong to this project.
+</span><span class='id identifier rubyid_vsProjBuild'>vsProjBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>VisualStudioProjectBuilder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_vsInputs'>vsInputs</span>
+
+<span class='comment'># Create a VsSolutionBuilder that will create the Visual Studio solution which will contain the test project.
+</span><span class='comment'># It receives the solution description.
+</span><span class='id identifier rubyid_vsSlnBuild'>vsSlnBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>VisualStudioSolutionBuilder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_vsSlnDescr'>vsSlnDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TestProject</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+
+<span class='comment'># Create a chain for the Visual studio solution.
+</span><span class='id identifier rubyid_chain'>chain</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SolutionChain</span><span class='tstring_end'>&quot;</span></span>
+<span class='comment'># The VsProjectBuilder will input its output to the VsSolutionBuilder.
+</span><span class='comment'># This is because the project should be part of the solution.
+</span><span class='id identifier rubyid_chain'>chain</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SolutionChain</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>VisualStudioProjectBuilder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>VisualStudioSolutionBuilder</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># To build the solution execute the VsSolutionBuilder (which is a task and can be treated equally).
+</span><span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Build VS Solution</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_vsSlnBuild'>vsSlnBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>VisualStudioSolutionBuilder</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'>####################################################################################################
+</span><span class='comment'># GPP Process Chain
+</span><span class='comment'>####################################################################################################
+</span>
+<span class='comment'># Create a GppProjectBuilder that will offer tasks to create the different configurations of the project.
+</span><span class='comment'># This task won't actually compile the project with GPP, it only creates a project instance that can be used by other processors.
+</span><span class='id identifier rubyid_gppProjBuild'>gppProjBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GppProjectBuilder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_gppInputs'>gppInputs</span></pre></div></div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

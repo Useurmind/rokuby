@@ -1,0 +1,828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rake::FileUtilsExt
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rake.html" title="Rake (module)">Rake</a></span></span>
+     &raquo; 
+    <span class="title">FileUtilsExt</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rake::FileUtilsExt
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+      <dt class="r1">Extended by:</dt>
+      <dd class="r1"><span class='object_link'><a href="" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></dd>
+      
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></dd>
+      
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="../Rake.html" title="Rake (module)">Rake</a></span>, <span class='object_link'><a href="DSL.html" title="Rake::DSL (module)">DSL</a></span>, <span class='object_link'><a href="" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/RokubyRake/rake/file_utils_ext.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>FileUtilsExt provides a custom version of the FileUtils methods that
+respond to the <tt>verbose</tt> and <tt>nowrite</tt> commands.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="DEFAULT-constant" class="">DEFAULT =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Object</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#LN_SUPPORTED-constant" title="FileUtils::LN_SUPPORTED (constant)">FileUtils::LN_SUPPORTED</a></span>, <span class='object_link'><a href="../FileUtils.html#RUBY-constant" title="FileUtils::RUBY (constant)">FileUtils::RUBY</a></span></p>
+
+
+  <h2>Class Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nowrite_flag-class_method" title="nowrite_flag (class method)">+ (Object) <strong>nowrite_flag</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute nowrite_flag.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#verbose_flag-class_method" title="verbose_flag (class method)">+ (Object) <strong>verbose_flag</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute verbose_flag.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nowrite-instance_method" title="#nowrite (instance method)">- (Object) <strong>nowrite</strong>(value = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get/set the nowrite flag controlling output from the FileUtils utilities.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rake_check_options-instance_method" title="#rake_check_options (instance method)">- (Object) <strong>rake_check_options</strong>(options, *optdecl) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check that the options do not contain options not listed in
+<tt>optdecl</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rake_merge_option-instance_method" title="#rake_merge_option (instance method)">- (Object) <strong>rake_merge_option</strong>(args, defaults) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Merge the given options with the default values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rake_output_message-instance_method" title="#rake_output_message (instance method)">- (Object) <strong>rake_output_message</strong>(message) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Send the message to the default rake output (which is $stderr).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#verbose-instance_method" title="#verbose (instance method)">- (Object) <strong>verbose</strong>(value = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get/set the verbose flag controlling output from the FileUtils utilities.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#when_writing-instance_method" title="#when_writing (instance method)">- (Object) <strong>when_writing</strong>(msg = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Use this function to prevent potentially destructive ruby code from running
+when the :nowrite flag is set.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#ruby-instance_method" title="FileUtils#ruby (method)">#ruby</a></span>, <span class='object_link'><a href="../FileUtils.html#safe_ln-instance_method" title="FileUtils#safe_ln (method)">#safe_ln</a></span>, <span class='object_link'><a href="../FileUtils.html#sh-instance_method" title="FileUtils#sh (method)">#sh</a></span>, <span class='object_link'><a href="../FileUtils.html#split_all-instance_method" title="FileUtils#split_all (method)">#split_all</a></span></p>
+
+  <div id="class_attr_details" class="attr_details">
+    <h2>Class Attribute Details</h2>
+    
+      
+      <span id="nowrite_flag=-class_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="nowrite_flag-class_method">
+  
+    + (<tt>Object</tt>) <strong>nowrite_flag</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute nowrite_flag</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_nowrite_flag'>nowrite_flag</span>
+  <span class='ivar'>@nowrite_flag</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="verbose_flag=-class_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="verbose_flag-class_method">
+  
+    + (<tt>Object</tt>) <strong>verbose_flag</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute verbose_flag</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_verbose_flag'>verbose_flag</span>
+  <span class='ivar'>@verbose_flag</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="nowrite-instance_method">
+  
+    - (<tt>Object</tt>) <strong>nowrite</strong>(value = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get/set the nowrite flag controlling output from the FileUtils utilities. 
+If verbose is true, then the utility method is echoed to standard output.</p>
+
+<p>Examples:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_nowrite'>nowrite</span>              <span class='comment'># return the current value of the
+</span>                     <span class='comment'># nowrite flag
+</span><span class='id identifier rubyid_nowrite'>nowrite</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span>           <span class='comment'># set the nowrite flag to _v_.
+</span><span class='id identifier rubyid_nowrite'>nowrite</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_code'>code</span> <span class='rbrace'>}</span>  <span class='comment'># Execute code with the nowrite flag set
+</span>                     <span class='comment'># temporarily to _v_. Return to the
+</span>                     <span class='comment'># original value when code is done.</span></code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_nowrite'>nowrite</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_oldvalue'>oldvalue</span> <span class='op'>=</span> <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_nowrite_flag'>nowrite_flag</span>
+  <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_nowrite_flag'>nowrite_flag</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span> <span class='kw'>unless</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>begin</span>
+      <span class='kw'>yield</span>
+    <span class='kw'>ensure</span>
+      <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_nowrite_flag'>nowrite_flag</span> <span class='op'>=</span> <span class='id identifier rubyid_oldvalue'>oldvalue</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_oldvalue'>oldvalue</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rake_check_options-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rake_check_options</strong>(options, *optdecl) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check that the options do not contain options not listed in
+<tt>optdecl</tt>.  An ArgumentError exception is thrown if non-declared
+options are found.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+135
+136
+137
+138
+139
+140
+141</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 135</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rake_check_options'>rake_check_options</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_optdecl'>optdecl</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='id identifier rubyid_optdecl'>optdecl</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='op'>|</span>
+    <span class='id identifier rubyid_h'>h</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no such option: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_h'>h</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_h'>h</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rake_merge_option-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rake_merge_option</strong>(args, defaults) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Merge the given options with the default values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120
+121
+122
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rake_merge_option'>rake_merge_option</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_defaults'>defaults</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='const'>Hash</span> <span class='op'>===</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_pop'>pop</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_defaults'>defaults</span>
+  <span class='id identifier rubyid_args'>args</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rake_output_message-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rake_output_message</strong>(message) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Send the message to the default rake output (which is $stderr).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rake_output_message'>rake_output_message</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
+  <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="verbose-instance_method">
+  
+    - (<tt>Object</tt>) <strong>verbose</strong>(value = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get/set the verbose flag controlling output from the FileUtils utilities. 
+If verbose is true, then the utility method is echoed to standard output.</p>
+
+<p>Examples:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_verbose'>verbose</span>              <span class='comment'># return the current value of the
+</span>                     <span class='comment'># verbose flag
+</span><span class='id identifier rubyid_verbose'>verbose</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span>           <span class='comment'># set the verbose flag to _v_.
+</span><span class='id identifier rubyid_verbose'>verbose</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_code'>code</span> <span class='rbrace'>}</span>  <span class='comment'># Execute code with the verbose flag set
+</span>                     <span class='comment'># temporarily to _v_.  Return to the
+</span>                     <span class='comment'># original value when code is done.</span></code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_verbose'>verbose</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_oldvalue'>oldvalue</span> <span class='op'>=</span> <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_verbose_flag'>verbose_flag</span>
+  <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_verbose_flag'>verbose_flag</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span> <span class='kw'>unless</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>begin</span>
+      <span class='kw'>yield</span>
+    <span class='kw'>ensure</span>
+      <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_verbose_flag'>verbose_flag</span> <span class='op'>=</span> <span class='id identifier rubyid_oldvalue'>oldvalue</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_verbose_flag'>verbose_flag</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="when_writing-instance_method">
+  
+    - (<tt>Object</tt>) <strong>when_writing</strong>(msg = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Use this function to prevent potentially destructive ruby code from running
+when the :nowrite flag is set.</p>
+
+<p>Example:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_when_writing'>when_writing</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Building Project</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span>
+<span class='kw'>end</span></code></pre>
+
+<p>The following code will build the project under normal conditions. If the
+nowrite(true) flag is set, then the example will print:</p>
+
+<pre class="code ruby"><code>DRYRUN: Building Project</code></pre>
+
+<p>instead of actually building the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111
+112
+113
+114
+115</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_utils_ext.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_when_writing'>when_writing</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='const'>FileUtilsExt</span><span class='period'>.</span><span class='id identifier rubyid_nowrite_flag'>nowrite_flag</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DRYRUN: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_msg'>msg</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_msg'>msg</span>
+  <span class='kw'>else</span>
+    <span class='kw'>yield</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:44 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

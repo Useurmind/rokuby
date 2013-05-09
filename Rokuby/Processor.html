@@ -1,0 +1,2869 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::Processor
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">Processor</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::Processor
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="../Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">Rake::ProcessorTask</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">Rake::ProcessorTask</a></span></li>
+          
+            <li class="next">Rokuby::Processor</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Processors/processor.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The processor base class upon which all processors are build. It defines
+basic concepts of the class like inputs and outputs and the interface for
+the processing step. Each processor is a special sort of task. Therefore it
+is defined as any other task with the corresponding class. Processor can
+use the advantages of tasks. But there is one thing that needs to be
+considered here. The tasks must be defined during the setup phase, which
+means in the initialize or extend method (triggered by the user). If the
+task is defined during the process phase then it could be that the task is
+not found because the dependend task has already been tried to invoke.
+Processor can also use a cache infrastructure. This works as follows:</p>
+<ul><li>
+<p>In at least the one iteration the processor builds up a cache that saves
+all the outputs that this processor created in this iteration.</p>
+</li><li>
+<p>In the next iteration instead of creating outputs from the inputs of the
+processor, the outputs will be loaded from cache.</p>
+</li><li>
+<p>To enable the execution of activities that cannot be cached, the processor
+has also the  possibility to execute additional functionality after this
+processing took place (this is called post processing).</p>
+</li></ul>
+
+<p>It is important to understand that you should not use inputs of the
+processor in the post processing because they may not be in the form you
+need them (they are not processed when cache is used). The same hold for
+the processing step of the inputs: do not assume that it is executed
+because it won't if the cache is used.</p>
+<dl class="rdoc-list"><dt>Name</dt>
+<dd>
+<p>The name of the processor to uniquely identify it.</p>
+</dd><dt>ThrowOnUnknownInput</dt>
+<dd>
+<p>Throw an exception when an unknown input occures.</p>
+</dd><dt>UseCache</dt>
+<dd>
+<p>Use the cache for this processor.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="FileFinder.html" title="Rokuby::FileFinder (class)">FileFinder</a></span>, <span class='object_link'><a href="GppProjectCompiler.html" title="Rokuby::GppProjectCompiler (class)">GppProjectCompiler</a></span>, <span class='object_link'><a href="GppProjectCreator.html" title="Rokuby::GppProjectCreator (class)">GppProjectCreator</a></span>, <span class='object_link'><a href="GppProjectLibraryGatherer.html" title="Rokuby::GppProjectLibraryGatherer (class)">GppProjectLibraryGatherer</a></span>, <span class='object_link'><a href="GppProjectPreprocessor.html" title="Rokuby::GppProjectPreprocessor (class)">GppProjectPreprocessor</a></span>, <span class='object_link'><a href="LibraryFinder.html" title="Rokuby::LibraryFinder (class)">LibraryFinder</a></span>, <span class='object_link'><a href="PassthroughProcessor.html" title="Rokuby::PassthroughProcessor (class)">PassthroughProcessor</a></span>, <span class='object_link'><a href="ProcessChain.html" title="Rokuby::ProcessChain (class)">ProcessChain</a></span>, <span class='object_link'><a href="ProjectJoiner.html" title="Rokuby::ProjectJoiner (class)">ProjectJoiner</a></span>, <span class='object_link'><a href="ProjectSplitter.html" title="Rokuby::ProjectSplitter (class)">ProjectSplitter</a></span>, <span class='object_link'><a href="SourceUnitFinder.html" title="Rokuby::SourceUnitFinder (class)">SourceUnitFinder</a></span>, <span class='object_link'><a href="VsPostBuildCommandTaskCreator.html" title="Rokuby::VsPostBuildCommandTaskCreator (class)">VsPostBuildCommandTaskCreator</a></span>, <span class='object_link'><a href="VsProjectCreator.html" title="Rokuby::VsProjectCreator (class)">VsProjectCreator</a></span>, <span class='object_link'><a href="VsProjectFilesWriter.html" title="Rokuby::VsProjectFilesWriter (class)">VsProjectFilesWriter</a></span>, <span class='object_link'><a href="VsProjectFinder.html" title="Rokuby::VsProjectFinder (class)">VsProjectFinder</a></span>, <span class='object_link'><a href="VsProjectPreprocessor.html" title="Rokuby::VsProjectPreprocessor (class)">VsProjectPreprocessor</a></span>, <span class='object_link'><a href="VsSolutionFileWriter.html" title="Rokuby::VsSolutionFileWriter (class)">VsSolutionFileWriter</a></span>, <span class='object_link'><a href="VsSolutionPreprocessor.html" title="Rokuby::VsSolutionPreprocessor (class)">VsSolutionPreprocessor</a></span></p>
+</div>
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3AName-instance_method" title="#:Name (instance method)">- (String) <strong>:Name</strong>(:Name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the processor.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3AThrowOnUnknownInput-instance_method" title="#:ThrowOnUnknownInput (instance method)">- (Bool) <strong>:ThrowOnUnknownInput</strong>(:ThrowOnUnknownInput) </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Should the processor throw an exception if an unknown input is encountered.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3AUseCache-instance_method" title="#:UseCache (instance method)">- (Bool) <strong>:UseCache</strong>(:UseCache) </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Don't execute processors and retrieve status from cache instead.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Name-instance_method" title="#Name (instance method)">- (String) <strong>Name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the processor.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ThrowOnUnknownInput-instance_method" title="#ThrowOnUnknownInput (instance method)">- (Bool) <strong>ThrowOnUnknownInput</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Should the processor throw an exception if an unknown input is encountered.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#UseCache-instance_method" title="#UseCache (instance method)">- (Bool) <strong>UseCache</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Don't execute processors and retrieve status from cache instead.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Task.html#ProjectFile-instance_method" title="Rake::Task#ProjectFile (method)">#ProjectFile</a></span>, <span class='object_link'><a href="../Rake/Task.html#actions-instance_method" title="Rake::Task#actions (method)">#actions</a></span>, <span class='object_link'><a href="../Rake/Task.html#application-instance_method" title="Rake::Task#application (method)">#application</a></span>, <span class='object_link'><a href="../Rake/Task.html#comment-instance_method" title="Rake::Task#comment (method)">#comment</a></span>, <span class='object_link'><a href="../Rake/Task.html#full_comment-instance_method" title="Rake::Task#full_comment (method)">#full_comment</a></span>, <span class='object_link'><a href="../Rake/Task.html#locations-instance_method" title="Rake::Task#locations (method)">#locations</a></span>, <span class='object_link'><a href="../Rake/Task.html#prerequisites-instance_method" title="Rake::Task#prerequisites (method)">#prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#scope-instance_method" title="Rake::Task#scope (method)">#scope</a></span>, <span class='object_link'><a href="../Rake/Task.html#sources-instance_method" title="Rake::Task#sources (method)">#sources</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="TaskDescription.html" title="Rokuby::TaskDescription (module)">TaskDescription</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskDescription.html#ArgDescriptions-instance_method" title="Rokuby::TaskDescription#ArgDescriptions (method)">#ArgDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#KnownArgNames-instance_method" title="Rokuby::TaskDescription#KnownArgNames (method)">#KnownArgNames</a></span>, <span class='object_link'><a href="TaskDescription.html#TaskDescriptions-instance_method" title="Rokuby::TaskDescription#TaskDescriptions (method)">#TaskDescriptions</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_AddDependencies-instance_method" title="#_AddDependencies (instance method)">- (Object) <strong>_AddDependencies</strong>(taskPaths) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_AddInput-instance_method" title="#_AddInput (instance method)">- (Object) <strong>_AddInput</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ExecutePostProcessing-instance_method" title="#_ExecutePostProcessing (instance method)">- (Object) <strong>_ExecutePostProcessing</strong>(taskArgs = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method can be overloaded to deal with the case that cached values are
+used.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_FetchInputs-instance_method" title="#_FetchInputs (instance method)">- (Object) <strong>_FetchInputs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_InitProc-instance_method" title="#_InitProc (instance method)">- (Object) <strong>_InitProc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overwrite this in derived processors to</p>
+<ul><li>
+<p>add the known input classes</p>
+</li><li>
+<p>perform any initialization step that is required during both initialization
+and cloning</p>
+</li></ul>
+
+<p>Changing anything related to name adaptation when cloning a processor is
+done in AdaptName.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_InputKnown-instance_method" title="#_InputKnown (instance method)">- (Object) <strong>_InputKnown</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_InputProcessors-instance_method" title="#_InputProcessors (instance method)">- (Object) <strong>_InputProcessors</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This can only be called after invoking the task.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_LogProcessorExecution-instance_method" title="#_LogProcessorExecution (instance method)">- (Object) <strong>_LogProcessorExecution</strong>(logText) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_LogTextAfterExecute-instance_method" title="#_LogTextAfterExecute (instance method)">- (Object) <strong>_LogTextAfterExecute</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overwrite this in derived processors to print a message after the processor
+was executed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_LogTextBeforeExecute-instance_method" title="#_LogTextBeforeExecute (instance method)">- (Object) <strong>_LogTextBeforeExecute</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overwrite this in derived processors to print a message before the
+processor is executed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_OnAddInput-instance_method" title="#_OnAddInput (instance method)">- (Object) <strong>_OnAddInput</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overwrite this if you need to take action when input is added Returns true
+if the input should really be added (this should be default).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ProcessInputs-instance_method" title="#_ProcessInputs (instance method)">- (Object) <strong>_ProcessInputs</strong>(taskArgs = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function needs to be overloaded by derived classes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_RemoveDependencies-instance_method" title="#_RemoveDependencies (instance method)">- (Object) <strong>_RemoveDependencies</strong>(taskPaths) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdaptName-instance_method" title="#AdaptName (instance method)">- (Object) <strong>AdaptName</strong>(newName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AddDependencies-instance_method" title="#AddDependencies (instance method)">- (Object) <strong>AddDependencies</strong>(taskPaths) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AddInput-instance_method" title="#AddInput (instance method)">- (Object) <strong>AddInput</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add one or several inputs to the input queue of this class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Extend-instance_method" title="#Extend (instance method)">- (Object) <strong>Extend</strong>(valueMap, executeParent = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Extend the attributes of the processor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FullName-instance_method" title="#FullName (instance method)">- (Object) <strong>FullName</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetOutputByClass-instance_method" title="#GetOutputByClass (instance method)">- (Object) <strong>GetOutputByClass</strong>(cls) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the first output of the processor that has the given class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetOutputsByClass-instance_method" title="#GetOutputsByClass (instance method)">- (Object) <strong>GetOutputsByClass</strong>(cls) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init-instance_method" title="#init (instance method)">- (Object) <strong>init</strong>(name = nil, app = nil, project_file = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Processor) <strong>initialize</strong>(name = nil, app = nil, project_file = nil) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Processor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_copy-instance_method" title="#initialize_copy (instance method)">- (Object) <strong>initialize_copy</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_processortask-instance_method" title="#initialize_processortask (instance method)">- (Object) <strong>initialize_processortask</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Inputs-instance_method" title="#Inputs (instance method)">- (Object) <strong>Inputs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#KnownInputClasses-instance_method" title="#KnownInputClasses (instance method)">- (Object) <strong>KnownInputClasses</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Outputs-instance_method" title="#Outputs (instance method)">- (Object) <strong>Outputs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Process-instance_method" title="#Process (instance method)">- (Object) <strong>Process</strong>(task_args = nil, invocation_chain = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute all input processors, fetch their outputs and process them to
+create own output.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#RemoveDependencies-instance_method" title="#RemoveDependencies (instance method)">- (Object) <strong>RemoveDependencies</strong>(taskPaths) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Remove dependencies from this processor.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GeneralUtility.html#Clone-instance_method" title="Rokuby::GeneralUtility#Clone (method)">#Clone</a></span>, <span class='object_link'><a href="GeneralUtility.html#CloneArray-instance_method" title="Rokuby::GeneralUtility#CloneArray (method)">#CloneArray</a></span>, <span class='object_link'><a href="GeneralUtility.html#DescribeTasks-instance_method" title="Rokuby::GeneralUtility#DescribeTasks (method)">#DescribeTasks</a></span>, <span class='object_link'><a href="GeneralUtility.html#GenerateTaskName-instance_method" title="Rokuby::GeneralUtility#GenerateTaskName (method)">#GenerateTaskName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetClassName-instance_method" title="Rokuby::GeneralUtility#GetClassName (method)">#GetClassName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetUUID-instance_method" title="Rokuby::GeneralUtility#GetUUID (method)">#GetUUID</a></span>, <span class='object_link'><a href="GeneralUtility.html#SystemWithFail-instance_method" title="Rokuby::GeneralUtility#SystemWithFail (method)">#SystemWithFail</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">Rake::ProcessorTask</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/ProcessorTask.html#Execute-instance_method" title="Rake::ProcessorTask#Execute (method)">#Execute</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#InTaskHierarchy%3F-instance_method" title="Rake::ProcessorTask#InTaskHierarchy? (method)">#InTaskHierarchy?</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#InvokePrerequisites-instance_method" title="Rake::ProcessorTask#InvokePrerequisites (method)">#InvokePrerequisites</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#invoke_with_call_chain-instance_method" title="Rake::ProcessorTask#invoke_with_call_chain (method)">#invoke_with_call_chain</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Task.html#%5B%5D-class_method" title="Rake::Task.[] (method)">[]</a></span>, <span class='object_link'><a href="../Rake/Task.html#add_description-instance_method" title="Rake::Task#add_description (method)">#add_description</a></span>, <span class='object_link'><a href="../Rake/Task.html#add_description_old_task-instance_method" title="Rake::Task#add_description_old_task (method)">#add_description_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#arg_description-instance_method" title="Rake::Task#arg_description (method)">#arg_description</a></span>, <span class='object_link'><a href="../Rake/Task.html#arg_names-instance_method" title="Rake::Task#arg_names (method)">#arg_names</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear-instance_method" title="Rake::Task#clear (method)">#clear</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear-class_method" title="Rake::Task.clear (method)">clear</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear_actions-instance_method" title="Rake::Task#clear_actions (method)">#clear_actions</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear_prerequisites-instance_method" title="Rake::Task#clear_prerequisites (method)">#clear_prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#create_rule-class_method" title="Rake::Task.create_rule (method)">create_rule</a></span>, <span class='object_link'><a href="../Rake/Task.html#define_task-class_method" title="Rake::Task.define_task (method)">define_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#enhance-instance_method" title="Rake::Task#enhance (method)">#enhance</a></span>, <span class='object_link'><a href="../Rake/Task.html#execute-instance_method" title="Rake::Task#execute (method)">#execute</a></span>, <span class='object_link'><a href="../Rake/Task.html#execute_old_task-instance_method" title="Rake::Task#execute_old_task (method)">#execute_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#initialize_old_task-instance_method" title="Rake::Task#initialize_old_task (method)">#initialize_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#inspect-instance_method" title="Rake::Task#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="../Rake/Task.html#investigation-instance_method" title="Rake::Task#investigation (method)">#investigation</a></span>, <span class='object_link'><a href="../Rake/Task.html#invoke-instance_method" title="Rake::Task#invoke (method)">#invoke</a></span>, <span class='object_link'><a href="../Rake/Task.html#invoke_prerequisites-instance_method" title="Rake::Task#invoke_prerequisites (method)">#invoke_prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#lookup_prerequisite_old_task-instance_method" title="Rake::Task#lookup_prerequisite_old_task (method)">#lookup_prerequisite_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#name-instance_method" title="Rake::Task#name (method)">#name</a></span>, <span class='object_link'><a href="../Rake/Task.html#name_with_args-instance_method" title="Rake::Task#name_with_args (method)">#name_with_args</a></span>, <span class='object_link'><a href="../Rake/Task.html#needed%3F-instance_method" title="Rake::Task#needed? (method)">#needed?</a></span>, <span class='object_link'><a href="../Rake/Task.html#prerequisite_tasks-instance_method" title="Rake::Task#prerequisite_tasks (method)">#prerequisite_tasks</a></span>, <span class='object_link'><a href="../Rake/Task.html#reenable-instance_method" title="Rake::Task#reenable (method)">#reenable</a></span>, <span class='object_link'><a href="../Rake/Task.html#scope_name-class_method" title="Rake::Task.scope_name (method)">scope_name</a></span>, <span class='object_link'><a href="../Rake/Task.html#set_arg_names-instance_method" title="Rake::Task#set_arg_names (method)">#set_arg_names</a></span>, <span class='object_link'><a href="../Rake/Task.html#set_arg_names_old_task-instance_method" title="Rake::Task#set_arg_names_old_task (method)">#set_arg_names_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#source-instance_method" title="Rake::Task#source (method)">#source</a></span>, <span class='object_link'><a href="../Rake/Task.html#task_defined%3F-class_method" title="Rake::Task.task_defined? (method)">task_defined?</a></span>, <span class='object_link'><a href="../Rake/Task.html#tasks-class_method" title="Rake::Task.tasks (method)">tasks</a></span>, <span class='object_link'><a href="../Rake/Task.html#timestamp-instance_method" title="Rake::Task#timestamp (method)">#timestamp</a></span>, <span class='object_link'><a href="../Rake/Task.html#to_s-instance_method" title="Rake::Task#to_s (method)">#to_s</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="TaskDescription.html" title="Rokuby::TaskDescription (module)">TaskDescription</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskDescription.html#AddTaskArgumentDescriptions-instance_method" title="Rokuby::TaskDescription#AddTaskArgumentDescriptions (method)">#AddTaskArgumentDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#AddTaskDescriptions-instance_method" title="Rokuby::TaskDescription#AddTaskDescriptions (method)">#AddTaskDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#IsTaskDescriptionEmpty%3F-instance_method" title="Rokuby::TaskDescription#IsTaskDescriptionEmpty? (method)">#IsTaskDescriptionEmpty?</a></span>, <span class='object_link'><a href="TaskDescription.html#ResetTaskDescription-instance_method" title="Rokuby::TaskDescription#ResetTaskDescription (method)">#ResetTaskDescription</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="PathUtility.html#ExecuteInPath-instance_method" title="Rokuby::PathUtility#ExecuteInPath (method)">#ExecuteInPath</a></span>, <span class='object_link'><a href="PathUtility.html#FormatPath-instance_method" title="Rokuby::PathUtility#FormatPath (method)">#FormatPath</a></span>, <span class='object_link'><a href="PathUtility.html#GetWindowsPath-instance_method" title="Rokuby::PathUtility#GetWindowsPath (method)">#GetWindowsPath</a></span>, <span class='object_link'><a href="PathUtility.html#JoinPaths-instance_method" title="Rokuby::PathUtility#JoinPaths (method)">#JoinPaths</a></span>, <span class='object_link'><a href="PathUtility.html#PathAbsolute%3F-instance_method" title="Rokuby::PathUtility#PathAbsolute? (method)">#PathAbsolute?</a></span>, <span class='object_link'><a href="PathUtility.html#RemoveParents-instance_method" title="Rokuby::PathUtility#RemoveParents (method)">#RemoveParents</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::Processor (class)">Processor</a></span></tt>) <strong>initialize</strong>(name = nil, app = nil, project_file = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of Processor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_file'>project_file</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>    
+  <span class='id identifier rubyid_init'>init</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='id identifier rubyid_project_file'>project_file</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=":Name=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id=":Name-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>:Name</strong>(:Name) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the processor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the processor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 33</span>
+
+<span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:Name</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=":ThrowOnUnknownInput=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id=":ThrowOnUnknownInput-instance_method">
+  
+    - (<tt>Bool</tt>) <strong>:ThrowOnUnknownInput</strong>(:ThrowOnUnknownInput) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Should the processor throw an exception if an unknown input is encountered.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Bool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Should the processor throw an exception if an unknown input is encountered.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 37</span>
+
+<span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:ThrowOnUnknownInput</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=":UseCache=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id=":UseCache-instance_method">
+  
+    - (<tt>Bool</tt>) <strong>:UseCache</strong>(:UseCache) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Don't execute processors and retrieve status from cache instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Bool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Don't execute processors and retrieve status from cache instead.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 41</span>
+
+<span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:UseCache</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Name-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>Name</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the processor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the processor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='const'>Name</span>
+  <span class='ivar'>@Name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ThrowOnUnknownInput=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ThrowOnUnknownInput-instance_method">
+  
+    - (<tt>Bool</tt>) <strong>ThrowOnUnknownInput</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Should the processor throw an exception if an unknown input is encountered.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Bool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Should the processor throw an exception if an unknown input is encountered.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='const'>ThrowOnUnknownInput</span>
+  <span class='ivar'>@ThrowOnUnknownInput</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="UseCache=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="UseCache-instance_method">
+  
+    - (<tt>Bool</tt>) <strong>UseCache</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Don't execute processors and retrieve status from cache instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Bool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Don't execute processors and retrieve status from cache instead.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='const'>UseCache</span>
+  <span class='ivar'>@UseCache</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_AddDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_AddDependencies</strong>(taskPaths) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+345
+346
+347
+348
+349
+350
+351</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 345</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__AddDependencies'>_AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rparen'>)</span>
+  <span class='comment'>#if(taskPaths.length &gt; 0)
+</span>  <span class='comment'>#  puts &quot;Adding prerequisites to processor #{@Name}: #{taskPaths}&quot;
+</span>  <span class='comment'>#end
+</span>  
+  <span class='ivar'>@prerequisites</span> <span class='op'>|=</span> <span class='id identifier rubyid_taskPaths'>taskPaths</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_AddInput-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_AddInput</strong>(input) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 271</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__AddInput'>_AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;Adding input to #{@Name}: #{input}&quot;
+</span>  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid__InputKnown'>_InputKnown</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid__OnAddInput'>_OnAddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='ivar'>@inputs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>      
+      <span class='kw'>return</span> <span class='kw'>true</span>
+    <span class='kw'>else</span>
+      <span class='kw'>return</span> <span class='kw'>false</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@ThrowOnUnknownInput</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Got unknown input in processor </span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_ExecutePostProcessing-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ExecutePostProcessing</strong>(taskArgs = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method can be overloaded to deal with the case that cached values are
+used. _ProcessInputs is then not called. Some processor will still need to
+execute some actions even in this case.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+246
+247
+248</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 246</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ExecutePostProcessing'>_ExecutePostProcessing</span><span class='lparen'>(</span><span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='comment'>#raise &quot;_ProcessCacheValues not defined in #{self.class.name}&quot;
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_FetchInputs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_FetchInputs</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 167</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__FetchInputs'>_FetchInputs</span>
+  <span class='comment'>#puts &quot;in FetchInputs of processor #{self}&quot;
+</span>  <span class='id identifier rubyid__InputProcessors'>_InputProcessors</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_inputProcessor'>inputProcessor</span><span class='op'>|</span>
+    <span class='comment'>#puts &quot;collecting outputs in #{@ProjectFile.Path.RelativePath}:#{@Name} from processor #{name}}&quot;
+</span>    <span class='id identifier rubyid_inputProcessor'>inputProcessor</span><span class='period'>.</span><span class='const'>Outputs</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_output'>output</span><span class='op'>|</span>
+      <span class='const'>AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_output'>output</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='comment'># Clone all inputs to be save towards overwritting due to the same ius in different process chains
+</span>  <span class='ivar'>@inputs</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='ivar'>@inputs</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_InitProc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_InitProc</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overwrite this in derived processors to</p>
+<ul><li>
+<p>add the known input classes</p>
+</li><li>
+<p>perform any initialization step that is required during both initialization
+and cloning</p>
+</li></ul>
+
+<p>Changing anything related to name adaptation when cloning a processor is
+done in AdaptName.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__InitProc'>_InitProc</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_InitProc not implemented in processor class </span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_InputKnown-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_InputKnown</strong>(input) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+157
+158
+159
+160
+161
+162
+163
+164
+165</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 157</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__InputKnown'>_InputKnown</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='ivar'>@knownInputClasses</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_knownInputType'>knownInputType</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='id identifier rubyid_knownInputType'>knownInputType</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='kw'>return</span> <span class='kw'>true</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_InputProcessors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_InputProcessors</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This can only be called after invoking the task.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 141</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__InputProcessors'>_InputProcessors</span>    
+  <span class='id identifier rubyid_inputProcs'>inputProcs</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  
+  <span class='comment'>#puts &quot;pres of #{FullName()}: #{prerequisites}&quot;
+</span>  
+  <span class='id identifier rubyid_prerequisites'>prerequisites</span><span class='period'>.</span><span class='id identifier rubyid_uniq'>uniq</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_pre'>pre</span><span class='op'>|</span>
+    <span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>DefineProcessor</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_pre'>pre</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_inputProcs'>inputProcs</span><span class='lbracket'>[</span><span class='id identifier rubyid_pre'>pre</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_p'>p</span>
+    <span class='kw'>end</span>      
+  <span class='kw'>end</span>
+  
+  <span class='comment'>#puts &quot;input processors: #{inputProcs}&quot;
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_inputProcs'>inputProcs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_LogProcessorExecution-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_LogProcessorExecution</strong>(logText) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__LogProcessorExecution'>_LogProcessorExecution</span><span class='lparen'>(</span><span class='id identifier rubyid_logText'>logText</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_logText'>logText</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_logText'>logText</span>
+  <span class='kw'>end</span>   
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_LogTextAfterExecute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_LogTextAfterExecute</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overwrite this in derived processors to print a message after the processor
+was executed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 124</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__LogTextAfterExecute'>_LogTextAfterExecute</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_LogTextBeforeExecute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_LogTextBeforeExecute</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overwrite this in derived processors to print a message before the
+processor is executed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 119</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__LogTextBeforeExecute'>_LogTextBeforeExecute</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_OnAddInput-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_OnAddInput</strong>(input) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overwrite this if you need to take action when input is added Returns true
+if the input should really be added (this should be default). If it should
+not be added instead return false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+292
+293
+294</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 292</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__OnAddInput'>_OnAddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_ProcessInputs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ProcessInputs</strong>(taskArgs = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function needs to be overloaded by derived classes. It should process
+the inputs that are already filled in the @inputs member and fill the
+corresponding @outputs list with the processed output information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+253
+254
+255</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 253</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ProcessInputs'>_ProcessInputs</span><span class='lparen'>(</span><span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_ProcessInputs not defined in </span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_RemoveDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_RemoveDependencies</strong>(taskPaths) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+362
+363
+364
+365
+366
+367
+368
+369
+370</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 362</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__RemoveDependencies'>_RemoveDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rparen'>)</span>
+  <span class='comment'>#if(taskPaths.length &gt; 0)
+</span>  <span class='comment'>#  puts &quot;Removing prerequisites from processor #{@Name}: #{taskPaths}&quot;
+</span>  <span class='comment'>#end
+</span>  
+  <span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='op'>|</span>
+    <span class='ivar'>@prerequisites</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>    
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AdaptName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdaptName</strong>(newName) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134
+135
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='const'>AdaptName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Adapting name of processor from </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_newName'>newName</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@name</span> <span class='op'>=</span> <span class='id identifier rubyid_newName'>newName</span>
+  <span class='ivar'>@Name</span> <span class='op'>=</span> <span class='id identifier rubyid_newName'>newName</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AddDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AddDependencies</strong>(taskPaths) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+337
+338
+339
+340
+341
+342
+343</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 337</span>
+
+<span class='kw'>def</span> <span class='const'>AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid__AddDependencies'>_AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid__AddDependencies'>_AddDependencies</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AddInput-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AddInput</strong>(input) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add one or several inputs to the input queue of this class. If at least one
+of the inputs was not successfully added returns false, else true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 259</span>
+
+<span class='kw'>def</span> <span class='const'>AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_inputsDone'>inputsDone</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_inp'>inp</span><span class='op'>|</span>
+      <span class='id identifier rubyid_inputsDone'>inputsDone</span> <span class='op'>=</span> <span class='id identifier rubyid_inputsDone'>inputsDone</span> <span class='kw'>and</span> <span class='id identifier rubyid__AddInput'>_AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_inp'>inp</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_inputsDone'>inputsDone</span>
+  <span class='kw'>else</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid__AddInput'>_AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>    
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Extend-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Extend</strong>(valueMap, executeParent = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Extend the attributes of the processor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 316</span>
+
+<span class='kw'>def</span> <span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_executeParent'>executeParent</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_inputs'>inputs</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Inputs</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ins</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_inputs'>inputs</span><span class='rparen'>)</span>
+    <span class='const'>AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_inputs'>inputs</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ThrowOnUnkownInput</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:throwUnknown</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span><span class='rparen'>)</span>
+    <span class='ivar'>@ThrowOnUnkownInput</span> <span class='op'>=</span> <span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_dependencies'>dependencies</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Dependencies</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:deps</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_dependencies'>dependencies</span><span class='rparen'>)</span>
+    <span class='const'>AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_dependencies'>dependencies</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FullName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FullName</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='const'>FullName</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetOutputByClass-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetOutputByClass</strong>(cls) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the first output of the processor that has the given class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+297
+298
+299
+300
+301
+302
+303</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 297</span>
+
+<span class='kw'>def</span> <span class='const'>GetOutputByClass</span><span class='lparen'>(</span><span class='id identifier rubyid_cls'>cls</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_outputsWithClass'>outputsWithClass</span> <span class='op'>=</span> <span class='const'>GetOutputsByClass</span><span class='lparen'>(</span><span class='id identifier rubyid_cls'>cls</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_outputsWithClass'>outputsWithClass</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_outputsWithClass'>outputsWithClass</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetOutputsByClass-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetOutputsByClass</strong>(cls) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+305
+306
+307
+308
+309
+310
+311
+312
+313</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 305</span>
+
+<span class='kw'>def</span> <span class='const'>GetOutputsByClass</span><span class='lparen'>(</span><span class='id identifier rubyid_cls'>cls</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_outputsWithClass'>outputsWithClass</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@outputs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_output'>output</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_output'>output</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='id identifier rubyid_cls'>cls</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_outputsWithClass'>outputsWithClass</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_output'>output</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_outputsWithClass'>outputsWithClass</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init-instance_method">
+  
+    - (<tt>Object</tt>) <strong>init</strong>(name = nil, app = nil, project_file = nil) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_init'>init</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_file'>project_file</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span> <span class='op'>||</span> <span class='const'>GetUUID</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  
+  <span class='comment'>#puts &quot;in init processor #{name}&quot;
+</span>  <span class='id identifier rubyid_initialize_processortask'>initialize_processortask</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='id identifier rubyid_project_file'>project_file</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@Name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@ThrowOnUnknownInput</span> <span class='op'>=</span> <span class='kw'>false</span>
+  
+  <span class='ivar'>@knownInputClasses</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>  <span class='comment'># list of classes that can be processed by this processor, define in actual processor
+</span>  
+  <span class='ivar'>@inputs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@outputs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='ivar'>@UseCache</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_project_file'>project_file</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='ivar'>@Cache</span> <span class='op'>=</span> <span class='id identifier rubyid_project_file'>project_file</span><span class='period'>.</span><span class='const'>ProcessCache</span>
+  <span class='kw'>end</span>
+  
+  <span class='ivar'>@processing</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='ivar'>@processingDone</span> <span class='op'>=</span> <span class='kw'>false</span>
+  
+  <span class='comment'>#puts &quot;Processor name is #{name()}&quot;
+</span>  
+  <span class='id identifier rubyid__InitProc'>_InitProc</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize_copy</strong>(original) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize_copy'>initialize_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_init'>init</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='comma'>,</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ProjectFile</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@prerequisites</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_prerequisites'>prerequisites</span><span class='rparen'>)</span>
+  <span class='ivar'>@actions</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_actions'>actions</span><span class='rparen'>)</span>
+  <span class='ivar'>@scope</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
+  <span class='ivar'>@arg_names</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_arg_names'>arg_names</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@inputs</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>Inputs</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_processortask-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize_processortask</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 67</span>
+
+<span class='kw'>alias</span> <span class='id identifier rubyid_initialize_processortask'>initialize_processortask</span> <span class='id identifier rubyid_initialize'>initialize</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Inputs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Inputs</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='const'>Inputs</span>
+  <span class='ivar'>@inputs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="KnownInputClasses-instance_method">
+  
+    - (<tt>Object</tt>) <strong>KnownInputClasses</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='const'>KnownInputClasses</span>
+  <span class='ivar'>@knownInputClasses</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Outputs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Outputs</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='const'>Outputs</span>
+  <span class='ivar'>@outputs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Process-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Process</strong>(task_args = nil, invocation_chain = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute all input processors, fetch their outputs and process them to
+create own output. Returns true if processing took place and false else.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 181</span>
+
+<span class='kw'>def</span> <span class='const'>Process</span><span class='lparen'>(</span><span class='id identifier rubyid_task_args'>task_args</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_invocation_chain'>invocation_chain</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_InTaskHierarchy?'>InTaskHierarchy?</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>  <span class='comment'># Only do checking for processors that are integrated into the task hierarchy
+</span>    <span class='id identifier rubyid__ProcessInputs'>_ProcessInputs</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>true</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@processing</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Circular dependency detected in processor chain</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@processingDone</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid__LogProcessorExecution'>_LogProcessorExecution</span><span class='lparen'>(</span><span class='id identifier rubyid__LogTextBeforeExecute'>_LogTextBeforeExecute</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@processing</span> <span class='op'>=</span> <span class='kw'>true</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='rparen'>)</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>** Invoking pres in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='comment'>#puts &quot;Prerequisites in #{@ProjectFile.Path.RelativePath}:#{name} are #{prerequisites}&quot;
+</span>  <span class='const'>InvokePrerequisites</span><span class='lparen'>(</span><span class='id identifier rubyid_task_args'>task_args</span><span class='comma'>,</span> <span class='id identifier rubyid_invocation_chain'>invocation_chain</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='rparen'>)</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>** Fetching inputs in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid__FetchInputs'>_FetchInputs</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@UseCache</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@Cache</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='rparen'>)</span>
+      <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>** Loading outputs from cache in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comment'>#&quot;: #{@inputs}&quot;
+</span>    <span class='kw'>end</span>
+    <span class='ivar'>@outputs</span> <span class='op'>=</span> <span class='ivar'>@Cache</span><span class='period'>.</span><span class='const'>GetProcessorCache</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>else</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='rparen'>)</span>
+      <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>** Processing outputs from inputs in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comment'>#&quot;: #{@inputs}&quot;
+</span>    <span class='kw'>end</span>
+    <span class='comment'>#puts &quot;Inputs for #{@ProjectFile.Path.RelativePath}:#{name}:#{@inputs}&quot;
+</span>    <span class='id identifier rubyid__ProcessInputs'>_ProcessInputs</span><span class='lparen'>(</span><span class='id identifier rubyid_task_args'>task_args</span><span class='rparen'>)</span>
+    <span class='ivar'>@Cache</span><span class='period'>.</span><span class='const'>UpdateProcessorCache</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='rparen'>)</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>** Executing post processing in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid__ExecutePostProcessing'>_ExecutePostProcessing</span><span class='lparen'>(</span><span class='id identifier rubyid_task_args'>task_args</span><span class='rparen'>)</span>
+      
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='rparen'>)</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>** Executing actions in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='const'>Execute</span><span class='lparen'>(</span><span class='id identifier rubyid_task_args'>task_args</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid__LogProcessorExecution'>_LogProcessorExecution</span><span class='lparen'>(</span><span class='id identifier rubyid__LogTextAfterExecute'>_LogTextAfterExecute</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@processing</span> <span class='op'>=</span> <span class='kw'>false</span>
+  
+  <span class='ivar'>@processingDone</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>return</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="RemoveDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>RemoveDependencies</strong>(taskPaths) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Remove dependencies from this processor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+354
+355
+356
+357
+358
+359
+360</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor.rb', line 354</span>
+
+<span class='kw'>def</span> <span class='const'>RemoveDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid__RemoveDependencies'>_RemoveDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid__RemoveDependencies'>_RemoveDependencies</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_taskPaths'>taskPaths</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:46 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

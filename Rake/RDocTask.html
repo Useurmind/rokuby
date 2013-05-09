@@ -1,0 +1,1344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rake::RDocTask
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rake.html" title="Rake (module)">Rake</a></span></span>
+     &raquo; 
+    <span class="title">RDocTask</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rake::RDocTask
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="TaskLib.html" title="Rake::TaskLib (class)">TaskLib</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="TaskLib.html" title="Rake::TaskLib (class)">TaskLib</a></span></li>
+          
+            <li class="next">Rake::RDocTask</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/RokubyRake/rake/rdoctask.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+
+
+
+  <h2>Constant Summary</h2>
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="FileUtilsExt.html#DEFAULT-constant" title="Rake::FileUtilsExt::DEFAULT (constant)">FileUtilsExt::DEFAULT</a></span></p>
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#LN_SUPPORTED-constant" title="FileUtils::LN_SUPPORTED (constant)">FileUtils::LN_SUPPORTED</a></span>, <span class='object_link'><a href="../FileUtils.html#RUBY-constant" title="FileUtils::RUBY (constant)">FileUtils::RUBY</a></span></p>
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#external-instance_method" title="#external (instance method)">- (Object) <strong>external</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute external.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inline_source-instance_method" title="#inline_source (instance method)">- (Object) <strong>inline_source</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute inline_source.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#main-instance_method" title="#main (instance method)">- (Object) <strong>main</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute main.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">- (Object) <strong>name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#options-instance_method" title="#options (instance method)">- (Object) <strong>options</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute options.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rdoc_dir-instance_method" title="#rdoc_dir (instance method)">- (Object) <strong>rdoc_dir</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute rdoc_dir.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rdoc_files-instance_method" title="#rdoc_files (instance method)">- (Object) <strong>rdoc_files</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute rdoc_files.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#template-instance_method" title="#template (instance method)">- (Object) <strong>template</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute template.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title-instance_method" title="#title (instance method)">- (Object) <strong>title</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute title.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#before_running_rdoc-instance_method" title="#before_running_rdoc (instance method)">- (Object) <strong>before_running_rdoc</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The block passed to this method will be called just before running the RDoc
+generator.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#define-instance_method" title="#define (instance method)">- (Object) <strong>define</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (RDocTask) <strong>initialize</strong>(name = :rdoc) {|_self| ... }</a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of RDocTask.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#option_list-instance_method" title="#option_list (instance method)">- (Object) <strong>option_list</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#option_string-instance_method" title="#option_string (instance method)">- (Object) <strong>option_string</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#quote-instance_method" title="#quote (instance method)">- (Object) <strong>quote</strong>(str) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="TaskLib.html" title="Rake::TaskLib (class)">TaskLib</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskLib.html#paste-instance_method" title="Rake::TaskLib#paste (method)">#paste</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="DSL.html" title="Rake::DSL (module)">DSL</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="DSL.html#arg-instance_method" title="Rake::DSL#arg (method)">#arg</a></span>, <span class='object_link'><a href="DSL.html#clean-instance_method" title="Rake::DSL#clean (method)">#clean</a></span>, <span class='object_link'><a href="DSL.html#clobber-instance_method" title="Rake::DSL#clobber (method)">#clobber</a></span>, <span class='object_link'><a href="DSL.html#desc_old-instance_method" title="Rake::DSL#desc_old (method)">#desc_old</a></span>, <span class='object_link'><a href="DSL.html#import_old-instance_method" title="Rake::DSL#import_old (method)">#import_old</a></span>, <span class='object_link'><a href="DSL.html#taskDescriptor-instance_method" title="Rake::DSL#taskDescriptor (method)">#taskDescriptor</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="FileUtilsExt.html#nowrite-instance_method" title="Rake::FileUtilsExt#nowrite (method)">#nowrite</a></span>, <span class='object_link'><a href="FileUtilsExt.html#rake_check_options-instance_method" title="Rake::FileUtilsExt#rake_check_options (method)">#rake_check_options</a></span>, <span class='object_link'><a href="FileUtilsExt.html#rake_merge_option-instance_method" title="Rake::FileUtilsExt#rake_merge_option (method)">#rake_merge_option</a></span>, <span class='object_link'><a href="FileUtilsExt.html#rake_output_message-instance_method" title="Rake::FileUtilsExt#rake_output_message (method)">#rake_output_message</a></span>, <span class='object_link'><a href="FileUtilsExt.html#verbose-instance_method" title="Rake::FileUtilsExt#verbose (method)">#verbose</a></span>, <span class='object_link'><a href="FileUtilsExt.html#when_writing-instance_method" title="Rake::FileUtilsExt#when_writing (method)">#when_writing</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#ruby-instance_method" title="FileUtils#ruby (method)">#ruby</a></span>, <span class='object_link'><a href="../FileUtils.html#safe_ln-instance_method" title="FileUtils#safe_ln (method)">#safe_ln</a></span>, <span class='object_link'><a href="../FileUtils.html#sh-instance_method" title="FileUtils#sh (method)">#sh</a></span>, <span class='object_link'><a href="../FileUtils.html#split_all-instance_method" title="FileUtils#split_all (method)">#split_all</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Cloneable.html" title="Rake::Cloneable (module)">Cloneable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Cloneable.html#clone-instance_method" title="Rake::Cloneable#clone (method)">#clone</a></span>, <span class='object_link'><a href="Cloneable.html#dup-instance_method" title="Rake::Cloneable#dup (method)">#dup</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rake::RDocTask (class)">RDocTask</a></span></tt>) <strong>initialize</strong>(name = :rdoc) {|_self| ... }
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of RDocTask</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>_self</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>_self</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rake::RDocTask (class)">Rake::RDocTask</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the object that the method was called on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 112</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='symbol'>:rdoc</span><span class='rparen'>)</span>  <span class='comment'># :yield: self
+</span>  <span class='kw'>if</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_invalid_options'>invalid_options</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span> <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='rbrace'>}</span> <span class='op'>-</span> <span class='lbracket'>[</span><span class='symbol'>:rdoc</span><span class='comma'>,</span> <span class='symbol'>:clobber_rdoc</span><span class='comma'>,</span> <span class='symbol'>:rerdoc</span><span class='rbracket'>]</span>
+    <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_invalid_options'>invalid_options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid option(s) passed to RDocTask.new: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_invalid_options'>invalid_options</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@rdoc_files</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='op'>::</span><span class='const'>FileList</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@rdoc_dir</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>html</span><span class='tstring_end'>'</span></span>
+  <span class='ivar'>@main</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@title</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@template</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@external</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='ivar'>@inline_source</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@options</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>yield</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='id identifier rubyid_define'>define</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="external=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="external-instance_method">
+  
+    - (<tt>Object</tt>) <strong>external</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute external</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_external'>external</span>
+  <span class='ivar'>@external</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="inline_source=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="inline_source-instance_method">
+  
+    - (<tt>Object</tt>) <strong>inline_source</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute inline_source</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 108</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_inline_source'>inline_source</span>
+  <span class='ivar'>@inline_source</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="main=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="main-instance_method">
+  
+    - (<tt>Object</tt>) <strong>main</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute main</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_main'>main</span>
+  <span class='ivar'>@main</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    - (<tt>Object</tt>) <strong>name</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="options=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="options-instance_method">
+  
+    - (<tt>Object</tt>) <strong>options</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute options</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 103</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_options'>options</span>
+  <span class='ivar'>@options</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="rdoc_dir=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="rdoc_dir-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rdoc_dir</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute rdoc_dir</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rdoc_dir'>rdoc_dir</span>
+  <span class='ivar'>@rdoc_dir</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="rdoc_files=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="rdoc_files-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rdoc_files</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute rdoc_files</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 100</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rdoc_files'>rdoc_files</span>
+  <span class='ivar'>@rdoc_files</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="template=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="template-instance_method">
+  
+    - (<tt>Object</tt>) <strong>template</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute template</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_template'>template</span>
+  <span class='ivar'>@template</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="title=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="title-instance_method">
+  
+    - (<tt>Object</tt>) <strong>title</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute title</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_title'>title</span>
+  <span class='ivar'>@title</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="before_running_rdoc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>before_running_rdoc</strong>(&amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The block passed to this method will be called just before running the RDoc
+generator. It is allowed to modify RDocTask attributes inside the block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 194</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_before_running_rdoc'>before_running_rdoc</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@before_running_rdoc</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="define-instance_method">
+  
+    - (<tt>Object</tt>) <strong>define</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_define'>define</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_rdoc_task_name'>rdoc_task_name</span> <span class='op'>!=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rdoc</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Build the RDOC HTML Files</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Build the </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_rdoc_task_name'>rdoc_task_name</span><span class='rbrace'>}</span><span class='tstring_content'> HTML Files</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_task'>task</span> <span class='id identifier rubyid_rdoc_task_name'>rdoc_task_name</span>
+
+  <span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Force a rebuild of the RDOC files</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_task'>task</span> <span class='id identifier rubyid_rerdoc_task_name'>rerdoc_task_name</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_clobber_task_name'>clobber_task_name</span><span class='comma'>,</span> <span class='id identifier rubyid_rdoc_task_name'>rdoc_task_name</span><span class='rbracket'>]</span>
+
+  <span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Remove rdoc products</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_task'>task</span> <span class='id identifier rubyid_clobber_task_name'>clobber_task_name</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_rm_r'>rm_r</span> <span class='id identifier rubyid_rdoc_dir'>rdoc_dir</span> <span class='kw'>rescue</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_task'>task</span> <span class='symbol'>:clobber</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_clobber_task_name'>clobber_task_name</span><span class='rbracket'>]</span>
+
+  <span class='id identifier rubyid_directory'>directory</span> <span class='ivar'>@rdoc_dir</span>
+  <span class='id identifier rubyid_task'>task</span> <span class='id identifier rubyid_rdoc_task_name'>rdoc_task_name</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_rdoc_target'>rdoc_target</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_file'>file</span> <span class='id identifier rubyid_rdoc_target'>rdoc_target</span> <span class='op'>=&gt;</span> <span class='ivar'>@rdoc_files</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_rakefile'>rakefile</span><span class='rbracket'>]</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_rm_r'>rm_r</span> <span class='ivar'>@rdoc_dir</span> <span class='kw'>rescue</span> <span class='kw'>nil</span>
+    <span class='ivar'>@before_running_rdoc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span> <span class='kw'>if</span> <span class='ivar'>@before_running_rdoc</span>
+    <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='id identifier rubyid_option_list'>option_list</span> <span class='op'>+</span> <span class='ivar'>@rdoc_files</span>
+    <span class='kw'>if</span> <span class='ivar'>@external</span>
+      <span class='id identifier rubyid_argstring'>argstring</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_sh'>sh</span> <span class='tstring'><span class='tstring_beg'>%{</span><span class='tstring_content'>ruby -Ivendor vendor/rd </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_argstring'>argstring</span><span class='rbrace'>}</span><span class='tstring_end'>}</span></span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>rdoc/rdoc</span><span class='tstring_end'>'</span></span>
+      <span class='const'>RDoc</span><span class='op'>::</span><span class='const'>RDoc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_document'>document</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="option_list-instance_method">
+  
+    - (<tt>Object</tt>) <strong>option_list</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 169</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_option_list'>option_list</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='ivar'>@options</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-o</span><span class='tstring_end'>&quot;</span></span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@rdoc_dir</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--main</span><span class='tstring_end'>&quot;</span></span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_quote'>quote</span><span class='lparen'>(</span><span class='id identifier rubyid_main'>main</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_main'>main</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--title</span><span class='tstring_end'>&quot;</span></span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_quote'>quote</span><span class='lparen'>(</span><span class='id identifier rubyid_title'>title</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_title'>title</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-T</span><span class='tstring_end'>&quot;</span></span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_quote'>quote</span><span class='lparen'>(</span><span class='id identifier rubyid_template'>template</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_template'>template</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--inline-source</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_inline_source'>inline_source</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@options</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--inline-source</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@options</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-S</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="option_string-instance_method">
+  
+    - (<tt>Object</tt>) <strong>option_string</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187
+188
+189</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 187</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_option_string'>option_string</span>
+  <span class='id identifier rubyid_option_list'>option_list</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="quote-instance_method">
+  
+    - (<tt>Object</tt>) <strong>quote</strong>(str) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rdoctask.rb', line 179</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_quote'>quote</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='ivar'>@external</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>'</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_str'>str</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_str'>str</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:48 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

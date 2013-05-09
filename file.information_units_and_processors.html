@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: information_units_and_processors
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: information_units_and_processors</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>Information Units &amp; Processors</h1>
+
+<p>There are two very important classes in Rokuby:</p>
+
+<ul>
+<li>Information Units: They represent the basic unit of information in Rokuby that can be passed around between different processors.</li>
+<li>Processors: They process information units to achieve certain goals.</li>
+</ul>
+
+<p>As mentioned in the <a href="file.introduction.html">Introduction</a> processors are Rake tasks that share all the functionality that of these tasks.
+They can depend on tasks or be a dependency for other tasks. And they can also be executed.</p>
+
+<p>But they are also much more than tasks. In addition to their task behaviour they can pass information to processors that are further up
+the task chain. This means that if a processor depends on another processor it automatically receives the created output information
+unit of the processor on which it depends.</p>
+
+<p>A basic processor workflow is given below:</p>
+
+<p><img src="images/basic_processor_pipeline.svg" alt="Processor Pipeline Image" title="Fictional processor pipeline"></p>
+
+<p>We will now dive a little bit deeper into the basic features of these two important classes.</p>
+
+<h2>Information Units</h2>
+
+<p>The basic information unit class exhibits only one feature. It establishes a generic interface to create a information unit.
+This is done via the Extend method. Normally, this method will not be visible to the user of the Rokuby DSL. But it is a good way to understand
+how the creation of an information unit works.</p>
+
+<p>Before we further look at the Extend method of the information unit class we will discuss a property that all information units should share.</p>
+
+<pre class="code ruby"><code>Information units are simple data containers whose properties follow a simple set/get paradigm and which are copyable without problems.
+</code></pre>
+
+<p>This property makes it easy to pass information units around and propagate them in between the differen processors.</p>
+
+<p>In this manner, the Extend method is a simple mean of setting multiple properties of an information unit at once. See the <a href="Rokuby/InformationUnit.html">InformationUnit class</a>
+for further documentation. One important thing about the Extend method is that array and map type attributes in the information unti will be extended with
+the additional values given in the extend method (therefore the name extend). This means that inputting an attribute value of <code>[3, 4]</code> to an information unit
+that already contains values <code>[1, 2]</code> in this attribute results in an attribute of the information unit being <code>[1, 2, 3, 4]</code>.</p>
+
+<p>This makes the definition of an information unit very easy:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_infoUnit'>infoUnit</span> <span class='const'>InformationUnitClass</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>IUName</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>attribute1:</span> <span class='id identifier rubyid_value1'>value1</span><span class='comma'>,</span>
+    <span class='label'>attribute2:</span> <span class='id identifier rubyid_value2'>value2</span><span class='comma'>,</span>
+    <span class='label'>attribute3:</span> <span class='id identifier rubyid_value3'>value3</span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<p>which is a short form for</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_infoUnit'>infoUnit</span><span class='lparen'>(</span><span class='const'>InformationUnitClass</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>IUName</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>attribute1:</span> <span class='id identifier rubyid_value1'>value1</span><span class='comma'>,</span>
+    <span class='label'>attribute2:</span> <span class='id identifier rubyid_value2'>value2</span><span class='comma'>,</span>
+    <span class='label'>attribute3:</span> <span class='id identifier rubyid_value3'>value3</span>
+<span class='rbrace'>}</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>Normally, there are functions that are specific for the creation of certain information units. For example:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_projDescr'>projDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProjectDescriptionName</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProjectName</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.0</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<p>The functions that are available to create certain information untis (and also processors) are members of the <code>Rokuby::DSL</code> namespace.</p>
+
+<p>The nice thing is that once the information units are defined you can easily obtain them via their name. For example</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_projDescr'>projDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProjectDescriptionName</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>will return you the instance of the project description information unit defined above.</p>
+
+<h2>Processors</h2>
+
+<p>The processors of Rokuby are more complex than the simple information units. Therefore, their definition is also a little bit more bothersome.
+To undertand their creation, we should look at their similarity and differences in comparison to information units.</p>
+
+<p>First processors can also have attributes and they can be set in a similar fashion as the information unit attributes by defining a Hash that
+contains the names and values of the attributes. The extend method of processor bears the same logical behaviour as the information unit
+extend method.</p>
+
+<p>But what is even more important when defining a processor is to input the correct information untis that should be processed by the processor.
+This can simply be done by inputting an array of the information units you deem necessary for the processor.</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>ProcessorClass</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProcessorName</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:procIns</span><span class='comma'>,</span> <span class='symbol'>:procArgs</span><span class='comma'>,</span> <span class='symbol'>:procDeps</span>
+</code></pre>
+</div></div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

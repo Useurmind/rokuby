@@ -1,0 +1,2923 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::Application
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">Application</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::Application
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="../Rake/Application.html" title="Rake::Application (class)">Rake::Application</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Rake/Application.html" title="Rake::Application (class)">Rake::Application</a></span></li>
+          
+            <li class="next">Rokuby::Application</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/RakeWrapper/application.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Rake main application object.  When invoking <tt>rake</tt> from the command
+line, a Rake::Application object is created and run.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="DEFAULT_RAKEFILES-constant" class="">DEFAULT_RAKEFILES =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ProjectDefinition</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>projectdefinition</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Projectdefinition</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>projectDefinition</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ProjectDefinition.rb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>projectdefinition.rb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Projectdefinition.rb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>projectDefinition.rb</span><span class='tstring_end'>'</span></span>
+<span class='rbracket'>]</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CurrentTask-instance_method" title="#CurrentTask (instance method)">- (Object) <strong>CurrentTask</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The task that currently asks for a prerequesite.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#TopmostProjectFile-instance_method" title="#TopmostProjectFile (instance method)">- (Object) <strong>TopmostProjectFile</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute TopmostProjectFile.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../Rake/Application.html" title="Rake::Application (class)">Rake::Application</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Application.html#name-instance_method" title="Rake::Application#name (method)">#name</a></span>, <span class='object_link'><a href="../Rake/Application.html#original_dir-instance_method" title="Rake::Application#original_dir (method)">#original_dir</a></span>, <span class='object_link'><a href="../Rake/Application.html#rakefile-instance_method" title="Rake::Application#rakefile (method)">#rakefile</a></span>, <span class='object_link'><a href="../Rake/Application.html#terminal_columns-instance_method" title="Rake::Application#terminal_columns (method)">#terminal_columns</a></span>, <span class='object_link'><a href="../Rake/Application.html#top_level_tasks-instance_method" title="Rake::Application#top_level_tasks (method)">#top_level_tasks</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="../Rake/TaskManager.html" title="Rake::TaskManager (module)">Rake::TaskManager</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/TaskManager.html#last_description-instance_method" title="Rake::TaskManager#last_description (method)">#last_description</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%5B%5D-instance_method" title="#[] (instance method)">- (Object) <strong>[]</strong>(taskPath, scopes = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return a task with the given name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AddProjectImport-instance_method" title="#AddProjectImport (instance method)">- (Object) <strong>AddProjectImport</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is called when an additional file is inculded by a project file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear-instance_method" title="#clear (instance method)">- (Object) <strong>clear</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Clear the task list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CloneProcessor-instance_method" title="#CloneProcessor (instance method)">- (Object) <strong>CloneProcessor</strong>(newName, oldName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compute_task_project_file-instance_method" title="#compute_task_project_file (instance method)">- (Object) <strong>compute_task_project_file</strong>(projectPath, taskName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the project file containing the task from the path of the task and the
+project file in which the task path is declared.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_rule-instance_method" title="#create_rule (instance method)">- (Object) <strong>create_rule</strong>(*args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Define a rule for synthesizing tasks.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_project_file-instance_method" title="#current_project_file (instance method)">- (Object) <strong>current_project_file</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#define_task-instance_method" title="#define_task (instance method)">- (Object) <strong>define_task</strong>(task_class, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Define a task given <tt>args</tt> and an option block.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DefineInformationUnit-instance_method" title="#DefineInformationUnit (instance method)">- (Object) <strong>DefineInformationUnit</strong>(iuClass, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DefineProcessChain-instance_method" title="#DefineProcessChain (instance method)">- (Object) <strong>DefineProcessChain</strong>(chainClass, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DefineProcessor-instance_method" title="#DefineProcessor (instance method)">- (Object) <strong>DefineProcessor</strong>(procClass, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DescribeArgument-instance_method" title="#DescribeArgument (instance method)">- (Object) <strong>DescribeArgument</strong>(name, *args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DescribeTask-instance_method" title="#DescribeTask (instance method)">- (Object) <strong>DescribeTask</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>New dsl interface introduced by the Rokuby module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_error_message-instance_method" title="#display_error_message (instance method)">- (Object) <strong>display_error_message</strong>(ex) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Display the error message that caused the exception.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_tasks_and_comments-instance_method" title="#display_tasks_and_comments (instance method)">- (Object) <strong>display_tasks_and_comments</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Display the tasks and comments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FindInformationUnit-instance_method" title="#FindInformationUnit (instance method)">- (Object) <strong>FindInformationUnit</strong>(iuClass, absoluteIuPath) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FindProcessor-instance_method" title="#FindProcessor (instance method)">- (Object) <strong>FindProcessor</strong>(procName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_invoked_project_file-instance_method" title="#get_invoked_project_file (instance method)">- (Object) <strong>get_invoked_project_file</strong>(invokingProjectFilePath, invokedProjectFilePath) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get a project file included by the given project file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_terminal_width-instance_method" title="#get_terminal_width (instance method)">- (Object) <strong>get_terminal_width</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns [width, height] of terminal when detected, nil if not detected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getTaskAndProjectFile-instance_method" title="#getTaskAndProjectFile (instance method)">- (Object) <strong>getTaskAndProjectFile</strong>(taskPath, scopes = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#IncludeCleanTargets-instance_method" title="#IncludeCleanTargets (instance method)">- (Object) <strong>IncludeCleanTargets</strong>(*includes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Include a file expression into the list of clean targets of the current
+project file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#IncludeClobberTargets-instance_method" title="#IncludeClobberTargets (instance method)">- (Object) <strong>IncludeClobberTargets</strong>(*includes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Include a file expression into the list of clobber targets of the current
+project file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init-instance_method" title="#init (instance method)">- (Object) <strong>init</strong>(app_name = @name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Application) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#invoke_task-instance_method" title="#invoke_task (instance method)">- (Object) <strong>invoke_task</strong>(task_string) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is changed because the clean syntax has changed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#LoadProjectFile-instance_method" title="#LoadProjectFile (instance method)">- (Object) <strong>LoadProjectFile</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup-instance_method" title="#lookup (instance method)">- (Object) <strong>lookup</strong>(taskPath, initial_scope = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lookup a task, using scope and the scope hints in the task name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scope_name-instance_method" title="#scope_name (instance method)">- (Object) <strong>scope_name</strong>(scope, task_name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Apply the scope to the task name according to the rules for this kind of
+task.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#search_task_in_project_file_tree-instance_method" title="#search_task_in_project_file_tree (instance method)">- (Object) <strong>search_task_in_project_file_tree</strong>(projectFile, name, scopes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>search the task in the project file and all the project files loaded by it
+breadth first search.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#standard_rake_options-instance_method" title="#standard_rake_options (instance method)">- (Object) <strong>standard_rake_options</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A list of all the standard options used in rake, suitable for passing to
+OptionParser.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status_string-instance_method" title="#status_string (instance method)">- (Object) <strong>status_string</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#task_defined%3F-instance_method" title="#task_defined? (instance method)">- (Boolean) <strong>task_defined?</strong>(task_name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>TRUE if the task name is already defined.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tasks-instance_method" title="#tasks (instance method)">- (Object) <strong>tasks</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>List of all defined tasks.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#top_level-instance_method" title="#top_level (instance method)">- (Object) <strong>top_level</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Run the top level tasks of a Rake application.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPath-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPath (method)">#AbsoluteTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPathOnly%3F-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPathOnly? (method)">#AbsoluteTaskPathOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#ApplicationBasedTaskPath-instance_method" title="Rokuby::TaskPathUtility#ApplicationBasedTaskPath (method)">#ApplicationBasedTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePath-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePath (method)">#GetProjectFilePath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePathName (method)">#GetProjectFilePathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetTaskName-instance_method" title="Rokuby::TaskPathUtility#GetTaskName (method)">#GetTaskName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#JoinTaskPathName-instance_method" title="Rokuby::TaskPathUtility#JoinTaskPathName (method)">#JoinTaskPathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#MakeRelativeTo-instance_method" title="Rokuby::TaskPathUtility#MakeRelativeTo (method)">#MakeRelativeTo</a></span>, <span class='object_link'><a href="TaskPathUtility.html#NameOnly%3F-instance_method" title="Rokuby::TaskPathUtility#NameOnly? (method)">#NameOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#SplitTaskPath-instance_method" title="Rokuby::TaskPathUtility#SplitTaskPath (method)">#SplitTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#_GetTaskProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#_GetTaskProjectFilePathName (method)">#_GetTaskProjectFilePathName</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Rake/Application.html" title="Rake::Application (class)">Rake::Application</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Application.html#add_import-instance_method" title="Rake::Application#add_import (method)">#add_import</a></span>, <span class='object_link'><a href="../Rake/Application.html#add_loader-instance_method" title="Rake::Application#add_loader (method)">#add_loader</a></span>, <span class='object_link'><a href="../Rake/Application.html#collect_tasks-instance_method" title="Rake::Application#collect_tasks (method)">#collect_tasks</a></span>, <span class='object_link'><a href="../Rake/Application.html#const_warning-instance_method" title="Rake::Application#const_warning (method)">#const_warning</a></span>, <span class='object_link'><a href="../Rake/Application.html#deprecate-instance_method" title="Rake::Application#deprecate (method)">#deprecate</a></span>, <span class='object_link'><a href="../Rake/Application.html#display_prerequisites-instance_method" title="Rake::Application#display_prerequisites (method)">#display_prerequisites</a></span>, <span class='object_link'><a href="../Rake/Application.html#dynamic_width-instance_method" title="Rake::Application#dynamic_width (method)">#dynamic_width</a></span>, <span class='object_link'><a href="../Rake/Application.html#dynamic_width_stty-instance_method" title="Rake::Application#dynamic_width_stty (method)">#dynamic_width_stty</a></span>, <span class='object_link'><a href="../Rake/Application.html#dynamic_width_tput-instance_method" title="Rake::Application#dynamic_width_tput (method)">#dynamic_width_tput</a></span>, <span class='object_link'><a href="../Rake/Application.html#find_rakefile_location-instance_method" title="Rake::Application#find_rakefile_location (method)">#find_rakefile_location</a></span>, <span class='object_link'><a href="../Rake/Application.html#handle_options-instance_method" title="Rake::Application#handle_options (method)">#handle_options</a></span>, <span class='object_link'><a href="../Rake/Application.html#have_rakefile-instance_method" title="Rake::Application#have_rakefile (method)">#have_rakefile</a></span>, <span class='object_link'><a href="../Rake/Application.html#load_imports-instance_method" title="Rake::Application#load_imports (method)">#load_imports</a></span>, <span class='object_link'><a href="../Rake/Application.html#load_rakefile-instance_method" title="Rake::Application#load_rakefile (method)">#load_rakefile</a></span>, <span class='object_link'><a href="../Rake/Application.html#options-instance_method" title="Rake::Application#options (method)">#options</a></span>, <span class='object_link'><a href="../Rake/Application.html#parse_task_string-instance_method" title="Rake::Application#parse_task_string (method)">#parse_task_string</a></span>, <span class='object_link'><a href="../Rake/Application.html#print_rakefile_directory-instance_method" title="Rake::Application#print_rakefile_directory (method)">#print_rakefile_directory</a></span>, <span class='object_link'><a href="../Rake/Application.html#rake_require-instance_method" title="Rake::Application#rake_require (method)">#rake_require</a></span>, <span class='object_link'><a href="../Rake/Application.html#rakefile_location-instance_method" title="Rake::Application#rakefile_location (method)">#rakefile_location</a></span>, <span class='object_link'><a href="../Rake/Application.html#raw_load_rakefile-instance_method" title="Rake::Application#raw_load_rakefile (method)">#raw_load_rakefile</a></span>, <span class='object_link'><a href="../Rake/Application.html#run-instance_method" title="Rake::Application#run (method)">#run</a></span>, <span class='object_link'><a href="../Rake/Application.html#standard_exception_handling-instance_method" title="Rake::Application#standard_exception_handling (method)">#standard_exception_handling</a></span>, <span class='object_link'><a href="../Rake/Application.html#system_dir-instance_method" title="Rake::Application#system_dir (method)">#system_dir</a></span>, <span class='object_link'><a href="../Rake/Application.html#terminal_width-instance_method" title="Rake::Application#terminal_width (method)">#terminal_width</a></span>, <span class='object_link'><a href="../Rake/Application.html#truncate-instance_method" title="Rake::Application#truncate (method)">#truncate</a></span>, <span class='object_link'><a href="../Rake/Application.html#truncate_output%3F-instance_method" title="Rake::Application#truncate_output? (method)">#truncate_output?</a></span>, <span class='object_link'><a href="../Rake/Application.html#tty_output%3D-instance_method" title="Rake::Application#tty_output= (method)">#tty_output=</a></span>, <span class='object_link'><a href="../Rake/Application.html#tty_output%3F-instance_method" title="Rake::Application#tty_output? (method)">#tty_output?</a></span>, <span class='object_link'><a href="../Rake/Application.html#unix%3F-instance_method" title="Rake::Application#unix? (method)">#unix?</a></span>, <span class='object_link'><a href="../Rake/Application.html#windows%3F-instance_method" title="Rake::Application#windows? (method)">#windows?</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Rake/TaskManager.html" title="Rake::TaskManager (module)">Rake::TaskManager</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/TaskManager.html#current_scope-instance_method" title="Rake::TaskManager#current_scope (method)">#current_scope</a></span>, <span class='object_link'><a href="../Rake/TaskManager.html#enhance_with_matching_rule-instance_method" title="Rake::TaskManager#enhance_with_matching_rule (method)">#enhance_with_matching_rule</a></span>, <span class='object_link'><a href="../Rake/TaskManager.html#in_namespace-instance_method" title="Rake::TaskManager#in_namespace (method)">#in_namespace</a></span>, <span class='object_link'><a href="../Rake/TaskManager.html#intern-instance_method" title="Rake::TaskManager#intern (method)">#intern</a></span>, <span class='object_link'><a href="../Rake/TaskManager.html#resolve_args-instance_method" title="Rake::TaskManager#resolve_args (method)">#resolve_args</a></span>, <span class='object_link'><a href="../Rake/TaskManager.html#synthesize_file_task-instance_method" title="Rake::TaskManager#synthesize_file_task (method)">#synthesize_file_task</a></span>, <span class='object_link'><a href="../Rake/TaskManager.html#tasks_in_scope-instance_method" title="Rake::TaskManager#tasks_in_scope (method)">#tasks_in_scope</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::Application (class)">Application</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of Application</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='comment'>#puts &quot;Initializing Rake Builder Application&quot;
+</span>  <span class='kw'>super</span>
+  <span class='ivar'>@TaskHelpMessages</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@rakefiles</span> <span class='op'>=</span> <span class='const'>DEFAULT_RAKEFILES</span>
+  <span class='ivar'>@ProjectFileLoader</span> <span class='op'>=</span> <span class='const'>Rokuby</span><span class='op'>::</span><span class='const'>ProjectFileLoader</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Rokuby</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@CurrentTask</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="CurrentTask=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="CurrentTask-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CurrentTask</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The task that currently asks for a prerequesite.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='const'>CurrentTask</span>
+  <span class='ivar'>@CurrentTask</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="TopmostProjectFile-instance_method">
+  
+    - (<tt>Object</tt>) <strong>TopmostProjectFile</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute TopmostProjectFile</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='const'>TopmostProjectFile</span>
+  <span class='ivar'>@TopmostProjectFile</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="[]-instance_method">
+  
+    - (<tt>Object</tt>) <strong>[]</strong>(taskPath, scopes = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Return a task with the given name.  If the task is not currently known, try
+to synthesize one from the defined rules.  If no rules are found, but an
+existing file matches the task name, assume it is a file task with no
+dependencies or actions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+342
+343
+344
+345</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 342</span>
+
+<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_task'>task</span><span class='comma'>,</span> <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='id identifier rubyid_getTaskAndProjectFile'>getTaskAndProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AddProjectImport-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AddProjectImport</strong>(path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is called when an additional file is inculded by a project file. It
+will load the project file asap to make its values available in the loading
+project file and above.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+260
+261
+262
+263</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 260</span>
+
+<span class='kw'>def</span> <span class='const'>AddProjectImport</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_projectPath'>projectPath</span> <span class='op'>=</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear-instance_method">
+  
+    - (<tt>Object</tt>) <strong>clear</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Clear the task list.  This cause rake to immediately forget all the tasks
+that have been assigned.  (Normally used in the unit tests.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+323
+324
+325
+326
+327</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 323</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFiles</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='op'>|</span>
+    <span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CloneProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CloneProcessor</strong>(newName, oldName) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+283
+284
+285</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 283</span>
+
+<span class='kw'>def</span> <span class='const'>CloneProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>CloneProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="compute_task_project_file-instance_method">
+  
+    - (<tt>Object</tt>) <strong>compute_task_project_file</strong>(projectPath, taskName) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the project file containing the task from the path of the task and the
+project file in which the task path is declared.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 166</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compute_task_project_file'>compute_task_project_file</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='comma'>,</span> <span class='id identifier rubyid_taskName'>taskName</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='ivar'>@CurrentTask</span><span class='rparen'>)</span>
+        <span class='comment'>#Just get the project file with the complete project path
+</span>        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+    <span class='kw'>else</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='rparen'>)</span>
+            <span class='comment'># Make the project path relative to the top first as it is now relative to the invoking project file
+</span>          <span class='id identifier rubyid_invokingProjectFile'>invokingProjectFile</span> <span class='op'>=</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span> <span class='op'>||</span> <span class='ivar'>@CurrentTask</span><span class='period'>.</span><span class='const'>ProjectFile</span>
+          <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='id identifier rubyid_get_invoked_project_file'>get_invoked_project_file</span><span class='lparen'>(</span><span class='id identifier rubyid_invokingProjectFile'>invokingProjectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='comma'>,</span> <span class='id identifier rubyid_projectPath'>projectPath</span><span class='rparen'>)</span>
+          <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='rparen'>)</span>
+              <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Don't know project file '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='rbrace'>}</span><span class='tstring_content'>' for task '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_taskName'>taskName</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span>
+          <span class='kw'>end</span>
+        <span class='kw'>else</span>
+            <span class='comment'># Tasks without path are searched first in their declaring project file and then in all sub project files
+</span>            <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='ivar'>@CurrentTask</span><span class='period'>.</span><span class='const'>ProjectFile</span>
+        <span class='kw'>end</span>
+        
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_projectFile'>projectFile</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_rule-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_rule</strong>(*args, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Define a rule for synthesizing tasks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423
+424
+425</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 423</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_rule'>create_rule</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_create_rule'>create_rule</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_project_file-instance_method">
+  
+    - (<tt>Object</tt>) <strong>current_project_file</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_current_project_file'>current_project_file</span>
+    <span class='kw'>return</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="define_task-instance_method">
+  
+    - (<tt>Object</tt>) <strong>define_task</strong>(task_class, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Define a task given <tt>args</tt> and an option block.  If a rule with the
+given name already exists, the prerequisites and actions are added to the
+existing task.  Returns the defined task.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+418
+419
+420</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 418</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_define_task'>define_task</span><span class='lparen'>(</span><span class='id identifier rubyid_task_class'>task_class</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_define_task'>define_task</span><span class='lparen'>(</span><span class='id identifier rubyid_task_class'>task_class</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DefineInformationUnit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DefineInformationUnit</strong>(iuClass, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+275
+276
+277</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 275</span>
+
+<span class='kw'>def</span> <span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='id identifier rubyid_iuClass'>iuClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='id identifier rubyid_iuClass'>iuClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DefineProcessChain-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DefineProcessChain</strong>(chainClass, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+287
+288
+289</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 287</span>
+
+<span class='kw'>def</span> <span class='const'>DefineProcessChain</span><span class='lparen'>(</span><span class='id identifier rubyid_chainClass'>chainClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>DefineProcessChain</span><span class='lparen'>(</span><span class='id identifier rubyid_chainClass'>chainClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DefineProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DefineProcessor</strong>(procClass, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+279
+280
+281</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 279</span>
+
+<span class='kw'>def</span> <span class='const'>DefineProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_procClass'>procClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>          
+  <span class='kw'>return</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>DefineProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_procClass'>procClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DescribeArgument-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DescribeArgument</strong>(name, *args) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 246</span>
+
+<span class='kw'>def</span> <span class='const'>DescribeArgument</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_descriptionLines'>descriptionLines</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+            <span class='id identifier rubyid_descriptionLines'>descriptionLines</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_argMap'>argMap</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_descriptionLines'>descriptionLines</span><span class='rbrace'>}</span>
+    <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>AddTaskArgumentDescriptions</span><span class='lparen'>(</span><span class='id identifier rubyid_argMap'>argMap</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="DescribeTask-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DescribeTask</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>New dsl interface introduced by the Rokuby module</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+236
+237
+238
+239
+240
+241
+242
+243
+244</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 236</span>
+
+<span class='kw'>def</span> <span class='const'>DescribeTask</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_descriptionLines'>descriptionLines</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+            <span class='id identifier rubyid_descriptionLines'>descriptionLines</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>AddTaskDescriptions</span><span class='lparen'>(</span><span class='id identifier rubyid_descriptionLines'>descriptionLines</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display_error_message-instance_method">
+  
+    - (<tt>Object</tt>) <strong>display_error_message</strong>(ex) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Display the error message that caused the exception.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_display_error_message'>display_error_message</span><span class='lparen'>(</span><span class='id identifier rubyid_ex'>ex</span><span class='rparen'>)</span>
+  <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_ex'>ex</span><span class='rparen'>)</span>        
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display_tasks_and_comments-instance_method">
+  
+    - (<tt>Object</tt>) <strong>display_tasks_and_comments</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Display the tasks and comments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_display_tasks_and_comments'>display_tasks_and_comments</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Displaying tasks... \n</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_show_tasks'>show_tasks</span> <span class='op'>==</span> <span class='symbol'>:tasks</span><span class='rparen'>)</span>
+    <span class='comment'># Get the maximum width of all task names
+</span>    <span class='id identifier rubyid_all_displayable_tasks'>all_displayable_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_tasks'>tasks</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+      <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_comment'>comment</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=~</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_show_task_pattern'>show_task_pattern</span>
+    <span class='rbrace'>}</span>
+    
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Displayable tasks: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_all_displayable_tasks'>all_displayable_tasks</span><span class='rbrace'>}</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+    
+    <span class='id identifier rubyid_width'>width</span> <span class='op'>=</span> <span class='id identifier rubyid_all_displayable_tasks'>all_displayable_tasks</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_name_with_args'>name_with_args</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span> <span class='op'>||</span> <span class='int'>10</span>
+    <span class='id identifier rubyid_max_column'>max_column</span> <span class='op'>=</span> <span class='id identifier rubyid_truncate_output?'>truncate_output?</span> <span class='op'>?</span> <span class='id identifier rubyid_terminal_width'>terminal_width</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>-</span> <span class='id identifier rubyid_width'>width</span> <span class='op'>-</span> <span class='int'>7</span> <span class='op'>:</span> <span class='kw'>nil</span>
+    
+    <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFiles</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='op'>|</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='const'>HasTasks</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+            <span class='id identifier rubyid_headline'>headline</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Tasks in project file: '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>'\n</span><span class='tstring_end'>&quot;</span></span>
+            <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_headline'>headline</span>
+            <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-</span><span class='tstring_end'>&quot;</span></span> <span class='op'>*</span> <span class='id identifier rubyid_headline'>headline</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+            <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='const'>GetTaskDescriptions</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_max_column'>max_column</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>            
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='kw'>super</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FindInformationUnit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FindInformationUnit</strong>(iuClass, absoluteIuPath) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 291</span>
+
+<span class='kw'>def</span> <span class='const'>FindInformationUnit</span><span class='lparen'>(</span><span class='id identifier rubyid_iuClass'>iuClass</span><span class='comma'>,</span> <span class='id identifier rubyid_absoluteIuPath'>absoluteIuPath</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_projectPath'>projectPath</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='const'>GetProjectFilePathName</span><span class='lparen'>(</span><span class='id identifier rubyid_absoluteIuPath'>absoluteIuPath</span><span class='rparen'>)</span>            
+      <span class='comment'>#puts &quot;result is #{projectPath}, #{name}&quot;
+</span>      <span class='comment'>#puts &quot;Looking up information unit in application #{absoluteIuPath} with class #{iuClass}&quot;
+</span>      
+      <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='id identifier rubyid_compute_task_project_file'>compute_task_project_file</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+      
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not find projectFile </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='rbrace'>}</span><span class='tstring_content'> for information unit </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_absoluteIuPath'>absoluteIuPath</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>else</span>
+          <span class='id identifier rubyid_iu'>iu</span> <span class='op'>=</span> <span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='const'>GetExistingInformationUnit</span><span class='lparen'>(</span><span class='id identifier rubyid_iuClass'>iuClass</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+          <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_iu'>iu</span><span class='rparen'>)</span>
+              <span class='comment'>#puts &quot;Searched information units: #{[projectFile.InformationUnits]}&quot;
+</span>              <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not find information unit </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_absoluteIuPath'>absoluteIuPath</span><span class='rbrace'>}</span><span class='tstring_content'> with class </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_iuClass'>iuClass</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+          <span class='kw'>end</span>
+          <span class='kw'>return</span> <span class='id identifier rubyid_iu'>iu</span>
+      <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="FindProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FindProcessor</strong>(procName) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+310
+311
+312
+313
+314
+315
+316</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 310</span>
+
+<span class='kw'>def</span> <span class='const'>FindProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_procName'>procName</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_task'>task</span><span class='comma'>,</span> <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='id identifier rubyid_getTaskAndProjectFile'>getTaskAndProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_procName'>procName</span><span class='rparen'>)</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Processor</span><span class='rparen'>)</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Found task </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_procName'>procName</span><span class='rbrace'>}</span><span class='tstring_content'> is no processor.</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+      <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span><span class='comma'>,</span> <span class='id identifier rubyid_projectFile'>projectFile</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_invoked_project_file-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_invoked_project_file</strong>(invokingProjectFilePath, invokedProjectFilePath) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get a project file included by the given project file. The include paths
+relative component needs to be the include path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+192
+193
+194
+195
+196
+197
+198
+199
+200</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 192</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_invoked_project_file'>get_invoked_project_file</span><span class='lparen'>(</span><span class='id identifier rubyid_invokingProjectFilePath'>invokingProjectFilePath</span><span class='comma'>,</span> <span class='id identifier rubyid_invokedProjectFilePath'>invokedProjectFilePath</span><span class='rparen'>)</span>
+    <span class='comment'>#if(invokedProjectFilePath.BasePath == invokedProjectFilePath.BasePath)
+</span>     <span class='comment'>#   topRelativePath = invokedProjectFilePath
+</span>    <span class='comment'>#else
+</span>        <span class='id identifier rubyid_topRelativePath'>topRelativePath</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_invokingProjectFilePath'>invokingProjectFilePath</span><span class='period'>.</span><span class='const'>DirectoryPath</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_invokedProjectFilePath'>invokedProjectFilePath</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>MakeRelativeTo</span><span class='lparen'>(</span><span class='ivar'>@TopmostProjectFile</span><span class='period'>.</span><span class='const'>DirectoryPath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='comment'>#end
+</span>    <span class='comment'>#puts &quot;top relative path is #{topRelativePath}&quot;
+</span>    <span class='kw'>return</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_topRelativePath'>topRelativePath</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_terminal_width-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_terminal_width</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns [width, height] of terminal when detected, nil if not detected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_terminal_width'>get_terminal_width</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>COLUMNS</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\d+$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
+    <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>COLUMNS</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='const'>RUBY_PLATFORM</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>java</span><span class='regexp_end'>/</span></span> <span class='op'>||</span> <span class='lparen'>(</span><span class='op'>!</span><span class='const'>STDIN</span><span class='period'>.</span><span class='id identifier rubyid_tty?'>tty?</span> <span class='op'>&amp;&amp;</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>TERM</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_command_exists?'>command_exists?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tput</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='backtick'>`</span><span class='tstring_content'>tput cols</span><span class='tstring_end'>`</span></span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='kw'>elsif</span> <span class='const'>STDIN</span><span class='period'>.</span><span class='id identifier rubyid_tty?'>tty?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_command_exists?'>command_exists?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>stty</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='backtick'>`</span><span class='tstring_content'>stty size</span><span class='tstring_end'>`</span></span><span class='period'>.</span><span class='id identifier rubyid_scan'>scan</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\d+</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='kw'>else</span>
+    <span class='int'>80</span>
+  <span class='kw'>end</span>
+<span class='kw'>rescue</span>
+  <span class='int'>80</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getTaskAndProjectFile-instance_method">
+  
+    - (<tt>Object</tt>) <strong>getTaskAndProjectFile</strong>(taskPath, scopes = nil) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 347</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_getTaskAndProjectFile'>getTaskAndProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  
+  <span class='comment'>#puts &quot;parsing task path #{taskPath}:#{taskPath.class}&quot;
+</span>  <span class='id identifier rubyid_projectPath'>projectPath</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='const'>GetProjectFilePathName</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;result is #{projectPath}, #{name}&quot;
+</span>  
+  <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='id identifier rubyid_compute_task_project_file'>compute_task_project_file</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='rparen'>)</span>          
+    <span class='comment'># return the task from the declaring project file
+</span>    <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_search_task_in_project_file_tree'>search_task_in_project_file_tree</span><span class='lparen'>(</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Don't know how to build task '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='comment'># return the first task that is found in any project file
+</span>    <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFiles</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_projFile'>projFile</span><span class='op'>|</span>
+      <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_projFile'>projFile</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='rbracket'>]</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='id identifier rubyid_projFile'>projFile</span>
+          <span class='kw'>break</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Don't know how to build task '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='comment'>#puts &quot;Application found task '#{task.name}'&quot;
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span><span class='comma'>,</span> <span class='id identifier rubyid_projectFile'>projectFile</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="IncludeCleanTargets-instance_method">
+  
+    - (<tt>Object</tt>) <strong>IncludeCleanTargets</strong>(*includes) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Include a file expression into the list of clean targets of the current
+project file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+266
+267
+268</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 266</span>
+
+<span class='kw'>def</span> <span class='const'>IncludeCleanTargets</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>CleanList</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span><span class='lparen'>(</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="IncludeClobberTargets-instance_method">
+  
+    - (<tt>Object</tt>) <strong>IncludeClobberTargets</strong>(*includes) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Include a file expression into the list of clobber targets of the current
+project file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+271
+272
+273</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 271</span>
+
+<span class='kw'>def</span> <span class='const'>IncludeClobberTargets</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>CurrentlyLoadedProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>ClobberList</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span><span class='lparen'>(</span><span class='id identifier rubyid_includes'>includes</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init-instance_method">
+  
+    - (<tt>Object</tt>) <strong>init</strong>(app_name = @name) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_init'>init</span><span class='lparen'>(</span><span class='id identifier rubyid_app_name'>app_name</span><span class='op'>=</span><span class='ivar'>@name</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_app_name'>app_name</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="invoke_task-instance_method">
+  
+    - (<tt>Object</tt>) <strong>invoke_task</strong>(task_string) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is changed because the clean syntax has changed. There is now one
+clean task for each project file that can be executed separately. Calling
+clean/clobber without extra information will clean all project files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 146</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_invoke_task'>invoke_task</span><span class='lparen'>(</span><span class='id identifier rubyid_task_string'>task_string</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_taskPath'>taskPath</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='id identifier rubyid_parse_task_string'>parse_task_string</span><span class='lparen'>(</span><span class='id identifier rubyid_task_string'>task_string</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_projectPath'>projectPath</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='const'>GetProjectFilePathName</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='rparen'>)</span>
+    
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='kw'>and</span> <span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>clean</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>or</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>clobber</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='comment'># Execute all clean targets
+</span>    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cleaning all projects...</span><span class='tstring_end'>&quot;</span></span>
+    <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFiles</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_projFile'>projFile</span><span class='op'>|</span>  
+      <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_projFile'>projFile</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_invoke'>invoke</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='kw'>self</span><span class='lbracket'>[</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_invoke'>invoke</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="LoadProjectFile-instance_method">
+  
+    - (<tt>Object</tt>) <strong>LoadProjectFile</strong>(path) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 44</span>
+
+<span class='kw'>def</span> <span class='const'>LoadProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='ivar'>@TopmostProjectFile</span> <span class='op'>=</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup-instance_method">
+  
+    - (<tt>Object</tt>) <strong>lookup</strong>(taskPath, initial_scope = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Lookup a task, using scope and the scope hints in the task name. This
+method performs straight lookups without trying to synthesize file tasks or
+rules.  Special scope names (e.g. '^') are recognized.  If no scope
+argument is supplied, use the current scope.  Return nil if the task cannot
+be found.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 386</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_lookup'>lookup</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='comma'>,</span> <span class='id identifier rubyid_initial_scope'>initial_scope</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  
+  <span class='id identifier rubyid_projectPath'>projectPath</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='const'>GetProjectFilePathName</span><span class='lparen'>(</span><span class='id identifier rubyid_taskPath'>taskPath</span><span class='rparen'>)</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='comment'># return the project file specific task
+</span>    <span class='id identifier rubyid_projectFile'>projectFile</span> <span class='op'>=</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFile</span><span class='lparen'>(</span><span class='id identifier rubyid_projectPath'>projectPath</span><span class='period'>.</span><span class='const'>RelativePath</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='rparen'>)</span>
+      <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='id identifier rubyid_lookup'>lookup</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_initial_scope'>initial_scope</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='comment'># return the first task that is found in any project file
+</span>    <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFiles</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_projFile'>projFile</span><span class='op'>|</span>
+      <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_projFile'>projFile</span><span class='period'>.</span><span class='id identifier rubyid_lookup'>lookup</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_initial_scope'>initial_scope</span><span class='rparen'>)</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+        <span class='kw'>break</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scope_name-instance_method">
+  
+    - (<tt>Object</tt>) <strong>scope_name</strong>(scope, task_name) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Apply the scope to the task name according to the rules for this kind of
+task.  Generic tasks will accept the scope as part of the name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+430
+431
+432</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 430</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_scope_name'>scope_name</span><span class='lparen'>(</span><span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='id identifier rubyid_task_name'>task_name</span><span class='rparen'>)</span>
+  <span class='lparen'>(</span><span class='id identifier rubyid_scope'>scope</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='id identifier rubyid_task_name'>task_name</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>:</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="search_task_in_project_file_tree-instance_method">
+  
+    - (<tt>Object</tt>) <strong>search_task_in_project_file_tree</strong>(projectFile, name, scopes) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>search the task in the project file and all the project files loaded by it
+breadth first search</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 204</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_search_task_in_project_file_tree'>search_task_in_project_file_tree</span><span class='lparen'>(</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='rparen'>)</span>
+    <span class='comment'>#puts &quot;Looking for task '#{name}' in tree under '#{projectFile.Path().to_s}'&quot;
+</span>    <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No valid project file specified to search for task </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    
+    <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_projectFile'>projectFile</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='rbracket'>]</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+        <span class='comment'>#puts &quot;Found task '#{task.name}'&quot;
+</span>        <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span>
+    <span class='kw'>end</span>
+    
+    <span class='comment'>#puts &quot;Searching project file includes #{projectFile.ProjectFileIncludes}&quot;
+</span>    <span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='const'>ProjectFileIncludes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_includePath'>includePath</span><span class='op'>|</span>
+        <span class='id identifier rubyid_includedProjectFile'>includedProjectFile</span> <span class='op'>=</span> <span class='id identifier rubyid_get_invoked_project_file'>get_invoked_project_file</span><span class='lparen'>(</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='comma'>,</span> <span class='id identifier rubyid_includePath'>includePath</span><span class='rparen'>)</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_includedProjectFile'>includedProjectFile</span><span class='rparen'>)</span>
+            <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WARNING: Could not find included project file '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_includePath'>includePath</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_content'>' in '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='const'>Path</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span>
+        <span class='kw'>end</span>
+        <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_search_task_in_project_file_tree'>search_task_in_project_file_tree</span><span class='lparen'>(</span><span class='id identifier rubyid_includedProjectFile'>includedProjectFile</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='rparen'>)</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+            <span class='comment'>#puts &quot;Found task '#{task.name}'&quot;
+</span>            <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span>
+        <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    
+    <span class='comment'>#puts &quot;Could not find task in tree under '#{projectFile.Path().to_s}'&quot;
+</span>    <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="standard_rake_options-instance_method">
+  
+    - (<tt>Object</tt>) <strong>standard_rake_options</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A list of all the standard options used in rake, suitable for passing to
+OptionParser.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_standard_rake_options'>standard_rake_options</span>
+  <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_no_cache'>no_cache</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='lbracket'>[</span>
+    <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>--status</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Print the status of the Rokuby.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='id identifier rubyid_lambda'>lambda</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+        <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_show_status'>show_status</span> <span class='op'>=</span> <span class='kw'>true</span>
+      <span class='rbrace'>}</span>
+    <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>--nocache [cache]</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Do not use caching during processing(specify cache as all, lib, src or nothing for all).</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='id identifier rubyid_lambda'>lambda</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+          <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_value'>value</span> <span class='op'>||</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>all</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+              <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_no_cache'>no_cache</span> <span class='op'>=</span> <span class='kw'>true</span>
+          <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+              <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_no_lib_cache'>no_lib_cache</span> <span class='op'>=</span> <span class='kw'>true</span>
+          <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>src</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+              <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_no_src_cache'>no_src_cache</span> <span class='op'>=</span> <span class='kw'>true</span>
+          <span class='kw'>else</span>
+              <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unknown option value '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_value'>value</span><span class='rbrace'>}</span><span class='tstring_content'>' for --nocache.</span><span class='tstring_end'>&quot;</span></span>
+          <span class='kw'>end</span>
+      <span class='rbrace'>}</span>            
+    <span class='rbracket'>]</span>
+  <span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="status_string-instance_method">
+  
+    - (<tt>Object</tt>) <strong>status_string</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+434
+435
+436
+437
+438
+439</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 434</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status_string'>status_string</span>
+  <span class='id identifier rubyid_val'>val</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\nRokuby Application Status:\n</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_val'>val</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>===============================================\n</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_val'>val</span> <span class='op'>+=</span> <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_val'>val</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>===============================================\n\n</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="task_defined?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>task_defined?</strong>(task_name) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>TRUE if the task name is already defined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+411
+412
+413</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 411</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_task_defined?'>task_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_task_name'>task_name</span><span class='rparen'>)</span>        
+  <span class='id identifier rubyid_lookup'>lookup</span><span class='lparen'>(</span><span class='id identifier rubyid_task_name'>task_name</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tasks-instance_method">
+  
+    - (<tt>Object</tt>) <strong>tasks</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>List of all defined tasks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+330
+331
+332
+333
+334
+335
+336</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 330</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tasks'>tasks</span>
+  <span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@ProjectFileLoader</span><span class='period'>.</span><span class='const'>LoadedProjectFiles</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='op'>|</span>
+    <span class='id identifier rubyid_tasks'>tasks</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_projectFile'>projectFile</span><span class='period'>.</span><span class='id identifier rubyid_tasks'>tasks</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_tasks'>tasks</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="top_level-instance_method">
+  
+    - (<tt>Object</tt>) <strong>top_level</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Run the top level tasks of a Rake application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RakeWrapper/application.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_top_level'>top_level</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_show_status'>show_status</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_status_string'>status_string</span>
+  <span class='kw'>else</span>
+    <span class='kw'>super</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#@ProjectFileLoader.LoadedProjectFiles().each() do |projectFile|
+</span>  <span class='comment'>#    projectFile.SaveCache()
+</span>  <span class='comment'>#end
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:47 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

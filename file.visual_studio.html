@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: visual_studio
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: visual_studio</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>Visual Studio Solution Builder</h1>
+
+<p>Rokuby features a set of processors and information units that are meant to create VisualStudio projects and solutions.
+In Visual Studio a IDE representation of your software project is called a <em>Solution</em>. Each Solution can be made up of several
+<em>Project</em>s. They represent binaries that are build in the course of creating your software project.</p>
+
+<p>For example, given we want to build an application and decided that we want to extract some of the code into a separate library.
+We would create two projects one for the library code and one for the application code, which are compiled and linked separately.
+Then we would put these two projects into one final solution which encapsulates them in a single IDE environment.</p>
+
+<h2>Visual Studio Project Creation</h2>
+
+<p>First let us see the project creation workflow.</p>
+
+<p><img src="images/vs_project_workflow.svg" alt="Visual Studio project creation"></p>
+
+<p>Remember the simple project workflow, which is described on <a href="file.projects.html">Projects</a> :</p>
+
+<p><img src="images/basic_project_build_process.svg" alt="Project build process"></p>
+
+<p>As you can see they are different in a few things but are the same in other things. Both processes include one project builder processor
+which creates the information needed to pass the project around as a information unit. The project builders also share some of the input
+information unit that desribe the project. This includes general project description, specification and configurations.</p>
+
+<p>The difference between the two on the one hand the additional input for the visual studio project build and the result that is available after
+executing the process builder.</p>
+
+<p>The input is extended by some information units that include visual studio specific parts of project description, specification and configurations.
+When looking at the output of the porject builder, we see a visual studio specific version of the project information unit. Additionally, the project
+builder will create files that represent the project setup.</p>
+
+<h2>Visual Studio Solution Creation</h2>
+
+<p>The solution build process is rather simple:</p>
+
+<p><img src="images/vs_solution_workflow.svg" alt="Visual Studio solution creation"></p>
+
+<p>You can see that the visual studio project information units are presented as input to the solution builder. In the end the solution builder will
+have created a solution file that includes the information about the solution and also an information unit with some of the information about the
+solution.</p>
+
+<h2>Example</h2>
+
+<p>Let us see a visual studio solution which is made up of several projects. A main application is dependend on two libraries from which one is
+a static library and another one is a dynamic library. In the following some of the visual studio specific code is shown, we have left out some of
+the basic declarations (e.g. source specifications) for simplicity.</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_projDescr'>projDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplication</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplication</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binaryName:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>myApplication</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binaryType:</span> <span class='symbol'>:Application</span>
+<span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_vsProjSpec'>vsProjSpec</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplication</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>resSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplicationResources</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_projDescr'>projDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binaryName:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>myStaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binaryType:</span> <span class='symbol'>:Static</span>
+<span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_projDescr'>projDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SharedLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SharedLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binaryName:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mySharedLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binaryType:</span> <span class='symbol'>:Shared</span>
+<span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_vsProjBuild'>vsProjBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplicationBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projDescr'>projDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplication</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_projSpec'>projSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplication</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_vsProjSpec'>vsProjSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplication</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+                                            <span class='op'>+</span> <span class='id identifier rubyid_defaultProjectConfigurations'>defaultProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_defaultVsProjectConfigurations'>defaultVsProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_vsProjBuild'>vsProjBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibraryBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projDescr'>projDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_projSpec'>projSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+                                            <span class='op'>+</span> <span class='id identifier rubyid_defaultProjectConfigurations'>defaultProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_defaultVsProjectConfigurations'>defaultVsProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_vsProjBuild'>vsProjBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SharedLibraryBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projDescr'>projDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SharedLibrary</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_projSpec'>projSpec</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SharedLibrary</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+                                            <span class='op'>+</span> <span class='id identifier rubyid_defaultProjectConfigurations'>defaultProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_defaultVsProjectConfigurations'>defaultVsProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>As you can see the main application additionally contains some resource files that are specified in a VsProjectSpecification. The two libraries only contain standard
+source code. The one thing that is important here are the VsProjectConfigurations. In the optimal case you can put in the same VsProjectConfigurations to all project builds.
+You do not necessarily have to use the default configurations that are already prepared by Rokuby. You can clone and alter them or create your own configurations. What you
+should pay attention to is that the complete solution can only build in a configuration if the PlatformConfiguration of this configuration is available in all other projects.
+Therefore, pay attention to provide a matching set of configurations to all projects.</p>
+
+<p>Now let us combine the projects into a solution which can simply be done by doing:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_vsSlnDescr'>vsSlnDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MySolution</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MySolution</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vsSlnBuild'>vsSlnBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MyVsSolutionBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_vsSlnDescr'>vsSlnDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MySolution</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+
+<span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:SlnChain</span>
+<span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:SlnChain</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplicationBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MyVsSolutionBuild</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:SlnChain</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibraryBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MyVsSolutionBuild</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:SlnChain</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SharedLibraryBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MyVsSolutionBuild</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>So now we have put in the main application project and the two libraries project into the solution builder. This means the project will appear in the
+visual studio solution and can be build from there. It works by chaining the solution builder processors to the solution builder processor. The output
+projects of the project builders are now an input to the solution builder which will interpret received projects as a command to put them into the
+solution.</p>
+
+<p>The projects are now in the solution but they still do not depend on each other as described above. Visual studio comes with a premade dependency
+management which is imitated by Rokuby. You can simply chain the project builders in the following manner:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:SlnChain</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibraryBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplicationBuild</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:SlnChain</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SharedLibraryBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplicationBuild</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>This will input the projects of the static and shared library into the project builder for the main application. The project builder of the main application
+in turn will interpret these projects as subprojects on which itself depends. This information will be integrated into the final solution which means that
+by building the main application we automatically check for necessary rebuilds of the subprojects (if this is enabled in visual studio).</p>
+
+<p>We have now build a visual studio solution with several projects that are dependend on each other. By executing the task/processor <code>MyVsSolutionBuild</code> we can now
+create a fully functional visual studio solution.</p>
+
+<h2>More on Visual Studio Project Dependencies -  The VsProjectUsage class</h2>
+
+<p>Chaining the process in the manner above is fine and will put the projects into a corresponding dependency in the visual studio project.
+But this is not enough to fully control the possibilities that visual studio provides to handle project dependencies. There are further ways
+in which visual studio allows you to control this behaviour.
+To propagate these possibilities the VsProjectUsage class was created that holds exactly the information necessary to control this behaviour.
+If you want to deviate from the standard behaviour that visual studio provides you can do it like in the following example. Assume the example above
+in which we have now to add some additional elements:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_vsProjDescr'>vsProjDescr</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>guid:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>{34aaa03b-5dd7-4228-9845-db359b137cb6}</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_vsProjUsage'>vsProjUsage</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='symbol'>:Guid</span> <span class='op'>=&gt;</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_vsProjDescr'>vsProjDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>Guid</span><span class='rparen'>)</span><span class='comma'>,</span>
+<span class='symbol'>:UseLibraryDependencyInputs</span> <span class='op'>=&gt;</span> <span class='kw'>true</span>
+<span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_vsProjBuild'>vsProjBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibraryBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_vsProjDescr'>vsProjDescr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+
+<span class='id identifier rubyid_vsProjBuild'>vsProjBuild</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MainApplicationBuild</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_vsProjUsage'>vsProjUsage</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StaticLibrary</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+</code></pre>
+
+<p>What we did in this code snippet is:</p>
+
+<ul>
+<li>Create and input a VsProjectDescription that gives the static library project a known guid.</li>
+<li>Create a VsProjectUsage object that obtains the guid of the project on which our application depends.</li>
+<li>Input the project usage object into the application builder to inform him how this specific subproject
+should be handled.</li>
+</ul>
+
+<h2>Reference</h2>
+
+<p>Here are references to the classes presented in this chapter.</p>
+
+<p>Information Units:</p>
+
+<ul>
+<li><a href="Rokuby/VsProjectDescription.html">VsProjectDescription Source</a></li>
+<li><a href="Rokuby/VsProjectSpecification.html">VsProjectSpecification Source</a></li>
+<li><a href="Rokuby/VsProjectConfiguration.html">VsProjectConfiguration Source</a></li>
+<li><a href="Rokuby/VsProjectUsage.html">VsProjectUsage Source</a></li>
+<li><a href="Rokuby/VsProject.html">VsProject Source</a></li>
+</ul>
+
+<p>Processors:</p>
+
+<ul>
+<li><a href="Rokuby/VsProjectBuilder.html">VsProjectBuilder Source</a></li>
+<li><a href="Rokuby/VsSolutionBuilder.html">VsSolutionBuilder Source</a></li>
+</ul>
+</div></div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

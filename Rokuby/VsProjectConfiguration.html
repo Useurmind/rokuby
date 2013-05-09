@@ -1,0 +1,3289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::VsProjectConfiguration
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">VsProjectConfiguration</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::VsProjectConfiguration
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="InformationConfiguration.html" title="Rokuby::InformationConfiguration (class)">InformationConfiguration</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="InformationUnit.html" title="Rokuby::InformationUnit (class)">InformationUnit</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="InformationConfiguration.html" title="Rokuby::InformationConfiguration (class)">InformationConfiguration</a></span></li>
+          
+            <li class="next">Rokuby::VsProjectConfiguration</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="../Rake/DSL.html" title="Rake::DSL (module)">Rake::DSL</a></span>, <span class='object_link'><a href="DirectoryUtility.html" title="Rokuby::DirectoryUtility (module)">DirectoryUtility</a></span>, <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class holds additional values needed to describe a visual studio
+project configuration. The default configuration is for release builds.
+Many values will not be set by default. If they are not set by the user
+they will be set based on the values in the project information classes.
+General attributes:</p>
+<dl class="rdoc-list"><dt>PlatformName</dt>
+<dd>
+<p>The platform to compile for (based on the platform).</p>
+</dd><dt>TargetName</dt>
+<dd>
+<p>The name of the resulting binary (based on the project description name and
+the platform extension).</p>
+</dd><dt>TargetExt</dt>
+<dd>
+<p>The extension for the resulting binary (based on the project description
+binary type).</p>
+</dd><dt>ConfigurationType</dt>
+<dd>
+<p>The type of binary that is created (based on the project description binary
+type).</p>
+</dd><dt>UseDebugLibraries</dt>
+<dd>
+<p>Should debug libraries be used (bool) (based on the platform type).</p>
+</dd><dt>WholeProgramOptimization</dt>
+<dd>
+<p>Should the program be optimized (bool) (based on the platform type).</p>
+</dd><dt>CharacterSet</dt>
+<dd>
+<p>bla ('MultiByte', 'Unicode', 'NotSet').</p>
+</dd><dt>OutputDirectory</dt>
+<dd>
+<p>The directory for the build result (based on the project description build
+path).</p>
+</dd><dt>IntermediateDirectory</dt>
+<dd>
+<p>The directory for intermediate build results (based on the project
+description compiles path).</p>
+</dd></dl>
+
+<p>Compile time attributes:</p>
+<dl class="rdoc-list"><dt>WarningLevel</dt>
+<dd>
+<p>The warning level (default: 'Level3')</p>
+</dd><dt>Optimization</dt>
+<dd>
+<p>The optimization that should be performed (e.g. 'Disabled', 'MaxSpeed')
+(based on the platform type)</p>
+</dd><dt>AdditionalIncludeDirectories</dt>
+<dd>
+<p>An array with all include directories (based on the project instance).</p>
+</dd><dt>PreprocessorDefinitions</dt>
+<dd>
+<p>An array with all pr?prozessor definitions (basedon all gathered defines).</p>
+</dd><dt>AssemblerOutput</dt>
+<dd>
+<p>Option to enable listings that should be generated about the compilation
+(e.g. 'NoListing').</p>
+</dd><dt>FunctionLevelLinking</dt>
+<dd>
+<p>Seems to be good for performance, e.g. release builds (bool) (based on the
+platform type).</p>
+</dd><dt>IntrinsicFunctions</dt>
+<dd>
+<p>Seems to be good for performance, e.g. release builds (bool) (based on the
+platform type).</p>
+</dd><dt>ProgramDataBaseFileName</dt>
+<dd>
+<p>The name of the pdb file that should hold debug information.</p>
+</dd><dt>RuntimeLibrary</dt>
+<dd>
+<p>The windows libraries to be used with this project ('MultiThreaded',
+'MultiThreadedDll', 'MultiThreadedDebug', 'MultiThreadedDebugDll').</p>
+</dd><dt>ExceptionHandling</dt>
+<dd>
+<p>Which type of exception handling should be applied (e.g. 'Async', 'false',
+default: 'Sync' )</p>
+</dd><dt>BufferSecurityCheck</dt>
+<dd>
+<p>bool, default: true.</p>
+</dd><dt>DebugInformationFormat</dt>
+<dd>
+<p>Format of the generated debug information (e.g. 'OldStyle',
+'ProgramDatabase', default: 'EditAndContinue')</p>
+</dd><dt>InlineFunctionExpansion</dt>
+<dd>
+<p>How should functions be expanded inline (e.g. 'AnySuitable', 'Disabled',
+default: 'Default')</p>
+</dd></dl>
+
+<p>Link time attributes:</p>
+<dl class="rdoc-list"><dt>GenerateDebugInformation</dt>
+<dd>
+<p>Should debug information be generated (bool) (based on the platform type).</p>
+</dd><dt>AdditionalLibraryDirectories</dt>
+<dd>
+<p>Array of directories where libraries should be searched (based on project
+instance).</p>
+</dd><dt>AdditionalDependencies</dt>
+<dd>
+<p>Array of names of libraries that should be linked in (based on project
+instance).</p>
+</dd><dt>EnableCOMDATFolding</dt>
+<dd>
+<p>Seems to be good for performance, e.g. release builds (bool) (based on the
+platform type).</p>
+</dd><dt>OptimizeReferences</dt>
+<dd>
+<p>Seems to be good for performance, e.g. release builds (bool) (based on the
+platform type).</p>
+</dd><dt>ModuleDefinitionFile</dt>
+<dd>
+<p>The file that describes the exports of a library.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+
+
+
+  <h2>Constant Summary</h2>
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">Rake::FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/FileUtilsExt.html#DEFAULT-constant" title="Rake::FileUtilsExt::DEFAULT (constant)">Rake::FileUtilsExt::DEFAULT</a></span></p>
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#LN_SUPPORTED-constant" title="FileUtils::LN_SUPPORTED (constant)">FileUtils::LN_SUPPORTED</a></span>, <span class='object_link'><a href="../FileUtils.html#RUBY-constant" title="FileUtils::RUBY (constant)">FileUtils::RUBY</a></span></p>
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdditionalDependencies-instance_method" title="#AdditionalDependencies (instance method)">- (Object) <strong>AdditionalDependencies</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute AdditionalDependencies.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdditionalIncludeDirectories-instance_method" title="#AdditionalIncludeDirectories (instance method)">- (Object) <strong>AdditionalIncludeDirectories</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute AdditionalIncludeDirectories.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdditionalLibraryDirectories-instance_method" title="#AdditionalLibraryDirectories (instance method)">- (Object) <strong>AdditionalLibraryDirectories</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute AdditionalLibraryDirectories.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AssemblerOutput-instance_method" title="#AssemblerOutput (instance method)">- (Object) <strong>AssemblerOutput</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute AssemblerOutput.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#BufferSecurityCheck-instance_method" title="#BufferSecurityCheck (instance method)">- (Object) <strong>BufferSecurityCheck</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute BufferSecurityCheck.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CharacterSet-instance_method" title="#CharacterSet (instance method)">- (Object) <strong>CharacterSet</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute CharacterSet.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ConfigurationType-instance_method" title="#ConfigurationType (instance method)">- (Object) <strong>ConfigurationType</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ConfigurationType.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DebugInformationFormat-instance_method" title="#DebugInformationFormat (instance method)">- (Object) <strong>DebugInformationFormat</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute DebugInformationFormat.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#EnableCOMDATFolding-instance_method" title="#EnableCOMDATFolding (instance method)">- (Object) <strong>EnableCOMDATFolding</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute EnableCOMDATFolding.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ExceptionHandling-instance_method" title="#ExceptionHandling (instance method)">- (Object) <strong>ExceptionHandling</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ExceptionHandling.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FunctionLevelLinking-instance_method" title="#FunctionLevelLinking (instance method)">- (Object) <strong>FunctionLevelLinking</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute FunctionLevelLinking.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GenerateDebugInformation-instance_method" title="#GenerateDebugInformation (instance method)">- (Object) <strong>GenerateDebugInformation</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute GenerateDebugInformation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#InlineFunctionExpansion-instance_method" title="#InlineFunctionExpansion (instance method)">- (Object) <strong>InlineFunctionExpansion</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute InlineFunctionExpansion.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#IntermediateDirectory-instance_method" title="#IntermediateDirectory (instance method)">- (Object) <strong>IntermediateDirectory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute IntermediateDirectory.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#IntrinsicFunctions-instance_method" title="#IntrinsicFunctions (instance method)">- (Object) <strong>IntrinsicFunctions</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute IntrinsicFunctions.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ModuleDefinitionFile-instance_method" title="#ModuleDefinitionFile (instance method)">- (Object) <strong>ModuleDefinitionFile</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ModuleDefinitionFile.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Optimization-instance_method" title="#Optimization (instance method)">- (Object) <strong>Optimization</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Optimization.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#OptimizeReferences-instance_method" title="#OptimizeReferences (instance method)">- (Object) <strong>OptimizeReferences</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute OptimizeReferences.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#OutputDirectory-instance_method" title="#OutputDirectory (instance method)">- (Object) <strong>OutputDirectory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute OutputDirectory.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#PlatformName-instance_method" title="#PlatformName (instance method)">- (Object) <strong>PlatformName</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute PlatformName.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#PostBuildCommand-instance_method" title="#PostBuildCommand (instance method)">- (Object) <strong>PostBuildCommand</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute PostBuildCommand.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#PreprocessorDefinitions-instance_method" title="#PreprocessorDefinitions (instance method)">- (Object) <strong>PreprocessorDefinitions</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute PreprocessorDefinitions.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProgramDataBaseFileName-instance_method" title="#ProgramDataBaseFileName (instance method)">- (Object) <strong>ProgramDataBaseFileName</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ProgramDataBaseFileName.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#RuntimeLibrary-instance_method" title="#RuntimeLibrary (instance method)">- (Object) <strong>RuntimeLibrary</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute RuntimeLibrary.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#TargetExt-instance_method" title="#TargetExt (instance method)">- (Object) <strong>TargetExt</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute TargetExt.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#TargetName-instance_method" title="#TargetName (instance method)">- (Object) <strong>TargetName</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute TargetName.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#UseDebugLibraries-instance_method" title="#UseDebugLibraries (instance method)">- (Object) <strong>UseDebugLibraries</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute UseDebugLibraries.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#WarningLevel-instance_method" title="#WarningLevel (instance method)">- (Object) <strong>WarningLevel</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute WarningLevel.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#WholeProgramOptimization-instance_method" title="#WholeProgramOptimization (instance method)">- (Object) <strong>WholeProgramOptimization</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute WholeProgramOptimization.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="InformationConfiguration.html" title="Rokuby::InformationConfiguration (class)">InformationConfiguration</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="InformationConfiguration.html#Defines-instance_method" title="Rokuby::InformationConfiguration#Defines (method)">#Defines</a></span>, <span class='object_link'><a href="InformationConfiguration.html#Platform-instance_method" title="Rokuby::InformationConfiguration#Platform (method)">#Platform</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ConfigurationCondition-instance_method" title="#ConfigurationCondition (instance method)">- (Object) <strong>ConfigurationCondition</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Extend-instance_method" title="#Extend (instance method)">- (Object) <strong>Extend</strong>(valueMap, callParent = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GatherDefines-instance_method" title="#GatherDefines (instance method)">- (Object) <strong>GatherDefines</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gather the defines from this information unit and all subunits.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetTargetFilePath-instance_method" title="#GetTargetFilePath (instance method)">- (Object) <strong>GetTargetFilePath</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (VsProjectConfiguration) <strong>initialize</strong>(valueMap = nil) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of VsProjectConfiguration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_copy-instance_method" title="#initialize_copy (instance method)">- (Object) <strong>initialize_copy</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Name-instance_method" title="#Name (instance method)">- (Object) <strong>Name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#NamePlatformCombi-instance_method" title="#NamePlatformCombi (instance method)">- (Object) <strong>NamePlatformCombi</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Rake/DSL.html" title="Rake::DSL (module)">Rake::DSL</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/DSL.html#arg-instance_method" title="Rake::DSL#arg (method)">#arg</a></span>, <span class='object_link'><a href="../Rake/DSL.html#clean-instance_method" title="Rake::DSL#clean (method)">#clean</a></span>, <span class='object_link'><a href="../Rake/DSL.html#clobber-instance_method" title="Rake::DSL#clobber (method)">#clobber</a></span>, <span class='object_link'><a href="../Rake/DSL.html#desc_old-instance_method" title="Rake::DSL#desc_old (method)">#desc_old</a></span>, <span class='object_link'><a href="../Rake/DSL.html#import_old-instance_method" title="Rake::DSL#import_old (method)">#import_old</a></span>, <span class='object_link'><a href="../Rake/DSL.html#taskDescriptor-instance_method" title="Rake::DSL#taskDescriptor (method)">#taskDescriptor</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">Rake::FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/FileUtilsExt.html#nowrite-instance_method" title="Rake::FileUtilsExt#nowrite (method)">#nowrite</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#rake_check_options-instance_method" title="Rake::FileUtilsExt#rake_check_options (method)">#rake_check_options</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#rake_merge_option-instance_method" title="Rake::FileUtilsExt#rake_merge_option (method)">#rake_merge_option</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#rake_output_message-instance_method" title="Rake::FileUtilsExt#rake_output_message (method)">#rake_output_message</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#verbose-instance_method" title="Rake::FileUtilsExt#verbose (method)">#verbose</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#when_writing-instance_method" title="Rake::FileUtilsExt#when_writing (method)">#when_writing</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#ruby-instance_method" title="FileUtils#ruby (method)">#ruby</a></span>, <span class='object_link'><a href="../FileUtils.html#safe_ln-instance_method" title="FileUtils#safe_ln (method)">#safe_ln</a></span>, <span class='object_link'><a href="../FileUtils.html#sh-instance_method" title="FileUtils#sh (method)">#sh</a></span>, <span class='object_link'><a href="../FileUtils.html#split_all-instance_method" title="FileUtils#split_all (method)">#split_all</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GeneralUtility.html#Clone-instance_method" title="Rokuby::GeneralUtility#Clone (method)">#Clone</a></span>, <span class='object_link'><a href="GeneralUtility.html#CloneArray-instance_method" title="Rokuby::GeneralUtility#CloneArray (method)">#CloneArray</a></span>, <span class='object_link'><a href="GeneralUtility.html#DescribeTasks-instance_method" title="Rokuby::GeneralUtility#DescribeTasks (method)">#DescribeTasks</a></span>, <span class='object_link'><a href="GeneralUtility.html#GenerateTaskName-instance_method" title="Rokuby::GeneralUtility#GenerateTaskName (method)">#GenerateTaskName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetClassName-instance_method" title="Rokuby::GeneralUtility#GetClassName (method)">#GetClassName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetUUID-instance_method" title="Rokuby::GeneralUtility#GetUUID (method)">#GetUUID</a></span>, <span class='object_link'><a href="GeneralUtility.html#SystemWithFail-instance_method" title="Rokuby::GeneralUtility#SystemWithFail (method)">#SystemWithFail</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="DirectoryUtility.html" title="Rokuby::DirectoryUtility (module)">DirectoryUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="DirectoryUtility.html#CreatePath-instance_method" title="Rokuby::DirectoryUtility#CreatePath (method)">#CreatePath</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFileInDirectories-instance_method" title="Rokuby::DirectoryUtility#FindFileInDirectories (method)">#FindFileInDirectories</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFileInDirectory-instance_method" title="Rokuby::DirectoryUtility#FindFileInDirectory (method)">#FindFileInDirectory</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFilesInDirectories-instance_method" title="Rokuby::DirectoryUtility#FindFilesInDirectories (method)">#FindFilesInDirectories</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFilesInDirectory-instance_method" title="Rokuby::DirectoryUtility#FindFilesInDirectory (method)">#FindFilesInDirectory</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GenerateVSVariablePath-instance_method" title="Rokuby::DirectoryUtility#GenerateVSVariablePath (method)">#GenerateVSVariablePath</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryPathsFromRelativeBase-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryPathsFromRelativeBase (method)">#GetDirectoryPathsFromRelativeBase</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryTree-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryTree (method)">#GetDirectoryTree</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryTreeFromRelativeBase-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryTreeFromRelativeBase (method)">#GetDirectoryTreeFromRelativeBase</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::VsProjectConfiguration (class)">VsProjectConfiguration</a></span></tt>) <strong>initialize</strong>(valueMap = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of VsProjectConfiguration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>      
+  <span class='ivar'>@PlatformName</span> <span class='op'>=</span> <span class='kw'>nil</span>
+
+  <span class='ivar'>@TargetName</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@TargetExt</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@ConfigurationType</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@UseDebugLibraries</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@WholeProgramOptimization</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@CharacterSet</span> <span class='op'>=</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CharacterSet</span><span class='op'>::</span><span class='const'>NOT_SET</span>
+  <span class='ivar'>@OutputDirectory</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@IntermediateDirectory</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@RuntimeLibrary</span> <span class='op'>=</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>RuntimeLibrary</span><span class='op'>::</span><span class='const'>MULTITHREADED</span>
+
+  <span class='ivar'>@WarningLevel</span> <span class='op'>=</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>WarningLevel</span><span class='op'>::</span><span class='const'>LEVEL3</span>
+  <span class='ivar'>@Optimization</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@AssemblerOutput</span> <span class='op'>=</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>AssemblerOutput</span><span class='op'>::</span><span class='const'>NO_LISTING</span>
+  <span class='ivar'>@FunctionLevelLinking</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@IntrinsicFunctions</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@ProgramDataBaseFileName</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@ExceptionHandling</span> <span class='op'>=</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>ExceptionHandling</span><span class='op'>::</span><span class='const'>SYNC</span>
+  <span class='ivar'>@BufferSecurityCheck</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@DebugInformationFormat</span> <span class='op'>=</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>DebugInformationFormat</span><span class='op'>::</span><span class='const'>EDIT_AND_CONTINUE</span>
+  <span class='ivar'>@InlineFunctionExpansion</span> <span class='op'>=</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>InlineFunctionExpansion</span><span class='op'>::</span><span class='const'>DEFAULT</span>
+
+  <span class='ivar'>@GenerateDebugInformation</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@EnableCOMDATFolding</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@OptimizeReferences</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@ModuleDefinitionFile</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  
+  <span class='ivar'>@AdditionalIncludeDirectories</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@AdditionalLibraryDirectories</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@PreprocessorDefinitions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%(PreprocessorDefinitions)</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@AdditionalDependencies</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%(AdditionalDependencies)</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  
+  <span class='ivar'>@PostBuildCommand</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='rparen'>)</span>
+  <span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="AdditionalDependencies=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="AdditionalDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdditionalDependencies</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute AdditionalDependencies</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='const'>AdditionalDependencies</span>
+  <span class='ivar'>@AdditionalDependencies</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="AdditionalIncludeDirectories=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="AdditionalIncludeDirectories-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdditionalIncludeDirectories</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute AdditionalIncludeDirectories</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='const'>AdditionalIncludeDirectories</span>
+  <span class='ivar'>@AdditionalIncludeDirectories</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="AdditionalLibraryDirectories=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="AdditionalLibraryDirectories-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdditionalLibraryDirectories</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute AdditionalLibraryDirectories</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='const'>AdditionalLibraryDirectories</span>
+  <span class='ivar'>@AdditionalLibraryDirectories</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="AssemblerOutput=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="AssemblerOutput-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AssemblerOutput</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute AssemblerOutput</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='const'>AssemblerOutput</span>
+  <span class='ivar'>@AssemblerOutput</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="BufferSecurityCheck=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="BufferSecurityCheck-instance_method">
+  
+    - (<tt>Object</tt>) <strong>BufferSecurityCheck</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute BufferSecurityCheck</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='const'>BufferSecurityCheck</span>
+  <span class='ivar'>@BufferSecurityCheck</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="CharacterSet=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="CharacterSet-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CharacterSet</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute CharacterSet</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='const'>CharacterSet</span>
+  <span class='ivar'>@CharacterSet</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ConfigurationType=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ConfigurationType-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ConfigurationType</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ConfigurationType</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='const'>ConfigurationType</span>
+  <span class='ivar'>@ConfigurationType</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="DebugInformationFormat=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="DebugInformationFormat-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DebugInformationFormat</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute DebugInformationFormat</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='const'>DebugInformationFormat</span>
+  <span class='ivar'>@DebugInformationFormat</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="EnableCOMDATFolding=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="EnableCOMDATFolding-instance_method">
+  
+    - (<tt>Object</tt>) <strong>EnableCOMDATFolding</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute EnableCOMDATFolding</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='const'>EnableCOMDATFolding</span>
+  <span class='ivar'>@EnableCOMDATFolding</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ExceptionHandling=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ExceptionHandling-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ExceptionHandling</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ExceptionHandling</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='const'>ExceptionHandling</span>
+  <span class='ivar'>@ExceptionHandling</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="FunctionLevelLinking=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="FunctionLevelLinking-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FunctionLevelLinking</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute FunctionLevelLinking</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='const'>FunctionLevelLinking</span>
+  <span class='ivar'>@FunctionLevelLinking</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="GenerateDebugInformation=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="GenerateDebugInformation-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GenerateDebugInformation</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute GenerateDebugInformation</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='const'>GenerateDebugInformation</span>
+  <span class='ivar'>@GenerateDebugInformation</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="InlineFunctionExpansion=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="InlineFunctionExpansion-instance_method">
+  
+    - (<tt>Object</tt>) <strong>InlineFunctionExpansion</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute InlineFunctionExpansion</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='const'>InlineFunctionExpansion</span>
+  <span class='ivar'>@InlineFunctionExpansion</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="IntermediateDirectory=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="IntermediateDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>IntermediateDirectory</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute IntermediateDirectory</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='const'>IntermediateDirectory</span>
+  <span class='ivar'>@IntermediateDirectory</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="IntrinsicFunctions=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="IntrinsicFunctions-instance_method">
+  
+    - (<tt>Object</tt>) <strong>IntrinsicFunctions</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute IntrinsicFunctions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='const'>IntrinsicFunctions</span>
+  <span class='ivar'>@IntrinsicFunctions</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ModuleDefinitionFile=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ModuleDefinitionFile-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ModuleDefinitionFile</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ModuleDefinitionFile</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='const'>ModuleDefinitionFile</span>
+  <span class='ivar'>@ModuleDefinitionFile</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Optimization=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Optimization-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Optimization</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Optimization</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='const'>Optimization</span>
+  <span class='ivar'>@Optimization</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="OptimizeReferences=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="OptimizeReferences-instance_method">
+  
+    - (<tt>Object</tt>) <strong>OptimizeReferences</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute OptimizeReferences</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='const'>OptimizeReferences</span>
+  <span class='ivar'>@OptimizeReferences</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="OutputDirectory=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="OutputDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>OutputDirectory</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute OutputDirectory</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='const'>OutputDirectory</span>
+  <span class='ivar'>@OutputDirectory</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="PlatformName=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="PlatformName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>PlatformName</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute PlatformName</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='const'>PlatformName</span>
+  <span class='ivar'>@PlatformName</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="PostBuildCommand=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="PostBuildCommand-instance_method">
+  
+    - (<tt>Object</tt>) <strong>PostBuildCommand</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute PostBuildCommand</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='const'>PostBuildCommand</span>
+  <span class='ivar'>@PostBuildCommand</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="PreprocessorDefinitions=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="PreprocessorDefinitions-instance_method">
+  
+    - (<tt>Object</tt>) <strong>PreprocessorDefinitions</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute PreprocessorDefinitions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='const'>PreprocessorDefinitions</span>
+  <span class='ivar'>@PreprocessorDefinitions</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ProgramDataBaseFileName=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ProgramDataBaseFileName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProgramDataBaseFileName</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ProgramDataBaseFileName</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='const'>ProgramDataBaseFileName</span>
+  <span class='ivar'>@ProgramDataBaseFileName</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="RuntimeLibrary=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="RuntimeLibrary-instance_method">
+  
+    - (<tt>Object</tt>) <strong>RuntimeLibrary</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute RuntimeLibrary</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='const'>RuntimeLibrary</span>
+  <span class='ivar'>@RuntimeLibrary</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="TargetExt=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="TargetExt-instance_method">
+  
+    - (<tt>Object</tt>) <strong>TargetExt</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute TargetExt</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 47</span>
+
+<span class='kw'>def</span> <span class='const'>TargetExt</span>
+  <span class='ivar'>@TargetExt</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="TargetName=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="TargetName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>TargetName</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute TargetName</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='const'>TargetName</span>
+  <span class='ivar'>@TargetName</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="UseDebugLibraries=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="UseDebugLibraries-instance_method">
+  
+    - (<tt>Object</tt>) <strong>UseDebugLibraries</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute UseDebugLibraries</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='const'>UseDebugLibraries</span>
+  <span class='ivar'>@UseDebugLibraries</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="WarningLevel=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="WarningLevel-instance_method">
+  
+    - (<tt>Object</tt>) <strong>WarningLevel</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute WarningLevel</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='const'>WarningLevel</span>
+  <span class='ivar'>@WarningLevel</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="WholeProgramOptimization=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="WholeProgramOptimization-instance_method">
+  
+    - (<tt>Object</tt>) <strong>WholeProgramOptimization</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute WholeProgramOptimization</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='const'>WholeProgramOptimization</span>
+  <span class='ivar'>@WholeProgramOptimization</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="ConfigurationCondition-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ConfigurationCondition</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='const'>ConfigurationCondition</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>'$(Configuration)|$(Platform)'=='</span><span class='embexpr_beg'>#{</span><span class='const'>NamePlatformCombi</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Extend-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Extend</strong>(valueMap, callParent = true) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 178</span>
+
+<span class='kw'>def</span> <span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_callParent'>callParent</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;in Extend of vsconf: #{valueMap}&quot;
+</span>  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_callParent'>callParent</span><span class='rparen'>)</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_plat'>plat</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:PlatformName</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:platformName</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_plat'>plat</span><span class='rparen'>)</span>
+    <span class='ivar'>@PlatformName</span> <span class='op'>=</span> <span class='id identifier rubyid_plat'>plat</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_targetName'>targetName</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:TargetName</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:targetName</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_targetName'>targetName</span><span class='rparen'>)</span>
+      <span class='ivar'>@TargetName</span> <span class='op'>=</span> <span class='id identifier rubyid_targetName'>targetName</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_targetExt'>targetExt</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:TargetExt</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:targetExt</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_targetExt'>targetExt</span><span class='rparen'>)</span>
+    <span class='ivar'>@TargetExt</span> <span class='op'>=</span> <span class='id identifier rubyid_targetExt'>targetExt</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_configurationType'>configurationType</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ConfigurationType</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:configurationType</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_configurationType'>configurationType</span><span class='rparen'>)</span>
+    <span class='ivar'>@ConfigurationType</span> <span class='op'>=</span> <span class='id identifier rubyid_configurationType'>configurationType</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_useDebugLibraries'>useDebugLibraries</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:UseDebugLibraries</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:useDebugLibraries</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_useDebugLibraries'>useDebugLibraries</span><span class='rparen'>)</span>
+    <span class='ivar'>@UseDebugLibraries</span> <span class='op'>=</span> <span class='id identifier rubyid_useDebugLibraries'>useDebugLibraries</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_wholeProgramOptimization'>wholeProgramOptimization</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:WholeProgramOptimization</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:wholeProgramOptimization</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_wholeProgramOptimization'>wholeProgramOptimization</span><span class='rparen'>)</span>
+    <span class='ivar'>@WholeProgramOptimization</span> <span class='op'>=</span> <span class='id identifier rubyid_wholeProgramOptimization'>wholeProgramOptimization</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_characterSet'>characterSet</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:CharacterSet</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:characterSet</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_characterSet'>characterSet</span><span class='rparen'>)</span>
+    <span class='ivar'>@CharacterSet</span> <span class='op'>=</span> <span class='id identifier rubyid_characterSet'>characterSet</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_outputDirectory'>outputDirectory</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:OutputDirectory</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:outputDirectory</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_outputDirectory'>outputDirectory</span><span class='rparen'>)</span>
+    <span class='ivar'>@OutputDirectory</span> <span class='op'>=</span> <span class='id identifier rubyid_outputDirectory'>outputDirectory</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_intermediateDirectory'>intermediateDirectory</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:IntermediateDirectory</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:intermediateDirectory</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_intermediateDirectory'>intermediateDirectory</span><span class='rparen'>)</span>
+    <span class='ivar'>@IntermediateDirectory</span> <span class='op'>=</span> <span class='id identifier rubyid_intermediateDirectory'>intermediateDirectory</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_runtimeLibrary'>runtimeLibrary</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:RuntimeLibrary</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:runtimeLibrary</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_runtimeLibrary'>runtimeLibrary</span><span class='rparen'>)</span>
+    <span class='ivar'>@RuntimeLibrary</span> <span class='op'>=</span> <span class='id identifier rubyid_runtimeLibrary'>runtimeLibrary</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_warningLevel'>warningLevel</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:WarningLevel</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:warningLevel</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_warningLevel'>warningLevel</span><span class='rparen'>)</span>
+    <span class='ivar'>@WarningLevel</span> <span class='op'>=</span> <span class='id identifier rubyid_warningLevel'>warningLevel</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_optimization'>optimization</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Optimization</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:optimization</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_optimization'>optimization</span><span class='rparen'>)</span>
+    <span class='ivar'>@Optimization</span> <span class='op'>=</span> <span class='id identifier rubyid_optimization'>optimization</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_assemblerOutput'>assemblerOutput</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:AssemblerOutput</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:assemblerOutput</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_assemblerOutput'>assemblerOutput</span><span class='rparen'>)</span>
+    <span class='ivar'>@AssemblerOutput</span> <span class='op'>=</span> <span class='id identifier rubyid_assemblerOutput'>assemblerOutput</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_functionLevelLinking'>functionLevelLinking</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:FunctionLevelLinking</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:functionLevelLinking</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_functionLevelLinking'>functionLevelLinking</span><span class='rparen'>)</span>
+    <span class='ivar'>@FunctionLevelLinking</span> <span class='op'>=</span> <span class='id identifier rubyid_functionLevelLinking'>functionLevelLinking</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_intrinsicFunctions'>intrinsicFunctions</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:IntrinsicFunctions</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:intrinsicFunctions</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_intrinsicFunctions'>intrinsicFunctions</span><span class='rparen'>)</span>
+    <span class='ivar'>@IntrinsicFunctions</span> <span class='op'>=</span> <span class='id identifier rubyid_intrinsicFunctions'>intrinsicFunctions</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_programDataBaseFileName'>programDataBaseFileName</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ProgramDataBaseFileName</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:programDataBaseFileName</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_programDataBaseFileName'>programDataBaseFileName</span><span class='rparen'>)</span>
+    <span class='ivar'>@ProgramDataBaseFileName</span> <span class='op'>=</span> <span class='id identifier rubyid_programDataBaseFileName'>programDataBaseFileName</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_exceptionHandling'>exceptionHandling</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ExceptionHandling</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:exceptionHandling</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_exceptionHandling'>exceptionHandling</span><span class='rparen'>)</span>
+    <span class='ivar'>@ExceptionHandling</span> <span class='op'>=</span> <span class='id identifier rubyid_exceptionHandling'>exceptionHandling</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_bufferSecurityCheck'>bufferSecurityCheck</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:BufferSecurityCheck</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:bufferSecurityCheck</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_bufferSecurityCheck'>bufferSecurityCheck</span><span class='rparen'>)</span>
+    <span class='ivar'>@BufferSecurityCheck</span> <span class='op'>=</span> <span class='id identifier rubyid_bufferSecurityCheck'>bufferSecurityCheck</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_debugInformationFormat'>debugInformationFormat</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:DebugInformationFormat</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:debugInformationFormat</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_debugInformationFormat'>debugInformationFormat</span><span class='rparen'>)</span>
+    <span class='ivar'>@DebugInformationFormat</span> <span class='op'>=</span> <span class='id identifier rubyid_debugInformationFormat'>debugInformationFormat</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_inlineFunctionExpansion'>inlineFunctionExpansion</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:InlineFunctionExpansion</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:inlineFunctionExpansion</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_inlineFunctionExpansion'>inlineFunctionExpansion</span><span class='rparen'>)</span>
+    <span class='ivar'>@InlineFunctionExpansion</span> <span class='op'>=</span> <span class='id identifier rubyid_inlineFunctionExpansion'>inlineFunctionExpansion</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_generateDebugInformation'>generateDebugInformation</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:GenerateDebugInformation</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:generateDebugInformation</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_generateDebugInformation'>generateDebugInformation</span><span class='rparen'>)</span>
+    <span class='ivar'>@GenerateDebugInformation</span> <span class='op'>=</span> <span class='id identifier rubyid_generateDebugInformation'>generateDebugInformation</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_enableCOMDATFolding'>enableCOMDATFolding</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:EnableCOMDATFolding</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:enableCOMDATFolding</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_enableCOMDATFolding'>enableCOMDATFolding</span><span class='rparen'>)</span>
+    <span class='ivar'>@EnableCOMDATFolding</span> <span class='op'>=</span> <span class='id identifier rubyid_enableCOMDATFolding'>enableCOMDATFolding</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_optimizeReferences'>optimizeReferences</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:OptimizeReferences</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:optimizeReferences</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_optimizeReferences'>optimizeReferences</span><span class='rparen'>)</span>
+    <span class='ivar'>@OptimizeReferences</span> <span class='op'>=</span> <span class='id identifier rubyid_optimizeReferences'>optimizeReferences</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_moduleDefinitionFile'>moduleDefinitionFile</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ModuleDefinitionFile</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:moduleDefinitionFile</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_moduleDefinitionFile'>moduleDefinitionFile</span><span class='rparen'>)</span>
+    <span class='ivar'>@ModuleDefinitionFile</span> <span class='op'>=</span> <span class='id identifier rubyid_moduleDefinitionFile'>moduleDefinitionFile</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_additionalIncludeDirectories'>additionalIncludeDirectories</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:AdditionalIncludeDirectories</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:additionalIncludeDirectories</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_additionalIncludeDirectories'>additionalIncludeDirectories</span><span class='rparen'>)</span>
+    <span class='ivar'>@AdditionalIncludeDirectories</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_additionalIncludeDirectories'>additionalIncludeDirectories</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_additionalLibraryDirectories'>additionalLibraryDirectories</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:AdditionalLibraryDirectories</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:additionalLibraryDirectories</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_additionalLibraryDirectories'>additionalLibraryDirectories</span><span class='rparen'>)</span>
+    <span class='ivar'>@AdditionalLibraryDirectories</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_additionalLibraryDirectories'>additionalLibraryDirectories</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_preprocessorDefinitions'>preprocessorDefinitions</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:PreprocessorDefinitions</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:preprocessorDefinitions</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:defines</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:defs</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_preprocessorDefinitions'>preprocessorDefinitions</span><span class='rparen'>)</span>
+    <span class='ivar'>@PreprocessorDefinitions</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_preprocessorDefinitions'>preprocessorDefinitions</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_additionalDependencies'>additionalDependencies</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:AdditionalDependencies</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:additionalDependencies</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_additionalDependencies'>additionalDependencies</span><span class='rparen'>)</span>
+    <span class='ivar'>@AdditionalDependencies</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_additionalDependencies'>additionalDependencies</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_postBuildCommand'>postBuildCommand</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:PostBuildCommand</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:postBuildCommand</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_postBuildCommand'>postBuildCommand</span><span class='rparen'>)</span>
+    <span class='ivar'>@PostBuildCommand</span> <span class='op'>=</span> <span class='id identifier rubyid_postBuildCommand'>postBuildCommand</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GatherDefines-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GatherDefines</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gather the defines from this information unit and all subunits.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+174
+175
+176</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 174</span>
+
+<span class='kw'>def</span> <span class='const'>GatherDefines</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='ivar'>@Defines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetTargetFilePath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetTargetFilePath</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+169
+170
+171</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 169</span>
+
+<span class='kw'>def</span> <span class='const'>GetTargetFilePath</span>
+  <span class='kw'>return</span> <span class='ivar'>@OutputDirectory</span> <span class='op'>+</span> <span class='const'>ProjectPath</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@TargetName</span> <span class='op'>+</span> <span class='ivar'>@TargetExt</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize_copy</strong>(original) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize_copy'>initialize_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@PlatformName</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>PlatformName</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@TargetName</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>TargetName</span><span class='rparen'>)</span>
+  <span class='ivar'>@TargetExt</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>TargetExt</span><span class='rparen'>)</span>
+  <span class='ivar'>@ConfigurationType</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ConfigurationType</span><span class='rparen'>)</span>
+  <span class='ivar'>@UseDebugLibraries</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>UseDebugLibraries</span><span class='rparen'>)</span>
+  <span class='ivar'>@WholeProgramOptimization</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>WholeProgramOptimization</span><span class='rparen'>)</span>
+  <span class='ivar'>@CharacterSet</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>CharacterSet</span><span class='rparen'>)</span>
+  <span class='ivar'>@OutputDirectory</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>OutputDirectory</span><span class='rparen'>)</span>
+  <span class='ivar'>@IntermediateDirectory</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>IntermediateDirectory</span><span class='rparen'>)</span>
+  <span class='ivar'>@RuntimeLibrary</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>RuntimeLibrary</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@WarningLevel</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>WarningLevel</span><span class='rparen'>)</span>
+  <span class='ivar'>@Optimization</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>Optimization</span><span class='rparen'>)</span>
+  <span class='ivar'>@AssemblerOutput</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>AssemblerOutput</span><span class='rparen'>)</span>
+  <span class='ivar'>@FunctionLevelLinking</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>FunctionLevelLinking</span><span class='rparen'>)</span>
+  <span class='ivar'>@IntrinsicFunctions</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>IntrinsicFunctions</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProgramDataBaseFileName</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ProgramDataBaseFileName</span><span class='rparen'>)</span>
+  <span class='ivar'>@ExceptionHandling</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ExceptionHandling</span><span class='rparen'>)</span>
+  <span class='ivar'>@BufferSecurityCheck</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>BufferSecurityCheck</span><span class='rparen'>)</span>
+  <span class='ivar'>@DebugInformationFormat</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>DebugInformationFormat</span><span class='rparen'>)</span>
+  <span class='ivar'>@InlineFunctionExpansion</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>InlineFunctionExpansion</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@GenerateDebugInformation</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>GenerateDebugInformation</span><span class='rparen'>)</span>
+  <span class='ivar'>@EnableCOMDATFolding</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>EnableCOMDATFolding</span><span class='rparen'>)</span>
+  <span class='ivar'>@OptimizeReferences</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>OptimizeReferences</span><span class='rparen'>)</span>
+  <span class='ivar'>@ModuleDefinitionFile</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ModuleDefinitionFile</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@AdditionalIncludeDirectories</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>AdditionalIncludeDirectories</span><span class='rparen'>)</span>
+  <span class='ivar'>@AdditionalLibraryDirectories</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>AdditionalLibraryDirectories</span><span class='rparen'>)</span>
+  <span class='ivar'>@PreprocessorDefinitions</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>PreprocessorDefinitions</span><span class='rparen'>)</span>
+  <span class='ivar'>@AdditionalDependencies</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>AdditionalDependencies</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@PostBuildCommand</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>PostBuildCommand</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Name-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Name</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='const'>Name</span>
+   <span class='kw'>return</span> <span class='ivar'>@Platform</span><span class='period'>.</span><span class='const'>Name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="NamePlatformCombi-instance_method">
+  
+    - (<tt>Object</tt>) <strong>NamePlatformCombi</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='const'>NamePlatformCombi</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Name</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>|</span><span class='embexpr_beg'>#{</span><span class='ivar'>@PlatformName</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:58 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

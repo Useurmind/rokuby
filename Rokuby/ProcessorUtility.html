@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::ProcessorUtility
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">ProcessorUtility</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::ProcessorUtility
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="GppProjectCompiler.html" title="Rokuby::GppProjectCompiler (class)">GppProjectCompiler</a></span>, <span class='object_link'><a href="GppProjectLibraryGatherer.html" title="Rokuby::GppProjectLibraryGatherer (class)">GppProjectLibraryGatherer</a></span>, <span class='object_link'><a href="VsPostBuildCommandTaskCreator.html" title="Rokuby::VsPostBuildCommandTaskCreator (class)">VsPostBuildCommandTaskCreator</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/Processors/processor_utility.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This utility is for processors that need to define tasks and execute them
+during their execution phase. Creation of tasks in such cases is restricted
+to the current project file as the execution phase is entered after the
+task to execute has been chosen. Additionally, the task can only be
+executed on the fly by program components that know them. For tasks that
+should be executable by the user, you must define them in the declaration
+phas, e.g. in _OnAddInput or initialize. With this task can be created with
+the appropriate functions, you can build chains and in the end append them
+to the backtask to execute them.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ExecuteBackTask-instance_method" title="#_ExecuteBackTask (instance method)">- (Object) <strong>_ExecuteBackTask</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateFileTask-instance_method" title="#CreateFileTask (instance method)">- (Object) <strong>CreateFileTask</strong>(paramBag) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a file task.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateTask-instance_method" title="#CreateTask (instance method)">- (Object) <strong>CreateTask</strong>(*args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateTaskClass-instance_method" title="#CreateTaskClass (instance method)">- (Object) <strong>CreateTaskClass</strong>(taskClass, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ProcessorUtility) <strong>initialize</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of ProcessorUtility.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_ExecuteBackTask-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ExecuteBackTask</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor_utility.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ExecuteBackTask'>_ExecuteBackTask</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@BackTask</span><span class='period'>.</span><span class='id identifier rubyid_invoke'>invoke</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CreateFileTask-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateFileTask</strong>(paramBag) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a file task.</p>
+<dl class="rdoc-list"><dt>filePath</dt>
+<dd>
+<p>The path of the file that should be created.</p>
+</dd><dt>dependencies</dt>
+<dd>
+<p>Task on which the task depends.</p>
+</dd><dt>command</dt>
+<dd>
+<p>The command to execute in the task block.</p>
+</dd><dt>error</dt>
+<dd>
+<p>The error message if the command fails.</p>
+</dd></dl>
+
+<p>Additionally, one block is given that is essentially the block for the
+task.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor_utility.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='const'>CreateFileTask</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_filePath'>filePath</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:filePath</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_dependencies'>dependencies</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:dependencies</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_command'>command</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:command</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:error</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_filePath'>filePath</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_abort'>abort</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No file path given for file task creation</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_dependencies'>dependencies</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='const'>CreateTaskClass</span> <span class='const'>Rake</span><span class='op'>::</span><span class='const'>FileTask</span><span class='comma'>,</span> <span class='id identifier rubyid_filePath'>filePath</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_dependencies'>dependencies</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_command'>command</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='const'>CreateTaskClass</span> <span class='const'>Rake</span><span class='op'>::</span><span class='const'>FileTask</span><span class='comma'>,</span> <span class='id identifier rubyid_filePath'>filePath</span> <span class='kw'>do</span>
+      <span class='const'>SystemWithFail</span><span class='lparen'>(</span><span class='id identifier rubyid_command'>command</span><span class='comma'>,</span> <span class='id identifier rubyid_error'>error</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_task'>task</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CreateTask-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateTask</strong>(*args, &amp;block) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor_utility.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='const'>CreateTask</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'>CreateTaskClass</span><span class='lparen'>(</span><span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CreateTaskClass-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateTaskClass</strong>(taskClass, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor_utility.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='const'>CreateTaskClass</span><span class='lparen'>(</span><span class='id identifier rubyid_taskClass'>taskClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'>ProjectFile</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_define_task'>define_task</span><span class='lparen'>(</span><span class='id identifier rubyid_taskClass'>taskClass</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProcessorUtility (module)">ProcessorUtility</a></span></tt>) <strong>initialize</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of ProcessorUtility</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/processor_utility.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@BackTask</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='period'>.</span><span class='id identifier rubyid_define_task'>define_task</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_content'>_BackTask</span><span class='tstring_end'>&quot;</span></span>   <span class='comment'># used to create a new task chain
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:44 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

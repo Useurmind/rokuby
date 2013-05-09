@@ -1,0 +1,1992 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::DoxygenBuilder
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">DoxygenBuilder</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::DoxygenBuilder
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rokuby::DoxygenBuilder</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="DirectoryUtility.html" title="Rokuby::DirectoryUtility (module)">DirectoryUtility</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/doxygen_builder.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class can be used to create a doxygen class. It offers the possibility
+to set values for important doxygen options. The class takes a doxyfile
+template, fills in the values for the given options,  the project name, the
+source files that are to be documented and creates the doxygen
+documentation.</p>
+<dl class="rdoc-list"><dt>DoxyfileTemplate</dt>
+<dd>
+<p>Relative path of the template file for the doxyfile that should be used.</p>
+</dd><dt>DoxyfileName</dt>
+<dd>
+<p>Relative path of the doxyfile that should be created and used.</p>
+</dd><dt>ProjectConfiguration</dt>
+<dd>
+<p>The configuration of the project to document.</p>
+</dd><dt>OutputDirectory</dt>
+<dd>
+<p>The directory where the doxygen docu should be put.</p>
+</dd><dt>EnablePreprocessing</dt>
+<dd>
+<p>Should the doxygen preprocessor be enabled.</p>
+</dd><dt>MacroExpansion</dt>
+<dd>
+<p>Should preprocessor macros be expanded to their defined values.</p>
+</dd><dt>ExpandOnlyPredef</dt>
+<dd>
+<p>Should only predefined macros be expanded to their defined values.</p>
+</dd><dt>Predefined</dt>
+<dd>
+<p>The macros that should be expanded and their values in form of a hash.</p>
+</dd><dt>ImagePath</dt>
+<dd>
+<p>The path to the folder that contains the images used in the docu.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdditionalDocumentationFileDirectory-instance_method" title="#AdditionalDocumentationFileDirectory (instance method)">- (Object) <strong>AdditionalDocumentationFileDirectory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute AdditionalDocumentationFileDirectory.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#BuiltinStlSupport-instance_method" title="#BuiltinStlSupport (instance method)">- (Object) <strong>BuiltinStlSupport</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute BuiltinStlSupport.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DoxyfileName-instance_method" title="#DoxyfileName (instance method)">- (Object) <strong>DoxyfileName</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute DoxyfileName.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#DoxyfileTemplate-instance_method" title="#DoxyfileTemplate (instance method)">- (Object) <strong>DoxyfileTemplate</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute DoxyfileTemplate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#EnablePreprocessing-instance_method" title="#EnablePreprocessing (instance method)">- (Object) <strong>EnablePreprocessing</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute EnablePreprocessing.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ExpandOnlyPredef-instance_method" title="#ExpandOnlyPredef (instance method)">- (Object) <strong>ExpandOnlyPredef</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ExpandOnlyPredef.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ExtractAll-instance_method" title="#ExtractAll (instance method)">- (Object) <strong>ExtractAll</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ExtractAll.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ExtractPrivate-instance_method" title="#ExtractPrivate (instance method)">- (Object) <strong>ExtractPrivate</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ExtractPrivate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ExtractStatic-instance_method" title="#ExtractStatic (instance method)">- (Object) <strong>ExtractStatic</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ExtractStatic.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ImagePath-instance_method" title="#ImagePath (instance method)">- (Object) <strong>ImagePath</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ImagePath.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#JavadocAutobrief-instance_method" title="#JavadocAutobrief (instance method)">- (Object) <strong>JavadocAutobrief</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>doxygen properties.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#MacroExpansion-instance_method" title="#MacroExpansion (instance method)">- (Object) <strong>MacroExpansion</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute MacroExpansion.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#MultilineCppIsBrief-instance_method" title="#MultilineCppIsBrief (instance method)">- (Object) <strong>MultilineCppIsBrief</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute MultilineCppIsBrief.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#OutputDirectory-instance_method" title="#OutputDirectory (instance method)">- (Object) <strong>OutputDirectory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute OutputDirectory.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Predefined-instance_method" title="#Predefined (instance method)">- (Object) <strong>Predefined</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Predefined.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProjectConfiguration-instance_method" title="#ProjectConfiguration (instance method)">- (Object) <strong>ProjectConfiguration</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ProjectConfiguration.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#QtAutobrief-instance_method" title="#QtAutobrief (instance method)">- (Object) <strong>QtAutobrief</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute QtAutobrief.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SourceBrowser-instance_method" title="#SourceBrowser (instance method)">- (Object) <strong>SourceBrowser</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute SourceBrowser.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateAdditionalDocumentationFilesString-instance_method" title="#CreateAdditionalDocumentationFilesString (instance method)">- (Object) <strong>CreateAdditionalDocumentationFilesString</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateDoxyfile-instance_method" title="#CreateDoxyfile (instance method)">- (Object) <strong>CreateDoxyfile</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create the doxyfile and the documentation resulting from it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#CreateDoxyfileTemplateIfMissing-instance_method" title="#CreateDoxyfileTemplateIfMissing (instance method)">- (Object) <strong>CreateDoxyfileTemplateIfMissing</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a doxyfile template if it is missing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (DoxygenBuilder) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of DoxygenBuilder.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SetAttributeIfMatch-instance_method" title="#SetAttributeIfMatch (instance method)">- (Object) <strong>SetAttributeIfMatch</strong>(name, value, line) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If the line contains the named attribute set its value and return the new
+line.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SetBoolAttributeIfMatch-instance_method" title="#SetBoolAttributeIfMatch (instance method)">- (Object) <strong>SetBoolAttributeIfMatch</strong>(name, value, line) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If the line contains the named boolean attribute set its value to "YES" or
+"NO" and return the new line.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="DirectoryUtility.html" title="Rokuby::DirectoryUtility (module)">DirectoryUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="DirectoryUtility.html#CreatePath-instance_method" title="Rokuby::DirectoryUtility#CreatePath (method)">#CreatePath</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFileInDirectories-instance_method" title="Rokuby::DirectoryUtility#FindFileInDirectories (method)">#FindFileInDirectories</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFileInDirectory-instance_method" title="Rokuby::DirectoryUtility#FindFileInDirectory (method)">#FindFileInDirectory</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFilesInDirectories-instance_method" title="Rokuby::DirectoryUtility#FindFilesInDirectories (method)">#FindFilesInDirectories</a></span>, <span class='object_link'><a href="DirectoryUtility.html#FindFilesInDirectory-instance_method" title="Rokuby::DirectoryUtility#FindFilesInDirectory (method)">#FindFilesInDirectory</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GenerateVSVariablePath-instance_method" title="Rokuby::DirectoryUtility#GenerateVSVariablePath (method)">#GenerateVSVariablePath</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryPathsFromRelativeBase-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryPathsFromRelativeBase (method)">#GetDirectoryPathsFromRelativeBase</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryTree-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryTree (method)">#GetDirectoryTree</a></span>, <span class='object_link'><a href="DirectoryUtility.html#GetDirectoryTreeFromRelativeBase-instance_method" title="Rokuby::DirectoryUtility#GetDirectoryTreeFromRelativeBase (method)">#GetDirectoryTreeFromRelativeBase</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::DoxygenBuilder (class)">DoxygenBuilder</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of DoxygenBuilder</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='ivar'>@DoxyfileTemplate</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Doxyfile.template</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@Doxyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Doxyfile</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@OutputDirectory</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>documentation</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@AdditionalDocumentationFileDirectory</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>src_doc</span><span class='tstring_end'>&quot;</span></span>
+  
+  <span class='ivar'>@JavadocAutobrief</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@QtAutobrief</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@MultilineCppIsBrief</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='ivar'>@BuiltinStlSupport</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@ExtractAll</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@ExtractStatic</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@ExtractPrivate</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@SourceBrowser</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@EnablePreprocessing</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@MacroExpansion</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='ivar'>@ExpandOnlyPredef</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='ivar'>@Predefined</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@ImagePath</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="AdditionalDocumentationFileDirectory=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="AdditionalDocumentationFileDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdditionalDocumentationFileDirectory</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute AdditionalDocumentationFileDirectory</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='const'>AdditionalDocumentationFileDirectory</span>
+  <span class='ivar'>@AdditionalDocumentationFileDirectory</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="BuiltinStlSupport=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="BuiltinStlSupport-instance_method">
+  
+    - (<tt>Object</tt>) <strong>BuiltinStlSupport</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute BuiltinStlSupport</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='const'>BuiltinStlSupport</span>
+  <span class='ivar'>@BuiltinStlSupport</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="DoxyfileName=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="DoxyfileName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DoxyfileName</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute DoxyfileName</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='const'>DoxyfileName</span>
+  <span class='ivar'>@DoxyfileName</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="DoxyfileTemplate=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="DoxyfileTemplate-instance_method">
+  
+    - (<tt>Object</tt>) <strong>DoxyfileTemplate</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute DoxyfileTemplate</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='const'>DoxyfileTemplate</span>
+  <span class='ivar'>@DoxyfileTemplate</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="EnablePreprocessing=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="EnablePreprocessing-instance_method">
+  
+    - (<tt>Object</tt>) <strong>EnablePreprocessing</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute EnablePreprocessing</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='const'>EnablePreprocessing</span>
+  <span class='ivar'>@EnablePreprocessing</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ExpandOnlyPredef=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ExpandOnlyPredef-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ExpandOnlyPredef</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ExpandOnlyPredef</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='const'>ExpandOnlyPredef</span>
+  <span class='ivar'>@ExpandOnlyPredef</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ExtractAll=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ExtractAll-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ExtractAll</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ExtractAll</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='const'>ExtractAll</span>
+  <span class='ivar'>@ExtractAll</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ExtractPrivate=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ExtractPrivate-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ExtractPrivate</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ExtractPrivate</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='const'>ExtractPrivate</span>
+  <span class='ivar'>@ExtractPrivate</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ExtractStatic=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ExtractStatic-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ExtractStatic</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ExtractStatic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='const'>ExtractStatic</span>
+  <span class='ivar'>@ExtractStatic</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ImagePath=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ImagePath-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ImagePath</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ImagePath</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='const'>ImagePath</span>
+  <span class='ivar'>@ImagePath</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="JavadocAutobrief=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="JavadocAutobrief-instance_method">
+  
+    - (<tt>Object</tt>) <strong>JavadocAutobrief</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>doxygen properties</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='const'>JavadocAutobrief</span>
+  <span class='ivar'>@JavadocAutobrief</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="MacroExpansion=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="MacroExpansion-instance_method">
+  
+    - (<tt>Object</tt>) <strong>MacroExpansion</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute MacroExpansion</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='const'>MacroExpansion</span>
+  <span class='ivar'>@MacroExpansion</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="MultilineCppIsBrief=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="MultilineCppIsBrief-instance_method">
+  
+    - (<tt>Object</tt>) <strong>MultilineCppIsBrief</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute MultilineCppIsBrief</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='const'>MultilineCppIsBrief</span>
+  <span class='ivar'>@MultilineCppIsBrief</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="OutputDirectory=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="OutputDirectory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>OutputDirectory</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute OutputDirectory</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='const'>OutputDirectory</span>
+  <span class='ivar'>@OutputDirectory</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Predefined=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Predefined-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Predefined</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Predefined</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='const'>Predefined</span>
+  <span class='ivar'>@Predefined</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ProjectConfiguration=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ProjectConfiguration-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProjectConfiguration</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ProjectConfiguration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='const'>ProjectConfiguration</span>
+  <span class='ivar'>@ProjectConfiguration</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="QtAutobrief=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="QtAutobrief-instance_method">
+  
+    - (<tt>Object</tt>) <strong>QtAutobrief</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute QtAutobrief</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='const'>QtAutobrief</span>
+  <span class='ivar'>@QtAutobrief</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="SourceBrowser=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="SourceBrowser-instance_method">
+  
+    - (<tt>Object</tt>) <strong>SourceBrowser</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute SourceBrowser</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='const'>SourceBrowser</span>
+  <span class='ivar'>@SourceBrowser</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="CreateAdditionalDocumentationFilesString-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateAdditionalDocumentationFilesString</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='const'>CreateAdditionalDocumentationFilesString</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_additionalDocFiles'>additionalDocFiles</span> <span class='op'>=</span> <span class='const'>FindFilesInDirectory</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.h$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='ivar'>@AdditionalDocumentationFileDirectory</span><span class='rparen'>)</span>
+  <span class='ivar'>@additionalDocumentationFilesString</span> <span class='op'>=</span> <span class='id identifier rubyid_additionalDocFiles'>additionalDocFiles</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CreateDoxyfile-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateDoxyfile</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create the doxyfile and the documentation resulting from it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='const'>CreateDoxyfile</span>
+  <span class='const'>CreateDoxyfileTemplateIfMissing</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='const'>CreateAdditionalDocumentationFilesString</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_usedSources'>usedSources</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectConfiguration</span><span class='period'>.</span><span class='const'>GetSourceDirectoryTree</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_usedIncludes'>usedIncludes</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@ProjectConfiguration</span><span class='period'>.</span><span class='const'>GetIncludeDirectoryTree</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='ivar'>@additionalDocumentationFilesString</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  
+  <span class='id identifier rubyid_predefinedMacros'>predefinedMacros</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@Predefined</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_macro'>macro</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+	<span class='id identifier rubyid_predefinedMacros'>predefinedMacros</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_macro'>macro</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_value'>value</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_predefinedString'>predefinedString</span> <span class='op'>=</span> <span class='id identifier rubyid_predefinedMacros'>predefinedMacros</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_templateLines'>templateLines</span> <span class='op'>=</span> <span class='const'>IO</span><span class='period'>.</span><span class='id identifier rubyid_readlines'>readlines</span><span class='lparen'>(</span><span class='ivar'>@DoxyfileTemplate</span><span class='rparen'>)</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='ivar'>@Doxyfile</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>w</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_doxyfile'>doxyfile</span><span class='op'>|</span>
+	
+	<span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='int'>0</span><span class='op'>..</span><span class='id identifier rubyid_templateLines'>templateLines</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>1</span> <span class='kw'>do</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='id identifier rubyid_templateLines'>templateLines</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span>
+	  
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PROJECT_NAME</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@ProjectConfiguration</span><span class='period'>.</span><span class='const'>ProjectName</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>OUTPUT_DIRECTORY</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@OutputDirectory</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INPUT</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_usedSources'>usedSources</span><span class='rbrace'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_usedIncludes'>usedIncludes</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>JAVADOC_AUTOBRIEF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@JavadocAutobrief</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>QT_AUTOBRIEF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@QtAutobrief</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MULTILINE_CPP_IS_BRIEF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@MultilineCppIsBrief</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>BUILTIN_STL_SUPPORT</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@BuiltinStlSupport</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EXTRACT_ALL</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@ExtractAll</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span> 
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EXTRACT_STATIC</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@ExtractStatic</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span> 
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EXTRACT_PRIVATE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@ExtractPrivate</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>  
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SOURCE_BROWSER</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@SourceBrowser</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>IMAGE_PATH</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@ImagePath</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ENABLE_PREPROCESSING</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@EnablePreprocessing</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MACRO_EXPANSION</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@MacroExpansion</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>EXPAND_ONLY_PREDEF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@ExpandOnlyPredef</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='const'>SetAttributeIfMatch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PREDEFINED</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_predefinedString'>predefinedString</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+	  
+	  <span class='id identifier rubyid_doxyfile'>doxyfile</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_line'>line</span><span class='rbrace'>}</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_system'>system</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>doxygen </span><span class='embexpr_beg'>#{</span><span class='ivar'>@DoxyfileName</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="CreateDoxyfileTemplateIfMissing-instance_method">
+  
+    - (<tt>Object</tt>) <strong>CreateDoxyfileTemplateIfMissing</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a doxyfile template if it is missing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134
+135
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='const'>CreateDoxyfileTemplateIfMissing</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exists?'>exists?</span><span class='lparen'>(</span><span class='ivar'>@DoxyfileTemplate</span><span class='rparen'>)</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_system'>system</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>doxygen -g </span><span class='embexpr_beg'>#{</span><span class='ivar'>@DoxyfileTemplate</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="SetAttributeIfMatch-instance_method">
+  
+    - (<tt>Object</tt>) <strong>SetAttributeIfMatch</strong>(name, value, line) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If the line contains the named attribute set its value and return the new
+line.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+126
+127
+128
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 126</span>
+
+<span class='kw'>def</span> <span class='const'>SetAttributeIfMatch</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>^\s*</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>\s*=</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+ <span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>    = </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_value'>value</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_line'>line</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="SetBoolAttributeIfMatch-instance_method">
+  
+    - (<tt>Object</tt>) <strong>SetBoolAttributeIfMatch</strong>(name, value, line) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If the line contains the named boolean attribute set its value to "YES" or
+"NO" and return the new line.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/doxygen_builder.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='const'>SetBoolAttributeIfMatch</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span> 
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>YES</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+	<span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>NO</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='const'>SetAttributeIfMatch</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_s'>s</span><span class='comma'>,</span> <span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:45 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

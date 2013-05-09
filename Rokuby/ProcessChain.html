@@ -1,0 +1,1882 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::ProcessChain
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">ProcessChain</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::ProcessChain
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">Rake::ProcessorTask</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></li>
+          
+            <li class="next">Rokuby::ProcessChain</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="DSL.html" title="Rokuby::DSL (module)">DSL</a></span>, <span class='object_link'><a href="TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Processors/process_chain.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A class to manage the processor structure. A process chain is a directed
+graph structure of processors that are connected and propagate their
+outputs to the next processors in the graph.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="GppProjectBuilder.html" title="Rokuby::GppProjectBuilder (class)">GppProjectBuilder</a></span>, <span class='object_link'><a href="ProcessorArray.html" title="Rokuby::ProcessorArray (class)">ProcessorArray</a></span>, <span class='object_link'><a href="ProjectBuilder.html" title="Rokuby::ProjectBuilder (class)">ProjectBuilder</a></span>, <span class='object_link'><a href="ProjectFinder.html" title="Rokuby::ProjectFinder (class)">ProjectFinder</a></span>, <span class='object_link'><a href="VsProjectBuilder.html" title="Rokuby::VsProjectBuilder (class)">VsProjectBuilder</a></span>, <span class='object_link'><a href="VsSolutionBuilder.html" title="Rokuby::VsSolutionBuilder (class)">VsSolutionBuilder</a></span></p>
+</div>
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ChainProcessors-instance_method" title="#ChainProcessors (instance method)">- (Object) <strong>ChainProcessors</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ChainProcessors.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#InputProcessor-instance_method" title="#InputProcessor (instance method)">- (Object) <strong>InputProcessor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute InputProcessor.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#InputProcessorName-instance_method" title="#InputProcessorName (instance method)">- (Object) <strong>InputProcessorName</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute InputProcessorName.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#OutputProcessor-instance_method" title="#OutputProcessor (instance method)">- (Object) <strong>OutputProcessor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute OutputProcessor.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#OutputProcessorName-instance_method" title="#OutputProcessorName (instance method)">- (Object) <strong>OutputProcessorName</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute OutputProcessorName.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Processor.html#%3AName-instance_method" title="Rokuby::Processor#:Name (method)">#:Name</a></span>, <span class='object_link'><a href="Processor.html#%3AThrowOnUnknownInput-instance_method" title="Rokuby::Processor#:ThrowOnUnknownInput (method)">#:ThrowOnUnknownInput</a></span>, <span class='object_link'><a href="Processor.html#%3AUseCache-instance_method" title="Rokuby::Processor#:UseCache (method)">#:UseCache</a></span>, <span class='object_link'><a href="Processor.html#Name-instance_method" title="Rokuby::Processor#Name (method)">#Name</a></span>, <span class='object_link'><a href="Processor.html#ThrowOnUnknownInput-instance_method" title="Rokuby::Processor#ThrowOnUnknownInput (method)">#ThrowOnUnknownInput</a></span>, <span class='object_link'><a href="Processor.html#UseCache-instance_method" title="Rokuby::Processor#UseCache (method)">#UseCache</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Task.html#ProjectFile-instance_method" title="Rake::Task#ProjectFile (method)">#ProjectFile</a></span>, <span class='object_link'><a href="../Rake/Task.html#actions-instance_method" title="Rake::Task#actions (method)">#actions</a></span>, <span class='object_link'><a href="../Rake/Task.html#application-instance_method" title="Rake::Task#application (method)">#application</a></span>, <span class='object_link'><a href="../Rake/Task.html#comment-instance_method" title="Rake::Task#comment (method)">#comment</a></span>, <span class='object_link'><a href="../Rake/Task.html#full_comment-instance_method" title="Rake::Task#full_comment (method)">#full_comment</a></span>, <span class='object_link'><a href="../Rake/Task.html#locations-instance_method" title="Rake::Task#locations (method)">#locations</a></span>, <span class='object_link'><a href="../Rake/Task.html#prerequisites-instance_method" title="Rake::Task#prerequisites (method)">#prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#scope-instance_method" title="Rake::Task#scope (method)">#scope</a></span>, <span class='object_link'><a href="../Rake/Task.html#sources-instance_method" title="Rake::Task#sources (method)">#sources</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="TaskDescription.html" title="Rokuby::TaskDescription (module)">TaskDescription</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskDescription.html#ArgDescriptions-instance_method" title="Rokuby::TaskDescription#ArgDescriptions (method)">#ArgDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#KnownArgNames-instance_method" title="Rokuby::TaskDescription#KnownArgNames (method)">#KnownArgNames</a></span>, <span class='object_link'><a href="TaskDescription.html#TaskDescriptions-instance_method" title="Rokuby::TaskDescription#TaskDescriptions (method)">#TaskDescriptions</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_AdaptProcessorName-instance_method" title="#_AdaptProcessorName (instance method)">- (Object) <strong>_AdaptProcessorName</strong>(newName, oldName, oldProcessorName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Replace an old processor name with new one including the new process chain
+name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_CloneChainProcessors-instance_method" title="#_CloneChainProcessors (instance method)">- (Object) <strong>_CloneChainProcessors</strong>(newName, oldName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>replace the existing chain processors through new ones that are clones of
+the old processors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_GetProcessorName-instance_method" title="#_GetProcessorName (instance method)">- (Object) <strong>_GetProcessorName</strong>(extension) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get a processor name with a custom extension.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_InitProc-instance_method" title="#_InitProc (instance method)">- (Object) <strong>_InitProc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Nothing to be done here.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_InputKnown-instance_method" title="#_InputKnown (instance method)">- (Object) <strong>_InputKnown</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_OnAddInput-instance_method" title="#_OnAddInput (instance method)">- (Object) <strong>_OnAddInput</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ProcessInputs-instance_method" title="#_ProcessInputs (instance method)">- (Object) <strong>_ProcessInputs</strong>(taskArgs = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdaptName-instance_method" title="#AdaptName (instance method)">- (Object) <strong>AdaptName</strong>(newName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdaptName_processor-instance_method" title="#AdaptName_processor (instance method)">- (Object) <strong>AdaptName_processor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AddDependencies-instance_method" title="#AddDependencies (instance method)">- (Object) <strong>AddDependencies</strong>(deps) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AddDependencies_Processor-instance_method" title="#AddDependencies_Processor (instance method)">- (Object) <strong>AddDependencies_Processor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AddProcessor-instance_method" title="#AddProcessor (instance method)">- (Object) <strong>AddProcessor</strong>(processor) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a processor to this process chain.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Connect-instance_method" title="#Connect (instance method)">- (Object) <strong>Connect</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>State that some processors should be chained.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Extend-instance_method" title="#Extend (instance method)">- (Object) <strong>Extend</strong>(valueMap, executeParent = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Extend/set the attributes of the process_chain.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ProcessChain) <strong>initialize</strong>(name = nil, app = nil, projectFile = nil) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of ProcessChain.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_copy-instance_method" title="#initialize_copy (instance method)">- (Object) <strong>initialize_copy</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_processor-instance_method" title="#initialize_processor (instance method)">- (Object) <strong>initialize_processor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#intialize_copy_processor-instance_method" title="#intialize_copy_processor (instance method)">- (Object) <strong>intialize_copy_processor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>do not use this function without calling adapt name afterwards adapt name
+does the actual copying of the internal processors that can not be done
+before the name of the process chain is clear.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="DSL.html" title="Rokuby::DSL (module)">DSL</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="DSL.html#chain-instance_method" title="Rokuby::DSL#chain (method)">#chain</a></span>, <span class='object_link'><a href="DSL.html#cloneProc-instance_method" title="Rokuby::DSL#cloneProc (method)">#cloneProc</a></span>, <span class='object_link'><a href="DSL.html#defaultGppProjectConfigurations-instance_method" title="Rokuby::DSL#defaultGppProjectConfigurations (method)">#defaultGppProjectConfigurations</a></span>, <span class='object_link'><a href="DSL.html#defaultProjectConfigurations-instance_method" title="Rokuby::DSL#defaultProjectConfigurations (method)">#defaultProjectConfigurations</a></span>, <span class='object_link'><a href="DSL.html#defaultVsProjectConfigurations-instance_method" title="Rokuby::DSL#defaultVsProjectConfigurations (method)">#defaultVsProjectConfigurations</a></span>, <span class='object_link'><a href="DSL.html#defineChain-instance_method" title="Rokuby::DSL#defineChain (method)">#defineChain</a></span>, <span class='object_link'><a href="DSL.html#defineProc-instance_method" title="Rokuby::DSL#defineProc (method)">#defineProc</a></span>, <span class='object_link'><a href="DSL.html#fileFinder-instance_method" title="Rokuby::DSL#fileFinder (method)">#fileFinder</a></span>, <span class='object_link'><a href="DSL.html#fileSet-instance_method" title="Rokuby::DSL#fileSet (method)">#fileSet</a></span>, <span class='object_link'><a href="DSL.html#fileSpec-instance_method" title="Rokuby::DSL#fileSpec (method)">#fileSpec</a></span>, <span class='object_link'><a href="DSL.html#gppProj-instance_method" title="Rokuby::DSL#gppProj (method)">#gppProj</a></span>, <span class='object_link'><a href="DSL.html#gppProjBuild-instance_method" title="Rokuby::DSL#gppProjBuild (method)">#gppProjBuild</a></span>, <span class='object_link'><a href="DSL.html#gppProjConf-instance_method" title="Rokuby::DSL#gppProjConf (method)">#gppProjConf</a></span>, <span class='object_link'><a href="DSL.html#gppProjDescr-instance_method" title="Rokuby::DSL#gppProjDescr (method)">#gppProjDescr</a></span>, <span class='object_link'><a href="DSL.html#infoUnit-instance_method" title="Rokuby::DSL#infoUnit (method)">#infoUnit</a></span>, <span class='object_link'><a href="DSL.html#lib-instance_method" title="Rokuby::DSL#lib (method)">#lib</a></span>, <span class='object_link'><a href="DSL.html#libFileSet-instance_method" title="Rokuby::DSL#libFileSet (method)">#libFileSet</a></span>, <span class='object_link'><a href="DSL.html#libFinder-instance_method" title="Rokuby::DSL#libFinder (method)">#libFinder</a></span>, <span class='object_link'><a href="DSL.html#libInst-instance_method" title="Rokuby::DSL#libInst (method)">#libInst</a></span>, <span class='object_link'><a href="DSL.html#libLoc-instance_method" title="Rokuby::DSL#libLoc (method)">#libLoc</a></span>, <span class='object_link'><a href="DSL.html#libSpec-instance_method" title="Rokuby::DSL#libSpec (method)">#libSpec</a></span>, <span class='object_link'><a href="DSL.html#libSpecSet-instance_method" title="Rokuby::DSL#libSpecSet (method)">#libSpecSet</a></span>, <span class='object_link'><a href="DSL.html#multiProjBuild-instance_method" title="Rokuby::DSL#multiProjBuild (method)">#multiProjBuild</a></span>, <span class='object_link'><a href="DSL.html#multiSlnBuild-instance_method" title="Rokuby::DSL#multiSlnBuild (method)">#multiSlnBuild</a></span>, <span class='object_link'><a href="DSL.html#passDefs-instance_method" title="Rokuby::DSL#passDefs (method)">#passDefs</a></span>, <span class='object_link'><a href="DSL.html#plat-instance_method" title="Rokuby::DSL#plat (method)">#plat</a></span>, <span class='object_link'><a href="DSL.html#proc-instance_method" title="Rokuby::DSL#proc (method)">#proc</a></span>, <span class='object_link'><a href="DSL.html#procArr-instance_method" title="Rokuby::DSL#procArr (method)">#procArr</a></span>, <span class='object_link'><a href="DSL.html#proj-instance_method" title="Rokuby::DSL#proj (method)">#proj</a></span>, <span class='object_link'><a href="DSL.html#projConf-instance_method" title="Rokuby::DSL#projConf (method)">#projConf</a></span>, <span class='object_link'><a href="DSL.html#projDescr-instance_method" title="Rokuby::DSL#projDescr (method)">#projDescr</a></span>, <span class='object_link'><a href="DSL.html#projFinder-instance_method" title="Rokuby::DSL#projFinder (method)">#projFinder</a></span>, <span class='object_link'><a href="DSL.html#projInst-instance_method" title="Rokuby::DSL#projInst (method)">#projInst</a></span>, <span class='object_link'><a href="DSL.html#projPath-instance_method" title="Rokuby::DSL#projPath (method)">#projPath</a></span>, <span class='object_link'><a href="DSL.html#projSpec-instance_method" title="Rokuby::DSL#projSpec (method)">#projSpec</a></span>, <span class='object_link'><a href="DSL.html#sourceFinder-instance_method" title="Rokuby::DSL#sourceFinder (method)">#sourceFinder</a></span>, <span class='object_link'><a href="DSL.html#srcInst-instance_method" title="Rokuby::DSL#srcInst (method)">#srcInst</a></span>, <span class='object_link'><a href="DSL.html#srcSpec-instance_method" title="Rokuby::DSL#srcSpec (method)">#srcSpec</a></span>, <span class='object_link'><a href="DSL.html#vsProj-instance_method" title="Rokuby::DSL#vsProj (method)">#vsProj</a></span>, <span class='object_link'><a href="DSL.html#vsProjBuild-instance_method" title="Rokuby::DSL#vsProjBuild (method)">#vsProjBuild</a></span>, <span class='object_link'><a href="DSL.html#vsProjConf-instance_method" title="Rokuby::DSL#vsProjConf (method)">#vsProjConf</a></span>, <span class='object_link'><a href="DSL.html#vsProjDescr-instance_method" title="Rokuby::DSL#vsProjDescr (method)">#vsProjDescr</a></span>, <span class='object_link'><a href="DSL.html#vsProjInst-instance_method" title="Rokuby::DSL#vsProjInst (method)">#vsProjInst</a></span>, <span class='object_link'><a href="DSL.html#vsProjSpec-instance_method" title="Rokuby::DSL#vsProjSpec (method)">#vsProjSpec</a></span>, <span class='object_link'><a href="DSL.html#vsProjUsage-instance_method" title="Rokuby::DSL#vsProjUsage (method)">#vsProjUsage</a></span>, <span class='object_link'><a href="DSL.html#vsSlnBuild-instance_method" title="Rokuby::DSL#vsSlnBuild (method)">#vsSlnBuild</a></span>, <span class='object_link'><a href="DSL.html#vsSlnDescr-instance_method" title="Rokuby::DSL#vsSlnDescr (method)">#vsSlnDescr</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GeneralUtility.html#Clone-instance_method" title="Rokuby::GeneralUtility#Clone (method)">#Clone</a></span>, <span class='object_link'><a href="GeneralUtility.html#CloneArray-instance_method" title="Rokuby::GeneralUtility#CloneArray (method)">#CloneArray</a></span>, <span class='object_link'><a href="GeneralUtility.html#DescribeTasks-instance_method" title="Rokuby::GeneralUtility#DescribeTasks (method)">#DescribeTasks</a></span>, <span class='object_link'><a href="GeneralUtility.html#GenerateTaskName-instance_method" title="Rokuby::GeneralUtility#GenerateTaskName (method)">#GenerateTaskName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetClassName-instance_method" title="Rokuby::GeneralUtility#GetClassName (method)">#GetClassName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetUUID-instance_method" title="Rokuby::GeneralUtility#GetUUID (method)">#GetUUID</a></span>, <span class='object_link'><a href="GeneralUtility.html#SystemWithFail-instance_method" title="Rokuby::GeneralUtility#SystemWithFail (method)">#SystemWithFail</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPath-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPath (method)">#AbsoluteTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPathOnly%3F-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPathOnly? (method)">#AbsoluteTaskPathOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#ApplicationBasedTaskPath-instance_method" title="Rokuby::TaskPathUtility#ApplicationBasedTaskPath (method)">#ApplicationBasedTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePath-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePath (method)">#GetProjectFilePath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePathName (method)">#GetProjectFilePathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetTaskName-instance_method" title="Rokuby::TaskPathUtility#GetTaskName (method)">#GetTaskName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#JoinTaskPathName-instance_method" title="Rokuby::TaskPathUtility#JoinTaskPathName (method)">#JoinTaskPathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#MakeRelativeTo-instance_method" title="Rokuby::TaskPathUtility#MakeRelativeTo (method)">#MakeRelativeTo</a></span>, <span class='object_link'><a href="TaskPathUtility.html#NameOnly%3F-instance_method" title="Rokuby::TaskPathUtility#NameOnly? (method)">#NameOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#SplitTaskPath-instance_method" title="Rokuby::TaskPathUtility#SplitTaskPath (method)">#SplitTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#_GetTaskProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#_GetTaskProjectFilePathName (method)">#_GetTaskProjectFilePathName</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Processor.html#AddInput-instance_method" title="Rokuby::Processor#AddInput (method)">#AddInput</a></span>, <span class='object_link'><a href="Processor.html#FullName-instance_method" title="Rokuby::Processor#FullName (method)">#FullName</a></span>, <span class='object_link'><a href="Processor.html#GetOutputByClass-instance_method" title="Rokuby::Processor#GetOutputByClass (method)">#GetOutputByClass</a></span>, <span class='object_link'><a href="Processor.html#GetOutputsByClass-instance_method" title="Rokuby::Processor#GetOutputsByClass (method)">#GetOutputsByClass</a></span>, <span class='object_link'><a href="Processor.html#Inputs-instance_method" title="Rokuby::Processor#Inputs (method)">#Inputs</a></span>, <span class='object_link'><a href="Processor.html#KnownInputClasses-instance_method" title="Rokuby::Processor#KnownInputClasses (method)">#KnownInputClasses</a></span>, <span class='object_link'><a href="Processor.html#Outputs-instance_method" title="Rokuby::Processor#Outputs (method)">#Outputs</a></span>, <span class='object_link'><a href="Processor.html#Process-instance_method" title="Rokuby::Processor#Process (method)">#Process</a></span>, <span class='object_link'><a href="Processor.html#RemoveDependencies-instance_method" title="Rokuby::Processor#RemoveDependencies (method)">#RemoveDependencies</a></span>, <span class='object_link'><a href="Processor.html#_AddDependencies-instance_method" title="Rokuby::Processor#_AddDependencies (method)">#_AddDependencies</a></span>, <span class='object_link'><a href="Processor.html#_AddInput-instance_method" title="Rokuby::Processor#_AddInput (method)">#_AddInput</a></span>, <span class='object_link'><a href="Processor.html#_ExecutePostProcessing-instance_method" title="Rokuby::Processor#_ExecutePostProcessing (method)">#_ExecutePostProcessing</a></span>, <span class='object_link'><a href="Processor.html#_FetchInputs-instance_method" title="Rokuby::Processor#_FetchInputs (method)">#_FetchInputs</a></span>, <span class='object_link'><a href="Processor.html#_InputProcessors-instance_method" title="Rokuby::Processor#_InputProcessors (method)">#_InputProcessors</a></span>, <span class='object_link'><a href="Processor.html#_LogProcessorExecution-instance_method" title="Rokuby::Processor#_LogProcessorExecution (method)">#_LogProcessorExecution</a></span>, <span class='object_link'><a href="Processor.html#_LogTextAfterExecute-instance_method" title="Rokuby::Processor#_LogTextAfterExecute (method)">#_LogTextAfterExecute</a></span>, <span class='object_link'><a href="Processor.html#_LogTextBeforeExecute-instance_method" title="Rokuby::Processor#_LogTextBeforeExecute (method)">#_LogTextBeforeExecute</a></span>, <span class='object_link'><a href="Processor.html#_RemoveDependencies-instance_method" title="Rokuby::Processor#_RemoveDependencies (method)">#_RemoveDependencies</a></span>, <span class='object_link'><a href="Processor.html#init-instance_method" title="Rokuby::Processor#init (method)">#init</a></span>, <span class='object_link'><a href="Processor.html#initialize_processortask-instance_method" title="Rokuby::Processor#initialize_processortask (method)">#initialize_processortask</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">Rake::ProcessorTask</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/ProcessorTask.html#Execute-instance_method" title="Rake::ProcessorTask#Execute (method)">#Execute</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#InTaskHierarchy%3F-instance_method" title="Rake::ProcessorTask#InTaskHierarchy? (method)">#InTaskHierarchy?</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#InvokePrerequisites-instance_method" title="Rake::ProcessorTask#InvokePrerequisites (method)">#InvokePrerequisites</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#invoke_with_call_chain-instance_method" title="Rake::ProcessorTask#invoke_with_call_chain (method)">#invoke_with_call_chain</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Task.html#%5B%5D-class_method" title="Rake::Task.[] (method)">[]</a></span>, <span class='object_link'><a href="../Rake/Task.html#add_description-instance_method" title="Rake::Task#add_description (method)">#add_description</a></span>, <span class='object_link'><a href="../Rake/Task.html#add_description_old_task-instance_method" title="Rake::Task#add_description_old_task (method)">#add_description_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#arg_description-instance_method" title="Rake::Task#arg_description (method)">#arg_description</a></span>, <span class='object_link'><a href="../Rake/Task.html#arg_names-instance_method" title="Rake::Task#arg_names (method)">#arg_names</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear-instance_method" title="Rake::Task#clear (method)">#clear</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear-class_method" title="Rake::Task.clear (method)">clear</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear_actions-instance_method" title="Rake::Task#clear_actions (method)">#clear_actions</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear_prerequisites-instance_method" title="Rake::Task#clear_prerequisites (method)">#clear_prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#create_rule-class_method" title="Rake::Task.create_rule (method)">create_rule</a></span>, <span class='object_link'><a href="../Rake/Task.html#define_task-class_method" title="Rake::Task.define_task (method)">define_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#enhance-instance_method" title="Rake::Task#enhance (method)">#enhance</a></span>, <span class='object_link'><a href="../Rake/Task.html#execute-instance_method" title="Rake::Task#execute (method)">#execute</a></span>, <span class='object_link'><a href="../Rake/Task.html#execute_old_task-instance_method" title="Rake::Task#execute_old_task (method)">#execute_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#initialize_old_task-instance_method" title="Rake::Task#initialize_old_task (method)">#initialize_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#inspect-instance_method" title="Rake::Task#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="../Rake/Task.html#investigation-instance_method" title="Rake::Task#investigation (method)">#investigation</a></span>, <span class='object_link'><a href="../Rake/Task.html#invoke-instance_method" title="Rake::Task#invoke (method)">#invoke</a></span>, <span class='object_link'><a href="../Rake/Task.html#invoke_prerequisites-instance_method" title="Rake::Task#invoke_prerequisites (method)">#invoke_prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#lookup_prerequisite_old_task-instance_method" title="Rake::Task#lookup_prerequisite_old_task (method)">#lookup_prerequisite_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#name-instance_method" title="Rake::Task#name (method)">#name</a></span>, <span class='object_link'><a href="../Rake/Task.html#name_with_args-instance_method" title="Rake::Task#name_with_args (method)">#name_with_args</a></span>, <span class='object_link'><a href="../Rake/Task.html#needed%3F-instance_method" title="Rake::Task#needed? (method)">#needed?</a></span>, <span class='object_link'><a href="../Rake/Task.html#prerequisite_tasks-instance_method" title="Rake::Task#prerequisite_tasks (method)">#prerequisite_tasks</a></span>, <span class='object_link'><a href="../Rake/Task.html#reenable-instance_method" title="Rake::Task#reenable (method)">#reenable</a></span>, <span class='object_link'><a href="../Rake/Task.html#scope_name-class_method" title="Rake::Task.scope_name (method)">scope_name</a></span>, <span class='object_link'><a href="../Rake/Task.html#set_arg_names-instance_method" title="Rake::Task#set_arg_names (method)">#set_arg_names</a></span>, <span class='object_link'><a href="../Rake/Task.html#set_arg_names_old_task-instance_method" title="Rake::Task#set_arg_names_old_task (method)">#set_arg_names_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#source-instance_method" title="Rake::Task#source (method)">#source</a></span>, <span class='object_link'><a href="../Rake/Task.html#task_defined%3F-class_method" title="Rake::Task.task_defined? (method)">task_defined?</a></span>, <span class='object_link'><a href="../Rake/Task.html#tasks-class_method" title="Rake::Task.tasks (method)">tasks</a></span>, <span class='object_link'><a href="../Rake/Task.html#timestamp-instance_method" title="Rake::Task#timestamp (method)">#timestamp</a></span>, <span class='object_link'><a href="../Rake/Task.html#to_s-instance_method" title="Rake::Task#to_s (method)">#to_s</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="TaskDescription.html" title="Rokuby::TaskDescription (module)">TaskDescription</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskDescription.html#AddTaskArgumentDescriptions-instance_method" title="Rokuby::TaskDescription#AddTaskArgumentDescriptions (method)">#AddTaskArgumentDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#AddTaskDescriptions-instance_method" title="Rokuby::TaskDescription#AddTaskDescriptions (method)">#AddTaskDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#IsTaskDescriptionEmpty%3F-instance_method" title="Rokuby::TaskDescription#IsTaskDescriptionEmpty? (method)">#IsTaskDescriptionEmpty?</a></span>, <span class='object_link'><a href="TaskDescription.html#ResetTaskDescription-instance_method" title="Rokuby::TaskDescription#ResetTaskDescription (method)">#ResetTaskDescription</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="PathUtility.html#ExecuteInPath-instance_method" title="Rokuby::PathUtility#ExecuteInPath (method)">#ExecuteInPath</a></span>, <span class='object_link'><a href="PathUtility.html#FormatPath-instance_method" title="Rokuby::PathUtility#FormatPath (method)">#FormatPath</a></span>, <span class='object_link'><a href="PathUtility.html#GetWindowsPath-instance_method" title="Rokuby::PathUtility#GetWindowsPath (method)">#GetWindowsPath</a></span>, <span class='object_link'><a href="PathUtility.html#JoinPaths-instance_method" title="Rokuby::PathUtility#JoinPaths (method)">#JoinPaths</a></span>, <span class='object_link'><a href="PathUtility.html#PathAbsolute%3F-instance_method" title="Rokuby::PathUtility#PathAbsolute? (method)">#PathAbsolute?</a></span>, <span class='object_link'><a href="PathUtility.html#RemoveParents-instance_method" title="Rokuby::PathUtility#RemoveParents (method)">#RemoveParents</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::ProcessChain (class)">ProcessChain</a></span></tt>) <strong>initialize</strong>(name = nil, app = nil, projectFile = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of ProcessChain</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_projectFile'>projectFile</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_initialize_processor'>initialize_processor</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='id identifier rubyid_projectFile'>projectFile</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@ChainProcessors</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  
+  <span class='ivar'>@InputProcessorName</span> <span class='op'>=</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>in</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@OutputProcessorName</span> <span class='op'>=</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>out</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@InputProcessor</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>PassthroughProcessor</span><span class='comma'>,</span> <span class='ivar'>@InputProcessorName</span>
+  <span class='ivar'>@OutputProcessor</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>PassthroughProcessor</span><span class='comma'>,</span> <span class='ivar'>@OutputProcessorName</span>
+  
+  <span class='const'>AddDependencies_Processor</span><span class='lparen'>(</span><span class='ivar'>@OutputProcessorName</span><span class='rparen'>)</span>
+  
+  <span class='const'>AddProcessor</span><span class='lparen'>(</span><span class='ivar'>@InputProcessor</span><span class='rparen'>)</span>
+  <span class='const'>AddProcessor</span><span class='lparen'>(</span><span class='ivar'>@OutputProcessor</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="ChainProcessors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ChainProcessors</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ChainProcessors</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='const'>ChainProcessors</span>
+  <span class='ivar'>@ChainProcessors</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="InputProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>InputProcessor</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute InputProcessor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='const'>InputProcessor</span>
+  <span class='ivar'>@InputProcessor</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="InputProcessorName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>InputProcessorName</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute InputProcessorName</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='const'>InputProcessorName</span>
+  <span class='ivar'>@InputProcessorName</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="OutputProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>OutputProcessor</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute OutputProcessor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 12</span>
+
+<span class='kw'>def</span> <span class='const'>OutputProcessor</span>
+  <span class='ivar'>@OutputProcessor</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="OutputProcessorName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>OutputProcessorName</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute OutputProcessorName</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='const'>OutputProcessorName</span>
+  <span class='ivar'>@OutputProcessorName</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_AdaptProcessorName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_AdaptProcessorName</strong>(newName, oldName, oldProcessorName) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Replace an old processor name with new one including the new process chain
+name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldProcessorName'>oldProcessorName</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_oldProcessorName'>oldProcessorName</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='id identifier rubyid_newName'>newName</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_CloneChainProcessors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_CloneChainProcessors</strong>(newName, oldName) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>replace the existing chain processors through new ones that are clones of
+the old processors</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__CloneChainProcessors'>_CloneChainProcessors</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_oldChainProcessors'>oldChainProcessors</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span>
+  <span class='ivar'>@ChainProcessors</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_oldChainProcessors'>oldChainProcessors</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_procName'>procName</span><span class='op'>|</span>
+    <span class='id identifier rubyid_newProcessorName'>newProcessorName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='id identifier rubyid_procName'>procName</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_newProcessor'>newProcessor</span> <span class='op'>=</span> <span class='id identifier rubyid_cloneProc'>cloneProc</span> <span class='id identifier rubyid_newProcessorName'>newProcessorName</span> <span class='id identifier rubyid_procName'>procName</span>
+    <span class='id identifier rubyid_newProcessor'>newProcessor</span><span class='period'>.</span><span class='const'>RemoveDependencies</span><span class='lparen'>(</span><span class='ivar'>@ChainProcessors</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>  <span class='comment'># all internal dependencies should be removed
+</span>    <span class='const'>AddProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_newProcessor'>newProcessor</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_GetProcessorName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_GetProcessorName</strong>(extension) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get a processor name with a custom extension</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_extension'>extension</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_extension'>extension</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_InitProc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_InitProc</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Nothing to be done here</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__InitProc'>_InitProc</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_InputKnown-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_InputKnown</strong>(input) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__InputKnown'>_InputKnown</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_OnAddInput-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_OnAddInput</strong>(input) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__OnAddInput'>_OnAddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='const'>InputProcessor</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_ProcessInputs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ProcessInputs</strong>(taskArgs = nil) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ProcessInputs'>_ProcessInputs</span><span class='lparen'>(</span><span class='id identifier rubyid_taskArgs'>taskArgs</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='ivar'>@outputs</span> <span class='op'>=</span> <span class='const'>OutputProcessor</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>Outputs</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AdaptName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdaptName</strong>(newName) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='const'>AdaptName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_oldName'>oldName</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='const'>AdaptName_processor</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid__CloneChainProcessors'>_CloneChainProcessors</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='rparen'>)</span>
+  
+  <span class='const'>RemoveDependencies</span><span class='lparen'>(</span><span class='ivar'>@OutputProcessorName</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@InputProcessorName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='ivar'>@InputProcessorName</span><span class='rparen'>)</span>
+  <span class='ivar'>@OutputProcessorName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='ivar'>@OutputProcessorName</span><span class='rparen'>)</span>
+  
+  <span class='const'>AddDependencies_Processor</span><span class='lparen'>(</span><span class='ivar'>@OutputProcessorName</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@InputProcessor</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='ivar'>@InputProcessorName</span><span class='rbracket'>]</span>
+  <span class='ivar'>@OutputProcessor</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='ivar'>@OutputProcessorName</span><span class='rbracket'>]</span>
+  
+  <span class='const'>AddProcessor</span><span class='lparen'>(</span><span class='ivar'>@InputProcessor</span><span class='rparen'>)</span>
+  <span class='const'>AddProcessor</span><span class='lparen'>(</span><span class='ivar'>@OutputProcessor</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AdaptName_processor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdaptName_processor</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 50</span>
+
+<span class='kw'>alias</span> <span class='const'>AdaptName_processor</span> <span class='const'>AdaptName</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AddDependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AddDependencies</strong>(deps) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='const'>AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_deps'>deps</span><span class='rparen'>)</span>
+  <span class='const'>InputProcessor</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_deps'>deps</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AddDependencies_Processor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AddDependencies_Processor</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 113</span>
+
+<span class='kw'>alias</span> <span class='const'>AddDependencies_Processor</span> <span class='const'>AddDependencies</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AddProcessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AddProcessor</strong>(processor) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a processor to this process chain.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='const'>AddProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_processor'>processor</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_processor'>processor</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_processor'>processor</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Connect-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Connect</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>State that some processors should be chained. The processors in the list
+will deliver their output to the next processor in the list. The processors
+should already be defined when calling this function. The args should be a
+list of processor names or :in, :out</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 153</span>
+
+<span class='kw'>def</span> <span class='const'>Connect</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_procNames'>procNames</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_procNames'>procNames</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_lastProcName'>lastProcName</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_procNames'>procNames</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_procName'>procName</span><span class='op'>|</span>
+    <span class='id identifier rubyid_usedProcName'>usedProcName</span> <span class='op'>=</span> <span class='id identifier rubyid_procName'>procName</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_procName'>procName</span> <span class='op'>==</span> <span class='symbol'>:in</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_usedProcName'>usedProcName</span> <span class='op'>=</span> <span class='ivar'>@InputProcessorName</span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_procName'>procName</span> <span class='op'>==</span> <span class='symbol'>:out</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_usedProcName'>usedProcName</span> <span class='op'>=</span> <span class='ivar'>@OutputProcessorName</span>
+    <span class='kw'>end</span>
+    
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_lastProcName'>lastProcName</span><span class='rparen'>)</span>
+      <span class='comment'>#puts &quot;Adding #{lastProcName} to pres of #{usedProcName}&quot;
+</span>      <span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='id identifier rubyid_proc'>proc</span> <span class='id identifier rubyid_usedProcName'>usedProcName</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not find processor '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='const'>Name</span><span class='rbrace'>}</span><span class='tstring_content'>' when trying to connect processor '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lastProcName'>lastProcName</span><span class='rbrace'>}</span><span class='tstring_content'>' to its input.</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+      <span class='const'>AddProcessor</span><span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_proc'>proc</span> <span class='id identifier rubyid_usedProcName'>usedProcName</span><span class='comma'>,</span> <span class='symbol'>:procDeps</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_lastProcName'>lastProcName</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_lastProcName'>lastProcName</span> <span class='op'>=</span> <span class='id identifier rubyid_usedProcName'>usedProcName</span>
+  <span class='kw'>end</span>      
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Extend-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Extend</strong>(valueMap, executeParent = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Extend/set the attributes of the process_chain. Same as in processor except
+that the inputs and dependecies are set on the input processor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_executeParent'>executeParent</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='comment'>#puts &quot;in extend of process chain #{name}: #{valueMap}&quot;
+</span>  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_inputs'>inputs</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Inputs</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ins</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_inputs'>inputs</span><span class='rparen'>)</span>
+    <span class='const'>AddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_inputs'>inputs</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:ThrowOnUnkownInput</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:throwUnknown</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span><span class='rparen'>)</span>
+    <span class='ivar'>@ThrowOnUnkownInput</span> <span class='op'>=</span> <span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span>
+    <span class='const'>InputProcessor</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>ThrowOnUnkownInput</span> <span class='op'>=</span> <span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span>
+    <span class='const'>OutputProcessor</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>ThrowOnUnkownInput</span> <span class='op'>=</span> <span class='id identifier rubyid_throwOnUnknownInput'>throwOnUnknownInput</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_dependencies'>dependencies</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Dependencies</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:deps</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_dependencies'>dependencies</span><span class='rparen'>)</span>
+    <span class='const'>InputProcessor</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='const'>AddDependencies</span><span class='lparen'>(</span><span class='id identifier rubyid_dependencies'>dependencies</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize_copy</strong>(original) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize_copy'>initialize_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_intialize_copy_processor'>intialize_copy_processor</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@ChainProcessors</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ChainProcessors</span>
+  
+  <span class='ivar'>@InputProcessorName</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>InputProcessorName</span><span class='rparen'>)</span>
+  <span class='ivar'>@OutputProcessorName</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>OutputProcessorName</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@InputProcessor</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>InputProcessor</span>
+  <span class='ivar'>@OutputProcessor</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>OutputProcessor</span>      
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_processor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize_processor</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 16</span>
+
+<span class='kw'>alias</span> <span class='id identifier rubyid_initialize_processor'>initialize_processor</span> <span class='id identifier rubyid_initialize'>initialize</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="intialize_copy_processor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>intialize_copy_processor</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>do not use this function without calling adapt name afterwards adapt name
+does the actual copying of the internal processors that can not be done
+before the name of the process chain is clear.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/process_chain.rb', line 37</span>
+
+<span class='kw'>alias</span> <span class='id identifier rubyid_intialize_copy_processor'>intialize_copy_processor</span> <span class='id identifier rubyid_initialize_copy'>initialize_copy</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:48 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: introduction
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: introduction</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>Rokuby</h1>
+
+<h2>What is Rokuby?</h2>
+
+<p>Rokuby is the name of a build tool to create C/C++ project.
+It is based on the rake tool with extensions that incorporate ideas from other
+build tools like CMake to make it easier to create complex projects.</p>
+
+<p><em>Features</em>:</p>
+
+<ul>
+<li>Define software projects</li>
+<li>Build your projects on different platforms</li>
+<li>Visual Studio Solution Creation</li>
+</ul>
+
+<h2>How does it work?</h2>
+
+<p>Rokuby works similar to Rake where you can define tasks that can be made dependent
+on each other.</p>
+
+<p>But there are also some important differences between Rake and Rokuby.
+Although tasks are a great thing they are missing an important feature: It is not possible
+to easily transport information between tasks that let you combine them to create
+complex solutions.</p>
+
+<p>Therefore, Rokuby implements a new paradigm which is called <em>Processors</em>. They are similar
+to tasks in that they are dependent on each other and execute their dependencies before
+executing themselves. On the other hand they are more complex than tasks because they
+are able to transmit information between each other. In that manner they build up <b>Process
+Chains</b> that can be very complex beasts that transport information from their starting point
+to at least one end point (which are processors).</p>
+
+<p>The information that is transported between the processors comes in so called <b>Information Units</b>.
+They are arbitrary sets of information whose format must be known to the processor so he can
+manage to process these units.</p>
+
+<p>In this manner the processors can define a set of valid information units that they accept
+and the user can input these units into the processor to let him create something that the user
+needs (like a software project).</p>
+
+<p>Here is a picture depicting the information flow in a fictional processor pipeline:</p>
+
+<p><img src="images/basic_processor_pipeline.svg" alt="Processor Pipeline Image" title="Fictional processor pipeline"></p>
+
+<p>Examples for information units:</p>
+
+<ul>
+<li>File specifications (specify the location of a set of files)</li>
+<li>Library specification (specify the location of a software library)</li>
+<li>Project description (contains meta information about a software project)</li>
+</ul>
+
+<p>Examples of processors:</p>
+
+<ul>
+<li>File finder (find a file specified by a file specification)</li>
+<li>Library finder (find a software library specified by a library specification)</li>
+<li>Project builder (build a software project)</li>
+</ul>
+
+<h2>Defining a Build Process</h2>
+
+<p>Rokuby comes with several premade processors and information units that can be handed to them.
+Defining instances of both is made available trough a build in DSL which resembles the Rake
+DSL. Nevertheless, there are important differences which are necessary to include the new features
+of the build tool.</p>
+
+<h3>From Specification to Instance: The process of finding files</h3>
+
+<p>Finding files is one of the most important tasks of a build system because it is made to process
+files into other files. Therefore, this process must be very flexible.</p>
+
+<p>To find anything in Rokuby one has to first setup a <em>specification</em> for it. Such a specification
+can be a combination of several things:</p>
+
+<ul>
+<li>Include patterns: Names of files and or regular expressions for files that should be included into the instance.</li>
+<li>Exclude patterns: Names of files and or regular expressions for files that should be excluded from the instance (stronger than include patterns).</li>
+<li>Search paths: The paths in which should be searched (recursively).</li>
+</ul>
+
+<p>Once you have created such a specification it is just a matter of putting it into a proper processor which will
+create an instance with the files that were found (for simple files a <a href="Rokuby/FileFinder.html">FileFinder</a>).</p>
+
+<p>Remember that there are more complex cases than just finding a file. There are special processors for finding certain
+types of file sets (e.g. libraries or even software project files).</p>
+
+<p>Lets see it in a simple example:</p>
+
+<p>Assume that we have the following directory structure:</p>
+
+<ul>
+<li>Current directory: .</li>
+<li>Searched file: ./src/main.cpp</li>
+</ul>
+
+<p>We can now create a file specification that targets the given file:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_fileSpec'>fileSpec</span> <span class='symbol'>:SourceFile</span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>main\.cpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>sPaths:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>src</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<p>After that the file specification wanders into a file finder to locate the specified files:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Find the main.cpp file</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_fileFinder'>fileFinder</span> <span class='symbol'>:FindSourceFile</span><span class='comma'>,</span> <span class='symbol'>:ins</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='symbol'>:SourceFile</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fileFinder'>fileFinder</span><span class='op'>|</span>
+    <span class='id identifier rubyid_fileSet'>fileSet</span> <span class='op'>=</span> <span class='id identifier rubyid_fileFinder'>fileFinder</span><span class='period'>.</span><span class='const'>GetOutputByClass</span><span class='lparen'>(</span><span class='const'>FileSet</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='lbracket'>[</span><span class='id identifier rubyid_fileSet'>fileSet</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>When you now save this in a project file ProjectDefinition.rb and execute <code>rokuby FindSourceFile</code> in the folder
+where this project definition is located rokuby will try to find the file and print the set of files that
+was found (even if no files were found, in which case the file set will almost be empty).</p>
+
+<h3>A Project Reference: The Test Project</h3>
+
+<p>In the Rokuby repository you can find the test project which is used to test the features of Rokuby when changes
+are applied to the source code. It is documented and a very good example to get going with Rokuby.</p>
+
+<p>Go and have a look at its <a href="file.ProjectDefinition.html">ProjectDefinition</a> file.</p>
+
+<p>The project is hopefully not too complex, but complex enough to show the important features of a Rokuby build process.</p>
+
+<h2>Project Files and their Namespaces</h2>
+
+<h3>Project Files</h3>
+
+<p>Learn more under <a href="file.project_files.html">Project Files</a></p>
+
+<p>Understanding how project files are loaded and processed is important to be able to effectively work with
+Rokuby. Executing &quot;rokuby&quot; in a folder will load and process the first project file that is found in that directory.
+Project files can have any name but only some names are recognized by default. Loading an arbitrary project
+file is possible through the &quot;-f&quot; option.</p>
+
+<pre class="code ruby"><code>rokuby -f path/to/project/file
+</code></pre>
+
+<p>Also Rokuby allows the user to load other project files by the means of an import, e.g.:
+<code>import &quot;subpath/ProjectDefinition.rb&quot;</code></p>
+
+<p>This will load and process another project file with the given path which is treated as a new project (in contrast
+to the ruby require statement that works as expected).</p>
+
+<p>Simple projects that only contain one project file can be complex to create, but joining two projects with
+different project files is even more challenging. Rokuby supports the inclusion of several project files that
+describe different parts of the whole project (which can also be foreign projects). To assure that now information
+of one project file can disturb the information in another project file, Rokuby will load project files strictly
+sepparated from each other. On the one hand this makes sure that no problems occur through global variables but also
+can make the life of a programmer harder because the information in one project file is strictly separated from
+information in another project file.</p>
+
+<h3>Addressing Tasks in different Project Files</h3>
+
+<p>To overcome this problem Rokuby allows to address tasks, information units and processors through the project files
+path in the directory structure.</p>
+
+<p>As an example asume the following directory structure:</p>
+
+<ul>
+<li>Current directory: .</li>
+<li>Loaded project file: ./ProjectDefinition.rb</li>
+<li>Imported project file: ./subfolder/ProjectDefinition.rb</li>
+</ul>
+
+<p>If we now want to address an entity in the imported project file from the main project file we can simply do it.
+Making a task <code>task1</code> in the main project file depending on a task <code>task1</code> in the subproject file:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_importPath'>importPath</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>subfolder/ProjectDefinition.rb</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_import'>import</span> <span class='id identifier rubyid_importPath'>importPath</span>
+
+<span class='id identifier rubyid_task'>task</span> <span class='symbol'>:task1</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_importPath'>importPath</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:task1</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+</code></pre>
+
+<p>This will lead to the execution of <code>task1</code> in the imported project file before the <code>task1</code> in the main project file.
+(This is by the way one of the only differences between tasks in Rokuby and Rake).</p>
+
+<p>This is also the way to address tasks from the command line. Only giving a name of a task to the command line tool will
+try to execute the task with that name in the main project file (the first project file that is loaded).
+If you want to address a task in a specific project file you need to address it with the relative path to this project file
+a colon and the name of the task:
+If you for example want to execute a task <code>subtask</code> in the project file &quot;./subdir/ProjectDefinition.rb&quot; you would type:</p>
+
+<pre class="code ruby"><code>rakebuilder ./subdir/ProjectDefinition.rb:subtask
+</code></pre>
+
+<h2>Project Paths</h2>
+
+<p>An important thing when building projects is the management of paths and how they are related to the current work directory.
+Rokubys solution to this problem is that of project paths. These paths do not only hold a simple string that represents a path.
+Instead they save the absolute path as well as the relative part of the path that is defined. </p>
+
+<p>This works as follows:</p>
+
+<ul>
+<li>Each project file is parsed and executed in the directory it is saved in (which means the working directory is set to this directory).</li>
+<li>Project paths always extract information regarding the current directory and combine it with the relative path the user inserts.</li>
+<li>The complete information makes it possible to extract a relative path even if you are in the context of another project file.</li>
+</ul>
+
+<p>These abilities make it very easy to handle paths because every paths knows where it belongs to.
+The only drawback for the user is that it is necessary for him to define project paths instead of normal strings.
+To ease this task Rokuby provides a shortcut for defining a project path:</p>
+
+<pre class="code ruby"><code><span class='comment'># Define a project path that is relative to the current directory, which should be the path of the current project file
+</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>relative/path/to/my/file.txt</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># Define a project path that is relative to a base directory
+</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>base:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>base/path</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>relative:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>relative/path/to/my/file.txt</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+</code></pre>
+
+<h2>Information Units</h2>
+
+<p>Information units are the elements in Rokuby that carry all information which is used in the process of creating a
+project. They are simple and relatively stupid objecs that can only be used to carry and structure information (nothing more!).</p>
+
+<p>Defining an information unit is easy as you have already seen in the file set example above. Generally the definition
+of an information unit has the following format:</p>
+
+<pre class="code ruby"><code><span class='comment'># Define an information unit with name :IUName and some given attributes
+</span><span class='id identifier rubyid_infoUnit'>infoUnit</span> <span class='const'>IUClass</span><span class='comma'>,</span> <span class='symbol'>:IUName</span><span class='comma'>,</span> <span class='symbol'>:attr1</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_valu1'>valu1</span><span class='comma'>,</span>
+                           <span class='symbol'>:attr2</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_value2'>value2</span> <span class='comment'>#...
+</span></code></pre>
+
+<p>Notice that you can define any class of information unit with this syntax. You just need to define a class that can carry data
+and is derived from a proper information unit base class.</p>
+
+<p>There are also a lot of abbreviations for several information unit classes, e.g. <code>fileSpec</code> for file specifications.
+Notice that information units that are created with a name are registered in the project file and can be addressed later on with their
+class, name combination. For example:</p>
+
+<pre class="code ruby"><code># define information unit
+fileSpec :SourceCode, :inPats =&gt; [...], :sPaths =&gt; []
+
+# use information unit in source code specification
+srcSpec :SourceCode, :srcSpec =&gt; fileSpec(:SourceCode),
+                                 :inclSpec =&gt; fileSpec(:Includes),
+                                 :defs =&gt; [&quot;USE_SOURCE_CODE&quot;]
+</code></pre>
+
+<p>Notice that almost every information unit (in the context of a c/c++ project) should be able to carry defines that are specific to this information unit and are only
+applied when this information unit is involved.</p>
+
+<p>The ability to define and reuse information units and the capabilities of project paths make it possible to use information units
+independently of the project file where they were defined. You can even address information units from outside the project file the
+same way you would do with tasks and processors.</p>
+
+<h2>Processors and Process Chains</h2>
+
+<h3>The Ins and Outs of Processors</h3>
+
+<p>Processors are entities that are designed to take a set of inputs and produce a set of outputs from the given inputs. The rules of
+defining and connecting processors are similar to the rules of defining and connecting Rake tasks.</p>
+
+<p>In general the definition of a processor looks like this:</p>
+
+<pre class="code ruby"><code># define a processor
+defineProc ProcClass, :ProcName, :ins =&gt; [...],
+                                 :deps =&gt; [...],
+                                 ...more attributes...
+</code></pre>
+
+<p>The <code>:ins</code> attribute is an array of information units that can be handed to the processor for processing. Additionally, the processor
+can depend on some other processor that are specified over the <code>:deps</code> attribute which is an array of processors. These dependencies
+will be executed before the processor itself is executed and the output that is generated by them is added to the inputs that this
+processor will use during its execution.</p>
+
+<h3>Process Chains</h3>
+
+<p>To ease the task of connecting processors (and to generate special purpose chains of processors) there are process chains. One feature
+that process chains provide is the markup to more simply connect a set of processors into chains.
+For example:</p>
+
+<pre class="code ruby"><code><span class='comment'>#define a general purpose process chain of some known processors
+</span><span class='id identifier rubyid_chain'>chain</span> <span class='symbol'>:ChainName</span><span class='comma'>,</span> <span class='symbol'>:in</span><span class='comma'>,</span> <span class='symbol'>:Proc1Name</span><span class='comma'>,</span> <span class='symbol'>:Proc2Name</span><span class='comma'>,</span> <span class='symbol'>:Proc3Name</span><span class='comma'>,</span> <span class='symbol'>:out</span>
+</code></pre>
+
+<p>This code defines a process chain that connects two processors with the names Proc1Name, Proc2Name and Proc3Name. The <code>:in</code> and <code>:out</code>
+symbols represent two processors that each process chain posseses, namely the input processor and the output processor. These processors
+are simple processors that just forward their input values as their output values. They are needed to implement a feature of a process chain
+that makes them very versatile: process chains are processors. This means that process chains can be used like processors in another process
+chain. They gather input in their input processor and produce output that is placed in their output processor.</p>
+
+<p>(In fact some of the more complex processors are process chains that simply reuse other processors to implement their functionality)</p>
+
+<h3>Processors and Tasks</h3>
+
+<p>Rokuby adopts the tasking features of Rake so that the user does not loose the possibility to use tasks in their scripts. To tightly integrated
+processors into the world of tasks it was decided to implement processors as a new sort of tasks. This makes it possible to make processors depend
+on tasks and the other way round. With this integration it is easy for users to interweave processors and tasks.</p>
+
+<pre class="code ruby"><code>#define a task
+task :MyTask do
+    puts &quot;Working in MyTask&quot;
+end
+
+#define a processor
+defineProc ProcClass, :MyProc, :ins =&gt; [...]
+
+#make MyTask dependent on MyProc so that MyProc is executed before MyTask
+task :MyTask =&gt; [:MyProc]
+</code></pre>
+
+<p>You could also do it the other way round and make MyProc depend on the task instead</p>
+
+<pre class="code ruby"><code><span class='comment'>#make MyProc dependent on MyTask so that MyTask is executed before MyProc
+</span><span class='id identifier rubyid_proc'>proc</span> <span class='symbol'>:MyProc</span><span class='comma'>,</span> <span class='symbol'>:deps</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='symbol'>:MyTask</span><span class='rbracket'>]</span>
+</code></pre>
+</div></div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

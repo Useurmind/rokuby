@@ -1,0 +1,752 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: XmlSimple
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (X)</a> &raquo;
+    
+    
+    <span class="title">XmlSimple</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: XmlSimple
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">XmlSimple</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">REXML</dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Utility/XML/xmlsimple.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Easy API to maintain XML (especially configuration files).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="XmlSimple/Cache.html" title="XmlSimple::Cache (class)">Cache</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="VERSION-classvariable" class="">@@VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>1.0.15</span><span class='tstring_end'>'</span></span></pre></dd>
+      
+        <dt id="cache-classvariable" class="">@@cache =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Create a "global" cache.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>Cache</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xml_in-class_method" title="xml_in (class method)">+ (Object) <strong>xml_in</strong>(string = nil, options = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the functional version of the instance method xml_in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xml_out-class_method" title="xml_out (class method)">+ (Object) <strong>xml_out</strong>(hash, options = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the functional version of the instance method xml_out.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (XmlSimple) <strong>initialize</strong>(defaults = nil) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates and intializes a new XmlSimple object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xml_in-instance_method" title="#xml_in (instance method)">- (Object) <strong>xml_in</strong>(string = nil, options = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts an XML document in the same way as the Perl module XML::Simple.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xml_out-instance_method" title="#xml_out (instance method)">- (Object) <strong>xml_out</strong>(ref, options = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts a data structure into an XML document.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="XmlSimple (class)">XmlSimple</a></span></tt>) <strong>initialize</strong>(defaults = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates and intializes a new XmlSimple object.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>defaults</p></td>
+<td>
+<p>Default values for options.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Options have to be a Hash.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@default_options</span> <span class='op'>=</span> <span class='id identifier rubyid_normalize_option_names'>normalize_option_names</span><span class='lparen'>(</span><span class='id identifier rubyid_defaults'>defaults</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='const'>KNOWN_OPTIONS</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>in</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='const'>KNOWN_OPTIONS</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>out</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_uniq'>uniq</span><span class='rparen'>)</span>
+  <span class='ivar'>@options</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@_var_values</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="xml_in-class_method">
+  
+    + (<tt>Object</tt>) <strong>xml_in</strong>(string = nil, options = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the functional version of the instance method xml_in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+201
+202
+203
+204</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 201</span>
+
+<span class='kw'>def</span> <span class='const'>XmlSimple</span><span class='period'>.</span><span class='id identifier rubyid_xml_in'>xml_in</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_xml_simple'>xml_simple</span> <span class='op'>=</span> <span class='const'>XmlSimple</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_xml_simple'>xml_simple</span><span class='period'>.</span><span class='id identifier rubyid_xml_in'>xml_in</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xml_out-class_method">
+  
+    + (<tt>Object</tt>) <strong>xml_out</strong>(hash, options = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the functional version of the instance method xml_out.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+257
+258
+259
+260</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 257</span>
+
+<span class='kw'>def</span> <span class='const'>XmlSimple</span><span class='period'>.</span><span class='id identifier rubyid_xml_out'>xml_out</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_xml_simple'>xml_simple</span> <span class='op'>=</span> <span class='const'>XmlSimple</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_xml_simple'>xml_simple</span><span class='period'>.</span><span class='id identifier rubyid_xml_out'>xml_out</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="xml_in-instance_method">
+  
+    - (<tt>Object</tt>) <strong>xml_in</strong>(string = nil, options = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts an XML document in the same way as the Perl module XML::Simple.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>string</p></td>
+<td>
+<p>XML source. Could be one of the following:</p>
+<ul><li>
+<p>nil: Tries to load and parse '&lt;scriptname&gt;.xml'.</p>
+</li><li>
+<p>filename: Tries to load and parse filename.</p>
+</li><li>
+<p>IO object: Reads from object until EOF is detected and parses result.</p>
+</li><li>
+<p>XML string: Parses string.</p>
+</li></ul>
+</td></tr><tr><td class="rdoc-term"><p>options</p></td>
+<td>
+<p>Options to be used.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_xml_in'>xml_in</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_handle_options'>handle_options</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>in</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+
+  <span class='comment'># If no XML string or filename was supplied look for scriptname.xml.
+</span>  <span class='kw'>if</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_string'>string</span> <span class='op'>=</span> <span class='const'>File</span><span class='op'>::</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='gvar'>$0</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+    <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_sub!'>sub!</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.[^.]+$</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_string'>string</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.xml</span><span class='tstring_end'>'</span></span>
+
+    <span class='id identifier rubyid_directory'>directory</span> <span class='op'>=</span> <span class='const'>File</span><span class='op'>::</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='gvar'>$0</span><span class='rparen'>)</span>
+    <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>searchpath</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_directory'>directory</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_directory'>directory</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_string'>string</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>&lt;.*?&gt;</span><span class='regexp_end'>/m</span></span>
+      <span class='ivar'>@doc</span> <span class='op'>=</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_string'>string</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-</span><span class='tstring_end'>'</span></span>
+      <span class='ivar'>@doc</span> <span class='op'>=</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='gvar'>$stdin</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_filename'>filename</span> <span class='op'>=</span> <span class='id identifier rubyid_find_xml_file'>find_xml_file</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='comma'>,</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>searchpath</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+
+      <span class='kw'>if</span> <span class='ivar'>@options</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cache</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+        <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cache</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_scheme'>scheme</span><span class='op'>|</span>
+          <span class='kw'>case</span><span class='lparen'>(</span><span class='id identifier rubyid_scheme'>scheme</span><span class='rparen'>)</span>
+          <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>storable</span><span class='tstring_end'>'</span></span>
+            <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='cvar'>@@cache</span><span class='period'>.</span><span class='id identifier rubyid_restore_storable'>restore_storable</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+          <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>mem_share</span><span class='tstring_end'>'</span></span>
+            <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='cvar'>@@cache</span><span class='period'>.</span><span class='id identifier rubyid_restore_mem_share'>restore_mem_share</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+          <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>mem_copy</span><span class='tstring_end'>'</span></span>
+            <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='cvar'>@@cache</span><span class='period'>.</span><span class='id identifier rubyid_restore_mem_copy'>restore_mem_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+          <span class='kw'>else</span>
+            <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unsupported caching scheme: &lt;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scheme'>scheme</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;.</span><span class='tstring_end'>&quot;</span></span>
+          <span class='kw'>end</span>
+          <span class='kw'>return</span> <span class='id identifier rubyid_content'>content</span> <span class='kw'>if</span> <span class='id identifier rubyid_content'>content</span>
+        <span class='rbrace'>}</span>
+      <span class='kw'>end</span>
+      
+      <span class='ivar'>@doc</span> <span class='op'>=</span> <span class='id identifier rubyid_load_xml_file'>load_xml_file</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>IO</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>StringIO</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Zlib</span><span class='op'>::</span><span class='const'>GzipReader</span><span class='rparen'>)</span>
+    <span class='ivar'>@doc</span> <span class='op'>=</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not parse object of type: &lt;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_collapse'>collapse</span><span class='lparen'>(</span><span class='ivar'>@doc</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>keeproot</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='ivar'>@doc</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_result'>result</span>
+  <span class='id identifier rubyid_put_into_cache'>put_into_cache</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xml_out-instance_method">
+  
+    - (<tt>Object</tt>) <strong>xml_out</strong>(ref, options = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts a data structure into an XML document.</p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>ref</p></td>
+<td>
+<p>Reference to data structure to be converted into XML.</p>
+</td></tr><tr><td class="rdoc-term"><p>options</p></td>
+<td>
+<p>Options to be used.</p>
+</td></tr></table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/xmlsimple.rb', line 212</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_xml_out'>xml_out</span><span class='lparen'>(</span><span class='id identifier rubyid_ref'>ref</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_handle_options'>handle_options</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>out</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_ref'>ref</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>anonymoustag</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_ref'>ref</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>keeproot</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>==</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_ref'>ref</span> <span class='op'>=</span> <span class='id identifier rubyid_ref'>ref</span><span class='lbracket'>[</span><span class='id identifier rubyid_keys'>keys</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+      <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>rootname</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_keys'>keys</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>elsif</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>rootname</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_refsave'>refsave</span> <span class='op'>=</span> <span class='id identifier rubyid_ref'>ref</span>
+      <span class='id identifier rubyid_ref'>ref</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+      <span class='id identifier rubyid_refsave'>refsave</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+        <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_scalar'>scalar</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_ref'>ref</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+        <span class='kw'>else</span>
+          <span class='id identifier rubyid_ref'>ref</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='rbracket'>]</span>
+        <span class='kw'>end</span>
+      <span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@ancestors</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_xml'>xml</span> <span class='op'>=</span> <span class='id identifier rubyid_value_to_xml'>value_to_xml</span><span class='lparen'>(</span><span class='id identifier rubyid_ref'>ref</span><span class='comma'>,</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>rootname</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@ancestors</span> <span class='op'>=</span> <span class='kw'>nil</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xmldeclaration</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_xml'>xml</span> <span class='op'>=</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xmldeclaration</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_xml'>xml</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@options</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>outputfile</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>outputfile</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>IO</span><span class='rparen'>)</span>
+      <span class='kw'>return</span> <span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>outputfile</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_xml'>xml</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='ivar'>@options</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>outputfile</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>w</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span> <span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_xml'>xml</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:46 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

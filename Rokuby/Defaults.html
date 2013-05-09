@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby::Defaults
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">Defaults</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby::Defaults
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/InformationUnits/General/defaults.rb<span class="defines">,<br />
+  lib/rokuby/InformationUnits/Linux/gpp_defaults.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_defaults.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Defaults/PlatformConfigurations.html" title="Rokuby::Defaults::PlatformConfigurations (module)">PlatformConfigurations</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#InitDefaultGppProjectConfigurations-class_method" title="InitDefaultGppProjectConfigurations (class method)">+ (Object) <strong>InitDefaultGppProjectConfigurations</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#InitDefaultProjectConfigurations-class_method" title="InitDefaultProjectConfigurations (class method)">+ (Object) <strong>InitDefaultProjectConfigurations</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#InitDefaultVsProjectConfigurations-class_method" title="InitDefaultVsProjectConfigurations (class method)">+ (Object) <strong>InitDefaultVsProjectConfigurations</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="InitDefaultGppProjectConfigurations-class_method">
+  
+    + (<tt>Object</tt>) <strong>InitDefaultGppProjectConfigurations</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/Linux/gpp_defaults.rb', line 3</span>
+
+<span class='kw'>def</span> <span class='const'>Defaults</span><span class='period'>.</span><span class='const'>InitDefaultGppProjectConfigurations</span>
+  <span class='id identifier rubyid_configs'>configs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>GppProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_RELEASE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_UBUNTU_X64_RELEASE</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X64</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:CompileOptions</span> <span class='op'>=&gt;</span>  <span class='lbracket'>[</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>USE_CPP0X</span><span class='comma'>,</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>OPTIMIZE_LEVEL_3</span>
+                                                                                                                           <span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:LinkOptions</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span>
+                                                                                                                       
+                                                                                                                       <span class='rbracket'>]</span>
+                                                     <span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>GppProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_UBUNTU_X64_DEBUG</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X64</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:CompileOptions</span> <span class='op'>=&gt;</span>  <span class='lbracket'>[</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>USE_CPP0X</span><span class='comma'>,</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>CREATE_DEBUG_INFORMATION</span>
+                                                                                                                           <span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:LinkOptions</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span>
+                                                                                                                       <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>LinkOptions</span><span class='op'>::</span><span class='const'>CREATE_DEBUG_INFORMATION</span>
+                                                                                                                       <span class='rbracket'>]</span>
+                                                     <span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>GppProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_RELEASE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_UBUNTU_X86_RELEASE</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X64</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:CompileOptions</span> <span class='op'>=&gt;</span>  <span class='lbracket'>[</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>USE_CPP0X</span><span class='comma'>,</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>OPTIMIZE_LEVEL_3</span>
+                                                                                                                           <span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:LinkOptions</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span>
+
+                                                                                                                       <span class='rbracket'>]</span>
+                                                     <span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>GppProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_UBUNTU_X86_DEBUG</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X64</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:CompileOptions</span> <span class='op'>=&gt;</span>  <span class='lbracket'>[</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>USE_CPP0X</span><span class='comma'>,</span>
+                                                                                                                           <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>CompileOptions</span><span class='op'>::</span><span class='const'>CREATE_DEBUG_INFORMATION</span>
+                                                                                                                           <span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:LinkOptions</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span>
+                                                                                                                       <span class='const'>Gpp</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>LinkOptions</span><span class='op'>::</span><span class='const'>CREATE_DEBUG_INFORMATION</span>
+                                                                                                                       <span class='rbracket'>]</span>
+                                                     <span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_configs'>configs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="InitDefaultProjectConfigurations-class_method">
+  
+    + (<tt>Object</tt>) <strong>InitDefaultProjectConfigurations</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/defaults.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='const'>Defaults</span><span class='period'>.</span><span class='const'>InitDefaultProjectConfigurations</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_configs'>configs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span> <span class='const'>ProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_RELEASE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X64_RELEASE</span>
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span> <span class='const'>ProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_RELWITHDEB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X64_RELWITHDEB</span>
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span> <span class='const'>ProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X64_DEBUG</span>
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span> <span class='const'>ProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_RELEASE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X86_RELEASE</span>
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span> <span class='const'>ProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_RELWITHDEB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X86_RELWITHDEB</span>
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span> <span class='const'>ProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X86_DEBUG</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_configs'>configs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="InitDefaultVsProjectConfigurations-class_method">
+  
+    + (<tt>Object</tt>) <strong>InitDefaultVsProjectConfigurations</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/VisualStudio/vs_defaults.rb', line 3</span>
+
+<span class='kw'>def</span> <span class='const'>Defaults</span><span class='period'>.</span><span class='const'>InitDefaultVsProjectConfigurations</span>
+  <span class='id identifier rubyid_configs'>configs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>VsProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_RELEASE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X64_RELEASE</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN32</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X64</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN64</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:RuntimeLibrary</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>RuntimeLibrary</span><span class='op'>::</span><span class='const'>MULTITHREADED_DLL</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:PlatformName</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Platform</span><span class='op'>::</span><span class='const'>X64</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:WarningLevel</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>WarningLevel</span><span class='op'>::</span><span class='const'>LEVEL3</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:Optimization</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Optimization</span><span class='op'>::</span><span class='const'>MAX_SPEED</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:AssemblerOutput</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>AssemblerOutput</span><span class='op'>::</span><span class='const'>NO_LISTING</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:FunctionLevelLinking</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:IntrinsicFunctions</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:ProgramDataBaseFileName</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:ExceptionHandling</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>ExceptionHandling</span><span class='op'>::</span><span class='const'>SYNC</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:BufferSecurityCheck</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:DebugInformationFormat</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>DebugInformationFormat</span><span class='op'>::</span><span class='const'>PROGRAM_DATABASE</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:InlineFunctionExpansion</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>InlineFunctionExpansion</span><span class='op'>::</span><span class='const'>DEFAULT</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:GenerateDebugInformation</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:EnableCOMDATFolding</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:OptimizeReferences</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                      <span class='symbol'>:UseDebugLibraries</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>VsProjectConfiguration</span><span class='comma'>,</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_RELWITHDEB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X64_RELWITHDEB</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN32</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X64</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN64</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:RuntimeLibrary</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>RuntimeLibrary</span><span class='op'>::</span><span class='const'>MULTITHREADED_DLL</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:PlatformName</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Platform</span><span class='op'>::</span><span class='const'>X64</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:WarningLevel</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>WarningLevel</span><span class='op'>::</span><span class='const'>LEVEL3</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:Optimization</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Optimization</span><span class='op'>::</span><span class='const'>DISABLED</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:AssemblerOutput</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>AssemblerOutput</span><span class='op'>::</span><span class='const'>ASSEMBLY_AND_SOURCE_CODE</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:FunctionLevelLinking</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:IntrinsicFunctions</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:ProgramDataBaseFileName</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:ExceptionHandling</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>ExceptionHandling</span><span class='op'>::</span><span class='const'>SYNC</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:BufferSecurityCheck</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:DebugInformationFormat</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>DebugInformationFormat</span><span class='op'>::</span><span class='const'>EDIT_AND_CONTINUE</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:InlineFunctionExpansion</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>InlineFunctionExpansion</span><span class='op'>::</span><span class='const'>DEFAULT</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:GenerateDebugInformation</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:EnableCOMDATFolding</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:OptimizeReferences</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                          <span class='symbol'>:UseDebugLibraries</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>VsProjectConfiguration</span><span class='comma'>,</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X64_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X64_DEBUG</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN32</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X64</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN64</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:RuntimeLibrary</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>RuntimeLibrary</span><span class='op'>::</span><span class='const'>MULTITHREADED_DEBUG_DLL</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:PlatformName</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Platform</span><span class='op'>::</span><span class='const'>X64</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:WarningLevel</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>WarningLevel</span><span class='op'>::</span><span class='const'>LEVEL3</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:Optimization</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Optimization</span><span class='op'>::</span><span class='const'>DISABLED</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:AssemblerOutput</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>AssemblerOutput</span><span class='op'>::</span><span class='const'>ASSEMBLY_AND_SOURCE_CODE</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:FunctionLevelLinking</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:IntrinsicFunctions</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:ProgramDataBaseFileName</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:ExceptionHandling</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>ExceptionHandling</span><span class='op'>::</span><span class='const'>SYNC</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:BufferSecurityCheck</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:DebugInformationFormat</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>DebugInformationFormat</span><span class='op'>::</span><span class='const'>EDIT_AND_CONTINUE</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:InlineFunctionExpansion</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>InlineFunctionExpansion</span><span class='op'>::</span><span class='const'>DEFAULT</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:GenerateDebugInformation</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:EnableCOMDATFolding</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:OptimizeReferences</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                    <span class='symbol'>:UseDebugLibraries</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>VsProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_RELEASE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X86_RELEASE</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN32</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:RuntimeLibrary</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>RuntimeLibrary</span><span class='op'>::</span><span class='const'>MULTITHREADED_DLL</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:PlatformName</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Platform</span><span class='op'>::</span><span class='const'>WIN32</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:WarningLevel</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>WarningLevel</span><span class='op'>::</span><span class='const'>LEVEL3</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:Optimization</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Optimization</span><span class='op'>::</span><span class='const'>MAX_SPEED</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:AssemblerOutput</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>AssemblerOutput</span><span class='op'>::</span><span class='const'>NO_LISTING</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:FunctionLevelLinking</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:IntrinsicFunctions</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:ProgramDataBaseFileName</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:ExceptionHandling</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>ExceptionHandling</span><span class='op'>::</span><span class='const'>SYNC</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:BufferSecurityCheck</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:DebugInformationFormat</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>DebugInformationFormat</span><span class='op'>::</span><span class='const'>PROGRAM_DATABASE</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:InlineFunctionExpansion</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>InlineFunctionExpansion</span><span class='op'>::</span><span class='const'>DEFAULT</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:GenerateDebugInformation</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:EnableCOMDATFolding</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:OptimizeReferences</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                     <span class='symbol'>:UseDebugLibraries</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>VsProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_RELWITHDEB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X86_RELWITHDEB</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN32</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:RuntimeLibrary</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>RuntimeLibrary</span><span class='op'>::</span><span class='const'>MULTITHREADED_DLL</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:PlatformName</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Platform</span><span class='op'>::</span><span class='const'>WIN32</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:WarningLevel</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>WarningLevel</span><span class='op'>::</span><span class='const'>LEVEL3</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:Optimization</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Optimization</span><span class='op'>::</span><span class='const'>DISABLED</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:AssemblerOutput</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>AssemblerOutput</span><span class='op'>::</span><span class='const'>NO_LISTING</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:FunctionLevelLinking</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:IntrinsicFunctions</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:ProgramDataBaseFileName</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:ExceptionHandling</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>ExceptionHandling</span><span class='op'>::</span><span class='const'>SYNC</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:BufferSecurityCheck</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:DebugInformationFormat</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>DebugInformationFormat</span><span class='op'>::</span><span class='const'>EDIT_AND_CONTINUE</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:InlineFunctionExpansion</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>InlineFunctionExpansion</span><span class='op'>::</span><span class='const'>DEFAULT</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:GenerateDebugInformation</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:EnableCOMDATFolding</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:OptimizeReferences</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                        <span class='symbol'>:UseDebugLibraries</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_configs'>configs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='const'>DefineInformationUnit</span><span class='lparen'>(</span><span class='const'>VsProjectConfiguration</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEFAULT_X86_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:plat</span> <span class='op'>=&gt;</span> <span class='const'>PLATFORM_WIN_X86_DEBUG</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:defines</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WIN32</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:RuntimeLibrary</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>RuntimeLibrary</span><span class='op'>::</span><span class='const'>MULTITHREADED_DEBUG_DLL</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:PlatformName</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Platform</span><span class='op'>::</span><span class='const'>WIN32</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:WarningLevel</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>WarningLevel</span><span class='op'>::</span><span class='const'>LEVEL3</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:Optimization</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>Optimization</span><span class='op'>::</span><span class='const'>DISABLED</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:AssemblerOutput</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>AssemblerOutput</span><span class='op'>::</span><span class='const'>NO_LISTING</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:FunctionLevelLinking</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:IntrinsicFunctions</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:ProgramDataBaseFileName</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:ExceptionHandling</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>ExceptionHandling</span><span class='op'>::</span><span class='const'>SYNC</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:BufferSecurityCheck</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:DebugInformationFormat</span> <span class='op'>=&gt;</span> <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>DebugInformationFormat</span><span class='op'>::</span><span class='const'>EDIT_AND_CONTINUE</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:InlineFunctionExpansion</span> <span class='op'>=&gt;</span>  <span class='const'>Vs</span><span class='op'>::</span><span class='const'>Configuration</span><span class='op'>::</span><span class='const'>InlineFunctionExpansion</span><span class='op'>::</span><span class='const'>DEFAULT</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:GenerateDebugInformation</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:EnableCOMDATFolding</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:OptimizeReferences</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+                                                                                                   <span class='symbol'>:UseDebugLibraries</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_configs'>configs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:44 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

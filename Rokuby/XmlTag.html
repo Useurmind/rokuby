@@ -1,0 +1,762 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::XmlTag
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (X)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">XmlTag</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::XmlTag
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rokuby::XmlTag</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="XmlHelper.html" title="Rokuby::XmlHelper (module)">XmlHelper</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Utility/XML/XmlTag.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Attributes-instance_method" title="#Attributes (instance method)">- (Object) <strong>Attributes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Attributes.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Children-instance_method" title="#Children (instance method)">- (Object) <strong>Children</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Children.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#IndentDepth-instance_method" title="#IndentDepth (instance method)">- (Object) <strong>IndentDepth</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute IndentDepth.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Name-instance_method" title="#Name (instance method)">- (Object) <strong>Name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Value-instance_method" title="#Value (instance method)">- (Object) <strong>Value</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Value.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetIndentationString-instance_method" title="#GetIndentationString (instance method)">- (Object) <strong>GetIndentationString</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (XmlTag) <strong>initialize</strong>(paramBag = {}) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><dl class="rdoc-list"><dt>name</dt>
+<dd>
+<p>The name for the tag.</p>
+</dd></dl>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ToXml-instance_method" title="#ToXml (instance method)">- (Object) <strong>ToXml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="XmlHelper.html" title="Rokuby::XmlHelper (module)">XmlHelper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="XmlHelper.html#BuildAttributeString-instance_method" title="Rokuby::XmlHelper#BuildAttributeString (method)">#BuildAttributeString</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::XmlTag (class)">XmlTag</a></span></tt>) <strong>initialize</strong>(paramBag = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <dl class="rdoc-list"><dt>name</dt>
+<dd>
+<p>The name for the tag.</p>
+</dd><dt>attributes</dt>
+<dd>
+<p>A hash representing the attributes for the tag.</p>
+</dd><dt>value</dt>
+<dd>
+<p>A string for the value of the tag.</p>
+</dd><dt>children</dt>
+<dd>
+<p>A list with XmlTags representing the children of the tag.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18
+19
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@Name</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='ivar'>@Attributes</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:attributes</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@Value</span> <span class='op'>=</span> <span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:value</span><span class='rbracket'>]</span>
+    <span class='ivar'>@Children</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_paramBag'>paramBag</span><span class='lbracket'>[</span><span class='symbol'>:children</span><span class='rbracket'>]</span> <span class='kw'>or</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='ivar'>@IndentDepth</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="Attributes=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="Attributes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Attributes</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Attributes</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 7</span>
+
+<span class='kw'>def</span> <span class='const'>Attributes</span>
+  <span class='ivar'>@Attributes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Children=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Children-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Children</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Children</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='const'>Children</span>
+  <span class='ivar'>@Children</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="IndentDepth=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="IndentDepth-instance_method">
+  
+    - (<tt>Object</tt>) <strong>IndentDepth</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute IndentDepth</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='const'>IndentDepth</span>
+  <span class='ivar'>@IndentDepth</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Name-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Name</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='const'>Name</span>
+  <span class='ivar'>@Name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Value=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Value-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Value</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Value</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='const'>Value</span>
+  <span class='ivar'>@Value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="GetIndentationString-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetIndentationString</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='const'>GetIndentationString</span>
+    <span class='id identifier rubyid_indent'>indent</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='lparen'>(</span><span class='int'>0</span><span class='op'>..</span><span class='ivar'>@IndentDepth</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span>
+        <span class='id identifier rubyid_indent'>indent</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_indent'>indent</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ToXml-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ToXml</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Utility/XML/XmlTag.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='const'>ToXml</span>
+    <span class='id identifier rubyid_attributeString'>attributeString</span> <span class='op'>=</span> <span class='const'>BuildAttributeString</span><span class='lparen'>(</span><span class='ivar'>@Attributes</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_indent'>indent</span> <span class='op'>=</span> <span class='const'>GetIndentationString</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    
+    <span class='id identifier rubyid_xml'>xml</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_indent'>indent</span><span class='rbrace'>}</span><span class='tstring_content'>&lt;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_attributeString'>attributeString</span> <span class='op'>!=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+         <span class='id identifier rubyid_xml'>xml</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attributeString'>attributeString</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@Value</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_xml'>xml</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@Value</span><span class='rbrace'>}</span><span class='tstring_content'>&lt;/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>elsif</span><span class='lparen'>(</span><span class='ivar'>@Children</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_xml'>xml</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/&gt;\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+        <span class='id identifier rubyid_childrenStrings'>childrenStrings</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+        <span class='ivar'>@Children</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_child'>child</span><span class='op'>|</span>
+            <span class='id identifier rubyid_child'>child</span><span class='period'>.</span><span class='const'>IndentDepth</span> <span class='op'>=</span> <span class='ivar'>@IndentDepth</span> <span class='op'>+</span> <span class='int'>2</span>
+            <span class='id identifier rubyid_childrenStrings'>childrenStrings</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_child'>child</span><span class='period'>.</span><span class='const'>ToXml</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+        <span class='id identifier rubyid_childrenString'>childrenString</span> <span class='op'>=</span> <span class='id identifier rubyid_childrenStrings'>childrenStrings</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_xml'>xml</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_childrenString'>childrenString</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_indent'>indent</span><span class='rbrace'>}</span><span class='tstring_content'>&lt;/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    
+    <span class='kw'>return</span> <span class='id identifier rubyid_xml'>xml</span><span class='semicolon'>;</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:45 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

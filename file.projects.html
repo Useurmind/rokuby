@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: projects
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: projects</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>C/C++ Projects in Rokuby</h1>
+
+<p>In the first place Rokuby was build to create C++ projects under various operating systems.
+As ruby and rake were already in place it was a logical choice to extend them to cope with
+more complexity in terms of C++ build management.</p>
+
+<p>Therefore, rokuby has some integrated processors that allow the user to more easily build even
+complex C/C++ projects.</p>
+
+<p>Currently there are the following integrated build process chains for C/C++ projects:</p>
+
+<ul>
+<li><a href="file.visual_studio.html">Visual Studio Solution Builder</a></li>
+<li><a href="file.gpp.html">G++ Project Builder</a></li>
+</ul>
+
+<p>Here we will explain some general rules which both build tools follow. They were intentionally designed
+to use the same core units to reduce the work when defining a project. In the following we will explain
+information units that are used in all build tools to define a C/C++ project.</p>
+
+<p>Below you see an example for a general project build process:</p>
+
+<p><img src="images/basic_project_build_process.svg" alt="Project build process"></p>
+
+<p>You can see that there are several types of information units that are input into a project builder processor.
+We will explain all of the in the following.</p>
+
+<h2>Project Description</h2>
+
+<p>The project description is the core information concerning each project. It includes:</p>
+
+<ul>
+<li>The name of the project</li>
+<li>The current version of the project</li>
+<li>A basis for the name of the binary that will be created (it is extended depending on the configuration)</li>
+<li>The type of the binary that should be build (executable, static/dynamic link library)</li>
+</ul>
+
+<p><a href="Rokuby/ProjectDescription.html">ProjectDescription Source</a></p>
+
+<h2>Source Unit Specification</h2>
+
+<p>Source units are units of code that are needed to successfully compile the project.
+The specifications for these units include the following:</p>
+
+<ul>
+<li>A file specification for the source files that are part of the project itself.</li>
+<li>A file specification for the header files that are part of the project itself.</li>
+</ul>
+
+<p><a href="Rokuby/SourceUnitSpecification.html">SourceUnitSpecification Source</a></p>
+
+<h2>Platform Configuration</h2>
+
+<p>Platform configurations in the context of Rokuby mean different system setups for which the build process differs.</p>
+
+<p>These platform configurations contain:</p>
+
+<ul>
+<li>Operating System.</li>
+<li>Architecture.</li>
+<li>A type (which is more or less just a freely chosen symbol that states a certain configuration).</li>
+</ul>
+
+<p>There are several reasons why a differentiation between different platform setups is practical. One of them is explained
+in the section about libraries below.</p>
+
+<p><a href="Rokuby/Defaults/PlatformConfigurations.html">Common PlatformConfigurations</a></p>
+
+<p><a href="Rokuby/PlatformConfiguration.html">PlatformConfiguration Source</a></p>
+
+<h2>Libraries</h2>
+
+<p>The inclusion of libraries into software project is probably one of the most complex problems when building them.
+Therefore, this process is rather complex compared to the other parts of the build tool.</p>
+
+<p>One of the problems that you encounter when including libraries into your project is that of choosing the right library
+for the right platform that you build your project for. Normally, you have different libraries for Linux and Windows, for each
+architecture the operating system runs on and even different configurations you want to run the library in (e.g. release or debug).
+To differentiate between these different instances of the library is one of the reasons why we introduced the platform configurations
+described above. Therefore, when specifying a library you have to give one or several platform configurations for which this
+library instance is meant.</p>
+
+<p>When looking at libraries that are use in C/C++ projects you can end up with the following conclusions:</p>
+
+<ul>
+<li>Each library has at least one binary file which contains the compiled and executable code.</li>
+<li>Additionally, each library is registered with the linker by telling him the location of a file that he should inspect. This file can be the
+same as the binary file, but it also can differ from this file (e.g. for DLL under Windows you normally have a lib and a dll file).</li>
+<li>Each library consists of at least one header file that must be included into a project so that it can compile the source code that
+depends on the library.</li>
+</ul>
+
+<p>Putting everything above together leads us to the following attributes that we need to state for a full specification of a library:</p>
+
+<ul>
+<li>The name of the library (just needed to indetify library instances that represent the same library)</li>
+<li>The library file specification.</li>
+<li>The link file specification.</li>
+<li>The specification for the header files that are needed to be included in dependend projects.</li>
+<li>The platform configurations this library is meant for.</li>
+</ul>
+
+<p>They are separated in the following way:</p>
+
+<ul>
+<li>All the file specifications are contained in a so called library location specification.</li>
+<li>The name, the library location specification, and the platforms are then gathered in a library specification.</li>
+</ul>
+
+<h2>Project Configuration</h2>
+
+<p>The project configuration is the place to gather information of how the builds for different environments or configurations of the project differ.</p>
+
+<p>These project configurations can be very extensive for specialised tools. In the general case the project configuration only contains</p>
+
+<ul>
+<li>A platform configuration.</li>
+<li>Defines that will be applied to the project in case of this configuration (but defines can be added to most information units anyway).</li>
+</ul>
+
+<p><a href="Rokuby/ProjectConfiguration.html">ProjectConfiguration Source</a></p>
+
+<h2>Project Sepcification</h2>
+
+<p>The project specification is the place where the information about all required files is gathered. This means:</p>
+
+<ul>
+<li>The source unit specifications needed by the project.</li>
+<li>The library specifications neeeded by the project.</li>
+</ul>
+
+<p><a href="Rokuby/ProjectSpecification.html">Project Specification Source</a></p>
+
+<h2>A general project example</h2>
+
+<p>This section presents a general example for a project build that is independent of the specific cases of project build with differnt tools
+(e.g. G++ or Visual Studio). It is not operational! Rather it is meant to illustrate the general process of setting up a build in Rokuby.
+Some points need to be added for each of the different build tools. But these steps are described in the sections of these tools.</p>
+
+<pre class="code ruby"><code><span class='comment'># Define meta information for the project in its ProjectDescription
+</span><span class='id identifier rubyid_projDescr'>projDescr</span> <span class='symbol'>:DemoProject</span><span class='comma'>,</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DemoProject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binName:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>demoproject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>binType:</span> <span class='symbol'>:Application</span><span class='comma'>,</span>
+    <span class='label'>projPath:</span> <span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>compPath:</span> <span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>build</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>buildPath:</span> <span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>defs:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A_WONDERFUL_DEMO_DEFINE</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># Define the source code that should be included into the project by means of a SourceUnitSpecification
+</span><span class='comment'># This specification defines source in the subdirectory src below the project directory and header files
+</span><span class='comment'># in the subdirectory include of the project directory. The search will be recursive.
+</span><span class='id identifier rubyid_srcSpec'>srcSpec</span> <span class='symbol'>:DemoProjectSource</span><span class='comma'>,</span> <span class='lbrace'>{</span>
+<span class='label'>srcSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.cpp$</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.c$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exPats:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>sPaths:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>src</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+<span class='rbrace'>}</span><span class='rparen'>)</span><span class='comma'>,</span>
+<span class='label'>inclSpec:</span> <span class='id identifier rubyid_fileSpec'>fileSpec</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>inPats:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.h$</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.*\.hpp$</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>sPaths:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_projPath'>projPath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>include</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span>
+<span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='rbrace'>}</span>
+
+<span class='comment'># Define a library with different instances for different platforms
+</span>
+
+<span class='comment'># Combine library specifications and source specifications into a project specification
+</span><span class='id identifier rubyid_projSpec'>projSpec</span> <span class='symbol'>:DemoProjectSpec</span><span class='comma'>,</span> <span class='lbrace'>{</span>
+   <span class='label'>srcSpecs:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_srcSpec'>srcSpec</span><span class='lparen'>(</span><span class='symbol'>:DemoProjectSource</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='comma'>,</span>
+   <span class='label'>libSpecs:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<h2>Multi Platform Project Building</h2>
+
+<p>After reading</p>
+
+<ul>
+<li><a href="file.visual_studio.html">Visual Studio Solution Builder</a></li>
+<li><a href="file.gpp.html">G++ Project Builder</a></li>
+</ul>
+
+<p>I would recommend to read on with how to create <a href="file.multi_platform.html">multi-platform project build processes</a>.</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

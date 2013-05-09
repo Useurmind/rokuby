@@ -1,0 +1,1490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::VsProjectBuilder
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">VsProjectBuilder</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::VsProjectBuilder
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="ProcessChain.html" title="Rokuby::ProcessChain (class)">ProcessChain</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">Rake::ProcessorTask</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="ProcessChain.html" title="Rokuby::ProcessChain (class)">ProcessChain</a></span></li>
+          
+            <li class="next">Rokuby::VsProjectBuilder</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="../Rake/DSL.html" title="Rake::DSL (module)">Rake::DSL</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/Processors/VisualStudio/vs_project_builder.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class creates project and filter file for a given project and produces
+a VSProject instance that can be used in other projects. This builder works
+like a normal builder but additionally accepts a visual studio project
+description, one visual studio instance and several configurations. The
+configurations are associated with the project configurations by means of
+the platform they are defined for. Make sure that there is at most one
+visual studio and normal project configuration for each platform. Output of
+this processor is a VSProject instance that represents the created project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+
+
+
+  <h2>Constant Summary</h2>
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">Rake::FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/FileUtilsExt.html#DEFAULT-constant" title="Rake::FileUtilsExt::DEFAULT (constant)">Rake::FileUtilsExt::DEFAULT</a></span></p>
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#LN_SUPPORTED-constant" title="FileUtils::LN_SUPPORTED (constant)">FileUtils::LN_SUPPORTED</a></span>, <span class='object_link'><a href="../FileUtils.html#RUBY-constant" title="FileUtils::RUBY (constant)">FileUtils::RUBY</a></span></p>
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#FileWriter-instance_method" title="#FileWriter (instance method)">- (Object) <strong>FileWriter</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute FileWriter.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProjectCreator-instance_method" title="#ProjectCreator (instance method)">- (Object) <strong>ProjectCreator</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ProjectCreator.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProjectFinder-instance_method" title="#ProjectFinder (instance method)">- (Object) <strong>ProjectFinder</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ProjectFinder.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ProjectPreprocessor-instance_method" title="#ProjectPreprocessor (instance method)">- (Object) <strong>ProjectPreprocessor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ProjectPreprocessor.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsPostBuildTaskCreator-instance_method" title="#VsPostBuildTaskCreator (instance method)">- (Object) <strong>VsPostBuildTaskCreator</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute VsPostBuildTaskCreator.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#VsProjectFinder-instance_method" title="#VsProjectFinder (instance method)">- (Object) <strong>VsProjectFinder</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute VsProjectFinder.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="ProcessChain.html" title="Rokuby::ProcessChain (class)">ProcessChain</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ProcessChain.html#ChainProcessors-instance_method" title="Rokuby::ProcessChain#ChainProcessors (method)">#ChainProcessors</a></span>, <span class='object_link'><a href="ProcessChain.html#InputProcessor-instance_method" title="Rokuby::ProcessChain#InputProcessor (method)">#InputProcessor</a></span>, <span class='object_link'><a href="ProcessChain.html#InputProcessorName-instance_method" title="Rokuby::ProcessChain#InputProcessorName (method)">#InputProcessorName</a></span>, <span class='object_link'><a href="ProcessChain.html#OutputProcessor-instance_method" title="Rokuby::ProcessChain#OutputProcessor (method)">#OutputProcessor</a></span>, <span class='object_link'><a href="ProcessChain.html#OutputProcessorName-instance_method" title="Rokuby::ProcessChain#OutputProcessorName (method)">#OutputProcessorName</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Processor.html#%3AName-instance_method" title="Rokuby::Processor#:Name (method)">#:Name</a></span>, <span class='object_link'><a href="Processor.html#%3AThrowOnUnknownInput-instance_method" title="Rokuby::Processor#:ThrowOnUnknownInput (method)">#:ThrowOnUnknownInput</a></span>, <span class='object_link'><a href="Processor.html#%3AUseCache-instance_method" title="Rokuby::Processor#:UseCache (method)">#:UseCache</a></span>, <span class='object_link'><a href="Processor.html#Name-instance_method" title="Rokuby::Processor#Name (method)">#Name</a></span>, <span class='object_link'><a href="Processor.html#ThrowOnUnknownInput-instance_method" title="Rokuby::Processor#ThrowOnUnknownInput (method)">#ThrowOnUnknownInput</a></span>, <span class='object_link'><a href="Processor.html#UseCache-instance_method" title="Rokuby::Processor#UseCache (method)">#UseCache</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Task.html#ProjectFile-instance_method" title="Rake::Task#ProjectFile (method)">#ProjectFile</a></span>, <span class='object_link'><a href="../Rake/Task.html#actions-instance_method" title="Rake::Task#actions (method)">#actions</a></span>, <span class='object_link'><a href="../Rake/Task.html#application-instance_method" title="Rake::Task#application (method)">#application</a></span>, <span class='object_link'><a href="../Rake/Task.html#comment-instance_method" title="Rake::Task#comment (method)">#comment</a></span>, <span class='object_link'><a href="../Rake/Task.html#full_comment-instance_method" title="Rake::Task#full_comment (method)">#full_comment</a></span>, <span class='object_link'><a href="../Rake/Task.html#locations-instance_method" title="Rake::Task#locations (method)">#locations</a></span>, <span class='object_link'><a href="../Rake/Task.html#prerequisites-instance_method" title="Rake::Task#prerequisites (method)">#prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#scope-instance_method" title="Rake::Task#scope (method)">#scope</a></span>, <span class='object_link'><a href="../Rake/Task.html#sources-instance_method" title="Rake::Task#sources (method)">#sources</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="TaskDescription.html" title="Rokuby::TaskDescription (module)">TaskDescription</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskDescription.html#ArgDescriptions-instance_method" title="Rokuby::TaskDescription#ArgDescriptions (method)">#ArgDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#KnownArgNames-instance_method" title="Rokuby::TaskDescription#KnownArgNames (method)">#KnownArgNames</a></span>, <span class='object_link'><a href="TaskDescription.html#TaskDescriptions-instance_method" title="Rokuby::TaskDescription#TaskDescriptions (method)">#TaskDescriptions</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_ConnectProcessors-instance_method" title="#_ConnectProcessors (instance method)">- (Object) <strong>_ConnectProcessors</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_InitProc-instance_method" title="#_InitProc (instance method)">- (Object) <strong>_InitProc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_LogTextAfterExecute-instance_method" title="#_LogTextAfterExecute (instance method)">- (Object) <strong>_LogTextAfterExecute</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overwrite this in derived processors to print a message after the processor
+was executed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_LogTextBeforeExecute-instance_method" title="#_LogTextBeforeExecute (instance method)">- (Object) <strong>_LogTextBeforeExecute</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overwrite this in derived processors to print a message before the
+processor is executed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_OnAddInput-instance_method" title="#_OnAddInput (instance method)">- (Object) <strong>_OnAddInput</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AdaptName-instance_method" title="#AdaptName (instance method)">- (Object) <strong>AdaptName</strong>(newName) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Extend-instance_method" title="#Extend (instance method)">- (Object) <strong>Extend</strong>(valueMap, executeParent = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Extend/set the attributes of the processor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (VsProjectBuilder) <strong>initialize</strong>(name = nil, app = nil, project_file = nil) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of VsProjectBuilder.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#intialize_copy-instance_method" title="#intialize_copy (instance method)">- (Object) <strong>intialize_copy</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Rake/DSL.html" title="Rake::DSL (module)">Rake::DSL</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/DSL.html#arg-instance_method" title="Rake::DSL#arg (method)">#arg</a></span>, <span class='object_link'><a href="../Rake/DSL.html#clean-instance_method" title="Rake::DSL#clean (method)">#clean</a></span>, <span class='object_link'><a href="../Rake/DSL.html#clobber-instance_method" title="Rake::DSL#clobber (method)">#clobber</a></span>, <span class='object_link'><a href="../Rake/DSL.html#desc_old-instance_method" title="Rake::DSL#desc_old (method)">#desc_old</a></span>, <span class='object_link'><a href="../Rake/DSL.html#import_old-instance_method" title="Rake::DSL#import_old (method)">#import_old</a></span>, <span class='object_link'><a href="../Rake/DSL.html#taskDescriptor-instance_method" title="Rake::DSL#taskDescriptor (method)">#taskDescriptor</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">Rake::FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/FileUtilsExt.html#nowrite-instance_method" title="Rake::FileUtilsExt#nowrite (method)">#nowrite</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#rake_check_options-instance_method" title="Rake::FileUtilsExt#rake_check_options (method)">#rake_check_options</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#rake_merge_option-instance_method" title="Rake::FileUtilsExt#rake_merge_option (method)">#rake_merge_option</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#rake_output_message-instance_method" title="Rake::FileUtilsExt#rake_output_message (method)">#rake_output_message</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#verbose-instance_method" title="Rake::FileUtilsExt#verbose (method)">#verbose</a></span>, <span class='object_link'><a href="../Rake/FileUtilsExt.html#when_writing-instance_method" title="Rake::FileUtilsExt#when_writing (method)">#when_writing</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../FileUtils.html#ruby-instance_method" title="FileUtils#ruby (method)">#ruby</a></span>, <span class='object_link'><a href="../FileUtils.html#safe_ln-instance_method" title="FileUtils#safe_ln (method)">#safe_ln</a></span>, <span class='object_link'><a href="../FileUtils.html#sh-instance_method" title="FileUtils#sh (method)">#sh</a></span>, <span class='object_link'><a href="../FileUtils.html#split_all-instance_method" title="FileUtils#split_all (method)">#split_all</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ProcessChain.html" title="Rokuby::ProcessChain (class)">ProcessChain</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ProcessChain.html#AdaptName_processor-instance_method" title="Rokuby::ProcessChain#AdaptName_processor (method)">#AdaptName_processor</a></span>, <span class='object_link'><a href="ProcessChain.html#AddDependencies-instance_method" title="Rokuby::ProcessChain#AddDependencies (method)">#AddDependencies</a></span>, <span class='object_link'><a href="ProcessChain.html#AddDependencies_Processor-instance_method" title="Rokuby::ProcessChain#AddDependencies_Processor (method)">#AddDependencies_Processor</a></span>, <span class='object_link'><a href="ProcessChain.html#AddProcessor-instance_method" title="Rokuby::ProcessChain#AddProcessor (method)">#AddProcessor</a></span>, <span class='object_link'><a href="ProcessChain.html#Connect-instance_method" title="Rokuby::ProcessChain#Connect (method)">#Connect</a></span>, <span class='object_link'><a href="ProcessChain.html#_AdaptProcessorName-instance_method" title="Rokuby::ProcessChain#_AdaptProcessorName (method)">#_AdaptProcessorName</a></span>, <span class='object_link'><a href="ProcessChain.html#_CloneChainProcessors-instance_method" title="Rokuby::ProcessChain#_CloneChainProcessors (method)">#_CloneChainProcessors</a></span>, <span class='object_link'><a href="ProcessChain.html#_GetProcessorName-instance_method" title="Rokuby::ProcessChain#_GetProcessorName (method)">#_GetProcessorName</a></span>, <span class='object_link'><a href="ProcessChain.html#_InputKnown-instance_method" title="Rokuby::ProcessChain#_InputKnown (method)">#_InputKnown</a></span>, <span class='object_link'><a href="ProcessChain.html#_ProcessInputs-instance_method" title="Rokuby::ProcessChain#_ProcessInputs (method)">#_ProcessInputs</a></span>, <span class='object_link'><a href="ProcessChain.html#initialize_copy-instance_method" title="Rokuby::ProcessChain#initialize_copy (method)">#initialize_copy</a></span>, <span class='object_link'><a href="ProcessChain.html#initialize_processor-instance_method" title="Rokuby::ProcessChain#initialize_processor (method)">#initialize_processor</a></span>, <span class='object_link'><a href="ProcessChain.html#intialize_copy_processor-instance_method" title="Rokuby::ProcessChain#intialize_copy_processor (method)">#intialize_copy_processor</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="DSL.html" title="Rokuby::DSL (module)">DSL</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="DSL.html#chain-instance_method" title="Rokuby::DSL#chain (method)">#chain</a></span>, <span class='object_link'><a href="DSL.html#cloneProc-instance_method" title="Rokuby::DSL#cloneProc (method)">#cloneProc</a></span>, <span class='object_link'><a href="DSL.html#defaultGppProjectConfigurations-instance_method" title="Rokuby::DSL#defaultGppProjectConfigurations (method)">#defaultGppProjectConfigurations</a></span>, <span class='object_link'><a href="DSL.html#defaultProjectConfigurations-instance_method" title="Rokuby::DSL#defaultProjectConfigurations (method)">#defaultProjectConfigurations</a></span>, <span class='object_link'><a href="DSL.html#defaultVsProjectConfigurations-instance_method" title="Rokuby::DSL#defaultVsProjectConfigurations (method)">#defaultVsProjectConfigurations</a></span>, <span class='object_link'><a href="DSL.html#defineChain-instance_method" title="Rokuby::DSL#defineChain (method)">#defineChain</a></span>, <span class='object_link'><a href="DSL.html#defineProc-instance_method" title="Rokuby::DSL#defineProc (method)">#defineProc</a></span>, <span class='object_link'><a href="DSL.html#fileFinder-instance_method" title="Rokuby::DSL#fileFinder (method)">#fileFinder</a></span>, <span class='object_link'><a href="DSL.html#fileSet-instance_method" title="Rokuby::DSL#fileSet (method)">#fileSet</a></span>, <span class='object_link'><a href="DSL.html#fileSpec-instance_method" title="Rokuby::DSL#fileSpec (method)">#fileSpec</a></span>, <span class='object_link'><a href="DSL.html#gppProj-instance_method" title="Rokuby::DSL#gppProj (method)">#gppProj</a></span>, <span class='object_link'><a href="DSL.html#gppProjBuild-instance_method" title="Rokuby::DSL#gppProjBuild (method)">#gppProjBuild</a></span>, <span class='object_link'><a href="DSL.html#gppProjConf-instance_method" title="Rokuby::DSL#gppProjConf (method)">#gppProjConf</a></span>, <span class='object_link'><a href="DSL.html#gppProjDescr-instance_method" title="Rokuby::DSL#gppProjDescr (method)">#gppProjDescr</a></span>, <span class='object_link'><a href="DSL.html#infoUnit-instance_method" title="Rokuby::DSL#infoUnit (method)">#infoUnit</a></span>, <span class='object_link'><a href="DSL.html#lib-instance_method" title="Rokuby::DSL#lib (method)">#lib</a></span>, <span class='object_link'><a href="DSL.html#libFileSet-instance_method" title="Rokuby::DSL#libFileSet (method)">#libFileSet</a></span>, <span class='object_link'><a href="DSL.html#libFinder-instance_method" title="Rokuby::DSL#libFinder (method)">#libFinder</a></span>, <span class='object_link'><a href="DSL.html#libInst-instance_method" title="Rokuby::DSL#libInst (method)">#libInst</a></span>, <span class='object_link'><a href="DSL.html#libLoc-instance_method" title="Rokuby::DSL#libLoc (method)">#libLoc</a></span>, <span class='object_link'><a href="DSL.html#libSpec-instance_method" title="Rokuby::DSL#libSpec (method)">#libSpec</a></span>, <span class='object_link'><a href="DSL.html#libSpecSet-instance_method" title="Rokuby::DSL#libSpecSet (method)">#libSpecSet</a></span>, <span class='object_link'><a href="DSL.html#multiProjBuild-instance_method" title="Rokuby::DSL#multiProjBuild (method)">#multiProjBuild</a></span>, <span class='object_link'><a href="DSL.html#multiSlnBuild-instance_method" title="Rokuby::DSL#multiSlnBuild (method)">#multiSlnBuild</a></span>, <span class='object_link'><a href="DSL.html#passDefs-instance_method" title="Rokuby::DSL#passDefs (method)">#passDefs</a></span>, <span class='object_link'><a href="DSL.html#plat-instance_method" title="Rokuby::DSL#plat (method)">#plat</a></span>, <span class='object_link'><a href="DSL.html#proc-instance_method" title="Rokuby::DSL#proc (method)">#proc</a></span>, <span class='object_link'><a href="DSL.html#procArr-instance_method" title="Rokuby::DSL#procArr (method)">#procArr</a></span>, <span class='object_link'><a href="DSL.html#proj-instance_method" title="Rokuby::DSL#proj (method)">#proj</a></span>, <span class='object_link'><a href="DSL.html#projConf-instance_method" title="Rokuby::DSL#projConf (method)">#projConf</a></span>, <span class='object_link'><a href="DSL.html#projDescr-instance_method" title="Rokuby::DSL#projDescr (method)">#projDescr</a></span>, <span class='object_link'><a href="DSL.html#projFinder-instance_method" title="Rokuby::DSL#projFinder (method)">#projFinder</a></span>, <span class='object_link'><a href="DSL.html#projInst-instance_method" title="Rokuby::DSL#projInst (method)">#projInst</a></span>, <span class='object_link'><a href="DSL.html#projPath-instance_method" title="Rokuby::DSL#projPath (method)">#projPath</a></span>, <span class='object_link'><a href="DSL.html#projSpec-instance_method" title="Rokuby::DSL#projSpec (method)">#projSpec</a></span>, <span class='object_link'><a href="DSL.html#sourceFinder-instance_method" title="Rokuby::DSL#sourceFinder (method)">#sourceFinder</a></span>, <span class='object_link'><a href="DSL.html#srcInst-instance_method" title="Rokuby::DSL#srcInst (method)">#srcInst</a></span>, <span class='object_link'><a href="DSL.html#srcSpec-instance_method" title="Rokuby::DSL#srcSpec (method)">#srcSpec</a></span>, <span class='object_link'><a href="DSL.html#vsProj-instance_method" title="Rokuby::DSL#vsProj (method)">#vsProj</a></span>, <span class='object_link'><a href="DSL.html#vsProjBuild-instance_method" title="Rokuby::DSL#vsProjBuild (method)">#vsProjBuild</a></span>, <span class='object_link'><a href="DSL.html#vsProjConf-instance_method" title="Rokuby::DSL#vsProjConf (method)">#vsProjConf</a></span>, <span class='object_link'><a href="DSL.html#vsProjDescr-instance_method" title="Rokuby::DSL#vsProjDescr (method)">#vsProjDescr</a></span>, <span class='object_link'><a href="DSL.html#vsProjInst-instance_method" title="Rokuby::DSL#vsProjInst (method)">#vsProjInst</a></span>, <span class='object_link'><a href="DSL.html#vsProjSpec-instance_method" title="Rokuby::DSL#vsProjSpec (method)">#vsProjSpec</a></span>, <span class='object_link'><a href="DSL.html#vsProjUsage-instance_method" title="Rokuby::DSL#vsProjUsage (method)">#vsProjUsage</a></span>, <span class='object_link'><a href="DSL.html#vsSlnBuild-instance_method" title="Rokuby::DSL#vsSlnBuild (method)">#vsSlnBuild</a></span>, <span class='object_link'><a href="DSL.html#vsSlnDescr-instance_method" title="Rokuby::DSL#vsSlnDescr (method)">#vsSlnDescr</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GeneralUtility.html#Clone-instance_method" title="Rokuby::GeneralUtility#Clone (method)">#Clone</a></span>, <span class='object_link'><a href="GeneralUtility.html#CloneArray-instance_method" title="Rokuby::GeneralUtility#CloneArray (method)">#CloneArray</a></span>, <span class='object_link'><a href="GeneralUtility.html#DescribeTasks-instance_method" title="Rokuby::GeneralUtility#DescribeTasks (method)">#DescribeTasks</a></span>, <span class='object_link'><a href="GeneralUtility.html#GenerateTaskName-instance_method" title="Rokuby::GeneralUtility#GenerateTaskName (method)">#GenerateTaskName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetClassName-instance_method" title="Rokuby::GeneralUtility#GetClassName (method)">#GetClassName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetUUID-instance_method" title="Rokuby::GeneralUtility#GetUUID (method)">#GetUUID</a></span>, <span class='object_link'><a href="GeneralUtility.html#SystemWithFail-instance_method" title="Rokuby::GeneralUtility#SystemWithFail (method)">#SystemWithFail</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPath-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPath (method)">#AbsoluteTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#AbsoluteTaskPathOnly%3F-instance_method" title="Rokuby::TaskPathUtility#AbsoluteTaskPathOnly? (method)">#AbsoluteTaskPathOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#ApplicationBasedTaskPath-instance_method" title="Rokuby::TaskPathUtility#ApplicationBasedTaskPath (method)">#ApplicationBasedTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePath-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePath (method)">#GetProjectFilePath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#GetProjectFilePathName (method)">#GetProjectFilePathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#GetTaskName-instance_method" title="Rokuby::TaskPathUtility#GetTaskName (method)">#GetTaskName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#JoinTaskPathName-instance_method" title="Rokuby::TaskPathUtility#JoinTaskPathName (method)">#JoinTaskPathName</a></span>, <span class='object_link'><a href="TaskPathUtility.html#MakeRelativeTo-instance_method" title="Rokuby::TaskPathUtility#MakeRelativeTo (method)">#MakeRelativeTo</a></span>, <span class='object_link'><a href="TaskPathUtility.html#NameOnly%3F-instance_method" title="Rokuby::TaskPathUtility#NameOnly? (method)">#NameOnly?</a></span>, <span class='object_link'><a href="TaskPathUtility.html#SplitTaskPath-instance_method" title="Rokuby::TaskPathUtility#SplitTaskPath (method)">#SplitTaskPath</a></span>, <span class='object_link'><a href="TaskPathUtility.html#_GetTaskProjectFilePathName-instance_method" title="Rokuby::TaskPathUtility#_GetTaskProjectFilePathName (method)">#_GetTaskProjectFilePathName</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Processor.html" title="Rokuby::Processor (class)">Processor</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Processor.html#AddDependencies-instance_method" title="Rokuby::Processor#AddDependencies (method)">#AddDependencies</a></span>, <span class='object_link'><a href="Processor.html#AddInput-instance_method" title="Rokuby::Processor#AddInput (method)">#AddInput</a></span>, <span class='object_link'><a href="Processor.html#FullName-instance_method" title="Rokuby::Processor#FullName (method)">#FullName</a></span>, <span class='object_link'><a href="Processor.html#GetOutputByClass-instance_method" title="Rokuby::Processor#GetOutputByClass (method)">#GetOutputByClass</a></span>, <span class='object_link'><a href="Processor.html#GetOutputsByClass-instance_method" title="Rokuby::Processor#GetOutputsByClass (method)">#GetOutputsByClass</a></span>, <span class='object_link'><a href="Processor.html#Inputs-instance_method" title="Rokuby::Processor#Inputs (method)">#Inputs</a></span>, <span class='object_link'><a href="Processor.html#KnownInputClasses-instance_method" title="Rokuby::Processor#KnownInputClasses (method)">#KnownInputClasses</a></span>, <span class='object_link'><a href="Processor.html#Outputs-instance_method" title="Rokuby::Processor#Outputs (method)">#Outputs</a></span>, <span class='object_link'><a href="Processor.html#Process-instance_method" title="Rokuby::Processor#Process (method)">#Process</a></span>, <span class='object_link'><a href="Processor.html#RemoveDependencies-instance_method" title="Rokuby::Processor#RemoveDependencies (method)">#RemoveDependencies</a></span>, <span class='object_link'><a href="Processor.html#_AddDependencies-instance_method" title="Rokuby::Processor#_AddDependencies (method)">#_AddDependencies</a></span>, <span class='object_link'><a href="Processor.html#_AddInput-instance_method" title="Rokuby::Processor#_AddInput (method)">#_AddInput</a></span>, <span class='object_link'><a href="Processor.html#_ExecutePostProcessing-instance_method" title="Rokuby::Processor#_ExecutePostProcessing (method)">#_ExecutePostProcessing</a></span>, <span class='object_link'><a href="Processor.html#_FetchInputs-instance_method" title="Rokuby::Processor#_FetchInputs (method)">#_FetchInputs</a></span>, <span class='object_link'><a href="Processor.html#_InputKnown-instance_method" title="Rokuby::Processor#_InputKnown (method)">#_InputKnown</a></span>, <span class='object_link'><a href="Processor.html#_InputProcessors-instance_method" title="Rokuby::Processor#_InputProcessors (method)">#_InputProcessors</a></span>, <span class='object_link'><a href="Processor.html#_LogProcessorExecution-instance_method" title="Rokuby::Processor#_LogProcessorExecution (method)">#_LogProcessorExecution</a></span>, <span class='object_link'><a href="Processor.html#_ProcessInputs-instance_method" title="Rokuby::Processor#_ProcessInputs (method)">#_ProcessInputs</a></span>, <span class='object_link'><a href="Processor.html#_RemoveDependencies-instance_method" title="Rokuby::Processor#_RemoveDependencies (method)">#_RemoveDependencies</a></span>, <span class='object_link'><a href="Processor.html#init-instance_method" title="Rokuby::Processor#init (method)">#init</a></span>, <span class='object_link'><a href="Processor.html#initialize_copy-instance_method" title="Rokuby::Processor#initialize_copy (method)">#initialize_copy</a></span>, <span class='object_link'><a href="Processor.html#initialize_processortask-instance_method" title="Rokuby::Processor#initialize_processortask (method)">#initialize_processortask</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">Rake::ProcessorTask</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/ProcessorTask.html#Execute-instance_method" title="Rake::ProcessorTask#Execute (method)">#Execute</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#InTaskHierarchy%3F-instance_method" title="Rake::ProcessorTask#InTaskHierarchy? (method)">#InTaskHierarchy?</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#InvokePrerequisites-instance_method" title="Rake::ProcessorTask#InvokePrerequisites (method)">#InvokePrerequisites</a></span>, <span class='object_link'><a href="../Rake/ProcessorTask.html#invoke_with_call_chain-instance_method" title="Rake::ProcessorTask#invoke_with_call_chain (method)">#invoke_with_call_chain</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Rake/Task.html#%5B%5D-class_method" title="Rake::Task.[] (method)">[]</a></span>, <span class='object_link'><a href="../Rake/Task.html#add_description-instance_method" title="Rake::Task#add_description (method)">#add_description</a></span>, <span class='object_link'><a href="../Rake/Task.html#add_description_old_task-instance_method" title="Rake::Task#add_description_old_task (method)">#add_description_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#arg_description-instance_method" title="Rake::Task#arg_description (method)">#arg_description</a></span>, <span class='object_link'><a href="../Rake/Task.html#arg_names-instance_method" title="Rake::Task#arg_names (method)">#arg_names</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear-instance_method" title="Rake::Task#clear (method)">#clear</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear-class_method" title="Rake::Task.clear (method)">clear</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear_actions-instance_method" title="Rake::Task#clear_actions (method)">#clear_actions</a></span>, <span class='object_link'><a href="../Rake/Task.html#clear_prerequisites-instance_method" title="Rake::Task#clear_prerequisites (method)">#clear_prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#create_rule-class_method" title="Rake::Task.create_rule (method)">create_rule</a></span>, <span class='object_link'><a href="../Rake/Task.html#define_task-class_method" title="Rake::Task.define_task (method)">define_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#enhance-instance_method" title="Rake::Task#enhance (method)">#enhance</a></span>, <span class='object_link'><a href="../Rake/Task.html#execute-instance_method" title="Rake::Task#execute (method)">#execute</a></span>, <span class='object_link'><a href="../Rake/Task.html#execute_old_task-instance_method" title="Rake::Task#execute_old_task (method)">#execute_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#initialize_old_task-instance_method" title="Rake::Task#initialize_old_task (method)">#initialize_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#inspect-instance_method" title="Rake::Task#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="../Rake/Task.html#investigation-instance_method" title="Rake::Task#investigation (method)">#investigation</a></span>, <span class='object_link'><a href="../Rake/Task.html#invoke-instance_method" title="Rake::Task#invoke (method)">#invoke</a></span>, <span class='object_link'><a href="../Rake/Task.html#invoke_prerequisites-instance_method" title="Rake::Task#invoke_prerequisites (method)">#invoke_prerequisites</a></span>, <span class='object_link'><a href="../Rake/Task.html#lookup_prerequisite_old_task-instance_method" title="Rake::Task#lookup_prerequisite_old_task (method)">#lookup_prerequisite_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#name-instance_method" title="Rake::Task#name (method)">#name</a></span>, <span class='object_link'><a href="../Rake/Task.html#name_with_args-instance_method" title="Rake::Task#name_with_args (method)">#name_with_args</a></span>, <span class='object_link'><a href="../Rake/Task.html#needed%3F-instance_method" title="Rake::Task#needed? (method)">#needed?</a></span>, <span class='object_link'><a href="../Rake/Task.html#prerequisite_tasks-instance_method" title="Rake::Task#prerequisite_tasks (method)">#prerequisite_tasks</a></span>, <span class='object_link'><a href="../Rake/Task.html#reenable-instance_method" title="Rake::Task#reenable (method)">#reenable</a></span>, <span class='object_link'><a href="../Rake/Task.html#scope_name-class_method" title="Rake::Task.scope_name (method)">scope_name</a></span>, <span class='object_link'><a href="../Rake/Task.html#set_arg_names-instance_method" title="Rake::Task#set_arg_names (method)">#set_arg_names</a></span>, <span class='object_link'><a href="../Rake/Task.html#set_arg_names_old_task-instance_method" title="Rake::Task#set_arg_names_old_task (method)">#set_arg_names_old_task</a></span>, <span class='object_link'><a href="../Rake/Task.html#source-instance_method" title="Rake::Task#source (method)">#source</a></span>, <span class='object_link'><a href="../Rake/Task.html#task_defined%3F-class_method" title="Rake::Task.task_defined? (method)">task_defined?</a></span>, <span class='object_link'><a href="../Rake/Task.html#tasks-class_method" title="Rake::Task.tasks (method)">tasks</a></span>, <span class='object_link'><a href="../Rake/Task.html#timestamp-instance_method" title="Rake::Task#timestamp (method)">#timestamp</a></span>, <span class='object_link'><a href="../Rake/Task.html#to_s-instance_method" title="Rake::Task#to_s (method)">#to_s</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="TaskDescription.html" title="Rokuby::TaskDescription (module)">TaskDescription</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="TaskDescription.html#AddTaskArgumentDescriptions-instance_method" title="Rokuby::TaskDescription#AddTaskArgumentDescriptions (method)">#AddTaskArgumentDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#AddTaskDescriptions-instance_method" title="Rokuby::TaskDescription#AddTaskDescriptions (method)">#AddTaskDescriptions</a></span>, <span class='object_link'><a href="TaskDescription.html#IsTaskDescriptionEmpty%3F-instance_method" title="Rokuby::TaskDescription#IsTaskDescriptionEmpty? (method)">#IsTaskDescriptionEmpty?</a></span>, <span class='object_link'><a href="TaskDescription.html#ResetTaskDescription-instance_method" title="Rokuby::TaskDescription#ResetTaskDescription (method)">#ResetTaskDescription</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="PathUtility.html#ExecuteInPath-instance_method" title="Rokuby::PathUtility#ExecuteInPath (method)">#ExecuteInPath</a></span>, <span class='object_link'><a href="PathUtility.html#FormatPath-instance_method" title="Rokuby::PathUtility#FormatPath (method)">#FormatPath</a></span>, <span class='object_link'><a href="PathUtility.html#GetWindowsPath-instance_method" title="Rokuby::PathUtility#GetWindowsPath (method)">#GetWindowsPath</a></span>, <span class='object_link'><a href="PathUtility.html#JoinPaths-instance_method" title="Rokuby::PathUtility#JoinPaths (method)">#JoinPaths</a></span>, <span class='object_link'><a href="PathUtility.html#PathAbsolute%3F-instance_method" title="Rokuby::PathUtility#PathAbsolute? (method)">#PathAbsolute?</a></span>, <span class='object_link'><a href="PathUtility.html#RemoveParents-instance_method" title="Rokuby::PathUtility#RemoveParents (method)">#RemoveParents</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::VsProjectBuilder (class)">VsProjectBuilder</a></span></tt>) <strong>initialize</strong>(name = nil, app = nil, project_file = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of VsProjectBuilder</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_file'>project_file</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='id identifier rubyid_project_file'>project_file</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@ProjectFinder</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>ProjectFinder</span><span class='comma'>,</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ProjFinder</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:TargetPlatforms</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='const'>PLATFORM_WIN</span><span class='rbracket'>]</span>
+  <span class='ivar'>@ProjectPreprocessor</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>VsProjectPreprocessor</span><span class='comma'>,</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Pre</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectCreator</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>VsProjectCreator</span><span class='comma'>,</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Proj</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@FileWriter</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>VsProjectFilesWriter</span><span class='comma'>,</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Files</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@VsProjectFinder</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>VsProjectFinder</span><span class='comma'>,</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>VsProjFinder</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@VsPostBuildTaskCreator</span> <span class='op'>=</span> <span class='id identifier rubyid_defineProc'>defineProc</span> <span class='const'>VsPostBuildCommandTaskCreator</span><span class='comma'>,</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PostBuild</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid__ConnectProcessors'>_ConnectProcessors</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="FileWriter-instance_method">
+  
+    - (<tt>Object</tt>) <strong>FileWriter</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute FileWriter</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='const'>FileWriter</span>
+  <span class='ivar'>@FileWriter</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ProjectCreator-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProjectCreator</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ProjectCreator</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='const'>ProjectCreator</span>
+  <span class='ivar'>@ProjectCreator</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ProjectFinder-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProjectFinder</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ProjectFinder</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='const'>ProjectFinder</span>
+  <span class='ivar'>@ProjectFinder</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ProjectPreprocessor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ProjectPreprocessor</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ProjectPreprocessor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='const'>ProjectPreprocessor</span>
+  <span class='ivar'>@ProjectPreprocessor</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="VsPostBuildTaskCreator-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsPostBuildTaskCreator</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute VsPostBuildTaskCreator</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='const'>VsPostBuildTaskCreator</span>
+  <span class='ivar'>@VsPostBuildTaskCreator</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="VsProjectFinder-instance_method">
+  
+    - (<tt>Object</tt>) <strong>VsProjectFinder</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute VsProjectFinder</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='const'>VsProjectFinder</span>
+  <span class='ivar'>@VsProjectFinder</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_ConnectProcessors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_ConnectProcessors</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__ConnectProcessors'>_ConnectProcessors</span>
+  <span class='const'>Connect</span><span class='lparen'>(</span><span class='symbol'>:in</span><span class='comma'>,</span> <span class='ivar'>@ProjectFinder</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@ProjectPreprocessor</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='const'>Connect</span><span class='lparen'>(</span><span class='symbol'>:in</span><span class='comma'>,</span> <span class='ivar'>@VsProjectFinder</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@ProjectPreprocessor</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='const'>Connect</span><span class='lparen'>(</span><span class='symbol'>:in</span><span class='comma'>,</span> <span class='ivar'>@ProjectPreprocessor</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>      
+  <span class='const'>Connect</span><span class='lparen'>(</span><span class='ivar'>@ProjectCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='symbol'>:out</span><span class='rparen'>)</span>
+  <span class='const'>Connect</span><span class='lparen'>(</span><span class='ivar'>@FileWriter</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@ProjectCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='const'>Connect</span><span class='lparen'>(</span><span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@ProjectCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='const'>Connect</span><span class='lparen'>(</span><span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@FileWriter</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  
+  <span class='comment'># The first argument to this task is the configuration name for which the post build should be executed
+</span>  <span class='ivar'>@PostBuildTask</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='op'>::</span><span class='const'>ProxyTask</span><span class='period'>.</span><span class='id identifier rubyid_define_task'>define_task</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PostBuildCommandTask</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:descr</span><span class='comma'>,</span> <span class='symbol'>:inst</span><span class='comma'>,</span> <span class='symbol'>:vsDescr</span><span class='comma'>,</span> <span class='symbol'>:vsInst</span><span class='comma'>,</span> <span class='symbol'>:vsConf</span>
+  <span class='ivar'>@PostBuildLibCopyTask</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='period'>.</span><span class='id identifier rubyid_define_task'>define_task</span> <span class='id identifier rubyid__GetProcessorName'>_GetProcessorName</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PostBuildLibCopyTask</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:descr</span><span class='comma'>,</span> <span class='symbol'>:inst</span><span class='comma'>,</span> <span class='symbol'>:vsDescr</span><span class='comma'>,</span> <span class='symbol'>:vsInst</span><span class='comma'>,</span> <span class='symbol'>:vsConf</span>
+  
+  <span class='ivar'>@PostBuildTask</span><span class='period'>.</span><span class='const'>SetArgumentModificationAction</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_args'>args</span><span class='op'>|</span>
+    
+    <span class='id identifier rubyid_vsConfBinaryExt'>vsConfBinaryExt</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    
+    <span class='gvar'>$EXECUTION_MODE</span> <span class='op'>=</span> <span class='symbol'>:Restricted</span>
+    <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>CurrentVsConfBinaryExt</span> <span class='op'>=</span> <span class='id identifier rubyid_vsConfBinaryExt'>vsConfBinaryExt</span>
+    <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='id identifier rubyid_invoke'>invoke</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    
+    <span class='id identifier rubyid_modifiedArgs'>modifiedArgs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+    
+    <span class='id identifier rubyid_modifiedArgs'>modifiedArgs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>GetOutputByClass</span><span class='lparen'>(</span><span class='const'>ProjectDescription</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_modifiedArgs'>modifiedArgs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>GetOutputByClass</span><span class='lparen'>(</span><span class='const'>ProjectInstance</span><span class='rparen'>)</span>
+    
+    <span class='id identifier rubyid_modifiedArgs'>modifiedArgs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>GetOutputByClass</span><span class='lparen'>(</span><span class='const'>VsProjectDescription</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_modifiedArgs'>modifiedArgs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>GetOutputByClass</span><span class='lparen'>(</span><span class='const'>VsProjectInstance</span><span class='rparen'>)</span>
+    
+    <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>GetOutputsByClass</span><span class='lparen'>(</span><span class='const'>VsProjectConfiguration</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_vsConf'>vsConf</span><span class='op'>|</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_vsConf'>vsConf</span><span class='period'>.</span><span class='const'>Platform</span><span class='period'>.</span><span class='const'>BinaryExtension</span> <span class='op'>==</span> <span class='id identifier rubyid_vsConfBinaryExt'>vsConfBinaryExt</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_modifiedArgs'>modifiedArgs</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_vsConf'>vsConf</span>
+        <span class='kw'>break</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    
+    <span class='id identifier rubyid_modifiedArgs'>modifiedArgs</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@PostBuildTask</span><span class='period'>.</span><span class='id identifier rubyid_enhance'>enhance</span> <span class='lbracket'>[</span><span class='ivar'>@PostBuildLibCopyTask</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span>  <span class='comment'># as the pres are executed corresponding to their order this executes the back task last
+</span>  
+  <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>PostBuildTask</span> <span class='op'>=</span> <span class='ivar'>@PostBuildTask</span>
+  <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='const'>PostBuildLibCopyTask</span> <span class='op'>=</span> <span class='ivar'>@PostBuildLibCopyTask</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_InitProc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_InitProc</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__InitProc'>_InitProc</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_LogTextAfterExecute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_LogTextAfterExecute</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overwrite this in derived processors to print a message after the processor
+was executed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__LogTextAfterExecute'>_LogTextAfterExecute</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Project </span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_content'> was build.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_LogTextBeforeExecute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_LogTextBeforeExecute</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overwrite this in derived processors to print a message before the
+processor is executed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+113
+114
+115</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 113</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__LogTextBeforeExecute'>_LogTextBeforeExecute</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Building project </span><span class='embexpr_beg'>#{</span><span class='ivar'>@Name</span><span class='rbrace'>}</span><span class='tstring_content'>...</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_OnAddInput-instance_method">
+  
+    - (<tt>Object</tt>) <strong>_OnAddInput</strong>(input) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__OnAddInput'>_OnAddInput</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>ProjectDescription</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_clean'>clean</span> <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='const'>CompilesPath</span><span class='period'>.</span><span class='const'>RelativePath</span>
+    <span class='id identifier rubyid_clean'>clean</span> <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='const'>BuildPath</span><span class='period'>.</span><span class='const'>RelativePath</span>
+  <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>VsProjectDescription</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_clean'>clean</span> <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='const'>ProjectBasePath</span><span class='period'>.</span><span class='const'>RelativePath</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="AdaptName-instance_method">
+  
+    - (<tt>Object</tt>) <strong>AdaptName</strong>(newName) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='const'>AdaptName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_oldName'>oldName</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='rparen'>)</span>
+  
+  <span class='id identifier rubyid_projecFinderName'>projecFinderName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='ivar'>@ProjectFinder</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_projectPreprocessorName'>projectPreprocessorName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='ivar'>@ProjectPreprocessor</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_libFinderName'>libFinderName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='ivar'>@ProjectCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_fileWriterName'>fileWriterName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='ivar'>@FileWriter</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_vsProjectFinderName'>vsProjectFinderName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='ivar'>@VsProjectFinder</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_vsPostBuildTaskCreatorName'>vsPostBuildTaskCreatorName</span> <span class='op'>=</span> <span class='id identifier rubyid__AdaptProcessorName'>_AdaptProcessorName</span><span class='lparen'>(</span><span class='id identifier rubyid_newName'>newName</span><span class='comma'>,</span> <span class='id identifier rubyid_oldName'>oldName</span><span class='comma'>,</span> <span class='ivar'>@VsPostBuildTaskCreator</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@ProjectFinder</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_projecFinderName'>projecFinderName</span><span class='rbracket'>]</span>
+  <span class='ivar'>@ProjectPreprocessor</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_projectPreprocessorName'>projectPreprocessorName</span><span class='rbracket'>]</span>
+  <span class='ivar'>@ProjectCreator</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_libFinderName'>libFinderName</span><span class='rbracket'>]</span>
+  <span class='ivar'>@FileWriter</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_fileWriterName'>fileWriterName</span><span class='rbracket'>]</span>
+  <span class='ivar'>@VsProjectFinder</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_vsProjectFinderName'>vsProjectFinderName</span><span class='rbracket'>]</span>
+  <span class='ivar'>@VsPostBuildTaskCreator</span> <span class='op'>=</span> <span class='ivar'>@ChainProcessors</span><span class='lbracket'>[</span><span class='id identifier rubyid_vsPostBuildTaskCreatorName'>vsPostBuildTaskCreatorName</span><span class='rbracket'>]</span>
+  
+  <span class='id identifier rubyid__ConnectProcessors'>_ConnectProcessors</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="Extend-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Extend</strong>(valueMap, executeParent = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Extend/set the attributes of the processor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_executeParent'>executeParent</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_executeParent'>executeParent</span><span class='rparen'>)</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_postBuildTasks'>postBuildTasks</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:PostBuildTasks</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:postBuild</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_postBuildTasks'>postBuildTasks</span><span class='rparen'>)</span>
+    <span class='ivar'>@PostBuildTask</span><span class='period'>.</span><span class='id identifier rubyid_enhance'>enhance</span> <span class='id identifier rubyid_postBuildTasks'>postBuildTasks</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="intialize_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>intialize_copy</strong>(original) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/Processors/VisualStudio/vs_project_builder.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_intialize_copy'>intialize_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='ivar'>@ProjectFinder</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ProjectFinder</span>
+  <span class='ivar'>@ProjectPreprocessor</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ProjectPreprocessor</span>
+  <span class='ivar'>@ProjectCreator</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>ProjectCreator</span>
+  <span class='ivar'>@FileWriter</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>FileWriter</span>
+  <span class='ivar'>@VsProjectFinder</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>VsProjectFinder</span>
+  <span class='ivar'>@VsPostBuildTaskCreator</span> <span class='op'>=</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>VsPostBuildTaskCreator</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:54 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

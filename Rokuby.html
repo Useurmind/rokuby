@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rokuby
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (R)</a> &raquo;
+    
+    
+    <span class="title">Rokuby</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rokuby
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/rokuby/requires.rb<span class="defines">,<br />
+  lib/rokuby/required_files.rb,<br /> lib/rokuby/doxygen_builder.rb,<br /> lib/rokuby/Utility/XML/XmlTag.rb,<br /> lib/rokuby/Utility/project_path.rb,<br /> lib/rokuby/Processors/processor.rb,<br /> lib/rokuby/Utility/path_utility.rb,<br /> lib/rokuby/Utility/XML/XmlHelper.rb,<br /> lib/rokuby/Utility/process_cache.rb,<br /> lib/rokuby/Utility/general_utility.rb,<br /> lib/rokuby/Utility/XML/XmlDocument.rb,<br /> lib/rokuby/RakeWrapper/application.rb,<br /> lib/rokuby/RakeWrapper/dsl_language.rb,<br /> lib/rokuby/Processors/process_chain.rb,<br /> lib/rokuby/RakeWrapper/project_file.rb,<br /> lib/rokuby/Utility/task_path_utility.rb,<br /> lib/rokuby/Utility/directory_utility.rb,<br /> lib/rokuby/Processors/project_builder.rb,<br /> lib/rokuby/Processors/processor_array.rb,<br /> lib/rokuby/RakeWrapper/process_manager.rb,<br /> lib/rokuby/RakeWrapper/task_description.rb,<br /> lib/rokuby/Processors/General/find_file.rb,<br /> lib/rokuby/Processors/processor_utility.rb,<br /> lib/rokuby/RakeWrapper/project_namespace.rb,<br /> lib/rokuby/Processors/General/file_finder.rb,<br /> lib/rokuby/RakeWrapper/project_file_loader.rb,<br /> lib/rokuby/InformationUnits/General/project.rb,<br /> lib/rokuby/InformationUnits/General/library.rb,<br /> lib/rokuby/Processors/General/library_finder.rb,<br /> lib/rokuby/InformationUnits/General/defaults.rb,<br /> lib/rokuby/Processors/General/project_finder.rb,<br /> lib/rokuby/Processors/General/project_joiner.rb,<br /> lib/rokuby/InformationUnits/information_unit.rb,<br /> lib/rokuby/Processors/General/platform_tester.rb,<br /> lib/rokuby/InformationUnits/Linux/gpp_project.rb,<br /> lib/rokuby/Processors/General/project_splitter.rb,<br /> lib/rokuby/InformationUnits/Linux/gpp_defaults.rb,<br /> lib/rokuby/InformationUnits/Instances/file_set.rb,<br /> lib/rokuby/Processors/Linux/gpp_project_builder.rb,<br /> lib/rokuby/Processors/Linux/gpp_project_creator.rb,<br /> lib/rokuby/InformationUnits/Linux/gpp_constants.rb,<br /> lib/rokuby/Utility/VisualStudio/vs_file_creator.rb,<br /> lib/rokuby/RakeWrapper/information_unit_manager.rb,<br /> lib/rokuby/Processors/Linux/gpp_project_compiler.rb,<br /> lib/rokuby/Processors/General/source_unit_finder.rb,<br /> lib/rokuby/InformationUnits/information_instance.rb,<br /> lib/rokuby/Utility/VisualStudio/vs_xml_file_utility.rb,<br /> lib/rokuby/Utility/VisualStudio/filter_file_creator.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_project.rb,<br /> lib/rokuby/Processors/General/passthrough_processor.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_project_finder.rb,<br /> lib/rokuby/Utility/VisualStudio/project_file_creator.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_defaults.rb,<br /> lib/rokuby/Processors/Linux/gpp_project_preprocessor.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_project_builder.rb,<br /> lib/rokuby/InformationUnits/information_configuration.rb,<br /> lib/rokuby/InformationUnits/information_specification.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_constants.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_project_creator.rb,<br /> lib/rokuby/Utility/VisualStudio/solution_file_creator.rb,<br /> lib/rokuby/InformationUnits/Instances/library_instance.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_solution_builder.rb,<br /> lib/rokuby/InformationUnits/Instances/library_file_set.rb,<br /> lib/rokuby/InformationUnits/Instances/project_instance.rb,<br /> lib/rokuby/InformationUnits/General/passthrough_defines.rb,<br /> lib/rokuby/InformationUnits/General/project_description.rb,<br /> lib/rokuby/InformationUnits/Constants/project_constants.rb,<br /> lib/rokuby/Processors/Linux/gpp_project_library_gatherer.rb,<br /> lib/rokuby/Processors/MultiPlatform/multi_project_builder.rb,<br /> lib/rokuby/InformationUnits/General/project_configuration.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_project_usage.rb,<br /> lib/rokuby/InformationUnits/Linux/gpp_project_description.rb,<br /> lib/rokuby/Processors/Linux/gpp_project_processor_utility.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_solution_file_writer.rb,<br /> lib/rokuby/InformationUnits/General/platform_configuration.rb,<br /> lib/rokuby/Processors/MultiPlatform/multi_solution_builder.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_project_files_writer.rb,<br /> lib/rokuby/InformationUnits/Instances/source_unit_instance.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_project_preprocessor.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_solution_preprocessor.rb,<br /> lib/rokuby/InformationUnits/Linux/gpp_project_configuration.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_project_instance.rb,<br /> lib/rokuby/InformationUnits/Constants/configuration_constants.rb,<br /> lib/rokuby/InformationUnits/Specifications/file_specification.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_project_description.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_project_processor_utility.rb,<br /> lib/rokuby/InformationUnits/Specifications/project_specification.rb,<br /> lib/rokuby/InformationUnits/Specifications/library_location_spec.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_solution_description.rb,<br /> lib/rokuby/InformationUnits/Specifications/library_specification.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_solution_processor_utility.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_project_configuration.rb,<br /> lib/rokuby/InformationUnits/VisualStudio/vs_project_specification.rb,<br /> lib/rokuby/InformationUnits/Specifications/library_specification_set.rb,<br /> lib/rokuby/InformationUnits/Specifications/source_unit_specification.rb,<br /> lib/rokuby/Processors/VisualStudio/vs_project_post_build_command_task_creator.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Rokuby/DSL.html" title="Rokuby::DSL (module)">DSL</a></span>, <span class='object_link'><a href="Rokuby/Defaults.html" title="Rokuby::Defaults (module)">Defaults</a></span>, <span class='object_link'><a href="Rokuby/DirectoryUtility.html" title="Rokuby::DirectoryUtility (module)">DirectoryUtility</a></span>, <span class='object_link'><a href="Rokuby/FindFile.html" title="Rokuby::FindFile (module)">FindFile</a></span>, <span class='object_link'><a href="Rokuby/GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span>, <span class='object_link'><a href="Rokuby/Gpp.html" title="Rokuby::Gpp (module)">Gpp</a></span>, <span class='object_link'><a href="Rokuby/GppProjectProcessorUtility.html" title="Rokuby::GppProjectProcessorUtility (module)">GppProjectProcessorUtility</a></span>, <span class='object_link'><a href="Rokuby/InformationUnitManager.html" title="Rokuby::InformationUnitManager (module)">InformationUnitManager</a></span>, <span class='object_link'><a href="Rokuby/PathUtility.html" title="Rokuby::PathUtility (module)">PathUtility</a></span>, <span class='object_link'><a href="Rokuby/PlatformTester.html" title="Rokuby::PlatformTester (module)">PlatformTester</a></span>, <span class='object_link'><a href="Rokuby/ProcessManager.html" title="Rokuby::ProcessManager (module)">ProcessManager</a></span>, <span class='object_link'><a href="Rokuby/ProcessorUtility.html" title="Rokuby::ProcessorUtility (module)">ProcessorUtility</a></span>, <span class='object_link'><a href="Rokuby/RequiredFiles.html" title="Rokuby::RequiredFiles (module)">RequiredFiles</a></span>, <span class='object_link'><a href="Rokuby/TaskDescription.html" title="Rokuby::TaskDescription (module)">TaskDescription</a></span>, <span class='object_link'><a href="Rokuby/TaskPathUtility.html" title="Rokuby::TaskPathUtility (module)">TaskPathUtility</a></span>, <span class='object_link'><a href="Rokuby/Vs.html" title="Rokuby::Vs (module)">Vs</a></span>, <span class='object_link'><a href="Rokuby/VsProjectProcessorUtility.html" title="Rokuby::VsProjectProcessorUtility (module)">VsProjectProcessorUtility</a></span>, <span class='object_link'><a href="Rokuby/VsSolutionProcessorUtility.html" title="Rokuby::VsSolutionProcessorUtility (module)">VsSolutionProcessorUtility</a></span>, <span class='object_link'><a href="Rokuby/VsXmlFileUtility.html" title="Rokuby::VsXmlFileUtility (module)">VsXmlFileUtility</a></span>, <span class='object_link'><a href="Rokuby/XmlHelper.html" title="Rokuby::XmlHelper (module)">XmlHelper</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Rokuby/Application.html" title="Rokuby::Application (class)">Application</a></span>, <span class='object_link'><a href="Rokuby/DoxygenBuilder.html" title="Rokuby::DoxygenBuilder (class)">DoxygenBuilder</a></span>, <span class='object_link'><a href="Rokuby/FileFinder.html" title="Rokuby::FileFinder (class)">FileFinder</a></span>, <span class='object_link'><a href="Rokuby/FileSet.html" title="Rokuby::FileSet (class)">FileSet</a></span>, <span class='object_link'><a href="Rokuby/FileSpecification.html" title="Rokuby::FileSpecification (class)">FileSpecification</a></span>, <span class='object_link'><a href="Rokuby/FilterFileCreator.html" title="Rokuby::FilterFileCreator (class)">FilterFileCreator</a></span>, <span class='object_link'><a href="Rokuby/GppProject.html" title="Rokuby::GppProject (class)">GppProject</a></span>, <span class='object_link'><a href="Rokuby/GppProjectBuilder.html" title="Rokuby::GppProjectBuilder (class)">GppProjectBuilder</a></span>, <span class='object_link'><a href="Rokuby/GppProjectCompiler.html" title="Rokuby::GppProjectCompiler (class)">GppProjectCompiler</a></span>, <span class='object_link'><a href="Rokuby/GppProjectConfiguration.html" title="Rokuby::GppProjectConfiguration (class)">GppProjectConfiguration</a></span>, <span class='object_link'><a href="Rokuby/GppProjectCreator.html" title="Rokuby::GppProjectCreator (class)">GppProjectCreator</a></span>, <span class='object_link'><a href="Rokuby/GppProjectDescription.html" title="Rokuby::GppProjectDescription (class)">GppProjectDescription</a></span>, <span class='object_link'><a href="Rokuby/GppProjectLibraryGatherer.html" title="Rokuby::GppProjectLibraryGatherer (class)">GppProjectLibraryGatherer</a></span>, <span class='object_link'><a href="Rokuby/GppProjectPreprocessor.html" title="Rokuby::GppProjectPreprocessor (class)">GppProjectPreprocessor</a></span>, <span class='object_link'><a href="Rokuby/InformationConfiguration.html" title="Rokuby::InformationConfiguration (class)">InformationConfiguration</a></span>, <span class='object_link'><a href="Rokuby/InformationInstance.html" title="Rokuby::InformationInstance (class)">InformationInstance</a></span>, <span class='object_link'><a href="Rokuby/InformationSpecification.html" title="Rokuby::InformationSpecification (class)">InformationSpecification</a></span>, <span class='object_link'><a href="Rokuby/InformationUnit.html" title="Rokuby::InformationUnit (class)">InformationUnit</a></span>, <span class='object_link'><a href="Rokuby/Library.html" title="Rokuby::Library (class)">Library</a></span>, <span class='object_link'><a href="Rokuby/LibraryFileSet.html" title="Rokuby::LibraryFileSet (class)">LibraryFileSet</a></span>, <span class='object_link'><a href="Rokuby/LibraryFinder.html" title="Rokuby::LibraryFinder (class)">LibraryFinder</a></span>, <span class='object_link'><a href="Rokuby/LibraryInstance.html" title="Rokuby::LibraryInstance (class)">LibraryInstance</a></span>, <span class='object_link'><a href="Rokuby/LibraryLocationSpec.html" title="Rokuby::LibraryLocationSpec (class)">LibraryLocationSpec</a></span>, <span class='object_link'><a href="Rokuby/LibrarySpecification.html" title="Rokuby::LibrarySpecification (class)">LibrarySpecification</a></span>, <span class='object_link'><a href="Rokuby/LibrarySpecificationSet.html" title="Rokuby::LibrarySpecificationSet (class)">LibrarySpecificationSet</a></span>, <span class='object_link'><a href="Rokuby/MultiProjectBuilder.html" title="Rokuby::MultiProjectBuilder (class)">MultiProjectBuilder</a></span>, <span class='object_link'><a href="Rokuby/MultiSolutionBuilder.html" title="Rokuby::MultiSolutionBuilder (class)">MultiSolutionBuilder</a></span>, <span class='object_link'><a href="Rokuby/PassthroughDefines.html" title="Rokuby::PassthroughDefines (class)">PassthroughDefines</a></span>, <span class='object_link'><a href="Rokuby/PassthroughProcessor.html" title="Rokuby::PassthroughProcessor (class)">PassthroughProcessor</a></span>, <span class='object_link'><a href="Rokuby/PlatformConfiguration.html" title="Rokuby::PlatformConfiguration (class)">PlatformConfiguration</a></span>, <span class='object_link'><a href="Rokuby/ProcessCache.html" title="Rokuby::ProcessCache (class)">ProcessCache</a></span>, <span class='object_link'><a href="Rokuby/ProcessChain.html" title="Rokuby::ProcessChain (class)">ProcessChain</a></span>, <span class='object_link'><a href="Rokuby/Processor.html" title="Rokuby::Processor (class)">Processor</a></span>, <span class='object_link'><a href="Rokuby/ProcessorArray.html" title="Rokuby::ProcessorArray (class)">ProcessorArray</a></span>, <span class='object_link'><a href="Rokuby/Project.html" title="Rokuby::Project (class)">Project</a></span>, <span class='object_link'><a href="Rokuby/ProjectBuilder.html" title="Rokuby::ProjectBuilder (class)">ProjectBuilder</a></span>, <span class='object_link'><a href="Rokuby/ProjectConfiguration.html" title="Rokuby::ProjectConfiguration (class)">ProjectConfiguration</a></span>, <span class='object_link'><a href="Rokuby/ProjectDescription.html" title="Rokuby::ProjectDescription (class)">ProjectDescription</a></span>, <span class='object_link'><a href="Rokuby/ProjectFile.html" title="Rokuby::ProjectFile (class)">ProjectFile</a></span>, <span class='object_link'><a href="Rokuby/ProjectFileCreator.html" title="Rokuby::ProjectFileCreator (class)">ProjectFileCreator</a></span>, <span class='object_link'><a href="Rokuby/ProjectFileLoader.html" title="Rokuby::ProjectFileLoader (class)">ProjectFileLoader</a></span>, <span class='object_link'><a href="Rokuby/ProjectFinder.html" title="Rokuby::ProjectFinder (class)">ProjectFinder</a></span>, <span class='object_link'><a href="Rokuby/ProjectInstance.html" title="Rokuby::ProjectInstance (class)">ProjectInstance</a></span>, <span class='object_link'><a href="Rokuby/ProjectJoiner.html" title="Rokuby::ProjectJoiner (class)">ProjectJoiner</a></span>, <span class='object_link'><a href="Rokuby/ProjectNamespace.html" title="Rokuby::ProjectNamespace (class)">ProjectNamespace</a></span>, <span class='object_link'><a href="Rokuby/ProjectPath.html" title="Rokuby::ProjectPath (class)">ProjectPath</a></span>, <span class='object_link'><a href="Rokuby/ProjectSpecification.html" title="Rokuby::ProjectSpecification (class)">ProjectSpecification</a></span>, <span class='object_link'><a href="Rokuby/ProjectSplitter.html" title="Rokuby::ProjectSplitter (class)">ProjectSplitter</a></span>, <span class='object_link'><a href="Rokuby/SolutionFileCreator.html" title="Rokuby::SolutionFileCreator (class)">SolutionFileCreator</a></span>, <span class='object_link'><a href="Rokuby/SourceUnitFinder.html" title="Rokuby::SourceUnitFinder (class)">SourceUnitFinder</a></span>, <span class='object_link'><a href="Rokuby/SourceUnitInstance.html" title="Rokuby::SourceUnitInstance (class)">SourceUnitInstance</a></span>, <span class='object_link'><a href="Rokuby/SourceUnitSpecification.html" title="Rokuby::SourceUnitSpecification (class)">SourceUnitSpecification</a></span>, <span class='object_link'><a href="Rokuby/VsFileCreator.html" title="Rokuby::VsFileCreator (class)">VsFileCreator</a></span>, <span class='object_link'><a href="Rokuby/VsPostBuildCommandTaskCreator.html" title="Rokuby::VsPostBuildCommandTaskCreator (class)">VsPostBuildCommandTaskCreator</a></span>, <span class='object_link'><a href="Rokuby/VsProject.html" title="Rokuby::VsProject (class)">VsProject</a></span>, <span class='object_link'><a href="Rokuby/VsProjectBuilder.html" title="Rokuby::VsProjectBuilder (class)">VsProjectBuilder</a></span>, <span class='object_link'><a href="Rokuby/VsProjectConfiguration.html" title="Rokuby::VsProjectConfiguration (class)">VsProjectConfiguration</a></span>, <span class='object_link'><a href="Rokuby/VsProjectCreator.html" title="Rokuby::VsProjectCreator (class)">VsProjectCreator</a></span>, <span class='object_link'><a href="Rokuby/VsProjectDescription.html" title="Rokuby::VsProjectDescription (class)">VsProjectDescription</a></span>, <span class='object_link'><a href="Rokuby/VsProjectFilesWriter.html" title="Rokuby::VsProjectFilesWriter (class)">VsProjectFilesWriter</a></span>, <span class='object_link'><a href="Rokuby/VsProjectFinder.html" title="Rokuby::VsProjectFinder (class)">VsProjectFinder</a></span>, <span class='object_link'><a href="Rokuby/VsProjectInstance.html" title="Rokuby::VsProjectInstance (class)">VsProjectInstance</a></span>, <span class='object_link'><a href="Rokuby/VsProjectPreprocessor.html" title="Rokuby::VsProjectPreprocessor (class)">VsProjectPreprocessor</a></span>, <span class='object_link'><a href="Rokuby/VsProjectSpecification.html" title="Rokuby::VsProjectSpecification (class)">VsProjectSpecification</a></span>, <span class='object_link'><a href="Rokuby/VsProjectUsage.html" title="Rokuby::VsProjectUsage (class)">VsProjectUsage</a></span>, <span class='object_link'><a href="Rokuby/VsSolutionBuilder.html" title="Rokuby::VsSolutionBuilder (class)">VsSolutionBuilder</a></span>, <span class='object_link'><a href="Rokuby/VsSolutionDescription.html" title="Rokuby::VsSolutionDescription (class)">VsSolutionDescription</a></span>, <span class='object_link'><a href="Rokuby/VsSolutionFileWriter.html" title="Rokuby::VsSolutionFileWriter (class)">VsSolutionFileWriter</a></span>, <span class='object_link'><a href="Rokuby/VsSolutionPreprocessor.html" title="Rokuby::VsSolutionPreprocessor (class)">VsSolutionPreprocessor</a></span>, <span class='object_link'><a href="Rokuby/XmlDocument.html" title="Rokuby::XmlDocument (class)">XmlDocument</a></span>, <span class='object_link'><a href="Rokuby/XmlTag.html" title="Rokuby::XmlTag (class)">XmlTag</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="BINARY_TYPES-constant" class="">BINARY_TYPES =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='symbol'>:Application</span><span class='comma'>,</span>  <span class='comment'># an executable application
+</span>  <span class='symbol'>:Shared</span><span class='comma'>,</span>      <span class='comment'># a shared dynamically linked library
+</span>  <span class='symbol'>:Static</span>       <span class='comment'># a statically linked library
+</span><span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="PROJECT_SUBDIR-constant" class="">PROJECT_SUBDIR =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="COMPILE_SUBDIR-constant" class="">COMPILE_SUBDIR =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="BUILD_SUBDIR-constant" class="">BUILD_SUBDIR =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>build</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PROJECT_BUILDER_TYPES-constant" class="">PROJECT_BUILDER_TYPES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Symbols that describe different project builder types</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='symbol'>:Vs</span><span class='comma'>,</span>  <span class='comment'># A project for visual studio
+</span>  <span class='symbol'>:Gpp</span>  <span class='comment'># A project for the gpp compiler
+</span><span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="SOLUTION_BUILDER_TYPES-constant" class="">SOLUTION_BUILDER_TYPES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Symbols that describe different solution builder types</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='symbol'>:Vs</span><span class='comma'>,</span>  <span class='comment'># A solution for visual studio
+</span><span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="OPERATING_SYSTEMS-constant" class="">OPERATING_SYSTEMS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Symbols that describe different operating systems</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='symbol'>:Ubuntu</span><span class='comma'>,</span>
+  <span class='symbol'>:Windows</span>
+<span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="ARCHITECTURES-constant" class="">ARCHITECTURES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Symbols that describe different architectures.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='symbol'>:x64</span><span class='comma'>,</span>
+  <span class='symbol'>:x86</span>
+<span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="CONFIGURATION_TYPES-constant" class="">CONFIGURATION_TYPES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Symbols that describe different build configurations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='symbol'>:Debug</span><span class='comma'>,</span>
+  <span class='symbol'>:Release</span><span class='comma'>,</span>
+  <span class='symbol'>:RelWithDeb</span>
+<span class='rbracket'>]</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:42 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

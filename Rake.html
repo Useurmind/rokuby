@@ -1,0 +1,651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Rake
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (R)</a> &raquo;
+    
+    
+    <span class="title">Rake</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Rake
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+      <dt class="r1">Extended by:</dt>
+      <dd class="r1"><span class='object_link'><a href="" title="Rake (module)">Rake</a></span>, <span class='object_link'><a href="Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></dd>
+      
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Test::Unit::Assertions</dd>
+      
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="" title="Rake (module)">Rake</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/RokubyRake/rake/task.rb<span class="defines">,<br />
+  lib/rokuby/RakeWrapper/task.rb,<br /> lib/rokuby/RakeWrapper/file_task.rb,<br /> lib/rokuby/RokubyRake/rake/win32.rb,<br /> lib/rokuby/RakeWrapper/proxy_task.rb,<br /> lib/rokuby/RokubyRake/rake/version.rb,<br /> lib/rokuby/RokubyRake/rake/runtest.rb,<br /> lib/rokuby/RokubyRake/rake/tasklib.rb,<br /> lib/rokuby/RakeWrapper/dsl_language.rb,<br /> lib/rokuby/RokubyRake/rake/testtask.rb,<br /> lib/rokuby/RokubyRake/rake/rdoctask.rb,<br /> lib/rokuby/RokubyRake/rake/rdoctask.rb,<br /> lib/rokuby/RokubyRake/rake/cloneable.rb,<br /> lib/rokuby/RokubyRake/rake/file_list.rb,<br /> lib/rokuby/RokubyRake/rake/file_list.rb,<br /> lib/rokuby/RokubyRake/rake/file_task.rb,<br /> lib/rokuby/RokubyRake/rake/name_space.rb,<br /> lib/rokuby/RakeWrapper/processor_task.rb,<br /> lib/rokuby/RokubyRake/rake/early_time.rb,<br /> lib/rokuby/RokubyRake/rake/multi_task.rb,<br /> lib/rokuby/RokubyRake/rake/rake_module.rb,<br /> lib/rokuby/RokubyRake/rake/packagetask.rb,<br /> lib/rokuby/RokubyRake/rake/application.rb,<br /> lib/rokuby/RokubyRake/rake/task_manager.rb,<br /> lib/rokuby/RokubyRake/rake/pseudo_status.rb,<br /> lib/rokuby/RokubyRake/rake_required_files.rb,<br /> lib/rokuby/RokubyRake/rake/file_utils_ext.rb,<br /> lib/rokuby/RokubyRake/rake/gempackagetask.rb,<br /> lib/rokuby/RokubyRake/rake/task_arguments.rb,<br /> lib/rokuby/RokubyRake/rake/dsl_definition.rb,<br /> lib/rokuby/RokubyRake/rake/default_loader.rb,<br /> lib/rokuby/RakeWrapper/file_creation_task.rb,<br /> lib/rokuby/RokubyRake/rake/contrib/ftptools.rb,<br /> lib/rokuby/RakeWrapper/rake_module_redefine.rb,<br /> lib/rokuby/RokubyRake/rake/loaders/makefile.rb,<br /> lib/rokuby/RokubyRake/rake/invocation_chain.rb,<br /> lib/rokuby/RokubyRake/rake/file_creation_task.rb,<br /> lib/rokuby/RokubyRake/rake/task_argument_error.rb,<br /> lib/rokuby/RokubyRake/rake/contrib/sshpublisher.rb,<br /> lib/rokuby/RokubyRake/rake/contrib/rubyforgepublisher.rb,<br /> lib/rokuby/RokubyRake/rake/invocation_exception_mixin.rb,<br /> lib/rokuby/RokubyRake/rake/contrib/compositepublisher.rb,<br /> lib/rokuby/RokubyRake/rake/rule_recursion_overflow_error.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>require 'rake/file_task' require 'rake/early_time'</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Rake/AltSystem.html" title="Rake::AltSystem (module)">AltSystem</a></span>, <span class='object_link'><a href="Rake/Cloneable.html" title="Rake::Cloneable (module)">Cloneable</a></span>, <span class='object_link'><a href="Rake/DSL.html" title="Rake::DSL (module)">DSL</a></span>, <span class='object_link'><a href="Rake/DeprecatedObjectDSL.html" title="Rake::DeprecatedObjectDSL (module)">DeprecatedObjectDSL</a></span>, <span class='object_link'><a href="Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span>, <span class='object_link'><a href="Rake/InvocationExceptionMixin.html" title="Rake::InvocationExceptionMixin (module)">InvocationExceptionMixin</a></span>, <span class='object_link'><a href="Rake/RequiredFiles.html" title="Rake::RequiredFiles (module)">RequiredFiles</a></span>, <span class='object_link'><a href="Rake/TaskManager.html" title="Rake::TaskManager (module)">TaskManager</a></span>, <span class='object_link'><a href="Rake/Version.html" title="Rake::Version (module)">Version</a></span>, <span class='object_link'><a href="Rake/Win32.html" title="Rake::Win32 (module)">Win32</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Rake/Application.html" title="Rake::Application (class)">Application</a></span>, <span class='object_link'><a href="Rake/CompositePublisher.html" title="Rake::CompositePublisher (class)">CompositePublisher</a></span>, <span class='object_link'><a href="Rake/DefaultLoader.html" title="Rake::DefaultLoader (class)">DefaultLoader</a></span>, <span class='object_link'><a href="Rake/EarlyTime.html" title="Rake::EarlyTime (class)">EarlyTime</a></span>, <span class='object_link'><a href="Rake/FileCreationTask.html" title="Rake::FileCreationTask (class)">FileCreationTask</a></span>, <span class='object_link'><a href="Rake/FileList.html" title="Rake::FileList (class)">FileList</a></span>, <span class='object_link'><a href="Rake/FileTask.html" title="Rake::FileTask (class)">FileTask</a></span>, <span class='object_link'><a href="Rake/FtpFile.html" title="Rake::FtpFile (class)">FtpFile</a></span>, <span class='object_link'><a href="Rake/FtpUploader.html" title="Rake::FtpUploader (class)">FtpUploader</a></span>, <span class='object_link'><a href="Rake/InvocationChain.html" title="Rake::InvocationChain (class)">InvocationChain</a></span>, <span class='object_link'><a href="Rake/MakefileLoader.html" title="Rake::MakefileLoader (class)">MakefileLoader</a></span>, <span class='object_link'><a href="Rake/MultiTask.html" title="Rake::MultiTask (class)">MultiTask</a></span>, <span class='object_link'><a href="Rake/NameSpace.html" title="Rake::NameSpace (class)">NameSpace</a></span>, <span class='object_link'><a href="Rake/PackageTask.html" title="Rake::PackageTask (class)">PackageTask</a></span>, <span class='object_link'><a href="Rake/ProcessorTask.html" title="Rake::ProcessorTask (class)">ProcessorTask</a></span>, <span class='object_link'><a href="Rake/ProxyTask.html" title="Rake::ProxyTask (class)">ProxyTask</a></span>, <span class='object_link'><a href="Rake/PseudoStatus.html" title="Rake::PseudoStatus (class)">PseudoStatus</a></span>, <span class='object_link'><a href="Rake/RubyForgePublisher.html" title="Rake::RubyForgePublisher (class)">RubyForgePublisher</a></span>, <span class='object_link'><a href="Rake/RuleRecursionOverflowError.html" title="Rake::RuleRecursionOverflowError (class)">RuleRecursionOverflowError</a></span>, <span class='object_link'><a href="Rake/SshDirPublisher.html" title="Rake::SshDirPublisher (class)">SshDirPublisher</a></span>, <span class='object_link'><a href="Rake/SshFilePublisher.html" title="Rake::SshFilePublisher (class)">SshFilePublisher</a></span>, <span class='object_link'><a href="Rake/SshFreshDirPublisher.html" title="Rake::SshFreshDirPublisher (class)">SshFreshDirPublisher</a></span>, <span class='object_link'><a href="Rake/Task.html" title="Rake::Task (class)">Task</a></span>, <span class='object_link'><a href="Rake/TaskArgumentError.html" title="Rake::TaskArgumentError (class)">TaskArgumentError</a></span>, <span class='object_link'><a href="Rake/TaskArguments.html" title="Rake::TaskArguments (class)">TaskArguments</a></span>, <span class='object_link'><a href="Rake/TaskLib.html" title="Rake::TaskLib (class)">TaskLib</a></span>, <span class='object_link'><a href="Rake/TestTask.html" title="Rake::TestTask (class)">TestTask</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>0.9.2</span><span class='tstring_end'>'</span></span></pre></dd>
+      
+        <dt id="RDocTask-constant" class="">RDocTask =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>RDoc</span><span class='op'>::</span><span class='const'>Task</span></pre></dd>
+      
+        <dt id="EARLY-constant" class="">EARLY =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>EarlyTime</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span></pre></dd>
+      
+        <dt id="GemPackageTask-constant" class="">GemPackageTask =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Gem</span><span class='op'>::</span><span class='const'>PackageTask</span></pre></dd>
+      
+        <dt id="EMPTY_TASK_ARGS-constant" class="">EMPTY_TASK_ARGS =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>TaskArguments</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="DeprecatedCommands-constant" class="">DeprecatedCommands =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Object</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_extend'>extend</span><span class='lparen'>(</span><span class='const'>DSL</span><span class='rparen'>)</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Rake/FileUtilsExt.html#DEFAULT-constant" title="Rake::FileUtilsExt::DEFAULT (constant)">FileUtilsExt::DEFAULT</a></span></p>
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="FileUtils.html#LN_SUPPORTED-constant" title="FileUtils::LN_SUPPORTED (constant)">FileUtils::LN_SUPPORTED</a></span>, <span class='object_link'><a href="FileUtils.html#RUBY-constant" title="FileUtils::RUBY (constant)">FileUtils::RUBY</a></span></p>
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application-class_method" title="application (class method)">+ (Object) <strong>application</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Current Rake Application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application%3D-class_method" title="application= (class method)">+ (Object) <strong>application=</strong>(app) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the current Rake application object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_dir_parent-class_method" title="each_dir_parent (class method)">+ (Object) <strong>each_dir_parent</strong>(dir) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Yield each file or directory component.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_rakefile-class_method" title="load_rakefile (class method)">+ (Object) <strong>load_rakefile</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Load a rakefile.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#original_dir-class_method" title="original_dir (class method)">+ (Object) <strong>original_dir</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return the original directory where the Rake application was started.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run_tests-instance_method" title="#run_tests (instance method)">- (Object) <strong>run_tests</strong>(pattern = 'test/test*.rb', log_enabled = false) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Rake/FileUtilsExt.html" title="Rake::FileUtilsExt (module)">FileUtilsExt</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Rake/FileUtilsExt.html#nowrite-instance_method" title="Rake::FileUtilsExt#nowrite (method)">nowrite</a></span>, <span class='object_link'><a href="Rake/FileUtilsExt.html#rake_check_options-instance_method" title="Rake::FileUtilsExt#rake_check_options (method)">rake_check_options</a></span>, <span class='object_link'><a href="Rake/FileUtilsExt.html#rake_merge_option-instance_method" title="Rake::FileUtilsExt#rake_merge_option (method)">rake_merge_option</a></span>, <span class='object_link'><a href="Rake/FileUtilsExt.html#rake_output_message-instance_method" title="Rake::FileUtilsExt#rake_output_message (method)">rake_output_message</a></span>, <span class='object_link'><a href="Rake/FileUtilsExt.html#verbose-instance_method" title="Rake::FileUtilsExt#verbose (method)">verbose</a></span>, <span class='object_link'><a href="Rake/FileUtilsExt.html#when_writing-instance_method" title="Rake::FileUtilsExt#when_writing (method)">when_writing</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="FileUtils.html" title="FileUtils (module)">FileUtils</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="FileUtils.html#ruby-instance_method" title="FileUtils#ruby (method)">#ruby</a></span>, <span class='object_link'><a href="FileUtils.html#safe_ln-instance_method" title="FileUtils#safe_ln (method)">#safe_ln</a></span>, <span class='object_link'><a href="FileUtils.html#sh-instance_method" title="FileUtils#sh (method)">#sh</a></span>, <span class='object_link'><a href="FileUtils.html#split_all-instance_method" title="FileUtils#split_all (method)">#split_all</a></span></p>
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="application-class_method">
+  
+    + (<tt>Object</tt>) <strong>application</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Current Rake Application</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rake_module.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_application'>application</span>
+  <span class='ivar'>@application</span> <span class='op'>||=</span> <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Application</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="application=-class_method">
+  
+    + (<tt>Object</tt>) <strong>application=</strong>(app) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set the current Rake application object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rake_module.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_application='>application=</span><span class='lparen'>(</span><span class='id identifier rubyid_app'>app</span><span class='rparen'>)</span>
+  <span class='ivar'>@application</span> <span class='op'>=</span> <span class='id identifier rubyid_app'>app</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="each_dir_parent-class_method">
+  
+    + (<tt>Object</tt>) <strong>each_dir_parent</strong>(dir) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Yield each file or directory component.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+394
+395
+396
+397
+398
+399
+400
+401</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/file_list.rb', line 394</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_each_dir_parent'>each_dir_parent</span><span class='lparen'>(</span><span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>    <span class='comment'># :nodoc:
+</span>  <span class='id identifier rubyid_old_length'>old_length</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>while</span> <span class='id identifier rubyid_dir'>dir</span> <span class='op'>!=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.</span><span class='tstring_end'>'</span></span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_dir'>dir</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>!=</span> <span class='id identifier rubyid_old_length'>old_length</span>
+    <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_old_length'>old_length</span> <span class='op'>=</span> <span class='id identifier rubyid_dir'>dir</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+    <span class='id identifier rubyid_dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='id identifier rubyid_dir'>dir</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_rakefile-class_method">
+  
+    + (<tt>Object</tt>) <strong>load_rakefile</strong>(path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Load a rakefile.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rake_module.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_load_rakefile'>load_rakefile</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="original_dir-class_method">
+  
+    + (<tt>Object</tt>) <strong>original_dir</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Return the original directory where the Rake application was started.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/rake_module.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_original_dir'>original_dir</span>
+  <span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_original_dir'>original_dir</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="run_tests-instance_method">
+  
+    - (<tt>Object</tt>) <strong>run_tests</strong>(pattern = 'test/test*.rb', log_enabled = false) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/RokubyRake/rake/runtest.rb', line 7</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_run_tests'>run_tests</span><span class='lparen'>(</span><span class='id identifier rubyid_pattern'>pattern</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>test/test*.rb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_log_enabled'>log_enabled</span><span class='op'>=</span><span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='const'>Dir</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_pattern'>pattern</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_fn'>fn</span><span class='op'>|</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_fn'>fn</span> <span class='kw'>if</span> <span class='id identifier rubyid_log_enabled'>log_enabled</span>
+    <span class='kw'>begin</span>
+      <span class='id identifier rubyid_require'>require</span> <span class='id identifier rubyid_fn'>fn</span>
+    <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_ex'>ex</span>
+      <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error in </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_fn'>fn</span><span class='rbrace'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_ex'>ex</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+      <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ex'>ex</span><span class='period'>.</span><span class='id identifier rubyid_backtrace'>backtrace</span>
+      <span class='id identifier rubyid_assert'>assert</span> <span class='kw'>false</span>
+    <span class='kw'>end</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:43 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

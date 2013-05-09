@@ -1,0 +1,1088 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Rokuby::Project
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rokuby.html" title="Rokuby (module)">Rokuby</a></span></span>
+     &raquo; 
+    <span class="title">Project</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Rokuby::Project
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="InformationUnit.html" title="Rokuby::InformationUnit (class)">InformationUnit</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="InformationUnit.html" title="Rokuby::InformationUnit (class)">InformationUnit</a></span></li>
+          
+            <li class="next">Rokuby::Project</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rokuby/InformationUnits/General/project.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This is an interface for all types of projects that should be reused in the
+build process. There can be several types of projects for the different
+types of outputs of a project. As the projects are normally used in the
+context of the specific compiler only, they are normally very specific to
+the type of compiler used. In general they should represent the output
+binary and some additional meta values that are needed to reuse it in other
+projects.</p>
+<dl class="rdoc-list"><dt>Name</dt>
+<dd>
+<p>The name of the project.</p>
+</dd><dt>OutputBinaryFileSet</dt>
+<dd>
+<p>This is a file set representing the output binary of the project.</p>
+</dd><dt>Defines</dt>
+<dd>
+<p>The defines that are necessary to include this project successfully.</p>
+</dd><dt>Libraries</dt>
+<dd>
+<p>The libraries needed to run this project successfully.</p>
+</dd><dt>Dependencies</dt>
+<dd>
+<p>Other projects on which this projects depends.</p>
+</dd><dt>PassedDefines</dt>
+<dd>
+<p>A set of passed through defines which should be applied for certain
+platforms.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="GppProject.html" title="Rokuby::GppProject (class)">GppProject</a></span>, <span class='object_link'><a href="VsProject.html" title="Rokuby::VsProject (class)">VsProject</a></span></p>
+</div>
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Defines-instance_method" title="#Defines (instance method)">- (Object) <strong>Defines</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Defines.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Dependencies-instance_method" title="#Dependencies (instance method)">- (Object) <strong>Dependencies</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Dependencies.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#IncludePaths-instance_method" title="#IncludePaths (instance method)">- (Object) <strong>IncludePaths</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute IncludePaths.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Libraries-instance_method" title="#Libraries (instance method)">- (Object) <strong>Libraries</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Libraries.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Name-instance_method" title="#Name (instance method)">- (Object) <strong>Name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute Name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#PassedDefines-instance_method" title="#PassedDefines (instance method)">- (Object) <strong>PassedDefines</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute PassedDefines.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Extend-instance_method" title="#Extend (instance method)">- (Object) <strong>Extend</strong>(valueMap, callParent = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GatherDefines-instance_method" title="#GatherDefines (instance method)">- (Object) <strong>GatherDefines</strong>(platform) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gather the defines from this information unit and all subunits.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GetPassedDefines-instance_method" title="#GetPassedDefines (instance method)">- (Object) <strong>GetPassedDefines</strong>(platform) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the defines that this project wants other projects to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Project) <strong>initialize</strong>(valueMap = nil) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_copy-instance_method" title="#initialize_copy (instance method)">- (Object) <strong>initialize_copy</strong>(original) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="GeneralUtility.html" title="Rokuby::GeneralUtility (module)">GeneralUtility</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GeneralUtility.html#Clone-instance_method" title="Rokuby::GeneralUtility#Clone (method)">#Clone</a></span>, <span class='object_link'><a href="GeneralUtility.html#CloneArray-instance_method" title="Rokuby::GeneralUtility#CloneArray (method)">#CloneArray</a></span>, <span class='object_link'><a href="GeneralUtility.html#DescribeTasks-instance_method" title="Rokuby::GeneralUtility#DescribeTasks (method)">#DescribeTasks</a></span>, <span class='object_link'><a href="GeneralUtility.html#GenerateTaskName-instance_method" title="Rokuby::GeneralUtility#GenerateTaskName (method)">#GenerateTaskName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetClassName-instance_method" title="Rokuby::GeneralUtility#GetClassName (method)">#GetClassName</a></span>, <span class='object_link'><a href="GeneralUtility.html#GetUUID-instance_method" title="Rokuby::GeneralUtility#GetUUID (method)">#GetUUID</a></span>, <span class='object_link'><a href="GeneralUtility.html#SystemWithFail-instance_method" title="Rokuby::GeneralUtility#SystemWithFail (method)">#SystemWithFail</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Rokuby::Project (class)">Project</a></span></tt>) <strong>initialize</strong>(valueMap = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of Project</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@Name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@IncludePaths</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@Defines</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@Libraries</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@Dependencies</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@PassedDefines</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="Defines=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="Defines-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Defines</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Defines</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='const'>Defines</span>
+  <span class='ivar'>@Defines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Dependencies=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Dependencies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Dependencies</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Dependencies</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='const'>Dependencies</span>
+  <span class='ivar'>@Dependencies</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="IncludePaths=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="IncludePaths-instance_method">
+  
+    - (<tt>Object</tt>) <strong>IncludePaths</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute IncludePaths</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='const'>IncludePaths</span>
+  <span class='ivar'>@IncludePaths</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Libraries=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Libraries-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Libraries</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Libraries</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='const'>Libraries</span>
+  <span class='ivar'>@Libraries</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="Name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Name-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Name</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute Name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='const'>Name</span>
+  <span class='ivar'>@Name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="PassedDefines=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="PassedDefines-instance_method">
+  
+    - (<tt>Object</tt>) <strong>PassedDefines</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute PassedDefines</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='const'>PassedDefines</span>
+  <span class='ivar'>@PassedDefines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="Extend-instance_method">
+  
+    - (<tt>Object</tt>) <strong>Extend</strong>(valueMap, callParent = true) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='const'>Extend</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='comma'>,</span> <span class='id identifier rubyid_callParent'>callParent</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span> <span class='op'>==</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_callParent'>callParent</span><span class='rparen'>)</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_valueMap'>valueMap</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Name</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+    <span class='ivar'>@Name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_includePaths'>includePaths</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:IncludePaths</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:incPaths</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_includePaths'>includePaths</span><span class='rparen'>)</span>
+    <span class='ivar'>@IncludePaths</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_includePaths'>includePaths</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Task</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:task</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
+    <span class='ivar'>@Task</span> <span class='op'>=</span> <span class='id identifier rubyid_task'>task</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_defines'>defines</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Defines</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:defs</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_defines'>defines</span><span class='rparen'>)</span>
+    <span class='ivar'>@Defines</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_defines'>defines</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_libraries'>libraries</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Libraries</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:libs</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_libraries'>libraries</span><span class='rparen'>)</span>
+    <span class='ivar'>@Libraries</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_libraries'>libraries</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_dependencies'>dependencies</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:Dependencies</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:deps</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_dependencies'>dependencies</span><span class='rparen'>)</span>
+    <span class='ivar'>@Dependencies</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_dependencies'>dependencies</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='id identifier rubyid_passedDefines'>passedDefines</span> <span class='op'>=</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:PassedDefines</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_valueMap'>valueMap</span><span class='lbracket'>[</span><span class='symbol'>:passDefs</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_passedDefines'>passedDefines</span><span class='rparen'>)</span>
+    <span class='ivar'>@PassedDefines</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_passedDefines'>passedDefines</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GatherDefines-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GatherDefines</strong>(platform) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gather the defines from this information unit and all subunits.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='const'>GatherDefines</span><span class='lparen'>(</span><span class='id identifier rubyid_platform'>platform</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_defines'>defines</span> <span class='op'>=</span> <span class='ivar'>@Defines</span>
+  
+  <span class='ivar'>@Libraries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_lib'>lib</span><span class='op'>|</span>
+    <span class='id identifier rubyid_libInstance'>libInstance</span> <span class='op'>=</span> <span class='id identifier rubyid_lib'>lib</span><span class='period'>.</span><span class='const'>GetInstance</span><span class='lparen'>(</span><span class='id identifier rubyid_platform'>platform</span><span class='rparen'>)</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_libInstance'>libInstance</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_defines'>defines</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_libInstance'>libInstance</span><span class='period'>.</span><span class='const'>GatherDefines</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='ivar'>@Dependencies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dep'>dep</span><span class='op'>|</span>
+    <span class='id identifier rubyid_defines'>defines</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_dep'>dep</span><span class='period'>.</span><span class='const'>GatherDefines</span><span class='lparen'>(</span><span class='id identifier rubyid_platform'>platform</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_defines'>defines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="GetPassedDefines-instance_method">
+  
+    - (<tt>Object</tt>) <strong>GetPassedDefines</strong>(platform) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the defines that this project wants other projects to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='const'>GetPassedDefines</span><span class='lparen'>(</span><span class='id identifier rubyid_platform'>platform</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_defines'>defines</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  
+  <span class='ivar'>@PassedDefines</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_passedDefines'>passedDefines</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_passedDefines'>passedDefines</span><span class='period'>.</span><span class='const'>Platform</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_platform'>platform</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_defines'>defines</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_passedDefines'>passedDefines</span><span class='period'>.</span><span class='const'>GatherDefines</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  
+  <span class='kw'>return</span> <span class='id identifier rubyid_defines'>defines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_copy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize_copy</strong>(original) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rokuby/InformationUnits/General/project.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize_copy'>initialize_copy</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
+  
+  <span class='ivar'>@Name</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>Name</span><span class='rparen'>)</span>
+  <span class='ivar'>@IncludePaths</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>IncludePaths</span><span class='rparen'>)</span>
+  <span class='ivar'>@Defines</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>Defines</span><span class='rparen'>)</span>
+  <span class='ivar'>@Libraries</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>Libraries</span><span class='rparen'>)</span>
+  <span class='ivar'>@Dependencies</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>Dependencies</span><span class='rparen'>)</span>
+  <span class='ivar'>@PassedDefines</span> <span class='op'>=</span> <span class='const'>Clone</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='const'>PassedDefines</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Sep 19 23:09:50 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>
