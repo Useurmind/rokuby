@@ -22,6 +22,7 @@ module Rake
     # Needs to be executed in the appropriate directory
     alias execute_old_task execute
     def execute(args=nil)
+      #puts "Executing task with args #{args}"
       ExecuteInPath(@ProjectFile.Path().DirectoryPath()) do
         execute_old_task(args)
       end

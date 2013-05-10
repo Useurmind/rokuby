@@ -146,6 +146,7 @@ module Rokuby
     end
     
     def _GatherLibraryLinkComponents(gppConf)
+      workingDir = ProjectPath.new(".")
       dynamicLibsSearchPaths = Set.new
       dynamicLibs = []
       staticLibs = []
@@ -164,6 +165,8 @@ module Rokuby
           #puts "No library instance found for library #{lib.Name}"
           next
         end
+        libPath = libPath.MakeRelativeTo(workingDir)
+        
         libExtension = libPath.FileExt()
         if(libExtension == dynamicLibExtension)
           dynamicLibs.push  Gpp::CommandLine::Options::LIB_NAME + libPath.FileName(false)
@@ -176,7 +179,7 @@ module Rokuby
       # the libraries that are created by other projects
       @gppProjects.each() do |gppProject|
         projGppConf = gppProject.GetConfiguration(gppConf.Platform)
-        projectLibFilePath = projGppConf.GetTargetFilePath().MakeRelativeTo(@ProjectFile.Path)
+        projectLibFilePath = projGppConf.GetTargetFilePath().MakeRelativeTo(workingDir)
         if(projGppConf.TargetExt == Gpp::Configuration::TargetExt::SHARED_LIB)
           dynamicLibs.push Gpp::CommandLine::Options::LIB_NAME + projectLibFilePath.FileName(false)
           dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + projectLibFilePath.DirectoryPath().RelativePath

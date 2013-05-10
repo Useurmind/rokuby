@@ -10,9 +10,9 @@ module Rokuby
     end
 
     def _ProcessInputs(taskArgs=nil)
-      platBinExt = GetPlatformBinaryExtensions(taskArgs)
-      
       _SortInputs()
+      
+      platBinExt = GetPlatformBinaryExtensions(taskArgs)
       
       _ExtendGppProjectConfigurations(platBinExt)
       
@@ -24,14 +24,14 @@ module Rokuby
       
       gppConf = _GetGppProjectConf(platBinExt)
         
-      subfolderName = @projectDescription.BinaryName + gppConf.Platform.BinaryExtension()
+      subfolderName = @projectDescription.Name + "_" + gppConf.Platform.BinaryExtension()
       
       if(gppConf.CompileDirectory == nil)
-        gppConf.CompileDirectory = @projectDescription.BuildPath + ProjectPath.new(subfolderName)
+        gppConf.CompileDirectory = @projectDescription.CompilesPath + ProjectPath.new(subfolderName)
       end
       
       if(gppConf.OutputDirectory == nil)
-        gppConf.OutputDirectory = @projectDescription.CompilesPath + ProjectPath.new(subfolderName)
+        gppConf.OutputDirectory = @projectDescription.BuildPath + ProjectPath.new(subfolderName)
       end
       
       if(gppConf.TargetName == nil)

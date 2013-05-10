@@ -100,6 +100,7 @@ module Rokuby
     end
     
     def _ProcessInputs(taskArgs=nil)
+      #puts "task args in chain are #{taskArgs}"
       @outputs = OutputProcessor().Outputs()
     end
     
