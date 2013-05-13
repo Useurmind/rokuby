@@ -38,7 +38,11 @@ module Rokuby
         if(@projectDescription.BinaryName)
             gppConf.TargetName = @projectDescription.BinaryName
         else
+          if(@projectDescription.BinaryType == :Shared)
+            gppConf.TargetName = "lib" + @projectDescription.Name + "_" + gppConf.Platform.BinaryExtension()
+          else
             gppConf.TargetName = @projectDescription.Name + "_" + gppConf.Platform.BinaryExtension()
+          end
         end  
       end
       

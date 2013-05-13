@@ -151,6 +151,10 @@ module Rokuby
       dynamicLibs = []
       staticLibs = []
 
+      gppConf.AdditionalPreLibraries.each() do |preLib|
+        dynamicLibs.push(Gpp::CommandLine::Options::LIB_NAME + preLib)
+      end
+
       dynamicLibExtension = Gpp::Configuration::TargetExt::SHARED_LIB.gsub("\.", "")
 
       # the libraries that are included in this project
@@ -162,14 +166,14 @@ module Rokuby
 
         libPath = libInstance.FileSet.LibraryFileSet.FilePaths[0]
         if(!libPath)
-          #puts "No library instance found for library #{lib.Name}"
+          puts "WARNING No library file path found for library #{lib.Name}"
           next
         end
         libPath = libPath.MakeRelativeTo(workingDir)
         
         libExtension = libPath.FileExt()
         if(libExtension == dynamicLibExtension)
-          dynamicLibs.push  Gpp::CommandLine::Options::LIB_NAME + libPath.FileName(false)
+          dynamicLibs.push  Gpp::CommandLine::Options::LIB_NAME + _GetLibLinkName(libPath.FileName(false))
           dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + libPath.DirectoryPath().RelativePath
         else
           staticLibs.push libPath.RelativePath
@@ -181,14 +185,22 @@ module Rokuby
         projGppConf = gppProject.GetConfiguration(gppConf.Platform)
         projectLibFilePath = projGppConf.GetTargetFilePath().MakeRelativeTo(workingDir)
         if(projGppConf.TargetExt == Gpp::Configuration::TargetExt::SHARED_LIB)
-          dynamicLibs.push Gpp::CommandLine::Options::LIB_NAME + projectLibFilePath.FileName(false)
+          dynamicLibs.push Gpp::CommandLine::Options::LIB_NAME + _GetLibLinkName(projectLibFilePath.FileName(false))
           dynamicLibsSearchPaths.add Gpp::CommandLine::Options::LIB_DIRECTORY + projectLibFilePath.DirectoryPath().RelativePath
         elsif(projGppConf.TargetExt == Gpp::Configuration::TargetExt::STATIC_LIB)
           staticLibs.push projectLibFilePath.RelativePath
         end
       end
       
+      gppConf.AdditionalPostLibraries.each() do |postLib|
+        dynamicLibs.push(Gpp::CommandLine::Options::LIB_NAME + postLib)
+      end
+      
       return dynamicLibsSearchPaths.to_a() + dynamicLibs + staticLibs
+    end
+    
+    def _GetLibLinkName(fullName)
+      return fullName.gsub(/^lib/, "")
     end
   end
 end
