@@ -14,7 +14,7 @@ module Rokuby
                                                          )
 
       configs.push Rake.application.DefineInformationUnit(GppProjectConfiguration, "DEFAULT_X64_DEBUG", :plat => PLATFORM_UBUNTU_X64_DEBUG,
-                                                                                                          :defines => ["X64"],
+                                                                                                          :defines => ["X64", "DEBUG", "_DEBUG"],
                                                                                                           :CompileOptions =>  [
                                                                                                                                Gpp::Configuration::CompileOptions::USE_CPP0X,
                                                                                                                                Gpp::Configuration::CompileOptions::CREATE_DEBUG_INFORMATION
@@ -36,7 +36,7 @@ module Rokuby
                                                          )
 
       configs.push Rake.application.DefineInformationUnit(GppProjectConfiguration, "DEFAULT_X86_DEBUG", :plat => PLATFORM_UBUNTU_X86_DEBUG,
-                                                                                                          :defines => ["X64"],
+                                                                                                          :defines => ["X64", "DEBUG", "_DEBUG"],
                                                                                                           :CompileOptions =>  [
                                                                                                                                Gpp::Configuration::CompileOptions::USE_CPP0X,
                                                                                                                                Gpp::Configuration::CompileOptions::CREATE_DEBUG_INFORMATION
