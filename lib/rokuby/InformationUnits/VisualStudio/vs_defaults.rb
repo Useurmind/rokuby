@@ -3,7 +3,7 @@ module Rokuby
     def Defaults.InitDefaultVsProjectConfigurations
       configs = []
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X64_RELEASE", :plat => PLATFORM_WIN_X64_RELEASE,
-                                                                                                          :defines => ["WIN32", "X64", "WIN64"],
+                                                                                                          :Defines => ["WIN32", "X64", "WIN64"],
                                                                                                           :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                           :PlatformName => Vs::Configuration::Platform::X64,
                                                                                                           :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
@@ -22,7 +22,7 @@ module Rokuby
                                                                                                           :UseDebugLibraries => false)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration,  "DEFAULT_X64_RELWITHDEB", :plat => PLATFORM_WIN_X64_RELWITHDEB,
-                                                                                                              :defines => ["WIN32", "X64", "WIN64"],
+                                                                                                              :Defines => ["WIN32", "X64", "WIN64"],
                                                                                                               :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                               :PlatformName => Vs::Configuration::Platform::X64,
                                                                                                               :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
@@ -41,7 +41,7 @@ module Rokuby
                                                                                                               :UseDebugLibraries => true)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration,  "DEFAULT_X64_DEBUG", :plat => PLATFORM_WIN_X64_DEBUG,
-                                                                                                        :defines => ["WIN32", "X64", "WIN64", "DEBUG", "_DEBUG"],
+                                                                                                        :Defines => ["WIN32", "X64", "WIN64", "DEBUG", "_DEBUG"],
                                                                                                         :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DEBUG_DLL,
                                                                                                         :PlatformName => Vs::Configuration::Platform::X64,
                                                                                                         :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
@@ -60,7 +60,7 @@ module Rokuby
                                                                                                         :UseDebugLibraries => true)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X86_RELEASE", :plat => PLATFORM_WIN_X86_RELEASE,
-                                                                                                         :defines => ["WIN32"],
+                                                                                                         :Defines => ["WIN32"],
                                                                                                          :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                          :PlatformName => Vs::Configuration::Platform::WIN32,
                                                                                                          :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
@@ -79,7 +79,7 @@ module Rokuby
                                                                                                          :UseDebugLibraries => false)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X86_RELWITHDEB", :plat => PLATFORM_WIN_X86_RELWITHDEB,
-                                                                                                            :defines => ["WIN32"],
+                                                                                                            :Defines => ["WIN32"],
                                                                                                             :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DLL,
                                                                                                             :PlatformName => Vs::Configuration::Platform::WIN32,
                                                                                                             :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,
@@ -98,7 +98,7 @@ module Rokuby
                                                                                                             :UseDebugLibraries => false)
       
       configs.push Rake.application.DefineInformationUnit(VsProjectConfiguration, "DEFAULT_X86_DEBUG", :plat => PLATFORM_WIN_X86_DEBUG,
-                                                                                                       :defines => ["WIN32", "DEBUG", "_DEBUG"],
+                                                                                                       :Defines => ["WIN32", "DEBUG", "_DEBUG"],
                                                                                                        :RuntimeLibrary =>  Vs::Configuration::RuntimeLibrary::MULTITHREADED_DEBUG_DLL,
                                                                                                        :PlatformName => Vs::Configuration::Platform::WIN32,
                                                                                                        :WarningLevel => Vs::Configuration::WarningLevel::LEVEL3,

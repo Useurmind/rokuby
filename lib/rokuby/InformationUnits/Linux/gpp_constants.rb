@@ -14,10 +14,10 @@ module Rokuby
       module CompileOptions
         USE_CPP0X = "-std=c++0x"
         CREATE_DEBUG_INFORMATION = "-g"
-        OPTIMIZE_LEVEL_0 = "-O0"
-        OPTIMIZE_LEVEL_1 = "-O"
-        OPTIMIZE_LEVEL_2 = "-O2"
-        OPTIMIZE_LEVEL_3 = "-O3"
+
+        OPTIMIZATION_LEVELS = [
+          "-O0","-O","-O2","-O3"
+        ]
       end
     end
     

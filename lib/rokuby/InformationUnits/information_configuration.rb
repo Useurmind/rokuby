@@ -44,7 +44,7 @@ module Rokuby
         @Platform = platform
       end
       
-      defines = valueMap[:Defines] || valueMap[:defs]
+      defines = valueMap[:Defines] || valueMap[:defs] || valueMap[:defines]
       if(defines)
         @Defines.concat(defines)
       end

@@ -20,7 +20,7 @@ module Rokuby
     # Clone an arbitrary object
     # Returns nil for nil and the orginal for symbols.
     def Clone(original)
-      if(original.class == Symbol or original == false or original == true)
+      if(original.class == Symbol or original == false or original == true or original.class == Fixnum)
         return original
       end
       

@@ -63,7 +63,9 @@ module Rokuby
       gppConf.IncludePaths |= _GatherIncludePaths(gppConf)
       
       gppConf.Defines |= _GatherDefines(gppConf)
-      gppConf.Defines = gppConf.Defines.uniq
+      
+      gppConf.CompileOptions |= _GatherCompileOptions(gppConf)
+      
     end
     
     def _GatherDefines(gppConf)
@@ -76,6 +78,14 @@ module Rokuby
         defines |= gppProj.GetPassedDefines(gppConf.Platform)
       end
       return defines
+    end
+
+    def _GatherCompileOptions(gppConf)
+      options = []
+      if(gppConf.OptimizationLevel != nil)
+        options |= [Gpp::Configuration::CompileOptions::OPTIMIZATION_LEVELS[gppConf.OptimizationLevel]]
+      end
+      return options
     end
     
     def _GatherIncludePaths(gppConf)            

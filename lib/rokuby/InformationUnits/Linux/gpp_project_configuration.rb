@@ -6,6 +6,7 @@ module Rokuby
   # [AdditionalPostLibraries] The libraries that should be linked after any other libraries.
   # [TargetName] The name of the binary that comes out of the build process.
   # [TargetExt] The extension of the binary that comes out of the build process.
+  # [OptimizationLevel] The optimization level applied to compilation (e.g. nil, 1, 2, 3; normally applied via e.g. "-o2").
   # [IncludePaths] The include paths necessary to compile the source code files.
   class GppProjectConfiguration < InformationConfiguration
     attr_accessor :CompileDirectory
@@ -18,6 +19,8 @@ module Rokuby
     
     attr_accessor :TargetName
     attr_accessor :TargetExt
+
+    attr_accessor :OptimizationLevel
     
     attr_accessor :IncludePaths
     
@@ -34,6 +37,7 @@ module Rokuby
       @TargetExt = nil
       
       @IncludePaths = []
+      @OptimizationLevel = 0
       
       super(valueMap)
       Extend(valueMap, false)
@@ -51,7 +55,8 @@ module Rokuby
       
       @TargetName = Clone(original.TargetName)
       @TargetExt = Clone(original.TargetExt)
-      
+
+      @OptimizationLevel = Clone(original.OptimizationLevel)
       @IncludePaths = Clone(original.IncludePaths)
     end
     
@@ -106,6 +111,11 @@ module Rokuby
       targetExt = valueMap[:TargetExt] || valueMap[:targetExt]
       if(targetExt)
         @TargetExt = targetExt
+      end
+
+      optLevel = valueMap[:OptimizationLevel] || valueMap[:optLevel]
+      if(optLevel)
+        @OptimizationLevel = optLevel
       end
       
       includePaths = valueMap[:IncludePaths] || valueMap[:inclPaths]
