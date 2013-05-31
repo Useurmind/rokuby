@@ -211,7 +211,7 @@ module Rokuby
     
     # Gather the defines that should be applied to a project configuration.
     def _GatherDefines(vsConf)
-      defines = []
+      defines = vsConf.Defines
       defines |= @projectInstance.GatherDefines(vsConf.Platform)
       if(@vsProjectInstance)        
         defines |= @vsProjectInstance.GatherDefines()
