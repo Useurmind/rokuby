@@ -1,6 +1,7 @@
 module Rokuby
   
   # Represents a library and includes information concerning all found instances of it on this system.
+  # When searching for an instance of a library based on a platform, the last version that was added is chosen.
   # [Name] The name of the library that is represented by this container.
   # [instances] The instances of the library that were found.
   class Library < InformationUnit
@@ -25,7 +26,7 @@ module Rokuby
     def GetInstance(platform)
       instances = GetInstances(platform)
       if(instances.length > 0)
-        return instances[0]
+        return instances[instances.length-1]
       end
       return nil
     end
@@ -58,7 +59,7 @@ module Rokuby
         return nil
       end
       
-      return matchingInstances[0].LibraryFileName()
+      return matchingInstances[matchingInstances.length()-1].LibraryFileName()
     end
     
     # Get the name of the file that should be linked under on this platform.
@@ -68,7 +69,7 @@ module Rokuby
         return nil
       end
       
-      return matchingInstances[0].LinkFileName()
+      return matchingInstances[matchingInstances.length()-1].LinkFileName()
     end
     
     def Extend(valueMap, callParent=true)

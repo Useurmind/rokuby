@@ -63,5 +63,19 @@ module Rokuby
       end
       return false
     end
+    
+    # Extend the attributes of the processor.
+    def Extend(valueMap, executeParent=true)
+      if(valueMap == nil)
+        return
+      end
+      
+      if(executeParent)
+        super(valueMap)
+      end
+      
+      @SolutionPreprocessor.Extend(valueMap)
+      @FileWriter.Extend(valueMap)
+    end
   end
 end
