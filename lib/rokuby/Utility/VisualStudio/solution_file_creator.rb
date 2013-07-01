@@ -25,6 +25,10 @@ module Rokuby
       return @VsSolutionDescription.SolutionFilePath.DirectoryPath()
     end
     
+    def GetSolutionGuid
+      return @VsSolutionDescription.Guid
+    end
+    
     def BuildFile
       #startTime = Time.now
       
@@ -99,10 +103,14 @@ module Rokuby
     
     # [guid] A guid in the form {35BC...}
     def StartProject(guid, project)
+      slnGuid = GetSolutionGuid()
+      if(slnGuid == nil)
+        slnGuid = guid
+      end
       solutionDirectory = GetSolutionDirectory()
       
       relativeProjectFilePath = FormatXmlPath(project.ProjectFilePath.MakeRelativeTo(solutionDirectory).RelativePath)
-      WriteLine("Project(\"#{guid}\") = \"#{project.Name}\", \"#{relativeProjectFilePath}\", \"#{project.Guid}\"")
+      WriteLine("Project(\"#{slnGuid}\") = \"#{project.Name}\", \"#{relativeProjectFilePath}\", \"#{project.Guid}\"")
       IncreaseIndentation()
     end
     
