@@ -5,6 +5,7 @@ module Rokuby
   # the project name, the source files that are to be documented and creates the doxygen
   # documentation.  
   class DoxyfileCreator
+    include GeneralUtility
     include DirectoryUtility
     
     attr_accessor :SourceUnitInstances
